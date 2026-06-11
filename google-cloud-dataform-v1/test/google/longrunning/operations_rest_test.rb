@@ -101,32 +101,32 @@ class ::Google::Longrunning::Operations::Rest::ClientTest < Minitest::Test
     ::Google::Longrunning::Operations::Rest::ServiceStub.stub :transcode_list_operations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_operations_client_stub do
         # Create client
-        client = ::Google::Longrunning::Operations::Rest::Client.new do |config|
+        c = ::Google::Longrunning::Operations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_operations name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
+        c.list_operations name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_operations ::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
+        c.list_operations ::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_operations(::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_operations(::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Longrunning::Operations::Rest::ClientTest < Minitest::Test
     ::Google::Longrunning::Operations::Rest::ServiceStub.stub :transcode_get_operation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_operation_client_stub do
         # Create client
-        client = ::Google::Longrunning::Operations::Rest::Client.new do |config|
+        c = ::Google::Longrunning::Operations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_operation({ name: name }) do |_result, response|
+        c.get_operation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_operation name: name do |_result, response|
+        c.get_operation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_operation ::Google::Longrunning::GetOperationRequest.new(name: name) do |_result, response|
+        c.get_operation ::Google::Longrunning::GetOperationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_operation({ name: name }, call_options) do |_result, response|
+        c.get_operation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_operation(::Google::Longrunning::GetOperationRequest.new(name: name), call_options) do |_result, response|
+        c.get_operation(::Google::Longrunning::GetOperationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Longrunning::Operations::Rest::ClientTest < Minitest::Test
     ::Google::Longrunning::Operations::Rest::ServiceStub.stub :transcode_delete_operation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_operation_client_stub do
         # Create client
-        client = ::Google::Longrunning::Operations::Rest::Client.new do |config|
+        c = ::Google::Longrunning::Operations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_operation({ name: name }) do |_result, response|
+        c.delete_operation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_operation name: name do |_result, response|
+        c.delete_operation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_operation ::Google::Longrunning::DeleteOperationRequest.new(name: name) do |_result, response|
+        c.delete_operation ::Google::Longrunning::DeleteOperationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_operation({ name: name }, call_options) do |_result, response|
+        c.delete_operation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_operation(::Google::Longrunning::DeleteOperationRequest.new(name: name), call_options) do |_result, response|
+        c.delete_operation(::Google::Longrunning::DeleteOperationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Longrunning::Operations::Rest::ClientTest < Minitest::Test
     ::Google::Longrunning::Operations::Rest::ServiceStub.stub :transcode_cancel_operation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_operation_client_stub do
         # Create client
-        client = ::Google::Longrunning::Operations::Rest::Client.new do |config|
+        c = ::Google::Longrunning::Operations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_operation({ name: name }) do |_result, response|
+        c.cancel_operation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_operation name: name do |_result, response|
+        c.cancel_operation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_operation ::Google::Longrunning::CancelOperationRequest.new(name: name) do |_result, response|
+        c.cancel_operation ::Google::Longrunning::CancelOperationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_operation({ name: name }, call_options) do |_result, response|
+        c.cancel_operation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_operation(::Google::Longrunning::CancelOperationRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_operation(::Google::Longrunning::CancelOperationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
