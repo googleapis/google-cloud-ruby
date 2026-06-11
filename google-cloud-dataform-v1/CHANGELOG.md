@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.4.0 (2026-06-11)
+
+#### Features
+
+* add folders and teamFolders related changes to v1 
+* publish client batch config schema 
+* update gapic-common dependency to 1.3 and document retry jitter ([#33330](https://github.com/googleapis/google-cloud-ruby/issues/33330)) 
+
 ### 0.3.0 (2026-03-19)
 
 #### Features
