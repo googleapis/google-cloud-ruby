@@ -18,6 +18,7 @@ require_relative "../storage_control_get_folder"
 require_relative "../storage_control_list_folders"
 require_relative "../storage_control_rename_folder"
 require_relative "../storage_control_delete_folder"
+require_relative "../delete_folder_recursive"
 
 describe "Storage Control Folders" do
   let(:bucket_name) { random_bucket_name }
@@ -63,6 +64,23 @@ describe "Storage Control Folders" do
     # delete_folder
     assert_output "Deleted folder: #{new_folder_name}\n" do
       delete_folder bucket_name: bucket_name, folder_name: new_folder_name
+    end
+  end
+
+  it "delete_folder_recursive" do
+    recursive_folder_name = "#{folder_name}_recursive"
+    # create_folder
+    out, _err = capture_io do
+      create_folder bucket_name: bucket_name, folder_name: recursive_folder_name
+    end
+    assert_includes out, recursive_folder_name
+
+    # delete_folder_recursive
+    storage_control = Google::Cloud::Storage::Control.storage_control
+    folder_path = storage_control.folder_path project: "_", bucket: bucket_name, folder: recursive_folder_name
+    
+    assert_output "Deleted folder: #{folder_path}\n" do
+      delete_folder_recursive bucket_name: bucket_name, folder_name: recursive_folder_name
     end
   end
 end
