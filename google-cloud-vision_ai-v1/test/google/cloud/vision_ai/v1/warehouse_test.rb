@@ -87,36 +87,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_asset_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_asset({ parent: parent, asset: asset, asset_id: asset_id }) do |response, operation|
+      c.create_asset({ parent: parent, asset: asset, asset_id: asset_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_asset parent: parent, asset: asset, asset_id: asset_id do |response, operation|
+      c.create_asset parent: parent, asset: asset, asset_id: asset_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_asset ::Google::Cloud::VisionAI::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id) do |response, operation|
+      c.create_asset ::Google::Cloud::VisionAI::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_asset({ parent: parent, asset: asset, asset_id: asset_id }, grpc_options) do |response, operation|
+      c.create_asset({ parent: parent, asset: asset, asset_id: asset_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_asset(::Google::Cloud::VisionAI::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id), grpc_options) do |response, operation|
+      c.create_asset(::Google::Cloud::VisionAI::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -147,36 +147,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_asset_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_asset({ asset: asset, update_mask: update_mask }) do |response, operation|
+      c.update_asset({ asset: asset, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_asset asset: asset, update_mask: update_mask do |response, operation|
+      c.update_asset asset: asset, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_asset ::Google::Cloud::VisionAI::V1::UpdateAssetRequest.new(asset: asset, update_mask: update_mask) do |response, operation|
+      c.update_asset ::Google::Cloud::VisionAI::V1::UpdateAssetRequest.new(asset: asset, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_asset({ asset: asset, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_asset({ asset: asset, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_asset(::Google::Cloud::VisionAI::V1::UpdateAssetRequest.new(asset: asset, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_asset(::Google::Cloud::VisionAI::V1::UpdateAssetRequest.new(asset: asset, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -205,36 +205,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_asset_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_asset({ name: name }) do |response, operation|
+      c.get_asset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_asset name: name do |response, operation|
+      c.get_asset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_asset ::Google::Cloud::VisionAI::V1::GetAssetRequest.new(name: name) do |response, operation|
+      c.get_asset ::Google::Cloud::VisionAI::V1::GetAssetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_asset({ name: name }, grpc_options) do |response, operation|
+      c.get_asset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_asset(::Google::Cloud::VisionAI::V1::GetAssetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_asset(::Google::Cloud::VisionAI::V1::GetAssetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -269,40 +269,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_assets_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_assets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_assets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_assets ::Google::Cloud::VisionAI::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_assets ::Google::Cloud::VisionAI::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_assets(::Google::Cloud::VisionAI::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_assets(::Google::Cloud::VisionAI::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -332,40 +332,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_asset_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_asset({ name: name }) do |response, operation|
+      c.delete_asset({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_asset name: name do |response, operation|
+      c.delete_asset name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_asset ::Google::Cloud::VisionAI::V1::DeleteAssetRequest.new(name: name) do |response, operation|
+      c.delete_asset ::Google::Cloud::VisionAI::V1::DeleteAssetRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_asset({ name: name }, grpc_options) do |response, operation|
+      c.delete_asset({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_asset(::Google::Cloud::VisionAI::V1::DeleteAssetRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_asset(::Google::Cloud::VisionAI::V1::DeleteAssetRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -397,40 +397,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, upload_asset_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.upload_asset({ name: name, asset_source: asset_source }) do |response, operation|
+      c.upload_asset({ name: name, asset_source: asset_source }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upload_asset name: name, asset_source: asset_source do |response, operation|
+      c.upload_asset name: name, asset_source: asset_source do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upload_asset ::Google::Cloud::VisionAI::V1::UploadAssetRequest.new(name: name, asset_source: asset_source) do |response, operation|
+      c.upload_asset ::Google::Cloud::VisionAI::V1::UploadAssetRequest.new(name: name, asset_source: asset_source) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upload_asset({ name: name, asset_source: asset_source }, grpc_options) do |response, operation|
+      c.upload_asset({ name: name, asset_source: asset_source }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upload_asset(::Google::Cloud::VisionAI::V1::UploadAssetRequest.new(name: name, asset_source: asset_source), grpc_options) do |response, operation|
+      c.upload_asset(::Google::Cloud::VisionAI::V1::UploadAssetRequest.new(name: name, asset_source: asset_source), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -460,36 +460,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, generate_retrieval_url_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_retrieval_url({ name: name }) do |response, operation|
+      c.generate_retrieval_url({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_retrieval_url name: name do |response, operation|
+      c.generate_retrieval_url name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_retrieval_url ::Google::Cloud::VisionAI::V1::GenerateRetrievalUrlRequest.new(name: name) do |response, operation|
+      c.generate_retrieval_url ::Google::Cloud::VisionAI::V1::GenerateRetrievalUrlRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_retrieval_url({ name: name }, grpc_options) do |response, operation|
+      c.generate_retrieval_url({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_retrieval_url(::Google::Cloud::VisionAI::V1::GenerateRetrievalUrlRequest.new(name: name), grpc_options) do |response, operation|
+      c.generate_retrieval_url(::Google::Cloud::VisionAI::V1::GenerateRetrievalUrlRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -518,40 +518,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, analyze_asset_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.analyze_asset({ name: name }) do |response, operation|
+      c.analyze_asset({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.analyze_asset name: name do |response, operation|
+      c.analyze_asset name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.analyze_asset ::Google::Cloud::VisionAI::V1::AnalyzeAssetRequest.new(name: name) do |response, operation|
+      c.analyze_asset ::Google::Cloud::VisionAI::V1::AnalyzeAssetRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.analyze_asset({ name: name }, grpc_options) do |response, operation|
+      c.analyze_asset({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.analyze_asset(::Google::Cloud::VisionAI::V1::AnalyzeAssetRequest.new(name: name), grpc_options) do |response, operation|
+      c.analyze_asset(::Google::Cloud::VisionAI::V1::AnalyzeAssetRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -583,40 +583,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, index_asset_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.index_asset({ name: name, index: index }) do |response, operation|
+      c.index_asset({ name: name, index: index }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.index_asset name: name, index: index do |response, operation|
+      c.index_asset name: name, index: index do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.index_asset ::Google::Cloud::VisionAI::V1::IndexAssetRequest.new(name: name, index: index) do |response, operation|
+      c.index_asset ::Google::Cloud::VisionAI::V1::IndexAssetRequest.new(name: name, index: index) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.index_asset({ name: name, index: index }, grpc_options) do |response, operation|
+      c.index_asset({ name: name, index: index }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.index_asset(::Google::Cloud::VisionAI::V1::IndexAssetRequest.new(name: name, index: index), grpc_options) do |response, operation|
+      c.index_asset(::Google::Cloud::VisionAI::V1::IndexAssetRequest.new(name: name, index: index), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -648,40 +648,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, remove_index_asset_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.remove_index_asset({ name: name, index: index }) do |response, operation|
+      c.remove_index_asset({ name: name, index: index }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.remove_index_asset name: name, index: index do |response, operation|
+      c.remove_index_asset name: name, index: index do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.remove_index_asset ::Google::Cloud::VisionAI::V1::RemoveIndexAssetRequest.new(name: name, index: index) do |response, operation|
+      c.remove_index_asset ::Google::Cloud::VisionAI::V1::RemoveIndexAssetRequest.new(name: name, index: index) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.remove_index_asset({ name: name, index: index }, grpc_options) do |response, operation|
+      c.remove_index_asset({ name: name, index: index }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.remove_index_asset(::Google::Cloud::VisionAI::V1::RemoveIndexAssetRequest.new(name: name, index: index), grpc_options) do |response, operation|
+      c.remove_index_asset(::Google::Cloud::VisionAI::V1::RemoveIndexAssetRequest.new(name: name, index: index), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -717,40 +717,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, view_indexed_assets_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.view_indexed_assets({ index: index, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.view_indexed_assets({ index: index, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.view_indexed_assets index: index, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.view_indexed_assets index: index, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.view_indexed_assets ::Google::Cloud::VisionAI::V1::ViewIndexedAssetsRequest.new(index: index, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.view_indexed_assets ::Google::Cloud::VisionAI::V1::ViewIndexedAssetsRequest.new(index: index, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.view_indexed_assets({ index: index, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.view_indexed_assets({ index: index, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.view_indexed_assets(::Google::Cloud::VisionAI::V1::ViewIndexedAssetsRequest.new(index: index, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.view_indexed_assets(::Google::Cloud::VisionAI::V1::ViewIndexedAssetsRequest.new(index: index, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -784,40 +784,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_index_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_index({ parent: parent, index_id: index_id, index: index }) do |response, operation|
+      c.create_index({ parent: parent, index_id: index_id, index: index }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_index parent: parent, index_id: index_id, index: index do |response, operation|
+      c.create_index parent: parent, index_id: index_id, index: index do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_index ::Google::Cloud::VisionAI::V1::CreateIndexRequest.new(parent: parent, index_id: index_id, index: index) do |response, operation|
+      c.create_index ::Google::Cloud::VisionAI::V1::CreateIndexRequest.new(parent: parent, index_id: index_id, index: index) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_index({ parent: parent, index_id: index_id, index: index }, grpc_options) do |response, operation|
+      c.create_index({ parent: parent, index_id: index_id, index: index }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_index(::Google::Cloud::VisionAI::V1::CreateIndexRequest.new(parent: parent, index_id: index_id, index: index), grpc_options) do |response, operation|
+      c.create_index(::Google::Cloud::VisionAI::V1::CreateIndexRequest.new(parent: parent, index_id: index_id, index: index), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -849,40 +849,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_index_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_index({ index: index, update_mask: update_mask }) do |response, operation|
+      c.update_index({ index: index, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_index index: index, update_mask: update_mask do |response, operation|
+      c.update_index index: index, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_index ::Google::Cloud::VisionAI::V1::UpdateIndexRequest.new(index: index, update_mask: update_mask) do |response, operation|
+      c.update_index ::Google::Cloud::VisionAI::V1::UpdateIndexRequest.new(index: index, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_index({ index: index, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_index({ index: index, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_index(::Google::Cloud::VisionAI::V1::UpdateIndexRequest.new(index: index, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_index(::Google::Cloud::VisionAI::V1::UpdateIndexRequest.new(index: index, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -912,36 +912,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_index_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_index({ name: name }) do |response, operation|
+      c.get_index({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_index name: name do |response, operation|
+      c.get_index name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_index ::Google::Cloud::VisionAI::V1::GetIndexRequest.new(name: name) do |response, operation|
+      c.get_index ::Google::Cloud::VisionAI::V1::GetIndexRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_index({ name: name }, grpc_options) do |response, operation|
+      c.get_index({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_index(::Google::Cloud::VisionAI::V1::GetIndexRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_index(::Google::Cloud::VisionAI::V1::GetIndexRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -974,40 +974,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_indexes_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_indexes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_indexes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_indexes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_indexes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_indexes ::Google::Cloud::VisionAI::V1::ListIndexesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_indexes ::Google::Cloud::VisionAI::V1::ListIndexesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_indexes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_indexes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_indexes(::Google::Cloud::VisionAI::V1::ListIndexesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_indexes(::Google::Cloud::VisionAI::V1::ListIndexesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1037,40 +1037,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_index_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_index({ name: name }) do |response, operation|
+      c.delete_index({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_index name: name do |response, operation|
+      c.delete_index name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_index ::Google::Cloud::VisionAI::V1::DeleteIndexRequest.new(name: name) do |response, operation|
+      c.delete_index ::Google::Cloud::VisionAI::V1::DeleteIndexRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_index({ name: name }, grpc_options) do |response, operation|
+      c.delete_index({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_index(::Google::Cloud::VisionAI::V1::DeleteIndexRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_index(::Google::Cloud::VisionAI::V1::DeleteIndexRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1102,40 +1102,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_corpus_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_corpus({ parent: parent, corpus: corpus }) do |response, operation|
+      c.create_corpus({ parent: parent, corpus: corpus }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_corpus parent: parent, corpus: corpus do |response, operation|
+      c.create_corpus parent: parent, corpus: corpus do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_corpus ::Google::Cloud::VisionAI::V1::CreateCorpusRequest.new(parent: parent, corpus: corpus) do |response, operation|
+      c.create_corpus ::Google::Cloud::VisionAI::V1::CreateCorpusRequest.new(parent: parent, corpus: corpus) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_corpus({ parent: parent, corpus: corpus }, grpc_options) do |response, operation|
+      c.create_corpus({ parent: parent, corpus: corpus }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_corpus(::Google::Cloud::VisionAI::V1::CreateCorpusRequest.new(parent: parent, corpus: corpus), grpc_options) do |response, operation|
+      c.create_corpus(::Google::Cloud::VisionAI::V1::CreateCorpusRequest.new(parent: parent, corpus: corpus), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1165,36 +1165,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_corpus_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_corpus({ name: name }) do |response, operation|
+      c.get_corpus({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_corpus name: name do |response, operation|
+      c.get_corpus name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_corpus ::Google::Cloud::VisionAI::V1::GetCorpusRequest.new(name: name) do |response, operation|
+      c.get_corpus ::Google::Cloud::VisionAI::V1::GetCorpusRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_corpus({ name: name }, grpc_options) do |response, operation|
+      c.get_corpus({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_corpus(::Google::Cloud::VisionAI::V1::GetCorpusRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_corpus(::Google::Cloud::VisionAI::V1::GetCorpusRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1225,36 +1225,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_corpus_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_corpus({ corpus: corpus, update_mask: update_mask }) do |response, operation|
+      c.update_corpus({ corpus: corpus, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_corpus corpus: corpus, update_mask: update_mask do |response, operation|
+      c.update_corpus corpus: corpus, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_corpus ::Google::Cloud::VisionAI::V1::UpdateCorpusRequest.new(corpus: corpus, update_mask: update_mask) do |response, operation|
+      c.update_corpus ::Google::Cloud::VisionAI::V1::UpdateCorpusRequest.new(corpus: corpus, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_corpus({ corpus: corpus, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_corpus({ corpus: corpus, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_corpus(::Google::Cloud::VisionAI::V1::UpdateCorpusRequest.new(corpus: corpus, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_corpus(::Google::Cloud::VisionAI::V1::UpdateCorpusRequest.new(corpus: corpus, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1289,40 +1289,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_corpora_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_corpora({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_corpora({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_corpora parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_corpora parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_corpora ::Google::Cloud::VisionAI::V1::ListCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_corpora ::Google::Cloud::VisionAI::V1::ListCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_corpora({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_corpora({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_corpora(::Google::Cloud::VisionAI::V1::ListCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_corpora(::Google::Cloud::VisionAI::V1::ListCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1352,36 +1352,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_corpus_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_corpus({ name: name }) do |response, operation|
+      c.delete_corpus({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_corpus name: name do |response, operation|
+      c.delete_corpus name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_corpus ::Google::Cloud::VisionAI::V1::DeleteCorpusRequest.new(name: name) do |response, operation|
+      c.delete_corpus ::Google::Cloud::VisionAI::V1::DeleteCorpusRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_corpus({ name: name }, grpc_options) do |response, operation|
+      c.delete_corpus({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_corpus(::Google::Cloud::VisionAI::V1::DeleteCorpusRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_corpus(::Google::Cloud::VisionAI::V1::DeleteCorpusRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1410,40 +1410,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, analyze_corpus_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.analyze_corpus({ name: name }) do |response, operation|
+      c.analyze_corpus({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.analyze_corpus name: name do |response, operation|
+      c.analyze_corpus name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.analyze_corpus ::Google::Cloud::VisionAI::V1::AnalyzeCorpusRequest.new(name: name) do |response, operation|
+      c.analyze_corpus ::Google::Cloud::VisionAI::V1::AnalyzeCorpusRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.analyze_corpus({ name: name }, grpc_options) do |response, operation|
+      c.analyze_corpus({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.analyze_corpus(::Google::Cloud::VisionAI::V1::AnalyzeCorpusRequest.new(name: name), grpc_options) do |response, operation|
+      c.analyze_corpus(::Google::Cloud::VisionAI::V1::AnalyzeCorpusRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1475,36 +1475,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_data_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_data_schema({ parent: parent, data_schema: data_schema }) do |response, operation|
+      c.create_data_schema({ parent: parent, data_schema: data_schema }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_schema parent: parent, data_schema: data_schema do |response, operation|
+      c.create_data_schema parent: parent, data_schema: data_schema do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_schema ::Google::Cloud::VisionAI::V1::CreateDataSchemaRequest.new(parent: parent, data_schema: data_schema) do |response, operation|
+      c.create_data_schema ::Google::Cloud::VisionAI::V1::CreateDataSchemaRequest.new(parent: parent, data_schema: data_schema) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_schema({ parent: parent, data_schema: data_schema }, grpc_options) do |response, operation|
+      c.create_data_schema({ parent: parent, data_schema: data_schema }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_schema(::Google::Cloud::VisionAI::V1::CreateDataSchemaRequest.new(parent: parent, data_schema: data_schema), grpc_options) do |response, operation|
+      c.create_data_schema(::Google::Cloud::VisionAI::V1::CreateDataSchemaRequest.new(parent: parent, data_schema: data_schema), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1535,36 +1535,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_data_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_data_schema({ data_schema: data_schema, update_mask: update_mask }) do |response, operation|
+      c.update_data_schema({ data_schema: data_schema, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_data_schema data_schema: data_schema, update_mask: update_mask do |response, operation|
+      c.update_data_schema data_schema: data_schema, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_data_schema ::Google::Cloud::VisionAI::V1::UpdateDataSchemaRequest.new(data_schema: data_schema, update_mask: update_mask) do |response, operation|
+      c.update_data_schema ::Google::Cloud::VisionAI::V1::UpdateDataSchemaRequest.new(data_schema: data_schema, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_data_schema({ data_schema: data_schema, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_data_schema({ data_schema: data_schema, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_data_schema(::Google::Cloud::VisionAI::V1::UpdateDataSchemaRequest.new(data_schema: data_schema, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_data_schema(::Google::Cloud::VisionAI::V1::UpdateDataSchemaRequest.new(data_schema: data_schema, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1593,36 +1593,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_data_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_schema({ name: name }) do |response, operation|
+      c.get_data_schema({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_schema name: name do |response, operation|
+      c.get_data_schema name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_schema ::Google::Cloud::VisionAI::V1::GetDataSchemaRequest.new(name: name) do |response, operation|
+      c.get_data_schema ::Google::Cloud::VisionAI::V1::GetDataSchemaRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_schema({ name: name }, grpc_options) do |response, operation|
+      c.get_data_schema({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_schema(::Google::Cloud::VisionAI::V1::GetDataSchemaRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_data_schema(::Google::Cloud::VisionAI::V1::GetDataSchemaRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1651,36 +1651,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_data_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_data_schema({ name: name }) do |response, operation|
+      c.delete_data_schema({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_data_schema name: name do |response, operation|
+      c.delete_data_schema name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_data_schema ::Google::Cloud::VisionAI::V1::DeleteDataSchemaRequest.new(name: name) do |response, operation|
+      c.delete_data_schema ::Google::Cloud::VisionAI::V1::DeleteDataSchemaRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_data_schema({ name: name }, grpc_options) do |response, operation|
+      c.delete_data_schema({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_data_schema(::Google::Cloud::VisionAI::V1::DeleteDataSchemaRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_data_schema(::Google::Cloud::VisionAI::V1::DeleteDataSchemaRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1713,40 +1713,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_data_schemas_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_schemas({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_data_schemas({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_schemas parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_data_schemas parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_schemas ::Google::Cloud::VisionAI::V1::ListDataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_data_schemas ::Google::Cloud::VisionAI::V1::ListDataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_schemas({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_data_schemas({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_schemas(::Google::Cloud::VisionAI::V1::ListDataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_data_schemas(::Google::Cloud::VisionAI::V1::ListDataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1781,36 +1781,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_annotation_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_annotation({ parent: parent, annotation: annotation, annotation_id: annotation_id }) do |response, operation|
+      c.create_annotation({ parent: parent, annotation: annotation, annotation_id: annotation_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_annotation parent: parent, annotation: annotation, annotation_id: annotation_id do |response, operation|
+      c.create_annotation parent: parent, annotation: annotation, annotation_id: annotation_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_annotation ::Google::Cloud::VisionAI::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, annotation_id: annotation_id) do |response, operation|
+      c.create_annotation ::Google::Cloud::VisionAI::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, annotation_id: annotation_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_annotation({ parent: parent, annotation: annotation, annotation_id: annotation_id }, grpc_options) do |response, operation|
+      c.create_annotation({ parent: parent, annotation: annotation, annotation_id: annotation_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_annotation(::Google::Cloud::VisionAI::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, annotation_id: annotation_id), grpc_options) do |response, operation|
+      c.create_annotation(::Google::Cloud::VisionAI::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, annotation_id: annotation_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1839,36 +1839,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_annotation_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_annotation({ name: name }) do |response, operation|
+      c.get_annotation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_annotation name: name do |response, operation|
+      c.get_annotation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_annotation ::Google::Cloud::VisionAI::V1::GetAnnotationRequest.new(name: name) do |response, operation|
+      c.get_annotation ::Google::Cloud::VisionAI::V1::GetAnnotationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_annotation({ name: name }, grpc_options) do |response, operation|
+      c.get_annotation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_annotation(::Google::Cloud::VisionAI::V1::GetAnnotationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_annotation(::Google::Cloud::VisionAI::V1::GetAnnotationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1903,40 +1903,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_annotations_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_annotations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_annotations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_annotations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_annotations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_annotations ::Google::Cloud::VisionAI::V1::ListAnnotationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_annotations ::Google::Cloud::VisionAI::V1::ListAnnotationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_annotations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_annotations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_annotations(::Google::Cloud::VisionAI::V1::ListAnnotationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_annotations(::Google::Cloud::VisionAI::V1::ListAnnotationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1968,36 +1968,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_annotation_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_annotation({ annotation: annotation, update_mask: update_mask }) do |response, operation|
+      c.update_annotation({ annotation: annotation, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_annotation annotation: annotation, update_mask: update_mask do |response, operation|
+      c.update_annotation annotation: annotation, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_annotation ::Google::Cloud::VisionAI::V1::UpdateAnnotationRequest.new(annotation: annotation, update_mask: update_mask) do |response, operation|
+      c.update_annotation ::Google::Cloud::VisionAI::V1::UpdateAnnotationRequest.new(annotation: annotation, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_annotation({ annotation: annotation, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_annotation({ annotation: annotation, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_annotation(::Google::Cloud::VisionAI::V1::UpdateAnnotationRequest.new(annotation: annotation, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_annotation(::Google::Cloud::VisionAI::V1::UpdateAnnotationRequest.new(annotation: annotation, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2026,36 +2026,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_annotation_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_annotation({ name: name }) do |response, operation|
+      c.delete_annotation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_annotation name: name do |response, operation|
+      c.delete_annotation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_annotation ::Google::Cloud::VisionAI::V1::DeleteAnnotationRequest.new(name: name) do |response, operation|
+      c.delete_annotation ::Google::Cloud::VisionAI::V1::DeleteAnnotationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_annotation({ name: name }, grpc_options) do |response, operation|
+      c.delete_annotation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_annotation(::Google::Cloud::VisionAI::V1::DeleteAnnotationRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_annotation(::Google::Cloud::VisionAI::V1::DeleteAnnotationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2084,7 +2084,7 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, ingest_asset_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -2092,7 +2092,7 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
       request_hash = { config: config }
       request_proto = ::Google::Cloud::VisionAI::V1::IngestAssetRequest.new config: config
       enum_input = [request_hash, request_proto].to_enum
-      client.ingest_asset enum_input do |response, operation|
+      c.ingest_asset enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::IngestAssetResponse, r
@@ -2104,7 +2104,7 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
       request_hash = { config: config }
       request_proto = ::Google::Cloud::VisionAI::V1::IngestAssetRequest.new config: config
       stream_input = Gapic::StreamInput.new
-      client.ingest_asset stream_input do |response, operation|
+      c.ingest_asset stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::IngestAssetResponse, r
@@ -2119,7 +2119,7 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
       request_hash = { config: config }
       request_proto = ::Google::Cloud::VisionAI::V1::IngestAssetRequest.new config: config
       enum_input = [request_hash, request_proto].to_enum
-      client.ingest_asset enum_input, grpc_options do |response, operation|
+      c.ingest_asset enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::IngestAssetResponse, r
@@ -2131,7 +2131,7 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
       request_hash = { config: config }
       request_proto = ::Google::Cloud::VisionAI::V1::IngestAssetRequest.new config: config
       stream_input = Gapic::StreamInput.new
-      client.ingest_asset stream_input, grpc_options do |response, operation|
+      c.ingest_asset stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::IngestAssetResponse, r
@@ -2175,36 +2175,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, clip_asset_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.clip_asset({ name: name, temporal_partition: temporal_partition }) do |response, operation|
+      c.clip_asset({ name: name, temporal_partition: temporal_partition }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.clip_asset name: name, temporal_partition: temporal_partition do |response, operation|
+      c.clip_asset name: name, temporal_partition: temporal_partition do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.clip_asset ::Google::Cloud::VisionAI::V1::ClipAssetRequest.new(name: name, temporal_partition: temporal_partition) do |response, operation|
+      c.clip_asset ::Google::Cloud::VisionAI::V1::ClipAssetRequest.new(name: name, temporal_partition: temporal_partition) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.clip_asset({ name: name, temporal_partition: temporal_partition }, grpc_options) do |response, operation|
+      c.clip_asset({ name: name, temporal_partition: temporal_partition }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.clip_asset(::Google::Cloud::VisionAI::V1::ClipAssetRequest.new(name: name, temporal_partition: temporal_partition), grpc_options) do |response, operation|
+      c.clip_asset(::Google::Cloud::VisionAI::V1::ClipAssetRequest.new(name: name, temporal_partition: temporal_partition), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2237,36 +2237,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, generate_hls_uri_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_hls_uri({ name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled }) do |response, operation|
+      c.generate_hls_uri({ name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_hls_uri name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled do |response, operation|
+      c.generate_hls_uri name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_hls_uri ::Google::Cloud::VisionAI::V1::GenerateHlsUriRequest.new(name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled) do |response, operation|
+      c.generate_hls_uri ::Google::Cloud::VisionAI::V1::GenerateHlsUriRequest.new(name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_hls_uri({ name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled }, grpc_options) do |response, operation|
+      c.generate_hls_uri({ name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_hls_uri(::Google::Cloud::VisionAI::V1::GenerateHlsUriRequest.new(name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled), grpc_options) do |response, operation|
+      c.generate_hls_uri(::Google::Cloud::VisionAI::V1::GenerateHlsUriRequest.new(name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2298,40 +2298,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, import_assets_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_assets({ assets_gcs_uri: assets_gcs_uri, parent: parent }) do |response, operation|
+      c.import_assets({ assets_gcs_uri: assets_gcs_uri, parent: parent }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_assets assets_gcs_uri: assets_gcs_uri, parent: parent do |response, operation|
+      c.import_assets assets_gcs_uri: assets_gcs_uri, parent: parent do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_assets ::Google::Cloud::VisionAI::V1::ImportAssetsRequest.new(assets_gcs_uri: assets_gcs_uri, parent: parent) do |response, operation|
+      c.import_assets ::Google::Cloud::VisionAI::V1::ImportAssetsRequest.new(assets_gcs_uri: assets_gcs_uri, parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_assets({ assets_gcs_uri: assets_gcs_uri, parent: parent }, grpc_options) do |response, operation|
+      c.import_assets({ assets_gcs_uri: assets_gcs_uri, parent: parent }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_assets(::Google::Cloud::VisionAI::V1::ImportAssetsRequest.new(assets_gcs_uri: assets_gcs_uri, parent: parent), grpc_options) do |response, operation|
+      c.import_assets(::Google::Cloud::VisionAI::V1::ImportAssetsRequest.new(assets_gcs_uri: assets_gcs_uri, parent: parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2365,36 +2365,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_search_config_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_search_config({ parent: parent, search_config: search_config, search_config_id: search_config_id }) do |response, operation|
+      c.create_search_config({ parent: parent, search_config: search_config, search_config_id: search_config_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_search_config parent: parent, search_config: search_config, search_config_id: search_config_id do |response, operation|
+      c.create_search_config parent: parent, search_config: search_config, search_config_id: search_config_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_search_config ::Google::Cloud::VisionAI::V1::CreateSearchConfigRequest.new(parent: parent, search_config: search_config, search_config_id: search_config_id) do |response, operation|
+      c.create_search_config ::Google::Cloud::VisionAI::V1::CreateSearchConfigRequest.new(parent: parent, search_config: search_config, search_config_id: search_config_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_search_config({ parent: parent, search_config: search_config, search_config_id: search_config_id }, grpc_options) do |response, operation|
+      c.create_search_config({ parent: parent, search_config: search_config, search_config_id: search_config_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_search_config(::Google::Cloud::VisionAI::V1::CreateSearchConfigRequest.new(parent: parent, search_config: search_config, search_config_id: search_config_id), grpc_options) do |response, operation|
+      c.create_search_config(::Google::Cloud::VisionAI::V1::CreateSearchConfigRequest.new(parent: parent, search_config: search_config, search_config_id: search_config_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2425,36 +2425,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_search_config_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_search_config({ search_config: search_config, update_mask: update_mask }) do |response, operation|
+      c.update_search_config({ search_config: search_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_search_config search_config: search_config, update_mask: update_mask do |response, operation|
+      c.update_search_config search_config: search_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_search_config ::Google::Cloud::VisionAI::V1::UpdateSearchConfigRequest.new(search_config: search_config, update_mask: update_mask) do |response, operation|
+      c.update_search_config ::Google::Cloud::VisionAI::V1::UpdateSearchConfigRequest.new(search_config: search_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_search_config({ search_config: search_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_search_config({ search_config: search_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_search_config(::Google::Cloud::VisionAI::V1::UpdateSearchConfigRequest.new(search_config: search_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_search_config(::Google::Cloud::VisionAI::V1::UpdateSearchConfigRequest.new(search_config: search_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2483,36 +2483,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_search_config_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_search_config({ name: name }) do |response, operation|
+      c.get_search_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_search_config name: name do |response, operation|
+      c.get_search_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_search_config ::Google::Cloud::VisionAI::V1::GetSearchConfigRequest.new(name: name) do |response, operation|
+      c.get_search_config ::Google::Cloud::VisionAI::V1::GetSearchConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_search_config({ name: name }, grpc_options) do |response, operation|
+      c.get_search_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_search_config(::Google::Cloud::VisionAI::V1::GetSearchConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_search_config(::Google::Cloud::VisionAI::V1::GetSearchConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2541,36 +2541,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_search_config_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_search_config({ name: name }) do |response, operation|
+      c.delete_search_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_search_config name: name do |response, operation|
+      c.delete_search_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_search_config ::Google::Cloud::VisionAI::V1::DeleteSearchConfigRequest.new(name: name) do |response, operation|
+      c.delete_search_config ::Google::Cloud::VisionAI::V1::DeleteSearchConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_search_config({ name: name }, grpc_options) do |response, operation|
+      c.delete_search_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_search_config(::Google::Cloud::VisionAI::V1::DeleteSearchConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_search_config(::Google::Cloud::VisionAI::V1::DeleteSearchConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2603,40 +2603,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_search_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_search_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_search_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_search_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_search_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_search_configs ::Google::Cloud::VisionAI::V1::ListSearchConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_search_configs ::Google::Cloud::VisionAI::V1::ListSearchConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_search_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_search_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_search_configs(::Google::Cloud::VisionAI::V1::ListSearchConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_search_configs(::Google::Cloud::VisionAI::V1::ListSearchConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2671,36 +2671,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_search_hypernym_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_search_hypernym({ parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id }) do |response, operation|
+      c.create_search_hypernym({ parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_search_hypernym parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id do |response, operation|
+      c.create_search_hypernym parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_search_hypernym ::Google::Cloud::VisionAI::V1::CreateSearchHypernymRequest.new(parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id) do |response, operation|
+      c.create_search_hypernym ::Google::Cloud::VisionAI::V1::CreateSearchHypernymRequest.new(parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_search_hypernym({ parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id }, grpc_options) do |response, operation|
+      c.create_search_hypernym({ parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_search_hypernym(::Google::Cloud::VisionAI::V1::CreateSearchHypernymRequest.new(parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id), grpc_options) do |response, operation|
+      c.create_search_hypernym(::Google::Cloud::VisionAI::V1::CreateSearchHypernymRequest.new(parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2731,36 +2731,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_search_hypernym_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_search_hypernym({ search_hypernym: search_hypernym, update_mask: update_mask }) do |response, operation|
+      c.update_search_hypernym({ search_hypernym: search_hypernym, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_search_hypernym search_hypernym: search_hypernym, update_mask: update_mask do |response, operation|
+      c.update_search_hypernym search_hypernym: search_hypernym, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_search_hypernym ::Google::Cloud::VisionAI::V1::UpdateSearchHypernymRequest.new(search_hypernym: search_hypernym, update_mask: update_mask) do |response, operation|
+      c.update_search_hypernym ::Google::Cloud::VisionAI::V1::UpdateSearchHypernymRequest.new(search_hypernym: search_hypernym, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_search_hypernym({ search_hypernym: search_hypernym, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_search_hypernym({ search_hypernym: search_hypernym, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_search_hypernym(::Google::Cloud::VisionAI::V1::UpdateSearchHypernymRequest.new(search_hypernym: search_hypernym, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_search_hypernym(::Google::Cloud::VisionAI::V1::UpdateSearchHypernymRequest.new(search_hypernym: search_hypernym, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2789,36 +2789,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_search_hypernym_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_search_hypernym({ name: name }) do |response, operation|
+      c.get_search_hypernym({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_search_hypernym name: name do |response, operation|
+      c.get_search_hypernym name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_search_hypernym ::Google::Cloud::VisionAI::V1::GetSearchHypernymRequest.new(name: name) do |response, operation|
+      c.get_search_hypernym ::Google::Cloud::VisionAI::V1::GetSearchHypernymRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_search_hypernym({ name: name }, grpc_options) do |response, operation|
+      c.get_search_hypernym({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_search_hypernym(::Google::Cloud::VisionAI::V1::GetSearchHypernymRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_search_hypernym(::Google::Cloud::VisionAI::V1::GetSearchHypernymRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2847,36 +2847,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_search_hypernym_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_search_hypernym({ name: name }) do |response, operation|
+      c.delete_search_hypernym({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_search_hypernym name: name do |response, operation|
+      c.delete_search_hypernym name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_search_hypernym ::Google::Cloud::VisionAI::V1::DeleteSearchHypernymRequest.new(name: name) do |response, operation|
+      c.delete_search_hypernym ::Google::Cloud::VisionAI::V1::DeleteSearchHypernymRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_search_hypernym({ name: name }, grpc_options) do |response, operation|
+      c.delete_search_hypernym({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_search_hypernym(::Google::Cloud::VisionAI::V1::DeleteSearchHypernymRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_search_hypernym(::Google::Cloud::VisionAI::V1::DeleteSearchHypernymRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2909,40 +2909,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_search_hypernyms_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_search_hypernyms({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_search_hypernyms({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_search_hypernyms parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_search_hypernyms parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_search_hypernyms ::Google::Cloud::VisionAI::V1::ListSearchHypernymsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_search_hypernyms ::Google::Cloud::VisionAI::V1::ListSearchHypernymsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_search_hypernyms({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_search_hypernyms({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_search_hypernyms(::Google::Cloud::VisionAI::V1::ListSearchHypernymsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_search_hypernyms(::Google::Cloud::VisionAI::V1::ListSearchHypernymsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2989,40 +2989,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_assets_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_assets({ schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query }) do |response, operation|
+      c.search_assets({ schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_assets schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query do |response, operation|
+      c.search_assets schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_assets ::Google::Cloud::VisionAI::V1::SearchAssetsRequest.new(schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query) do |response, operation|
+      c.search_assets ::Google::Cloud::VisionAI::V1::SearchAssetsRequest.new(schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_assets({ schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query }, grpc_options) do |response, operation|
+      c.search_assets({ schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_assets(::Google::Cloud::VisionAI::V1::SearchAssetsRequest.new(schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query), grpc_options) do |response, operation|
+      c.search_assets(::Google::Cloud::VisionAI::V1::SearchAssetsRequest.new(schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3063,40 +3063,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_index_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_index_endpoint({ image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_index_endpoint({ image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_index_endpoint image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_index_endpoint image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_index_endpoint ::Google::Cloud::VisionAI::V1::SearchIndexEndpointRequest.new(image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_index_endpoint ::Google::Cloud::VisionAI::V1::SearchIndexEndpointRequest.new(image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_index_endpoint({ image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_index_endpoint({ image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_index_endpoint(::Google::Cloud::VisionAI::V1::SearchIndexEndpointRequest.new(image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_index_endpoint(::Google::Cloud::VisionAI::V1::SearchIndexEndpointRequest.new(image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3130,40 +3130,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_index_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_index_endpoint({ parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint }) do |response, operation|
+      c.create_index_endpoint({ parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_index_endpoint parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint do |response, operation|
+      c.create_index_endpoint parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_index_endpoint ::Google::Cloud::VisionAI::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint) do |response, operation|
+      c.create_index_endpoint ::Google::Cloud::VisionAI::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_index_endpoint({ parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint }, grpc_options) do |response, operation|
+      c.create_index_endpoint({ parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_index_endpoint(::Google::Cloud::VisionAI::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint), grpc_options) do |response, operation|
+      c.create_index_endpoint(::Google::Cloud::VisionAI::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3193,36 +3193,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_index_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_index_endpoint({ name: name }) do |response, operation|
+      c.get_index_endpoint({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_index_endpoint name: name do |response, operation|
+      c.get_index_endpoint name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_index_endpoint ::Google::Cloud::VisionAI::V1::GetIndexEndpointRequest.new(name: name) do |response, operation|
+      c.get_index_endpoint ::Google::Cloud::VisionAI::V1::GetIndexEndpointRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_index_endpoint({ name: name }, grpc_options) do |response, operation|
+      c.get_index_endpoint({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_index_endpoint(::Google::Cloud::VisionAI::V1::GetIndexEndpointRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_index_endpoint(::Google::Cloud::VisionAI::V1::GetIndexEndpointRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3257,40 +3257,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_index_endpoints_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_index_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_index_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_index_endpoints parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_index_endpoints parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_index_endpoints ::Google::Cloud::VisionAI::V1::ListIndexEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_index_endpoints ::Google::Cloud::VisionAI::V1::ListIndexEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_index_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_index_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_index_endpoints(::Google::Cloud::VisionAI::V1::ListIndexEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_index_endpoints(::Google::Cloud::VisionAI::V1::ListIndexEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3322,40 +3322,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_index_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }) do |response, operation|
+      c.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_index_endpoint index_endpoint: index_endpoint, update_mask: update_mask do |response, operation|
+      c.update_index_endpoint index_endpoint: index_endpoint, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_index_endpoint ::Google::Cloud::VisionAI::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask) do |response, operation|
+      c.update_index_endpoint ::Google::Cloud::VisionAI::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_index_endpoint(::Google::Cloud::VisionAI::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_index_endpoint(::Google::Cloud::VisionAI::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3385,40 +3385,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_index_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_index_endpoint({ name: name }) do |response, operation|
+      c.delete_index_endpoint({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_index_endpoint name: name do |response, operation|
+      c.delete_index_endpoint name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_index_endpoint ::Google::Cloud::VisionAI::V1::DeleteIndexEndpointRequest.new(name: name) do |response, operation|
+      c.delete_index_endpoint ::Google::Cloud::VisionAI::V1::DeleteIndexEndpointRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_index_endpoint({ name: name }, grpc_options) do |response, operation|
+      c.delete_index_endpoint({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_index_endpoint(::Google::Cloud::VisionAI::V1::DeleteIndexEndpointRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_index_endpoint(::Google::Cloud::VisionAI::V1::DeleteIndexEndpointRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3450,40 +3450,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, deploy_index_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |response, operation|
+      c.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.deploy_index index_endpoint: index_endpoint, deployed_index: deployed_index do |response, operation|
+      c.deploy_index index_endpoint: index_endpoint, deployed_index: deployed_index do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.deploy_index ::Google::Cloud::VisionAI::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |response, operation|
+      c.deploy_index ::Google::Cloud::VisionAI::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, grpc_options) do |response, operation|
+      c.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.deploy_index(::Google::Cloud::VisionAI::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), grpc_options) do |response, operation|
+      c.deploy_index(::Google::Cloud::VisionAI::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3513,40 +3513,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, undeploy_index_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undeploy_index({ index_endpoint: index_endpoint }) do |response, operation|
+      c.undeploy_index({ index_endpoint: index_endpoint }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undeploy_index index_endpoint: index_endpoint do |response, operation|
+      c.undeploy_index index_endpoint: index_endpoint do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undeploy_index ::Google::Cloud::VisionAI::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint) do |response, operation|
+      c.undeploy_index ::Google::Cloud::VisionAI::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undeploy_index({ index_endpoint: index_endpoint }, grpc_options) do |response, operation|
+      c.undeploy_index({ index_endpoint: index_endpoint }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undeploy_index(::Google::Cloud::VisionAI::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint), grpc_options) do |response, operation|
+      c.undeploy_index(::Google::Cloud::VisionAI::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3581,40 +3581,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_collection_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_collection({ parent: parent, collection: collection, collection_id: collection_id }) do |response, operation|
+      c.create_collection({ parent: parent, collection: collection, collection_id: collection_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_collection parent: parent, collection: collection, collection_id: collection_id do |response, operation|
+      c.create_collection parent: parent, collection: collection, collection_id: collection_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_collection ::Google::Cloud::VisionAI::V1::CreateCollectionRequest.new(parent: parent, collection: collection, collection_id: collection_id) do |response, operation|
+      c.create_collection ::Google::Cloud::VisionAI::V1::CreateCollectionRequest.new(parent: parent, collection: collection, collection_id: collection_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_collection({ parent: parent, collection: collection, collection_id: collection_id }, grpc_options) do |response, operation|
+      c.create_collection({ parent: parent, collection: collection, collection_id: collection_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_collection(::Google::Cloud::VisionAI::V1::CreateCollectionRequest.new(parent: parent, collection: collection, collection_id: collection_id), grpc_options) do |response, operation|
+      c.create_collection(::Google::Cloud::VisionAI::V1::CreateCollectionRequest.new(parent: parent, collection: collection, collection_id: collection_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3644,40 +3644,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_collection_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_collection({ name: name }) do |response, operation|
+      c.delete_collection({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_collection name: name do |response, operation|
+      c.delete_collection name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_collection ::Google::Cloud::VisionAI::V1::DeleteCollectionRequest.new(name: name) do |response, operation|
+      c.delete_collection ::Google::Cloud::VisionAI::V1::DeleteCollectionRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_collection({ name: name }, grpc_options) do |response, operation|
+      c.delete_collection({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_collection(::Google::Cloud::VisionAI::V1::DeleteCollectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_collection(::Google::Cloud::VisionAI::V1::DeleteCollectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3707,36 +3707,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_collection_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_collection({ name: name }) do |response, operation|
+      c.get_collection({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_collection name: name do |response, operation|
+      c.get_collection name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_collection ::Google::Cloud::VisionAI::V1::GetCollectionRequest.new(name: name) do |response, operation|
+      c.get_collection ::Google::Cloud::VisionAI::V1::GetCollectionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_collection({ name: name }, grpc_options) do |response, operation|
+      c.get_collection({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_collection(::Google::Cloud::VisionAI::V1::GetCollectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_collection(::Google::Cloud::VisionAI::V1::GetCollectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3767,36 +3767,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_collection_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_collection({ collection: collection, update_mask: update_mask }) do |response, operation|
+      c.update_collection({ collection: collection, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_collection collection: collection, update_mask: update_mask do |response, operation|
+      c.update_collection collection: collection, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_collection ::Google::Cloud::VisionAI::V1::UpdateCollectionRequest.new(collection: collection, update_mask: update_mask) do |response, operation|
+      c.update_collection ::Google::Cloud::VisionAI::V1::UpdateCollectionRequest.new(collection: collection, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_collection({ collection: collection, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_collection({ collection: collection, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_collection(::Google::Cloud::VisionAI::V1::UpdateCollectionRequest.new(collection: collection, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_collection(::Google::Cloud::VisionAI::V1::UpdateCollectionRequest.new(collection: collection, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3829,40 +3829,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_collections_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_collections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_collections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_collections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_collections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_collections ::Google::Cloud::VisionAI::V1::ListCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_collections ::Google::Cloud::VisionAI::V1::ListCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_collections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_collections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_collections(::Google::Cloud::VisionAI::V1::ListCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_collections(::Google::Cloud::VisionAI::V1::ListCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3892,36 +3892,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, add_collection_item_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.add_collection_item({ item: item }) do |response, operation|
+      c.add_collection_item({ item: item }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.add_collection_item item: item do |response, operation|
+      c.add_collection_item item: item do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.add_collection_item ::Google::Cloud::VisionAI::V1::AddCollectionItemRequest.new(item: item) do |response, operation|
+      c.add_collection_item ::Google::Cloud::VisionAI::V1::AddCollectionItemRequest.new(item: item) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.add_collection_item({ item: item }, grpc_options) do |response, operation|
+      c.add_collection_item({ item: item }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.add_collection_item(::Google::Cloud::VisionAI::V1::AddCollectionItemRequest.new(item: item), grpc_options) do |response, operation|
+      c.add_collection_item(::Google::Cloud::VisionAI::V1::AddCollectionItemRequest.new(item: item), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3950,36 +3950,36 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, remove_collection_item_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.remove_collection_item({ item: item }) do |response, operation|
+      c.remove_collection_item({ item: item }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.remove_collection_item item: item do |response, operation|
+      c.remove_collection_item item: item do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.remove_collection_item ::Google::Cloud::VisionAI::V1::RemoveCollectionItemRequest.new(item: item) do |response, operation|
+      c.remove_collection_item ::Google::Cloud::VisionAI::V1::RemoveCollectionItemRequest.new(item: item) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.remove_collection_item({ item: item }, grpc_options) do |response, operation|
+      c.remove_collection_item({ item: item }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.remove_collection_item(::Google::Cloud::VisionAI::V1::RemoveCollectionItemRequest.new(item: item), grpc_options) do |response, operation|
+      c.remove_collection_item(::Google::Cloud::VisionAI::V1::RemoveCollectionItemRequest.new(item: item), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4012,40 +4012,40 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, view_collection_items_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::Warehouse::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.view_collection_items({ collection: collection, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.view_collection_items({ collection: collection, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.view_collection_items collection: collection, page_size: page_size, page_token: page_token do |response, operation|
+      c.view_collection_items collection: collection, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.view_collection_items ::Google::Cloud::VisionAI::V1::ViewCollectionItemsRequest.new(collection: collection, page_size: page_size, page_token: page_token) do |response, operation|
+      c.view_collection_items ::Google::Cloud::VisionAI::V1::ViewCollectionItemsRequest.new(collection: collection, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.view_collection_items({ collection: collection, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.view_collection_items({ collection: collection, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.view_collection_items(::Google::Cloud::VisionAI::V1::ViewCollectionItemsRequest.new(collection: collection, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.view_collection_items(::Google::Cloud::VisionAI::V1::ViewCollectionItemsRequest.new(collection: collection, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

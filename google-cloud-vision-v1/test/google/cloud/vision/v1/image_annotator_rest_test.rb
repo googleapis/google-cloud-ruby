@@ -99,32 +99,32 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::ClientTest < Minitest::
     ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::ServiceStub.stub :transcode_batch_annotate_images_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_annotate_images_client_stub do
         # Create client
-        client = ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new do |config|
+        c = ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_annotate_images({ requests: requests, parent: parent, labels: labels }) do |_result, response|
+        c.batch_annotate_images({ requests: requests, parent: parent, labels: labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_annotate_images requests: requests, parent: parent, labels: labels do |_result, response|
+        c.batch_annotate_images requests: requests, parent: parent, labels: labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_annotate_images ::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent, labels: labels) do |_result, response|
+        c.batch_annotate_images ::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent, labels: labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_annotate_images({ requests: requests, parent: parent, labels: labels }, call_options) do |_result, response|
+        c.batch_annotate_images({ requests: requests, parent: parent, labels: labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_annotate_images(::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent, labels: labels), call_options) do |_result, response|
+        c.batch_annotate_images(::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent, labels: labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::ClientTest < Minitest::
     ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::ServiceStub.stub :transcode_batch_annotate_files_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_annotate_files_client_stub do
         # Create client
-        client = ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new do |config|
+        c = ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_annotate_files({ requests: requests, parent: parent, labels: labels }) do |_result, response|
+        c.batch_annotate_files({ requests: requests, parent: parent, labels: labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_annotate_files requests: requests, parent: parent, labels: labels do |_result, response|
+        c.batch_annotate_files requests: requests, parent: parent, labels: labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_annotate_files ::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels) do |_result, response|
+        c.batch_annotate_files ::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_annotate_files({ requests: requests, parent: parent, labels: labels }, call_options) do |_result, response|
+        c.batch_annotate_files({ requests: requests, parent: parent, labels: labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_annotate_files(::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels), call_options) do |_result, response|
+        c.batch_annotate_files(::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::ClientTest < Minitest::
     ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::ServiceStub.stub :transcode_async_batch_annotate_images_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, async_batch_annotate_images_client_stub do
         # Create client
-        client = ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new do |config|
+        c = ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.async_batch_annotate_images({ requests: requests, output_config: output_config, parent: parent, labels: labels }) do |_result, response|
+        c.async_batch_annotate_images({ requests: requests, output_config: output_config, parent: parent, labels: labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.async_batch_annotate_images requests: requests, output_config: output_config, parent: parent, labels: labels do |_result, response|
+        c.async_batch_annotate_images requests: requests, output_config: output_config, parent: parent, labels: labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.async_batch_annotate_images ::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent, labels: labels) do |_result, response|
+        c.async_batch_annotate_images ::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent, labels: labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.async_batch_annotate_images({ requests: requests, output_config: output_config, parent: parent, labels: labels }, call_options) do |_result, response|
+        c.async_batch_annotate_images({ requests: requests, output_config: output_config, parent: parent, labels: labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.async_batch_annotate_images(::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent, labels: labels), call_options) do |_result, response|
+        c.async_batch_annotate_images(::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent, labels: labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::ClientTest < Minitest::
     ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::ServiceStub.stub :transcode_async_batch_annotate_files_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, async_batch_annotate_files_client_stub do
         # Create client
-        client = ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new do |config|
+        c = ::Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.async_batch_annotate_files({ requests: requests, parent: parent, labels: labels }) do |_result, response|
+        c.async_batch_annotate_files({ requests: requests, parent: parent, labels: labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.async_batch_annotate_files requests: requests, parent: parent, labels: labels do |_result, response|
+        c.async_batch_annotate_files requests: requests, parent: parent, labels: labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.async_batch_annotate_files ::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels) do |_result, response|
+        c.async_batch_annotate_files ::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.async_batch_annotate_files({ requests: requests, parent: parent, labels: labels }, call_options) do |_result, response|
+        c.async_batch_annotate_files({ requests: requests, parent: parent, labels: labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.async_batch_annotate_files(::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels), call_options) do |_result, response|
+        c.async_batch_annotate_files(::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

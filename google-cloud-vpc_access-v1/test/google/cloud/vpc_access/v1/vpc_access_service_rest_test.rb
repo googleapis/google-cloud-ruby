@@ -99,32 +99,32 @@ class ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::ClientTest < Minit
     ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::ServiceStub.stub :transcode_create_connector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_connector_client_stub do
         # Create client
-        client = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::Client.new do |config|
+        c = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_connector({ parent: parent, connector_id: connector_id, connector: connector }) do |_result, response|
+        c.create_connector({ parent: parent, connector_id: connector_id, connector: connector }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_connector parent: parent, connector_id: connector_id, connector: connector do |_result, response|
+        c.create_connector parent: parent, connector_id: connector_id, connector: connector do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_connector ::Google::Cloud::VpcAccess::V1::CreateConnectorRequest.new(parent: parent, connector_id: connector_id, connector: connector) do |_result, response|
+        c.create_connector ::Google::Cloud::VpcAccess::V1::CreateConnectorRequest.new(parent: parent, connector_id: connector_id, connector: connector) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_connector({ parent: parent, connector_id: connector_id, connector: connector }, call_options) do |_result, response|
+        c.create_connector({ parent: parent, connector_id: connector_id, connector: connector }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_connector(::Google::Cloud::VpcAccess::V1::CreateConnectorRequest.new(parent: parent, connector_id: connector_id, connector: connector), call_options) do |_result, response|
+        c.create_connector(::Google::Cloud::VpcAccess::V1::CreateConnectorRequest.new(parent: parent, connector_id: connector_id, connector: connector), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::ClientTest < Minit
     ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::ServiceStub.stub :transcode_get_connector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_connector_client_stub do
         # Create client
-        client = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::Client.new do |config|
+        c = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_connector({ name: name }) do |_result, response|
+        c.get_connector({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_connector name: name do |_result, response|
+        c.get_connector name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_connector ::Google::Cloud::VpcAccess::V1::GetConnectorRequest.new(name: name) do |_result, response|
+        c.get_connector ::Google::Cloud::VpcAccess::V1::GetConnectorRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_connector({ name: name }, call_options) do |_result, response|
+        c.get_connector({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_connector(::Google::Cloud::VpcAccess::V1::GetConnectorRequest.new(name: name), call_options) do |_result, response|
+        c.get_connector(::Google::Cloud::VpcAccess::V1::GetConnectorRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::ClientTest < Minit
     ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::ServiceStub.stub :transcode_list_connectors_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_connectors_client_stub do
         # Create client
-        client = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::Client.new do |config|
+        c = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_connectors parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_connectors parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_connectors ::Google::Cloud::VpcAccess::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_connectors ::Google::Cloud::VpcAccess::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_connectors(::Google::Cloud::VpcAccess::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_connectors(::Google::Cloud::VpcAccess::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::ClientTest < Minit
     ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::ServiceStub.stub :transcode_delete_connector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_connector_client_stub do
         # Create client
-        client = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::Client.new do |config|
+        c = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_connector({ name: name }) do |_result, response|
+        c.delete_connector({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_connector name: name do |_result, response|
+        c.delete_connector name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_connector ::Google::Cloud::VpcAccess::V1::DeleteConnectorRequest.new(name: name) do |_result, response|
+        c.delete_connector ::Google::Cloud::VpcAccess::V1::DeleteConnectorRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_connector({ name: name }, call_options) do |_result, response|
+        c.delete_connector({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_connector(::Google::Cloud::VpcAccess::V1::DeleteConnectorRequest.new(name: name), call_options) do |_result, response|
+        c.delete_connector(::Google::Cloud::VpcAccess::V1::DeleteConnectorRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
