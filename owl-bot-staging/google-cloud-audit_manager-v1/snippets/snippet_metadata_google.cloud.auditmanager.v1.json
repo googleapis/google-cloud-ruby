@@ -1,0 +1,335 @@
+{
+  "client_library": {
+    "name": "google-cloud-audit_manager-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.auditmanager.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "auditmanager_v1_generated_AuditManager_EnrollResource_sync",
+      "title": "Snippet for the enroll_resource call in the AuditManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AuditManager::V1::AuditManager::Client#enroll_resource.",
+      "file": "audit_manager/enroll_resource.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "enroll_resource",
+        "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client#enroll_resource",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AuditManager::V1::EnrollResourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AuditManager::V1::Enrollment",
+        "client": {
+          "short_name": "AuditManager::Client",
+          "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client"
+        },
+        "method": {
+          "short_name": "EnrollResource",
+          "full_name": "google.cloud.auditmanager.v1.AuditManager.EnrollResource",
+          "service": {
+            "short_name": "AuditManager",
+            "full_name": "google.cloud.auditmanager.v1.AuditManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "auditmanager_v1_generated_AuditManager_GenerateAuditScopeReport_sync",
+      "title": "Snippet for the generate_audit_scope_report call in the AuditManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AuditManager::V1::AuditManager::Client#generate_audit_scope_report.",
+      "file": "audit_manager/generate_audit_scope_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_audit_scope_report",
+        "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client#generate_audit_scope_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AuditManager::V1::AuditScopeReport",
+        "client": {
+          "short_name": "AuditManager::Client",
+          "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client"
+        },
+        "method": {
+          "short_name": "GenerateAuditScopeReport",
+          "full_name": "google.cloud.auditmanager.v1.AuditManager.GenerateAuditScopeReport",
+          "service": {
+            "short_name": "AuditManager",
+            "full_name": "google.cloud.auditmanager.v1.AuditManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "auditmanager_v1_generated_AuditManager_GenerateAuditReport_sync",
+      "title": "Snippet for the generate_audit_report call in the AuditManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AuditManager::V1::AuditManager::Client#generate_audit_report.",
+      "file": "audit_manager/generate_audit_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_audit_report",
+        "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client#generate_audit_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AuditManager::Client",
+          "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client"
+        },
+        "method": {
+          "short_name": "GenerateAuditReport",
+          "full_name": "google.cloud.auditmanager.v1.AuditManager.GenerateAuditReport",
+          "service": {
+            "short_name": "AuditManager",
+            "full_name": "google.cloud.auditmanager.v1.AuditManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "auditmanager_v1_generated_AuditManager_ListAuditReports_sync",
+      "title": "Snippet for the list_audit_reports call in the AuditManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AuditManager::V1::AuditManager::Client#list_audit_reports.",
+      "file": "audit_manager/list_audit_reports.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_audit_reports",
+        "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client#list_audit_reports",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AuditManager::V1::ListAuditReportsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AuditManager::V1::ListAuditReportsResponse",
+        "client": {
+          "short_name": "AuditManager::Client",
+          "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client"
+        },
+        "method": {
+          "short_name": "ListAuditReports",
+          "full_name": "google.cloud.auditmanager.v1.AuditManager.ListAuditReports",
+          "service": {
+            "short_name": "AuditManager",
+            "full_name": "google.cloud.auditmanager.v1.AuditManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "auditmanager_v1_generated_AuditManager_GetAuditReport_sync",
+      "title": "Snippet for the get_audit_report call in the AuditManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AuditManager::V1::AuditManager::Client#get_audit_report.",
+      "file": "audit_manager/get_audit_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_audit_report",
+        "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client#get_audit_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AuditManager::V1::GetAuditReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AuditManager::V1::AuditReport",
+        "client": {
+          "short_name": "AuditManager::Client",
+          "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client"
+        },
+        "method": {
+          "short_name": "GetAuditReport",
+          "full_name": "google.cloud.auditmanager.v1.AuditManager.GetAuditReport",
+          "service": {
+            "short_name": "AuditManager",
+            "full_name": "google.cloud.auditmanager.v1.AuditManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "auditmanager_v1_generated_AuditManager_GetResourceEnrollmentStatus_sync",
+      "title": "Snippet for the get_resource_enrollment_status call in the AuditManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AuditManager::V1::AuditManager::Client#get_resource_enrollment_status.",
+      "file": "audit_manager/get_resource_enrollment_status.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_resource_enrollment_status",
+        "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client#get_resource_enrollment_status",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AuditManager::V1::GetResourceEnrollmentStatusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AuditManager::V1::ResourceEnrollmentStatus",
+        "client": {
+          "short_name": "AuditManager::Client",
+          "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client"
+        },
+        "method": {
+          "short_name": "GetResourceEnrollmentStatus",
+          "full_name": "google.cloud.auditmanager.v1.AuditManager.GetResourceEnrollmentStatus",
+          "service": {
+            "short_name": "AuditManager",
+            "full_name": "google.cloud.auditmanager.v1.AuditManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "auditmanager_v1_generated_AuditManager_ListResourceEnrollmentStatuses_sync",
+      "title": "Snippet for the list_resource_enrollment_statuses call in the AuditManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AuditManager::V1::AuditManager::Client#list_resource_enrollment_statuses.",
+      "file": "audit_manager/list_resource_enrollment_statuses.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_resource_enrollment_statuses",
+        "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client#list_resource_enrollment_statuses",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesResponse",
+        "client": {
+          "short_name": "AuditManager::Client",
+          "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client"
+        },
+        "method": {
+          "short_name": "ListResourceEnrollmentStatuses",
+          "full_name": "google.cloud.auditmanager.v1.AuditManager.ListResourceEnrollmentStatuses",
+          "service": {
+            "short_name": "AuditManager",
+            "full_name": "google.cloud.auditmanager.v1.AuditManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "auditmanager_v1_generated_AuditManager_ListControls_sync",
+      "title": "Snippet for the list_controls call in the AuditManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AuditManager::V1::AuditManager::Client#list_controls.",
+      "file": "audit_manager/list_controls.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_controls",
+        "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client#list_controls",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AuditManager::V1::ListControlsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AuditManager::V1::ListControlsResponse",
+        "client": {
+          "short_name": "AuditManager::Client",
+          "full_name": "::Google::Cloud::AuditManager::V1::AuditManager::Client"
+        },
+        "method": {
+          "short_name": "ListControls",
+          "full_name": "google.cloud.auditmanager.v1.AuditManager.ListControls",
+          "service": {
+            "short_name": "AuditManager",
+            "full_name": "google.cloud.auditmanager.v1.AuditManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
