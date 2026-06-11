@@ -481,7 +481,7 @@
   "google-cloud-hypercompute_cluster+FILLER": "0.0.0",
   "google-cloud-hypercompute_cluster-v1beta": "0.3.1",
   "google-cloud-hypercompute_cluster-v1beta+FILLER": "0.0.0",
-  "google-cloud-iap": "1.6.0",
+  "google-cloud-iap": "1.7.0",
   "google-cloud-iap+FILLER": "0.0.0",
   "google-cloud-iap-v1": "1.7.1",
   "google-cloud-iap-v1+FILLER": "0.0.0",
