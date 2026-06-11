@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.13.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34060](https://github.com/googleapis/google-cloud-ruby/issues/34060)) 
+
 ### 0.12.1 (2026-04-03)
 
 #### Documentation
