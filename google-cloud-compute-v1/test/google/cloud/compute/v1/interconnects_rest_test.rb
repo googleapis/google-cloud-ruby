@@ -99,32 +99,32 @@ class ::Google::Cloud::Compute::V1::Interconnects::Rest::ClientTest < Minitest::
     ::Google::Cloud::Compute::V1::Interconnects::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete({ interconnect: interconnect, project: project, request_id: request_id }) do |_result, response|
+        c.delete({ interconnect: interconnect, project: project, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete interconnect: interconnect, project: project, request_id: request_id do |_result, response|
+        c.delete interconnect: interconnect, project: project, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete ::Google::Cloud::Compute::V1::DeleteInterconnectRequest.new(interconnect: interconnect, project: project, request_id: request_id) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteInterconnectRequest.new(interconnect: interconnect, project: project, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete({ interconnect: interconnect, project: project, request_id: request_id }, call_options) do |_result, response|
+        c.delete({ interconnect: interconnect, project: project, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete(::Google::Cloud::Compute::V1::DeleteInterconnectRequest.new(interconnect: interconnect, project: project, request_id: request_id), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteInterconnectRequest.new(interconnect: interconnect, project: project, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Compute::V1::Interconnects::Rest::ClientTest < Minitest::
     ::Google::Cloud::Compute::V1::Interconnects::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ interconnect: interconnect, project: project }) do |_result, response|
+        c.get({ interconnect: interconnect, project: project }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get interconnect: interconnect, project: project do |_result, response|
+        c.get interconnect: interconnect, project: project do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetInterconnectRequest.new(interconnect: interconnect, project: project) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetInterconnectRequest.new(interconnect: interconnect, project: project) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ interconnect: interconnect, project: project }, call_options) do |_result, response|
+        c.get({ interconnect: interconnect, project: project }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetInterconnectRequest.new(interconnect: interconnect, project: project), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetInterconnectRequest.new(interconnect: interconnect, project: project), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Compute::V1::Interconnects::Rest::ClientTest < Minitest::
     ::Google::Cloud::Compute::V1::Interconnects::Rest::ServiceStub.stub :transcode_get_diagnostics_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_diagnostics_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_diagnostics({ interconnect: interconnect, project: project }) do |_result, response|
+        c.get_diagnostics({ interconnect: interconnect, project: project }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_diagnostics interconnect: interconnect, project: project do |_result, response|
+        c.get_diagnostics interconnect: interconnect, project: project do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_diagnostics ::Google::Cloud::Compute::V1::GetDiagnosticsInterconnectRequest.new(interconnect: interconnect, project: project) do |_result, response|
+        c.get_diagnostics ::Google::Cloud::Compute::V1::GetDiagnosticsInterconnectRequest.new(interconnect: interconnect, project: project) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_diagnostics({ interconnect: interconnect, project: project }, call_options) do |_result, response|
+        c.get_diagnostics({ interconnect: interconnect, project: project }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_diagnostics(::Google::Cloud::Compute::V1::GetDiagnosticsInterconnectRequest.new(interconnect: interconnect, project: project), call_options) do |_result, response|
+        c.get_diagnostics(::Google::Cloud::Compute::V1::GetDiagnosticsInterconnectRequest.new(interconnect: interconnect, project: project), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::Compute::V1::Interconnects::Rest::ClientTest < Minitest::
     ::Google::Cloud::Compute::V1::Interconnects::Rest::ServiceStub.stub :transcode_get_macsec_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_macsec_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_macsec_config({ interconnect: interconnect, project: project }) do |_result, response|
+        c.get_macsec_config({ interconnect: interconnect, project: project }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_macsec_config interconnect: interconnect, project: project do |_result, response|
+        c.get_macsec_config interconnect: interconnect, project: project do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_macsec_config ::Google::Cloud::Compute::V1::GetMacsecConfigInterconnectRequest.new(interconnect: interconnect, project: project) do |_result, response|
+        c.get_macsec_config ::Google::Cloud::Compute::V1::GetMacsecConfigInterconnectRequest.new(interconnect: interconnect, project: project) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_macsec_config({ interconnect: interconnect, project: project }, call_options) do |_result, response|
+        c.get_macsec_config({ interconnect: interconnect, project: project }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_macsec_config(::Google::Cloud::Compute::V1::GetMacsecConfigInterconnectRequest.new(interconnect: interconnect, project: project), call_options) do |_result, response|
+        c.get_macsec_config(::Google::Cloud::Compute::V1::GetMacsecConfigInterconnectRequest.new(interconnect: interconnect, project: project), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::Compute::V1::Interconnects::Rest::ClientTest < Minitest::
     ::Google::Cloud::Compute::V1::Interconnects::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert({ interconnect_resource: interconnect_resource, project: project, request_id: request_id }) do |_result, response|
+        c.insert({ interconnect_resource: interconnect_resource, project: project, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert interconnect_resource: interconnect_resource, project: project, request_id: request_id do |_result, response|
+        c.insert interconnect_resource: interconnect_resource, project: project, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert ::Google::Cloud::Compute::V1::InsertInterconnectRequest.new(interconnect_resource: interconnect_resource, project: project, request_id: request_id) do |_result, response|
+        c.insert ::Google::Cloud::Compute::V1::InsertInterconnectRequest.new(interconnect_resource: interconnect_resource, project: project, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert({ interconnect_resource: interconnect_resource, project: project, request_id: request_id }, call_options) do |_result, response|
+        c.insert({ interconnect_resource: interconnect_resource, project: project, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert(::Google::Cloud::Compute::V1::InsertInterconnectRequest.new(interconnect_resource: interconnect_resource, project: project, request_id: request_id), call_options) do |_result, response|
+        c.insert(::Google::Cloud::Compute::V1::InsertInterconnectRequest.new(interconnect_resource: interconnect_resource, project: project, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::Compute::V1::Interconnects::Rest::ClientTest < Minitest::
     ::Google::Cloud::Compute::V1::Interconnects::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListInterconnectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListInterconnectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListInterconnectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListInterconnectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -436,32 +436,32 @@ class ::Google::Cloud::Compute::V1::Interconnects::Rest::ClientTest < Minitest::
     ::Google::Cloud::Compute::V1::Interconnects::Rest::ServiceStub.stub :transcode_patch_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, patch_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.patch({ interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id }) do |_result, response|
+        c.patch({ interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.patch interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id do |_result, response|
+        c.patch interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.patch ::Google::Cloud::Compute::V1::PatchInterconnectRequest.new(interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id) do |_result, response|
+        c.patch ::Google::Cloud::Compute::V1::PatchInterconnectRequest.new(interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.patch({ interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id }, call_options) do |_result, response|
+        c.patch({ interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.patch(::Google::Cloud::Compute::V1::PatchInterconnectRequest.new(interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id), call_options) do |_result, response|
+        c.patch(::Google::Cloud::Compute::V1::PatchInterconnectRequest.new(interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -492,32 +492,32 @@ class ::Google::Cloud::Compute::V1::Interconnects::Rest::ClientTest < Minitest::
     ::Google::Cloud::Compute::V1::Interconnects::Rest::ServiceStub.stub :transcode_set_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_labels_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }) do |_result, response|
+        c.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_labels global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource do |_result, response|
+        c.set_labels global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_labels ::Google::Cloud::Compute::V1::SetLabelsInterconnectRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource) do |_result, response|
+        c.set_labels ::Google::Cloud::Compute::V1::SetLabelsInterconnectRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }, call_options) do |_result, response|
+        c.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_labels(::Google::Cloud::Compute::V1::SetLabelsInterconnectRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource), call_options) do |_result, response|
+        c.set_labels(::Google::Cloud::Compute::V1::SetLabelsInterconnectRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

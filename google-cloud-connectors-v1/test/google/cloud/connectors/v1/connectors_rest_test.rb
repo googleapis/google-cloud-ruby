@@ -102,32 +102,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_list_connections_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_connections_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
+        c.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
+        c.list_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_connections ::Google::Cloud::Connectors::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
+        c.list_connections ::Google::Cloud::Connectors::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
+        c.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_connections(::Google::Cloud::Connectors::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
+        c.list_connections(::Google::Cloud::Connectors::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_get_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_connection({ name: name, view: view }) do |_result, response|
+        c.get_connection({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_connection name: name, view: view do |_result, response|
+        c.get_connection name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_connection ::Google::Cloud::Connectors::V1::GetConnectionRequest.new(name: name, view: view) do |_result, response|
+        c.get_connection ::Google::Cloud::Connectors::V1::GetConnectionRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_connection({ name: name, view: view }, call_options) do |_result, response|
+        c.get_connection({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_connection(::Google::Cloud::Connectors::V1::GetConnectionRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_connection(::Google::Cloud::Connectors::V1::GetConnectionRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_create_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_connection({ parent: parent, connection_id: connection_id, connection: connection }) do |_result, response|
+        c.create_connection({ parent: parent, connection_id: connection_id, connection: connection }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_connection parent: parent, connection_id: connection_id, connection: connection do |_result, response|
+        c.create_connection parent: parent, connection_id: connection_id, connection: connection do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_connection ::Google::Cloud::Connectors::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection) do |_result, response|
+        c.create_connection ::Google::Cloud::Connectors::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_connection({ parent: parent, connection_id: connection_id, connection: connection }, call_options) do |_result, response|
+        c.create_connection({ parent: parent, connection_id: connection_id, connection: connection }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_connection(::Google::Cloud::Connectors::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection), call_options) do |_result, response|
+        c.create_connection(::Google::Cloud::Connectors::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_update_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_connection({ connection: connection, update_mask: update_mask }) do |_result, response|
+        c.update_connection({ connection: connection, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_connection connection: connection, update_mask: update_mask do |_result, response|
+        c.update_connection connection: connection, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_connection ::Google::Cloud::Connectors::V1::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask) do |_result, response|
+        c.update_connection ::Google::Cloud::Connectors::V1::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_connection({ connection: connection, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_connection({ connection: connection, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_connection(::Google::Cloud::Connectors::V1::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask), call_options) do |_result, response|
+        c.update_connection(::Google::Cloud::Connectors::V1::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_delete_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_connection({ name: name }) do |_result, response|
+        c.delete_connection({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_connection name: name do |_result, response|
+        c.delete_connection name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_connection ::Google::Cloud::Connectors::V1::DeleteConnectionRequest.new(name: name) do |_result, response|
+        c.delete_connection ::Google::Cloud::Connectors::V1::DeleteConnectionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_connection({ name: name }, call_options) do |_result, response|
+        c.delete_connection({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_connection(::Google::Cloud::Connectors::V1::DeleteConnectionRequest.new(name: name), call_options) do |_result, response|
+        c.delete_connection(::Google::Cloud::Connectors::V1::DeleteConnectionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -378,32 +378,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_list_providers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_providers_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_providers({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_providers({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_providers parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_providers parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_providers ::Google::Cloud::Connectors::V1::ListProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_providers ::Google::Cloud::Connectors::V1::ListProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_providers({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_providers({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_providers(::Google::Cloud::Connectors::V1::ListProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_providers(::Google::Cloud::Connectors::V1::ListProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -432,32 +432,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_get_provider_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_provider_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_provider({ name: name }) do |_result, response|
+        c.get_provider({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_provider name: name do |_result, response|
+        c.get_provider name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_provider ::Google::Cloud::Connectors::V1::GetProviderRequest.new(name: name) do |_result, response|
+        c.get_provider ::Google::Cloud::Connectors::V1::GetProviderRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_provider({ name: name }, call_options) do |_result, response|
+        c.get_provider({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_provider(::Google::Cloud::Connectors::V1::GetProviderRequest.new(name: name), call_options) do |_result, response|
+        c.get_provider(::Google::Cloud::Connectors::V1::GetProviderRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -488,32 +488,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_list_connectors_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_connectors_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_connectors parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_connectors parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_connectors ::Google::Cloud::Connectors::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_connectors ::Google::Cloud::Connectors::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_connectors(::Google::Cloud::Connectors::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_connectors(::Google::Cloud::Connectors::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -542,32 +542,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_get_connector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_connector_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_connector({ name: name }) do |_result, response|
+        c.get_connector({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_connector name: name do |_result, response|
+        c.get_connector name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_connector ::Google::Cloud::Connectors::V1::GetConnectorRequest.new(name: name) do |_result, response|
+        c.get_connector ::Google::Cloud::Connectors::V1::GetConnectorRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_connector({ name: name }, call_options) do |_result, response|
+        c.get_connector({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_connector(::Google::Cloud::Connectors::V1::GetConnectorRequest.new(name: name), call_options) do |_result, response|
+        c.get_connector(::Google::Cloud::Connectors::V1::GetConnectorRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -599,32 +599,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_list_connector_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_connector_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_connector_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |_result, response|
+        c.list_connector_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_connector_versions parent: parent, page_size: page_size, page_token: page_token, view: view do |_result, response|
+        c.list_connector_versions parent: parent, page_size: page_size, page_token: page_token, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_connector_versions ::Google::Cloud::Connectors::V1::ListConnectorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |_result, response|
+        c.list_connector_versions ::Google::Cloud::Connectors::V1::ListConnectorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_connector_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view }, call_options) do |_result, response|
+        c.list_connector_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_connector_versions(::Google::Cloud::Connectors::V1::ListConnectorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), call_options) do |_result, response|
+        c.list_connector_versions(::Google::Cloud::Connectors::V1::ListConnectorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -654,32 +654,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_get_connector_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_connector_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_connector_version({ name: name, view: view }) do |_result, response|
+        c.get_connector_version({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_connector_version name: name, view: view do |_result, response|
+        c.get_connector_version name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_connector_version ::Google::Cloud::Connectors::V1::GetConnectorVersionRequest.new(name: name, view: view) do |_result, response|
+        c.get_connector_version ::Google::Cloud::Connectors::V1::GetConnectorVersionRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_connector_version({ name: name, view: view }, call_options) do |_result, response|
+        c.get_connector_version({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_connector_version(::Google::Cloud::Connectors::V1::GetConnectorVersionRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_connector_version(::Google::Cloud::Connectors::V1::GetConnectorVersionRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -708,32 +708,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_get_connection_schema_metadata_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_connection_schema_metadata_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_connection_schema_metadata({ name: name }) do |_result, response|
+        c.get_connection_schema_metadata({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_connection_schema_metadata name: name do |_result, response|
+        c.get_connection_schema_metadata name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_connection_schema_metadata ::Google::Cloud::Connectors::V1::GetConnectionSchemaMetadataRequest.new(name: name) do |_result, response|
+        c.get_connection_schema_metadata ::Google::Cloud::Connectors::V1::GetConnectionSchemaMetadataRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_connection_schema_metadata({ name: name }, call_options) do |_result, response|
+        c.get_connection_schema_metadata({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_connection_schema_metadata(::Google::Cloud::Connectors::V1::GetConnectionSchemaMetadataRequest.new(name: name), call_options) do |_result, response|
+        c.get_connection_schema_metadata(::Google::Cloud::Connectors::V1::GetConnectionSchemaMetadataRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -762,32 +762,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_refresh_connection_schema_metadata_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, refresh_connection_schema_metadata_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.refresh_connection_schema_metadata({ name: name }) do |_result, response|
+        c.refresh_connection_schema_metadata({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.refresh_connection_schema_metadata name: name do |_result, response|
+        c.refresh_connection_schema_metadata name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.refresh_connection_schema_metadata ::Google::Cloud::Connectors::V1::RefreshConnectionSchemaMetadataRequest.new(name: name) do |_result, response|
+        c.refresh_connection_schema_metadata ::Google::Cloud::Connectors::V1::RefreshConnectionSchemaMetadataRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.refresh_connection_schema_metadata({ name: name }, call_options) do |_result, response|
+        c.refresh_connection_schema_metadata({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.refresh_connection_schema_metadata(::Google::Cloud::Connectors::V1::RefreshConnectionSchemaMetadataRequest.new(name: name), call_options) do |_result, response|
+        c.refresh_connection_schema_metadata(::Google::Cloud::Connectors::V1::RefreshConnectionSchemaMetadataRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -819,32 +819,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_list_runtime_entity_schemas_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_runtime_entity_schemas_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_runtime_entity_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_runtime_entity_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_runtime_entity_schemas parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_runtime_entity_schemas parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_runtime_entity_schemas ::Google::Cloud::Connectors::V1::ListRuntimeEntitySchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_runtime_entity_schemas ::Google::Cloud::Connectors::V1::ListRuntimeEntitySchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_runtime_entity_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_runtime_entity_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_runtime_entity_schemas(::Google::Cloud::Connectors::V1::ListRuntimeEntitySchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_runtime_entity_schemas(::Google::Cloud::Connectors::V1::ListRuntimeEntitySchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -876,32 +876,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_list_runtime_action_schemas_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_runtime_action_schemas_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_runtime_action_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_runtime_action_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_runtime_action_schemas parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_runtime_action_schemas parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_runtime_action_schemas ::Google::Cloud::Connectors::V1::ListRuntimeActionSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_runtime_action_schemas ::Google::Cloud::Connectors::V1::ListRuntimeActionSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_runtime_action_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_runtime_action_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_runtime_action_schemas(::Google::Cloud::Connectors::V1::ListRuntimeActionSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_runtime_action_schemas(::Google::Cloud::Connectors::V1::ListRuntimeActionSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -930,32 +930,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_get_runtime_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_runtime_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_runtime_config({ name: name }) do |_result, response|
+        c.get_runtime_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_runtime_config name: name do |_result, response|
+        c.get_runtime_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_runtime_config ::Google::Cloud::Connectors::V1::GetRuntimeConfigRequest.new(name: name) do |_result, response|
+        c.get_runtime_config ::Google::Cloud::Connectors::V1::GetRuntimeConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_runtime_config({ name: name }, call_options) do |_result, response|
+        c.get_runtime_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_runtime_config(::Google::Cloud::Connectors::V1::GetRuntimeConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_runtime_config(::Google::Cloud::Connectors::V1::GetRuntimeConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -984,32 +984,32 @@ class ::Google::Cloud::Connectors::V1::Connectors::Rest::ClientTest < Minitest::
     ::Google::Cloud::Connectors::V1::Connectors::Rest::ServiceStub.stub :transcode_get_global_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_global_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
+        c = ::Google::Cloud::Connectors::V1::Connectors::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_global_settings({ name: name }) do |_result, response|
+        c.get_global_settings({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_global_settings name: name do |_result, response|
+        c.get_global_settings name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_global_settings ::Google::Cloud::Connectors::V1::GetGlobalSettingsRequest.new(name: name) do |_result, response|
+        c.get_global_settings ::Google::Cloud::Connectors::V1::GetGlobalSettingsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_global_settings({ name: name }, call_options) do |_result, response|
+        c.get_global_settings({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_global_settings(::Google::Cloud::Connectors::V1::GetGlobalSettingsRequest.new(name: name), call_options) do |_result, response|
+        c.get_global_settings(::Google::Cloud::Connectors::V1::GetGlobalSettingsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -101,32 +101,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_list_resource_bundles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_resource_bundles_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_resource_bundles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_resource_bundles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_resource_bundles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_resource_bundles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_resource_bundles ::Google::Cloud::ConfigDelivery::V1::ListResourceBundlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_resource_bundles ::Google::Cloud::ConfigDelivery::V1::ListResourceBundlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_resource_bundles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_resource_bundles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_resource_bundles(::Google::Cloud::ConfigDelivery::V1::ListResourceBundlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_resource_bundles(::Google::Cloud::ConfigDelivery::V1::ListResourceBundlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_get_resource_bundle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_resource_bundle_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_resource_bundle({ name: name }) do |_result, response|
+        c.get_resource_bundle({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_resource_bundle name: name do |_result, response|
+        c.get_resource_bundle name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_resource_bundle ::Google::Cloud::ConfigDelivery::V1::GetResourceBundleRequest.new(name: name) do |_result, response|
+        c.get_resource_bundle ::Google::Cloud::ConfigDelivery::V1::GetResourceBundleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_resource_bundle({ name: name }, call_options) do |_result, response|
+        c.get_resource_bundle({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_resource_bundle(::Google::Cloud::ConfigDelivery::V1::GetResourceBundleRequest.new(name: name), call_options) do |_result, response|
+        c.get_resource_bundle(::Google::Cloud::ConfigDelivery::V1::GetResourceBundleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_create_resource_bundle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_resource_bundle_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_resource_bundle({ parent: parent, resource_bundle_id: resource_bundle_id, resource_bundle: resource_bundle, request_id: request_id }) do |_result, response|
+        c.create_resource_bundle({ parent: parent, resource_bundle_id: resource_bundle_id, resource_bundle: resource_bundle, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_resource_bundle parent: parent, resource_bundle_id: resource_bundle_id, resource_bundle: resource_bundle, request_id: request_id do |_result, response|
+        c.create_resource_bundle parent: parent, resource_bundle_id: resource_bundle_id, resource_bundle: resource_bundle, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_resource_bundle ::Google::Cloud::ConfigDelivery::V1::CreateResourceBundleRequest.new(parent: parent, resource_bundle_id: resource_bundle_id, resource_bundle: resource_bundle, request_id: request_id) do |_result, response|
+        c.create_resource_bundle ::Google::Cloud::ConfigDelivery::V1::CreateResourceBundleRequest.new(parent: parent, resource_bundle_id: resource_bundle_id, resource_bundle: resource_bundle, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_resource_bundle({ parent: parent, resource_bundle_id: resource_bundle_id, resource_bundle: resource_bundle, request_id: request_id }, call_options) do |_result, response|
+        c.create_resource_bundle({ parent: parent, resource_bundle_id: resource_bundle_id, resource_bundle: resource_bundle, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_resource_bundle(::Google::Cloud::ConfigDelivery::V1::CreateResourceBundleRequest.new(parent: parent, resource_bundle_id: resource_bundle_id, resource_bundle: resource_bundle, request_id: request_id), call_options) do |_result, response|
+        c.create_resource_bundle(::Google::Cloud::ConfigDelivery::V1::CreateResourceBundleRequest.new(parent: parent, resource_bundle_id: resource_bundle_id, resource_bundle: resource_bundle, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_update_resource_bundle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_resource_bundle_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_resource_bundle({ update_mask: update_mask, resource_bundle: resource_bundle, request_id: request_id }) do |_result, response|
+        c.update_resource_bundle({ update_mask: update_mask, resource_bundle: resource_bundle, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_resource_bundle update_mask: update_mask, resource_bundle: resource_bundle, request_id: request_id do |_result, response|
+        c.update_resource_bundle update_mask: update_mask, resource_bundle: resource_bundle, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_resource_bundle ::Google::Cloud::ConfigDelivery::V1::UpdateResourceBundleRequest.new(update_mask: update_mask, resource_bundle: resource_bundle, request_id: request_id) do |_result, response|
+        c.update_resource_bundle ::Google::Cloud::ConfigDelivery::V1::UpdateResourceBundleRequest.new(update_mask: update_mask, resource_bundle: resource_bundle, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_resource_bundle({ update_mask: update_mask, resource_bundle: resource_bundle, request_id: request_id }, call_options) do |_result, response|
+        c.update_resource_bundle({ update_mask: update_mask, resource_bundle: resource_bundle, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_resource_bundle(::Google::Cloud::ConfigDelivery::V1::UpdateResourceBundleRequest.new(update_mask: update_mask, resource_bundle: resource_bundle, request_id: request_id), call_options) do |_result, response|
+        c.update_resource_bundle(::Google::Cloud::ConfigDelivery::V1::UpdateResourceBundleRequest.new(update_mask: update_mask, resource_bundle: resource_bundle, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -324,32 +324,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_delete_resource_bundle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_resource_bundle_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_resource_bundle({ name: name, request_id: request_id, force: force }) do |_result, response|
+        c.delete_resource_bundle({ name: name, request_id: request_id, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_resource_bundle name: name, request_id: request_id, force: force do |_result, response|
+        c.delete_resource_bundle name: name, request_id: request_id, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_resource_bundle ::Google::Cloud::ConfigDelivery::V1::DeleteResourceBundleRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
+        c.delete_resource_bundle ::Google::Cloud::ConfigDelivery::V1::DeleteResourceBundleRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_resource_bundle({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
+        c.delete_resource_bundle({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_resource_bundle(::Google::Cloud::ConfigDelivery::V1::DeleteResourceBundleRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
+        c.delete_resource_bundle(::Google::Cloud::ConfigDelivery::V1::DeleteResourceBundleRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -382,32 +382,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_list_fleet_packages_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_fleet_packages_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_fleet_packages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_fleet_packages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_fleet_packages parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_fleet_packages parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_fleet_packages ::Google::Cloud::ConfigDelivery::V1::ListFleetPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_fleet_packages ::Google::Cloud::ConfigDelivery::V1::ListFleetPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_fleet_packages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_fleet_packages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_fleet_packages(::Google::Cloud::ConfigDelivery::V1::ListFleetPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_fleet_packages(::Google::Cloud::ConfigDelivery::V1::ListFleetPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -436,32 +436,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_get_fleet_package_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_fleet_package_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_fleet_package({ name: name }) do |_result, response|
+        c.get_fleet_package({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_fleet_package name: name do |_result, response|
+        c.get_fleet_package name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_fleet_package ::Google::Cloud::ConfigDelivery::V1::GetFleetPackageRequest.new(name: name) do |_result, response|
+        c.get_fleet_package ::Google::Cloud::ConfigDelivery::V1::GetFleetPackageRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_fleet_package({ name: name }, call_options) do |_result, response|
+        c.get_fleet_package({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_fleet_package(::Google::Cloud::ConfigDelivery::V1::GetFleetPackageRequest.new(name: name), call_options) do |_result, response|
+        c.get_fleet_package(::Google::Cloud::ConfigDelivery::V1::GetFleetPackageRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -493,32 +493,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_create_fleet_package_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_fleet_package_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_fleet_package({ parent: parent, fleet_package_id: fleet_package_id, fleet_package: fleet_package, request_id: request_id }) do |_result, response|
+        c.create_fleet_package({ parent: parent, fleet_package_id: fleet_package_id, fleet_package: fleet_package, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_fleet_package parent: parent, fleet_package_id: fleet_package_id, fleet_package: fleet_package, request_id: request_id do |_result, response|
+        c.create_fleet_package parent: parent, fleet_package_id: fleet_package_id, fleet_package: fleet_package, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_fleet_package ::Google::Cloud::ConfigDelivery::V1::CreateFleetPackageRequest.new(parent: parent, fleet_package_id: fleet_package_id, fleet_package: fleet_package, request_id: request_id) do |_result, response|
+        c.create_fleet_package ::Google::Cloud::ConfigDelivery::V1::CreateFleetPackageRequest.new(parent: parent, fleet_package_id: fleet_package_id, fleet_package: fleet_package, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_fleet_package({ parent: parent, fleet_package_id: fleet_package_id, fleet_package: fleet_package, request_id: request_id }, call_options) do |_result, response|
+        c.create_fleet_package({ parent: parent, fleet_package_id: fleet_package_id, fleet_package: fleet_package, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_fleet_package(::Google::Cloud::ConfigDelivery::V1::CreateFleetPackageRequest.new(parent: parent, fleet_package_id: fleet_package_id, fleet_package: fleet_package, request_id: request_id), call_options) do |_result, response|
+        c.create_fleet_package(::Google::Cloud::ConfigDelivery::V1::CreateFleetPackageRequest.new(parent: parent, fleet_package_id: fleet_package_id, fleet_package: fleet_package, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -549,32 +549,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_update_fleet_package_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_fleet_package_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_fleet_package({ update_mask: update_mask, fleet_package: fleet_package, request_id: request_id }) do |_result, response|
+        c.update_fleet_package({ update_mask: update_mask, fleet_package: fleet_package, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_fleet_package update_mask: update_mask, fleet_package: fleet_package, request_id: request_id do |_result, response|
+        c.update_fleet_package update_mask: update_mask, fleet_package: fleet_package, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_fleet_package ::Google::Cloud::ConfigDelivery::V1::UpdateFleetPackageRequest.new(update_mask: update_mask, fleet_package: fleet_package, request_id: request_id) do |_result, response|
+        c.update_fleet_package ::Google::Cloud::ConfigDelivery::V1::UpdateFleetPackageRequest.new(update_mask: update_mask, fleet_package: fleet_package, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_fleet_package({ update_mask: update_mask, fleet_package: fleet_package, request_id: request_id }, call_options) do |_result, response|
+        c.update_fleet_package({ update_mask: update_mask, fleet_package: fleet_package, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_fleet_package(::Google::Cloud::ConfigDelivery::V1::UpdateFleetPackageRequest.new(update_mask: update_mask, fleet_package: fleet_package, request_id: request_id), call_options) do |_result, response|
+        c.update_fleet_package(::Google::Cloud::ConfigDelivery::V1::UpdateFleetPackageRequest.new(update_mask: update_mask, fleet_package: fleet_package, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -606,32 +606,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_delete_fleet_package_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_fleet_package_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_fleet_package({ name: name, request_id: request_id, force: force, allow_missing: allow_missing }) do |_result, response|
+        c.delete_fleet_package({ name: name, request_id: request_id, force: force, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_fleet_package name: name, request_id: request_id, force: force, allow_missing: allow_missing do |_result, response|
+        c.delete_fleet_package name: name, request_id: request_id, force: force, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_fleet_package ::Google::Cloud::ConfigDelivery::V1::DeleteFleetPackageRequest.new(name: name, request_id: request_id, force: force, allow_missing: allow_missing) do |_result, response|
+        c.delete_fleet_package ::Google::Cloud::ConfigDelivery::V1::DeleteFleetPackageRequest.new(name: name, request_id: request_id, force: force, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_fleet_package({ name: name, request_id: request_id, force: force, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.delete_fleet_package({ name: name, request_id: request_id, force: force, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_fleet_package(::Google::Cloud::ConfigDelivery::V1::DeleteFleetPackageRequest.new(name: name, request_id: request_id, force: force, allow_missing: allow_missing), call_options) do |_result, response|
+        c.delete_fleet_package(::Google::Cloud::ConfigDelivery::V1::DeleteFleetPackageRequest.new(name: name, request_id: request_id, force: force, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -664,32 +664,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_list_releases_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_releases_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_releases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_releases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_releases parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_releases parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_releases ::Google::Cloud::ConfigDelivery::V1::ListReleasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_releases ::Google::Cloud::ConfigDelivery::V1::ListReleasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_releases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_releases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_releases(::Google::Cloud::ConfigDelivery::V1::ListReleasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_releases(::Google::Cloud::ConfigDelivery::V1::ListReleasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -718,32 +718,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_get_release_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_release_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_release({ name: name }) do |_result, response|
+        c.get_release({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_release name: name do |_result, response|
+        c.get_release name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_release ::Google::Cloud::ConfigDelivery::V1::GetReleaseRequest.new(name: name) do |_result, response|
+        c.get_release ::Google::Cloud::ConfigDelivery::V1::GetReleaseRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_release({ name: name }, call_options) do |_result, response|
+        c.get_release({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_release(::Google::Cloud::ConfigDelivery::V1::GetReleaseRequest.new(name: name), call_options) do |_result, response|
+        c.get_release(::Google::Cloud::ConfigDelivery::V1::GetReleaseRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -775,32 +775,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_create_release_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_release_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_release({ parent: parent, release_id: release_id, release: release, request_id: request_id }) do |_result, response|
+        c.create_release({ parent: parent, release_id: release_id, release: release, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_release parent: parent, release_id: release_id, release: release, request_id: request_id do |_result, response|
+        c.create_release parent: parent, release_id: release_id, release: release, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_release ::Google::Cloud::ConfigDelivery::V1::CreateReleaseRequest.new(parent: parent, release_id: release_id, release: release, request_id: request_id) do |_result, response|
+        c.create_release ::Google::Cloud::ConfigDelivery::V1::CreateReleaseRequest.new(parent: parent, release_id: release_id, release: release, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_release({ parent: parent, release_id: release_id, release: release, request_id: request_id }, call_options) do |_result, response|
+        c.create_release({ parent: parent, release_id: release_id, release: release, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_release(::Google::Cloud::ConfigDelivery::V1::CreateReleaseRequest.new(parent: parent, release_id: release_id, release: release, request_id: request_id), call_options) do |_result, response|
+        c.create_release(::Google::Cloud::ConfigDelivery::V1::CreateReleaseRequest.new(parent: parent, release_id: release_id, release: release, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -831,32 +831,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_update_release_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_release_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_release({ update_mask: update_mask, release: release, request_id: request_id }) do |_result, response|
+        c.update_release({ update_mask: update_mask, release: release, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_release update_mask: update_mask, release: release, request_id: request_id do |_result, response|
+        c.update_release update_mask: update_mask, release: release, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_release ::Google::Cloud::ConfigDelivery::V1::UpdateReleaseRequest.new(update_mask: update_mask, release: release, request_id: request_id) do |_result, response|
+        c.update_release ::Google::Cloud::ConfigDelivery::V1::UpdateReleaseRequest.new(update_mask: update_mask, release: release, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_release({ update_mask: update_mask, release: release, request_id: request_id }, call_options) do |_result, response|
+        c.update_release({ update_mask: update_mask, release: release, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_release(::Google::Cloud::ConfigDelivery::V1::UpdateReleaseRequest.new(update_mask: update_mask, release: release, request_id: request_id), call_options) do |_result, response|
+        c.update_release(::Google::Cloud::ConfigDelivery::V1::UpdateReleaseRequest.new(update_mask: update_mask, release: release, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -887,32 +887,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_delete_release_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_release_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_release({ name: name, request_id: request_id, force: force }) do |_result, response|
+        c.delete_release({ name: name, request_id: request_id, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_release name: name, request_id: request_id, force: force do |_result, response|
+        c.delete_release name: name, request_id: request_id, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_release ::Google::Cloud::ConfigDelivery::V1::DeleteReleaseRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
+        c.delete_release ::Google::Cloud::ConfigDelivery::V1::DeleteReleaseRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_release({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
+        c.delete_release({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_release(::Google::Cloud::ConfigDelivery::V1::DeleteReleaseRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
+        c.delete_release(::Google::Cloud::ConfigDelivery::V1::DeleteReleaseRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -945,32 +945,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_list_variants_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_variants_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_variants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_variants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_variants parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_variants parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_variants ::Google::Cloud::ConfigDelivery::V1::ListVariantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_variants ::Google::Cloud::ConfigDelivery::V1::ListVariantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_variants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_variants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_variants(::Google::Cloud::ConfigDelivery::V1::ListVariantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_variants(::Google::Cloud::ConfigDelivery::V1::ListVariantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -999,32 +999,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_get_variant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_variant_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_variant({ name: name }) do |_result, response|
+        c.get_variant({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_variant name: name do |_result, response|
+        c.get_variant name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_variant ::Google::Cloud::ConfigDelivery::V1::GetVariantRequest.new(name: name) do |_result, response|
+        c.get_variant ::Google::Cloud::ConfigDelivery::V1::GetVariantRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_variant({ name: name }, call_options) do |_result, response|
+        c.get_variant({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_variant(::Google::Cloud::ConfigDelivery::V1::GetVariantRequest.new(name: name), call_options) do |_result, response|
+        c.get_variant(::Google::Cloud::ConfigDelivery::V1::GetVariantRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1056,32 +1056,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_create_variant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_variant_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_variant({ parent: parent, variant_id: variant_id, variant: variant, request_id: request_id }) do |_result, response|
+        c.create_variant({ parent: parent, variant_id: variant_id, variant: variant, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_variant parent: parent, variant_id: variant_id, variant: variant, request_id: request_id do |_result, response|
+        c.create_variant parent: parent, variant_id: variant_id, variant: variant, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_variant ::Google::Cloud::ConfigDelivery::V1::CreateVariantRequest.new(parent: parent, variant_id: variant_id, variant: variant, request_id: request_id) do |_result, response|
+        c.create_variant ::Google::Cloud::ConfigDelivery::V1::CreateVariantRequest.new(parent: parent, variant_id: variant_id, variant: variant, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_variant({ parent: parent, variant_id: variant_id, variant: variant, request_id: request_id }, call_options) do |_result, response|
+        c.create_variant({ parent: parent, variant_id: variant_id, variant: variant, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_variant(::Google::Cloud::ConfigDelivery::V1::CreateVariantRequest.new(parent: parent, variant_id: variant_id, variant: variant, request_id: request_id), call_options) do |_result, response|
+        c.create_variant(::Google::Cloud::ConfigDelivery::V1::CreateVariantRequest.new(parent: parent, variant_id: variant_id, variant: variant, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1112,32 +1112,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_update_variant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_variant_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_variant({ update_mask: update_mask, variant: variant, request_id: request_id }) do |_result, response|
+        c.update_variant({ update_mask: update_mask, variant: variant, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_variant update_mask: update_mask, variant: variant, request_id: request_id do |_result, response|
+        c.update_variant update_mask: update_mask, variant: variant, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_variant ::Google::Cloud::ConfigDelivery::V1::UpdateVariantRequest.new(update_mask: update_mask, variant: variant, request_id: request_id) do |_result, response|
+        c.update_variant ::Google::Cloud::ConfigDelivery::V1::UpdateVariantRequest.new(update_mask: update_mask, variant: variant, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_variant({ update_mask: update_mask, variant: variant, request_id: request_id }, call_options) do |_result, response|
+        c.update_variant({ update_mask: update_mask, variant: variant, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_variant(::Google::Cloud::ConfigDelivery::V1::UpdateVariantRequest.new(update_mask: update_mask, variant: variant, request_id: request_id), call_options) do |_result, response|
+        c.update_variant(::Google::Cloud::ConfigDelivery::V1::UpdateVariantRequest.new(update_mask: update_mask, variant: variant, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1167,32 +1167,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_delete_variant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_variant_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_variant({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_variant({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_variant name: name, request_id: request_id do |_result, response|
+        c.delete_variant name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_variant ::Google::Cloud::ConfigDelivery::V1::DeleteVariantRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_variant ::Google::Cloud::ConfigDelivery::V1::DeleteVariantRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_variant({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_variant({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_variant(::Google::Cloud::ConfigDelivery::V1::DeleteVariantRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_variant(::Google::Cloud::ConfigDelivery::V1::DeleteVariantRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1225,32 +1225,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_list_rollouts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_rollouts_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_rollouts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_rollouts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_rollouts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_rollouts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_rollouts ::Google::Cloud::ConfigDelivery::V1::ListRolloutsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_rollouts ::Google::Cloud::ConfigDelivery::V1::ListRolloutsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_rollouts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_rollouts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_rollouts(::Google::Cloud::ConfigDelivery::V1::ListRolloutsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_rollouts(::Google::Cloud::ConfigDelivery::V1::ListRolloutsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1279,32 +1279,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_get_rollout_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_rollout_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_rollout({ name: name }) do |_result, response|
+        c.get_rollout({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_rollout name: name do |_result, response|
+        c.get_rollout name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_rollout ::Google::Cloud::ConfigDelivery::V1::GetRolloutRequest.new(name: name) do |_result, response|
+        c.get_rollout ::Google::Cloud::ConfigDelivery::V1::GetRolloutRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_rollout({ name: name }, call_options) do |_result, response|
+        c.get_rollout({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_rollout(::Google::Cloud::ConfigDelivery::V1::GetRolloutRequest.new(name: name), call_options) do |_result, response|
+        c.get_rollout(::Google::Cloud::ConfigDelivery::V1::GetRolloutRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1334,32 +1334,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_suspend_rollout_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, suspend_rollout_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.suspend_rollout({ name: name, reason: reason }) do |_result, response|
+        c.suspend_rollout({ name: name, reason: reason }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.suspend_rollout name: name, reason: reason do |_result, response|
+        c.suspend_rollout name: name, reason: reason do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.suspend_rollout ::Google::Cloud::ConfigDelivery::V1::SuspendRolloutRequest.new(name: name, reason: reason) do |_result, response|
+        c.suspend_rollout ::Google::Cloud::ConfigDelivery::V1::SuspendRolloutRequest.new(name: name, reason: reason) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.suspend_rollout({ name: name, reason: reason }, call_options) do |_result, response|
+        c.suspend_rollout({ name: name, reason: reason }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.suspend_rollout(::Google::Cloud::ConfigDelivery::V1::SuspendRolloutRequest.new(name: name, reason: reason), call_options) do |_result, response|
+        c.suspend_rollout(::Google::Cloud::ConfigDelivery::V1::SuspendRolloutRequest.new(name: name, reason: reason), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1389,32 +1389,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_resume_rollout_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resume_rollout_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resume_rollout({ name: name, reason: reason }) do |_result, response|
+        c.resume_rollout({ name: name, reason: reason }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resume_rollout name: name, reason: reason do |_result, response|
+        c.resume_rollout name: name, reason: reason do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resume_rollout ::Google::Cloud::ConfigDelivery::V1::ResumeRolloutRequest.new(name: name, reason: reason) do |_result, response|
+        c.resume_rollout ::Google::Cloud::ConfigDelivery::V1::ResumeRolloutRequest.new(name: name, reason: reason) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resume_rollout({ name: name, reason: reason }, call_options) do |_result, response|
+        c.resume_rollout({ name: name, reason: reason }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resume_rollout(::Google::Cloud::ConfigDelivery::V1::ResumeRolloutRequest.new(name: name, reason: reason), call_options) do |_result, response|
+        c.resume_rollout(::Google::Cloud::ConfigDelivery::V1::ResumeRolloutRequest.new(name: name, reason: reason), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1444,32 +1444,32 @@ class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ClientTest < Mi
     ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::ServiceStub.stub :transcode_abort_rollout_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, abort_rollout_client_stub do
         # Create client
-        client = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
+        c = ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.abort_rollout({ name: name, reason: reason }) do |_result, response|
+        c.abort_rollout({ name: name, reason: reason }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.abort_rollout name: name, reason: reason do |_result, response|
+        c.abort_rollout name: name, reason: reason do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.abort_rollout ::Google::Cloud::ConfigDelivery::V1::AbortRolloutRequest.new(name: name, reason: reason) do |_result, response|
+        c.abort_rollout ::Google::Cloud::ConfigDelivery::V1::AbortRolloutRequest.new(name: name, reason: reason) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.abort_rollout({ name: name, reason: reason }, call_options) do |_result, response|
+        c.abort_rollout({ name: name, reason: reason }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.abort_rollout(::Google::Cloud::ConfigDelivery::V1::AbortRolloutRequest.new(name: name, reason: reason), call_options) do |_result, response|
+        c.abort_rollout(::Google::Cloud::ConfigDelivery::V1::AbortRolloutRequest.new(name: name, reason: reason), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

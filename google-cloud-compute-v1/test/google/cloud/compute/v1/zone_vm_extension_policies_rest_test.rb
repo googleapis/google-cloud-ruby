@@ -100,32 +100,32 @@ class ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::ClientTest < 
     ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete({ project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, zone: zone }) do |_result, response|
+        c.delete({ project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, zone: zone do |_result, response|
+        c.delete project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete ::Google::Cloud::Compute::V1::DeleteZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, zone: zone) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete({ project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, zone: zone }, call_options) do |_result, response|
+        c.delete({ project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete(::Google::Cloud::Compute::V1::DeleteZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, zone: zone), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::ClientTest < 
     ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ project: project, vm_extension_policy: vm_extension_policy, zone: zone }) do |_result, response|
+        c.get({ project: project, vm_extension_policy: vm_extension_policy, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get project: project, vm_extension_policy: vm_extension_policy, zone: zone do |_result, response|
+        c.get project: project, vm_extension_policy: vm_extension_policy, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetZoneVmExtensionPolicyRequest.new(project: project, vm_extension_policy: vm_extension_policy, zone: zone) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetZoneVmExtensionPolicyRequest.new(project: project, vm_extension_policy: vm_extension_policy, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ project: project, vm_extension_policy: vm_extension_policy, zone: zone }, call_options) do |_result, response|
+        c.get({ project: project, vm_extension_policy: vm_extension_policy, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetZoneVmExtensionPolicyRequest.new(project: project, vm_extension_policy: vm_extension_policy, zone: zone), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetZoneVmExtensionPolicyRequest.new(project: project, vm_extension_policy: vm_extension_policy, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::ClientTest < 
     ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert({ project: project, request_id: request_id, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone }) do |_result, response|
+        c.insert({ project: project, request_id: request_id, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert project: project, request_id: request_id, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone do |_result, response|
+        c.insert project: project, request_id: request_id, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert ::Google::Cloud::Compute::V1::InsertZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone) do |_result, response|
+        c.insert ::Google::Cloud::Compute::V1::InsertZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert({ project: project, request_id: request_id, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone }, call_options) do |_result, response|
+        c.insert({ project: project, request_id: request_id, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert(::Google::Cloud::Compute::V1::InsertZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone), call_options) do |_result, response|
+        c.insert(::Google::Cloud::Compute::V1::InsertZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -273,32 +273,32 @@ class ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::ClientTest < 
     ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListZoneVmExtensionPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListZoneVmExtensionPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListZoneVmExtensionPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListZoneVmExtensionPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -331,32 +331,32 @@ class ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::ClientTest < 
     ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::ServiceStub.stub :transcode_update_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update({ project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone }) do |_result, response|
+        c.update({ project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone do |_result, response|
+        c.update project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update ::Google::Cloud::Compute::V1::UpdateZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone) do |_result, response|
+        c.update ::Google::Cloud::Compute::V1::UpdateZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update({ project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone }, call_options) do |_result, response|
+        c.update({ project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update(::Google::Cloud::Compute::V1::UpdateZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone), call_options) do |_result, response|
+        c.update(::Google::Cloud::Compute::V1::UpdateZoneVmExtensionPolicyRequest.new(project: project, request_id: request_id, vm_extension_policy: vm_extension_policy, vm_extension_policy_resource: vm_extension_policy_resource, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

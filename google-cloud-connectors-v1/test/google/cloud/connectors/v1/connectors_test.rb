@@ -92,40 +92,40 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_connections_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |response, operation|
+      c.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |response, operation|
+      c.list_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_connections ::Google::Cloud::Connectors::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |response, operation|
+      c.list_connections ::Google::Cloud::Connectors::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, grpc_options) do |response, operation|
+      c.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_connections(::Google::Cloud::Connectors::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), grpc_options) do |response, operation|
+      c.list_connections(::Google::Cloud::Connectors::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -157,36 +157,36 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_connection({ name: name, view: view }) do |response, operation|
+      c.get_connection({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_connection name: name, view: view do |response, operation|
+      c.get_connection name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_connection ::Google::Cloud::Connectors::V1::GetConnectionRequest.new(name: name, view: view) do |response, operation|
+      c.get_connection ::Google::Cloud::Connectors::V1::GetConnectionRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_connection({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_connection({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_connection(::Google::Cloud::Connectors::V1::GetConnectionRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_connection(::Google::Cloud::Connectors::V1::GetConnectionRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,40 +219,40 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_connection({ parent: parent, connection_id: connection_id, connection: connection }) do |response, operation|
+      c.create_connection({ parent: parent, connection_id: connection_id, connection: connection }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_connection parent: parent, connection_id: connection_id, connection: connection do |response, operation|
+      c.create_connection parent: parent, connection_id: connection_id, connection: connection do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_connection ::Google::Cloud::Connectors::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection) do |response, operation|
+      c.create_connection ::Google::Cloud::Connectors::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_connection({ parent: parent, connection_id: connection_id, connection: connection }, grpc_options) do |response, operation|
+      c.create_connection({ parent: parent, connection_id: connection_id, connection: connection }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_connection(::Google::Cloud::Connectors::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection), grpc_options) do |response, operation|
+      c.create_connection(::Google::Cloud::Connectors::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_connection({ connection: connection, update_mask: update_mask }) do |response, operation|
+      c.update_connection({ connection: connection, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_connection connection: connection, update_mask: update_mask do |response, operation|
+      c.update_connection connection: connection, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_connection ::Google::Cloud::Connectors::V1::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask) do |response, operation|
+      c.update_connection ::Google::Cloud::Connectors::V1::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_connection({ connection: connection, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_connection({ connection: connection, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_connection(::Google::Cloud::Connectors::V1::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_connection(::Google::Cloud::Connectors::V1::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -347,40 +347,40 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_connection({ name: name }) do |response, operation|
+      c.delete_connection({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_connection name: name do |response, operation|
+      c.delete_connection name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_connection ::Google::Cloud::Connectors::V1::DeleteConnectionRequest.new(name: name) do |response, operation|
+      c.delete_connection ::Google::Cloud::Connectors::V1::DeleteConnectionRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_connection({ name: name }, grpc_options) do |response, operation|
+      c.delete_connection({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_connection(::Google::Cloud::Connectors::V1::DeleteConnectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_connection(::Google::Cloud::Connectors::V1::DeleteConnectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -414,40 +414,40 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_providers_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_providers({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_providers({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_providers parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_providers parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_providers ::Google::Cloud::Connectors::V1::ListProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_providers ::Google::Cloud::Connectors::V1::ListProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_providers({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_providers({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_providers(::Google::Cloud::Connectors::V1::ListProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_providers(::Google::Cloud::Connectors::V1::ListProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -477,36 +477,36 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_provider_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_provider({ name: name }) do |response, operation|
+      c.get_provider({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_provider name: name do |response, operation|
+      c.get_provider name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_provider ::Google::Cloud::Connectors::V1::GetProviderRequest.new(name: name) do |response, operation|
+      c.get_provider ::Google::Cloud::Connectors::V1::GetProviderRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_provider({ name: name }, grpc_options) do |response, operation|
+      c.get_provider({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_provider(::Google::Cloud::Connectors::V1::GetProviderRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_provider(::Google::Cloud::Connectors::V1::GetProviderRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -539,40 +539,40 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_connectors_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_connectors parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_connectors parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_connectors ::Google::Cloud::Connectors::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_connectors ::Google::Cloud::Connectors::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_connectors(::Google::Cloud::Connectors::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_connectors(::Google::Cloud::Connectors::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -602,36 +602,36 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_connector({ name: name }) do |response, operation|
+      c.get_connector({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_connector name: name do |response, operation|
+      c.get_connector name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_connector ::Google::Cloud::Connectors::V1::GetConnectorRequest.new(name: name) do |response, operation|
+      c.get_connector ::Google::Cloud::Connectors::V1::GetConnectorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_connector({ name: name }, grpc_options) do |response, operation|
+      c.get_connector({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_connector(::Google::Cloud::Connectors::V1::GetConnectorRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_connector(::Google::Cloud::Connectors::V1::GetConnectorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -666,40 +666,40 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_connector_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_connector_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |response, operation|
+      c.list_connector_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_connector_versions parent: parent, page_size: page_size, page_token: page_token, view: view do |response, operation|
+      c.list_connector_versions parent: parent, page_size: page_size, page_token: page_token, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_connector_versions ::Google::Cloud::Connectors::V1::ListConnectorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |response, operation|
+      c.list_connector_versions ::Google::Cloud::Connectors::V1::ListConnectorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_connector_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view }, grpc_options) do |response, operation|
+      c.list_connector_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_connector_versions(::Google::Cloud::Connectors::V1::ListConnectorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
+      c.list_connector_versions(::Google::Cloud::Connectors::V1::ListConnectorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -731,36 +731,36 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_connector_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_connector_version({ name: name, view: view }) do |response, operation|
+      c.get_connector_version({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_connector_version name: name, view: view do |response, operation|
+      c.get_connector_version name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_connector_version ::Google::Cloud::Connectors::V1::GetConnectorVersionRequest.new(name: name, view: view) do |response, operation|
+      c.get_connector_version ::Google::Cloud::Connectors::V1::GetConnectorVersionRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_connector_version({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_connector_version({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_connector_version(::Google::Cloud::Connectors::V1::GetConnectorVersionRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_connector_version(::Google::Cloud::Connectors::V1::GetConnectorVersionRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -789,36 +789,36 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_connection_schema_metadata_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_connection_schema_metadata({ name: name }) do |response, operation|
+      c.get_connection_schema_metadata({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_connection_schema_metadata name: name do |response, operation|
+      c.get_connection_schema_metadata name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_connection_schema_metadata ::Google::Cloud::Connectors::V1::GetConnectionSchemaMetadataRequest.new(name: name) do |response, operation|
+      c.get_connection_schema_metadata ::Google::Cloud::Connectors::V1::GetConnectionSchemaMetadataRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_connection_schema_metadata({ name: name }, grpc_options) do |response, operation|
+      c.get_connection_schema_metadata({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_connection_schema_metadata(::Google::Cloud::Connectors::V1::GetConnectionSchemaMetadataRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_connection_schema_metadata(::Google::Cloud::Connectors::V1::GetConnectionSchemaMetadataRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -847,40 +847,40 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, refresh_connection_schema_metadata_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.refresh_connection_schema_metadata({ name: name }) do |response, operation|
+      c.refresh_connection_schema_metadata({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.refresh_connection_schema_metadata name: name do |response, operation|
+      c.refresh_connection_schema_metadata name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.refresh_connection_schema_metadata ::Google::Cloud::Connectors::V1::RefreshConnectionSchemaMetadataRequest.new(name: name) do |response, operation|
+      c.refresh_connection_schema_metadata ::Google::Cloud::Connectors::V1::RefreshConnectionSchemaMetadataRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.refresh_connection_schema_metadata({ name: name }, grpc_options) do |response, operation|
+      c.refresh_connection_schema_metadata({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.refresh_connection_schema_metadata(::Google::Cloud::Connectors::V1::RefreshConnectionSchemaMetadataRequest.new(name: name), grpc_options) do |response, operation|
+      c.refresh_connection_schema_metadata(::Google::Cloud::Connectors::V1::RefreshConnectionSchemaMetadataRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -916,40 +916,40 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_runtime_entity_schemas_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_runtime_entity_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_runtime_entity_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_runtime_entity_schemas parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_runtime_entity_schemas parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_runtime_entity_schemas ::Google::Cloud::Connectors::V1::ListRuntimeEntitySchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_runtime_entity_schemas ::Google::Cloud::Connectors::V1::ListRuntimeEntitySchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_runtime_entity_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_runtime_entity_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_runtime_entity_schemas(::Google::Cloud::Connectors::V1::ListRuntimeEntitySchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_runtime_entity_schemas(::Google::Cloud::Connectors::V1::ListRuntimeEntitySchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -985,40 +985,40 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_runtime_action_schemas_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_runtime_action_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_runtime_action_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_runtime_action_schemas parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_runtime_action_schemas parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_runtime_action_schemas ::Google::Cloud::Connectors::V1::ListRuntimeActionSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_runtime_action_schemas ::Google::Cloud::Connectors::V1::ListRuntimeActionSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_runtime_action_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_runtime_action_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_runtime_action_schemas(::Google::Cloud::Connectors::V1::ListRuntimeActionSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_runtime_action_schemas(::Google::Cloud::Connectors::V1::ListRuntimeActionSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1048,36 +1048,36 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_runtime_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_runtime_config({ name: name }) do |response, operation|
+      c.get_runtime_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_runtime_config name: name do |response, operation|
+      c.get_runtime_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_runtime_config ::Google::Cloud::Connectors::V1::GetRuntimeConfigRequest.new(name: name) do |response, operation|
+      c.get_runtime_config ::Google::Cloud::Connectors::V1::GetRuntimeConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_runtime_config({ name: name }, grpc_options) do |response, operation|
+      c.get_runtime_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_runtime_config(::Google::Cloud::Connectors::V1::GetRuntimeConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_runtime_config(::Google::Cloud::Connectors::V1::GetRuntimeConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1106,36 +1106,36 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_global_settings_client_stub do
       # Create client
-      client = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
+      c = ::Google::Cloud::Connectors::V1::Connectors::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_global_settings({ name: name }) do |response, operation|
+      c.get_global_settings({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_global_settings name: name do |response, operation|
+      c.get_global_settings name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_global_settings ::Google::Cloud::Connectors::V1::GetGlobalSettingsRequest.new(name: name) do |response, operation|
+      c.get_global_settings ::Google::Cloud::Connectors::V1::GetGlobalSettingsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_global_settings({ name: name }, grpc_options) do |response, operation|
+      c.get_global_settings({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_global_settings(::Google::Cloud::Connectors::V1::GetGlobalSettingsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_global_settings(::Google::Cloud::Connectors::V1::GetGlobalSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

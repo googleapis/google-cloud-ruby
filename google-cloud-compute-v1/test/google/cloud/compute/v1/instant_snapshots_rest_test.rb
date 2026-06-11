@@ -104,32 +104,32 @@ class ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ServiceStub.stub :transcode_aggregated_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, aggregated_list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
+        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
+        c.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListInstantSnapshotsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
+        c.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListInstantSnapshotsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
+        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListInstantSnapshotsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
+        c.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListInstantSnapshotsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -161,32 +161,32 @@ class ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete({ instant_snapshot: instant_snapshot, project: project, request_id: request_id, zone: zone }) do |_result, response|
+        c.delete({ instant_snapshot: instant_snapshot, project: project, request_id: request_id, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete instant_snapshot: instant_snapshot, project: project, request_id: request_id, zone: zone do |_result, response|
+        c.delete instant_snapshot: instant_snapshot, project: project, request_id: request_id, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete ::Google::Cloud::Compute::V1::DeleteInstantSnapshotRequest.new(instant_snapshot: instant_snapshot, project: project, request_id: request_id, zone: zone) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteInstantSnapshotRequest.new(instant_snapshot: instant_snapshot, project: project, request_id: request_id, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete({ instant_snapshot: instant_snapshot, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+        c.delete({ instant_snapshot: instant_snapshot, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete(::Google::Cloud::Compute::V1::DeleteInstantSnapshotRequest.new(instant_snapshot: instant_snapshot, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteInstantSnapshotRequest.new(instant_snapshot: instant_snapshot, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -217,32 +217,32 @@ class ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ instant_snapshot: instant_snapshot, project: project, zone: zone }) do |_result, response|
+        c.get({ instant_snapshot: instant_snapshot, project: project, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get instant_snapshot: instant_snapshot, project: project, zone: zone do |_result, response|
+        c.get instant_snapshot: instant_snapshot, project: project, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetInstantSnapshotRequest.new(instant_snapshot: instant_snapshot, project: project, zone: zone) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetInstantSnapshotRequest.new(instant_snapshot: instant_snapshot, project: project, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ instant_snapshot: instant_snapshot, project: project, zone: zone }, call_options) do |_result, response|
+        c.get({ instant_snapshot: instant_snapshot, project: project, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetInstantSnapshotRequest.new(instant_snapshot: instant_snapshot, project: project, zone: zone), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetInstantSnapshotRequest.new(instant_snapshot: instant_snapshot, project: project, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -274,32 +274,32 @@ class ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }) do |_result, response|
+        c.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone do |_result, response|
+        c.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyInstantSnapshotRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone) do |_result, response|
+        c.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyInstantSnapshotRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }, call_options) do |_result, response|
+        c.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyInstantSnapshotRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone), call_options) do |_result, response|
+        c.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyInstantSnapshotRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -331,32 +331,32 @@ class ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert({ instant_snapshot_resource: instant_snapshot_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
+        c.insert({ instant_snapshot_resource: instant_snapshot_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert instant_snapshot_resource: instant_snapshot_resource, project: project, request_id: request_id, zone: zone do |_result, response|
+        c.insert instant_snapshot_resource: instant_snapshot_resource, project: project, request_id: request_id, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert ::Google::Cloud::Compute::V1::InsertInstantSnapshotRequest.new(instant_snapshot_resource: instant_snapshot_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
+        c.insert ::Google::Cloud::Compute::V1::InsertInstantSnapshotRequest.new(instant_snapshot_resource: instant_snapshot_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert({ instant_snapshot_resource: instant_snapshot_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+        c.insert({ instant_snapshot_resource: instant_snapshot_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert(::Google::Cloud::Compute::V1::InsertInstantSnapshotRequest.new(instant_snapshot_resource: instant_snapshot_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+        c.insert(::Google::Cloud::Compute::V1::InsertInstantSnapshotRequest.new(instant_snapshot_resource: instant_snapshot_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -391,32 +391,32 @@ class ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListInstantSnapshotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListInstantSnapshotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListInstantSnapshotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListInstantSnapshotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -448,32 +448,32 @@ class ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }) do |_result, response|
+        c.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_iam_policy project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource do |_result, response|
+        c.set_iam_policy project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyInstantSnapshotRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource) do |_result, response|
+        c.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyInstantSnapshotRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }, call_options) do |_result, response|
+        c.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyInstantSnapshotRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource), call_options) do |_result, response|
+        c.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyInstantSnapshotRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -506,32 +506,32 @@ class ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ServiceStub.stub :transcode_set_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_labels_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_labels({ project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource }) do |_result, response|
+        c.set_labels({ project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_labels project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource do |_result, response|
+        c.set_labels project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_labels ::Google::Cloud::Compute::V1::SetLabelsInstantSnapshotRequest.new(project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource) do |_result, response|
+        c.set_labels ::Google::Cloud::Compute::V1::SetLabelsInstantSnapshotRequest.new(project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_labels({ project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource }, call_options) do |_result, response|
+        c.set_labels({ project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_labels(::Google::Cloud::Compute::V1::SetLabelsInstantSnapshotRequest.new(project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource), call_options) do |_result, response|
+        c.set_labels(::Google::Cloud::Compute::V1::SetLabelsInstantSnapshotRequest.new(project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -563,32 +563,32 @@ class ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }) do |_result, response|
+        c.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone do |_result, response|
+        c.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsInstantSnapshotRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone) do |_result, response|
+        c.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsInstantSnapshotRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }, call_options) do |_result, response|
+        c.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsInstantSnapshotRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone), call_options) do |_result, response|
+        c.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsInstantSnapshotRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -104,32 +104,32 @@ class ::Google::Cloud::Compute::V1::SslPolicies::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Compute::V1::SslPolicies::Rest::ServiceStub.stub :transcode_aggregated_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, aggregated_list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
+        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
+        c.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListSslPoliciesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
+        c.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListSslPoliciesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
+        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListSslPoliciesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
+        c.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListSslPoliciesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -160,32 +160,32 @@ class ::Google::Cloud::Compute::V1::SslPolicies::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Compute::V1::SslPolicies::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete({ project: project, request_id: request_id, ssl_policy: ssl_policy }) do |_result, response|
+        c.delete({ project: project, request_id: request_id, ssl_policy: ssl_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete project: project, request_id: request_id, ssl_policy: ssl_policy do |_result, response|
+        c.delete project: project, request_id: request_id, ssl_policy: ssl_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete ::Google::Cloud::Compute::V1::DeleteSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy: ssl_policy) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy: ssl_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete({ project: project, request_id: request_id, ssl_policy: ssl_policy }, call_options) do |_result, response|
+        c.delete({ project: project, request_id: request_id, ssl_policy: ssl_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete(::Google::Cloud::Compute::V1::DeleteSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy: ssl_policy), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy: ssl_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -215,32 +215,32 @@ class ::Google::Cloud::Compute::V1::SslPolicies::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Compute::V1::SslPolicies::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ project: project, ssl_policy: ssl_policy }) do |_result, response|
+        c.get({ project: project, ssl_policy: ssl_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get project: project, ssl_policy: ssl_policy do |_result, response|
+        c.get project: project, ssl_policy: ssl_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetSslPolicyRequest.new(project: project, ssl_policy: ssl_policy) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetSslPolicyRequest.new(project: project, ssl_policy: ssl_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ project: project, ssl_policy: ssl_policy }, call_options) do |_result, response|
+        c.get({ project: project, ssl_policy: ssl_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetSslPolicyRequest.new(project: project, ssl_policy: ssl_policy), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetSslPolicyRequest.new(project: project, ssl_policy: ssl_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -271,32 +271,32 @@ class ::Google::Cloud::Compute::V1::SslPolicies::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Compute::V1::SslPolicies::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert({ project: project, request_id: request_id, ssl_policy_resource: ssl_policy_resource }) do |_result, response|
+        c.insert({ project: project, request_id: request_id, ssl_policy_resource: ssl_policy_resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert project: project, request_id: request_id, ssl_policy_resource: ssl_policy_resource do |_result, response|
+        c.insert project: project, request_id: request_id, ssl_policy_resource: ssl_policy_resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert ::Google::Cloud::Compute::V1::InsertSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy_resource: ssl_policy_resource) do |_result, response|
+        c.insert ::Google::Cloud::Compute::V1::InsertSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy_resource: ssl_policy_resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert({ project: project, request_id: request_id, ssl_policy_resource: ssl_policy_resource }, call_options) do |_result, response|
+        c.insert({ project: project, request_id: request_id, ssl_policy_resource: ssl_policy_resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert(::Google::Cloud::Compute::V1::InsertSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy_resource: ssl_policy_resource), call_options) do |_result, response|
+        c.insert(::Google::Cloud::Compute::V1::InsertSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy_resource: ssl_policy_resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -330,32 +330,32 @@ class ::Google::Cloud::Compute::V1::SslPolicies::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Compute::V1::SslPolicies::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -389,32 +389,32 @@ class ::Google::Cloud::Compute::V1::SslPolicies::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Compute::V1::SslPolicies::Rest::ServiceStub.stub :transcode_list_available_features_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_available_features_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_available_features({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_available_features({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_available_features filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        c.list_available_features filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_available_features ::Google::Cloud::Compute::V1::ListAvailableFeaturesSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        c.list_available_features ::Google::Cloud::Compute::V1::ListAvailableFeaturesSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_available_features({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_available_features({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_available_features(::Google::Cloud::Compute::V1::ListAvailableFeaturesSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_available_features(::Google::Cloud::Compute::V1::ListAvailableFeaturesSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -446,32 +446,32 @@ class ::Google::Cloud::Compute::V1::SslPolicies::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Compute::V1::SslPolicies::Rest::ServiceStub.stub :transcode_patch_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, patch_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::SslPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.patch({ project: project, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource }) do |_result, response|
+        c.patch({ project: project, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.patch project: project, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource do |_result, response|
+        c.patch project: project, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.patch ::Google::Cloud::Compute::V1::PatchSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource) do |_result, response|
+        c.patch ::Google::Cloud::Compute::V1::PatchSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.patch({ project: project, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource }, call_options) do |_result, response|
+        c.patch({ project: project, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.patch(::Google::Cloud::Compute::V1::PatchSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource), call_options) do |_result, response|
+        c.patch(::Google::Cloud::Compute::V1::PatchSslPolicyRequest.new(project: project, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

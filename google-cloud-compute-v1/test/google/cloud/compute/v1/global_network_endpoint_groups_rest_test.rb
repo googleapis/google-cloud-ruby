@@ -100,32 +100,32 @@ class ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ClientTes
     ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ServiceStub.stub :transcode_attach_network_endpoints_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, attach_network_endpoints_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.attach_network_endpoints({ global_network_endpoint_groups_attach_endpoints_request_resource: global_network_endpoint_groups_attach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }) do |_result, response|
+        c.attach_network_endpoints({ global_network_endpoint_groups_attach_endpoints_request_resource: global_network_endpoint_groups_attach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.attach_network_endpoints global_network_endpoint_groups_attach_endpoints_request_resource: global_network_endpoint_groups_attach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id do |_result, response|
+        c.attach_network_endpoints global_network_endpoint_groups_attach_endpoints_request_resource: global_network_endpoint_groups_attach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.attach_network_endpoints ::Google::Cloud::Compute::V1::AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest.new(global_network_endpoint_groups_attach_endpoints_request_resource: global_network_endpoint_groups_attach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id) do |_result, response|
+        c.attach_network_endpoints ::Google::Cloud::Compute::V1::AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest.new(global_network_endpoint_groups_attach_endpoints_request_resource: global_network_endpoint_groups_attach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.attach_network_endpoints({ global_network_endpoint_groups_attach_endpoints_request_resource: global_network_endpoint_groups_attach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }, call_options) do |_result, response|
+        c.attach_network_endpoints({ global_network_endpoint_groups_attach_endpoints_request_resource: global_network_endpoint_groups_attach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.attach_network_endpoints(::Google::Cloud::Compute::V1::AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest.new(global_network_endpoint_groups_attach_endpoints_request_resource: global_network_endpoint_groups_attach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id), call_options) do |_result, response|
+        c.attach_network_endpoints(::Google::Cloud::Compute::V1::AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest.new(global_network_endpoint_groups_attach_endpoints_request_resource: global_network_endpoint_groups_attach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ClientTes
     ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete({ network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }) do |_result, response|
+        c.delete({ network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete network_endpoint_group: network_endpoint_group, project: project, request_id: request_id do |_result, response|
+        c.delete network_endpoint_group: network_endpoint_group, project: project, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete ::Google::Cloud::Compute::V1::DeleteGlobalNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, request_id: request_id) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteGlobalNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete({ network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }, call_options) do |_result, response|
+        c.delete({ network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete(::Google::Cloud::Compute::V1::DeleteGlobalNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, request_id: request_id), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteGlobalNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ClientTes
     ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ServiceStub.stub :transcode_detach_network_endpoints_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, detach_network_endpoints_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.detach_network_endpoints({ global_network_endpoint_groups_detach_endpoints_request_resource: global_network_endpoint_groups_detach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }) do |_result, response|
+        c.detach_network_endpoints({ global_network_endpoint_groups_detach_endpoints_request_resource: global_network_endpoint_groups_detach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.detach_network_endpoints global_network_endpoint_groups_detach_endpoints_request_resource: global_network_endpoint_groups_detach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id do |_result, response|
+        c.detach_network_endpoints global_network_endpoint_groups_detach_endpoints_request_resource: global_network_endpoint_groups_detach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.detach_network_endpoints ::Google::Cloud::Compute::V1::DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest.new(global_network_endpoint_groups_detach_endpoints_request_resource: global_network_endpoint_groups_detach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id) do |_result, response|
+        c.detach_network_endpoints ::Google::Cloud::Compute::V1::DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest.new(global_network_endpoint_groups_detach_endpoints_request_resource: global_network_endpoint_groups_detach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.detach_network_endpoints({ global_network_endpoint_groups_detach_endpoints_request_resource: global_network_endpoint_groups_detach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }, call_options) do |_result, response|
+        c.detach_network_endpoints({ global_network_endpoint_groups_detach_endpoints_request_resource: global_network_endpoint_groups_detach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.detach_network_endpoints(::Google::Cloud::Compute::V1::DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest.new(global_network_endpoint_groups_detach_endpoints_request_resource: global_network_endpoint_groups_detach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id), call_options) do |_result, response|
+        c.detach_network_endpoints(::Google::Cloud::Compute::V1::DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest.new(global_network_endpoint_groups_detach_endpoints_request_resource: global_network_endpoint_groups_detach_endpoints_request_resource, network_endpoint_group: network_endpoint_group, project: project, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ClientTes
     ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ network_endpoint_group: network_endpoint_group, project: project }) do |_result, response|
+        c.get({ network_endpoint_group: network_endpoint_group, project: project }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get network_endpoint_group: network_endpoint_group, project: project do |_result, response|
+        c.get network_endpoint_group: network_endpoint_group, project: project do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetGlobalNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetGlobalNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ network_endpoint_group: network_endpoint_group, project: project }, call_options) do |_result, response|
+        c.get({ network_endpoint_group: network_endpoint_group, project: project }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetGlobalNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetGlobalNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -324,32 +324,32 @@ class ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ClientTes
     ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert({ network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id }) do |_result, response|
+        c.insert({ network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id do |_result, response|
+        c.insert network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert ::Google::Cloud::Compute::V1::InsertGlobalNetworkEndpointGroupRequest.new(network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id) do |_result, response|
+        c.insert ::Google::Cloud::Compute::V1::InsertGlobalNetworkEndpointGroupRequest.new(network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert({ network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id }, call_options) do |_result, response|
+        c.insert({ network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert(::Google::Cloud::Compute::V1::InsertGlobalNetworkEndpointGroupRequest.new(network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id), call_options) do |_result, response|
+        c.insert(::Google::Cloud::Compute::V1::InsertGlobalNetworkEndpointGroupRequest.new(network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -383,32 +383,32 @@ class ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ClientTes
     ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListGlobalNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListGlobalNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListGlobalNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListGlobalNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -443,32 +443,32 @@ class ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ClientTes
     ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::ServiceStub.stub :transcode_list_network_endpoints_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_network_endpoints_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_network_endpoints({ filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_network_endpoints({ filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_network_endpoints filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        c.list_network_endpoints filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_network_endpoints ::Google::Cloud::Compute::V1::ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        c.list_network_endpoints ::Google::Cloud::Compute::V1::ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_network_endpoints({ filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_network_endpoints({ filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_network_endpoints(::Google::Cloud::Compute::V1::ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_network_endpoints(::Google::Cloud::Compute::V1::ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
