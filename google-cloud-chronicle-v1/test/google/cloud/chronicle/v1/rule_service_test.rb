@@ -84,36 +84,36 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_rule({ parent: parent, rule: rule }) do |response, operation|
+      c.create_rule({ parent: parent, rule: rule }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_rule parent: parent, rule: rule do |response, operation|
+      c.create_rule parent: parent, rule: rule do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_rule ::Google::Cloud::Chronicle::V1::CreateRuleRequest.new(parent: parent, rule: rule) do |response, operation|
+      c.create_rule ::Google::Cloud::Chronicle::V1::CreateRuleRequest.new(parent: parent, rule: rule) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_rule({ parent: parent, rule: rule }, grpc_options) do |response, operation|
+      c.create_rule({ parent: parent, rule: rule }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_rule(::Google::Cloud::Chronicle::V1::CreateRuleRequest.new(parent: parent, rule: rule), grpc_options) do |response, operation|
+      c.create_rule(::Google::Cloud::Chronicle::V1::CreateRuleRequest.new(parent: parent, rule: rule), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_rule({ name: name, view: view }) do |response, operation|
+      c.get_rule({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_rule name: name, view: view do |response, operation|
+      c.get_rule name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_rule ::Google::Cloud::Chronicle::V1::GetRuleRequest.new(name: name, view: view) do |response, operation|
+      c.get_rule ::Google::Cloud::Chronicle::V1::GetRuleRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_rule({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_rule({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_rule(::Google::Cloud::Chronicle::V1::GetRuleRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_rule(::Google::Cloud::Chronicle::V1::GetRuleRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -210,40 +210,40 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_rules_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_rules({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }) do |response, operation|
+      c.list_rules({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_rules parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter do |response, operation|
+      c.list_rules parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_rules ::Google::Cloud::Chronicle::V1::ListRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter) do |response, operation|
+      c.list_rules ::Google::Cloud::Chronicle::V1::ListRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_rules({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }, grpc_options) do |response, operation|
+      c.list_rules({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_rules(::Google::Cloud::Chronicle::V1::ListRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter), grpc_options) do |response, operation|
+      c.list_rules(::Google::Cloud::Chronicle::V1::ListRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -275,36 +275,36 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_rule({ rule: rule, update_mask: update_mask }) do |response, operation|
+      c.update_rule({ rule: rule, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_rule rule: rule, update_mask: update_mask do |response, operation|
+      c.update_rule rule: rule, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_rule ::Google::Cloud::Chronicle::V1::UpdateRuleRequest.new(rule: rule, update_mask: update_mask) do |response, operation|
+      c.update_rule ::Google::Cloud::Chronicle::V1::UpdateRuleRequest.new(rule: rule, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_rule({ rule: rule, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_rule({ rule: rule, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_rule(::Google::Cloud::Chronicle::V1::UpdateRuleRequest.new(rule: rule, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_rule(::Google::Cloud::Chronicle::V1::UpdateRuleRequest.new(rule: rule, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,36 +335,36 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_rule({ name: name, force: force }) do |response, operation|
+      c.delete_rule({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_rule name: name, force: force do |response, operation|
+      c.delete_rule name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_rule ::Google::Cloud::Chronicle::V1::DeleteRuleRequest.new(name: name, force: force) do |response, operation|
+      c.delete_rule ::Google::Cloud::Chronicle::V1::DeleteRuleRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_rule({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_rule({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_rule(::Google::Cloud::Chronicle::V1::DeleteRuleRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_rule(::Google::Cloud::Chronicle::V1::DeleteRuleRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -399,40 +399,40 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_rule_revisions_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_rule_revisions({ name: name, page_size: page_size, page_token: page_token, view: view }) do |response, operation|
+      c.list_rule_revisions({ name: name, page_size: page_size, page_token: page_token, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_rule_revisions name: name, page_size: page_size, page_token: page_token, view: view do |response, operation|
+      c.list_rule_revisions name: name, page_size: page_size, page_token: page_token, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_rule_revisions ::Google::Cloud::Chronicle::V1::ListRuleRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token, view: view) do |response, operation|
+      c.list_rule_revisions ::Google::Cloud::Chronicle::V1::ListRuleRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_rule_revisions({ name: name, page_size: page_size, page_token: page_token, view: view }, grpc_options) do |response, operation|
+      c.list_rule_revisions({ name: name, page_size: page_size, page_token: page_token, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_rule_revisions(::Google::Cloud::Chronicle::V1::ListRuleRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
+      c.list_rule_revisions(::Google::Cloud::Chronicle::V1::ListRuleRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -464,40 +464,40 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_retrohunt_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_retrohunt({ parent: parent, retrohunt: retrohunt }) do |response, operation|
+      c.create_retrohunt({ parent: parent, retrohunt: retrohunt }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_retrohunt parent: parent, retrohunt: retrohunt do |response, operation|
+      c.create_retrohunt parent: parent, retrohunt: retrohunt do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_retrohunt ::Google::Cloud::Chronicle::V1::CreateRetrohuntRequest.new(parent: parent, retrohunt: retrohunt) do |response, operation|
+      c.create_retrohunt ::Google::Cloud::Chronicle::V1::CreateRetrohuntRequest.new(parent: parent, retrohunt: retrohunt) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_retrohunt({ parent: parent, retrohunt: retrohunt }, grpc_options) do |response, operation|
+      c.create_retrohunt({ parent: parent, retrohunt: retrohunt }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_retrohunt(::Google::Cloud::Chronicle::V1::CreateRetrohuntRequest.new(parent: parent, retrohunt: retrohunt), grpc_options) do |response, operation|
+      c.create_retrohunt(::Google::Cloud::Chronicle::V1::CreateRetrohuntRequest.new(parent: parent, retrohunt: retrohunt), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -527,36 +527,36 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_retrohunt_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_retrohunt({ name: name }) do |response, operation|
+      c.get_retrohunt({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_retrohunt name: name do |response, operation|
+      c.get_retrohunt name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_retrohunt ::Google::Cloud::Chronicle::V1::GetRetrohuntRequest.new(name: name) do |response, operation|
+      c.get_retrohunt ::Google::Cloud::Chronicle::V1::GetRetrohuntRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_retrohunt({ name: name }, grpc_options) do |response, operation|
+      c.get_retrohunt({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_retrohunt(::Google::Cloud::Chronicle::V1::GetRetrohuntRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_retrohunt(::Google::Cloud::Chronicle::V1::GetRetrohuntRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -591,40 +591,40 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_retrohunts_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_retrohunts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_retrohunts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_retrohunts parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_retrohunts parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_retrohunts ::Google::Cloud::Chronicle::V1::ListRetrohuntsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_retrohunts ::Google::Cloud::Chronicle::V1::ListRetrohuntsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_retrohunts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_retrohunts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_retrohunts(::Google::Cloud::Chronicle::V1::ListRetrohuntsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_retrohunts(::Google::Cloud::Chronicle::V1::ListRetrohuntsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -654,36 +654,36 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_rule_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_rule_deployment({ name: name }) do |response, operation|
+      c.get_rule_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_rule_deployment name: name do |response, operation|
+      c.get_rule_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_rule_deployment ::Google::Cloud::Chronicle::V1::GetRuleDeploymentRequest.new(name: name) do |response, operation|
+      c.get_rule_deployment ::Google::Cloud::Chronicle::V1::GetRuleDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_rule_deployment({ name: name }, grpc_options) do |response, operation|
+      c.get_rule_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_rule_deployment(::Google::Cloud::Chronicle::V1::GetRuleDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_rule_deployment(::Google::Cloud::Chronicle::V1::GetRuleDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -718,40 +718,40 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_rule_deployments_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_rule_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_rule_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_rule_deployments parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_rule_deployments parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_rule_deployments ::Google::Cloud::Chronicle::V1::ListRuleDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_rule_deployments ::Google::Cloud::Chronicle::V1::ListRuleDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_rule_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_rule_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_rule_deployments(::Google::Cloud::Chronicle::V1::ListRuleDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_rule_deployments(::Google::Cloud::Chronicle::V1::ListRuleDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -783,36 +783,36 @@ class ::Google::Cloud::Chronicle::V1::RuleService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_rule_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::RuleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_rule_deployment({ rule_deployment: rule_deployment, update_mask: update_mask }) do |response, operation|
+      c.update_rule_deployment({ rule_deployment: rule_deployment, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_rule_deployment rule_deployment: rule_deployment, update_mask: update_mask do |response, operation|
+      c.update_rule_deployment rule_deployment: rule_deployment, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_rule_deployment ::Google::Cloud::Chronicle::V1::UpdateRuleDeploymentRequest.new(rule_deployment: rule_deployment, update_mask: update_mask) do |response, operation|
+      c.update_rule_deployment ::Google::Cloud::Chronicle::V1::UpdateRuleDeploymentRequest.new(rule_deployment: rule_deployment, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_rule_deployment({ rule_deployment: rule_deployment, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_rule_deployment({ rule_deployment: rule_deployment, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_rule_deployment(::Google::Cloud::Chronicle::V1::UpdateRuleDeploymentRequest.new(rule_deployment: rule_deployment, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_rule_deployment(::Google::Cloud::Chronicle::V1::UpdateRuleDeploymentRequest.new(rule_deployment: rule_deployment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

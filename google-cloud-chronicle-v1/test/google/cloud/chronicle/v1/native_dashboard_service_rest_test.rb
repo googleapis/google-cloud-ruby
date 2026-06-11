@@ -98,32 +98,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_create_native_dashboard_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_native_dashboard_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_native_dashboard({ parent: parent, native_dashboard: native_dashboard }) do |_result, response|
+        c.create_native_dashboard({ parent: parent, native_dashboard: native_dashboard }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_native_dashboard parent: parent, native_dashboard: native_dashboard do |_result, response|
+        c.create_native_dashboard parent: parent, native_dashboard: native_dashboard do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_native_dashboard ::Google::Cloud::Chronicle::V1::CreateNativeDashboardRequest.new(parent: parent, native_dashboard: native_dashboard) do |_result, response|
+        c.create_native_dashboard ::Google::Cloud::Chronicle::V1::CreateNativeDashboardRequest.new(parent: parent, native_dashboard: native_dashboard) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_native_dashboard({ parent: parent, native_dashboard: native_dashboard }, call_options) do |_result, response|
+        c.create_native_dashboard({ parent: parent, native_dashboard: native_dashboard }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_native_dashboard(::Google::Cloud::Chronicle::V1::CreateNativeDashboardRequest.new(parent: parent, native_dashboard: native_dashboard), call_options) do |_result, response|
+        c.create_native_dashboard(::Google::Cloud::Chronicle::V1::CreateNativeDashboardRequest.new(parent: parent, native_dashboard: native_dashboard), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_get_native_dashboard_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_native_dashboard_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_native_dashboard({ name: name, view: view }) do |_result, response|
+        c.get_native_dashboard({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_native_dashboard name: name, view: view do |_result, response|
+        c.get_native_dashboard name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_native_dashboard ::Google::Cloud::Chronicle::V1::GetNativeDashboardRequest.new(name: name, view: view) do |_result, response|
+        c.get_native_dashboard ::Google::Cloud::Chronicle::V1::GetNativeDashboardRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_native_dashboard({ name: name, view: view }, call_options) do |_result, response|
+        c.get_native_dashboard({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_native_dashboard(::Google::Cloud::Chronicle::V1::GetNativeDashboardRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_native_dashboard(::Google::Cloud::Chronicle::V1::GetNativeDashboardRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_list_native_dashboards_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_native_dashboards_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_native_dashboards({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |_result, response|
+        c.list_native_dashboards({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_native_dashboards parent: parent, page_size: page_size, page_token: page_token, view: view do |_result, response|
+        c.list_native_dashboards parent: parent, page_size: page_size, page_token: page_token, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_native_dashboards ::Google::Cloud::Chronicle::V1::ListNativeDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |_result, response|
+        c.list_native_dashboards ::Google::Cloud::Chronicle::V1::ListNativeDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_native_dashboards({ parent: parent, page_size: page_size, page_token: page_token, view: view }, call_options) do |_result, response|
+        c.list_native_dashboards({ parent: parent, page_size: page_size, page_token: page_token, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_native_dashboards(::Google::Cloud::Chronicle::V1::ListNativeDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), call_options) do |_result, response|
+        c.list_native_dashboards(::Google::Cloud::Chronicle::V1::ListNativeDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_update_native_dashboard_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_native_dashboard_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_native_dashboard({ native_dashboard: native_dashboard, update_mask: update_mask }) do |_result, response|
+        c.update_native_dashboard({ native_dashboard: native_dashboard, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_native_dashboard native_dashboard: native_dashboard, update_mask: update_mask do |_result, response|
+        c.update_native_dashboard native_dashboard: native_dashboard, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_native_dashboard ::Google::Cloud::Chronicle::V1::UpdateNativeDashboardRequest.new(native_dashboard: native_dashboard, update_mask: update_mask) do |_result, response|
+        c.update_native_dashboard ::Google::Cloud::Chronicle::V1::UpdateNativeDashboardRequest.new(native_dashboard: native_dashboard, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_native_dashboard({ native_dashboard: native_dashboard, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_native_dashboard({ native_dashboard: native_dashboard, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_native_dashboard(::Google::Cloud::Chronicle::V1::UpdateNativeDashboardRequest.new(native_dashboard: native_dashboard, update_mask: update_mask), call_options) do |_result, response|
+        c.update_native_dashboard(::Google::Cloud::Chronicle::V1::UpdateNativeDashboardRequest.new(native_dashboard: native_dashboard, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_duplicate_native_dashboard_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, duplicate_native_dashboard_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.duplicate_native_dashboard({ name: name, native_dashboard: native_dashboard }) do |_result, response|
+        c.duplicate_native_dashboard({ name: name, native_dashboard: native_dashboard }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.duplicate_native_dashboard name: name, native_dashboard: native_dashboard do |_result, response|
+        c.duplicate_native_dashboard name: name, native_dashboard: native_dashboard do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.duplicate_native_dashboard ::Google::Cloud::Chronicle::V1::DuplicateNativeDashboardRequest.new(name: name, native_dashboard: native_dashboard) do |_result, response|
+        c.duplicate_native_dashboard ::Google::Cloud::Chronicle::V1::DuplicateNativeDashboardRequest.new(name: name, native_dashboard: native_dashboard) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.duplicate_native_dashboard({ name: name, native_dashboard: native_dashboard }, call_options) do |_result, response|
+        c.duplicate_native_dashboard({ name: name, native_dashboard: native_dashboard }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.duplicate_native_dashboard(::Google::Cloud::Chronicle::V1::DuplicateNativeDashboardRequest.new(name: name, native_dashboard: native_dashboard), call_options) do |_result, response|
+        c.duplicate_native_dashboard(::Google::Cloud::Chronicle::V1::DuplicateNativeDashboardRequest.new(name: name, native_dashboard: native_dashboard), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_delete_native_dashboard_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_native_dashboard_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_native_dashboard({ name: name }) do |_result, response|
+        c.delete_native_dashboard({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_native_dashboard name: name do |_result, response|
+        c.delete_native_dashboard name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_native_dashboard ::Google::Cloud::Chronicle::V1::DeleteNativeDashboardRequest.new(name: name) do |_result, response|
+        c.delete_native_dashboard ::Google::Cloud::Chronicle::V1::DeleteNativeDashboardRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_native_dashboard({ name: name }, call_options) do |_result, response|
+        c.delete_native_dashboard({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_native_dashboard(::Google::Cloud::Chronicle::V1::DeleteNativeDashboardRequest.new(name: name), call_options) do |_result, response|
+        c.delete_native_dashboard(::Google::Cloud::Chronicle::V1::DeleteNativeDashboardRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_add_chart_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, add_chart_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.add_chart({ name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, chart_layout: chart_layout }) do |_result, response|
+        c.add_chart({ name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, chart_layout: chart_layout }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.add_chart name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, chart_layout: chart_layout do |_result, response|
+        c.add_chart name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, chart_layout: chart_layout do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.add_chart ::Google::Cloud::Chronicle::V1::AddChartRequest.new(name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, chart_layout: chart_layout) do |_result, response|
+        c.add_chart ::Google::Cloud::Chronicle::V1::AddChartRequest.new(name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, chart_layout: chart_layout) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.add_chart({ name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, chart_layout: chart_layout }, call_options) do |_result, response|
+        c.add_chart({ name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, chart_layout: chart_layout }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.add_chart(::Google::Cloud::Chronicle::V1::AddChartRequest.new(name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, chart_layout: chart_layout), call_options) do |_result, response|
+        c.add_chart(::Google::Cloud::Chronicle::V1::AddChartRequest.new(name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, chart_layout: chart_layout), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_remove_chart_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, remove_chart_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.remove_chart({ name: name, dashboard_chart: dashboard_chart }) do |_result, response|
+        c.remove_chart({ name: name, dashboard_chart: dashboard_chart }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.remove_chart name: name, dashboard_chart: dashboard_chart do |_result, response|
+        c.remove_chart name: name, dashboard_chart: dashboard_chart do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.remove_chart ::Google::Cloud::Chronicle::V1::RemoveChartRequest.new(name: name, dashboard_chart: dashboard_chart) do |_result, response|
+        c.remove_chart ::Google::Cloud::Chronicle::V1::RemoveChartRequest.new(name: name, dashboard_chart: dashboard_chart) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.remove_chart({ name: name, dashboard_chart: dashboard_chart }, call_options) do |_result, response|
+        c.remove_chart({ name: name, dashboard_chart: dashboard_chart }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.remove_chart(::Google::Cloud::Chronicle::V1::RemoveChartRequest.new(name: name, dashboard_chart: dashboard_chart), call_options) do |_result, response|
+        c.remove_chart(::Google::Cloud::Chronicle::V1::RemoveChartRequest.new(name: name, dashboard_chart: dashboard_chart), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -544,32 +544,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_edit_chart_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, edit_chart_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.edit_chart({ name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, edit_mask: edit_mask, language_features: language_features }) do |_result, response|
+        c.edit_chart({ name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, edit_mask: edit_mask, language_features: language_features }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.edit_chart name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, edit_mask: edit_mask, language_features: language_features do |_result, response|
+        c.edit_chart name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, edit_mask: edit_mask, language_features: language_features do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.edit_chart ::Google::Cloud::Chronicle::V1::EditChartRequest.new(name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, edit_mask: edit_mask, language_features: language_features) do |_result, response|
+        c.edit_chart ::Google::Cloud::Chronicle::V1::EditChartRequest.new(name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, edit_mask: edit_mask, language_features: language_features) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.edit_chart({ name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, edit_mask: edit_mask, language_features: language_features }, call_options) do |_result, response|
+        c.edit_chart({ name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, edit_mask: edit_mask, language_features: language_features }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.edit_chart(::Google::Cloud::Chronicle::V1::EditChartRequest.new(name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, edit_mask: edit_mask, language_features: language_features), call_options) do |_result, response|
+        c.edit_chart(::Google::Cloud::Chronicle::V1::EditChartRequest.new(name: name, dashboard_query: dashboard_query, dashboard_chart: dashboard_chart, edit_mask: edit_mask, language_features: language_features), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -599,32 +599,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_duplicate_chart_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, duplicate_chart_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.duplicate_chart({ name: name, dashboard_chart: dashboard_chart }) do |_result, response|
+        c.duplicate_chart({ name: name, dashboard_chart: dashboard_chart }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.duplicate_chart name: name, dashboard_chart: dashboard_chart do |_result, response|
+        c.duplicate_chart name: name, dashboard_chart: dashboard_chart do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.duplicate_chart ::Google::Cloud::Chronicle::V1::DuplicateChartRequest.new(name: name, dashboard_chart: dashboard_chart) do |_result, response|
+        c.duplicate_chart ::Google::Cloud::Chronicle::V1::DuplicateChartRequest.new(name: name, dashboard_chart: dashboard_chart) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.duplicate_chart({ name: name, dashboard_chart: dashboard_chart }, call_options) do |_result, response|
+        c.duplicate_chart({ name: name, dashboard_chart: dashboard_chart }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.duplicate_chart(::Google::Cloud::Chronicle::V1::DuplicateChartRequest.new(name: name, dashboard_chart: dashboard_chart), call_options) do |_result, response|
+        c.duplicate_chart(::Google::Cloud::Chronicle::V1::DuplicateChartRequest.new(name: name, dashboard_chart: dashboard_chart), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -654,32 +654,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_export_native_dashboards_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_native_dashboards_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_native_dashboards({ parent: parent, names: names }) do |_result, response|
+        c.export_native_dashboards({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_native_dashboards parent: parent, names: names do |_result, response|
+        c.export_native_dashboards parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_native_dashboards ::Google::Cloud::Chronicle::V1::ExportNativeDashboardsRequest.new(parent: parent, names: names) do |_result, response|
+        c.export_native_dashboards ::Google::Cloud::Chronicle::V1::ExportNativeDashboardsRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_native_dashboards({ parent: parent, names: names }, call_options) do |_result, response|
+        c.export_native_dashboards({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_native_dashboards(::Google::Cloud::Chronicle::V1::ExportNativeDashboardsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.export_native_dashboards(::Google::Cloud::Chronicle::V1::ExportNativeDashboardsRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -709,32 +709,32 @@ class ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ClientTest <
     ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::ServiceStub.stub :transcode_import_native_dashboards_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_native_dashboards_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_native_dashboards({ parent: parent, source: source }) do |_result, response|
+        c.import_native_dashboards({ parent: parent, source: source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_native_dashboards parent: parent, source: source do |_result, response|
+        c.import_native_dashboards parent: parent, source: source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_native_dashboards ::Google::Cloud::Chronicle::V1::ImportNativeDashboardsRequest.new(parent: parent, source: source) do |_result, response|
+        c.import_native_dashboards ::Google::Cloud::Chronicle::V1::ImportNativeDashboardsRequest.new(parent: parent, source: source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_native_dashboards({ parent: parent, source: source }, call_options) do |_result, response|
+        c.import_native_dashboards({ parent: parent, source: source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_native_dashboards(::Google::Cloud::Chronicle::V1::ImportNativeDashboardsRequest.new(parent: parent, source: source), call_options) do |_result, response|
+        c.import_native_dashboards(::Google::Cloud::Chronicle::V1::ImportNativeDashboardsRequest.new(parent: parent, source: source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

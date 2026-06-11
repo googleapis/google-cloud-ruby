@@ -92,40 +92,40 @@ class ::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerMonitoring:
 
     Gapic::ServiceStub.stub :new, list_violations_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerMonitoring::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerMonitoring::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_violations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, interval: interval }) do |response, operation|
+      c.list_violations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, interval: interval }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_violations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, interval: interval do |response, operation|
+      c.list_violations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, interval: interval do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_violations ::Google::Cloud::CloudControlsPartner::V1::ListViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, interval: interval) do |response, operation|
+      c.list_violations ::Google::Cloud::CloudControlsPartner::V1::ListViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, interval: interval) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_violations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, interval: interval }, grpc_options) do |response, operation|
+      c.list_violations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, interval: interval }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_violations(::Google::Cloud::CloudControlsPartner::V1::ListViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, interval: interval), grpc_options) do |response, operation|
+      c.list_violations(::Google::Cloud::CloudControlsPartner::V1::ListViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, interval: interval), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -155,36 +155,36 @@ class ::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerMonitoring:
 
     Gapic::ServiceStub.stub :new, get_violation_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerMonitoring::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerMonitoring::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_violation({ name: name }) do |response, operation|
+      c.get_violation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_violation name: name do |response, operation|
+      c.get_violation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_violation ::Google::Cloud::CloudControlsPartner::V1::GetViolationRequest.new(name: name) do |response, operation|
+      c.get_violation ::Google::Cloud::CloudControlsPartner::V1::GetViolationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_violation({ name: name }, grpc_options) do |response, operation|
+      c.get_violation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_violation(::Google::Cloud::CloudControlsPartner::V1::GetViolationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_violation(::Google::Cloud::CloudControlsPartner::V1::GetViolationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

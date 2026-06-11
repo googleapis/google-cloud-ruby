@@ -108,32 +108,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_run_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report }) do |_result, response|
+        c.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_evaluation app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report do |_result, response|
+        c.run_evaluation app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_evaluation ::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report) do |_result, response|
+        c.run_evaluation ::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report }, call_options) do |_result, response|
+        c.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_evaluation(::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report), call_options) do |_result, response|
+        c.run_evaluation(::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -164,32 +164,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_upload_evaluation_audio_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, upload_evaluation_audio_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.upload_evaluation_audio({ name: name, audio_content: audio_content, previous_audio_gcs_uri: previous_audio_gcs_uri }) do |_result, response|
+        c.upload_evaluation_audio({ name: name, audio_content: audio_content, previous_audio_gcs_uri: previous_audio_gcs_uri }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.upload_evaluation_audio name: name, audio_content: audio_content, previous_audio_gcs_uri: previous_audio_gcs_uri do |_result, response|
+        c.upload_evaluation_audio name: name, audio_content: audio_content, previous_audio_gcs_uri: previous_audio_gcs_uri do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.upload_evaluation_audio ::Google::Cloud::Ces::V1beta::UploadEvaluationAudioRequest.new(name: name, audio_content: audio_content, previous_audio_gcs_uri: previous_audio_gcs_uri) do |_result, response|
+        c.upload_evaluation_audio ::Google::Cloud::Ces::V1beta::UploadEvaluationAudioRequest.new(name: name, audio_content: audio_content, previous_audio_gcs_uri: previous_audio_gcs_uri) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.upload_evaluation_audio({ name: name, audio_content: audio_content, previous_audio_gcs_uri: previous_audio_gcs_uri }, call_options) do |_result, response|
+        c.upload_evaluation_audio({ name: name, audio_content: audio_content, previous_audio_gcs_uri: previous_audio_gcs_uri }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.upload_evaluation_audio(::Google::Cloud::Ces::V1beta::UploadEvaluationAudioRequest.new(name: name, audio_content: audio_content, previous_audio_gcs_uri: previous_audio_gcs_uri), call_options) do |_result, response|
+        c.upload_evaluation_audio(::Google::Cloud::Ces::V1beta::UploadEvaluationAudioRequest.new(name: name, audio_content: audio_content, previous_audio_gcs_uri: previous_audio_gcs_uri), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -220,32 +220,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_create_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_evaluation({ parent: parent, evaluation_id: evaluation_id, evaluation: evaluation }) do |_result, response|
+        c.create_evaluation({ parent: parent, evaluation_id: evaluation_id, evaluation: evaluation }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_evaluation parent: parent, evaluation_id: evaluation_id, evaluation: evaluation do |_result, response|
+        c.create_evaluation parent: parent, evaluation_id: evaluation_id, evaluation: evaluation do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_evaluation ::Google::Cloud::Ces::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation_id: evaluation_id, evaluation: evaluation) do |_result, response|
+        c.create_evaluation ::Google::Cloud::Ces::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation_id: evaluation_id, evaluation: evaluation) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_evaluation({ parent: parent, evaluation_id: evaluation_id, evaluation: evaluation }, call_options) do |_result, response|
+        c.create_evaluation({ parent: parent, evaluation_id: evaluation_id, evaluation: evaluation }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_evaluation(::Google::Cloud::Ces::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation_id: evaluation_id, evaluation: evaluation), call_options) do |_result, response|
+        c.create_evaluation(::Google::Cloud::Ces::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation_id: evaluation_id, evaluation: evaluation), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -275,32 +275,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_generate_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_evaluation({ conversation: conversation, source: source }) do |_result, response|
+        c.generate_evaluation({ conversation: conversation, source: source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_evaluation conversation: conversation, source: source do |_result, response|
+        c.generate_evaluation conversation: conversation, source: source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_evaluation ::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source) do |_result, response|
+        c.generate_evaluation ::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_evaluation({ conversation: conversation, source: source }, call_options) do |_result, response|
+        c.generate_evaluation({ conversation: conversation, source: source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_evaluation(::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source), call_options) do |_result, response|
+        c.generate_evaluation(::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -331,32 +331,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_import_evaluations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_evaluations_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_evaluations({ conversation_list: conversation_list, parent: parent, import_options: import_options }) do |_result, response|
+        c.import_evaluations({ conversation_list: conversation_list, parent: parent, import_options: import_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_evaluations conversation_list: conversation_list, parent: parent, import_options: import_options do |_result, response|
+        c.import_evaluations conversation_list: conversation_list, parent: parent, import_options: import_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_evaluations ::Google::Cloud::Ces::V1beta::ImportEvaluationsRequest.new(conversation_list: conversation_list, parent: parent, import_options: import_options) do |_result, response|
+        c.import_evaluations ::Google::Cloud::Ces::V1beta::ImportEvaluationsRequest.new(conversation_list: conversation_list, parent: parent, import_options: import_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_evaluations({ conversation_list: conversation_list, parent: parent, import_options: import_options }, call_options) do |_result, response|
+        c.import_evaluations({ conversation_list: conversation_list, parent: parent, import_options: import_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_evaluations(::Google::Cloud::Ces::V1beta::ImportEvaluationsRequest.new(conversation_list: conversation_list, parent: parent, import_options: import_options), call_options) do |_result, response|
+        c.import_evaluations(::Google::Cloud::Ces::V1beta::ImportEvaluationsRequest.new(conversation_list: conversation_list, parent: parent, import_options: import_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -387,32 +387,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_create_evaluation_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_evaluation_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_evaluation_dataset({ parent: parent, evaluation_dataset_id: evaluation_dataset_id, evaluation_dataset: evaluation_dataset }) do |_result, response|
+        c.create_evaluation_dataset({ parent: parent, evaluation_dataset_id: evaluation_dataset_id, evaluation_dataset: evaluation_dataset }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_evaluation_dataset parent: parent, evaluation_dataset_id: evaluation_dataset_id, evaluation_dataset: evaluation_dataset do |_result, response|
+        c.create_evaluation_dataset parent: parent, evaluation_dataset_id: evaluation_dataset_id, evaluation_dataset: evaluation_dataset do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_evaluation_dataset ::Google::Cloud::Ces::V1beta::CreateEvaluationDatasetRequest.new(parent: parent, evaluation_dataset_id: evaluation_dataset_id, evaluation_dataset: evaluation_dataset) do |_result, response|
+        c.create_evaluation_dataset ::Google::Cloud::Ces::V1beta::CreateEvaluationDatasetRequest.new(parent: parent, evaluation_dataset_id: evaluation_dataset_id, evaluation_dataset: evaluation_dataset) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_evaluation_dataset({ parent: parent, evaluation_dataset_id: evaluation_dataset_id, evaluation_dataset: evaluation_dataset }, call_options) do |_result, response|
+        c.create_evaluation_dataset({ parent: parent, evaluation_dataset_id: evaluation_dataset_id, evaluation_dataset: evaluation_dataset }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_evaluation_dataset(::Google::Cloud::Ces::V1beta::CreateEvaluationDatasetRequest.new(parent: parent, evaluation_dataset_id: evaluation_dataset_id, evaluation_dataset: evaluation_dataset), call_options) do |_result, response|
+        c.create_evaluation_dataset(::Google::Cloud::Ces::V1beta::CreateEvaluationDatasetRequest.new(parent: parent, evaluation_dataset_id: evaluation_dataset_id, evaluation_dataset: evaluation_dataset), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -442,32 +442,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_update_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_evaluation({ evaluation: evaluation, update_mask: update_mask }) do |_result, response|
+        c.update_evaluation({ evaluation: evaluation, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_evaluation evaluation: evaluation, update_mask: update_mask do |_result, response|
+        c.update_evaluation evaluation: evaluation, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_evaluation ::Google::Cloud::Ces::V1beta::UpdateEvaluationRequest.new(evaluation: evaluation, update_mask: update_mask) do |_result, response|
+        c.update_evaluation ::Google::Cloud::Ces::V1beta::UpdateEvaluationRequest.new(evaluation: evaluation, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_evaluation({ evaluation: evaluation, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_evaluation({ evaluation: evaluation, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_evaluation(::Google::Cloud::Ces::V1beta::UpdateEvaluationRequest.new(evaluation: evaluation, update_mask: update_mask), call_options) do |_result, response|
+        c.update_evaluation(::Google::Cloud::Ces::V1beta::UpdateEvaluationRequest.new(evaluation: evaluation, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -497,32 +497,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_update_evaluation_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_evaluation_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_evaluation_dataset({ evaluation_dataset: evaluation_dataset, update_mask: update_mask }) do |_result, response|
+        c.update_evaluation_dataset({ evaluation_dataset: evaluation_dataset, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_evaluation_dataset evaluation_dataset: evaluation_dataset, update_mask: update_mask do |_result, response|
+        c.update_evaluation_dataset evaluation_dataset: evaluation_dataset, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_evaluation_dataset ::Google::Cloud::Ces::V1beta::UpdateEvaluationDatasetRequest.new(evaluation_dataset: evaluation_dataset, update_mask: update_mask) do |_result, response|
+        c.update_evaluation_dataset ::Google::Cloud::Ces::V1beta::UpdateEvaluationDatasetRequest.new(evaluation_dataset: evaluation_dataset, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_evaluation_dataset({ evaluation_dataset: evaluation_dataset, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_evaluation_dataset({ evaluation_dataset: evaluation_dataset, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_evaluation_dataset(::Google::Cloud::Ces::V1beta::UpdateEvaluationDatasetRequest.new(evaluation_dataset: evaluation_dataset, update_mask: update_mask), call_options) do |_result, response|
+        c.update_evaluation_dataset(::Google::Cloud::Ces::V1beta::UpdateEvaluationDatasetRequest.new(evaluation_dataset: evaluation_dataset, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -553,32 +553,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_delete_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_evaluation({ name: name, force: force, etag: etag }) do |_result, response|
+        c.delete_evaluation({ name: name, force: force, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_evaluation name: name, force: force, etag: etag do |_result, response|
+        c.delete_evaluation name: name, force: force, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_evaluation ::Google::Cloud::Ces::V1beta::DeleteEvaluationRequest.new(name: name, force: force, etag: etag) do |_result, response|
+        c.delete_evaluation ::Google::Cloud::Ces::V1beta::DeleteEvaluationRequest.new(name: name, force: force, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_evaluation({ name: name, force: force, etag: etag }, call_options) do |_result, response|
+        c.delete_evaluation({ name: name, force: force, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_evaluation(::Google::Cloud::Ces::V1beta::DeleteEvaluationRequest.new(name: name, force: force, etag: etag), call_options) do |_result, response|
+        c.delete_evaluation(::Google::Cloud::Ces::V1beta::DeleteEvaluationRequest.new(name: name, force: force, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -607,32 +607,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_delete_evaluation_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_evaluation_result_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_evaluation_result({ name: name }) do |_result, response|
+        c.delete_evaluation_result({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_evaluation_result name: name do |_result, response|
+        c.delete_evaluation_result name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_evaluation_result ::Google::Cloud::Ces::V1beta::DeleteEvaluationResultRequest.new(name: name) do |_result, response|
+        c.delete_evaluation_result ::Google::Cloud::Ces::V1beta::DeleteEvaluationResultRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_evaluation_result({ name: name }, call_options) do |_result, response|
+        c.delete_evaluation_result({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_evaluation_result(::Google::Cloud::Ces::V1beta::DeleteEvaluationResultRequest.new(name: name), call_options) do |_result, response|
+        c.delete_evaluation_result(::Google::Cloud::Ces::V1beta::DeleteEvaluationResultRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -662,32 +662,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_delete_evaluation_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_evaluation_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_evaluation_dataset({ name: name, etag: etag }) do |_result, response|
+        c.delete_evaluation_dataset({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_evaluation_dataset name: name, etag: etag do |_result, response|
+        c.delete_evaluation_dataset name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_evaluation_dataset ::Google::Cloud::Ces::V1beta::DeleteEvaluationDatasetRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_evaluation_dataset ::Google::Cloud::Ces::V1beta::DeleteEvaluationDatasetRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_evaluation_dataset({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_evaluation_dataset({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_evaluation_dataset(::Google::Cloud::Ces::V1beta::DeleteEvaluationDatasetRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_evaluation_dataset(::Google::Cloud::Ces::V1beta::DeleteEvaluationDatasetRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -716,32 +716,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_delete_evaluation_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_evaluation_run_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_evaluation_run({ name: name }) do |_result, response|
+        c.delete_evaluation_run({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_evaluation_run name: name do |_result, response|
+        c.delete_evaluation_run name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_evaluation_run ::Google::Cloud::Ces::V1beta::DeleteEvaluationRunRequest.new(name: name) do |_result, response|
+        c.delete_evaluation_run ::Google::Cloud::Ces::V1beta::DeleteEvaluationRunRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_evaluation_run({ name: name }, call_options) do |_result, response|
+        c.delete_evaluation_run({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_evaluation_run(::Google::Cloud::Ces::V1beta::DeleteEvaluationRunRequest.new(name: name), call_options) do |_result, response|
+        c.delete_evaluation_run(::Google::Cloud::Ces::V1beta::DeleteEvaluationRunRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -770,32 +770,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_get_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_evaluation({ name: name }) do |_result, response|
+        c.get_evaluation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_evaluation name: name do |_result, response|
+        c.get_evaluation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_evaluation ::Google::Cloud::Ces::V1beta::GetEvaluationRequest.new(name: name) do |_result, response|
+        c.get_evaluation ::Google::Cloud::Ces::V1beta::GetEvaluationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_evaluation({ name: name }, call_options) do |_result, response|
+        c.get_evaluation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_evaluation(::Google::Cloud::Ces::V1beta::GetEvaluationRequest.new(name: name), call_options) do |_result, response|
+        c.get_evaluation(::Google::Cloud::Ces::V1beta::GetEvaluationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -824,32 +824,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_get_evaluation_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_evaluation_result_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_evaluation_result({ name: name }) do |_result, response|
+        c.get_evaluation_result({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_evaluation_result name: name do |_result, response|
+        c.get_evaluation_result name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_evaluation_result ::Google::Cloud::Ces::V1beta::GetEvaluationResultRequest.new(name: name) do |_result, response|
+        c.get_evaluation_result ::Google::Cloud::Ces::V1beta::GetEvaluationResultRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_evaluation_result({ name: name }, call_options) do |_result, response|
+        c.get_evaluation_result({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_evaluation_result(::Google::Cloud::Ces::V1beta::GetEvaluationResultRequest.new(name: name), call_options) do |_result, response|
+        c.get_evaluation_result(::Google::Cloud::Ces::V1beta::GetEvaluationResultRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -878,32 +878,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_get_evaluation_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_evaluation_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_evaluation_dataset({ name: name }) do |_result, response|
+        c.get_evaluation_dataset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_evaluation_dataset name: name do |_result, response|
+        c.get_evaluation_dataset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_evaluation_dataset ::Google::Cloud::Ces::V1beta::GetEvaluationDatasetRequest.new(name: name) do |_result, response|
+        c.get_evaluation_dataset ::Google::Cloud::Ces::V1beta::GetEvaluationDatasetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_evaluation_dataset({ name: name }, call_options) do |_result, response|
+        c.get_evaluation_dataset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_evaluation_dataset(::Google::Cloud::Ces::V1beta::GetEvaluationDatasetRequest.new(name: name), call_options) do |_result, response|
+        c.get_evaluation_dataset(::Google::Cloud::Ces::V1beta::GetEvaluationDatasetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -932,32 +932,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_get_evaluation_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_evaluation_run_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_evaluation_run({ name: name }) do |_result, response|
+        c.get_evaluation_run({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_evaluation_run name: name do |_result, response|
+        c.get_evaluation_run name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_evaluation_run ::Google::Cloud::Ces::V1beta::GetEvaluationRunRequest.new(name: name) do |_result, response|
+        c.get_evaluation_run ::Google::Cloud::Ces::V1beta::GetEvaluationRunRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_evaluation_run({ name: name }, call_options) do |_result, response|
+        c.get_evaluation_run({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_evaluation_run(::Google::Cloud::Ces::V1beta::GetEvaluationRunRequest.new(name: name), call_options) do |_result, response|
+        c.get_evaluation_run(::Google::Cloud::Ces::V1beta::GetEvaluationRunRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -993,32 +993,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_list_evaluations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_evaluations_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, evaluation_filter: evaluation_filter, evaluation_run_filter: evaluation_run_filter, order_by: order_by, last_ten_results: last_ten_results }) do |_result, response|
+        c.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, evaluation_filter: evaluation_filter, evaluation_run_filter: evaluation_run_filter, order_by: order_by, last_ten_results: last_ten_results }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_evaluations parent: parent, page_size: page_size, page_token: page_token, filter: filter, evaluation_filter: evaluation_filter, evaluation_run_filter: evaluation_run_filter, order_by: order_by, last_ten_results: last_ten_results do |_result, response|
+        c.list_evaluations parent: parent, page_size: page_size, page_token: page_token, filter: filter, evaluation_filter: evaluation_filter, evaluation_run_filter: evaluation_run_filter, order_by: order_by, last_ten_results: last_ten_results do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_evaluations ::Google::Cloud::Ces::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, evaluation_filter: evaluation_filter, evaluation_run_filter: evaluation_run_filter, order_by: order_by, last_ten_results: last_ten_results) do |_result, response|
+        c.list_evaluations ::Google::Cloud::Ces::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, evaluation_filter: evaluation_filter, evaluation_run_filter: evaluation_run_filter, order_by: order_by, last_ten_results: last_ten_results) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, evaluation_filter: evaluation_filter, evaluation_run_filter: evaluation_run_filter, order_by: order_by, last_ten_results: last_ten_results }, call_options) do |_result, response|
+        c.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, evaluation_filter: evaluation_filter, evaluation_run_filter: evaluation_run_filter, order_by: order_by, last_ten_results: last_ten_results }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_evaluations(::Google::Cloud::Ces::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, evaluation_filter: evaluation_filter, evaluation_run_filter: evaluation_run_filter, order_by: order_by, last_ten_results: last_ten_results), call_options) do |_result, response|
+        c.list_evaluations(::Google::Cloud::Ces::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, evaluation_filter: evaluation_filter, evaluation_run_filter: evaluation_run_filter, order_by: order_by, last_ten_results: last_ten_results), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1051,32 +1051,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_list_evaluation_results_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_evaluation_results_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_evaluation_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_evaluation_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_evaluation_results parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_evaluation_results parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_evaluation_results ::Google::Cloud::Ces::V1beta::ListEvaluationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_evaluation_results ::Google::Cloud::Ces::V1beta::ListEvaluationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_evaluation_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_evaluation_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_evaluation_results(::Google::Cloud::Ces::V1beta::ListEvaluationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_evaluation_results(::Google::Cloud::Ces::V1beta::ListEvaluationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1109,32 +1109,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_list_evaluation_datasets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_evaluation_datasets_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_evaluation_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_evaluation_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_evaluation_datasets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_evaluation_datasets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_evaluation_datasets ::Google::Cloud::Ces::V1beta::ListEvaluationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_evaluation_datasets ::Google::Cloud::Ces::V1beta::ListEvaluationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_evaluation_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_evaluation_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_evaluation_datasets(::Google::Cloud::Ces::V1beta::ListEvaluationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_evaluation_datasets(::Google::Cloud::Ces::V1beta::ListEvaluationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1167,32 +1167,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_list_evaluation_runs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_evaluation_runs_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_evaluation_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_evaluation_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_evaluation_runs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_evaluation_runs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_evaluation_runs ::Google::Cloud::Ces::V1beta::ListEvaluationRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_evaluation_runs ::Google::Cloud::Ces::V1beta::ListEvaluationRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_evaluation_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_evaluation_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_evaluation_runs(::Google::Cloud::Ces::V1beta::ListEvaluationRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_evaluation_runs(::Google::Cloud::Ces::V1beta::ListEvaluationRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1225,32 +1225,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_list_evaluation_expectations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_evaluation_expectations_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_evaluation_expectations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_evaluation_expectations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_evaluation_expectations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_evaluation_expectations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_evaluation_expectations ::Google::Cloud::Ces::V1beta::ListEvaluationExpectationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_evaluation_expectations ::Google::Cloud::Ces::V1beta::ListEvaluationExpectationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_evaluation_expectations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_evaluation_expectations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_evaluation_expectations(::Google::Cloud::Ces::V1beta::ListEvaluationExpectationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_evaluation_expectations(::Google::Cloud::Ces::V1beta::ListEvaluationExpectationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1279,32 +1279,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_get_evaluation_expectation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_evaluation_expectation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_evaluation_expectation({ name: name }) do |_result, response|
+        c.get_evaluation_expectation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_evaluation_expectation name: name do |_result, response|
+        c.get_evaluation_expectation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_evaluation_expectation ::Google::Cloud::Ces::V1beta::GetEvaluationExpectationRequest.new(name: name) do |_result, response|
+        c.get_evaluation_expectation ::Google::Cloud::Ces::V1beta::GetEvaluationExpectationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_evaluation_expectation({ name: name }, call_options) do |_result, response|
+        c.get_evaluation_expectation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_evaluation_expectation(::Google::Cloud::Ces::V1beta::GetEvaluationExpectationRequest.new(name: name), call_options) do |_result, response|
+        c.get_evaluation_expectation(::Google::Cloud::Ces::V1beta::GetEvaluationExpectationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1335,32 +1335,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_create_evaluation_expectation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_evaluation_expectation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_evaluation_expectation({ parent: parent, evaluation_expectation_id: evaluation_expectation_id, evaluation_expectation: evaluation_expectation }) do |_result, response|
+        c.create_evaluation_expectation({ parent: parent, evaluation_expectation_id: evaluation_expectation_id, evaluation_expectation: evaluation_expectation }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_evaluation_expectation parent: parent, evaluation_expectation_id: evaluation_expectation_id, evaluation_expectation: evaluation_expectation do |_result, response|
+        c.create_evaluation_expectation parent: parent, evaluation_expectation_id: evaluation_expectation_id, evaluation_expectation: evaluation_expectation do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_evaluation_expectation ::Google::Cloud::Ces::V1beta::CreateEvaluationExpectationRequest.new(parent: parent, evaluation_expectation_id: evaluation_expectation_id, evaluation_expectation: evaluation_expectation) do |_result, response|
+        c.create_evaluation_expectation ::Google::Cloud::Ces::V1beta::CreateEvaluationExpectationRequest.new(parent: parent, evaluation_expectation_id: evaluation_expectation_id, evaluation_expectation: evaluation_expectation) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_evaluation_expectation({ parent: parent, evaluation_expectation_id: evaluation_expectation_id, evaluation_expectation: evaluation_expectation }, call_options) do |_result, response|
+        c.create_evaluation_expectation({ parent: parent, evaluation_expectation_id: evaluation_expectation_id, evaluation_expectation: evaluation_expectation }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_evaluation_expectation(::Google::Cloud::Ces::V1beta::CreateEvaluationExpectationRequest.new(parent: parent, evaluation_expectation_id: evaluation_expectation_id, evaluation_expectation: evaluation_expectation), call_options) do |_result, response|
+        c.create_evaluation_expectation(::Google::Cloud::Ces::V1beta::CreateEvaluationExpectationRequest.new(parent: parent, evaluation_expectation_id: evaluation_expectation_id, evaluation_expectation: evaluation_expectation), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1390,32 +1390,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_update_evaluation_expectation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_evaluation_expectation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_evaluation_expectation({ evaluation_expectation: evaluation_expectation, update_mask: update_mask }) do |_result, response|
+        c.update_evaluation_expectation({ evaluation_expectation: evaluation_expectation, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_evaluation_expectation evaluation_expectation: evaluation_expectation, update_mask: update_mask do |_result, response|
+        c.update_evaluation_expectation evaluation_expectation: evaluation_expectation, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_evaluation_expectation ::Google::Cloud::Ces::V1beta::UpdateEvaluationExpectationRequest.new(evaluation_expectation: evaluation_expectation, update_mask: update_mask) do |_result, response|
+        c.update_evaluation_expectation ::Google::Cloud::Ces::V1beta::UpdateEvaluationExpectationRequest.new(evaluation_expectation: evaluation_expectation, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_evaluation_expectation({ evaluation_expectation: evaluation_expectation, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_evaluation_expectation({ evaluation_expectation: evaluation_expectation, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_evaluation_expectation(::Google::Cloud::Ces::V1beta::UpdateEvaluationExpectationRequest.new(evaluation_expectation: evaluation_expectation, update_mask: update_mask), call_options) do |_result, response|
+        c.update_evaluation_expectation(::Google::Cloud::Ces::V1beta::UpdateEvaluationExpectationRequest.new(evaluation_expectation: evaluation_expectation, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1445,32 +1445,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_delete_evaluation_expectation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_evaluation_expectation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_evaluation_expectation({ name: name, etag: etag }) do |_result, response|
+        c.delete_evaluation_expectation({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_evaluation_expectation name: name, etag: etag do |_result, response|
+        c.delete_evaluation_expectation name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_evaluation_expectation ::Google::Cloud::Ces::V1beta::DeleteEvaluationExpectationRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_evaluation_expectation ::Google::Cloud::Ces::V1beta::DeleteEvaluationExpectationRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_evaluation_expectation({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_evaluation_expectation({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_evaluation_expectation(::Google::Cloud::Ces::V1beta::DeleteEvaluationExpectationRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_evaluation_expectation(::Google::Cloud::Ces::V1beta::DeleteEvaluationExpectationRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1501,32 +1501,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_create_scheduled_evaluation_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_scheduled_evaluation_run_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_scheduled_evaluation_run({ parent: parent, scheduled_evaluation_run_id: scheduled_evaluation_run_id, scheduled_evaluation_run: scheduled_evaluation_run }) do |_result, response|
+        c.create_scheduled_evaluation_run({ parent: parent, scheduled_evaluation_run_id: scheduled_evaluation_run_id, scheduled_evaluation_run: scheduled_evaluation_run }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_scheduled_evaluation_run parent: parent, scheduled_evaluation_run_id: scheduled_evaluation_run_id, scheduled_evaluation_run: scheduled_evaluation_run do |_result, response|
+        c.create_scheduled_evaluation_run parent: parent, scheduled_evaluation_run_id: scheduled_evaluation_run_id, scheduled_evaluation_run: scheduled_evaluation_run do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_scheduled_evaluation_run ::Google::Cloud::Ces::V1beta::CreateScheduledEvaluationRunRequest.new(parent: parent, scheduled_evaluation_run_id: scheduled_evaluation_run_id, scheduled_evaluation_run: scheduled_evaluation_run) do |_result, response|
+        c.create_scheduled_evaluation_run ::Google::Cloud::Ces::V1beta::CreateScheduledEvaluationRunRequest.new(parent: parent, scheduled_evaluation_run_id: scheduled_evaluation_run_id, scheduled_evaluation_run: scheduled_evaluation_run) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_scheduled_evaluation_run({ parent: parent, scheduled_evaluation_run_id: scheduled_evaluation_run_id, scheduled_evaluation_run: scheduled_evaluation_run }, call_options) do |_result, response|
+        c.create_scheduled_evaluation_run({ parent: parent, scheduled_evaluation_run_id: scheduled_evaluation_run_id, scheduled_evaluation_run: scheduled_evaluation_run }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_scheduled_evaluation_run(::Google::Cloud::Ces::V1beta::CreateScheduledEvaluationRunRequest.new(parent: parent, scheduled_evaluation_run_id: scheduled_evaluation_run_id, scheduled_evaluation_run: scheduled_evaluation_run), call_options) do |_result, response|
+        c.create_scheduled_evaluation_run(::Google::Cloud::Ces::V1beta::CreateScheduledEvaluationRunRequest.new(parent: parent, scheduled_evaluation_run_id: scheduled_evaluation_run_id, scheduled_evaluation_run: scheduled_evaluation_run), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1555,32 +1555,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_get_scheduled_evaluation_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_scheduled_evaluation_run_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_scheduled_evaluation_run({ name: name }) do |_result, response|
+        c.get_scheduled_evaluation_run({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_scheduled_evaluation_run name: name do |_result, response|
+        c.get_scheduled_evaluation_run name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_scheduled_evaluation_run ::Google::Cloud::Ces::V1beta::GetScheduledEvaluationRunRequest.new(name: name) do |_result, response|
+        c.get_scheduled_evaluation_run ::Google::Cloud::Ces::V1beta::GetScheduledEvaluationRunRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_scheduled_evaluation_run({ name: name }, call_options) do |_result, response|
+        c.get_scheduled_evaluation_run({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_scheduled_evaluation_run(::Google::Cloud::Ces::V1beta::GetScheduledEvaluationRunRequest.new(name: name), call_options) do |_result, response|
+        c.get_scheduled_evaluation_run(::Google::Cloud::Ces::V1beta::GetScheduledEvaluationRunRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1613,32 +1613,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_list_scheduled_evaluation_runs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_scheduled_evaluation_runs_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_scheduled_evaluation_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_scheduled_evaluation_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_scheduled_evaluation_runs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_scheduled_evaluation_runs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_scheduled_evaluation_runs ::Google::Cloud::Ces::V1beta::ListScheduledEvaluationRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_scheduled_evaluation_runs ::Google::Cloud::Ces::V1beta::ListScheduledEvaluationRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_scheduled_evaluation_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_scheduled_evaluation_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_scheduled_evaluation_runs(::Google::Cloud::Ces::V1beta::ListScheduledEvaluationRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_scheduled_evaluation_runs(::Google::Cloud::Ces::V1beta::ListScheduledEvaluationRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1668,32 +1668,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_update_scheduled_evaluation_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_scheduled_evaluation_run_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_scheduled_evaluation_run({ scheduled_evaluation_run: scheduled_evaluation_run, update_mask: update_mask }) do |_result, response|
+        c.update_scheduled_evaluation_run({ scheduled_evaluation_run: scheduled_evaluation_run, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_scheduled_evaluation_run scheduled_evaluation_run: scheduled_evaluation_run, update_mask: update_mask do |_result, response|
+        c.update_scheduled_evaluation_run scheduled_evaluation_run: scheduled_evaluation_run, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_scheduled_evaluation_run ::Google::Cloud::Ces::V1beta::UpdateScheduledEvaluationRunRequest.new(scheduled_evaluation_run: scheduled_evaluation_run, update_mask: update_mask) do |_result, response|
+        c.update_scheduled_evaluation_run ::Google::Cloud::Ces::V1beta::UpdateScheduledEvaluationRunRequest.new(scheduled_evaluation_run: scheduled_evaluation_run, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_scheduled_evaluation_run({ scheduled_evaluation_run: scheduled_evaluation_run, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_scheduled_evaluation_run({ scheduled_evaluation_run: scheduled_evaluation_run, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_scheduled_evaluation_run(::Google::Cloud::Ces::V1beta::UpdateScheduledEvaluationRunRequest.new(scheduled_evaluation_run: scheduled_evaluation_run, update_mask: update_mask), call_options) do |_result, response|
+        c.update_scheduled_evaluation_run(::Google::Cloud::Ces::V1beta::UpdateScheduledEvaluationRunRequest.new(scheduled_evaluation_run: scheduled_evaluation_run, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1723,32 +1723,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_delete_scheduled_evaluation_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_scheduled_evaluation_run_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_scheduled_evaluation_run({ name: name, etag: etag }) do |_result, response|
+        c.delete_scheduled_evaluation_run({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_scheduled_evaluation_run name: name, etag: etag do |_result, response|
+        c.delete_scheduled_evaluation_run name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_scheduled_evaluation_run ::Google::Cloud::Ces::V1beta::DeleteScheduledEvaluationRunRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_scheduled_evaluation_run ::Google::Cloud::Ces::V1beta::DeleteScheduledEvaluationRunRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_scheduled_evaluation_run({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_scheduled_evaluation_run({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_scheduled_evaluation_run(::Google::Cloud::Ces::V1beta::DeleteScheduledEvaluationRunRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_scheduled_evaluation_run(::Google::Cloud::Ces::V1beta::DeleteScheduledEvaluationRunRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1779,32 +1779,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_test_persona_voice_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, test_persona_voice_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.test_persona_voice({ app: app, persona_id: persona_id, text: text }) do |_result, response|
+        c.test_persona_voice({ app: app, persona_id: persona_id, text: text }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.test_persona_voice app: app, persona_id: persona_id, text: text do |_result, response|
+        c.test_persona_voice app: app, persona_id: persona_id, text: text do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.test_persona_voice ::Google::Cloud::Ces::V1beta::TestPersonaVoiceRequest.new(app: app, persona_id: persona_id, text: text) do |_result, response|
+        c.test_persona_voice ::Google::Cloud::Ces::V1beta::TestPersonaVoiceRequest.new(app: app, persona_id: persona_id, text: text) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.test_persona_voice({ app: app, persona_id: persona_id, text: text }, call_options) do |_result, response|
+        c.test_persona_voice({ app: app, persona_id: persona_id, text: text }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.test_persona_voice(::Google::Cloud::Ces::V1beta::TestPersonaVoiceRequest.new(app: app, persona_id: persona_id, text: text), call_options) do |_result, response|
+        c.test_persona_voice(::Google::Cloud::Ces::V1beta::TestPersonaVoiceRequest.new(app: app, persona_id: persona_id, text: text), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1837,32 +1837,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_export_evaluations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_evaluations_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_evaluations({ parent: parent, names: names, export_options: export_options, include_evaluation_results: include_evaluation_results, include_evaluations: include_evaluations }) do |_result, response|
+        c.export_evaluations({ parent: parent, names: names, export_options: export_options, include_evaluation_results: include_evaluation_results, include_evaluations: include_evaluations }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_evaluations parent: parent, names: names, export_options: export_options, include_evaluation_results: include_evaluation_results, include_evaluations: include_evaluations do |_result, response|
+        c.export_evaluations parent: parent, names: names, export_options: export_options, include_evaluation_results: include_evaluation_results, include_evaluations: include_evaluations do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_evaluations ::Google::Cloud::Ces::V1beta::ExportEvaluationsRequest.new(parent: parent, names: names, export_options: export_options, include_evaluation_results: include_evaluation_results, include_evaluations: include_evaluations) do |_result, response|
+        c.export_evaluations ::Google::Cloud::Ces::V1beta::ExportEvaluationsRequest.new(parent: parent, names: names, export_options: export_options, include_evaluation_results: include_evaluation_results, include_evaluations: include_evaluations) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_evaluations({ parent: parent, names: names, export_options: export_options, include_evaluation_results: include_evaluation_results, include_evaluations: include_evaluations }, call_options) do |_result, response|
+        c.export_evaluations({ parent: parent, names: names, export_options: export_options, include_evaluation_results: include_evaluation_results, include_evaluations: include_evaluations }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_evaluations(::Google::Cloud::Ces::V1beta::ExportEvaluationsRequest.new(parent: parent, names: names, export_options: export_options, include_evaluation_results: include_evaluation_results, include_evaluations: include_evaluations), call_options) do |_result, response|
+        c.export_evaluations(::Google::Cloud::Ces::V1beta::ExportEvaluationsRequest.new(parent: parent, names: names, export_options: export_options, include_evaluation_results: include_evaluation_results, include_evaluations: include_evaluations), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1893,32 +1893,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_export_evaluation_runs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_evaluation_runs_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_evaluation_runs({ parent: parent, names: names, export_options: export_options }) do |_result, response|
+        c.export_evaluation_runs({ parent: parent, names: names, export_options: export_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_evaluation_runs parent: parent, names: names, export_options: export_options do |_result, response|
+        c.export_evaluation_runs parent: parent, names: names, export_options: export_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_evaluation_runs ::Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest.new(parent: parent, names: names, export_options: export_options) do |_result, response|
+        c.export_evaluation_runs ::Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest.new(parent: parent, names: names, export_options: export_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_evaluation_runs({ parent: parent, names: names, export_options: export_options }, call_options) do |_result, response|
+        c.export_evaluation_runs({ parent: parent, names: names, export_options: export_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_evaluation_runs(::Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest.new(parent: parent, names: names, export_options: export_options), call_options) do |_result, response|
+        c.export_evaluation_runs(::Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest.new(parent: parent, names: names, export_options: export_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1949,32 +1949,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_export_evaluation_results_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_evaluation_results_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_evaluation_results({ parent: parent, names: names, export_options: export_options }) do |_result, response|
+        c.export_evaluation_results({ parent: parent, names: names, export_options: export_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_evaluation_results parent: parent, names: names, export_options: export_options do |_result, response|
+        c.export_evaluation_results parent: parent, names: names, export_options: export_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_evaluation_results ::Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest.new(parent: parent, names: names, export_options: export_options) do |_result, response|
+        c.export_evaluation_results ::Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest.new(parent: parent, names: names, export_options: export_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_evaluation_results({ parent: parent, names: names, export_options: export_options }, call_options) do |_result, response|
+        c.export_evaluation_results({ parent: parent, names: names, export_options: export_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_evaluation_results(::Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest.new(parent: parent, names: names, export_options: export_options), call_options) do |_result, response|
+        c.export_evaluation_results(::Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest.new(parent: parent, names: names, export_options: export_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2003,32 +2003,32 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_run_evaluation_result_metrics_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_evaluation_result_metrics_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_evaluation_result_metrics({ evaluation_result_id: evaluation_result_id }) do |_result, response|
+        c.run_evaluation_result_metrics({ evaluation_result_id: evaluation_result_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_evaluation_result_metrics evaluation_result_id: evaluation_result_id do |_result, response|
+        c.run_evaluation_result_metrics evaluation_result_id: evaluation_result_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_evaluation_result_metrics ::Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest.new(evaluation_result_id: evaluation_result_id) do |_result, response|
+        c.run_evaluation_result_metrics ::Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest.new(evaluation_result_id: evaluation_result_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_evaluation_result_metrics({ evaluation_result_id: evaluation_result_id }, call_options) do |_result, response|
+        c.run_evaluation_result_metrics({ evaluation_result_id: evaluation_result_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_evaluation_result_metrics(::Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest.new(evaluation_result_id: evaluation_result_id), call_options) do |_result, response|
+        c.run_evaluation_result_metrics(::Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest.new(evaluation_result_id: evaluation_result_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

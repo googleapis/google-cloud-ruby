@@ -86,36 +86,36 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, create_data_access_label_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_data_access_label({ parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id }) do |response, operation|
+      c.create_data_access_label({ parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_access_label parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id do |response, operation|
+      c.create_data_access_label parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_access_label ::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new(parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id) do |response, operation|
+      c.create_data_access_label ::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new(parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_access_label({ parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id }, grpc_options) do |response, operation|
+      c.create_data_access_label({ parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_access_label(::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new(parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id), grpc_options) do |response, operation|
+      c.create_data_access_label(::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new(parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, get_data_access_label_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_access_label({ name: name }) do |response, operation|
+      c.get_data_access_label({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_access_label name: name do |response, operation|
+      c.get_data_access_label name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_access_label ::Google::Cloud::Chronicle::V1::GetDataAccessLabelRequest.new(name: name) do |response, operation|
+      c.get_data_access_label ::Google::Cloud::Chronicle::V1::GetDataAccessLabelRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_access_label({ name: name }, grpc_options) do |response, operation|
+      c.get_data_access_label({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_access_label(::Google::Cloud::Chronicle::V1::GetDataAccessLabelRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_data_access_label(::Google::Cloud::Chronicle::V1::GetDataAccessLabelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -208,40 +208,40 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, list_data_access_labels_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_access_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_data_access_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_access_labels parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_data_access_labels parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_access_labels ::Google::Cloud::Chronicle::V1::ListDataAccessLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_data_access_labels ::Google::Cloud::Chronicle::V1::ListDataAccessLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_access_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_data_access_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_access_labels(::Google::Cloud::Chronicle::V1::ListDataAccessLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_data_access_labels(::Google::Cloud::Chronicle::V1::ListDataAccessLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -273,36 +273,36 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, update_data_access_label_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_data_access_label({ data_access_label: data_access_label, update_mask: update_mask }) do |response, operation|
+      c.update_data_access_label({ data_access_label: data_access_label, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_data_access_label data_access_label: data_access_label, update_mask: update_mask do |response, operation|
+      c.update_data_access_label data_access_label: data_access_label, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_data_access_label ::Google::Cloud::Chronicle::V1::UpdateDataAccessLabelRequest.new(data_access_label: data_access_label, update_mask: update_mask) do |response, operation|
+      c.update_data_access_label ::Google::Cloud::Chronicle::V1::UpdateDataAccessLabelRequest.new(data_access_label: data_access_label, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_data_access_label({ data_access_label: data_access_label, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_data_access_label({ data_access_label: data_access_label, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_data_access_label(::Google::Cloud::Chronicle::V1::UpdateDataAccessLabelRequest.new(data_access_label: data_access_label, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_data_access_label(::Google::Cloud::Chronicle::V1::UpdateDataAccessLabelRequest.new(data_access_label: data_access_label, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,36 +331,36 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, delete_data_access_label_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_data_access_label({ name: name }) do |response, operation|
+      c.delete_data_access_label({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_data_access_label name: name do |response, operation|
+      c.delete_data_access_label name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_data_access_label ::Google::Cloud::Chronicle::V1::DeleteDataAccessLabelRequest.new(name: name) do |response, operation|
+      c.delete_data_access_label ::Google::Cloud::Chronicle::V1::DeleteDataAccessLabelRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_data_access_label({ name: name }, grpc_options) do |response, operation|
+      c.delete_data_access_label({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_data_access_label(::Google::Cloud::Chronicle::V1::DeleteDataAccessLabelRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_data_access_label(::Google::Cloud::Chronicle::V1::DeleteDataAccessLabelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -393,36 +393,36 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, create_data_access_scope_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_data_access_scope({ parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id }) do |response, operation|
+      c.create_data_access_scope({ parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_access_scope parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id do |response, operation|
+      c.create_data_access_scope parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_access_scope ::Google::Cloud::Chronicle::V1::CreateDataAccessScopeRequest.new(parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id) do |response, operation|
+      c.create_data_access_scope ::Google::Cloud::Chronicle::V1::CreateDataAccessScopeRequest.new(parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_access_scope({ parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id }, grpc_options) do |response, operation|
+      c.create_data_access_scope({ parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_access_scope(::Google::Cloud::Chronicle::V1::CreateDataAccessScopeRequest.new(parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id), grpc_options) do |response, operation|
+      c.create_data_access_scope(::Google::Cloud::Chronicle::V1::CreateDataAccessScopeRequest.new(parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -451,36 +451,36 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, get_data_access_scope_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_access_scope({ name: name }) do |response, operation|
+      c.get_data_access_scope({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_access_scope name: name do |response, operation|
+      c.get_data_access_scope name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_access_scope ::Google::Cloud::Chronicle::V1::GetDataAccessScopeRequest.new(name: name) do |response, operation|
+      c.get_data_access_scope ::Google::Cloud::Chronicle::V1::GetDataAccessScopeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_access_scope({ name: name }, grpc_options) do |response, operation|
+      c.get_data_access_scope({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_access_scope(::Google::Cloud::Chronicle::V1::GetDataAccessScopeRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_data_access_scope(::Google::Cloud::Chronicle::V1::GetDataAccessScopeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -515,40 +515,40 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, list_data_access_scopes_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_access_scopes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_data_access_scopes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_access_scopes parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_data_access_scopes parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_access_scopes ::Google::Cloud::Chronicle::V1::ListDataAccessScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_data_access_scopes ::Google::Cloud::Chronicle::V1::ListDataAccessScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_access_scopes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_data_access_scopes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_access_scopes(::Google::Cloud::Chronicle::V1::ListDataAccessScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_data_access_scopes(::Google::Cloud::Chronicle::V1::ListDataAccessScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -580,36 +580,36 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, update_data_access_scope_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_data_access_scope({ data_access_scope: data_access_scope, update_mask: update_mask }) do |response, operation|
+      c.update_data_access_scope({ data_access_scope: data_access_scope, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_data_access_scope data_access_scope: data_access_scope, update_mask: update_mask do |response, operation|
+      c.update_data_access_scope data_access_scope: data_access_scope, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_data_access_scope ::Google::Cloud::Chronicle::V1::UpdateDataAccessScopeRequest.new(data_access_scope: data_access_scope, update_mask: update_mask) do |response, operation|
+      c.update_data_access_scope ::Google::Cloud::Chronicle::V1::UpdateDataAccessScopeRequest.new(data_access_scope: data_access_scope, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_data_access_scope({ data_access_scope: data_access_scope, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_data_access_scope({ data_access_scope: data_access_scope, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_data_access_scope(::Google::Cloud::Chronicle::V1::UpdateDataAccessScopeRequest.new(data_access_scope: data_access_scope, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_data_access_scope(::Google::Cloud::Chronicle::V1::UpdateDataAccessScopeRequest.new(data_access_scope: data_access_scope, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -638,36 +638,36 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, delete_data_access_scope_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_data_access_scope({ name: name }) do |response, operation|
+      c.delete_data_access_scope({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_data_access_scope name: name do |response, operation|
+      c.delete_data_access_scope name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_data_access_scope ::Google::Cloud::Chronicle::V1::DeleteDataAccessScopeRequest.new(name: name) do |response, operation|
+      c.delete_data_access_scope ::Google::Cloud::Chronicle::V1::DeleteDataAccessScopeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_data_access_scope({ name: name }, grpc_options) do |response, operation|
+      c.delete_data_access_scope({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_data_access_scope(::Google::Cloud::Chronicle::V1::DeleteDataAccessScopeRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_data_access_scope(::Google::Cloud::Chronicle::V1::DeleteDataAccessScopeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

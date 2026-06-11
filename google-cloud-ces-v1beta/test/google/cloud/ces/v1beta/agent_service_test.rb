@@ -90,40 +90,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_apps_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_apps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_apps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_apps parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_apps parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_apps ::Google::Cloud::Ces::V1beta::ListAppsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_apps ::Google::Cloud::Ces::V1beta::ListAppsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_apps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_apps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_apps(::Google::Cloud::Ces::V1beta::ListAppsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_apps(::Google::Cloud::Ces::V1beta::ListAppsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_app_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_app({ name: name }) do |response, operation|
+      c.get_app({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_app name: name do |response, operation|
+      c.get_app name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_app ::Google::Cloud::Ces::V1beta::GetAppRequest.new(name: name) do |response, operation|
+      c.get_app ::Google::Cloud::Ces::V1beta::GetAppRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_app({ name: name }, grpc_options) do |response, operation|
+      c.get_app({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_app(::Google::Cloud::Ces::V1beta::GetAppRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_app(::Google::Cloud::Ces::V1beta::GetAppRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_app_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_app({ parent: parent, app_id: app_id, app: app }) do |response, operation|
+      c.create_app({ parent: parent, app_id: app_id, app: app }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_app parent: parent, app_id: app_id, app: app do |response, operation|
+      c.create_app parent: parent, app_id: app_id, app: app do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_app ::Google::Cloud::Ces::V1beta::CreateAppRequest.new(parent: parent, app_id: app_id, app: app) do |response, operation|
+      c.create_app ::Google::Cloud::Ces::V1beta::CreateAppRequest.new(parent: parent, app_id: app_id, app: app) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_app({ parent: parent, app_id: app_id, app: app }, grpc_options) do |response, operation|
+      c.create_app({ parent: parent, app_id: app_id, app: app }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_app(::Google::Cloud::Ces::V1beta::CreateAppRequest.new(parent: parent, app_id: app_id, app: app), grpc_options) do |response, operation|
+      c.create_app(::Google::Cloud::Ces::V1beta::CreateAppRequest.new(parent: parent, app_id: app_id, app: app), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -280,36 +280,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_app_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_app({ app: app, update_mask: update_mask }) do |response, operation|
+      c.update_app({ app: app, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_app app: app, update_mask: update_mask do |response, operation|
+      c.update_app app: app, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_app ::Google::Cloud::Ces::V1beta::UpdateAppRequest.new(app: app, update_mask: update_mask) do |response, operation|
+      c.update_app ::Google::Cloud::Ces::V1beta::UpdateAppRequest.new(app: app, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_app({ app: app, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_app({ app: app, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_app(::Google::Cloud::Ces::V1beta::UpdateAppRequest.new(app: app, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_app(::Google::Cloud::Ces::V1beta::UpdateAppRequest.new(app: app, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,40 +340,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_app_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_app({ name: name, etag: etag }) do |response, operation|
+      c.delete_app({ name: name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_app name: name, etag: etag do |response, operation|
+      c.delete_app name: name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_app ::Google::Cloud::Ces::V1beta::DeleteAppRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_app ::Google::Cloud::Ces::V1beta::DeleteAppRequest.new(name: name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_app({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_app({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_app(::Google::Cloud::Ces::V1beta::DeleteAppRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_app(::Google::Cloud::Ces::V1beta::DeleteAppRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -409,40 +409,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_app_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_app({ name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version }) do |response, operation|
+      c.export_app({ name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_app name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version do |response, operation|
+      c.export_app name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_app ::Google::Cloud::Ces::V1beta::ExportAppRequest.new(name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version) do |response, operation|
+      c.export_app ::Google::Cloud::Ces::V1beta::ExportAppRequest.new(name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_app({ name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version }, grpc_options) do |response, operation|
+      c.export_app({ name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_app(::Google::Cloud::Ces::V1beta::ExportAppRequest.new(name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version), grpc_options) do |response, operation|
+      c.export_app(::Google::Cloud::Ces::V1beta::ExportAppRequest.new(name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -483,40 +483,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, import_app_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }) do |response, operation|
+      c.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_app gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock do |response, operation|
+      c.import_app gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_app ::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock) do |response, operation|
+      c.import_app ::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }, grpc_options) do |response, operation|
+      c.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_app(::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock), grpc_options) do |response, operation|
+      c.import_app(::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -546,36 +546,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_security_settings_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_security_settings({ name: name }) do |response, operation|
+      c.get_security_settings({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_security_settings name: name do |response, operation|
+      c.get_security_settings name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_security_settings ::Google::Cloud::Ces::V1beta::GetSecuritySettingsRequest.new(name: name) do |response, operation|
+      c.get_security_settings ::Google::Cloud::Ces::V1beta::GetSecuritySettingsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_security_settings({ name: name }, grpc_options) do |response, operation|
+      c.get_security_settings({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_security_settings(::Google::Cloud::Ces::V1beta::GetSecuritySettingsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_security_settings(::Google::Cloud::Ces::V1beta::GetSecuritySettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -606,36 +606,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_security_settings_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_security_settings({ security_settings: security_settings, update_mask: update_mask }) do |response, operation|
+      c.update_security_settings({ security_settings: security_settings, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_security_settings security_settings: security_settings, update_mask: update_mask do |response, operation|
+      c.update_security_settings security_settings: security_settings, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_security_settings ::Google::Cloud::Ces::V1beta::UpdateSecuritySettingsRequest.new(security_settings: security_settings, update_mask: update_mask) do |response, operation|
+      c.update_security_settings ::Google::Cloud::Ces::V1beta::UpdateSecuritySettingsRequest.new(security_settings: security_settings, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_security_settings({ security_settings: security_settings, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_security_settings({ security_settings: security_settings, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_security_settings(::Google::Cloud::Ces::V1beta::UpdateSecuritySettingsRequest.new(security_settings: security_settings, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_security_settings(::Google::Cloud::Ces::V1beta::UpdateSecuritySettingsRequest.new(security_settings: security_settings, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -672,40 +672,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_agents_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_agents parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_agents parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_agents ::Google::Cloud::Ces::V1beta::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_agents ::Google::Cloud::Ces::V1beta::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_agents(::Google::Cloud::Ces::V1beta::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_agents(::Google::Cloud::Ces::V1beta::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -735,36 +735,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_agent_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_agent({ name: name }) do |response, operation|
+      c.get_agent({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_agent name: name do |response, operation|
+      c.get_agent name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_agent ::Google::Cloud::Ces::V1beta::GetAgentRequest.new(name: name) do |response, operation|
+      c.get_agent ::Google::Cloud::Ces::V1beta::GetAgentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_agent({ name: name }, grpc_options) do |response, operation|
+      c.get_agent({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_agent(::Google::Cloud::Ces::V1beta::GetAgentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_agent(::Google::Cloud::Ces::V1beta::GetAgentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -797,36 +797,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_agent_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_agent({ parent: parent, agent_id: agent_id, agent: agent }) do |response, operation|
+      c.create_agent({ parent: parent, agent_id: agent_id, agent: agent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_agent parent: parent, agent_id: agent_id, agent: agent do |response, operation|
+      c.create_agent parent: parent, agent_id: agent_id, agent: agent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_agent ::Google::Cloud::Ces::V1beta::CreateAgentRequest.new(parent: parent, agent_id: agent_id, agent: agent) do |response, operation|
+      c.create_agent ::Google::Cloud::Ces::V1beta::CreateAgentRequest.new(parent: parent, agent_id: agent_id, agent: agent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_agent({ parent: parent, agent_id: agent_id, agent: agent }, grpc_options) do |response, operation|
+      c.create_agent({ parent: parent, agent_id: agent_id, agent: agent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_agent(::Google::Cloud::Ces::V1beta::CreateAgentRequest.new(parent: parent, agent_id: agent_id, agent: agent), grpc_options) do |response, operation|
+      c.create_agent(::Google::Cloud::Ces::V1beta::CreateAgentRequest.new(parent: parent, agent_id: agent_id, agent: agent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -857,36 +857,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_agent_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_agent({ agent: agent, update_mask: update_mask }) do |response, operation|
+      c.update_agent({ agent: agent, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_agent agent: agent, update_mask: update_mask do |response, operation|
+      c.update_agent agent: agent, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_agent ::Google::Cloud::Ces::V1beta::UpdateAgentRequest.new(agent: agent, update_mask: update_mask) do |response, operation|
+      c.update_agent ::Google::Cloud::Ces::V1beta::UpdateAgentRequest.new(agent: agent, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_agent({ agent: agent, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_agent({ agent: agent, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_agent(::Google::Cloud::Ces::V1beta::UpdateAgentRequest.new(agent: agent, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_agent(::Google::Cloud::Ces::V1beta::UpdateAgentRequest.new(agent: agent, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -919,36 +919,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_agent_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_agent({ name: name, force: force, etag: etag }) do |response, operation|
+      c.delete_agent({ name: name, force: force, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_agent name: name, force: force, etag: etag do |response, operation|
+      c.delete_agent name: name, force: force, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_agent ::Google::Cloud::Ces::V1beta::DeleteAgentRequest.new(name: name, force: force, etag: etag) do |response, operation|
+      c.delete_agent ::Google::Cloud::Ces::V1beta::DeleteAgentRequest.new(name: name, force: force, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_agent({ name: name, force: force, etag: etag }, grpc_options) do |response, operation|
+      c.delete_agent({ name: name, force: force, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_agent(::Google::Cloud::Ces::V1beta::DeleteAgentRequest.new(name: name, force: force, etag: etag), grpc_options) do |response, operation|
+      c.delete_agent(::Google::Cloud::Ces::V1beta::DeleteAgentRequest.new(name: name, force: force, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -985,40 +985,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_examples_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_examples({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_examples({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_examples parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_examples parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_examples ::Google::Cloud::Ces::V1beta::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_examples ::Google::Cloud::Ces::V1beta::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_examples({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_examples({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_examples(::Google::Cloud::Ces::V1beta::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_examples(::Google::Cloud::Ces::V1beta::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1048,36 +1048,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_example_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_example({ name: name }) do |response, operation|
+      c.get_example({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_example name: name do |response, operation|
+      c.get_example name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_example ::Google::Cloud::Ces::V1beta::GetExampleRequest.new(name: name) do |response, operation|
+      c.get_example ::Google::Cloud::Ces::V1beta::GetExampleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_example({ name: name }, grpc_options) do |response, operation|
+      c.get_example({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_example(::Google::Cloud::Ces::V1beta::GetExampleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_example(::Google::Cloud::Ces::V1beta::GetExampleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1110,36 +1110,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_example_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_example({ parent: parent, example_id: example_id, example: example }) do |response, operation|
+      c.create_example({ parent: parent, example_id: example_id, example: example }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_example parent: parent, example_id: example_id, example: example do |response, operation|
+      c.create_example parent: parent, example_id: example_id, example: example do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_example ::Google::Cloud::Ces::V1beta::CreateExampleRequest.new(parent: parent, example_id: example_id, example: example) do |response, operation|
+      c.create_example ::Google::Cloud::Ces::V1beta::CreateExampleRequest.new(parent: parent, example_id: example_id, example: example) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_example({ parent: parent, example_id: example_id, example: example }, grpc_options) do |response, operation|
+      c.create_example({ parent: parent, example_id: example_id, example: example }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_example(::Google::Cloud::Ces::V1beta::CreateExampleRequest.new(parent: parent, example_id: example_id, example: example), grpc_options) do |response, operation|
+      c.create_example(::Google::Cloud::Ces::V1beta::CreateExampleRequest.new(parent: parent, example_id: example_id, example: example), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1170,36 +1170,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_example_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_example({ example: example, update_mask: update_mask }) do |response, operation|
+      c.update_example({ example: example, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_example example: example, update_mask: update_mask do |response, operation|
+      c.update_example example: example, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_example ::Google::Cloud::Ces::V1beta::UpdateExampleRequest.new(example: example, update_mask: update_mask) do |response, operation|
+      c.update_example ::Google::Cloud::Ces::V1beta::UpdateExampleRequest.new(example: example, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_example({ example: example, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_example({ example: example, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_example(::Google::Cloud::Ces::V1beta::UpdateExampleRequest.new(example: example, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_example(::Google::Cloud::Ces::V1beta::UpdateExampleRequest.new(example: example, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1230,36 +1230,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_example_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_example({ name: name, etag: etag }) do |response, operation|
+      c.delete_example({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_example name: name, etag: etag do |response, operation|
+      c.delete_example name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_example ::Google::Cloud::Ces::V1beta::DeleteExampleRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_example ::Google::Cloud::Ces::V1beta::DeleteExampleRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_example({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_example({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_example(::Google::Cloud::Ces::V1beta::DeleteExampleRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_example(::Google::Cloud::Ces::V1beta::DeleteExampleRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1296,40 +1296,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_tools_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tools parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_tools parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tools ::Google::Cloud::Ces::V1beta::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_tools ::Google::Cloud::Ces::V1beta::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tools(::Google::Cloud::Ces::V1beta::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_tools(::Google::Cloud::Ces::V1beta::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1359,36 +1359,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_tool_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tool({ name: name }) do |response, operation|
+      c.get_tool({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tool name: name do |response, operation|
+      c.get_tool name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tool ::Google::Cloud::Ces::V1beta::GetToolRequest.new(name: name) do |response, operation|
+      c.get_tool ::Google::Cloud::Ces::V1beta::GetToolRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tool({ name: name }, grpc_options) do |response, operation|
+      c.get_tool({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tool(::Google::Cloud::Ces::V1beta::GetToolRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tool(::Google::Cloud::Ces::V1beta::GetToolRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1427,40 +1427,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_conversations_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources }) do |response, operation|
+      c.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources do |response, operation|
+      c.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_conversations ::Google::Cloud::Ces::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources) do |response, operation|
+      c.list_conversations ::Google::Cloud::Ces::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources }, grpc_options) do |response, operation|
+      c.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_conversations(::Google::Cloud::Ces::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources), grpc_options) do |response, operation|
+      c.list_conversations(::Google::Cloud::Ces::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1492,36 +1492,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_conversation({ name: name, source: source }) do |response, operation|
+      c.get_conversation({ name: name, source: source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_conversation name: name, source: source do |response, operation|
+      c.get_conversation name: name, source: source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_conversation ::Google::Cloud::Ces::V1beta::GetConversationRequest.new(name: name, source: source) do |response, operation|
+      c.get_conversation ::Google::Cloud::Ces::V1beta::GetConversationRequest.new(name: name, source: source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_conversation({ name: name, source: source }, grpc_options) do |response, operation|
+      c.get_conversation({ name: name, source: source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_conversation(::Google::Cloud::Ces::V1beta::GetConversationRequest.new(name: name, source: source), grpc_options) do |response, operation|
+      c.get_conversation(::Google::Cloud::Ces::V1beta::GetConversationRequest.new(name: name, source: source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1552,36 +1552,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_conversation({ name: name, source: source }) do |response, operation|
+      c.delete_conversation({ name: name, source: source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_conversation name: name, source: source do |response, operation|
+      c.delete_conversation name: name, source: source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_conversation ::Google::Cloud::Ces::V1beta::DeleteConversationRequest.new(name: name, source: source) do |response, operation|
+      c.delete_conversation ::Google::Cloud::Ces::V1beta::DeleteConversationRequest.new(name: name, source: source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_conversation({ name: name, source: source }, grpc_options) do |response, operation|
+      c.delete_conversation({ name: name, source: source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_conversation(::Google::Cloud::Ces::V1beta::DeleteConversationRequest.new(name: name, source: source), grpc_options) do |response, operation|
+      c.delete_conversation(::Google::Cloud::Ces::V1beta::DeleteConversationRequest.new(name: name, source: source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1612,40 +1612,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_delete_conversations_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_delete_conversations({ parent: parent, conversations: conversations }) do |response, operation|
+      c.batch_delete_conversations({ parent: parent, conversations: conversations }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_delete_conversations parent: parent, conversations: conversations do |response, operation|
+      c.batch_delete_conversations parent: parent, conversations: conversations do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_delete_conversations ::Google::Cloud::Ces::V1beta::BatchDeleteConversationsRequest.new(parent: parent, conversations: conversations) do |response, operation|
+      c.batch_delete_conversations ::Google::Cloud::Ces::V1beta::BatchDeleteConversationsRequest.new(parent: parent, conversations: conversations) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_delete_conversations({ parent: parent, conversations: conversations }, grpc_options) do |response, operation|
+      c.batch_delete_conversations({ parent: parent, conversations: conversations }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_delete_conversations(::Google::Cloud::Ces::V1beta::BatchDeleteConversationsRequest.new(parent: parent, conversations: conversations), grpc_options) do |response, operation|
+      c.batch_delete_conversations(::Google::Cloud::Ces::V1beta::BatchDeleteConversationsRequest.new(parent: parent, conversations: conversations), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1679,36 +1679,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_tool_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tool({ parent: parent, tool_id: tool_id, tool: tool }) do |response, operation|
+      c.create_tool({ parent: parent, tool_id: tool_id, tool: tool }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tool parent: parent, tool_id: tool_id, tool: tool do |response, operation|
+      c.create_tool parent: parent, tool_id: tool_id, tool: tool do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tool ::Google::Cloud::Ces::V1beta::CreateToolRequest.new(parent: parent, tool_id: tool_id, tool: tool) do |response, operation|
+      c.create_tool ::Google::Cloud::Ces::V1beta::CreateToolRequest.new(parent: parent, tool_id: tool_id, tool: tool) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tool({ parent: parent, tool_id: tool_id, tool: tool }, grpc_options) do |response, operation|
+      c.create_tool({ parent: parent, tool_id: tool_id, tool: tool }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tool(::Google::Cloud::Ces::V1beta::CreateToolRequest.new(parent: parent, tool_id: tool_id, tool: tool), grpc_options) do |response, operation|
+      c.create_tool(::Google::Cloud::Ces::V1beta::CreateToolRequest.new(parent: parent, tool_id: tool_id, tool: tool), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1739,36 +1739,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_tool_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tool({ tool: tool, update_mask: update_mask }) do |response, operation|
+      c.update_tool({ tool: tool, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tool tool: tool, update_mask: update_mask do |response, operation|
+      c.update_tool tool: tool, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tool ::Google::Cloud::Ces::V1beta::UpdateToolRequest.new(tool: tool, update_mask: update_mask) do |response, operation|
+      c.update_tool ::Google::Cloud::Ces::V1beta::UpdateToolRequest.new(tool: tool, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tool({ tool: tool, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_tool({ tool: tool, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tool(::Google::Cloud::Ces::V1beta::UpdateToolRequest.new(tool: tool, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_tool(::Google::Cloud::Ces::V1beta::UpdateToolRequest.new(tool: tool, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1801,36 +1801,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_tool_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tool({ name: name, force: force, etag: etag }) do |response, operation|
+      c.delete_tool({ name: name, force: force, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tool name: name, force: force, etag: etag do |response, operation|
+      c.delete_tool name: name, force: force, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tool ::Google::Cloud::Ces::V1beta::DeleteToolRequest.new(name: name, force: force, etag: etag) do |response, operation|
+      c.delete_tool ::Google::Cloud::Ces::V1beta::DeleteToolRequest.new(name: name, force: force, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tool({ name: name, force: force, etag: etag }, grpc_options) do |response, operation|
+      c.delete_tool({ name: name, force: force, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tool(::Google::Cloud::Ces::V1beta::DeleteToolRequest.new(name: name, force: force, etag: etag), grpc_options) do |response, operation|
+      c.delete_tool(::Google::Cloud::Ces::V1beta::DeleteToolRequest.new(name: name, force: force, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1867,40 +1867,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_guardrails_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_guardrails({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_guardrails({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_guardrails parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_guardrails parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_guardrails ::Google::Cloud::Ces::V1beta::ListGuardrailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_guardrails ::Google::Cloud::Ces::V1beta::ListGuardrailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_guardrails({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_guardrails({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_guardrails(::Google::Cloud::Ces::V1beta::ListGuardrailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_guardrails(::Google::Cloud::Ces::V1beta::ListGuardrailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1930,36 +1930,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_guardrail_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_guardrail({ name: name }) do |response, operation|
+      c.get_guardrail({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_guardrail name: name do |response, operation|
+      c.get_guardrail name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_guardrail ::Google::Cloud::Ces::V1beta::GetGuardrailRequest.new(name: name) do |response, operation|
+      c.get_guardrail ::Google::Cloud::Ces::V1beta::GetGuardrailRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_guardrail({ name: name }, grpc_options) do |response, operation|
+      c.get_guardrail({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_guardrail(::Google::Cloud::Ces::V1beta::GetGuardrailRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_guardrail(::Google::Cloud::Ces::V1beta::GetGuardrailRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1992,36 +1992,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_guardrail_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_guardrail({ parent: parent, guardrail_id: guardrail_id, guardrail: guardrail }) do |response, operation|
+      c.create_guardrail({ parent: parent, guardrail_id: guardrail_id, guardrail: guardrail }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_guardrail parent: parent, guardrail_id: guardrail_id, guardrail: guardrail do |response, operation|
+      c.create_guardrail parent: parent, guardrail_id: guardrail_id, guardrail: guardrail do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_guardrail ::Google::Cloud::Ces::V1beta::CreateGuardrailRequest.new(parent: parent, guardrail_id: guardrail_id, guardrail: guardrail) do |response, operation|
+      c.create_guardrail ::Google::Cloud::Ces::V1beta::CreateGuardrailRequest.new(parent: parent, guardrail_id: guardrail_id, guardrail: guardrail) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_guardrail({ parent: parent, guardrail_id: guardrail_id, guardrail: guardrail }, grpc_options) do |response, operation|
+      c.create_guardrail({ parent: parent, guardrail_id: guardrail_id, guardrail: guardrail }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_guardrail(::Google::Cloud::Ces::V1beta::CreateGuardrailRequest.new(parent: parent, guardrail_id: guardrail_id, guardrail: guardrail), grpc_options) do |response, operation|
+      c.create_guardrail(::Google::Cloud::Ces::V1beta::CreateGuardrailRequest.new(parent: parent, guardrail_id: guardrail_id, guardrail: guardrail), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2052,36 +2052,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_guardrail_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_guardrail({ guardrail: guardrail, update_mask: update_mask }) do |response, operation|
+      c.update_guardrail({ guardrail: guardrail, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_guardrail guardrail: guardrail, update_mask: update_mask do |response, operation|
+      c.update_guardrail guardrail: guardrail, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_guardrail ::Google::Cloud::Ces::V1beta::UpdateGuardrailRequest.new(guardrail: guardrail, update_mask: update_mask) do |response, operation|
+      c.update_guardrail ::Google::Cloud::Ces::V1beta::UpdateGuardrailRequest.new(guardrail: guardrail, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_guardrail({ guardrail: guardrail, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_guardrail({ guardrail: guardrail, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_guardrail(::Google::Cloud::Ces::V1beta::UpdateGuardrailRequest.new(guardrail: guardrail, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_guardrail(::Google::Cloud::Ces::V1beta::UpdateGuardrailRequest.new(guardrail: guardrail, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2114,36 +2114,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_guardrail_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_guardrail({ name: name, force: force, etag: etag }) do |response, operation|
+      c.delete_guardrail({ name: name, force: force, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_guardrail name: name, force: force, etag: etag do |response, operation|
+      c.delete_guardrail name: name, force: force, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_guardrail ::Google::Cloud::Ces::V1beta::DeleteGuardrailRequest.new(name: name, force: force, etag: etag) do |response, operation|
+      c.delete_guardrail ::Google::Cloud::Ces::V1beta::DeleteGuardrailRequest.new(name: name, force: force, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_guardrail({ name: name, force: force, etag: etag }, grpc_options) do |response, operation|
+      c.delete_guardrail({ name: name, force: force, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_guardrail(::Google::Cloud::Ces::V1beta::DeleteGuardrailRequest.new(name: name, force: force, etag: etag), grpc_options) do |response, operation|
+      c.delete_guardrail(::Google::Cloud::Ces::V1beta::DeleteGuardrailRequest.new(name: name, force: force, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2178,40 +2178,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_deployments_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_deployments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
+      c.list_deployments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_deployments parent: parent, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
+      c.list_deployments parent: parent, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_deployments ::Google::Cloud::Ces::V1beta::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
+      c.list_deployments ::Google::Cloud::Ces::V1beta::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_deployments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_deployments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_deployments(::Google::Cloud::Ces::V1beta::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
+      c.list_deployments(::Google::Cloud::Ces::V1beta::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2241,36 +2241,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_deployment({ name: name }) do |response, operation|
+      c.get_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_deployment name: name do |response, operation|
+      c.get_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_deployment ::Google::Cloud::Ces::V1beta::GetDeploymentRequest.new(name: name) do |response, operation|
+      c.get_deployment ::Google::Cloud::Ces::V1beta::GetDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_deployment({ name: name }, grpc_options) do |response, operation|
+      c.get_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_deployment(::Google::Cloud::Ces::V1beta::GetDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_deployment(::Google::Cloud::Ces::V1beta::GetDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2303,36 +2303,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }) do |response, operation|
+      c.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_deployment parent: parent, deployment_id: deployment_id, deployment: deployment do |response, operation|
+      c.create_deployment parent: parent, deployment_id: deployment_id, deployment: deployment do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_deployment ::Google::Cloud::Ces::V1beta::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment) do |response, operation|
+      c.create_deployment ::Google::Cloud::Ces::V1beta::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }, grpc_options) do |response, operation|
+      c.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_deployment(::Google::Cloud::Ces::V1beta::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment), grpc_options) do |response, operation|
+      c.create_deployment(::Google::Cloud::Ces::V1beta::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2363,36 +2363,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_deployment({ deployment: deployment, update_mask: update_mask }) do |response, operation|
+      c.update_deployment({ deployment: deployment, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_deployment deployment: deployment, update_mask: update_mask do |response, operation|
+      c.update_deployment deployment: deployment, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_deployment ::Google::Cloud::Ces::V1beta::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask) do |response, operation|
+      c.update_deployment ::Google::Cloud::Ces::V1beta::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_deployment({ deployment: deployment, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_deployment({ deployment: deployment, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_deployment(::Google::Cloud::Ces::V1beta::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_deployment(::Google::Cloud::Ces::V1beta::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2423,36 +2423,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_deployment({ name: name, etag: etag }) do |response, operation|
+      c.delete_deployment({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_deployment name: name, etag: etag do |response, operation|
+      c.delete_deployment name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_deployment ::Google::Cloud::Ces::V1beta::DeleteDeploymentRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_deployment ::Google::Cloud::Ces::V1beta::DeleteDeploymentRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_deployment({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_deployment({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_deployment(::Google::Cloud::Ces::V1beta::DeleteDeploymentRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_deployment(::Google::Cloud::Ces::V1beta::DeleteDeploymentRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2489,40 +2489,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_toolsets_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_toolsets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_toolsets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_toolsets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_toolsets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_toolsets ::Google::Cloud::Ces::V1beta::ListToolsetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_toolsets ::Google::Cloud::Ces::V1beta::ListToolsetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_toolsets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_toolsets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_toolsets(::Google::Cloud::Ces::V1beta::ListToolsetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_toolsets(::Google::Cloud::Ces::V1beta::ListToolsetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2552,36 +2552,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_toolset_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_toolset({ name: name }) do |response, operation|
+      c.get_toolset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_toolset name: name do |response, operation|
+      c.get_toolset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_toolset ::Google::Cloud::Ces::V1beta::GetToolsetRequest.new(name: name) do |response, operation|
+      c.get_toolset ::Google::Cloud::Ces::V1beta::GetToolsetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_toolset({ name: name }, grpc_options) do |response, operation|
+      c.get_toolset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_toolset(::Google::Cloud::Ces::V1beta::GetToolsetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_toolset(::Google::Cloud::Ces::V1beta::GetToolsetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2614,36 +2614,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_toolset_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_toolset({ parent: parent, toolset_id: toolset_id, toolset: toolset }) do |response, operation|
+      c.create_toolset({ parent: parent, toolset_id: toolset_id, toolset: toolset }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_toolset parent: parent, toolset_id: toolset_id, toolset: toolset do |response, operation|
+      c.create_toolset parent: parent, toolset_id: toolset_id, toolset: toolset do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_toolset ::Google::Cloud::Ces::V1beta::CreateToolsetRequest.new(parent: parent, toolset_id: toolset_id, toolset: toolset) do |response, operation|
+      c.create_toolset ::Google::Cloud::Ces::V1beta::CreateToolsetRequest.new(parent: parent, toolset_id: toolset_id, toolset: toolset) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_toolset({ parent: parent, toolset_id: toolset_id, toolset: toolset }, grpc_options) do |response, operation|
+      c.create_toolset({ parent: parent, toolset_id: toolset_id, toolset: toolset }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_toolset(::Google::Cloud::Ces::V1beta::CreateToolsetRequest.new(parent: parent, toolset_id: toolset_id, toolset: toolset), grpc_options) do |response, operation|
+      c.create_toolset(::Google::Cloud::Ces::V1beta::CreateToolsetRequest.new(parent: parent, toolset_id: toolset_id, toolset: toolset), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2674,36 +2674,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_toolset_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_toolset({ toolset: toolset, update_mask: update_mask }) do |response, operation|
+      c.update_toolset({ toolset: toolset, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_toolset toolset: toolset, update_mask: update_mask do |response, operation|
+      c.update_toolset toolset: toolset, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_toolset ::Google::Cloud::Ces::V1beta::UpdateToolsetRequest.new(toolset: toolset, update_mask: update_mask) do |response, operation|
+      c.update_toolset ::Google::Cloud::Ces::V1beta::UpdateToolsetRequest.new(toolset: toolset, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_toolset({ toolset: toolset, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_toolset({ toolset: toolset, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_toolset(::Google::Cloud::Ces::V1beta::UpdateToolsetRequest.new(toolset: toolset, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_toolset(::Google::Cloud::Ces::V1beta::UpdateToolsetRequest.new(toolset: toolset, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2736,36 +2736,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_toolset_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_toolset({ name: name, force: force, etag: etag }) do |response, operation|
+      c.delete_toolset({ name: name, force: force, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_toolset name: name, force: force, etag: etag do |response, operation|
+      c.delete_toolset name: name, force: force, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_toolset ::Google::Cloud::Ces::V1beta::DeleteToolsetRequest.new(name: name, force: force, etag: etag) do |response, operation|
+      c.delete_toolset ::Google::Cloud::Ces::V1beta::DeleteToolsetRequest.new(name: name, force: force, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_toolset({ name: name, force: force, etag: etag }, grpc_options) do |response, operation|
+      c.delete_toolset({ name: name, force: force, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_toolset(::Google::Cloud::Ces::V1beta::DeleteToolsetRequest.new(name: name, force: force, etag: etag), grpc_options) do |response, operation|
+      c.delete_toolset(::Google::Cloud::Ces::V1beta::DeleteToolsetRequest.new(name: name, force: force, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2802,40 +2802,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_app_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_app_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_app_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_app_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_app_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_app_versions ::Google::Cloud::Ces::V1beta::ListAppVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_app_versions ::Google::Cloud::Ces::V1beta::ListAppVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_app_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_app_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_app_versions(::Google::Cloud::Ces::V1beta::ListAppVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_app_versions(::Google::Cloud::Ces::V1beta::ListAppVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2865,36 +2865,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_app_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_app_version({ name: name }) do |response, operation|
+      c.get_app_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_app_version name: name do |response, operation|
+      c.get_app_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_app_version ::Google::Cloud::Ces::V1beta::GetAppVersionRequest.new(name: name) do |response, operation|
+      c.get_app_version ::Google::Cloud::Ces::V1beta::GetAppVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_app_version({ name: name }, grpc_options) do |response, operation|
+      c.get_app_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_app_version(::Google::Cloud::Ces::V1beta::GetAppVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_app_version(::Google::Cloud::Ces::V1beta::GetAppVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2927,36 +2927,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_app_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_app_version({ parent: parent, app_version_id: app_version_id, app_version: app_version }) do |response, operation|
+      c.create_app_version({ parent: parent, app_version_id: app_version_id, app_version: app_version }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_app_version parent: parent, app_version_id: app_version_id, app_version: app_version do |response, operation|
+      c.create_app_version parent: parent, app_version_id: app_version_id, app_version: app_version do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_app_version ::Google::Cloud::Ces::V1beta::CreateAppVersionRequest.new(parent: parent, app_version_id: app_version_id, app_version: app_version) do |response, operation|
+      c.create_app_version ::Google::Cloud::Ces::V1beta::CreateAppVersionRequest.new(parent: parent, app_version_id: app_version_id, app_version: app_version) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_app_version({ parent: parent, app_version_id: app_version_id, app_version: app_version }, grpc_options) do |response, operation|
+      c.create_app_version({ parent: parent, app_version_id: app_version_id, app_version: app_version }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_app_version(::Google::Cloud::Ces::V1beta::CreateAppVersionRequest.new(parent: parent, app_version_id: app_version_id, app_version: app_version), grpc_options) do |response, operation|
+      c.create_app_version(::Google::Cloud::Ces::V1beta::CreateAppVersionRequest.new(parent: parent, app_version_id: app_version_id, app_version: app_version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2987,36 +2987,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_app_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_app_version({ name: name, etag: etag }) do |response, operation|
+      c.delete_app_version({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_app_version name: name, etag: etag do |response, operation|
+      c.delete_app_version name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_app_version ::Google::Cloud::Ces::V1beta::DeleteAppVersionRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_app_version ::Google::Cloud::Ces::V1beta::DeleteAppVersionRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_app_version({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_app_version({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_app_version(::Google::Cloud::Ces::V1beta::DeleteAppVersionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_app_version(::Google::Cloud::Ces::V1beta::DeleteAppVersionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3045,40 +3045,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, restore_app_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restore_app_version({ name: name }) do |response, operation|
+      c.restore_app_version({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restore_app_version name: name do |response, operation|
+      c.restore_app_version name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restore_app_version ::Google::Cloud::Ces::V1beta::RestoreAppVersionRequest.new(name: name) do |response, operation|
+      c.restore_app_version ::Google::Cloud::Ces::V1beta::RestoreAppVersionRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restore_app_version({ name: name }, grpc_options) do |response, operation|
+      c.restore_app_version({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restore_app_version(::Google::Cloud::Ces::V1beta::RestoreAppVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.restore_app_version(::Google::Cloud::Ces::V1beta::RestoreAppVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3125,40 +3125,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, generate_app_resource_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_app_resource({ agent: agent, parent: parent, refine_instructions: refine_instructions, tool_generation_config: tool_generation_config, app_generation_config: app_generation_config, evaluation_generation_config: evaluation_generation_config, evaluation_personas_generation_config: evaluation_personas_generation_config, quality_report_generation_config: quality_report_generation_config, hill_climbing_fix_config: hill_climbing_fix_config }) do |response, operation|
+      c.generate_app_resource({ agent: agent, parent: parent, refine_instructions: refine_instructions, tool_generation_config: tool_generation_config, app_generation_config: app_generation_config, evaluation_generation_config: evaluation_generation_config, evaluation_personas_generation_config: evaluation_personas_generation_config, quality_report_generation_config: quality_report_generation_config, hill_climbing_fix_config: hill_climbing_fix_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_app_resource agent: agent, parent: parent, refine_instructions: refine_instructions, tool_generation_config: tool_generation_config, app_generation_config: app_generation_config, evaluation_generation_config: evaluation_generation_config, evaluation_personas_generation_config: evaluation_personas_generation_config, quality_report_generation_config: quality_report_generation_config, hill_climbing_fix_config: hill_climbing_fix_config do |response, operation|
+      c.generate_app_resource agent: agent, parent: parent, refine_instructions: refine_instructions, tool_generation_config: tool_generation_config, app_generation_config: app_generation_config, evaluation_generation_config: evaluation_generation_config, evaluation_personas_generation_config: evaluation_personas_generation_config, quality_report_generation_config: quality_report_generation_config, hill_climbing_fix_config: hill_climbing_fix_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_app_resource ::Google::Cloud::Ces::V1beta::GenerateAppResourceRequest.new(agent: agent, parent: parent, refine_instructions: refine_instructions, tool_generation_config: tool_generation_config, app_generation_config: app_generation_config, evaluation_generation_config: evaluation_generation_config, evaluation_personas_generation_config: evaluation_personas_generation_config, quality_report_generation_config: quality_report_generation_config, hill_climbing_fix_config: hill_climbing_fix_config) do |response, operation|
+      c.generate_app_resource ::Google::Cloud::Ces::V1beta::GenerateAppResourceRequest.new(agent: agent, parent: parent, refine_instructions: refine_instructions, tool_generation_config: tool_generation_config, app_generation_config: app_generation_config, evaluation_generation_config: evaluation_generation_config, evaluation_personas_generation_config: evaluation_personas_generation_config, quality_report_generation_config: quality_report_generation_config, hill_climbing_fix_config: hill_climbing_fix_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_app_resource({ agent: agent, parent: parent, refine_instructions: refine_instructions, tool_generation_config: tool_generation_config, app_generation_config: app_generation_config, evaluation_generation_config: evaluation_generation_config, evaluation_personas_generation_config: evaluation_personas_generation_config, quality_report_generation_config: quality_report_generation_config, hill_climbing_fix_config: hill_climbing_fix_config }, grpc_options) do |response, operation|
+      c.generate_app_resource({ agent: agent, parent: parent, refine_instructions: refine_instructions, tool_generation_config: tool_generation_config, app_generation_config: app_generation_config, evaluation_generation_config: evaluation_generation_config, evaluation_personas_generation_config: evaluation_personas_generation_config, quality_report_generation_config: quality_report_generation_config, hill_climbing_fix_config: hill_climbing_fix_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_app_resource(::Google::Cloud::Ces::V1beta::GenerateAppResourceRequest.new(agent: agent, parent: parent, refine_instructions: refine_instructions, tool_generation_config: tool_generation_config, app_generation_config: app_generation_config, evaluation_generation_config: evaluation_generation_config, evaluation_personas_generation_config: evaluation_personas_generation_config, quality_report_generation_config: quality_report_generation_config, hill_climbing_fix_config: hill_climbing_fix_config), grpc_options) do |response, operation|
+      c.generate_app_resource(::Google::Cloud::Ces::V1beta::GenerateAppResourceRequest.new(agent: agent, parent: parent, refine_instructions: refine_instructions, tool_generation_config: tool_generation_config, app_generation_config: app_generation_config, evaluation_generation_config: evaluation_generation_config, evaluation_personas_generation_config: evaluation_personas_generation_config, quality_report_generation_config: quality_report_generation_config, hill_climbing_fix_config: hill_climbing_fix_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3196,40 +3196,40 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_changelogs_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_changelogs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_changelogs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_changelogs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_changelogs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_changelogs ::Google::Cloud::Ces::V1beta::ListChangelogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_changelogs ::Google::Cloud::Ces::V1beta::ListChangelogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_changelogs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_changelogs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_changelogs(::Google::Cloud::Ces::V1beta::ListChangelogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_changelogs(::Google::Cloud::Ces::V1beta::ListChangelogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3259,36 +3259,36 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_changelog_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_changelog({ name: name }) do |response, operation|
+      c.get_changelog({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_changelog name: name do |response, operation|
+      c.get_changelog name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_changelog ::Google::Cloud::Ces::V1beta::GetChangelogRequest.new(name: name) do |response, operation|
+      c.get_changelog ::Google::Cloud::Ces::V1beta::GetChangelogRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_changelog({ name: name }, grpc_options) do |response, operation|
+      c.get_changelog({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_changelog(::Google::Cloud::Ces::V1beta::GetChangelogRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_changelog(::Google::Cloud::Ces::V1beta::GetChangelogRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

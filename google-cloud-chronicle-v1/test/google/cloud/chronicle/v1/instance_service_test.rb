@@ -82,36 +82,36 @@ class ::Google::Cloud::Chronicle::V1::InstanceService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::InstanceService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::InstanceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name }) do |response, operation|
+      c.get_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name do |response, operation|
+      c.get_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::Chronicle::V1::GetInstanceRequest.new(name: name) do |response, operation|
+      c.get_instance ::Google::Cloud::Chronicle::V1::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::Chronicle::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::Chronicle::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

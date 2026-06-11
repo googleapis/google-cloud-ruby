@@ -97,32 +97,32 @@ class ::Google::Cloud::Chronicle::V1::DashboardQueryService::Rest::ClientTest < 
     ::Google::Cloud::Chronicle::V1::DashboardQueryService::Rest::ServiceStub.stub :transcode_get_dashboard_query_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_dashboard_query_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DashboardQueryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DashboardQueryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_dashboard_query({ name: name }) do |_result, response|
+        c.get_dashboard_query({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_dashboard_query name: name do |_result, response|
+        c.get_dashboard_query name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_dashboard_query ::Google::Cloud::Chronicle::V1::GetDashboardQueryRequest.new(name: name) do |_result, response|
+        c.get_dashboard_query ::Google::Cloud::Chronicle::V1::GetDashboardQueryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_dashboard_query({ name: name }, call_options) do |_result, response|
+        c.get_dashboard_query({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_dashboard_query(::Google::Cloud::Chronicle::V1::GetDashboardQueryRequest.new(name: name), call_options) do |_result, response|
+        c.get_dashboard_query(::Google::Cloud::Chronicle::V1::GetDashboardQueryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Chronicle::V1::DashboardQueryService::Rest::ClientTest < 
     ::Google::Cloud::Chronicle::V1::DashboardQueryService::Rest::ServiceStub.stub :transcode_execute_dashboard_query_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, execute_dashboard_query_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DashboardQueryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DashboardQueryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.execute_dashboard_query({ parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range }) do |_result, response|
+        c.execute_dashboard_query({ parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.execute_dashboard_query parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range do |_result, response|
+        c.execute_dashboard_query parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.execute_dashboard_query ::Google::Cloud::Chronicle::V1::ExecuteDashboardQueryRequest.new(parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range) do |_result, response|
+        c.execute_dashboard_query ::Google::Cloud::Chronicle::V1::ExecuteDashboardQueryRequest.new(parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.execute_dashboard_query({ parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range }, call_options) do |_result, response|
+        c.execute_dashboard_query({ parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.execute_dashboard_query(::Google::Cloud::Chronicle::V1::ExecuteDashboardQueryRequest.new(parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range), call_options) do |_result, response|
+        c.execute_dashboard_query(::Google::Cloud::Chronicle::V1::ExecuteDashboardQueryRequest.new(parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

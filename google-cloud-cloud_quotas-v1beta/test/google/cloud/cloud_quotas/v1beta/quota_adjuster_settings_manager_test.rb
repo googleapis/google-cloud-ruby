@@ -86,36 +86,36 @@ class ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Client
 
     Gapic::ServiceStub.stub :new, update_quota_adjuster_settings_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Client.new do |config|
+      c = ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_quota_adjuster_settings({ quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
+      c.update_quota_adjuster_settings({ quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_quota_adjuster_settings quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only do |response, operation|
+      c.update_quota_adjuster_settings quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_quota_adjuster_settings ::Google::Cloud::CloudQuotas::V1beta::UpdateQuotaAdjusterSettingsRequest.new(quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only) do |response, operation|
+      c.update_quota_adjuster_settings ::Google::Cloud::CloudQuotas::V1beta::UpdateQuotaAdjusterSettingsRequest.new(quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_quota_adjuster_settings({ quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_quota_adjuster_settings({ quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_quota_adjuster_settings(::Google::Cloud::CloudQuotas::V1beta::UpdateQuotaAdjusterSettingsRequest.new(quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_quota_adjuster_settings(::Google::Cloud::CloudQuotas::V1beta::UpdateQuotaAdjusterSettingsRequest.new(quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Client
 
     Gapic::ServiceStub.stub :new, get_quota_adjuster_settings_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Client.new do |config|
+      c = ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_quota_adjuster_settings({ name: name }) do |response, operation|
+      c.get_quota_adjuster_settings({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_quota_adjuster_settings name: name do |response, operation|
+      c.get_quota_adjuster_settings name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_quota_adjuster_settings ::Google::Cloud::CloudQuotas::V1beta::GetQuotaAdjusterSettingsRequest.new(name: name) do |response, operation|
+      c.get_quota_adjuster_settings ::Google::Cloud::CloudQuotas::V1beta::GetQuotaAdjusterSettingsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_quota_adjuster_settings({ name: name }, grpc_options) do |response, operation|
+      c.get_quota_adjuster_settings({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_quota_adjuster_settings(::Google::Cloud::CloudQuotas::V1beta::GetQuotaAdjusterSettingsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_quota_adjuster_settings(::Google::Cloud::CloudQuotas::V1beta::GetQuotaAdjusterSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
