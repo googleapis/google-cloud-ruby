@@ -84,40 +84,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_dataset({ parent: parent, dataset: dataset }) do |response, operation|
+      c.create_dataset({ parent: parent, dataset: dataset }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_dataset parent: parent, dataset: dataset do |response, operation|
+      c.create_dataset parent: parent, dataset: dataset do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_dataset ::Google::Cloud::AIPlatform::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |response, operation|
+      c.create_dataset ::Google::Cloud::AIPlatform::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_dataset({ parent: parent, dataset: dataset }, grpc_options) do |response, operation|
+      c.create_dataset({ parent: parent, dataset: dataset }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_dataset(::Google::Cloud::AIPlatform::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options) do |response, operation|
+      c.create_dataset(::Google::Cloud::AIPlatform::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_dataset({ name: name, read_mask: read_mask }) do |response, operation|
+      c.get_dataset({ name: name, read_mask: read_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_dataset name: name, read_mask: read_mask do |response, operation|
+      c.get_dataset name: name, read_mask: read_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_dataset ::Google::Cloud::AIPlatform::V1::GetDatasetRequest.new(name: name, read_mask: read_mask) do |response, operation|
+      c.get_dataset ::Google::Cloud::AIPlatform::V1::GetDatasetRequest.new(name: name, read_mask: read_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_dataset({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.get_dataset({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_dataset(::Google::Cloud::AIPlatform::V1::GetDatasetRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
+      c.get_dataset(::Google::Cloud::AIPlatform::V1::GetDatasetRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,36 +209,36 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_dataset({ dataset: dataset, update_mask: update_mask }) do |response, operation|
+      c.update_dataset({ dataset: dataset, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_dataset dataset: dataset, update_mask: update_mask do |response, operation|
+      c.update_dataset dataset: dataset, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_dataset ::Google::Cloud::AIPlatform::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask) do |response, operation|
+      c.update_dataset ::Google::Cloud::AIPlatform::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_dataset({ dataset: dataset, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_dataset({ dataset: dataset, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_dataset(::Google::Cloud::AIPlatform::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_dataset(::Google::Cloud::AIPlatform::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -277,40 +277,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_datasets_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
+      c.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_datasets parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
+      c.list_datasets parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_datasets ::Google::Cloud::AIPlatform::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
+      c.list_datasets ::Google::Cloud::AIPlatform::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_datasets(::Google::Cloud::AIPlatform::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
+      c.list_datasets(::Google::Cloud::AIPlatform::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -340,40 +340,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_dataset({ name: name }) do |response, operation|
+      c.delete_dataset({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_dataset name: name do |response, operation|
+      c.delete_dataset name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_dataset ::Google::Cloud::AIPlatform::V1::DeleteDatasetRequest.new(name: name) do |response, operation|
+      c.delete_dataset ::Google::Cloud::AIPlatform::V1::DeleteDatasetRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_dataset({ name: name }, grpc_options) do |response, operation|
+      c.delete_dataset({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_dataset(::Google::Cloud::AIPlatform::V1::DeleteDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_dataset(::Google::Cloud::AIPlatform::V1::DeleteDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -405,40 +405,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, import_data_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_data({ name: name, import_configs: import_configs }) do |response, operation|
+      c.import_data({ name: name, import_configs: import_configs }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_data name: name, import_configs: import_configs do |response, operation|
+      c.import_data name: name, import_configs: import_configs do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_data ::Google::Cloud::AIPlatform::V1::ImportDataRequest.new(name: name, import_configs: import_configs) do |response, operation|
+      c.import_data ::Google::Cloud::AIPlatform::V1::ImportDataRequest.new(name: name, import_configs: import_configs) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_data({ name: name, import_configs: import_configs }, grpc_options) do |response, operation|
+      c.import_data({ name: name, import_configs: import_configs }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_data(::Google::Cloud::AIPlatform::V1::ImportDataRequest.new(name: name, import_configs: import_configs), grpc_options) do |response, operation|
+      c.import_data(::Google::Cloud::AIPlatform::V1::ImportDataRequest.new(name: name, import_configs: import_configs), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -470,40 +470,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, export_data_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_data({ name: name, export_config: export_config }) do |response, operation|
+      c.export_data({ name: name, export_config: export_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_data name: name, export_config: export_config do |response, operation|
+      c.export_data name: name, export_config: export_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_data ::Google::Cloud::AIPlatform::V1::ExportDataRequest.new(name: name, export_config: export_config) do |response, operation|
+      c.export_data ::Google::Cloud::AIPlatform::V1::ExportDataRequest.new(name: name, export_config: export_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_data({ name: name, export_config: export_config }, grpc_options) do |response, operation|
+      c.export_data({ name: name, export_config: export_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_data(::Google::Cloud::AIPlatform::V1::ExportDataRequest.new(name: name, export_config: export_config), grpc_options) do |response, operation|
+      c.export_data(::Google::Cloud::AIPlatform::V1::ExportDataRequest.new(name: name, export_config: export_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -535,40 +535,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_dataset_version_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_dataset_version({ parent: parent, dataset_version: dataset_version }) do |response, operation|
+      c.create_dataset_version({ parent: parent, dataset_version: dataset_version }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_dataset_version parent: parent, dataset_version: dataset_version do |response, operation|
+      c.create_dataset_version parent: parent, dataset_version: dataset_version do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_dataset_version ::Google::Cloud::AIPlatform::V1::CreateDatasetVersionRequest.new(parent: parent, dataset_version: dataset_version) do |response, operation|
+      c.create_dataset_version ::Google::Cloud::AIPlatform::V1::CreateDatasetVersionRequest.new(parent: parent, dataset_version: dataset_version) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_dataset_version({ parent: parent, dataset_version: dataset_version }, grpc_options) do |response, operation|
+      c.create_dataset_version({ parent: parent, dataset_version: dataset_version }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_dataset_version(::Google::Cloud::AIPlatform::V1::CreateDatasetVersionRequest.new(parent: parent, dataset_version: dataset_version), grpc_options) do |response, operation|
+      c.create_dataset_version(::Google::Cloud::AIPlatform::V1::CreateDatasetVersionRequest.new(parent: parent, dataset_version: dataset_version), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -600,36 +600,36 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_dataset_version_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_dataset_version({ dataset_version: dataset_version, update_mask: update_mask }) do |response, operation|
+      c.update_dataset_version({ dataset_version: dataset_version, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_dataset_version dataset_version: dataset_version, update_mask: update_mask do |response, operation|
+      c.update_dataset_version dataset_version: dataset_version, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_dataset_version ::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest.new(dataset_version: dataset_version, update_mask: update_mask) do |response, operation|
+      c.update_dataset_version ::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest.new(dataset_version: dataset_version, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_dataset_version({ dataset_version: dataset_version, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_dataset_version({ dataset_version: dataset_version, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_dataset_version(::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest.new(dataset_version: dataset_version, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_dataset_version(::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest.new(dataset_version: dataset_version, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -658,40 +658,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_dataset_version_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_dataset_version({ name: name }) do |response, operation|
+      c.delete_dataset_version({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_dataset_version name: name do |response, operation|
+      c.delete_dataset_version name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_dataset_version ::Google::Cloud::AIPlatform::V1::DeleteDatasetVersionRequest.new(name: name) do |response, operation|
+      c.delete_dataset_version ::Google::Cloud::AIPlatform::V1::DeleteDatasetVersionRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_dataset_version({ name: name }, grpc_options) do |response, operation|
+      c.delete_dataset_version({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_dataset_version(::Google::Cloud::AIPlatform::V1::DeleteDatasetVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_dataset_version(::Google::Cloud::AIPlatform::V1::DeleteDatasetVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -723,36 +723,36 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_dataset_version_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_dataset_version({ name: name, read_mask: read_mask }) do |response, operation|
+      c.get_dataset_version({ name: name, read_mask: read_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_dataset_version name: name, read_mask: read_mask do |response, operation|
+      c.get_dataset_version name: name, read_mask: read_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_dataset_version ::Google::Cloud::AIPlatform::V1::GetDatasetVersionRequest.new(name: name, read_mask: read_mask) do |response, operation|
+      c.get_dataset_version ::Google::Cloud::AIPlatform::V1::GetDatasetVersionRequest.new(name: name, read_mask: read_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_dataset_version({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.get_dataset_version({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_dataset_version(::Google::Cloud::AIPlatform::V1::GetDatasetVersionRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
+      c.get_dataset_version(::Google::Cloud::AIPlatform::V1::GetDatasetVersionRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -791,40 +791,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_dataset_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_dataset_versions({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
+      c.list_dataset_versions({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_dataset_versions parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
+      c.list_dataset_versions parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_dataset_versions ::Google::Cloud::AIPlatform::V1::ListDatasetVersionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
+      c.list_dataset_versions ::Google::Cloud::AIPlatform::V1::ListDatasetVersionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_dataset_versions({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_dataset_versions({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_dataset_versions(::Google::Cloud::AIPlatform::V1::ListDatasetVersionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
+      c.list_dataset_versions(::Google::Cloud::AIPlatform::V1::ListDatasetVersionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -854,40 +854,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, restore_dataset_version_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restore_dataset_version({ name: name }) do |response, operation|
+      c.restore_dataset_version({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restore_dataset_version name: name do |response, operation|
+      c.restore_dataset_version name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restore_dataset_version ::Google::Cloud::AIPlatform::V1::RestoreDatasetVersionRequest.new(name: name) do |response, operation|
+      c.restore_dataset_version ::Google::Cloud::AIPlatform::V1::RestoreDatasetVersionRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restore_dataset_version({ name: name }, grpc_options) do |response, operation|
+      c.restore_dataset_version({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restore_dataset_version(::Google::Cloud::AIPlatform::V1::RestoreDatasetVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.restore_dataset_version(::Google::Cloud::AIPlatform::V1::RestoreDatasetVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -927,40 +927,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_data_items_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_items({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
+      c.list_data_items({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_items parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
+      c.list_data_items parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_items ::Google::Cloud::AIPlatform::V1::ListDataItemsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
+      c.list_data_items ::Google::Cloud::AIPlatform::V1::ListDataItemsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_items({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_data_items({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_items(::Google::Cloud::AIPlatform::V1::ListDataItemsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
+      c.list_data_items(::Google::Cloud::AIPlatform::V1::ListDataItemsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1013,40 +1013,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, search_data_items_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_data_items({ order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token }) do |response, operation|
+      c.search_data_items({ order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_data_items order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token do |response, operation|
+      c.search_data_items order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_data_items ::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest.new(order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token) do |response, operation|
+      c.search_data_items ::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest.new(order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_data_items({ order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_data_items({ order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_data_items(::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest.new(order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token), grpc_options) do |response, operation|
+      c.search_data_items(::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest.new(order_by_data_item: order_by_data_item, dataset: dataset, saved_query: saved_query, data_labeling_job: data_labeling_job, data_item_filter: data_item_filter, annotations_filter: annotations_filter, annotation_filters: annotation_filters, field_mask: field_mask, annotations_limit: annotations_limit, page_size: page_size, order_by: order_by, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1086,40 +1086,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_saved_queries_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_saved_queries({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
+      c.list_saved_queries({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_saved_queries parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
+      c.list_saved_queries parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_saved_queries ::Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
+      c.list_saved_queries ::Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_saved_queries({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_saved_queries({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_saved_queries(::Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
+      c.list_saved_queries(::Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1149,40 +1149,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_saved_query_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_saved_query({ name: name }) do |response, operation|
+      c.delete_saved_query({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_saved_query name: name do |response, operation|
+      c.delete_saved_query name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_saved_query ::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest.new(name: name) do |response, operation|
+      c.delete_saved_query ::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_saved_query({ name: name }, grpc_options) do |response, operation|
+      c.delete_saved_query({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_saved_query(::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_saved_query(::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1214,36 +1214,36 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_annotation_spec_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_annotation_spec({ name: name, read_mask: read_mask }) do |response, operation|
+      c.get_annotation_spec({ name: name, read_mask: read_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_annotation_spec name: name, read_mask: read_mask do |response, operation|
+      c.get_annotation_spec name: name, read_mask: read_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_annotation_spec ::Google::Cloud::AIPlatform::V1::GetAnnotationSpecRequest.new(name: name, read_mask: read_mask) do |response, operation|
+      c.get_annotation_spec ::Google::Cloud::AIPlatform::V1::GetAnnotationSpecRequest.new(name: name, read_mask: read_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_annotation_spec({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.get_annotation_spec({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_annotation_spec(::Google::Cloud::AIPlatform::V1::GetAnnotationSpecRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
+      c.get_annotation_spec(::Google::Cloud::AIPlatform::V1::GetAnnotationSpecRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1282,40 +1282,40 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_annotations_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_annotations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
+      c.list_annotations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_annotations parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
+      c.list_annotations parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_annotations ::Google::Cloud::AIPlatform::V1::ListAnnotationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
+      c.list_annotations ::Google::Cloud::AIPlatform::V1::ListAnnotationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_annotations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_annotations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_annotations(::Google::Cloud::AIPlatform::V1::ListAnnotationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
+      c.list_annotations(::Google::Cloud::AIPlatform::V1::ListAnnotationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

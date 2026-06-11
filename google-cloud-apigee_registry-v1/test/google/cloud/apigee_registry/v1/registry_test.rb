@@ -88,40 +88,40 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_apis_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_apis parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_apis parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_apis ::Google::Cloud::ApigeeRegistry::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_apis ::Google::Cloud::ApigeeRegistry::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_apis(::Google::Cloud::ApigeeRegistry::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_apis(::Google::Cloud::ApigeeRegistry::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_api_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_api({ name: name }) do |response, operation|
+      c.get_api({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_api name: name do |response, operation|
+      c.get_api name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_api ::Google::Cloud::ApigeeRegistry::V1::GetApiRequest.new(name: name) do |response, operation|
+      c.get_api ::Google::Cloud::ApigeeRegistry::V1::GetApiRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_api({ name: name }, grpc_options) do |response, operation|
+      c.get_api({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_api(::Google::Cloud::ApigeeRegistry::V1::GetApiRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_api(::Google::Cloud::ApigeeRegistry::V1::GetApiRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,36 +213,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_api_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_api({ parent: parent, api: api, api_id: api_id }) do |response, operation|
+      c.create_api({ parent: parent, api: api, api_id: api_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_api parent: parent, api: api, api_id: api_id do |response, operation|
+      c.create_api parent: parent, api: api, api_id: api_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_api ::Google::Cloud::ApigeeRegistry::V1::CreateApiRequest.new(parent: parent, api: api, api_id: api_id) do |response, operation|
+      c.create_api ::Google::Cloud::ApigeeRegistry::V1::CreateApiRequest.new(parent: parent, api: api, api_id: api_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_api({ parent: parent, api: api, api_id: api_id }, grpc_options) do |response, operation|
+      c.create_api({ parent: parent, api: api, api_id: api_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_api(::Google::Cloud::ApigeeRegistry::V1::CreateApiRequest.new(parent: parent, api: api, api_id: api_id), grpc_options) do |response, operation|
+      c.create_api(::Google::Cloud::ApigeeRegistry::V1::CreateApiRequest.new(parent: parent, api: api, api_id: api_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -275,36 +275,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_api_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_api({ api: api, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
+      c.update_api({ api: api, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_api api: api, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
+      c.update_api api: api, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_api ::Google::Cloud::ApigeeRegistry::V1::UpdateApiRequest.new(api: api, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
+      c.update_api ::Google::Cloud::ApigeeRegistry::V1::UpdateApiRequest.new(api: api, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_api({ api: api, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_api({ api: api, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_api(::Google::Cloud::ApigeeRegistry::V1::UpdateApiRequest.new(api: api, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_api(::Google::Cloud::ApigeeRegistry::V1::UpdateApiRequest.new(api: api, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,36 +335,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_api_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_api({ name: name, force: force }) do |response, operation|
+      c.delete_api({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_api name: name, force: force do |response, operation|
+      c.delete_api name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_api ::Google::Cloud::ApigeeRegistry::V1::DeleteApiRequest.new(name: name, force: force) do |response, operation|
+      c.delete_api ::Google::Cloud::ApigeeRegistry::V1::DeleteApiRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_api({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_api({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_api(::Google::Cloud::ApigeeRegistry::V1::DeleteApiRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_api(::Google::Cloud::ApigeeRegistry::V1::DeleteApiRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -399,40 +399,40 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_api_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_api_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_api_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_api_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_api_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_api_versions ::Google::Cloud::ApigeeRegistry::V1::ListApiVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_api_versions ::Google::Cloud::ApigeeRegistry::V1::ListApiVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_api_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_api_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_api_versions(::Google::Cloud::ApigeeRegistry::V1::ListApiVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_api_versions(::Google::Cloud::ApigeeRegistry::V1::ListApiVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -462,36 +462,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_api_version_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_api_version({ name: name }) do |response, operation|
+      c.get_api_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_api_version name: name do |response, operation|
+      c.get_api_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_api_version ::Google::Cloud::ApigeeRegistry::V1::GetApiVersionRequest.new(name: name) do |response, operation|
+      c.get_api_version ::Google::Cloud::ApigeeRegistry::V1::GetApiVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_api_version({ name: name }, grpc_options) do |response, operation|
+      c.get_api_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_api_version(::Google::Cloud::ApigeeRegistry::V1::GetApiVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_api_version(::Google::Cloud::ApigeeRegistry::V1::GetApiVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -524,36 +524,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_api_version_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_api_version({ parent: parent, api_version: api_version, api_version_id: api_version_id }) do |response, operation|
+      c.create_api_version({ parent: parent, api_version: api_version, api_version_id: api_version_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_api_version parent: parent, api_version: api_version, api_version_id: api_version_id do |response, operation|
+      c.create_api_version parent: parent, api_version: api_version, api_version_id: api_version_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_api_version ::Google::Cloud::ApigeeRegistry::V1::CreateApiVersionRequest.new(parent: parent, api_version: api_version, api_version_id: api_version_id) do |response, operation|
+      c.create_api_version ::Google::Cloud::ApigeeRegistry::V1::CreateApiVersionRequest.new(parent: parent, api_version: api_version, api_version_id: api_version_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_api_version({ parent: parent, api_version: api_version, api_version_id: api_version_id }, grpc_options) do |response, operation|
+      c.create_api_version({ parent: parent, api_version: api_version, api_version_id: api_version_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_api_version(::Google::Cloud::ApigeeRegistry::V1::CreateApiVersionRequest.new(parent: parent, api_version: api_version, api_version_id: api_version_id), grpc_options) do |response, operation|
+      c.create_api_version(::Google::Cloud::ApigeeRegistry::V1::CreateApiVersionRequest.new(parent: parent, api_version: api_version, api_version_id: api_version_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -586,36 +586,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_api_version_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_api_version({ api_version: api_version, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
+      c.update_api_version({ api_version: api_version, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_api_version api_version: api_version, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
+      c.update_api_version api_version: api_version, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_api_version ::Google::Cloud::ApigeeRegistry::V1::UpdateApiVersionRequest.new(api_version: api_version, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
+      c.update_api_version ::Google::Cloud::ApigeeRegistry::V1::UpdateApiVersionRequest.new(api_version: api_version, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_api_version({ api_version: api_version, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_api_version({ api_version: api_version, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_api_version(::Google::Cloud::ApigeeRegistry::V1::UpdateApiVersionRequest.new(api_version: api_version, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_api_version(::Google::Cloud::ApigeeRegistry::V1::UpdateApiVersionRequest.new(api_version: api_version, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -646,36 +646,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_api_version_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_api_version({ name: name, force: force }) do |response, operation|
+      c.delete_api_version({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_api_version name: name, force: force do |response, operation|
+      c.delete_api_version name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_api_version ::Google::Cloud::ApigeeRegistry::V1::DeleteApiVersionRequest.new(name: name, force: force) do |response, operation|
+      c.delete_api_version ::Google::Cloud::ApigeeRegistry::V1::DeleteApiVersionRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_api_version({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_api_version({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_api_version(::Google::Cloud::ApigeeRegistry::V1::DeleteApiVersionRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_api_version(::Google::Cloud::ApigeeRegistry::V1::DeleteApiVersionRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -710,40 +710,40 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_api_specs_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_api_specs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_api_specs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_api_specs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_api_specs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_api_specs ::Google::Cloud::ApigeeRegistry::V1::ListApiSpecsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_api_specs ::Google::Cloud::ApigeeRegistry::V1::ListApiSpecsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_api_specs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_api_specs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_api_specs(::Google::Cloud::ApigeeRegistry::V1::ListApiSpecsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_api_specs(::Google::Cloud::ApigeeRegistry::V1::ListApiSpecsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -773,36 +773,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_api_spec_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_api_spec({ name: name }) do |response, operation|
+      c.get_api_spec({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_api_spec name: name do |response, operation|
+      c.get_api_spec name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_api_spec ::Google::Cloud::ApigeeRegistry::V1::GetApiSpecRequest.new(name: name) do |response, operation|
+      c.get_api_spec ::Google::Cloud::ApigeeRegistry::V1::GetApiSpecRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_api_spec({ name: name }, grpc_options) do |response, operation|
+      c.get_api_spec({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_api_spec(::Google::Cloud::ApigeeRegistry::V1::GetApiSpecRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_api_spec(::Google::Cloud::ApigeeRegistry::V1::GetApiSpecRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -831,36 +831,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_api_spec_contents_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_api_spec_contents({ name: name }) do |response, operation|
+      c.get_api_spec_contents({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_api_spec_contents name: name do |response, operation|
+      c.get_api_spec_contents name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_api_spec_contents ::Google::Cloud::ApigeeRegistry::V1::GetApiSpecContentsRequest.new(name: name) do |response, operation|
+      c.get_api_spec_contents ::Google::Cloud::ApigeeRegistry::V1::GetApiSpecContentsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_api_spec_contents({ name: name }, grpc_options) do |response, operation|
+      c.get_api_spec_contents({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_api_spec_contents(::Google::Cloud::ApigeeRegistry::V1::GetApiSpecContentsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_api_spec_contents(::Google::Cloud::ApigeeRegistry::V1::GetApiSpecContentsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -893,36 +893,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_api_spec_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_api_spec({ parent: parent, api_spec: api_spec, api_spec_id: api_spec_id }) do |response, operation|
+      c.create_api_spec({ parent: parent, api_spec: api_spec, api_spec_id: api_spec_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_api_spec parent: parent, api_spec: api_spec, api_spec_id: api_spec_id do |response, operation|
+      c.create_api_spec parent: parent, api_spec: api_spec, api_spec_id: api_spec_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_api_spec ::Google::Cloud::ApigeeRegistry::V1::CreateApiSpecRequest.new(parent: parent, api_spec: api_spec, api_spec_id: api_spec_id) do |response, operation|
+      c.create_api_spec ::Google::Cloud::ApigeeRegistry::V1::CreateApiSpecRequest.new(parent: parent, api_spec: api_spec, api_spec_id: api_spec_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_api_spec({ parent: parent, api_spec: api_spec, api_spec_id: api_spec_id }, grpc_options) do |response, operation|
+      c.create_api_spec({ parent: parent, api_spec: api_spec, api_spec_id: api_spec_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_api_spec(::Google::Cloud::ApigeeRegistry::V1::CreateApiSpecRequest.new(parent: parent, api_spec: api_spec, api_spec_id: api_spec_id), grpc_options) do |response, operation|
+      c.create_api_spec(::Google::Cloud::ApigeeRegistry::V1::CreateApiSpecRequest.new(parent: parent, api_spec: api_spec, api_spec_id: api_spec_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -955,36 +955,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_api_spec_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_api_spec({ api_spec: api_spec, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
+      c.update_api_spec({ api_spec: api_spec, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_api_spec api_spec: api_spec, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
+      c.update_api_spec api_spec: api_spec, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_api_spec ::Google::Cloud::ApigeeRegistry::V1::UpdateApiSpecRequest.new(api_spec: api_spec, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
+      c.update_api_spec ::Google::Cloud::ApigeeRegistry::V1::UpdateApiSpecRequest.new(api_spec: api_spec, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_api_spec({ api_spec: api_spec, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_api_spec({ api_spec: api_spec, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_api_spec(::Google::Cloud::ApigeeRegistry::V1::UpdateApiSpecRequest.new(api_spec: api_spec, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_api_spec(::Google::Cloud::ApigeeRegistry::V1::UpdateApiSpecRequest.new(api_spec: api_spec, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1015,36 +1015,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_api_spec_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_api_spec({ name: name, force: force }) do |response, operation|
+      c.delete_api_spec({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_api_spec name: name, force: force do |response, operation|
+      c.delete_api_spec name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_api_spec ::Google::Cloud::ApigeeRegistry::V1::DeleteApiSpecRequest.new(name: name, force: force) do |response, operation|
+      c.delete_api_spec ::Google::Cloud::ApigeeRegistry::V1::DeleteApiSpecRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_api_spec({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_api_spec({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_api_spec(::Google::Cloud::ApigeeRegistry::V1::DeleteApiSpecRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_api_spec(::Google::Cloud::ApigeeRegistry::V1::DeleteApiSpecRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1075,36 +1075,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, tag_api_spec_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.tag_api_spec_revision({ name: name, tag: tag }) do |response, operation|
+      c.tag_api_spec_revision({ name: name, tag: tag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.tag_api_spec_revision name: name, tag: tag do |response, operation|
+      c.tag_api_spec_revision name: name, tag: tag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.tag_api_spec_revision ::Google::Cloud::ApigeeRegistry::V1::TagApiSpecRevisionRequest.new(name: name, tag: tag) do |response, operation|
+      c.tag_api_spec_revision ::Google::Cloud::ApigeeRegistry::V1::TagApiSpecRevisionRequest.new(name: name, tag: tag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.tag_api_spec_revision({ name: name, tag: tag }, grpc_options) do |response, operation|
+      c.tag_api_spec_revision({ name: name, tag: tag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.tag_api_spec_revision(::Google::Cloud::ApigeeRegistry::V1::TagApiSpecRevisionRequest.new(name: name, tag: tag), grpc_options) do |response, operation|
+      c.tag_api_spec_revision(::Google::Cloud::ApigeeRegistry::V1::TagApiSpecRevisionRequest.new(name: name, tag: tag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1137,40 +1137,40 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_api_spec_revisions_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_api_spec_revisions({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_api_spec_revisions({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_api_spec_revisions name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_api_spec_revisions name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_api_spec_revisions ::Google::Cloud::ApigeeRegistry::V1::ListApiSpecRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_api_spec_revisions ::Google::Cloud::ApigeeRegistry::V1::ListApiSpecRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_api_spec_revisions({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_api_spec_revisions({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_api_spec_revisions(::Google::Cloud::ApigeeRegistry::V1::ListApiSpecRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_api_spec_revisions(::Google::Cloud::ApigeeRegistry::V1::ListApiSpecRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1202,36 +1202,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, rollback_api_spec_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.rollback_api_spec({ name: name, revision_id: revision_id }) do |response, operation|
+      c.rollback_api_spec({ name: name, revision_id: revision_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rollback_api_spec name: name, revision_id: revision_id do |response, operation|
+      c.rollback_api_spec name: name, revision_id: revision_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rollback_api_spec ::Google::Cloud::ApigeeRegistry::V1::RollbackApiSpecRequest.new(name: name, revision_id: revision_id) do |response, operation|
+      c.rollback_api_spec ::Google::Cloud::ApigeeRegistry::V1::RollbackApiSpecRequest.new(name: name, revision_id: revision_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rollback_api_spec({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
+      c.rollback_api_spec({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rollback_api_spec(::Google::Cloud::ApigeeRegistry::V1::RollbackApiSpecRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
+      c.rollback_api_spec(::Google::Cloud::ApigeeRegistry::V1::RollbackApiSpecRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1260,36 +1260,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_api_spec_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_api_spec_revision({ name: name }) do |response, operation|
+      c.delete_api_spec_revision({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_api_spec_revision name: name do |response, operation|
+      c.delete_api_spec_revision name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_api_spec_revision ::Google::Cloud::ApigeeRegistry::V1::DeleteApiSpecRevisionRequest.new(name: name) do |response, operation|
+      c.delete_api_spec_revision ::Google::Cloud::ApigeeRegistry::V1::DeleteApiSpecRevisionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_api_spec_revision({ name: name }, grpc_options) do |response, operation|
+      c.delete_api_spec_revision({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_api_spec_revision(::Google::Cloud::ApigeeRegistry::V1::DeleteApiSpecRevisionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_api_spec_revision(::Google::Cloud::ApigeeRegistry::V1::DeleteApiSpecRevisionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1324,40 +1324,40 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_api_deployments_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_api_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_api_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_api_deployments parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_api_deployments parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_api_deployments ::Google::Cloud::ApigeeRegistry::V1::ListApiDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_api_deployments ::Google::Cloud::ApigeeRegistry::V1::ListApiDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_api_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_api_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_api_deployments(::Google::Cloud::ApigeeRegistry::V1::ListApiDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_api_deployments(::Google::Cloud::ApigeeRegistry::V1::ListApiDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1387,36 +1387,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_api_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_api_deployment({ name: name }) do |response, operation|
+      c.get_api_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_api_deployment name: name do |response, operation|
+      c.get_api_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_api_deployment ::Google::Cloud::ApigeeRegistry::V1::GetApiDeploymentRequest.new(name: name) do |response, operation|
+      c.get_api_deployment ::Google::Cloud::ApigeeRegistry::V1::GetApiDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_api_deployment({ name: name }, grpc_options) do |response, operation|
+      c.get_api_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_api_deployment(::Google::Cloud::ApigeeRegistry::V1::GetApiDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_api_deployment(::Google::Cloud::ApigeeRegistry::V1::GetApiDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1449,36 +1449,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_api_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_api_deployment({ parent: parent, api_deployment: api_deployment, api_deployment_id: api_deployment_id }) do |response, operation|
+      c.create_api_deployment({ parent: parent, api_deployment: api_deployment, api_deployment_id: api_deployment_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_api_deployment parent: parent, api_deployment: api_deployment, api_deployment_id: api_deployment_id do |response, operation|
+      c.create_api_deployment parent: parent, api_deployment: api_deployment, api_deployment_id: api_deployment_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_api_deployment ::Google::Cloud::ApigeeRegistry::V1::CreateApiDeploymentRequest.new(parent: parent, api_deployment: api_deployment, api_deployment_id: api_deployment_id) do |response, operation|
+      c.create_api_deployment ::Google::Cloud::ApigeeRegistry::V1::CreateApiDeploymentRequest.new(parent: parent, api_deployment: api_deployment, api_deployment_id: api_deployment_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_api_deployment({ parent: parent, api_deployment: api_deployment, api_deployment_id: api_deployment_id }, grpc_options) do |response, operation|
+      c.create_api_deployment({ parent: parent, api_deployment: api_deployment, api_deployment_id: api_deployment_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_api_deployment(::Google::Cloud::ApigeeRegistry::V1::CreateApiDeploymentRequest.new(parent: parent, api_deployment: api_deployment, api_deployment_id: api_deployment_id), grpc_options) do |response, operation|
+      c.create_api_deployment(::Google::Cloud::ApigeeRegistry::V1::CreateApiDeploymentRequest.new(parent: parent, api_deployment: api_deployment, api_deployment_id: api_deployment_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1511,36 +1511,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_api_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_api_deployment({ api_deployment: api_deployment, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
+      c.update_api_deployment({ api_deployment: api_deployment, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_api_deployment api_deployment: api_deployment, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
+      c.update_api_deployment api_deployment: api_deployment, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_api_deployment ::Google::Cloud::ApigeeRegistry::V1::UpdateApiDeploymentRequest.new(api_deployment: api_deployment, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
+      c.update_api_deployment ::Google::Cloud::ApigeeRegistry::V1::UpdateApiDeploymentRequest.new(api_deployment: api_deployment, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_api_deployment({ api_deployment: api_deployment, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_api_deployment({ api_deployment: api_deployment, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_api_deployment(::Google::Cloud::ApigeeRegistry::V1::UpdateApiDeploymentRequest.new(api_deployment: api_deployment, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_api_deployment(::Google::Cloud::ApigeeRegistry::V1::UpdateApiDeploymentRequest.new(api_deployment: api_deployment, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1571,36 +1571,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_api_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_api_deployment({ name: name, force: force }) do |response, operation|
+      c.delete_api_deployment({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_api_deployment name: name, force: force do |response, operation|
+      c.delete_api_deployment name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_api_deployment ::Google::Cloud::ApigeeRegistry::V1::DeleteApiDeploymentRequest.new(name: name, force: force) do |response, operation|
+      c.delete_api_deployment ::Google::Cloud::ApigeeRegistry::V1::DeleteApiDeploymentRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_api_deployment({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_api_deployment({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_api_deployment(::Google::Cloud::ApigeeRegistry::V1::DeleteApiDeploymentRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_api_deployment(::Google::Cloud::ApigeeRegistry::V1::DeleteApiDeploymentRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1631,36 +1631,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, tag_api_deployment_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.tag_api_deployment_revision({ name: name, tag: tag }) do |response, operation|
+      c.tag_api_deployment_revision({ name: name, tag: tag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.tag_api_deployment_revision name: name, tag: tag do |response, operation|
+      c.tag_api_deployment_revision name: name, tag: tag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.tag_api_deployment_revision ::Google::Cloud::ApigeeRegistry::V1::TagApiDeploymentRevisionRequest.new(name: name, tag: tag) do |response, operation|
+      c.tag_api_deployment_revision ::Google::Cloud::ApigeeRegistry::V1::TagApiDeploymentRevisionRequest.new(name: name, tag: tag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.tag_api_deployment_revision({ name: name, tag: tag }, grpc_options) do |response, operation|
+      c.tag_api_deployment_revision({ name: name, tag: tag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.tag_api_deployment_revision(::Google::Cloud::ApigeeRegistry::V1::TagApiDeploymentRevisionRequest.new(name: name, tag: tag), grpc_options) do |response, operation|
+      c.tag_api_deployment_revision(::Google::Cloud::ApigeeRegistry::V1::TagApiDeploymentRevisionRequest.new(name: name, tag: tag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1693,40 +1693,40 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_api_deployment_revisions_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_api_deployment_revisions({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_api_deployment_revisions({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_api_deployment_revisions name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_api_deployment_revisions name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_api_deployment_revisions ::Google::Cloud::ApigeeRegistry::V1::ListApiDeploymentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_api_deployment_revisions ::Google::Cloud::ApigeeRegistry::V1::ListApiDeploymentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_api_deployment_revisions({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_api_deployment_revisions({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_api_deployment_revisions(::Google::Cloud::ApigeeRegistry::V1::ListApiDeploymentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_api_deployment_revisions(::Google::Cloud::ApigeeRegistry::V1::ListApiDeploymentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1758,36 +1758,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, rollback_api_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.rollback_api_deployment({ name: name, revision_id: revision_id }) do |response, operation|
+      c.rollback_api_deployment({ name: name, revision_id: revision_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rollback_api_deployment name: name, revision_id: revision_id do |response, operation|
+      c.rollback_api_deployment name: name, revision_id: revision_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rollback_api_deployment ::Google::Cloud::ApigeeRegistry::V1::RollbackApiDeploymentRequest.new(name: name, revision_id: revision_id) do |response, operation|
+      c.rollback_api_deployment ::Google::Cloud::ApigeeRegistry::V1::RollbackApiDeploymentRequest.new(name: name, revision_id: revision_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rollback_api_deployment({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
+      c.rollback_api_deployment({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rollback_api_deployment(::Google::Cloud::ApigeeRegistry::V1::RollbackApiDeploymentRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
+      c.rollback_api_deployment(::Google::Cloud::ApigeeRegistry::V1::RollbackApiDeploymentRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1816,36 +1816,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_api_deployment_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_api_deployment_revision({ name: name }) do |response, operation|
+      c.delete_api_deployment_revision({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_api_deployment_revision name: name do |response, operation|
+      c.delete_api_deployment_revision name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_api_deployment_revision ::Google::Cloud::ApigeeRegistry::V1::DeleteApiDeploymentRevisionRequest.new(name: name) do |response, operation|
+      c.delete_api_deployment_revision ::Google::Cloud::ApigeeRegistry::V1::DeleteApiDeploymentRevisionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_api_deployment_revision({ name: name }, grpc_options) do |response, operation|
+      c.delete_api_deployment_revision({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_api_deployment_revision(::Google::Cloud::ApigeeRegistry::V1::DeleteApiDeploymentRevisionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_api_deployment_revision(::Google::Cloud::ApigeeRegistry::V1::DeleteApiDeploymentRevisionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1880,40 +1880,40 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_artifacts_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_artifacts parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_artifacts parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_artifacts ::Google::Cloud::ApigeeRegistry::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_artifacts ::Google::Cloud::ApigeeRegistry::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_artifacts(::Google::Cloud::ApigeeRegistry::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_artifacts(::Google::Cloud::ApigeeRegistry::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1943,36 +1943,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_artifact_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_artifact({ name: name }) do |response, operation|
+      c.get_artifact({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_artifact name: name do |response, operation|
+      c.get_artifact name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_artifact ::Google::Cloud::ApigeeRegistry::V1::GetArtifactRequest.new(name: name) do |response, operation|
+      c.get_artifact ::Google::Cloud::ApigeeRegistry::V1::GetArtifactRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_artifact({ name: name }, grpc_options) do |response, operation|
+      c.get_artifact({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_artifact(::Google::Cloud::ApigeeRegistry::V1::GetArtifactRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_artifact(::Google::Cloud::ApigeeRegistry::V1::GetArtifactRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2001,36 +2001,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_artifact_contents_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_artifact_contents({ name: name }) do |response, operation|
+      c.get_artifact_contents({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_artifact_contents name: name do |response, operation|
+      c.get_artifact_contents name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_artifact_contents ::Google::Cloud::ApigeeRegistry::V1::GetArtifactContentsRequest.new(name: name) do |response, operation|
+      c.get_artifact_contents ::Google::Cloud::ApigeeRegistry::V1::GetArtifactContentsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_artifact_contents({ name: name }, grpc_options) do |response, operation|
+      c.get_artifact_contents({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_artifact_contents(::Google::Cloud::ApigeeRegistry::V1::GetArtifactContentsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_artifact_contents(::Google::Cloud::ApigeeRegistry::V1::GetArtifactContentsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2063,36 +2063,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_artifact_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_artifact({ parent: parent, artifact: artifact, artifact_id: artifact_id }) do |response, operation|
+      c.create_artifact({ parent: parent, artifact: artifact, artifact_id: artifact_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_artifact parent: parent, artifact: artifact, artifact_id: artifact_id do |response, operation|
+      c.create_artifact parent: parent, artifact: artifact, artifact_id: artifact_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_artifact ::Google::Cloud::ApigeeRegistry::V1::CreateArtifactRequest.new(parent: parent, artifact: artifact, artifact_id: artifact_id) do |response, operation|
+      c.create_artifact ::Google::Cloud::ApigeeRegistry::V1::CreateArtifactRequest.new(parent: parent, artifact: artifact, artifact_id: artifact_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_artifact({ parent: parent, artifact: artifact, artifact_id: artifact_id }, grpc_options) do |response, operation|
+      c.create_artifact({ parent: parent, artifact: artifact, artifact_id: artifact_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_artifact(::Google::Cloud::ApigeeRegistry::V1::CreateArtifactRequest.new(parent: parent, artifact: artifact, artifact_id: artifact_id), grpc_options) do |response, operation|
+      c.create_artifact(::Google::Cloud::ApigeeRegistry::V1::CreateArtifactRequest.new(parent: parent, artifact: artifact, artifact_id: artifact_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2121,36 +2121,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, replace_artifact_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.replace_artifact({ artifact: artifact }) do |response, operation|
+      c.replace_artifact({ artifact: artifact }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.replace_artifact artifact: artifact do |response, operation|
+      c.replace_artifact artifact: artifact do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.replace_artifact ::Google::Cloud::ApigeeRegistry::V1::ReplaceArtifactRequest.new(artifact: artifact) do |response, operation|
+      c.replace_artifact ::Google::Cloud::ApigeeRegistry::V1::ReplaceArtifactRequest.new(artifact: artifact) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.replace_artifact({ artifact: artifact }, grpc_options) do |response, operation|
+      c.replace_artifact({ artifact: artifact }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.replace_artifact(::Google::Cloud::ApigeeRegistry::V1::ReplaceArtifactRequest.new(artifact: artifact), grpc_options) do |response, operation|
+      c.replace_artifact(::Google::Cloud::ApigeeRegistry::V1::ReplaceArtifactRequest.new(artifact: artifact), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2179,36 +2179,36 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_artifact_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
+      c = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_artifact({ name: name }) do |response, operation|
+      c.delete_artifact({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_artifact name: name do |response, operation|
+      c.delete_artifact name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_artifact ::Google::Cloud::ApigeeRegistry::V1::DeleteArtifactRequest.new(name: name) do |response, operation|
+      c.delete_artifact ::Google::Cloud::ApigeeRegistry::V1::DeleteArtifactRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_artifact({ name: name }, grpc_options) do |response, operation|
+      c.delete_artifact({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_artifact(::Google::Cloud::ApigeeRegistry::V1::DeleteArtifactRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_artifact(::Google::Cloud::ApigeeRegistry::V1::DeleteArtifactRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

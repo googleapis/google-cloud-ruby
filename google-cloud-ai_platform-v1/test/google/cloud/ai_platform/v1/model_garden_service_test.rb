@@ -90,36 +90,36 @@ class ::Google::Cloud::AIPlatform::V1::ModelGardenService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_publisher_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_publisher_model({ name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token }) do |response, operation|
+      c.get_publisher_model({ name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_publisher_model name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token do |response, operation|
+      c.get_publisher_model name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_publisher_model ::Google::Cloud::AIPlatform::V1::GetPublisherModelRequest.new(name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token) do |response, operation|
+      c.get_publisher_model ::Google::Cloud::AIPlatform::V1::GetPublisherModelRequest.new(name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_publisher_model({ name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token }, grpc_options) do |response, operation|
+      c.get_publisher_model({ name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_publisher_model(::Google::Cloud::AIPlatform::V1::GetPublisherModelRequest.new(name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token), grpc_options) do |response, operation|
+      c.get_publisher_model(::Google::Cloud::AIPlatform::V1::GetPublisherModelRequest.new(name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,40 +157,40 @@ class ::Google::Cloud::AIPlatform::V1::ModelGardenService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, deploy_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.deploy({ publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config }) do |response, operation|
+      c.deploy({ publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.deploy publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config do |response, operation|
+      c.deploy publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.deploy ::Google::Cloud::AIPlatform::V1::DeployRequest.new(publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config) do |response, operation|
+      c.deploy ::Google::Cloud::AIPlatform::V1::DeployRequest.new(publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.deploy({ publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config }, grpc_options) do |response, operation|
+      c.deploy({ publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.deploy(::Google::Cloud::AIPlatform::V1::DeployRequest.new(publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config), grpc_options) do |response, operation|
+      c.deploy(::Google::Cloud::AIPlatform::V1::DeployRequest.new(publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
