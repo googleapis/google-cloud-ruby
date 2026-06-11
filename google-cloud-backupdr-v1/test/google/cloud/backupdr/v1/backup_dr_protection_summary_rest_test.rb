@@ -101,32 +101,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDrProtectionSummary::Rest::ClientTest
     ::Google::Cloud::BackupDR::V1::BackupDrProtectionSummary::Rest::ServiceStub.stub :transcode_list_resource_backup_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_resource_backup_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDrProtectionSummary::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDrProtectionSummary::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_resource_backup_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_resource_backup_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_resource_backup_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_resource_backup_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_resource_backup_configs ::Google::Cloud::BackupDR::V1::ListResourceBackupConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_resource_backup_configs ::Google::Cloud::BackupDR::V1::ListResourceBackupConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_resource_backup_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_resource_backup_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_resource_backup_configs(::Google::Cloud::BackupDR::V1::ListResourceBackupConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_resource_backup_configs(::Google::Cloud::BackupDR::V1::ListResourceBackupConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

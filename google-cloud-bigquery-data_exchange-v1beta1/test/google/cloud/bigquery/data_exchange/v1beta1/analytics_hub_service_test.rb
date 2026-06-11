@@ -86,40 +86,40 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, list_data_exchanges_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_exchanges({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_data_exchanges({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_exchanges parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_data_exchanges parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_exchanges ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListDataExchangesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_data_exchanges ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListDataExchangesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_exchanges({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_data_exchanges({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_exchanges(::Google::Cloud::Bigquery::DataExchange::V1beta1::ListDataExchangesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_data_exchanges(::Google::Cloud::Bigquery::DataExchange::V1beta1::ListDataExchangesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,40 +153,40 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, list_org_data_exchanges_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_org_data_exchanges({ organization: organization, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_org_data_exchanges({ organization: organization, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_org_data_exchanges organization: organization, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_org_data_exchanges organization: organization, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_org_data_exchanges ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListOrgDataExchangesRequest.new(organization: organization, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_org_data_exchanges ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListOrgDataExchangesRequest.new(organization: organization, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_org_data_exchanges({ organization: organization, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_org_data_exchanges({ organization: organization, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_org_data_exchanges(::Google::Cloud::Bigquery::DataExchange::V1beta1::ListOrgDataExchangesRequest.new(organization: organization, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_org_data_exchanges(::Google::Cloud::Bigquery::DataExchange::V1beta1::ListOrgDataExchangesRequest.new(organization: organization, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -216,36 +216,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, get_data_exchange_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_exchange({ name: name }) do |response, operation|
+      c.get_data_exchange({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_exchange name: name do |response, operation|
+      c.get_data_exchange name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_exchange ::Google::Cloud::Bigquery::DataExchange::V1beta1::GetDataExchangeRequest.new(name: name) do |response, operation|
+      c.get_data_exchange ::Google::Cloud::Bigquery::DataExchange::V1beta1::GetDataExchangeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_exchange({ name: name }, grpc_options) do |response, operation|
+      c.get_data_exchange({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_exchange(::Google::Cloud::Bigquery::DataExchange::V1beta1::GetDataExchangeRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_data_exchange(::Google::Cloud::Bigquery::DataExchange::V1beta1::GetDataExchangeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -278,36 +278,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, create_data_exchange_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_data_exchange({ parent: parent, data_exchange_id: data_exchange_id, data_exchange: data_exchange }) do |response, operation|
+      c.create_data_exchange({ parent: parent, data_exchange_id: data_exchange_id, data_exchange: data_exchange }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_exchange parent: parent, data_exchange_id: data_exchange_id, data_exchange: data_exchange do |response, operation|
+      c.create_data_exchange parent: parent, data_exchange_id: data_exchange_id, data_exchange: data_exchange do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_exchange ::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateDataExchangeRequest.new(parent: parent, data_exchange_id: data_exchange_id, data_exchange: data_exchange) do |response, operation|
+      c.create_data_exchange ::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateDataExchangeRequest.new(parent: parent, data_exchange_id: data_exchange_id, data_exchange: data_exchange) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_exchange({ parent: parent, data_exchange_id: data_exchange_id, data_exchange: data_exchange }, grpc_options) do |response, operation|
+      c.create_data_exchange({ parent: parent, data_exchange_id: data_exchange_id, data_exchange: data_exchange }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_exchange(::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateDataExchangeRequest.new(parent: parent, data_exchange_id: data_exchange_id, data_exchange: data_exchange), grpc_options) do |response, operation|
+      c.create_data_exchange(::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateDataExchangeRequest.new(parent: parent, data_exchange_id: data_exchange_id, data_exchange: data_exchange), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -338,36 +338,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, update_data_exchange_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_data_exchange({ update_mask: update_mask, data_exchange: data_exchange }) do |response, operation|
+      c.update_data_exchange({ update_mask: update_mask, data_exchange: data_exchange }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_data_exchange update_mask: update_mask, data_exchange: data_exchange do |response, operation|
+      c.update_data_exchange update_mask: update_mask, data_exchange: data_exchange do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_data_exchange ::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateDataExchangeRequest.new(update_mask: update_mask, data_exchange: data_exchange) do |response, operation|
+      c.update_data_exchange ::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateDataExchangeRequest.new(update_mask: update_mask, data_exchange: data_exchange) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_data_exchange({ update_mask: update_mask, data_exchange: data_exchange }, grpc_options) do |response, operation|
+      c.update_data_exchange({ update_mask: update_mask, data_exchange: data_exchange }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_data_exchange(::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateDataExchangeRequest.new(update_mask: update_mask, data_exchange: data_exchange), grpc_options) do |response, operation|
+      c.update_data_exchange(::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateDataExchangeRequest.new(update_mask: update_mask, data_exchange: data_exchange), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -396,36 +396,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, delete_data_exchange_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_data_exchange({ name: name }) do |response, operation|
+      c.delete_data_exchange({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_data_exchange name: name do |response, operation|
+      c.delete_data_exchange name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_data_exchange ::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteDataExchangeRequest.new(name: name) do |response, operation|
+      c.delete_data_exchange ::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteDataExchangeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_data_exchange({ name: name }, grpc_options) do |response, operation|
+      c.delete_data_exchange({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_data_exchange(::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteDataExchangeRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_data_exchange(::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteDataExchangeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -458,40 +458,40 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, list_listings_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_listings({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_listings({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_listings parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_listings parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_listings ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListListingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_listings ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListListingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_listings({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_listings({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_listings(::Google::Cloud::Bigquery::DataExchange::V1beta1::ListListingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_listings(::Google::Cloud::Bigquery::DataExchange::V1beta1::ListListingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -521,36 +521,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, get_listing_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_listing({ name: name }) do |response, operation|
+      c.get_listing({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_listing name: name do |response, operation|
+      c.get_listing name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::GetListingRequest.new(name: name) do |response, operation|
+      c.get_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::GetListingRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_listing({ name: name }, grpc_options) do |response, operation|
+      c.get_listing({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::GetListingRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::GetListingRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -583,36 +583,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, create_listing_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_listing({ parent: parent, listing_id: listing_id, listing: listing }) do |response, operation|
+      c.create_listing({ parent: parent, listing_id: listing_id, listing: listing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_listing parent: parent, listing_id: listing_id, listing: listing do |response, operation|
+      c.create_listing parent: parent, listing_id: listing_id, listing: listing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateListingRequest.new(parent: parent, listing_id: listing_id, listing: listing) do |response, operation|
+      c.create_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateListingRequest.new(parent: parent, listing_id: listing_id, listing: listing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_listing({ parent: parent, listing_id: listing_id, listing: listing }, grpc_options) do |response, operation|
+      c.create_listing({ parent: parent, listing_id: listing_id, listing: listing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateListingRequest.new(parent: parent, listing_id: listing_id, listing: listing), grpc_options) do |response, operation|
+      c.create_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateListingRequest.new(parent: parent, listing_id: listing_id, listing: listing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -643,36 +643,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, update_listing_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_listing({ update_mask: update_mask, listing: listing }) do |response, operation|
+      c.update_listing({ update_mask: update_mask, listing: listing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_listing update_mask: update_mask, listing: listing do |response, operation|
+      c.update_listing update_mask: update_mask, listing: listing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateListingRequest.new(update_mask: update_mask, listing: listing) do |response, operation|
+      c.update_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateListingRequest.new(update_mask: update_mask, listing: listing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_listing({ update_mask: update_mask, listing: listing }, grpc_options) do |response, operation|
+      c.update_listing({ update_mask: update_mask, listing: listing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateListingRequest.new(update_mask: update_mask, listing: listing), grpc_options) do |response, operation|
+      c.update_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateListingRequest.new(update_mask: update_mask, listing: listing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -701,36 +701,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, delete_listing_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_listing({ name: name }) do |response, operation|
+      c.delete_listing({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_listing name: name do |response, operation|
+      c.delete_listing name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteListingRequest.new(name: name) do |response, operation|
+      c.delete_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteListingRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_listing({ name: name }, grpc_options) do |response, operation|
+      c.delete_listing({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteListingRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteListingRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -762,36 +762,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, subscribe_listing_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.subscribe_listing({ destination_dataset: destination_dataset, name: name }) do |response, operation|
+      c.subscribe_listing({ destination_dataset: destination_dataset, name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.subscribe_listing destination_dataset: destination_dataset, name: name do |response, operation|
+      c.subscribe_listing destination_dataset: destination_dataset, name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.subscribe_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingRequest.new(destination_dataset: destination_dataset, name: name) do |response, operation|
+      c.subscribe_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingRequest.new(destination_dataset: destination_dataset, name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.subscribe_listing({ destination_dataset: destination_dataset, name: name }, grpc_options) do |response, operation|
+      c.subscribe_listing({ destination_dataset: destination_dataset, name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.subscribe_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingRequest.new(destination_dataset: destination_dataset, name: name), grpc_options) do |response, operation|
+      c.subscribe_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingRequest.new(destination_dataset: destination_dataset, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -822,36 +822,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -884,36 +884,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -944,36 +944,36 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

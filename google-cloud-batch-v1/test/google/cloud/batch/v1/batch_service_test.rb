@@ -88,36 +88,36 @@ class ::Google::Cloud::Batch::V1::BatchService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
+      c = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_job({ parent: parent, job_id: job_id, job: job, request_id: request_id }) do |response, operation|
+      c.create_job({ parent: parent, job_id: job_id, job: job, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_job parent: parent, job_id: job_id, job: job, request_id: request_id do |response, operation|
+      c.create_job parent: parent, job_id: job_id, job: job, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_job ::Google::Cloud::Batch::V1::CreateJobRequest.new(parent: parent, job_id: job_id, job: job, request_id: request_id) do |response, operation|
+      c.create_job ::Google::Cloud::Batch::V1::CreateJobRequest.new(parent: parent, job_id: job_id, job: job, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_job({ parent: parent, job_id: job_id, job: job, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_job({ parent: parent, job_id: job_id, job: job, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_job(::Google::Cloud::Batch::V1::CreateJobRequest.new(parent: parent, job_id: job_id, job: job, request_id: request_id), grpc_options) do |response, operation|
+      c.create_job(::Google::Cloud::Batch::V1::CreateJobRequest.new(parent: parent, job_id: job_id, job: job, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,36 +146,36 @@ class ::Google::Cloud::Batch::V1::BatchService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
+      c = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_job({ name: name }) do |response, operation|
+      c.get_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_job name: name do |response, operation|
+      c.get_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_job ::Google::Cloud::Batch::V1::GetJobRequest.new(name: name) do |response, operation|
+      c.get_job ::Google::Cloud::Batch::V1::GetJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_job({ name: name }, grpc_options) do |response, operation|
+      c.get_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_job(::Google::Cloud::Batch::V1::GetJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_job(::Google::Cloud::Batch::V1::GetJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -208,40 +208,40 @@ class ::Google::Cloud::Batch::V1::BatchService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
+      c = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_job({ name: name, reason: reason, request_id: request_id }) do |response, operation|
+      c.delete_job({ name: name, reason: reason, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_job name: name, reason: reason, request_id: request_id do |response, operation|
+      c.delete_job name: name, reason: reason, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_job ::Google::Cloud::Batch::V1::DeleteJobRequest.new(name: name, reason: reason, request_id: request_id) do |response, operation|
+      c.delete_job ::Google::Cloud::Batch::V1::DeleteJobRequest.new(name: name, reason: reason, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_job({ name: name, reason: reason, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_job({ name: name, reason: reason, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_job(::Google::Cloud::Batch::V1::DeleteJobRequest.new(name: name, reason: reason, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_job(::Google::Cloud::Batch::V1::DeleteJobRequest.new(name: name, reason: reason, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -273,40 +273,40 @@ class ::Google::Cloud::Batch::V1::BatchService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, cancel_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
+      c = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_job({ name: name, request_id: request_id }) do |response, operation|
+      c.cancel_job({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_job name: name, request_id: request_id do |response, operation|
+      c.cancel_job name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_job ::Google::Cloud::Batch::V1::CancelJobRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.cancel_job ::Google::Cloud::Batch::V1::CancelJobRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_job({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.cancel_job({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_job(::Google::Cloud::Batch::V1::CancelJobRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.cancel_job(::Google::Cloud::Batch::V1::CancelJobRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -344,40 +344,40 @@ class ::Google::Cloud::Batch::V1::BatchService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
+      c = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_jobs({ parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_jobs({ parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_jobs parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_jobs parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_jobs ::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_jobs ::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_jobs({ parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_jobs({ parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_jobs(::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_jobs(::Google::Cloud::Batch::V1::ListJobsRequest.new(parent: parent, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -407,36 +407,36 @@ class ::Google::Cloud::Batch::V1::BatchService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_task_client_stub do
       # Create client
-      client = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
+      c = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_task({ name: name }) do |response, operation|
+      c.get_task({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_task name: name do |response, operation|
+      c.get_task name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_task ::Google::Cloud::Batch::V1::GetTaskRequest.new(name: name) do |response, operation|
+      c.get_task ::Google::Cloud::Batch::V1::GetTaskRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_task({ name: name }, grpc_options) do |response, operation|
+      c.get_task({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_task(::Google::Cloud::Batch::V1::GetTaskRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_task(::Google::Cloud::Batch::V1::GetTaskRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -471,40 +471,40 @@ class ::Google::Cloud::Batch::V1::BatchService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_tasks_client_stub do
       # Create client
-      client = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
+      c = ::Google::Cloud::Batch::V1::BatchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tasks({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_tasks({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tasks parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_tasks parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tasks ::Google::Cloud::Batch::V1::ListTasksRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_tasks ::Google::Cloud::Batch::V1::ListTasksRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tasks({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_tasks({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tasks(::Google::Cloud::Batch::V1::ListTasksRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_tasks(::Google::Cloud::Batch::V1::ListTasksRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
