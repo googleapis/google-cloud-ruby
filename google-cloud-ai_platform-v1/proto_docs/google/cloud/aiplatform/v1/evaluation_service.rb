@@ -163,6 +163,125 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The metric used for running evaluations.
+        # @!attribute [rw] predefined_metric_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::PredefinedMetricSpec]
+        #     The spec for a pre-defined metric.
+        #
+        #     Note: The following fields are mutually exclusive: `predefined_metric_spec`, `computation_based_metric_spec`, `llm_based_metric_spec`, `pointwise_metric_spec`, `pairwise_metric_spec`, `exact_match_spec`, `bleu_spec`, `rouge_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] computation_based_metric_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::ComputationBasedMetricSpec]
+        #     Spec for a computation based metric.
+        #
+        #     Note: The following fields are mutually exclusive: `computation_based_metric_spec`, `predefined_metric_spec`, `llm_based_metric_spec`, `pointwise_metric_spec`, `pairwise_metric_spec`, `exact_match_spec`, `bleu_spec`, `rouge_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] llm_based_metric_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::LLMBasedMetricSpec]
+        #     Spec for an LLM based metric.
+        #
+        #     Note: The following fields are mutually exclusive: `llm_based_metric_spec`, `predefined_metric_spec`, `computation_based_metric_spec`, `pointwise_metric_spec`, `pairwise_metric_spec`, `exact_match_spec`, `bleu_spec`, `rouge_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] pointwise_metric_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::PointwiseMetricSpec]
+        #     Spec for pointwise metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pointwise_metric_spec`, `predefined_metric_spec`, `computation_based_metric_spec`, `llm_based_metric_spec`, `pairwise_metric_spec`, `exact_match_spec`, `bleu_spec`, `rouge_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] pairwise_metric_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::PairwiseMetricSpec]
+        #     Spec for pairwise metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pairwise_metric_spec`, `predefined_metric_spec`, `computation_based_metric_spec`, `llm_based_metric_spec`, `pointwise_metric_spec`, `exact_match_spec`, `bleu_spec`, `rouge_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] exact_match_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::ExactMatchSpec]
+        #     Spec for exact match metric.
+        #
+        #     Note: The following fields are mutually exclusive: `exact_match_spec`, `predefined_metric_spec`, `computation_based_metric_spec`, `llm_based_metric_spec`, `pointwise_metric_spec`, `pairwise_metric_spec`, `bleu_spec`, `rouge_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bleu_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::BleuSpec]
+        #     Spec for bleu metric.
+        #
+        #     Note: The following fields are mutually exclusive: `bleu_spec`, `predefined_metric_spec`, `computation_based_metric_spec`, `llm_based_metric_spec`, `pointwise_metric_spec`, `pairwise_metric_spec`, `exact_match_spec`, `rouge_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] rouge_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::RougeSpec]
+        #     Spec for rouge metric.
+        #
+        #     Note: The following fields are mutually exclusive: `rouge_spec`, `predefined_metric_spec`, `computation_based_metric_spec`, `llm_based_metric_spec`, `pointwise_metric_spec`, `pairwise_metric_spec`, `exact_match_spec`, `bleu_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] aggregation_metrics
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Metric::AggregationMetric>]
+        #     Optional. The aggregation metrics to use.
+        class Metric
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The per-metric statistics on evaluation results supported by
+          # `EvaluationService.EvaluateDataset`.
+          module AggregationMetric
+            # Unspecified aggregation metric.
+            AGGREGATION_METRIC_UNSPECIFIED = 0
+
+            # Average aggregation metric. Not supported for Pairwise metric.
+            AVERAGE = 1
+
+            # Mode aggregation metric.
+            MODE = 2
+
+            # Standard deviation aggregation metric. Not supported for pairwise metric.
+            STANDARD_DEVIATION = 3
+
+            # Variance aggregation metric. Not supported for pairwise metric.
+            VARIANCE = 4
+
+            # Minimum aggregation metric. Not supported for pairwise metric.
+            MINIMUM = 5
+
+            # Maximum aggregation metric. Not supported for pairwise metric.
+            MAXIMUM = 6
+
+            # Median aggregation metric. Not supported for pairwise metric.
+            MEDIAN = 7
+
+            # 90th percentile aggregation metric. Not supported for pairwise metric.
+            PERCENTILE_P90 = 8
+
+            # 95th percentile aggregation metric. Not supported for pairwise metric.
+            PERCENTILE_P95 = 9
+
+            # 99th percentile aggregation metric. Not supported for pairwise metric.
+            PERCENTILE_P99 = 10
+          end
+        end
+
+        # The configs for autorater. This is applicable to both EvaluateInstances and
+        # EvaluateDataset.
+        # @!attribute [rw] sampling_count
+        #   @return [::Integer]
+        #     Optional. Number of samples for each instance in the dataset.
+        #     If not specified, the default is 4. Minimum value is 1, maximum value
+        #     is 32.
+        # @!attribute [rw] flip_enabled
+        #   @return [::Boolean]
+        #     Optional. Default is true. Whether to flip the candidate and baseline
+        #     responses. This is only applicable to the pairwise metric. If enabled, also
+        #     provide PairwiseMetricSpec.candidate_response_field_name and
+        #     PairwiseMetricSpec.baseline_response_field_name. When rendering
+        #     PairwiseMetricSpec.metric_prompt_template, the candidate and baseline
+        #     fields will be flipped for half of the samples to reduce bias.
+        # @!attribute [rw] autorater_model
+        #   @return [::String]
+        #     Optional. The fully qualified name of the publisher model or tuned
+        #     autorater endpoint to use.
+        #
+        #     Publisher model format:
+        #     `projects/{project}/locations/{location}/publishers/*/models/*`
+        #
+        #     Tuned model endpoint format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] generation_config
+        #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig]
+        #     Optional. Configuration options for model generation and outputs.
+        class AutoraterConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Response message for EvaluationService.EvaluateInstances.
         # @!attribute [rw] exact_match_results
         #   @return [::Google::Cloud::AIPlatform::V1::ExactMatchResults]
@@ -297,7 +416,193 @@ module Google
         #     Result for Metricx metric.
         #
         #     Note: The following fields are mutually exclusive: `metricx_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] metric_results
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::MetricResult>]
+        #     Metric results for each instance.
+        #     The order of the metric results is guaranteed to be the same as the order
+        #     of the instances in the request.
         class EvaluateInstancesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Result for a single metric on a single instance.
+        # @!attribute [r] score
+        #   @return [::Float]
+        #     Output only. The score for the metric.
+        #     Please refer to each metric's documentation for the meaning of the score.
+        # @!attribute [r] explanation
+        #   @return [::String]
+        #     Output only. The explanation for the metric result.
+        # @!attribute [r] error
+        #   @return [::Google::Rpc::Status]
+        #     Output only. The error status for the metric result.
+        class MetricResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Config for evaluation output.
+        # @!attribute [rw] gcs_destination
+        #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]
+        #     Cloud storage destination for evaluation output.
+        class OutputConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The dataset used for evaluation.
+        # @!attribute [rw] gcs_source
+        #   @return [::Google::Cloud::AIPlatform::V1::GcsSource]
+        #     Cloud storage source holds the dataset. Currently only one Cloud Storage
+        #     file path is supported.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bigquery_source
+        #   @return [::Google::Cloud::AIPlatform::V1::BigQuerySource]
+        #     BigQuery source holds the dataset.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class EvaluationDataset
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The results from an evaluation run performed by the EvaluationService.
+        # @!attribute [r] aggregation_output
+        #   @return [::Google::Cloud::AIPlatform::V1::AggregationOutput]
+        #     Output only. Aggregation statistics derived from results of
+        #     EvaluationService.
+        # @!attribute [r] output_info
+        #   @return [::Google::Cloud::AIPlatform::V1::OutputInfo]
+        #     Output only. Output info for EvaluationService.
+        class EvaluateDatasetResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes the info for output of EvaluationService.
+        # @!attribute [r] gcs_output_directory
+        #   @return [::String]
+        #     Output only. The full path of the Cloud Storage directory created, into
+        #     which the evaluation results and aggregation results are written.
+        class OutputInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The aggregation result for the entire dataset and all metrics.
+        # @!attribute [rw] dataset
+        #   @return [::Google::Cloud::AIPlatform::V1::EvaluationDataset]
+        #     The dataset used for evaluation & aggregation.
+        # @!attribute [rw] aggregation_results
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::AggregationResult>]
+        #     One AggregationResult per metric.
+        class AggregationOutput
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The aggregation result for a single metric.
+        # @!attribute [rw] pointwise_metric_result
+        #   @return [::Google::Cloud::AIPlatform::V1::PointwiseMetricResult]
+        #     Result for pointwise metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pointwise_metric_result`, `pairwise_metric_result`, `exact_match_metric_value`, `bleu_metric_value`, `rouge_metric_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] pairwise_metric_result
+        #   @return [::Google::Cloud::AIPlatform::V1::PairwiseMetricResult]
+        #     Result for pairwise metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pairwise_metric_result`, `pointwise_metric_result`, `exact_match_metric_value`, `bleu_metric_value`, `rouge_metric_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] exact_match_metric_value
+        #   @return [::Google::Cloud::AIPlatform::V1::ExactMatchMetricValue]
+        #     Results for exact match metric.
+        #
+        #     Note: The following fields are mutually exclusive: `exact_match_metric_value`, `pointwise_metric_result`, `pairwise_metric_result`, `bleu_metric_value`, `rouge_metric_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bleu_metric_value
+        #   @return [::Google::Cloud::AIPlatform::V1::BleuMetricValue]
+        #     Results for bleu metric.
+        #
+        #     Note: The following fields are mutually exclusive: `bleu_metric_value`, `pointwise_metric_result`, `pairwise_metric_result`, `exact_match_metric_value`, `rouge_metric_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] rouge_metric_value
+        #   @return [::Google::Cloud::AIPlatform::V1::RougeMetricValue]
+        #     Results for rouge metric.
+        #
+        #     Note: The following fields are mutually exclusive: `rouge_metric_value`, `pointwise_metric_result`, `pairwise_metric_result`, `exact_match_metric_value`, `bleu_metric_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] aggregation_metric
+        #   @return [::Google::Cloud::AIPlatform::V1::Metric::AggregationMetric]
+        #     Aggregation metric.
+        class AggregationResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The spec for a pre-defined metric.
+        # @!attribute [rw] metric_spec_name
+        #   @return [::String]
+        #     Required. The name of a pre-defined metric, such as
+        #     "instruction_following_v1" or "text_quality_v1".
+        # @!attribute [rw] metric_spec_parameters
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. The parameters needed to run the pre-defined metric.
+        class PredefinedMetricSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specification for a computation based metric.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::AIPlatform::V1::ComputationBasedMetricSpec::ComputationBasedMetricType]
+        #     Required. The type of the computation based metric.
+        # @!attribute [rw] parameters
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. A map of parameters for the metric, e.g. {"rouge_type":
+        #     "rougeL"}.
+        class ComputationBasedMetricSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Types of computation based metrics.
+          module ComputationBasedMetricType
+            # Unspecified computation based metric type.
+            COMPUTATION_BASED_METRIC_TYPE_UNSPECIFIED = 0
+
+            # Exact match metric.
+            EXACT_MATCH = 1
+
+            # BLEU metric.
+            BLEU = 2
+
+            # ROUGE metric.
+            ROUGE = 3
+          end
+        end
+
+        # Specification for an LLM based metric.
+        # @!attribute [rw] rubric_group_key
+        #   @return [::String]
+        #     Use a pre-defined group of rubrics associated with the input.
+        #     Refers to a key in the rubric_groups map of EvaluationInstance.
+        #
+        #     Note: The following fields are mutually exclusive: `rubric_group_key`, `predefined_rubric_generation_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] predefined_rubric_generation_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::PredefinedMetricSpec]
+        #     Dynamically generate rubrics using a predefined spec.
+        #
+        #     Note: The following fields are mutually exclusive: `predefined_rubric_generation_spec`, `rubric_group_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] metric_prompt_template
+        #   @return [::String]
+        #     Required. Template for the prompt sent to the judge model.
+        # @!attribute [rw] system_instruction
+        #   @return [::String]
+        #     Optional. System instructions for the judge model.
+        # @!attribute [rw] judge_autorater_config
+        #   @return [::Google::Cloud::AIPlatform::V1::AutoraterConfig]
+        #     Optional. Optional configuration for the judge LLM (Autorater).
+        # @!attribute [rw] additional_config
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. Optional additional configuration for the metric.
+        class LLMBasedMetricSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1240,6 +1545,15 @@ module Google
         #     Instance specified as a json string. String key-value pairs are expected
         #     in the json_instance to render
         #     PointwiseMetricSpec.instance_prompt_template.
+        #
+        #     Note: The following fields are mutually exclusive: `json_instance`, `content_map_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] content_map_instance
+        #   @return [::Google::Cloud::AIPlatform::V1::ContentMap]
+        #     Key-value contents for the mutlimodality input, including text, image,
+        #     video, audio, and pdf, etc. The key is placeholder in metric prompt
+        #     template, and the value is the multimodal content.
+        #
+        #     Note: The following fields are mutually exclusive: `content_map_instance`, `json_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class PointwiseMetricInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1249,7 +1563,28 @@ module Google
         # @!attribute [rw] metric_prompt_template
         #   @return [::String]
         #     Required. Metric prompt template for pointwise metric.
+        # @!attribute [rw] system_instruction
+        #   @return [::String]
+        #     Optional. System instructions for pointwise metric.
+        # @!attribute [rw] custom_output_format_config
+        #   @return [::Google::Cloud::AIPlatform::V1::CustomOutputFormatConfig]
+        #     Optional. CustomOutputFormatConfig allows customization of metric output.
+        #     By default, metrics return a score and explanation.
+        #     When this config is set, the default output is replaced with either:
+        #      - The raw output string.
+        #      - A parsed output based on a user-defined schema.
+        #     If a custom format is chosen, the `score` and `explanation` fields in the
+        #     corresponding metric result will be empty.
         class PointwiseMetricSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Spec for custom output format configuration.
+        # @!attribute [rw] return_raw_output
+        #   @return [::Boolean]
+        #     Optional. Whether to return raw output.
+        class CustomOutputFormatConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1261,7 +1596,28 @@ module Google
         # @!attribute [r] explanation
         #   @return [::String]
         #     Output only. Explanation for pointwise metric score.
+        # @!attribute [r] custom_output
+        #   @return [::Google::Cloud::AIPlatform::V1::CustomOutput]
+        #     Output only. Spec for custom output.
         class PointwiseMetricResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Spec for custom output.
+        # @!attribute [r] raw_outputs
+        #   @return [::Google::Cloud::AIPlatform::V1::RawOutput]
+        #     Output only. List of raw output strings.
+        class CustomOutput
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Raw output.
+        # @!attribute [r] raw_output
+        #   @return [::Array<::String>]
+        #     Output only. Raw output string.
+        class RawOutput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1285,6 +1641,15 @@ module Google
         #     Instance specified as a json string. String key-value pairs are expected
         #     in the json_instance to render
         #     PairwiseMetricSpec.instance_prompt_template.
+        #
+        #     Note: The following fields are mutually exclusive: `json_instance`, `content_map_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] content_map_instance
+        #   @return [::Google::Cloud::AIPlatform::V1::ContentMap]
+        #     Key-value contents for the mutlimodality input, including text, image,
+        #     video, audio, and pdf, etc. The key is placeholder in metric prompt
+        #     template, and the value is the multimodal content.
+        #
+        #     Note: The following fields are mutually exclusive: `content_map_instance`, `json_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class PairwiseMetricInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1294,6 +1659,22 @@ module Google
         # @!attribute [rw] metric_prompt_template
         #   @return [::String]
         #     Required. Metric prompt template for pairwise metric.
+        # @!attribute [rw] candidate_response_field_name
+        #   @return [::String]
+        #     Optional. The field name of the candidate response.
+        # @!attribute [rw] baseline_response_field_name
+        #   @return [::String]
+        #     Optional. The field name of the baseline response.
+        # @!attribute [rw] system_instruction
+        #   @return [::String]
+        #     Optional. System instructions for pairwise metric.
+        # @!attribute [rw] custom_output_format_config
+        #   @return [::Google::Cloud::AIPlatform::V1::CustomOutputFormatConfig]
+        #     Optional. CustomOutputFormatConfig allows customization of metric output.
+        #     When this config is set, the default output is replaced with
+        #     the raw output string.
+        #     If a custom format is chosen, the `pairwise_choice` and `explanation`
+        #     fields in the corresponding metric result will be empty.
         class PairwiseMetricSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1306,6 +1687,9 @@ module Google
         # @!attribute [r] explanation
         #   @return [::String]
         #     Output only. Explanation for pairwise metric score.
+        # @!attribute [r] custom_output
+        #   @return [::Google::Cloud::AIPlatform::V1::CustomOutput]
+        #     Output only. Spec for custom output.
         class PairwiseMetricResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1638,6 +2022,33 @@ module Google
         class MetricxResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Map of placeholder in metric prompt template to contents of model input.
+        # @!attribute [rw] values
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::ContentMap::Contents}]
+        #     Optional. Map of placeholder to contents.
+        class ContentMap
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Repeated Content type.
+          # @!attribute [rw] contents
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::Content>]
+          #     Optional. Repeated contents.
+          class Contents
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AIPlatform::V1::ContentMap::Contents]
+          class ValuesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Pairwise prediction autorater preference.

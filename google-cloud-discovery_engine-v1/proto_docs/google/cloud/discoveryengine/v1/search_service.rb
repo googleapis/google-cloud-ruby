@@ -42,6 +42,25 @@ module Google
         # @!attribute [rw] query
         #   @return [::String]
         #     Raw search query.
+        # @!attribute [rw] page_categories
+        #   @return [::Array<::String>]
+        #     Optional. The categories associated with a category page. Must be set for
+        #     category navigation queries to achieve good search quality. The format
+        #     should be the same as
+        #     {::Google::Cloud::DiscoveryEngine::V1::PageInfo#page_category PageInfo.page_category}.
+        #     This field is the equivalent of the query for browse (navigation) queries.
+        #     It's used by the browse model when the query is empty.
+        #
+        #     If the field is empty, it will not be used by the browse model.
+        #     If the field contains more than one element, only the first element will
+        #     be used.
+        #
+        #     To represent full path of a category, use '>' character to separate
+        #     different hierarchies. If '>' is part of the category name, replace it with
+        #     other character(s).
+        #     For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+        #     4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+        #     > Founders Edition`
         # @!attribute [rw] image_query
         #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ImageQuery]
         #     Raw image query.
@@ -76,6 +95,8 @@ module Google
         #     unset.
         #
         #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+        #
+        #     A large offset may be capped to a reasonable threshold.
         # @!attribute [rw] one_box_page_size
         #   @return [::Integer]
         #     The maximum number of results to return for OneBox.
@@ -186,10 +207,10 @@ module Google
         #     which spell correction takes effect.
         # @!attribute [rw] user_pseudo_id
         #   @return [::String]
-        #     A unique identifier for tracking visitors. For example, this could be
-        #     implemented with an HTTP cookie, which should be able to uniquely identify
-        #     a visitor on a single device. This unique identifier should not change if
-        #     the visitor logs in or out of the website.
+        #     Optional. A unique identifier for tracking visitors. For example, this
+        #     could be implemented with an HTTP cookie, which should be able to uniquely
+        #     identify a visitor on a single device. This unique identifier should not
+        #     change if the visitor logs in or out of the website.
         #
         #     This field should NOT have a fixed value such as `unknown_visitor`.
         #
@@ -203,81 +224,10 @@ module Google
         # @!attribute [rw] content_search_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec]
         #     A specification for configuring the behavior of content search.
-        # @!attribute [rw] safe_search
-        #   @return [::Boolean]
-        #     Whether to turn on safe search. This is only supported for
-        #     website search.
-        # @!attribute [rw] user_labels
-        #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     The user labels applied to a resource must meet the following requirements:
-        #
-        #     * Each resource can have multiple labels, up to a maximum of 64.
-        #     * Each label must be a key-value pair.
-        #     * Keys have a minimum length of 1 character and a maximum length of 63
-        #       characters and cannot be empty. Values can be empty and have a maximum
-        #       length of 63 characters.
-        #     * Keys and values can contain only lowercase letters, numeric characters,
-        #       underscores, and dashes. All characters must use UTF-8 encoding, and
-        #       international characters are allowed.
-        #     * The key portion of a label must be unique. However, you can use the same
-        #       key with multiple resources.
-        #     * Keys must start with a lowercase letter or international character.
-        #
-        #     See [Google Cloud
-        #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-        #     for more details.
-        # @!attribute [rw] search_as_you_type_spec
-        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SearchAsYouTypeSpec]
-        #     Search as you type configuration. Only supported for the
-        #     {::Google::Cloud::DiscoveryEngine::V1::IndustryVertical::MEDIA IndustryVertical.MEDIA}
-        #     vertical.
-        # @!attribute [rw] display_spec
-        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DisplaySpec]
-        #     Optional. Config for display feature, like match highlighting on search
-        #     results.
-        # @!attribute [rw] session
-        #   @return [::String]
-        #     The session resource name. Optional.
-        #
-        #     Session allows users to do multi-turn /search API calls or coordination
-        #     between /search API calls and /answer API calls.
-        #
-        #     Example #1 (multi-turn /search API calls):
-        #       Call /search API with the session ID generated in the first call.
-        #       Here, the previous search query gets considered in query
-        #       standing. I.e., if the first query is "How did Alphabet do in 2022?"
-        #       and the current query is "How about 2023?", the current query will
-        #       be interpreted as "How did Alphabet do in 2023?".
-        #
-        #     Example #2 (coordination between /search API calls and /answer API calls):
-        #       Call /answer API with the session ID generated in the first call.
-        #       Here, the answer generation happens in the context of the search
-        #       results from the first search call.
-        #
-        #     Multi-turn Search feature is currently at private GA stage. Please use
-        #     v1alpha or v1beta version instead before we launch this feature to public
-        #     GA. Or ask for allowlisting through Google Support team.
-        # @!attribute [rw] session_spec
-        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SessionSpec]
-        #     Session specification.
-        #
-        #     Can be used only when `session` is set.
-        # @!attribute [rw] relevance_threshold
-        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceThreshold]
-        #     The relevance threshold of the search results.
-        #
-        #     Default to Google defined threshold, leveraging a balance of
-        #     precision and recall to deliver both highly accurate results and
-        #     comprehensive coverage of relevant information.
-        #
-        #     This feature is not supported for healthcare search.
-        # @!attribute [rw] relevance_score_spec
-        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceScoreSpec]
-        #     Optional. The specification for returning the relevance score.
         # @!attribute [rw] ranking_expression
         #   @return [::String]
-        #     The ranking expression controls the customized ranking on retrieval
-        #     documents. This overrides
+        #     Optional. The ranking expression controls the customized ranking on
+        #     retrieval documents. This overrides
         #     {::Google::Cloud::DiscoveryEngine::V1::ServingConfig#ranking_expression ServingConfig.ranking_expression}.
         #     The syntax and supported features depend on the
         #     `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -368,7 +318,100 @@ module Google
         #       * `base_rank`: the default rank of the result
         # @!attribute [rw] ranking_expression_backend
         #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RankingExpressionBackend]
-        #     The backend to use for the ranking expression evaluation.
+        #     Optional. The backend to use for the ranking expression evaluation.
+        # @!attribute [rw] safe_search
+        #   @return [::Boolean]
+        #     Whether to turn on safe search. This is only supported for
+        #     website search.
+        # @!attribute [rw] user_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The user labels applied to a resource must meet the following requirements:
+        #
+        #     * Each resource can have multiple labels, up to a maximum of 64.
+        #     * Each label must be a key-value pair.
+        #     * Keys have a minimum length of 1 character and a maximum length of 63
+        #       characters and cannot be empty. Values can be empty and have a maximum
+        #       length of 63 characters.
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #       underscores, and dashes. All characters must use UTF-8 encoding, and
+        #       international characters are allowed.
+        #     * The key portion of a label must be unique. However, you can use the same
+        #       key with multiple resources.
+        #     * Keys must start with a lowercase letter or international character.
+        #
+        #     See [Google Cloud
+        #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+        #     for more details.
+        # @!attribute [rw] natural_language_query_understanding_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::NaturalLanguageQueryUnderstandingSpec]
+        #     Optional. Config for natural language query understanding capabilities,
+        #     such as extracting structured field filters from the query. Refer to [this
+        #     documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+        #     for more information.
+        #     If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+        #     natural language query understanding will be done.
+        # @!attribute [rw] search_as_you_type_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SearchAsYouTypeSpec]
+        #     Search as you type configuration. Only supported for the
+        #     {::Google::Cloud::DiscoveryEngine::V1::IndustryVertical::MEDIA IndustryVertical.MEDIA}
+        #     vertical.
+        # @!attribute [rw] display_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DisplaySpec]
+        #     Optional. Config for display feature, like match highlighting on search
+        #     results.
+        # @!attribute [rw] crowding_specs
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::CrowdingSpec>]
+        #     Optional. Crowding specifications for improving result diversity.
+        #     If multiple CrowdingSpecs are specified, crowding will be evaluated on
+        #     each unique combination of the `field` values, and max_count will be the
+        #     maximum value of `max_count` across all CrowdingSpecs.
+        #     For example, if the first CrowdingSpec has `field` = "color" and
+        #     `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+        #     `max_count` = 2, then after 3 documents that share the same color AND size
+        #     have been returned, subsequent ones should be
+        #     removed or demoted.
+        # @!attribute [rw] session
+        #   @return [::String]
+        #     The session resource name. Optional.
+        #
+        #     Session allows users to do multi-turn /search API calls or coordination
+        #     between /search API calls and /answer API calls.
+        #
+        #     Example #1 (multi-turn /search API calls):
+        #       Call /search API with the session ID generated in the first call.
+        #       Here, the previous search query gets considered in query
+        #       standing. I.e., if the first query is "How did Alphabet do in 2022?"
+        #       and the current query is "How about 2023?", the current query will
+        #       be interpreted as "How did Alphabet do in 2023?".
+        #
+        #     Example #2 (coordination between /search API calls and /answer API calls):
+        #       Call /answer API with the session ID generated in the first call.
+        #       Here, the answer generation happens in the context of the search
+        #       results from the first search call.
+        #
+        #     Multi-turn Search feature is currently at private GA stage. Please use
+        #     v1alpha or v1beta version instead before we launch this feature to public
+        #     GA. Or ask for allowlisting through Google Support team.
+        # @!attribute [rw] session_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SessionSpec]
+        #     Session specification.
+        #
+        #     Can be used only when `session` is set.
+        # @!attribute [rw] relevance_threshold
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceThreshold]
+        #     The global relevance threshold of the search results.
+        #
+        #     Defaults to Google defined threshold, leveraging a balance of
+        #     precision and recall to deliver both highly accurate results and
+        #     comprehensive coverage of relevant information.
+        #
+        #     If more granular relevance filtering is required, use the
+        #     `relevance_filter_spec` instead.
+        #
+        #     This feature is not supported for healthcare search.
+        # @!attribute [rw] relevance_score_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceScoreSpec]
+        #     Optional. The specification for returning the relevance score.
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -391,6 +434,8 @@ module Google
           #     Required. Full resource name of
           #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}, such as
           #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`.
+          #     The path must include the project number, project id is not supported for
+          #     this field.
           # @!attribute [rw] filter
           #   @return [::String]
           #     Optional. Filter specification to filter documents in the data store
@@ -429,7 +474,6 @@ module Google
           # @!attribute [rw] excluded_filter_keys
           #   @return [::Array<::String>]
           #     List of keys to exclude when faceting.
-          #
           #
           #     By default,
           #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::FacetSpec::FacetKey#key FacetKey.key}
@@ -1025,6 +1069,77 @@ module Google
             end
           end
 
+          # Specification to enable natural language understanding capabilities for
+          # search requests.
+          # @!attribute [rw] filter_extraction_condition
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::NaturalLanguageQueryUnderstandingSpec::FilterExtractionCondition]
+          #     The condition under which filter extraction should occur.
+          #     Server behavior defaults to `DISABLED`.
+          # @!attribute [rw] geo_search_query_detection_field_names
+          #   @return [::Array<::String>]
+          #     Field names used for location-based filtering, where geolocation filters
+          #     are detected in natural language search queries.
+          #     Only valid when the FilterExtractionCondition is set to `ENABLED`.
+          #
+          #     If this field is set, it overrides the field names set in
+          #     [ServingConfig.geo_search_query_detection_field_names][google.cloud.discoveryengine.v1.ServingConfig.geo_search_query_detection_field_names].
+          # @!attribute [rw] extracted_filter_behavior
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::NaturalLanguageQueryUnderstandingSpec::ExtractedFilterBehavior]
+          #     Optional. Controls behavior of how extracted filters are applied to the
+          #     search. The default behavior depends on the request. For single datastore
+          #     structured search, the default is `HARD_FILTER`. For multi-datastore
+          #     search, the default behavior is `SOFT_BOOST`.
+          #     Location-based filters are always applied as hard filters, and the
+          #     `SOFT_BOOST` setting will not affect them.
+          #     This field is only used if
+          #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::NaturalLanguageQueryUnderstandingSpec::FilterExtractionCondition SearchRequest.NaturalLanguageQueryUnderstandingSpec.FilterExtractionCondition}
+          #     is set to
+          #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::NaturalLanguageQueryUnderstandingSpec::FilterExtractionCondition::ENABLED FilterExtractionCondition.ENABLED}.
+          # @!attribute [rw] allowed_field_names
+          #   @return [::Array<::String>]
+          #     Optional. Allowlist of fields that can be used for natural language
+          #     filter extraction. By default, if this is unspecified, all indexable
+          #     fields are eligible for natural language filter extraction (but are not
+          #     guaranteed to be used). If any fields are specified in
+          #     allowed_field_names, only the fields that are both marked as indexable in
+          #     the schema and specified in the allowlist will be eligible for natural
+          #     language filter extraction. Note: for multi-datastore search, this is not
+          #     yet supported, and will be ignored.
+          class NaturalLanguageQueryUnderstandingSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum describing under which condition filter extraction should occur.
+            module FilterExtractionCondition
+              # Server behavior defaults to `DISABLED`.
+              CONDITION_UNSPECIFIED = 0
+
+              # Disables NL filter extraction.
+              DISABLED = 1
+
+              # Enables NL filter extraction.
+              ENABLED = 2
+            end
+
+            # Enum describing how extracted filters are applied to the search.
+            module ExtractedFilterBehavior
+              # `EXTRACTED_FILTER_BEHAVIOR_UNSPECIFIED` will use the default behavior
+              # for extracted filters. For single datastore search, the default is to
+              # apply as hard filters. For multi-datastore search, the default is to
+              # apply as soft boosts.
+              EXTRACTED_FILTER_BEHAVIOR_UNSPECIFIED = 0
+
+              # Applies all extracted filters as hard filters on the results. Results
+              # that do not pass the extracted filters will not be returned in the
+              # result set.
+              HARD_FILTER = 1
+
+              # Applies all extracted filters as soft boosts. Results that pass the
+              # filters will be boosted up to higher ranks in the result set.
+              SOFT_BOOST = 2
+            end
+          end
+
           # Specification for search as you type in search requests.
           # @!attribute [rw] condition
           #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SearchAsYouTypeSpec::Condition]
@@ -1071,6 +1186,45 @@ module Google
 
               # Enables match highlighting on all documents.
               MATCH_HIGHLIGHTING_ENABLED = 2
+            end
+          end
+
+          # Specification for crowding. Crowding improves the diversity of search
+          # results by limiting the number of results that share the same field value.
+          # For example, crowding on the color field with a max_count of 3 and mode
+          # DROP_CROWDED_RESULTS will return at most 3 results with the same color
+          # across all pages.
+          # @!attribute [rw] field
+          #   @return [::String]
+          #     The field to use for crowding. Documents can be crowded by a field in the
+          #     {::Google::Cloud::DiscoveryEngine::V1::Document Document} object. Crowding
+          #     field is case sensitive.
+          # @!attribute [rw] max_count
+          #   @return [::Integer]
+          #     The maximum number of documents to keep per value of the field. Once
+          #     there are at least max_count previous results which contain the same
+          #     value for the given field (according to the order specified in
+          #     `order_by`), later results with the same value are "crowded away".
+          #     If not specified, the default value is 1.
+          # @!attribute [rw] mode
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::CrowdingSpec::Mode]
+          #     Mode to use for documents that are crowded away.
+          class CrowdingSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum describing the mode to use for documents that are crowded away.
+            # They can be dropped or demoted to the later pages.
+            module Mode
+              # Unspecified crowding mode. In this case, server behavior defaults to
+              # {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::CrowdingSpec::Mode::DROP_CROWDED_RESULTS Mode.DROP_CROWDED_RESULTS}.
+              MODE_UNSPECIFIED = 0
+
+              # Drop crowded results.
+              DROP_CROWDED_RESULTS = 1
+
+              # Demote crowded results to the later pages.
+              DEMOTE_CROWDED_RESULTS_TO_END = 2
             end
           end
 
@@ -1148,6 +1302,30 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # The backend to use for the ranking expression evaluation.
+          module RankingExpressionBackend
+            # Default option for unspecified/unknown values.
+            RANKING_EXPRESSION_BACKEND_UNSPECIFIED = 0
+
+            # Deprecated: Use `RANK_BY_EMBEDDING` instead.
+            # Ranking by custom embedding model, the default way to evaluate the
+            # ranking expression. Legacy enum option, `RANK_BY_EMBEDDING` should be
+            # used instead.
+            BYOE = 1
+
+            # Deprecated: Use `RANK_BY_FORMULA` instead.
+            # Ranking by custom formula. Legacy enum option, `RANK_BY_FORMULA` should
+            # be used instead.
+            CLEARBOX = 2
+
+            # Ranking by custom embedding model, the default way to evaluate the
+            # ranking expression.
+            RANK_BY_EMBEDDING = 3
+
+            # Ranking by custom formula.
+            RANK_BY_FORMULA = 4
+          end
+
           # The relevance threshold of the search results. The higher relevance
           # threshold is, the higher relevant results are shown and the less number of
           # results are returned.
@@ -1167,19 +1345,6 @@ module Google
 
             # High relevance threshold.
             HIGH = 4
-          end
-
-          # The backend to use for the ranking expression evaluation.
-          module RankingExpressionBackend
-            # Default option for unspecified/unknown values.
-            RANKING_EXPRESSION_BACKEND_UNSPECIFIED = 0
-
-            # Ranking by custom embedding model, the default way to evaluate the
-            # ranking expression.
-            RANK_BY_EMBEDDING = 3
-
-            # Ranking by custom formula.
-            RANK_BY_FORMULA = 4
           end
         end
 
@@ -1234,6 +1399,10 @@ module Google
         # @!attribute [rw] query_expansion_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::QueryExpansionInfo]
         #     Query expansion information for the returned results.
+        # @!attribute [r] natural_language_query_understanding_info
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::NaturalLanguageQueryUnderstandingInfo]
+        #     Output only. Natural language query understanding information for the
+        #     returned results.
         # @!attribute [rw] session_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SessionInfo]
         #     Session information.
@@ -1244,6 +1413,9 @@ module Google
         # @!attribute [rw] search_link_promotions
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchLinkPromotion>]
         #     Promotions for site search.
+        # @!attribute [r] semantic_state
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SemanticState]
+        #     Output only. Indicates the semantic state of the search response.
         class SearchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1268,10 +1440,56 @@ module Google
           #     Output only. Google provided available scores.
           # @!attribute [rw] rank_signals
           #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult::RankSignals]
-          #     A set of ranking signals associated with the result.
+          #     Optional. A set of ranking signals associated with the result.
           class SearchResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # A set of ranking signals.
+            # @!attribute [rw] keyword_similarity_score
+            #   @return [::Float]
+            #     Optional. Keyword matching adjustment.
+            # @!attribute [rw] relevance_score
+            #   @return [::Float]
+            #     Optional. Semantic relevance adjustment.
+            # @!attribute [rw] semantic_similarity_score
+            #   @return [::Float]
+            #     Optional. Semantic similarity adjustment.
+            # @!attribute [rw] pctr_rank
+            #   @return [::Float]
+            #     Optional. Predicted conversion rate adjustment as a rank.
+            # @!attribute [rw] topicality_rank
+            #   @return [::Float]
+            #     Optional. Topicality adjustment as a rank.
+            # @!attribute [rw] document_age
+            #   @return [::Float]
+            #     Optional. Age of the document in hours.
+            # @!attribute [rw] boosting_factor
+            #   @return [::Float]
+            #     Optional. Combined custom boosts for a doc.
+            # @!attribute [rw] default_rank
+            #   @return [::Float]
+            #     Optional. The default rank of the result.
+            # @!attribute [rw] custom_signals
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult::RankSignals::CustomSignal>]
+            #     Optional. A list of custom clearbox signals.
+            class RankSignals
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Custom clearbox signal represented by name and value pair.
+              # @!attribute [rw] name
+              #   @return [::String]
+              #     Optional. Name of the signal.
+              # @!attribute [rw] value
+              #   @return [::Float]
+              #     Optional. Float value representing the ranking signal (e.g. 1.25 for
+              #     BM25).
+              class CustomSignal
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
 
             # @!attribute [rw] key
             #   @return [::String]
@@ -1280,51 +1498,6 @@ module Google
             class ModelScoresEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
-            end
-
-            # A set of ranking signals.
-            # @!attribute [rw] keyword_similarity_score
-            #   @return [::Float]
-            #     Keyword matching adjustment.
-            # @!attribute [rw] relevance_score
-            #   @return [::Float]
-            #     Semantic relevance adjustment.
-            # @!attribute [rw] semantic_similarity_score
-            #   @return [::Float]
-            #     Semantic similarity adjustment.
-            # @!attribute [rw] pctr_rank
-            #   @return [::Float]
-            #     Predicted conversion rate adjustment as a rank.
-            # @!attribute [rw] topicality_rank
-            #   @return [::Float]
-            #     Topicality adjustment as a rank.
-            # @!attribute [rw] document_age
-            #   @return [::Float]
-            #     Age of the document in hours.
-            # @!attribute [rw] boosting_factor
-            #   @return [::Float]
-            #     Combined custom boosts for a doc.
-            # @!attribute [rw] default_rank
-            #   @return [::Float]
-            #     The default rank of the result.
-            # @!attribute [rw] custom_signals
-            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult::RankSignals::CustomSignal>]
-            #     A list of custom clearbox signals.
-            class RankSignals
-              include ::Google::Protobuf::MessageExts
-              extend ::Google::Protobuf::MessageExts::ClassMethods
-
-              # Custom clearbox signal represented by name and value pair.
-              # @!attribute [rw] name
-              #   @return [::String]
-              #     Name of the signal.
-              # @!attribute [rw] value
-              #   @return [::Float]
-              #     Float value representing the ranking signal (e.g. 1.25 for BM25).
-              class CustomSignal
-                include ::Google::Protobuf::MessageExts
-                extend ::Google::Protobuf::MessageExts::ClassMethods
-              end
             end
           end
 
@@ -1570,6 +1743,171 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Information describing what natural language understanding was
+          # done on the input query.
+          # @!attribute [rw] extracted_filters
+          #   @return [::String]
+          #     The filters that were extracted from the input query.
+          # @!attribute [rw] rewritten_query
+          #   @return [::String]
+          #     Rewritten input query minus the extracted filters.
+          # @!attribute [rw] classified_intents
+          #   @return [::Array<::String>]
+          #     The classified intents from the input query.
+          # @!attribute [rw] structured_extracted_filter
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter]
+          #     The filters that were extracted from the input query represented in a
+          #     structured form.
+          class NaturalLanguageQueryUnderstandingInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The filters that were extracted from the input query represented in a
+            # structured form.
+            # @!attribute [rw] expression
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::Expression]
+            #     The expression denoting the filter that was extracted from the input
+            #     query in a structured form. It can be a simple expression denoting a
+            #     single string, numerical or geolocation constraint or a compound
+            #     expression which is a combination of multiple expressions connected
+            #     using logical (OR and AND) operators.
+            class StructuredExtractedFilter
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Constraint expression of a string field.
+              # @!attribute [rw] field_name
+              #   @return [::String]
+              #     Name of the string field as defined in the schema.
+              # @!attribute [rw] values
+              #   @return [::Array<::String>]
+              #     Values of the string field. The record will only be returned if the
+              #     field value matches one of the values specified here.
+              # @!attribute [rw] query_segment
+              #   @return [::String]
+              #     Identifies the keywords within the search query that match a filter.
+              class StringConstraint
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Constraint expression of a number field. Example: price < 100.
+              # @!attribute [rw] field_name
+              #   @return [::String]
+              #     Name of the numerical field as defined in the schema.
+              # @!attribute [rw] comparison
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::NumberConstraint::Comparison]
+              #     The comparison operation performed between the field value and the
+              #     value specified in the constraint.
+              # @!attribute [rw] value
+              #   @return [::Float]
+              #     The value specified in the numerical constraint.
+              # @!attribute [rw] query_segment
+              #   @return [::String]
+              #     Identifies the keywords within the search query that match a filter.
+              class NumberConstraint
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # The comparison operation that was performed.
+                module Comparison
+                  # Undefined comparison operator.
+                  COMPARISON_UNSPECIFIED = 0
+
+                  # Denotes equality `=` operator.
+                  EQUALS = 1
+
+                  # Denotes less than or equal to `<=` operator.
+                  LESS_THAN_EQUALS = 2
+
+                  # Denotes less than `<` operator.
+                  LESS_THAN = 3
+
+                  # Denotes greater than or equal to `>=` operator.
+                  GREATER_THAN_EQUALS = 4
+
+                  # Denotes greater than `>` operator.
+                  GREATER_THAN = 5
+                end
+              end
+
+              # Constraint of a geolocation field.
+              # Name of the geolocation field as defined in the schema.
+              # @!attribute [rw] field_name
+              #   @return [::String]
+              #     The name of the geolocation field as defined in the schema.
+              # @!attribute [rw] address
+              #   @return [::String]
+              #     The reference address that was inferred from the input query. The
+              #     proximity of the reference address to the geolocation field will be
+              #     used to filter the results.
+              # @!attribute [rw] latitude
+              #   @return [::Float]
+              #     The latitude of the geolocation inferred from the input query.
+              # @!attribute [rw] longitude
+              #   @return [::Float]
+              #     The longitude of the geolocation inferred from the input query.
+              # @!attribute [rw] radius_in_meters
+              #   @return [::Float]
+              #     The radius in meters around the address. The record is returned if
+              #     the location of the geolocation field is within the radius.
+              class GeolocationConstraint
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Logical `And` operator.
+              # @!attribute [rw] expressions
+              #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::Expression>]
+              #     The expressions that were ANDed together.
+              class AndExpression
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Logical `Or` operator.
+              # @!attribute [rw] expressions
+              #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::Expression>]
+              #     The expressions that were ORed together.
+              class OrExpression
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # The expression denoting the filter that was extracted from the input
+              # query.
+              # @!attribute [rw] string_constraint
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::StringConstraint]
+              #     String constraint expression.
+              #
+              #     Note: The following fields are mutually exclusive: `string_constraint`, `number_constraint`, `geolocation_constraint`, `and_expr`, `or_expr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] number_constraint
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::NumberConstraint]
+              #     Numerical constraint expression.
+              #
+              #     Note: The following fields are mutually exclusive: `number_constraint`, `string_constraint`, `geolocation_constraint`, `and_expr`, `or_expr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] geolocation_constraint
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::GeolocationConstraint]
+              #     Geolocation constraint expression.
+              #
+              #     Note: The following fields are mutually exclusive: `geolocation_constraint`, `string_constraint`, `number_constraint`, `and_expr`, `or_expr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] and_expr
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::AndExpression]
+              #     Logical "And" compound operator connecting multiple expressions.
+              #
+              #     Note: The following fields are mutually exclusive: `and_expr`, `string_constraint`, `number_constraint`, `geolocation_constraint`, `or_expr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] or_expr
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::OrExpression]
+              #     Logical "Or" compound operator connecting multiple expressions.
+              #
+              #     Note: The following fields are mutually exclusive: `or_expr`, `string_constraint`, `number_constraint`, `geolocation_constraint`, `and_expr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              class Expression
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+          end
+
           # Information about the session.
           # @!attribute [rw] name
           #   @return [::String]
@@ -1588,6 +1926,18 @@ module Google
           class SessionInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Semantic state of the search response.
+          module SemanticState
+            # Default value. Should not be used.
+            SEMANTIC_STATE_UNSPECIFIED = 0
+
+            # Semantic search was disabled for this search response.
+            DISABLED = 1
+
+            # Semantic search was enabled for this search response.
+            ENABLED = 2
           end
         end
       end

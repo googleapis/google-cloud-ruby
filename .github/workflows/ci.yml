@@ -27,9 +27,6 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            ruby: "3.1"
-            task: "--test"
-          - os: ubuntu-latest
             ruby: "3.2"
             task: "--test"
           - os: ubuntu-latest
@@ -39,13 +36,17 @@ jobs:
             ruby: "3.4"
             task: "--test"
           - os: ubuntu-latest
-            ruby: "3.4"
-            task: "--rubocop-toplevel --rubocop --build --yard --linkinator"
+            ruby: "4.0"
+            task: "--test"
+          - os: ubuntu-latest
+            ruby: "4.0"
+            # (b/515549177): Disabled linkinator globally due to broken external doc links.
+            task: "--rubocop-toplevel --rubocop --build --yard"
           - os: macos-latest
-            ruby: "3.4"
+            ruby: "4.0"
             task: "--test"
           - os: windows-latest
-            ruby: "3.4"
+            ruby: "4.0"
             task: "--test"
       fail-fast: false
     runs-on: ${{ matrix.os }}

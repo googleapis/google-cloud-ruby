@@ -11,32 +11,10 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n6google/ads/admanager/v1/cms_metadata_key_service.proto\x12\x17google.ads.admanager.v1\x1a\x37google/ads/admanager/v1/cms_metadata_key_messages.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"Y\n\x18GetCmsMetadataKeyRequest\x12=\n\x04name\x18\x01 \x01(\tB/\xe0\x41\x02\xfa\x41)\n\'admanager.googleapis.com/CmsMetadataKey\"\xc6\x01\n\x1aListCmsMetadataKeysRequest\x12\x38\n\x06parent\x18\x01 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n admanager.googleapis.com/Network\x12\x16\n\tpage_size\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\npage_token\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12\x13\n\x06\x66ilter\x18\x04 \x01(\tB\x03\xe0\x41\x01\x12\x15\n\x08order_by\x18\x05 \x01(\tB\x03\xe0\x41\x01\x12\x11\n\x04skip\x18\x06 \x01(\x05\x42\x03\xe0\x41\x01\"\x8e\x01\n\x1bListCmsMetadataKeysResponse\x12\x42\n\x11\x63ms_metadata_keys\x18\x01 \x03(\x0b\x32\'.google.ads.admanager.v1.CmsMetadataKey\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\x12\x12\n\ntotal_size\x18\x03 \x01(\x05\x32\xc7\x03\n\x15\x43msMetadataKeyService\x12\xa7\x01\n\x11GetCmsMetadataKey\x12\x31.google.ads.admanager.v1.GetCmsMetadataKeyRequest\x1a\'.google.ads.admanager.v1.CmsMetadataKey\"6\xda\x41\x04name\x82\xd3\xe4\x93\x02)\x12\'/v1/{name=networks/*/cmsMetadataKeys/*}\x12\xba\x01\n\x13ListCmsMetadataKeys\x12\x33.google.ads.admanager.v1.ListCmsMetadataKeysRequest\x1a\x34.google.ads.admanager.v1.ListCmsMetadataKeysResponse\"8\xda\x41\x06parent\x82\xd3\xe4\x93\x02)\x12\'/v1/{parent=networks/*}/cmsMetadataKeys\x1aG\xca\x41\x18\x61\x64manager.googleapis.com\xd2\x41)https://www.googleapis.com/auth/admanagerB\xce\x01\n\x1b\x63om.google.ads.admanager.v1B\x1a\x43msMetadataKeyServiceProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n6google/ads/admanager/v1/cms_metadata_key_service.proto\x12\x17google.ads.admanager.v1\x1a\x37google/ads/admanager/v1/cms_metadata_key_messages.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"Y\n\x18GetCmsMetadataKeyRequest\x12=\n\x04name\x18\x01 \x01(\tB/\xe0\x41\x02\xfa\x41)\n\'admanager.googleapis.com/CmsMetadataKey\"\xc6\x01\n\x1aListCmsMetadataKeysRequest\x12\x38\n\x06parent\x18\x01 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n admanager.googleapis.com/Network\x12\x16\n\tpage_size\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\npage_token\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12\x13\n\x06\x66ilter\x18\x04 \x01(\tB\x03\xe0\x41\x01\x12\x15\n\x08order_by\x18\x05 \x01(\tB\x03\xe0\x41\x01\x12\x11\n\x04skip\x18\x06 \x01(\x05\x42\x03\xe0\x41\x01\"\x8e\x01\n\x1bListCmsMetadataKeysResponse\x12\x42\n\x11\x63ms_metadata_keys\x18\x01 \x03(\x0b\x32\'.google.ads.admanager.v1.CmsMetadataKey\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\x12\x12\n\ntotal_size\x18\x03 \x01(\x05\"\x9f\x01\n#BatchActivateCmsMetadataKeysRequest\x12\x38\n\x06parent\x18\x01 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n admanager.googleapis.com/Network\x12>\n\x05names\x18\x02 \x03(\tB/\xe0\x41\x02\xfa\x41)\n\'admanager.googleapis.com/CmsMetadataKey\"&\n$BatchActivateCmsMetadataKeysResponse\"\xa1\x01\n%BatchDeactivateCmsMetadataKeysRequest\x12\x38\n\x06parent\x18\x01 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n admanager.googleapis.com/Network\x12>\n\x05names\x18\x02 \x03(\tB/\xe0\x41\x02\xfa\x41)\n\'admanager.googleapis.com/CmsMetadataKey\"(\n&BatchDeactivateCmsMetadataKeysResponse2\xe0\x07\n\x15\x43msMetadataKeyService\x12\xa7\x01\n\x11GetCmsMetadataKey\x12\x31.google.ads.admanager.v1.GetCmsMetadataKeyRequest\x1a\'.google.ads.admanager.v1.CmsMetadataKey\"6\xda\x41\x04name\x82\xd3\xe4\x93\x02)\x12\'/v1/{name=networks/*/cmsMetadataKeys/*}\x12\xba\x01\n\x13ListCmsMetadataKeys\x12\x33.google.ads.admanager.v1.ListCmsMetadataKeysRequest\x1a\x34.google.ads.admanager.v1.ListCmsMetadataKeysResponse\"8\xda\x41\x06parent\x82\xd3\xe4\x93\x02)\x12\'/v1/{parent=networks/*}/cmsMetadataKeys\x12\xec\x01\n\x1c\x42\x61tchActivateCmsMetadataKeys\x12<.google.ads.admanager.v1.BatchActivateCmsMetadataKeysRequest\x1a=.google.ads.admanager.v1.BatchActivateCmsMetadataKeysResponse\"O\xda\x41\x0cparent,names\x82\xd3\xe4\x93\x02:\"5/v1/{parent=networks/*}/cmsMetadataKeys:batchActivate:\x01*\x12\xf4\x01\n\x1e\x42\x61tchDeactivateCmsMetadataKeys\x12>.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysRequest\x1a?.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysResponse\"Q\xda\x41\x0cparent,names\x82\xd3\xe4\x93\x02<\"7/v1/{parent=networks/*}/cmsMetadataKeys:batchDeactivate:\x01*\x1az\xca\x41\x18\x61\x64manager.googleapis.com\xd2\x41\\https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonlyB\xce\x01\n\x1b\x63om.google.ads.admanager.v1B\x1a\x43msMetadataKeyServiceProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
-pool = Google::Protobuf::DescriptorPool.generated_pool
-
-begin
-  pool.add_serialized_file(descriptor_data)
-rescue TypeError
-  # Compatibility code: will be removed in the next major version.
-  require 'google/protobuf/descriptor_pb'
-  parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
-  parsed.clear_dependency
-  serialized = parsed.class.encode(parsed)
-  file = pool.add_serialized_file(serialized)
-  warn "Warning: Protobuf detected an import path issue while loading generated file #{__FILE__}"
-  imports = [
-    ["google.ads.admanager.v1.CmsMetadataKey", "google/ads/admanager/v1/cms_metadata_key_messages.proto"],
-  ]
-  imports.each do |type_name, expected_filename|
-    import_file = pool.lookup(type_name).file_descriptor
-    if import_file.name != expected_filename
-      warn "- #{file.name} imports #{expected_filename}, but that import was loaded as #{import_file.name}"
-    end
-  end
-  warn "Each proto file must use a consistent fully-qualified name."
-  warn "This will become an error in the next major version."
-end
+pool = ::Google::Protobuf::DescriptorPool.generated_pool
+pool.add_serialized_file(descriptor_data)
 
 module Google
   module Ads
@@ -45,6 +23,10 @@ module Google
         GetCmsMetadataKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.GetCmsMetadataKeyRequest").msgclass
         ListCmsMetadataKeysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.ListCmsMetadataKeysRequest").msgclass
         ListCmsMetadataKeysResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.ListCmsMetadataKeysResponse").msgclass
+        BatchActivateCmsMetadataKeysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.BatchActivateCmsMetadataKeysRequest").msgclass
+        BatchActivateCmsMetadataKeysResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.BatchActivateCmsMetadataKeysResponse").msgclass
+        BatchDeactivateCmsMetadataKeysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysRequest").msgclass
+        BatchDeactivateCmsMetadataKeysResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysResponse").msgclass
       end
     end
   end

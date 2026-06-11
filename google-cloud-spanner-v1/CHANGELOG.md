@@ -1,5 +1,49 @@
 # Release History
 
+### 1.18.0 (2026-05-06)
+
+#### Features
+
+* `isolation_level` and `read_lock_mode` are added to message `.google.spanner.v1.CommitResponse` ([#33894](https://github.com/googleapis/google-cloud-ruby/issues/33894)) 
+* add cache updates API ([#33902](https://github.com/googleapis/google-cloud-ruby/issues/33902)) 
+
+### 1.17.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33482](https://github.com/googleapis/google-cloud-ruby/issues/33482)) 
+
+### 1.17.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33439](https://github.com/googleapis/google-cloud-ruby/issues/33439)) 
+
+### 1.16.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.15.0 (2026-03-05)
+
+#### Features
+
+* include cache updates and routing hint into BeginTransaction and Commit request/response respectively ([#32790](https://github.com/googleapis/google-cloud-ruby/issues/32790)) 
+
+### 1.14.0 (2026-02-18)
+
+#### Features
+
+* include cache updates into the ResultSet response ([#32416](https://github.com/googleapis/google-cloud-ruby/issues/32416)) 
+
+### 1.13.0 (2026-01-13)
+
+#### Features
+
+* add a ClientContext field to Spanner requests ([#32336](https://github.com/googleapis/google-cloud-ruby/issues/32336)) 
+* add Secure Parameters to the ClientContext 
+
 ### 1.12.1 (2025-11-21)
 
 #### Documentation

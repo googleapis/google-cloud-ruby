@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module ServiceDirectory
-      VERSION = "2.0.2".freeze
+      VERSION = "2.1.0".freeze
     end
   end
 end

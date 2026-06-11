@@ -46,6 +46,9 @@ module Google
           # @!attribute [rw] placeholders
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Generator::Placeholder>]
           #     Optional. List of custom placeholders in the prompt text.
+          # @!attribute [rw] llm_model_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::LlmModelSettings]
+          #     The LLM model settings.
           # @!attribute [rw] model_parameter
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Generator::ModelParameter]
           #     Parameters passed to the LLM to configure its behavior.

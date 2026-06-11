@@ -704,6 +704,7 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     parent = "hello world"
     source_model = "hello world"
     encryption_spec = {}
+    custom_service_account = "hello world"
 
     copy_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -719,27 +720,27 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
         end
 
         # Use hash object
-        client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec }) do |_result, response|
+        client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.copy_model model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec do |_result, response|
+        client.copy_model model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.copy_model ::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec) do |_result, response|
+        client.copy_model ::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec }, call_options) do |_result, response|
+        client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.copy_model(::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec), call_options) do |_result, response|
+        client.copy_model(::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

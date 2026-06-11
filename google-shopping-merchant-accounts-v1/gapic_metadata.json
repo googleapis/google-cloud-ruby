@@ -131,6 +131,11 @@
                 "create_and_configure_account"
               ]
             },
+            "CreateTestAccount": {
+              "methods": [
+                "create_test_account"
+              ]
+            },
             "DeleteAccount": {
               "methods": [
                 "delete_account"

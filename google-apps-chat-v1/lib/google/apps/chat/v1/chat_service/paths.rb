@@ -130,6 +130,42 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Section resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `users/{user}/sections/{section}`
+            #
+            # @param user [String]
+            # @param section [String]
+            #
+            # @return [::String]
+            def section_path user:, section:
+              raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+
+              "users/#{user}/sections/#{section}"
+            end
+
+            ##
+            # Create a fully-qualified SectionItem resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `users/{user}/sections/{section}/items/{item}`
+            #
+            # @param user [String]
+            # @param section [String]
+            # @param item [String]
+            #
+            # @return [::String]
+            def section_item_path user:, section:, item:
+              raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+              raise ::ArgumentError, "section cannot contain /" if section.to_s.include? "/"
+
+              "users/#{user}/sections/#{section}/items/#{item}"
+            end
+
+            ##
             # Create a fully-qualified Space resource string.
             #
             # The resource will be in the following format:
@@ -228,6 +264,20 @@ module Google
               raise ::ArgumentError, "space cannot contain /" if space.to_s.include? "/"
 
               "users/#{user}/spaces/#{space}/threads/#{thread}/threadReadState"
+            end
+
+            ##
+            # Create a fully-qualified User resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `users/{user}`
+            #
+            # @param user [String]
+            #
+            # @return [::String]
+            def user_path user:
+              "users/#{user}"
             end
 
             extend self

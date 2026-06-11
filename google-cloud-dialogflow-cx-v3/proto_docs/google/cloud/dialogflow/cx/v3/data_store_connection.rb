@@ -107,6 +107,9 @@ module Google
             # @!attribute [rw] text
             #   @return [::String]
             #     Text included in the prompt.
+            # @!attribute [rw] metadata
+            #   @return [::Google::Protobuf::Struct]
+            #     Metadata associated with the document.
             class SearchSnippet
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

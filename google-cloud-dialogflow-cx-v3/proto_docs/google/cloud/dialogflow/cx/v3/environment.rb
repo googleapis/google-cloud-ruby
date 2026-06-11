@@ -65,11 +65,13 @@ module Google
             # Configuration for the version.
             # @!attribute [rw] version
             #   @return [::String]
-            #     Required. Both flow and playbook versions are supported.
+            #     Required. Flow, playbook and tool versions are supported.
             #     Format for flow version:
             #     projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>.
             #     Format for playbook version:
             #     projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>/versions/<VersionID>.
+            #     Format for tool version:
+            #     projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/tools/<ToolID>/versions/<VersionID>.
             class VersionConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

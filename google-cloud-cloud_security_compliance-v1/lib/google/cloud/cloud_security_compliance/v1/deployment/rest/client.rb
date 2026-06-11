@@ -255,7 +255,9 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource of the framework deployment in the format
-              #     `organizations/{organization}/locations/{location}`.
+              #     `organizations/{organization}/locations/{location}`
+              #     or
+              #     `projects/{project}/locations/{location}`.
               #     Only the global location is supported.
               #   @param framework_deployment_id [::String]
               #     Optional. An identifier for the framework deployment that's unique in scope
@@ -351,7 +353,9 @@ module Google
               #   @param name [::String]
               #     Required. The name of the framework deployment that you want to delete,
               #     in the format
-              #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+              #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}`
+              #     or
+              #     `projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}`.
               #     The only supported location is `global`.
               #   @param etag [::String]
               #     Optional. An opaque identifier for the current version of the resource.
@@ -449,7 +453,9 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name of the framework deployment, in the format
-              #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+              #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}`
+              #     or
+              #     `projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}`.
               #     The only supported location is `global`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudSecurityCompliance::V1::FrameworkDeployment]
@@ -529,7 +535,9 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource of the framework deployment, in the format
-              #     `organizations/{organization}/locations/{location}`.
+              #     `organizations/{organization}/locations/{location}`
+              #     or
+              #     `projects/{project}/locations/{location}`.
               #     The only supported location is `global`.
               #   @param page_size [::Integer]
               #     Optional. The requested page size. The server might return fewer items than
@@ -633,7 +641,9 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name for the cloud control deployment, in the format
-              #     `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}`.
+              #     `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}`
+              #     or
+              #     `projects/{project}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}`.
               #     The only supported location is `global`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudSecurityCompliance::V1::CloudControlDeployment]
@@ -713,8 +723,9 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource for the cloud control deployment, in the
-              #     format `organizations/{organization}/locations/{location}`. The only
-              #     supported location is `global`.
+              #     format `organizations/{organization}/locations/{location}` or
+              #     `projects/{project}/locations/{location}`.
+              #     The only supported location is `global`.
               #   @param page_size [::Integer]
               #     Optional. The requested page size. The server might return fewer items than
               #     you requested.

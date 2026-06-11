@@ -1,0 +1,305 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.networkconnectivity.v1beta",
+  "libraryPackage": "::Google::Cloud::NetworkConnectivity::V1beta",
+  "services": {
+    "DataTransferService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client",
+          "rpcs": {
+            "ListMulticloudDataTransferConfigs": {
+              "methods": [
+                "list_multicloud_data_transfer_configs"
+              ]
+            },
+            "GetMulticloudDataTransferConfig": {
+              "methods": [
+                "get_multicloud_data_transfer_config"
+              ]
+            },
+            "CreateMulticloudDataTransferConfig": {
+              "methods": [
+                "create_multicloud_data_transfer_config"
+              ]
+            },
+            "UpdateMulticloudDataTransferConfig": {
+              "methods": [
+                "update_multicloud_data_transfer_config"
+              ]
+            },
+            "DeleteMulticloudDataTransferConfig": {
+              "methods": [
+                "delete_multicloud_data_transfer_config"
+              ]
+            },
+            "ListDestinations": {
+              "methods": [
+                "list_destinations"
+              ]
+            },
+            "GetDestination": {
+              "methods": [
+                "get_destination"
+              ]
+            },
+            "CreateDestination": {
+              "methods": [
+                "create_destination"
+              ]
+            },
+            "UpdateDestination": {
+              "methods": [
+                "update_destination"
+              ]
+            },
+            "DeleteDestination": {
+              "methods": [
+                "delete_destination"
+              ]
+            },
+            "GetMulticloudDataTransferSupportedService": {
+              "methods": [
+                "get_multicloud_data_transfer_supported_service"
+              ]
+            },
+            "ListMulticloudDataTransferSupportedServices": {
+              "methods": [
+                "list_multicloud_data_transfer_supported_services"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "HubService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client",
+          "rpcs": {
+            "ListHubs": {
+              "methods": [
+                "list_hubs"
+              ]
+            },
+            "GetHub": {
+              "methods": [
+                "get_hub"
+              ]
+            },
+            "CreateHub": {
+              "methods": [
+                "create_hub"
+              ]
+            },
+            "UpdateHub": {
+              "methods": [
+                "update_hub"
+              ]
+            },
+            "DeleteHub": {
+              "methods": [
+                "delete_hub"
+              ]
+            },
+            "ListHubSpokes": {
+              "methods": [
+                "list_hub_spokes"
+              ]
+            },
+            "QueryHubStatus": {
+              "methods": [
+                "query_hub_status"
+              ]
+            },
+            "ListSpokes": {
+              "methods": [
+                "list_spokes"
+              ]
+            },
+            "GetSpoke": {
+              "methods": [
+                "get_spoke"
+              ]
+            },
+            "CreateSpoke": {
+              "methods": [
+                "create_spoke"
+              ]
+            },
+            "UpdateSpoke": {
+              "methods": [
+                "update_spoke"
+              ]
+            },
+            "RejectHubSpoke": {
+              "methods": [
+                "reject_hub_spoke"
+              ]
+            },
+            "AcceptHubSpoke": {
+              "methods": [
+                "accept_hub_spoke"
+              ]
+            },
+            "AcceptSpokeUpdate": {
+              "methods": [
+                "accept_spoke_update"
+              ]
+            },
+            "RejectSpokeUpdate": {
+              "methods": [
+                "reject_spoke_update"
+              ]
+            },
+            "DeleteSpoke": {
+              "methods": [
+                "delete_spoke"
+              ]
+            },
+            "GetRouteTable": {
+              "methods": [
+                "get_route_table"
+              ]
+            },
+            "GetRoute": {
+              "methods": [
+                "get_route"
+              ]
+            },
+            "ListRoutes": {
+              "methods": [
+                "list_routes"
+              ]
+            },
+            "ListRouteTables": {
+              "methods": [
+                "list_route_tables"
+              ]
+            },
+            "GetGroup": {
+              "methods": [
+                "get_group"
+              ]
+            },
+            "ListGroups": {
+              "methods": [
+                "list_groups"
+              ]
+            },
+            "UpdateGroup": {
+              "methods": [
+                "update_group"
+              ]
+            },
+            "CreateGatewayAdvertisedRoute": {
+              "methods": [
+                "create_gateway_advertised_route"
+              ]
+            },
+            "GetGatewayAdvertisedRoute": {
+              "methods": [
+                "get_gateway_advertised_route"
+              ]
+            },
+            "ListGatewayAdvertisedRoutes": {
+              "methods": [
+                "list_gateway_advertised_routes"
+              ]
+            },
+            "UpdateGatewayAdvertisedRoute": {
+              "methods": [
+                "update_gateway_advertised_route"
+              ]
+            },
+            "DeleteGatewayAdvertisedRoute": {
+              "methods": [
+                "delete_gateway_advertised_route"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PolicyBasedRoutingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client",
+          "rpcs": {
+            "ListPolicyBasedRoutes": {
+              "methods": [
+                "list_policy_based_routes"
+              ]
+            },
+            "GetPolicyBasedRoute": {
+              "methods": [
+                "get_policy_based_route"
+              ]
+            },
+            "CreatePolicyBasedRoute": {
+              "methods": [
+                "create_policy_based_route"
+              ]
+            },
+            "DeletePolicyBasedRoute": {
+              "methods": [
+                "delete_policy_based_route"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TransportManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client",
+          "rpcs": {
+            "ListRemoteTransportProfiles": {
+              "methods": [
+                "list_remote_transport_profiles"
+              ]
+            },
+            "GetRemoteTransportProfile": {
+              "methods": [
+                "get_remote_transport_profile"
+              ]
+            },
+            "ListTransports": {
+              "methods": [
+                "list_transports"
+              ]
+            },
+            "GetTransport": {
+              "methods": [
+                "get_transport"
+              ]
+            },
+            "GetStatus": {
+              "methods": [
+                "get_status"
+              ]
+            },
+            "CreateTransport": {
+              "methods": [
+                "create_transport"
+              ]
+            },
+            "UpdateTransport": {
+              "methods": [
+                "update_transport"
+              ]
+            },
+            "DeleteTransport": {
+              "methods": [
+                "delete_transport"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

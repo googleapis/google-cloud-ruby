@@ -75,6 +75,11 @@
                 "revert_volume"
               ]
             },
+            "EstablishVolumePeering": {
+              "methods": [
+                "establish_volume_peering"
+              ]
+            },
             "ListSnapshots": {
               "methods": [
                 "list_snapshots"
@@ -308,6 +313,56 @@
             "DeleteQuotaRule": {
               "methods": [
                 "delete_quota_rule"
+              ]
+            },
+            "RestoreBackupFiles": {
+              "methods": [
+                "restore_backup_files"
+              ]
+            },
+            "ListHostGroups": {
+              "methods": [
+                "list_host_groups"
+              ]
+            },
+            "GetHostGroup": {
+              "methods": [
+                "get_host_group"
+              ]
+            },
+            "CreateHostGroup": {
+              "methods": [
+                "create_host_group"
+              ]
+            },
+            "UpdateHostGroup": {
+              "methods": [
+                "update_host_group"
+              ]
+            },
+            "DeleteHostGroup": {
+              "methods": [
+                "delete_host_group"
+              ]
+            },
+            "ExecuteOntapPost": {
+              "methods": [
+                "execute_ontap_post"
+              ]
+            },
+            "ExecuteOntapGet": {
+              "methods": [
+                "execute_ontap_get"
+              ]
+            },
+            "ExecuteOntapDelete": {
+              "methods": [
+                "execute_ontap_delete"
+              ]
+            },
+            "ExecuteOntapPatch": {
+              "methods": [
+                "execute_ontap_patch"
               ]
             }
           }

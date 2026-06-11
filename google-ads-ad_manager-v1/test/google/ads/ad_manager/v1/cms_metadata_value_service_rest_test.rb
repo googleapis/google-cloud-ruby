@@ -191,6 +191,116 @@ class ::Google::Ads::AdManager::V1::CmsMetadataValueService::Rest::ClientTest < 
     end
   end
 
+  def test_batch_activate_cms_metadata_values
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchActivateCmsMetadataValuesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_activate_cms_metadata_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CmsMetadataValueService::Rest::ServiceStub.stub :transcode_batch_activate_cms_metadata_values_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_activate_cms_metadata_values_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::CmsMetadataValueService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_activate_cms_metadata_values({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_activate_cms_metadata_values parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_activate_cms_metadata_values ::Google::Ads::AdManager::V1::BatchActivateCmsMetadataValuesRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_activate_cms_metadata_values({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_activate_cms_metadata_values(::Google::Ads::AdManager::V1::BatchActivateCmsMetadataValuesRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_activate_cms_metadata_values_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_deactivate_cms_metadata_values
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataValuesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_deactivate_cms_metadata_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CmsMetadataValueService::Rest::ServiceStub.stub :transcode_batch_deactivate_cms_metadata_values_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_deactivate_cms_metadata_values_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::CmsMetadataValueService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_deactivate_cms_metadata_values({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_deactivate_cms_metadata_values parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_deactivate_cms_metadata_values ::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataValuesRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_deactivate_cms_metadata_values({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_deactivate_cms_metadata_values(::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataValuesRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_deactivate_cms_metadata_values_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

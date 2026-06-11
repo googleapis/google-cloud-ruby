@@ -67,7 +67,7 @@ module Google
         # Configuration for repricing a Google bill over a period of time.
         # @!attribute [rw] entitlement_granularity
         #   @return [::Google::Cloud::Channel::V1::RepricingConfig::EntitlementGranularity]
-        #     Applies the repricing configuration at the entitlement level.
+        #     Required. Applies the repricing configuration at the entitlement level.
         #
         #     Note: If a
         #     {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}

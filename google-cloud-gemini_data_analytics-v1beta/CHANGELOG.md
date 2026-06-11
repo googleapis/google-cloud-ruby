@@ -1,5 +1,39 @@
 # Changelog
 
+### 0.9.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33478](https://github.com/googleapis/google-cloud-ruby/issues/33478)) 
+
+### 0.9.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33434](https://github.com/googleapis/google-cloud-ruby/issues/33434)) 
+
+### 0.8.0 (2026-03-19)
+
+#### Features
+
+* add `ParameterizedSecureViewParameters` message and field for PSV support 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* upgrade protobuf from v25.7 to v31.0 
+
+### 0.7.0 (2026-02-08)
+
+#### Features
+
+* add ClarificationMessage, thought-signature, formatted-data ([#32410](https://github.com/googleapis/google-cloud-ruby/issues/32410)) 
+
+### 0.6.0 (2026-01-13)
+
+#### Features
+
+* add custom prompt config in the request and return prompt in the response 
+* add LookerGoldenQuery to Context 
+* added sync APIs for the CRUD operations of Data Agent ([#32297](https://github.com/googleapis/google-cloud-ruby/issues/32297)) 
+
 ### 0.5.1 (2025-12-16)
 
 #### Documentation

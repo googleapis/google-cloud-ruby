@@ -370,6 +370,7 @@ class ::Google::Iam::V3beta::PolicyBindings::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
     parent = "hello world"
+    filter = "hello world"
 
     search_target_policy_bindings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -385,27 +386,27 @@ class ::Google::Iam::V3beta::PolicyBindings::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent }) do |_result, response|
+        client.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_target_policy_bindings target: target, page_size: page_size, page_token: page_token, parent: parent do |_result, response|
+        client.search_target_policy_bindings target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_target_policy_bindings ::Google::Iam::V3beta::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent) do |_result, response|
+        client.search_target_policy_bindings ::Google::Iam::V3beta::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent }, call_options) do |_result, response|
+        client.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_target_policy_bindings(::Google::Iam::V3beta::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent), call_options) do |_result, response|
+        client.search_target_policy_bindings(::Google::Iam::V3beta::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

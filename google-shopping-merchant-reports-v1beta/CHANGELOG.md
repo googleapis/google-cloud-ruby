@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.11.0 (2026-04-15)
+
+#### Features
+
+* publish client batch config schema ([#33443](https://github.com/googleapis/google-cloud-ruby/issues/33443)) 
+#### Documentation
+
+* update API common type documentation ([#33450](https://github.com/googleapis/google-cloud-ruby/issues/33450)) 
+* update SelectiveGapicGeneration usage doc ([#33485](https://github.com/googleapis/google-cloud-ruby/issues/33485)) 
+
 ### 0.10.1 (2025-10-27)
 
 #### Documentation

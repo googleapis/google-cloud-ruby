@@ -31,11 +31,23 @@ module Google
         # @!attribute [rw] error_info
         #   @return [::Google::Ads::DataManager::V1::ErrorInfo]
         #     An error info error containing the error reason and error counts related to
-        #     the upload.
+        #     the upload. Only populated if the
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination#request_status `request_status`}
+        #     is
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination::RequestStatus::FAILED `FAILED`}
+        #     or
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination::RequestStatus::PARTIAL_SUCCESS `PARTIAL_SUCCESS`}.
+        #     This field isn't populated while the request has
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination#request_status `request_status`}
+        #     of
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination::RequestStatus::PROCESSING `PROCESSING`}.
         # @!attribute [rw] warning_info
         #   @return [::Google::Ads::DataManager::V1::WarningInfo]
         #     A warning info containing the warning reason and warning counts related to
-        #     the upload.
+        #     the upload. This field isn't populated while the request has
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination#request_status `request_status`}
+        #     of
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination::RequestStatus::PROCESSING `PROCESSING`}.
         # @!attribute [rw] audience_members_ingestion_status
         #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestAudienceMembersStatus]
         #     The status of the ingest audience members request.
@@ -60,17 +72,32 @@ module Google
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestUserDataStatus]
           #     The status of the user data ingestion to the destination.
           #
-          #     Note: The following fields are mutually exclusive: `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mobile_data_ingestion_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestMobileDataStatus]
           #     The status of the mobile data ingestion to the destination.
           #
-          #     Note: The following fields are mutually exclusive: `mobile_data_ingestion_status`, `user_data_ingestion_status`, `pair_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `mobile_data_ingestion_status`, `user_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] pair_data_ingestion_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestPairDataStatus]
           #     The status of the pair data ingestion to the destination.
           #
-          #     Note: The following fields are mutually exclusive: `pair_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `pair_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] user_id_data_ingestion_status
+          #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestUserIdDataStatus]
+          #     The status of the user id data ingestion to the destination.
+          #
+          #     Note: The following fields are mutually exclusive: `user_id_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] ppid_data_ingestion_status
+          #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestPpidDataStatus]
+          #     The status of the ppid data ingestion to the destination.
+          #
+          #     Note: The following fields are mutually exclusive: `ppid_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `composite_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] composite_data_ingestion_status
+          #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestCompositeDataStatus]
+          #     The status of the composite data ingestion to the destination.
+          #
+          #     Note: The following fields are mutually exclusive: `composite_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class IngestAudienceMembersStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -81,17 +108,32 @@ module Google
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemoveUserDataStatus]
           #     The status of the user data removal from the destination.
           #
-          #     Note: The following fields are mutually exclusive: `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mobile_data_removal_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemoveMobileDataStatus]
           #     The status of the mobile data removal from the destination.
           #
-          #     Note: The following fields are mutually exclusive: `mobile_data_removal_status`, `user_data_removal_status`, `pair_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `mobile_data_removal_status`, `user_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] pair_data_removal_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemovePairDataStatus]
           #     The status of the pair data removal from the destination.
           #
-          #     Note: The following fields are mutually exclusive: `pair_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `pair_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] user_id_data_removal_status
+          #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemoveUserIdDataStatus]
+          #     The status of the user id data removal from the destination.
+          #
+          #     Note: The following fields are mutually exclusive: `user_id_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] ppid_data_removal_status
+          #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemovePpidDataStatus]
+          #     The status of the ppid data removal from the destination.
+          #
+          #     Note: The following fields are mutually exclusive: `ppid_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `composite_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] composite_data_removal_status
+          #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemoveCompositeDataStatus]
+          #     The status of the composite data removal from the destination.
+          #
+          #     Note: The following fields are mutually exclusive: `composite_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class RemoveAudienceMembersStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -210,22 +252,167 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # The status of the user id data ingestion to the destination containing
+          # stats related to the ingestion.
+          # @!attribute [rw] record_count
+          #   @return [::Integer]
+          #     The total count of audience members sent in the upload request for the
+          #     destination. Includes all audience members in the request, regardless of
+          #     whether they were successfully ingested or not.
+          # @!attribute [rw] user_id_count
+          #   @return [::Integer]
+          #     The total count of user ids sent in the upload request for the
+          #     destination. Includes all user ids in the request, regardless of
+          #     whether they were successfully ingested or not.
+          class IngestUserIdDataStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The status of the user id data removal from the destination.
+          # @!attribute [rw] record_count
+          #   @return [::Integer]
+          #     The total count of audience members sent in the removal request. Includes
+          #     all audience members in the request, regardless of whether they were
+          #     successfully removed or not.
+          # @!attribute [rw] user_id_count
+          #   @return [::Integer]
+          #     The total count of user ids sent in the removal request. Includes all
+          #     user ids in the request, regardless of whether they were successfully
+          #     removed or not.
+          class RemoveUserIdDataStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The status of the ppid data ingestion to the destination containing stats
+          # related to the ingestion.
+          # @!attribute [rw] record_count
+          #   @return [::Integer]
+          #     The total count of audience members sent in the upload request for the
+          #     destination. Includes all audience members in the request, regardless of
+          #     whether they were successfully ingested or not.
+          # @!attribute [rw] ppid_count
+          #   @return [::Integer]
+          #     The total count of ppids sent in the upload request for the
+          #     destination. Includes all ppids in the request, regardless of
+          #     whether they were successfully ingested or not.
+          class IngestPpidDataStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The status of the ppid data removal from the destination.
+          # @!attribute [rw] record_count
+          #   @return [::Integer]
+          #     The total count of audience members sent in the removal request. Includes
+          #     all audience members in the request, regardless of whether they were
+          #     successfully removed or not.
+          # @!attribute [rw] ppid_count
+          #   @return [::Integer]
+          #     The total count of ppids sent in the removal request. Includes all
+          #     ppids in the request, regardless of whether they were successfully
+          #     removed or not.
+          class RemovePpidDataStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The status of the composite data ingestion to the destination containing
+          # stats related to the ingestion.
+          # @!attribute [rw] record_count
+          #   @return [::Integer]
+          #     The total count of audience members sent in the upload request for the
+          #     destination. Includes all audience members in the request, regardless of
+          #     whether they were successfully ingested or not.
+          # @!attribute [rw] data_type_counts
+          #   @return [::Array<::Google::Ads::DataManager::V1::RequestStatusPerDestination::DataTypeCount>]
+          #     The total count of data types sent in the upload request for the
+          #     destination, broken down by data type. Includes all data types in
+          #     the request, regardless of whether they were successfully ingested or
+          #     not.
+          # @!attribute [rw] upload_match_rate_range
+          #   @return [::Google::Ads::DataManager::V1::MatchRateRange]
+          #     The match rate range of the upload.
+          class IngestCompositeDataStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The status of the composite data removal from the destination.
+          # @!attribute [rw] record_count
+          #   @return [::Integer]
+          #     The total count of audience members sent in the removal request. Includes
+          #     all audience members in the request, regardless of whether they were
+          #     successfully removed or not.
+          # @!attribute [rw] data_type_counts
+          #   @return [::Array<::Google::Ads::DataManager::V1::RequestStatusPerDestination::DataTypeCount>]
+          #     The total count of data types sent in the removal request, broken down
+          #     by data type. Includes all data types in the request, regardless
+          #     of whether they were successfully removed or not.
+          class RemoveCompositeDataStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The count for a specific data type.
+          # @!attribute [rw] type
+          #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::DataType]
+          #     The type of data.
+          # @!attribute [rw] count
+          #   @return [::Integer]
+          #     The count for this data type.
+          class DataTypeCount
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The request status.
           module RequestStatus
             # The request status is unknown.
             REQUEST_STATUS_UNKNOWN = 0
 
-            # The request succeeded.
+            # Processing succeeded for all records without any errors. However, there
+            # may be warnings in the
+            # {::Google::Ads::DataManager::V1::RequestStatusPerDestination#warning_info `warning_info`}
+            # field.
             SUCCESS = 1
 
             # The request is processing.
             PROCESSING = 2
 
-            # The request failed.
+            # Processing failed for all records. Check the
+            # {::Google::Ads::DataManager::V1::RequestStatusPerDestination#error_info `error_info`}
+            # field for error details, and check the
+            # {::Google::Ads::DataManager::V1::RequestStatusPerDestination#warning_info `warning_info`}
+            # field for warning details.
             FAILED = 3
 
-            # The request partially succeeded.
+            # Processing completed successfully without errors for some records, but
+            # failed with errors for other records. Check the
+            # {::Google::Ads::DataManager::V1::RequestStatusPerDestination#error_info `error_info`}
+            # field for error details, and check the
+            # {::Google::Ads::DataManager::V1::RequestStatusPerDestination#warning_info `warning_info`}
+            # field for warning details.
             PARTIAL_SUCCESS = 4
+          end
+
+          # The type of data.
+          module DataType
+            # The data type is unspecified.
+            DATA_TYPE_UNSPECIFIED = 0
+
+            # The data is an email address.
+            EMAIL = 1
+
+            # The data is a phone number.
+            PHONE_NUMBER = 2
+
+            # The data is a physical address.
+            ADDRESS = 3
+
+            # The data is an IP address.
+            IP_ADDRESS = 4
           end
         end
       end

@@ -85,10 +85,11 @@ module Google
           #     URI settings for cart or checkout URL.
           # @!attribute [rw] eligible_destinations
           #   @return [::Array<::Google::Shopping::Type::Destination::DestinationEnum>]
-          #     Optional. The destinations (also known as [Marketing
+          #     Optional. Required for the create operation. The destinations (also known
+          #     as [Marketing
           #     methods](https://support.google.com/merchants/answer/15130232)) to which
-          #     the checkout program applies, valid destination values are `SHOPPING_ADS`,
-          #     `FREE_LISTINGS`
+          #     the checkout program applies. Valid destination values are `SHOPPING_ADS`
+          #     and `FREE_LISTINGS`.
           # @!attribute [r] enrollment_state
           #   @return [::Google::Shopping::Merchant::Accounts::V1::CheckoutSettings::CheckoutEnrollmentState]
           #     Output only. Reflects the merchant enrollment state in `Checkout` program.

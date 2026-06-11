@@ -98,6 +98,12 @@ module Google
 
             # Google Analytics.
             GOOGLE_ANALYTICS_PROPERTY = 5
+
+            # Google Ad Manager audience link.
+            GOOGLE_AD_MANAGER_AUDIENCE_LINK = 6
+
+            # Floodlight configuration.
+            FLOODLIGHT_CONFIG = 7
           end
         end
 

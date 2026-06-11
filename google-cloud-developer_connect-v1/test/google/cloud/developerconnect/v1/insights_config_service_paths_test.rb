@@ -41,6 +41,18 @@ class ::Google::Cloud::Developerconnect::V1::InsightsConfigService::ClientPathsT
     end
   end
 
+  def test_deployment_event_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.deployment_event_path project: "value0", location: "value1", insights_config: "value2", deployment_event: "value3"
+      assert_equal "projects/value0/locations/value1/insightsConfigs/value2/deploymentEvents/value3", path
+    end
+  end
+
   def test_insights_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

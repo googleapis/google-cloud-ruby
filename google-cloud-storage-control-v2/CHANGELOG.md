@@ -1,5 +1,31 @@
 # Changelog
 
+### 1.11.0 (2026-06-01)
+
+#### Features
+
+* add support for GCS Storage Control Intelligence Finding APIs ([#33987](https://github.com/googleapis/google-cloud-ruby/issues/33987)) 
+
+### 1.10.1 (2026-04-08)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33482](https://github.com/googleapis/google-cloud-ruby/issues/33482)) 
+
+### 1.10.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33439](https://github.com/googleapis/google-cloud-ruby/issues/33439)) 
+
+### 1.9.0 (2026-03-19)
+
+#### Features
+
+* add a DeleteFolderRecursive API definition 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* upgrade protobuf from v25.7 to v31.0 
+
 ### 1.8.1 (2025-10-27)
 
 #### Documentation

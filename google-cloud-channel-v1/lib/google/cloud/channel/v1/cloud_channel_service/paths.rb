@@ -25,6 +25,20 @@ module Google
           # Path helper methods for the CloudChannelService API.
           module Paths
             ##
+            # Create a fully-qualified Account resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `accounts/{account}`
+            #
+            # @param account [String]
+            #
+            # @return [::String]
+            def account_path account:
+              "accounts/#{account}"
+            end
+
+            ##
             # Create a fully-qualified ChannelPartnerLink resource string.
             #
             # The resource will be in the following format:

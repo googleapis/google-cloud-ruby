@@ -1,5 +1,23 @@
 # Release History
 
+### 1.11.0 (2026-04-15)
+
+#### Features
+
+* add principal field to BigQuery Reservation Assignment ([#33832](https://github.com/googleapis/google-cloud-ruby/issues/33832)) 
+
+### 1.10.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.9.2 (2026-01-13)
+
+#### Documentation
+
+* change comment indicating `enable_gemini_in_bigquery` field for BigQuery Reservation Assignments is deprecated ([#32306](https://github.com/googleapis/google-cloud-ruby/issues/32306)) 
+
 ### 1.9.1 (2025-10-27)
 
 #### Documentation

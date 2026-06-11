@@ -1,5 +1,34 @@
 # Release History
 
+### 0.48.1 (2026-04-02)
+
+#### Documentation
+
+* update API common type documentation ([#33448](https://github.com/googleapis/google-cloud-ruby/issues/33448)) 
+
+### 0.48.0 (2026-03-19)
+
+#### Features
+
+* Add a field for upgrading previous processor version when fine tuning 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.47.0 (2026-03-04)
+
+### ⚠ BREAKING CHANGES
+
+* The `SpannerIndexingConfig` message and the `spanner_indexing_config` field within the `Dataset` message have been removed. Client code referencing these will need to stop referencing these in case of an error docs: Updated comments for various fields and messages
+
+#### Features
+
+* A new field `revisions` is added to message `.google.cloud.documentai.v1beta3.Evaluation` ([#32431](https://github.com/googleapis/google-cloud-ruby/issues/32431)) 
+
+### 0.46.2 (2026-02-04)
+
+#### Documentation
+
+* Regenerated REST and RPC Document AI documentation to include missing changes from September 2024 to November 2025 ([#32376](https://github.com/googleapis/google-cloud-ruby/issues/32376)) 
+
 ### 0.46.1 (2025-10-27)
 
 #### Documentation

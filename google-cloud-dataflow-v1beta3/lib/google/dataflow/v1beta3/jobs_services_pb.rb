@@ -24,8 +24,8 @@ module Google
     module Dataflow
       module V1beta3
         module JobsV1Beta3
-          # Provides a method to create and modify Google Cloud Dataflow jobs.
-          # A Job is a multi-stage computation graph run by the Cloud Dataflow service.
+          # Provides a method to create and modify Dataflow jobs.
+          # A Job is a multi-stage computation graph run by the Dataflow service.
           class Service
 
             include ::GRPC::GenericService
@@ -34,7 +34,7 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.dataflow.v1beta3.JobsV1Beta3'
 
-            # Creates a Cloud Dataflow job.
+            # Creates a Dataflow job.
             #
             # To create a job, we recommend using `projects.locations.jobs.create` with a
             # [regional endpoint]

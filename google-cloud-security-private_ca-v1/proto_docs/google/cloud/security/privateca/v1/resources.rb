@@ -357,6 +357,13 @@ module Google
           #     {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates} from any
           #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
           #     in this {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}.
+          # @!attribute [rw] encryption_spec
+          #   @return [::Google::Cloud::Security::PrivateCA::V1::EncryptionSpec]
+          #     Optional. When
+          #     {::Google::Cloud::Security::PrivateCA::V1::EncryptionSpec EncryptionSpec} is
+          #     provided, the {::Google::Cloud::Security::PrivateCA::V1::Subject Subject},
+          #     {::Google::Cloud::Security::PrivateCA::V1::SubjectAltNames SubjectAltNames}, and
+          #     the PEM-encoded certificate fields will be encrypted at rest.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. Labels with user-defined metadata.
@@ -428,13 +435,29 @@ module Google
             #     the key types listed here. Otherwise, any key may be used.
             # @!attribute [rw] backdate_duration
             #   @return [::Google::Protobuf::Duration]
-            #     Optional. The duration to backdate all certificates issued from this
-            #     {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}. If not set, the
-            #     certificates will be issued with a not_before_time of the issuance time
-            #     (i.e. the current time). If set, the certificates will be issued with a
-            #     not_before_time of the issuance time minus the backdate_duration. The
-            #     not_after_time will be adjusted to preserve the requested lifetime. The
-            #     backdate_duration must be less than or equal to 48 hours.
+            #     Optional. If set, all certificates issued from this
+            #     {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool} will be backdated by
+            #     this duration. The 'not_before_time' will be the issuance time minus this
+            #     {::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy#backdate_duration backdate_duration},
+            #     and the 'not_after_time' will be adjusted to preserve the requested
+            #     lifetime. The maximum duration that a certificate can be backdated with
+            #     these options is 48 hours in the past.
+            #     This option cannot be set if
+            #     {::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy#allow_requester_specified_not_before_time allow_requester_specified_not_before_time}
+            #     is set.
+            # @!attribute [rw] allow_requester_specified_not_before_time
+            #   @return [::Boolean]
+            #     Optional. If set to true, allows requesters to specify the
+            #     {::Google::Cloud::Security::PrivateCA::V1::Certificate#requested_not_before_time requested_not_before_time}
+            #     field when creating a
+            #     {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate}.
+            #     Certificates requested with this option enabled will have a
+            #     'not_before_time' equal to the value specified in the request. The
+            #     'not_after_time' will be adjusted to preserve the requested lifetime. The
+            #     maximum time that a certificate can be backdated with these options is 48
+            #     hours in the past. This option cannot be set if
+            #     {::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy#backdate_duration backdate_duration}
+            #     is set.
             # @!attribute [rw] maximum_lifetime
             #   @return [::Google::Protobuf::Duration]
             #     Optional. The maximum lifetime allowed for issued
@@ -605,6 +628,16 @@ module Google
               # DevOps tier.
               DEVOPS = 2
             end
+          end
+
+          # The configuration used for encrypting data at rest.
+          # @!attribute [rw] cloud_kms_key
+          #   @return [::String]
+          #     The resource name for a Cloud KMS key in the format
+          #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+          class EncryptionSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A
@@ -780,6 +813,22 @@ module Google
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. Labels with user-defined metadata.
+          # @!attribute [rw] requested_not_before_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Optional. The requested
+          #     {::Google::Cloud::Security::PrivateCA::V1::CertificateDescription::SubjectDescription#not_before_time not_before_time}
+          #     of this {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate}. This
+          #     field may only be set if the
+          #     {::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy#allow_requester_specified_not_before_time CaPool.IssuancePolicy.allow_requester_specified_not_before_time}
+          #     field is set to true for the issuing
+          #     {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}.
+          #
+          #     If this field is specified, the certificate will be issued with this
+          #     'not_before_time'. If this is not specified, the 'not_before_time' will be
+          #     set to the issuance time or issuance time minus
+          #     {::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy#backdate_duration backdate_duration}
+          #     depending on the {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}
+          #     configuration.
           class Certificate
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

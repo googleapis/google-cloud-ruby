@@ -27,8 +27,9 @@ module Google
         #     Identifier. The resource name of the `Order`.
         #     Format: `networks/{network_code}/orders/{order_id}`
         # @!attribute [r] order_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. Order ID.
+        #     Output only. Deprecated: Order ID.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the Order.  This value has a maximum length
@@ -97,8 +98,7 @@ module Google
         #     Output only. The archival status of the Order.
         # @!attribute [r] last_modified_by_app
         #   @return [::String]
-        #     Output only. The application which modified this order. This attribute is
-        #     assigned by Google.
+        #     Output only. The application which modified this order.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The instant this Order was last modified.

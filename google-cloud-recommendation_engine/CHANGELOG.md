@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.7.2 (2025-09-12)
 
 #### Documentation

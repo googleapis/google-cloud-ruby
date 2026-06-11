@@ -74,9 +74,22 @@ module Google
             #   @deprecated This field is deprecated and may be removed in the next major version update.
             #   @return [::String]
             #     The password for HTTP Basic authentication.
+            # @!attribute [rw] secret_version_for_username_password
+            #   @return [::String]
+            #     Optional. The SecretManager secret version resource storing the
+            #     username:password pair for HTTP Basic authentication. Format:
+            #     `projects/{project}/secrets/{secret}/versions/{version}`
             # @!attribute [rw] request_headers
             #   @return [::Google::Protobuf::Map{::String => ::String}]
             #     The HTTP request headers to send together with webhook requests.
+            # @!attribute [rw] secret_versions_for_request_headers
+            #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::CX::V3::Webhook::GenericWebService::SecretVersionHeaderValue}]
+            #     Optional. The HTTP request headers to send together with webhook
+            #     requests. Header values are stored in SecretManager secret versions.
+            #
+            #     When the same header name is specified in both `request_headers` and
+            #     `secret_versions_for_request_headers`, the value in
+            #     `secret_versions_for_request_headers` will be used.
             # @!attribute [rw] allowed_ca_certs
             #   @return [::Array<::String>]
             #     Optional. Specifies a list of allowed custom CA certificates (in DER
@@ -102,6 +115,9 @@ module Google
             #     service
             #     agent](https://cloud.google.com/iam/docs/service-agents#dialogflow-service-agent).
             #     The generated token is sent in the Authorization header.
+            # @!attribute [rw] service_account_auth_config
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook::GenericWebService::ServiceAccountAuthConfig]
+            #     Optional. Configuration for service account authentication.
             # @!attribute [rw] webhook_type
             #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook::GenericWebService::WebhookType]
             #     Optional. Type of the webhook.
@@ -123,6 +139,17 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
+              # Represents the value of an HTTP header stored in a SecretManager secret
+              # version.
+              # @!attribute [rw] secret_version
+              #   @return [::String]
+              #     Required. The SecretManager secret version resource storing the header
+              #     value. Format: `projects/{project}/secrets/{secret}/versions/{version}`
+              class SecretVersionHeaderValue
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
               # Represents configuration of OAuth client credential flow for 3rd party
               # API authentication.
               # @!attribute [rw] client_id
@@ -131,6 +158,12 @@ module Google
               # @!attribute [rw] client_secret
               #   @return [::String]
               #     Optional. The client secret provided by the 3rd party platform.
+              # @!attribute [rw] secret_version_for_client_secret
+              #   @return [::String]
+              #     Optional. The name of the SecretManager secret version resource storing
+              #     the client secret. If this field is set, the `client_secret` field will
+              #     be ignored. Format:
+              #     `projects/{project}/secrets/{secret}/versions/{version}`
               # @!attribute [rw] token_endpoint
               #   @return [::String]
               #     Required. The token endpoint provided by the 3rd party platform to
@@ -143,11 +176,37 @@ module Google
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
 
+              # Configuration for authentication using a service account.
+              # @!attribute [rw] service_account
+              #   @return [::String]
+              #     Required. The email address of the service account used to authenticate
+              #     the webhook call. Dialogflow uses this service account to exchange an
+              #     access token and the access token is then sent in the `Authorization`
+              #     header of the webhook request.
+              #
+              #     The service account must have the
+              #     `roles/iam.serviceAccountTokenCreator` role granted to the
+              #     [Dialogflow service
+              #     agent](https://cloud.google.com/iam/docs/service-agents#dialogflow-service-agent).
+              class ServiceAccountAuthConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
               # @!attribute [rw] key
               #   @return [::String]
               # @!attribute [rw] value
               #   @return [::String]
               class RequestHeadersEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook::GenericWebService::SecretVersionHeaderValue]
+              class SecretVersionsForRequestHeadersEntry
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end

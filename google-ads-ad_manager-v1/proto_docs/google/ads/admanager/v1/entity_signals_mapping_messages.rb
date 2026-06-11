@@ -43,8 +43,9 @@ module Google
         #     Format:
         #     `networks/{network_code}/entitySignalsMappings/{entity_signals_mapping_id}`
         # @!attribute [r] entity_signals_mapping_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. `EntitySignalsMapping` ID.
+        #     Output only. Deprecated: `EntitySignalsMapping` ID.
         # @!attribute [rw] taxonomy_category_ids
         #   @return [::Array<::Integer>]
         #     Optional. The IDs of the categories that are associated with the

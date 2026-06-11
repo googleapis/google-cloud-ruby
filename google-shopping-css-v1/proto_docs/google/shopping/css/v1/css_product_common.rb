@@ -131,7 +131,7 @@ module Google
         #   @return [::Array<::String>]
         #     The cut of the item. It can be used to represent combined size types for
         #     apparel items. Maximum two of size types can be provided (see
-        #     [https://support.google.com/merchants/answer/6324497](size type)).
+        #     [size type](https://support.google.com/merchants/answer/6324497).
         # @!attribute [rw] item_group_id
         #   @return [::String]
         #     Shared identifier for all variants of the same product.
@@ -205,6 +205,31 @@ module Google
         #   @return [::Google::Shopping::Css::V1::HeadlineOfferSubscriptionCost]
         #     Number of periods (months or years) and amount of payment per period
         #     for an item with an associated subscription contract.
+        # @!attribute [rw] review_count
+        #   @return [::Integer]
+        #     Number of reviews of the product. Required if
+        #     {::Google::Shopping::Css::V1::Attributes#rating `rating`} is provided.
+        #     This field is for an upcoming feature and is not yet used.
+        # @!attribute [rw] min_rating
+        #   @return [::Integer]
+        #     Minimum rating score of the product. Required if
+        #     {::Google::Shopping::Css::V1::Attributes#rating `rating`} is provided.
+        #     This field is for an upcoming feature and is not yet used.
+        # @!attribute [rw] max_rating
+        #   @return [::Integer]
+        #     Maximum rating score of the product. Required if
+        #     {::Google::Shopping::Css::V1::Attributes#rating `rating`} is provided.
+        #     This field is for an upcoming feature and is not yet used.
+        # @!attribute [rw] rating
+        #   @return [::Float]
+        #     Average rating score of the product. The value must be within the
+        #     range of [`min_rating`, `max_rating`], inclusive. When displayed on the
+        #     product page, this rating is normalized to a scale of [1, 5] with one
+        #     decimal place. If provided,
+        #     {::Google::Shopping::Css::V1::Attributes#review_count `review_count`},
+        #     {::Google::Shopping::Css::V1::Attributes#min_rating `min_rating`}, and
+        #     {::Google::Shopping::Css::V1::Attributes#max_rating `max_rating`} are also
+        #     required. This field is for an upcoming feature and is not yet used.
         class Attributes
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

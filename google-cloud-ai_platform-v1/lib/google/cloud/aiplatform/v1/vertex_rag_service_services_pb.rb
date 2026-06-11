@@ -42,6 +42,10 @@ module Google
             # the text. It also extracts and returns claims from the text and provides
             # supporting facts.
             rpc :CorroborateContent, ::Google::Cloud::AIPlatform::V1::CorroborateContentRequest, ::Google::Cloud::AIPlatform::V1::CorroborateContentResponse
+            # Agentic Retrieval Ask API for RAG.
+            rpc :AskContexts, ::Google::Cloud::AIPlatform::V1::AskContextsRequest, ::Google::Cloud::AIPlatform::V1::AskContextsResponse
+            # Asynchronous API to retrieves relevant contexts for a query.
+            rpc :AsyncRetrieveContexts, ::Google::Cloud::AIPlatform::V1::AsyncRetrieveContextsRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

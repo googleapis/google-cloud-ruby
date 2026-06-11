@@ -40,6 +40,20 @@ module Google
               end
 
               ##
+              # Create a fully-qualified Project resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}`
+              #
+              # @param project [String]
+              #
+              # @return [::String]
+              def project_path project:
+                "projects/#{project}"
+              end
+
+              ##
               # Create a fully-qualified ProtectedResourcesSummary resource string.
               #
               # @overload protected_resources_summary_path(project:, location:, key_ring:, crypto_key:)

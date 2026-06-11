@@ -28,4 +28,7 @@ jobs:
         gem install --no-document toys
     - name: Delete-library
       run: |
-        toys delete-library -v --fork ${{ github.event.inputs.flags }} ${{ github.event.inputs.gem }}
+        toys delete-library -v --fork ${GITHUB_EVENT_INPUTS_FLAGS} ${GITHUB_EVENT_INPUTS_GEM}
+      env:
+        GITHUB_EVENT_INPUTS_FLAGS: ${{ github.event.inputs.flags }}
+        GITHUB_EVENT_INPUTS_GEM: ${{ github.event.inputs.gem }}

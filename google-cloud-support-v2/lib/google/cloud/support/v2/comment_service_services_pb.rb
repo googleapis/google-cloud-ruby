@@ -39,6 +39,37 @@ module Google
             #
             # The comment must have the following fields set: `body`.
             rpc :CreateComment, ::Google::Cloud::Support::V2::CreateCommentRequest, ::Google::Cloud::Support::V2::Comment
+            # Retrieve a comment.
+            #
+            # EXAMPLES:
+            #
+            # cURL:
+            #
+            # ```shell
+            # comment="projects/some-project/cases/43595344/comments/234567890"
+            # curl \
+            #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+            #   "https://cloudsupport.googleapis.com/v2/$comment"
+            # ```
+            #
+            # Python:
+            #
+            # ```python
+            # import googleapiclient.discovery
+            #
+            # api_version = "v2"
+            # supportApiService = googleapiclient.discovery.build(
+            #     serviceName="cloudsupport",
+            #     version=api_version,
+            #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}",
+            # )
+            #
+            # request = supportApiService.cases().comments().get(
+            #     name="projects/some-project/cases/43595344/comments/234567890",
+            # )
+            # print(request.execute())
+            # ```
+            rpc :GetComment, ::Google::Cloud::Support::V2::GetCommentRequest, ::Google::Cloud::Support::V2::Comment
           end
 
           Stub = Service.rpc_stub_class

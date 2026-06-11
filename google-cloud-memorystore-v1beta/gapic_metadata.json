@@ -39,6 +39,11 @@
               "methods": [
                 "get_certificate_authority"
               ]
+            },
+            "GetSharedRegionalCertificateAuthority": {
+              "methods": [
+                "get_shared_regional_certificate_authority"
+              ]
             }
           }
         }

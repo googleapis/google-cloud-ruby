@@ -38,10 +38,9 @@ module Google
         #   @return [::String]
         #     Optional. A unique ID used to identify the request. If the service
         #     receives two
-        #     [CreateBatchRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateBatchRequest)s
-        #     with the same request_id, the second request is ignored and the
-        #     Operation that corresponds to the first Batch created and stored
-        #     in the backend is returned.
+        #     `CreateBatchRequests` with the same `request_id`, the second request is
+        #     ignored and the operation that corresponds to the first Batch created and
+        #     stored in the backend is returned.
         #
         #     Recommendation: Set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -84,10 +83,13 @@ module Google
         #     A filter is a logical expression constraining the values of various fields
         #     in each batch resource. Filters are case sensitive, and may contain
         #     multiple clauses combined with logical operators (AND/OR).
-        #     Supported fields are `batch_id`, `batch_uuid`, `state`, and `create_time`.
+        #     Supported fields are `batch_id`, `batch_uuid`, `state`, `create_time`, and
+        #     `labels`.
         #
         #     e.g. `state = RUNNING and create_time < "2023-01-01T00:00:00Z"`
-        #     filters for batches in state RUNNING that were created before 2023-01-01
+        #     filters for batches in state RUNNING that were created before 2023-01-01.
+        #     `state = RUNNING and labels.environment=production` filters for batches in
+        #     state in a RUNNING state that have a production environment label.
         #
         #     See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
         #     description of the filter syntax and a list of supported comparisons.
@@ -105,9 +107,9 @@ module Google
         end
 
         # A list of batch workloads.
-        # @!attribute [rw] batches
+        # @!attribute [r] batches
         #   @return [::Array<::Google::Cloud::Dataproc::V1::Batch>]
-        #     The batches from the specified collection.
+        #     Output only. The batches from the specified collection.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.
@@ -148,22 +150,27 @@ module Google
         #   @return [::Google::Cloud::Dataproc::V1::PySparkBatch]
         #     Optional. PySpark batch config.
         #
-        #     Note: The following fields are mutually exclusive: `pyspark_batch`, `spark_batch`, `spark_r_batch`, `spark_sql_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `pyspark_batch`, `spark_batch`, `spark_r_batch`, `spark_sql_batch`, `pyspark_notebook_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_batch
         #   @return [::Google::Cloud::Dataproc::V1::SparkBatch]
         #     Optional. Spark batch config.
         #
-        #     Note: The following fields are mutually exclusive: `spark_batch`, `pyspark_batch`, `spark_r_batch`, `spark_sql_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `spark_batch`, `pyspark_batch`, `spark_r_batch`, `spark_sql_batch`, `pyspark_notebook_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_r_batch
         #   @return [::Google::Cloud::Dataproc::V1::SparkRBatch]
         #     Optional. SparkR batch config.
         #
-        #     Note: The following fields are mutually exclusive: `spark_r_batch`, `pyspark_batch`, `spark_batch`, `spark_sql_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `spark_r_batch`, `pyspark_batch`, `spark_batch`, `spark_sql_batch`, `pyspark_notebook_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_sql_batch
         #   @return [::Google::Cloud::Dataproc::V1::SparkSqlBatch]
         #     Optional. SparkSql batch config.
         #
-        #     Note: The following fields are mutually exclusive: `spark_sql_batch`, `pyspark_batch`, `spark_batch`, `spark_r_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `spark_sql_batch`, `pyspark_batch`, `spark_batch`, `spark_r_batch`, `pyspark_notebook_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] pyspark_notebook_batch
+        #   @return [::Google::Cloud::Dataproc::V1::PySparkNotebookBatch]
+        #     Optional. PySpark notebook batch config.
+        #
+        #     Note: The following fields are mutually exclusive: `pyspark_notebook_batch`, `pyspark_batch`, `spark_batch`, `spark_r_batch`, `spark_sql_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] runtime_info
         #   @return [::Google::Cloud::Dataproc::V1::RuntimeInfo]
         #     Output only. Runtime information about batch execution.
@@ -374,6 +381,42 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class QueryVariablesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A configuration for running a PySpark Notebook batch workload.
+        # @!attribute [rw] notebook_file_uri
+        #   @return [::String]
+        #     Required. The HCFS URI of the notebook file to execute.
+        # @!attribute [rw] params
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The parameters to pass to the notebook.
+        # @!attribute [rw] python_file_uris
+        #   @return [::Array<::String>]
+        #     Optional. HCFS URIs of Python files to pass to the PySpark framework.
+        # @!attribute [rw] jar_file_uris
+        #   @return [::Array<::String>]
+        #     Optional. HCFS URIs of jar files to be added to the Spark CLASSPATH.
+        # @!attribute [rw] file_uris
+        #   @return [::Array<::String>]
+        #     Optional. HCFS URIs of files to be placed in the working directory of
+        #     each executor
+        # @!attribute [rw] archive_uris
+        #   @return [::Array<::String>]
+        #     Optional. HCFS URIs of archives to be extracted into the working directory
+        #     of each executor. Supported file types:
+        #     `.jar`, `.tar`, `.tar.gz`, `.tgz`, and `.zip`.
+        class PySparkNotebookBatch
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ParamsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

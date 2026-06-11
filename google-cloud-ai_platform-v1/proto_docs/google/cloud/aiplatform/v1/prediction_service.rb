@@ -663,9 +663,36 @@ module Google
           # @!attribute [r] candidates_tokens_details
           #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
           #     Output only. List of modalities that were returned in the response.
+          # @!attribute [r] tool_use_prompt_tokens_details
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+          #     Output only. A detailed breakdown by modality of the token counts from
+          #     the results of tool executions, which are provided back to the model as
+          #     input.
+          # @!attribute [r] traffic_type
+          #   @return [::Google::Cloud::AIPlatform::V1::GenerateContentResponse::UsageMetadata::TrafficType]
+          #     Output only. The traffic type for this request.
           class UsageMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The type of traffic that this request was processed with, indicating
+            # which quota is consumed.
+            module TrafficType
+              # Unspecified request traffic type.
+              TRAFFIC_TYPE_UNSPECIFIED = 0
+
+              # The request was processed using Pay-As-You-Go quota.
+              ON_DEMAND = 1
+
+              # Type for Priority Pay-As-You-Go traffic.
+              ON_DEMAND_PRIORITY = 3
+
+              # Type for Flex traffic.
+              ON_DEMAND_FLEX = 4
+
+              # Type for Provisioned Throughput traffic.
+              PROVISIONED_THROUGHPUT = 2
+            end
           end
         end
 
@@ -678,24 +705,67 @@ module Google
         #     `projects/{project}/locations/{location}/publishers/*/models/*`
         # @!attribute [rw] content
         #   @return [::Google::Cloud::AIPlatform::V1::Content]
-        #     Required. Input content to be embedded. Required.
+        #     Required. Input content to be embedded.
         # @!attribute [rw] title
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     Optional. An optional title for the text.
+        #     Optional. Deprecated: Please use EmbedContentConfig.title instead.
+        #     The title for the text.
         # @!attribute [rw] task_type
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AIPlatform::V1::EmbedContentRequest::EmbeddingTaskType]
-        #     Optional. The task type of the embedding.
+        #     Optional. Deprecated: Please use EmbedContentConfig.task_type instead.
+        #     The task type of the embedding.
         # @!attribute [rw] output_dimensionality
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Optional. Optional reduced dimension for the output embedding. If set,
-        #     excessive values in the output embedding are truncated from the end.
+        #     Optional. Deprecated: Please use EmbedContentConfig.output_dimensionality
+        #     instead. Reduced dimension for the output embedding. If set, excessive
+        #     values in the output embedding are truncated from the end.
         # @!attribute [rw] auto_truncate
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Optional. Whether to silently truncate the input content if it's longer
+        #     Optional. Deprecated: Please use EmbedContentConfig.auto_truncate instead.
+        #     Whether to silently truncate the input content if it's longer
         #     than the maximum sequence length.
+        # @!attribute [rw] embed_content_config
+        #   @return [::Google::Cloud::AIPlatform::V1::EmbedContentRequest::EmbedContentConfig]
+        #     Optional. Configuration for the EmbedContent request.
         class EmbedContentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configurations for the EmbedContent API.
+          # @!attribute [rw] title
+          #   @return [::String]
+          #     Optional. The title for the text.
+          #
+          #     Only applicable to text-only embedding models.
+          # @!attribute [rw] task_type
+          #   @return [::Google::Cloud::AIPlatform::V1::EmbedContentRequest::EmbeddingTaskType]
+          #     Optional. The task type of the embedding.
+          #
+          #     Only applicable to text-only embedding models.
+          # @!attribute [rw] auto_truncate
+          #   @return [::Boolean]
+          #     Optional. Whether to silently truncate the input content if it's longer
+          #     than the maximum sequence length.
+          #
+          #     Only applicable to text-only embedding models.
+          # @!attribute [rw] output_dimensionality
+          #   @return [::Integer]
+          #     Optional. Reduced dimension for the output embedding. If set, excessive
+          #     values in the output embedding are truncated from the end.
+          # @!attribute [rw] document_ocr
+          #   @return [::Boolean]
+          #     Optional. Whether to enable OCR for document content.
+          # @!attribute [rw] audio_track_extraction
+          #   @return [::Boolean]
+          #     Optional. Whether to extract audio from video content.
+          class EmbedContentConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Represents a downstream task the embeddings will be used for.
           module EmbeddingTaskType
@@ -735,7 +805,7 @@ module Google
         #     The embedding generated from the input content.
         # @!attribute [rw] usage_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::UsageMetadata]
-        #     Metadata about the response(s).
+        #     Usage metadata about the response(s).
         # @!attribute [rw] truncated
         #   @return [::Boolean]
         #     Whether the input content was truncated before generating the embedding.

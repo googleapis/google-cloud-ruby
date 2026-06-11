@@ -21,7 +21,7 @@ module Google
   module Ads
     module AdManager
       module V1
-        # A piece of content from a Publisher's CMS.
+        # A piece of `Content` from a Publisher's CMS.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the `Content`.

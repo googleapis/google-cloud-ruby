@@ -21,6 +21,397 @@ module Google
   module Cloud
     module GkeHub
       module V1
+        # Request message for the `GkeHub.GetNamespace` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The Namespace resource name in the format
+        #     `projects/*/locations/*/scopes/*/namespaces/*`.
+        class GetScopeNamespaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to create a fleet namespace.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the Namespace will be
+        #     created. Specified in the format `projects/*/locations/*/scopes/*`.
+        # @!attribute [rw] scope_namespace_id
+        #   @return [::String]
+        #     Required. Client chosen ID for the Namespace. `namespace_id` must be a
+        #     valid RFC 1123 compliant DNS label:
+        #
+        #       1. At most 63 characters in length
+        #       2. It must consist of lower case alphanumeric characters or `-`
+        #       3. It must start and end with an alphanumeric character
+        #
+        #     Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+        #     with a maximum length of 63 characters.
+        # @!attribute [rw] scope_namespace
+        #   @return [::Google::Cloud::GkeHub::V1::Namespace]
+        #     Required. The fleet namespace to create.
+        class CreateScopeNamespaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to update a fleet namespace.
+        # @!attribute [rw] scope_namespace
+        #   @return [::Google::Cloud::GkeHub::V1::Namespace]
+        #     Required. A namespace with fields updated. The 'name' field in this
+        #     namespace is used to identify the resource to update. Given 'updated'
+        #     prefix to follow go/proto-best-practices-checkers#keyword_conflict
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The fields to be updated.
+        class UpdateScopeNamespaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to delete a fleet namespace.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The Namespace resource name in the format
+        #     `projects/*/locations/*/scopes/*/namespaces/*`.
+        class DeleteScopeNamespaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list fleet namespaces.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the Features will be
+        #     listed. Specified in the format `projects/*/locations/*/scopes/*`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a 'page' of resources, `page_size` specifies
+        #     number of resources to return. If unspecified or set to 0, all resources
+        #     will be returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to `ListFeatures` which
+        #     specifies the position in the list from where to continue listing the
+        #     resources.
+        class ListScopeNamespacesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of fleet namespaces.
+        # @!attribute [rw] scope_namespaces
+        #   @return [::Array<::Google::Cloud::GkeHub::V1::Namespace>]
+        #     The list of fleet namespaces
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to request the next page of resources from the
+        #     `ListNamespaces` method. The value of an empty string means
+        #     that there are no more resources to return.
+        class ListScopeNamespacesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the `GkeHub.GetScopeRBACRoleBinding` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The RBACRoleBinding resource name in the format
+        #     `projects/*/locations/*/scopes/*/rbacrolebindings/*`.
+        class GetScopeRBACRoleBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to create a rbacrolebindings.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the RBACRoleBinding will
+        #     be created. Specified in the format `projects/*/locations/*/scopes/*`.
+        # @!attribute [rw] rbacrolebinding_id
+        #   @return [::String]
+        #     Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
+        #     must be a valid RFC 1123 compliant DNS label:
+        #
+        #       1. At most 63 characters in length
+        #       2. It must consist of lower case alphanumeric characters or `-`
+        #       3. It must start and end with an alphanumeric character
+        #
+        #     Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+        #     with a maximum length of 63 characters.
+        # @!attribute [rw] rbacrolebinding
+        #   @return [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+        #     Required. The rbacrolebindings to create.
+        class CreateScopeRBACRoleBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to update a scope rbacrolebinding.
+        # @!attribute [rw] rbacrolebinding
+        #   @return [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+        #     Required. A rbacrolebinding with fields updated. The 'name' field in this
+        #     rbacrolebinding is used to identify the resource to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The fields to be updated.
+        class UpdateScopeRBACRoleBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to delete a Scope RBACRoleBinding.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The RBACRoleBinding resource name in the format
+        #     `projects/*/locations/*/scopes/*/rbacrolebindings/*`.
+        class DeleteScopeRBACRoleBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list Scope RBACRoleBindings.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the Features will be
+        #     listed. Specified in the format `projects/*/locations/*/scopes/*`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a 'page' of resources, `page_size` specifies
+        #     number of resources to return. If unspecified or set to 0, all resources
+        #     will be returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to `ListScopeRBACRoleBindings`
+        #     which specifies the position in the list from where to continue listing the
+        #     resources.
+        class ListScopeRBACRoleBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of Scope RBACRoleBindings.
+        # @!attribute [rw] rbacrolebindings
+        #   @return [::Array<::Google::Cloud::GkeHub::V1::RBACRoleBinding>]
+        #     The list of Scope RBACRoleBindings.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to request the next page of resources from the
+        #     `ListScopeRBACRoleBindings` method. The value of an empty string means
+        #     that there are no more resources to return.
+        class ListScopeRBACRoleBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the `GkeHub.GetScope` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The Scope resource name in the format
+        #     `projects/*/locations/*/scopes/*`.
+        class GetScopeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to create a Scope.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the Scope will be
+        #     created. Specified in the format `projects/*/locations/*`.
+        # @!attribute [rw] scope_id
+        #   @return [::String]
+        #     Required. Client chosen ID for the Scope. `scope_id` must be a
+        #     ????
+        # @!attribute [rw] scope
+        #   @return [::Google::Cloud::GkeHub::V1::Scope]
+        #     Required. The Scope to create.
+        class CreateScopeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to update a Scope.
+        # @!attribute [rw] scope
+        #   @return [::Google::Cloud::GkeHub::V1::Scope]
+        #     Required. A Scope with fields updated. The 'name' field in this
+        #     namespace is used to identify the resource to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The fields to be updated.
+        class UpdateScopeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to delete a Scope.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The Scope resource name in the format
+        #     `projects/*/locations/*/scopes/*`.
+        class DeleteScopeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list Scopes.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the Scope will be listed.
+        #     Specified in the format `projects/*/locations/*`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a 'page' of resources, `page_size` specifies
+        #     number of resources to return. If unspecified or set to 0, all resources
+        #     will be returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to `ListScopes` which
+        #     specifies the position in the list from where to continue listing the
+        #     resources.
+        class ListScopesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of Scopes.
+        # @!attribute [rw] scopes
+        #   @return [::Array<::Google::Cloud::GkeHub::V1::Scope>]
+        #     The list of Scopes
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to request the next page of resources from the
+        #     `ListScopes` method. The value of an empty string means
+        #     that there are no more resources to return.
+        class ListScopesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list permitted Scopes.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the Scope will be listed.
+        #     Specified in the format `projects/*/locations/*`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a 'page' of resources, `page_size` specifies
+        #     number of resources to return. If unspecified or set to 0, all resources
+        #     will be returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to `ListPermittedScopes` which
+        #     specifies the position in the list from where to continue listing the
+        #     resources.
+        class ListPermittedScopesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of permitted Scopes.
+        # @!attribute [rw] scopes
+        #   @return [::Array<::Google::Cloud::GkeHub::V1::Scope>]
+        #     The list of permitted Scopes
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to request the next page of resources from the
+        #     `ListPermittedScopes` method. The value of an empty string means
+        #     that there are no more resources to return.
+        class ListPermittedScopesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the `GkeHub.GetMembershipBinding` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The MembershipBinding resource name in the format
+        #     `projects/*/locations/*/memberships/*/bindings/*`.
+        class GetMembershipBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to create a MembershipBinding.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the MembershipBinding
+        #     will be created. Specified in the format
+        #     `projects/*/locations/*/memberships/*`.
+        # @!attribute [rw] membership_binding
+        #   @return [::Google::Cloud::GkeHub::V1::MembershipBinding]
+        #     Required. The MembershipBinding to create.
+        # @!attribute [rw] membership_binding_id
+        #   @return [::String]
+        #     Required. The ID to use for the MembershipBinding.
+        class CreateMembershipBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to update a MembershipBinding.
+        # @!attribute [rw] membership_binding
+        #   @return [::Google::Cloud::GkeHub::V1::MembershipBinding]
+        #     Required. The MembershipBinding object with fields updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The fields to be updated.
+        class UpdateMembershipBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to delete a Binding.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The MembershipBinding resource name in the format
+        #     `projects/*/locations/*/memberships/*/bindings/*`.
+        class DeleteMembershipBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list MembershipBinding.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent Membership for which the MembershipBindings will be
+        #     listed. Specified in the format `projects/*/locations/*/memberships/*`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a 'page' of resources, `page_size` specifies
+        #     number of resources to return. If unspecified or set to 0, all resources
+        #     will be returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to `ListMembershipBindings` which
+        #     specifies the position in the list from where to continue listing the
+        #     resources.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Lists MembershipBindings that match the filter expression,
+        #     following the syntax outlined in https://google.aip.dev/160.
+        class ListMembershipBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of MembershipBindings.
+        # @!attribute [rw] membership_bindings
+        #   @return [::Array<::Google::Cloud::GkeHub::V1::MembershipBinding>]
+        #     The list of membership_bindings
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to request the next page of resources from the
+        #     `ListMembershipBindings` method. The value of an empty string means
+        #     that there are no more resources to return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     List of locations that could not be reached while fetching this list.
+        class ListMembershipBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for `GkeHub.ListMemberships` method.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -68,6 +459,134 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for the `GkeHub.GetMembershipRBACRoleBinding` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The RBACRoleBinding resource name in the format
+        #     `projects/*/locations/*/memberships/*/rbacrolebindings/*`.
+        class GetMembershipRBACRoleBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to create a rbacrolebindings.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the RBACRoleBinding will
+        #     be created. Specified in the format `projects/*/locations/*/memberships/*`.
+        # @!attribute [rw] rbacrolebinding_id
+        #   @return [::String]
+        #     Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
+        #     must be a valid RFC 1123 compliant DNS label:
+        #
+        #       1. At most 63 characters in length
+        #       2. It must consist of lower case alphanumeric characters or `-`
+        #       3. It must start and end with an alphanumeric character
+        #
+        #     Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+        #     with a maximum length of 63 characters.
+        # @!attribute [rw] rbacrolebinding
+        #   @return [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+        #     Required. The rbacrolebindings to create.
+        class CreateMembershipRBACRoleBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to update a membership rbacrolebinding.
+        # @!attribute [rw] rbacrolebinding
+        #   @return [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+        #     Required. A rbacrolebinding with fields updated. The 'name' field in this
+        #     rbacrolebinding is used to identify the resource to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The fields to be updated.
+        class UpdateMembershipRBACRoleBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to delete a Membership RBACRoleBinding.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The RBACRoleBinding resource name in the format
+        #     `projects/*/locations/*/memberships/*/rbacrolebindings/*`.
+        class DeleteMembershipRBACRoleBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list Membership RBACRoleBindings.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the Features will be
+        #     listed. Specified in the format `projects/*/locations/*/memberships/*`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a 'page' of resources, `page_size` specifies
+        #     number of resources to return. If unspecified or set to 0, all resources
+        #     will be returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to
+        #     `ListMembershipRBACRoleBindings` which specifies the position in the list
+        #     from where to continue listing the resources.
+        class ListMembershipRBACRoleBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of Membership RBACRoleBindings.
+        # @!attribute [rw] rbacrolebindings
+        #   @return [::Array<::Google::Cloud::GkeHub::V1::RBACRoleBinding>]
+        #     The list of Membership RBACRoleBindings.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to request the next page of resources from the
+        #     `ListMembershipRBACRoleBindings` method. The value of an empty string means
+        #     that there are no more resources to return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     List of locations that could not be reached while fetching this list.
+        class ListMembershipRBACRoleBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to generate a YAML of the RBAC policies for the specified
+        # RoleBinding and its associated impersonation resources.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the RBACRoleBinding will
+        #     be created. Specified in the format `projects/*/locations/*/memberships/*`.
+        # @!attribute [rw] rbacrolebinding_id
+        #   @return [::String]
+        #     Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
+        #     must be a valid RFC 1123 compliant DNS label:
+        #
+        #       1. At most 63 characters in length
+        #       2. It must consist of lower case alphanumeric characters or `-`
+        #       3. It must start and end with an alphanumeric character
+        #
+        #     Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+        #     with a maximum length of 63 characters.
+        # @!attribute [rw] rbacrolebinding
+        #   @return [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+        #     Required. The rbacrolebindings to generate the YAML for.
+        class GenerateMembershipRBACRoleBindingYAMLRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for GenerateRBACRoleBindingYAML.
+        # @!attribute [rw] role_bindings_yaml
+        #   @return [::String]
+        #     a yaml text blob including the RBAC policies.
+        class GenerateMembershipRBACRoleBindingYAMLResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Response message for the `GkeHub.ListMemberships` method.
         # @!attribute [rw] resources
         #   @return [::Array<::Google::Cloud::GkeHub::V1::Membership>]
@@ -91,6 +610,50 @@ module Google
         #     Required. The Membership resource name in the format
         #     `projects/*/locations/*/memberships/*`.
         class GetMembershipRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list Memberships bound to a Scope.
+        # @!attribute [rw] scope_name
+        #   @return [::String]
+        #     Required. Name of the Scope, in the format
+        #     `projects/*/locations/global/scopes/*`, to which the Memberships are bound.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Lists Memberships that match the filter expression, following the
+        #     syntax outlined in https://google.aip.dev/160. Currently, filtering
+        #     can be done only based on Memberships's `name`, `labels`, `create_time`,
+        #     `update_time`, and `unique_id`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a 'page' of resources, `page_size` specifies
+        #     number of resources to return. If unspecified or set to 0, all resources
+        #     will be returned. Pagination is currently not supported; therefore, setting
+        #     this field does not have any impact for now.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to `ListBoundMemberships` which
+        #     specifies the position in the list from where to continue listing the
+        #     resources.
+        class ListBoundMembershipsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of Memberships bound to a Scope.
+        # @!attribute [rw] memberships
+        #   @return [::Array<::Google::Cloud::GkeHub::V1::Membership>]
+        #     The list of Memberships bound to the given Scope.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     List of locations that could not be reached while fetching this list.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to request the next page of resources from the
+        #     `ListBoundMemberships` method. The value of an empty string means that
+        #     there are no more resources to return.
+        class ListBoundMembershipsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -318,6 +881,12 @@ module Google
         #   @return [::String]
         #     One or more fields to compare and use to sort the output.
         #     See https://google.aip.dev/132#ordering.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Optional. If set to true, the response will return partial results when
+        #     some regions are unreachable and the unreachable field in Feature proto
+        #     will be populated. If set to false, the request will fail when some regions
+        #     are unreachable.
         class ListFeaturesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -342,6 +911,12 @@ module Google
         #   @return [::String]
         #     Required. The Feature resource name in the format
         #     `projects/*/locations/*/features/*`
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Optional. If set to true, the response will return partial results when
+        #     some regions are unreachable and the unreachable field in Feature proto
+        #     will be populated. If set to false, the request will fail when some regions
+        #     are unreachable.
         class GetFeatureRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -360,7 +935,7 @@ module Google
         #     The Feature resource to create.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     A request ID to identify requests. Specify a unique request ID
         #     so that if you must retry your request, the server will know to ignore
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes after the first request.
@@ -428,7 +1003,7 @@ module Google
         #     user-modifiable fields to match `resource`.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     A request ID to identify requests. Specify a unique request ID
         #     so that if you must retry your request, the server will know to ignore
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes after the first request.
@@ -442,6 +1017,90 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class UpdateFeatureRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the `GkeHub.CreateFleet` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) where the Fleet will be
+        #     created. Specified in the format `projects/*/locations/*`.
+        # @!attribute [rw] fleet
+        #   @return [::Google::Cloud::GkeHub::V1::Fleet]
+        #     Required. The fleet to create.
+        class CreateFleetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the `GkeHub.GetFleet` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The Fleet resource name in the format
+        #     `projects/*/locations/*/fleets/*`.
+        class GetFleetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the `GkeHub.UpdateFleet` method.
+        # @!attribute [rw] fleet
+        #   @return [::Google::Cloud::GkeHub::V1::Fleet]
+        #     Required. The Fleet to update.
+        #
+        #     The `name` field of the Fleet object identifies which fleet will be
+        #     updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The fields to be updated;
+        class UpdateFleetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `GkeHub.DeleteFleet` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The Fleet resource name in the format
+        #     `projects/*/locations/*/fleets/*`.
+        class DeleteFleetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the `GkeHub.ListFleets` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The organization or project to list for Fleets under, in the
+        #     format `organizations/*/locations/*` or `projects/*/locations/*`.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListFleets` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListFleets` must match
+        #     the call that provided the page token.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of fleets to return. The service may return
+        #     fewer than this value. If unspecified, at most 200 fleets will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        class ListFleetsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for the `GkeHub.ListFleetsResponse` method.
+        # @!attribute [rw] fleets
+        #   @return [::Array<::Google::Cloud::GkeHub::V1::Fleet>]
+        #     The list of matching fleets.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        #     The token is only valid for 1h.
+        class ListFleetsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -466,9 +1125,10 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     corresponding to `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.

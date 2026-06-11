@@ -1,5 +1,36 @@
 # Changelog
 
+### 0.9.0 (2026-05-06)
+
+#### Features
+
+* add object custom contexts counters ([#33895](https://github.com/googleapis/google-cloud-ruby/issues/33895)) 
+
+### 0.8.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33482](https://github.com/googleapis/google-cloud-ruby/issues/33482)) 
+
+### 0.8.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33439](https://github.com/googleapis/google-cloud-ruby/issues/33439)) 
+
+### 0.7.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.6.0 (2026-03-05)
+
+#### Features
+
+* add new transformation `update_object_custom_context` ([#32449](https://github.com/googleapis/google-cloud-ruby/issues/32449)) 
+* add QUEUED state to Storage Batch Operations API 
+
 ### 0.5.0 (2025-12-16)
 
 #### Features

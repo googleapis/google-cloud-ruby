@@ -193,6 +193,9 @@ module Google
         # @!attribute [r] service_resources
         #   @return [::Google::Cloud::Dataflow::V1beta3::ServiceResources]
         #     Output only. Resources used by the Dataflow Service to run the job.
+        # @!attribute [r] pausable
+        #   @return [::Boolean]
+        #     Output only. Indicates whether the job can be paused.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -245,6 +248,16 @@ module Google
         #     For more information, see
         #     [Update an existing
         #     pipeline](https://cloud.google.com/dataflow/docs/guides/updating-a-pipeline).
+        # @!attribute [rw] acceptable_backlog_duration
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Deprecated: Use `autoscaling_tier` instead.
+        #     The backlog threshold duration in seconds for autoscaling. Value must be
+        #     non-negative.
+        # @!attribute [rw] autoscaling_tier
+        #   @return [::String]
+        #     Optional. The backlog threshold tier for autoscaling. Value must be one of
+        #     "low-latency", "medium-latency", or "high-latency".
         class RuntimeUpdatableParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1049,6 +1062,12 @@ module Google
           # Currently, this is an opt-in feature, please reach out to Cloud support
           # team if you are interested.
           JOB_STATE_RESOURCE_CLEANING_UP = 12
+
+          # `JOB_STATE_PAUSING` is not implemented yet.
+          JOB_STATE_PAUSING = 13
+
+          # `JOB_STATE_PAUSED` is not implemented yet.
+          JOB_STATE_PAUSED = 14
         end
 
         # Selector for how much information is returned in Job responses.

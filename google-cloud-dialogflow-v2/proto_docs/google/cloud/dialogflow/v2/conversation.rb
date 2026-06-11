@@ -70,9 +70,18 @@ module Google
         # @!attribute [r] telephony_connection_info
         #   @return [::Google::Cloud::Dialogflow::V2::Conversation::TelephonyConnectionInfo]
         #     Output only. The telephony connection information.
+        # @!attribute [r] initial_conversation_profile
+        #   @return [::Google::Cloud::Dialogflow::V2::ConversationProfile]
+        #     Optional. Output only. The initial conversation profile to be used to
+        #     configure this conversation, which is a copy of the conversation profile
+        #     config read at conversation creation time.
         # @!attribute [r] ingested_context_references
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::V2::Conversation::ContextReference}]
         #     Output only. The context reference updates provided by external systems.
+        # @!attribute [r] initial_generator_contexts
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::V2::Conversation::GeneratorContext}]
+        #     Output only. A map with generator name as key and generator context as
+        #     value.
         class Conversation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -187,11 +196,53 @@ module Google
             end
           end
 
+          # Represents the context of a generator.
+          # @!attribute [r] generator_type
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::GeneratorContext::GeneratorType]
+          #     Output only. The type of the generator.
+          class GeneratorContext
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The available generator types.
+            module GeneratorType
+              # Unspecified generator type.
+              GENERATOR_TYPE_UNSPECIFIED = 0
+
+              # Free form generator type.
+              FREE_FORM = 1
+
+              # Agent coaching generator type.
+              AGENT_COACHING = 2
+
+              # Summarization generator type.
+              SUMMARIZATION = 3
+
+              # Translation generator type.
+              TRANSLATION = 4
+
+              # Agent feedback generator type.
+              AGENT_FEEDBACK = 5
+
+              # Customer message generation generator type.
+              CUSTOMER_MESSAGE_GENERATION = 6
+            end
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
           #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference]
           class IngestedContextReferencesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::GeneratorContext]
+          class InitialGeneratorContextsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -483,6 +534,10 @@ module Google
           #     The summary content that is divided into sections. The key is the
           #     section's name and the value is the section's content. There is no
           #     specific format for the key or value.
+          # @!attribute [rw] sorted_text_sections
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse::Summary::SummarySection>]
+          #     Same as text_sections, but in an order that is consistent with the order
+          #     of the sections in the generator.
           # @!attribute [rw] answer_record
           #   @return [::String]
           #     The name of the answer record. Format:
@@ -494,6 +549,18 @@ module Google
           class Summary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # A component of the generated summary.
+            # @!attribute [r] section
+            #   @return [::String]
+            #     Output only. Name of the section.
+            # @!attribute [r] summary
+            #   @return [::String]
+            #     Output only. Summary text for the section.
+            class SummarySection
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # @!attribute [rw] key
             #   @return [::String]
@@ -941,6 +1008,42 @@ module Google
           end
         end
 
+        # Debug information related to SearchKnowledge feature.
+        # @!attribute [rw] datastore_response_reason
+        #   @return [::Google::Cloud::Dialogflow::V2::DatastoreResponseReason]
+        #     Response reason from datastore which indicates data serving status or
+        #     answer quality degradation.
+        # @!attribute [rw] search_knowledge_behavior
+        #   @return [::Google::Cloud::Dialogflow::V2::SearchKnowledgeDebugInfo::SearchKnowledgeBehavior]
+        #     Configured behaviors for SearchKnowledge.
+        # @!attribute [rw] ingested_context_reference_debug_info
+        #   @return [::Google::Cloud::Dialogflow::V2::IngestedContextReferenceDebugInfo]
+        #     Information about parameters ingested for search knowledge.
+        # @!attribute [rw] service_latency
+        #   @return [::Google::Cloud::Dialogflow::V2::ServiceLatency]
+        #     The latency of the service.
+        class SearchKnowledgeDebugInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configured behaviors for SearchKnowledge.
+          # @!attribute [rw] answer_generation_rewriter_on
+          #   @return [::Boolean]
+          #     Whether data store agent rewriter was turned on for the request.
+          # @!attribute [rw] end_user_metadata_included
+          #   @return [::Boolean]
+          #     Whether end_user_metadata is included in the data store agent call.
+          # @!attribute [rw] third_party_connector_allowed
+          #   @return [::Boolean]
+          #     This field indicates whether third party connectors are enabled for the
+          #     project. Note that this field only indicates if the project is
+          #     allowlisted for connectors.
+          class SearchKnowledgeBehavior
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # The response message for
         # {::Google::Cloud::Dialogflow::V2::Conversations::Client#search_knowledge Conversations.SearchKnowledge}.
         # @!attribute [rw] answers
@@ -950,6 +1053,9 @@ module Google
         # @!attribute [rw] rewritten_query
         #   @return [::String]
         #     The rewritten query used to search knowledge.
+        # @!attribute [rw] search_knowledge_debug_info
+        #   @return [::Google::Cloud::Dialogflow::V2::SearchKnowledgeDebugInfo]
+        #     Debug info for SearchKnowledge.
         class SearchKnowledgeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

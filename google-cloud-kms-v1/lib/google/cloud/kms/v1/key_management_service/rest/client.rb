@@ -105,6 +105,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
+                  default_config.rpcs.list_retired_resources.timeout = 60.0
+                  default_config.rpcs.list_retired_resources.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
                   default_config.rpcs.get_key_ring.timeout = 60.0
                   default_config.rpcs.get_key_ring.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -130,6 +135,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
+                  default_config.rpcs.get_retired_resource.timeout = 60.0
+                  default_config.rpcs.get_retired_resource.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
                   default_config.rpcs.create_key_ring.timeout = 60.0
                   default_config.rpcs.create_key_ring.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -141,6 +151,16 @@ module Google
                   }
 
                   default_config.rpcs.create_crypto_key_version.timeout = 60.0
+
+                  default_config.rpcs.delete_crypto_key.timeout = 60.0
+                  default_config.rpcs.delete_crypto_key.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.delete_crypto_key_version.timeout = 60.0
+                  default_config.rpcs.delete_crypto_key_version.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
 
                   default_config.rpcs.import_crypto_key_version.timeout = 60.0
 
@@ -283,6 +303,13 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @operations_client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Operations.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                  config.universe_domain = @config.universe_domain
+                end
+
                 @key_management_service_stub = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
@@ -319,6 +346,13 @@ module Google
                   config.logger = @key_management_service_stub.logger if config.respond_to? :logger=
                 end
               end
+
+              ##
+              # Get the associated client for long-running operations.
+              #
+              # @return [::Google::Cloud::Kms::V1::KeyManagementService::Rest::Operations]
+              #
+              attr_reader :operations_client
 
               ##
               # Get the associated client for mix-in of the Locations.
@@ -776,6 +810,106 @@ module Google
               end
 
               ##
+              # Lists the {::Google::Cloud::Kms::V1::RetiredResource RetiredResources} which are
+              # the records of deleted {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
+              # RetiredResources prevent the reuse of these resource names after deletion.
+              #
+              # @overload list_retired_resources(request, options = nil)
+              #   Pass arguments to `list_retired_resources` via a request object, either of type
+              #   {::Google::Cloud::Kms::V1::ListRetiredResourcesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Kms::V1::ListRetiredResourcesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_retired_resources(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_retired_resources` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project-specific location holding the
+              #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResources}, in the format
+              #     `projects/*/locations/*`.
+              #   @param page_size [::Integer]
+              #     Optional. Optional limit on the number of
+              #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResources} to be included in
+              #     the response. Further
+              #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResources} can subsequently be
+              #     obtained by including the
+              #     {::Google::Cloud::Kms::V1::ListRetiredResourcesResponse#next_page_token ListRetiredResourcesResponse.next_page_token}
+              #     in a subsequent request. If unspecified, the server will pick an
+              #     appropriate default.
+              #   @param page_token [::String]
+              #     Optional. Optional pagination token, returned earlier via
+              #     {::Google::Cloud::Kms::V1::ListRetiredResourcesResponse#next_page_token ListRetiredResourcesResponse.next_page_token}.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Kms::V1::RetiredResource>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Kms::V1::RetiredResource>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::ListRetiredResourcesRequest.new
+              #
+              #   # Call the list_retired_resources method.
+              #   result = client.list_retired_resources request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Kms::V1::RetiredResource.
+              #     p item
+              #   end
+              #
+              def list_retired_resources request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::ListRetiredResourcesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_retired_resources.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Kms::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_retired_resources.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_retired_resources.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @key_management_service_stub.list_retired_resources request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @key_management_service_stub, :list_retired_resources, "retired_resources", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Returns metadata for a given {::Google::Cloud::Kms::V1::KeyRing KeyRing}.
               #
               # @overload get_key_ring(request, options = nil)
@@ -1187,6 +1321,87 @@ module Google
               end
 
               ##
+              # Retrieves a specific {::Google::Cloud::Kms::V1::RetiredResource RetiredResource}
+              # resource, which represents the record of a deleted
+              # {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+              #
+              # @overload get_retired_resource(request, options = nil)
+              #   Pass arguments to `get_retired_resource` via a request object, either of type
+              #   {::Google::Cloud::Kms::V1::GetRetiredResourceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Kms::V1::GetRetiredResourceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_retired_resource(name: nil)
+              #   Pass arguments to `get_retired_resource` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The {::Google::Cloud::Kms::V1::RetiredResource#name name} of the
+              #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResource} to get.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Kms::V1::RetiredResource]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Kms::V1::RetiredResource]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::GetRetiredResourceRequest.new
+              #
+              #   # Call the get_retired_resource method.
+              #   result = client.get_retired_resource request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::RetiredResource.
+              #   p result
+              #
+              def get_retired_resource request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::GetRetiredResourceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_retired_resource.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Kms::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_retired_resource.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_retired_resource.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @key_management_service_stub.get_retired_resource request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Create a new {::Google::Cloud::Kms::V1::KeyRing KeyRing} in a given Project and
               # Location.
               #
@@ -1455,6 +1670,197 @@ module Google
 
                 @key_management_service_stub.create_crypto_key_version request, options do |result, operation|
                   yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Permanently deletes the given {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+              # All child {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} must
+              # have been previously deleted using
+              # {::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client#delete_crypto_key_version KeyManagementService.DeleteCryptoKeyVersion}.
+              # The specified crypto key will be immediately and permanently deleted upon
+              # calling this method. This action cannot be undone.
+              #
+              # @overload delete_crypto_key(request, options = nil)
+              #   Pass arguments to `delete_crypto_key` via a request object, either of type
+              #   {::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_crypto_key(name: nil)
+              #   Pass arguments to `delete_crypto_key` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the
+              #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to delete.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::DeleteCryptoKeyRequest.new
+              #
+              #   # Call the delete_crypto_key method.
+              #   result = client.delete_crypto_key request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_crypto_key request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_crypto_key.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Kms::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_crypto_key.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_crypto_key.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @key_management_service_stub.delete_crypto_key request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Permanently deletes the given
+              # {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Only possible if
+              # the version has not been previously imported and if its
+              # {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} is one of
+              # [DESTROYED][CryptoKeyVersionState.DESTROYED],
+              # [IMPORT_FAILED][CryptoKeyVersionState.IMPORT_FAILED], or
+              # [GENERATION_FAILED][CryptoKeyVersionState.GENERATION_FAILED].
+              # Successfully imported
+              # {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} cannot be deleted
+              # at this time. The specified version will be immediately and permanently
+              # deleted upon calling this method. This action cannot be undone.
+              #
+              # @overload delete_crypto_key_version(request, options = nil)
+              #   Pass arguments to `delete_crypto_key_version` via a request object, either of type
+              #   {::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_crypto_key_version(name: nil)
+              #   Pass arguments to `delete_crypto_key_version` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to delete.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest.new
+              #
+              #   # Call the delete_crypto_key_version method.
+              #   result = client.delete_crypto_key_version request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_crypto_key_version request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_crypto_key_version.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Kms::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_crypto_key_version.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_crypto_key_version.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @key_management_service_stub.delete_crypto_key_version request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3600,6 +4006,11 @@ module Google
                   #
                   attr_reader :list_import_jobs
                   ##
+                  # RPC-specific configuration for `list_retired_resources`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_retired_resources
+                  ##
                   # RPC-specific configuration for `get_key_ring`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3625,6 +4036,11 @@ module Google
                   #
                   attr_reader :get_import_job
                   ##
+                  # RPC-specific configuration for `get_retired_resource`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_retired_resource
+                  ##
                   # RPC-specific configuration for `create_key_ring`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3639,6 +4055,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :create_crypto_key_version
+                  ##
+                  # RPC-specific configuration for `delete_crypto_key`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_crypto_key
+                  ##
+                  # RPC-specific configuration for `delete_crypto_key_version`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_crypto_key_version
                   ##
                   # RPC-specific configuration for `import_crypto_key_version`
                   # @return [::Gapic::Config::Method]
@@ -3735,6 +4161,8 @@ module Google
                     @list_crypto_key_versions = ::Gapic::Config::Method.new list_crypto_key_versions_config
                     list_import_jobs_config = parent_rpcs.list_import_jobs if parent_rpcs.respond_to? :list_import_jobs
                     @list_import_jobs = ::Gapic::Config::Method.new list_import_jobs_config
+                    list_retired_resources_config = parent_rpcs.list_retired_resources if parent_rpcs.respond_to? :list_retired_resources
+                    @list_retired_resources = ::Gapic::Config::Method.new list_retired_resources_config
                     get_key_ring_config = parent_rpcs.get_key_ring if parent_rpcs.respond_to? :get_key_ring
                     @get_key_ring = ::Gapic::Config::Method.new get_key_ring_config
                     get_crypto_key_config = parent_rpcs.get_crypto_key if parent_rpcs.respond_to? :get_crypto_key
@@ -3745,12 +4173,18 @@ module Google
                     @get_public_key = ::Gapic::Config::Method.new get_public_key_config
                     get_import_job_config = parent_rpcs.get_import_job if parent_rpcs.respond_to? :get_import_job
                     @get_import_job = ::Gapic::Config::Method.new get_import_job_config
+                    get_retired_resource_config = parent_rpcs.get_retired_resource if parent_rpcs.respond_to? :get_retired_resource
+                    @get_retired_resource = ::Gapic::Config::Method.new get_retired_resource_config
                     create_key_ring_config = parent_rpcs.create_key_ring if parent_rpcs.respond_to? :create_key_ring
                     @create_key_ring = ::Gapic::Config::Method.new create_key_ring_config
                     create_crypto_key_config = parent_rpcs.create_crypto_key if parent_rpcs.respond_to? :create_crypto_key
                     @create_crypto_key = ::Gapic::Config::Method.new create_crypto_key_config
                     create_crypto_key_version_config = parent_rpcs.create_crypto_key_version if parent_rpcs.respond_to? :create_crypto_key_version
                     @create_crypto_key_version = ::Gapic::Config::Method.new create_crypto_key_version_config
+                    delete_crypto_key_config = parent_rpcs.delete_crypto_key if parent_rpcs.respond_to? :delete_crypto_key
+                    @delete_crypto_key = ::Gapic::Config::Method.new delete_crypto_key_config
+                    delete_crypto_key_version_config = parent_rpcs.delete_crypto_key_version if parent_rpcs.respond_to? :delete_crypto_key_version
+                    @delete_crypto_key_version = ::Gapic::Config::Method.new delete_crypto_key_version_config
                     import_crypto_key_version_config = parent_rpcs.import_crypto_key_version if parent_rpcs.respond_to? :import_crypto_key_version
                     @import_crypto_key_version = ::Gapic::Config::Method.new import_crypto_key_version_config
                     create_import_job_config = parent_rpcs.create_import_job if parent_rpcs.respond_to? :create_import_job

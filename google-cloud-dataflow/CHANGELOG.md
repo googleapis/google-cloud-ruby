@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.8.0 (2026-04-02)
+
+#### Features
+
+* Add Pausing/Yaml capabilities to public protos ([#33453](https://github.com/googleapis/google-cloud-ruby/issues/33453)) 
+
+### 0.7.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.6.3 (2025-09-12)
 
 #### Documentation

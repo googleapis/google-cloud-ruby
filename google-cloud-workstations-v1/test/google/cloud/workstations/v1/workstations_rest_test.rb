@@ -143,6 +143,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_workstation_clusters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -158,27 +159,27 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        client.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workstation_clusters parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_workstation_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workstation_clusters ::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_workstation_clusters ::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workstation_clusters(::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_workstation_clusters(::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -424,6 +425,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_workstation_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -439,27 +441,27 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        client.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workstation_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_workstation_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workstation_configs ::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_workstation_configs ::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workstation_configs(::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_workstation_configs(::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -761,6 +763,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_workstations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -776,27 +779,27 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        client.list_workstations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_workstations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workstations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_workstations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workstations ::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_workstations ::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workstations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_workstations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workstations(::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_workstations(::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1043,6 +1046,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     name = "hello world"
     validate_only = true
     etag = "hello world"
+    boost_config = "hello world"
 
     start_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1058,27 +1062,27 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        client.start_workstation({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        client.start_workstation({ name: name, validate_only: validate_only, etag: etag, boost_config: boost_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_workstation name: name, validate_only: validate_only, etag: etag do |_result, response|
+        client.start_workstation name: name, validate_only: validate_only, etag: etag, boost_config: boost_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_workstation ::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        client.start_workstation ::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag, boost_config: boost_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_workstation({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        client.start_workstation({ name: name, validate_only: validate_only, etag: etag, boost_config: boost_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_workstation(::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        client.start_workstation(::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag, boost_config: boost_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1154,6 +1158,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     expire_time = {}
     workstation = "hello world"
+    port = 42
 
     generate_access_token_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1169,27 +1174,27 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        client.generate_access_token({ expire_time: expire_time, workstation: workstation }) do |_result, response|
+        client.generate_access_token({ expire_time: expire_time, workstation: workstation, port: port }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_access_token expire_time: expire_time, workstation: workstation do |_result, response|
+        client.generate_access_token expire_time: expire_time, workstation: workstation, port: port do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_access_token ::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation) do |_result, response|
+        client.generate_access_token ::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation, port: port) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_access_token({ expire_time: expire_time, workstation: workstation }, call_options) do |_result, response|
+        client.generate_access_token({ expire_time: expire_time, workstation: workstation, port: port }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_access_token(::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation), call_options) do |_result, response|
+        client.generate_access_token(::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation, port: port), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

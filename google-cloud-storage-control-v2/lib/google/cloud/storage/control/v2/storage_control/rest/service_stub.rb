@@ -315,6 +315,206 @@ module Google
                 end
 
                 ##
+                # Baseline implementation for the get_intelligence_finding REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::IntelligenceFinding]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding]
+                #   A result object deserialized from the server's reply
+                def get_intelligence_finding request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_get_intelligence_finding_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_intelligence_finding",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Storage::Control::V2::IntelligenceFinding.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the list_intelligence_findings REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsResponse]
+                #   A result object deserialized from the server's reply
+                def list_intelligence_findings request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_list_intelligence_findings_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_intelligence_findings",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsResponse.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the summarize_intelligence_findings REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsResponse]
+                #   A result object deserialized from the server's reply
+                def summarize_intelligence_findings request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_summarize_intelligence_findings_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "summarize_intelligence_findings",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsResponse.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the get_intelligence_finding_revision REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision]
+                #   A result object deserialized from the server's reply
+                def get_intelligence_finding_revision request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_get_intelligence_finding_revision_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_intelligence_finding_revision",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the list_intelligence_finding_revisions REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsResponse]
+                #   A result object deserialized from the server's reply
+                def list_intelligence_finding_revisions request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_list_intelligence_finding_revisions_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_intelligence_finding_revisions",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsResponse.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
                 # @private
                 #
                 # GRPC transcoding helper method for the get_project_intelligence_config REST call
@@ -438,6 +638,125 @@ module Google
                                                             body: "intelligence_config",
                                                             matches: [
                                                               ["intelligence_config.name", %r{^organizations/[^/]+/locations/[^/]+/intelligenceConfig/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the get_intelligence_finding REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_get_intelligence_finding_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v2/{name}",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/intelligenceFindings/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the list_intelligence_findings REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_list_intelligence_findings_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v2/{parent}/intelligenceFindings",
+                                                            matches: [
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the summarize_intelligence_findings REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_summarize_intelligence_findings_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v2/{parent}/intelligenceFindings:summarize",
+                                                            matches: [
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v2/{parent}/intelligenceFindings:summarize",
+                                                            matches: [
+                                                              ["parent", %r{^folders/[^/]+/locations/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v2/{parent}/intelligenceFindings:summarize",
+                                                            matches: [
+                                                              ["parent", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the get_intelligence_finding_revision REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_get_intelligence_finding_revision_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v2/{name}",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/intelligenceFindings/[^/]+/revisions/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the list_intelligence_finding_revisions REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_list_intelligence_finding_revisions_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v2/{parent}/revisions",
+                                                            matches: [
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/intelligenceFindings/[^/]+/?$}, false]
                                                             ]
                                                           )
                   transcoder.transcode request_pb

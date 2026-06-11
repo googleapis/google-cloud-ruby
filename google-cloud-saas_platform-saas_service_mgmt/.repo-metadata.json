@@ -6,12 +6,12 @@
     "is_cloud": true,
     "language": "ruby",
     "name": "saasservicemgmt",
-    "name_pretty": "SaaS Runtime API",
+    "name_pretty": "App Lifecycle Manager API",
     "product_documentation": "https://cloud.google.com/saas-runtime/docs/overview",
     "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
-    "ruby-cloud-description": "SaaS Runtime lets you store, host, manage, and monitor software as a service (SaaS) applications on Google Cloud.",
+    "ruby-cloud-description": "App Lifecycle Manager Overview.",
     "ruby-cloud-product-url": "https://cloud.google.com/saas-runtime/docs/overview",
     "library_type": "GAPIC_MANUAL"
 }

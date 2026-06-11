@@ -29,8 +29,48 @@ module Google
         #     Format: `networks/{network_code}/applications/{application_id}`
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Optional. The display name of the application. This attribute is required
-        #     and has a maximum length of 80 characters.
+        #     Required. The display name of the application.
+        # @!attribute [rw] app_store_id
+        #   @return [::String]
+        #     Optional. The app store ID of the app to claim.
+        # @!attribute [rw] app_stores
+        #   @return [::Array<::Google::Ads::AdManager::V1::ApplicationStoreEnum::ApplicationStore>]
+        #     Optional. The app stores the application belongs to. This attribute is
+        #     mutable to allow for third party app store linking.
+        # @!attribute [r] archived
+        #   @return [::Boolean]
+        #     Output only. The archival status of the application.
+        #
+        #     When true, an application cannot be targeted and will not serve ads,
+        #     regardless of its `status`.
+        # @!attribute [r] app_store_display_name
+        #   @return [::String]
+        #     Output only. The name of the application on the app store.
+        # @!attribute [r] application_code
+        #   @return [::String]
+        #     Output only. The application code used to identify the app in the SDK.
+        #
+        #     Note that the UI refers to this as "App ID".
+        # @!attribute [r] developer
+        #   @return [::String]
+        #     Output only. The name of the developer of the application.
+        # @!attribute [r] platform
+        #   @return [::Google::Ads::AdManager::V1::ApplicationPlatformEnum::ApplicationPlatform]
+        #     Output only. The platform the application runs on.
+        # @!attribute [r] free
+        #   @return [::Boolean]
+        #     Output only. Whether the application is free on the app store it belongs
+        #     to.
+        # @!attribute [r] download_url
+        #   @return [::String]
+        #     Output only. The download URL of the application on the app store it
+        #     belongs to.
+        # @!attribute [r] approval_status
+        #   @return [::Google::Ads::AdManager::V1::ApplicationApprovalStatusEnum::ApplicationApprovalStatus]
+        #     Output only. The approval status for the application.
+        # @!attribute [r] webview_claiming_status
+        #   @return [::Google::Ads::AdManager::V1::WebviewClaimingStatusEnum::WebviewClaimingStatus]
+        #     Output only. The webview claiming status for the application.
         class Application
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

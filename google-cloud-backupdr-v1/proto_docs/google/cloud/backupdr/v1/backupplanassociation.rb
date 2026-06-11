@@ -66,6 +66,13 @@ module Google
         # @!attribute [r] cloud_sql_instance_backup_plan_association_properties
         #   @return [::Google::Cloud::BackupDR::V1::CloudSqlInstanceBackupPlanAssociationProperties]
         #     Output only. Cloud SQL instance's backup plan association properties.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_sql_instance_backup_plan_association_properties`, `alloydb_cluster_backup_plan_association_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] alloydb_cluster_backup_plan_association_properties
+        #   @return [::Google::Cloud::BackupDR::V1::AlloyDBClusterBackupPlanAssociationProperties]
+        #     Output only. AlloyDB cluster's backup plan association properties.
+        #
+        #     Note: The following fields are mutually exclusive: `alloydb_cluster_backup_plan_association_properties`, `cloud_sql_instance_backup_plan_association_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] backup_plan_revision_id
         #   @return [::String]
         #     Output only. The user friendly revision ID of the `BackupPlanRevision`.

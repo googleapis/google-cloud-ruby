@@ -1698,6 +1698,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     parent = "hello world"
     dataset = "hello world"
     content = ["hello world"]
+    mime_type = "hello world"
     reference_sentence_config = {}
     glossary_config = {}
 
@@ -1707,6 +1708,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["dataset"]
       assert_equal ["hello world"], request["content"]
+      assert_equal "hello world", request["mime_type"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest::ReferenceSentenceConfig), request["reference_sentence_config"]
       assert request.has_reference_sentence_config?
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest::GlossaryConfig), request["glossary_config"]
@@ -1721,31 +1723,31 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       end
 
       # Use hash object
-      client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }) do |response, operation|
+      client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.adaptive_mt_translate parent: parent, dataset: dataset, content: content, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config do |response, operation|
+      client.adaptive_mt_translate parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.adaptive_mt_translate ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config) do |response, operation|
+      client.adaptive_mt_translate ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }, grpc_options) do |response, operation|
+      client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.adaptive_mt_translate(::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config), grpc_options) do |response, operation|
+      client.adaptive_mt_translate(::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -234,7 +234,7 @@ module Google
           #   @return [::Google::Cloud::AIPlatform::V1::GcsSource]
           #     The Cloud Storage location for the input instances.
           #
-          #     Note: The following fields are mutually exclusive: `gcs_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `gcs_source`, `bigquery_source`, `vertex_multimodal_dataset_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bigquery_source
           #   @return [::Google::Cloud::AIPlatform::V1::BigQuerySource]
           #     The BigQuery location of the input table.
@@ -243,7 +243,13 @@ module Google
           #     additional columns that are not described by the schema, and they will
           #     be ignored.
           #
-          #     Note: The following fields are mutually exclusive: `bigquery_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `bigquery_source`, `gcs_source`, `vertex_multimodal_dataset_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] vertex_multimodal_dataset_source
+          #   @return [::Google::Cloud::AIPlatform::V1::VertexMultimodalDatasetSource]
+          #     A Vertex Managed Dataset. Currently, only datasets of type Multimodal
+          #     are supported.
+          #
+          #     Note: The following fields are mutually exclusive: `vertex_multimodal_dataset_source`, `gcs_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] instances_format
           #   @return [::String]
           #     Required. The format in which instances are given, must be one of the
@@ -385,7 +391,7 @@ module Google
           #     value has {::Google::Rpc::Status google.rpc.Status}
           #     containing only `code` and `message` fields.
           #
-          #     Note: The following fields are mutually exclusive: `gcs_destination`, `bigquery_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `gcs_destination`, `bigquery_destination`, `vertex_multimodal_dataset_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bigquery_destination
           #   @return [::Google::Cloud::AIPlatform::V1::BigQueryDestination]
           #     The BigQuery project or dataset location where the output is to be
@@ -409,7 +415,13 @@ module Google
           #     has {::Google::Rpc::Status google.rpc.Status}
           #     represented as a STRUCT, and containing only `code` and `message`.
           #
-          #     Note: The following fields are mutually exclusive: `bigquery_destination`, `gcs_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `bigquery_destination`, `gcs_destination`, `vertex_multimodal_dataset_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] vertex_multimodal_dataset_destination
+          #   @return [::Google::Cloud::AIPlatform::V1::VertexMultimodalDatasetDestination]
+          #     The details for a Vertex Multimodal Dataset that will be created for
+          #     the output.
+          #
+          #     Note: The following fields are mutually exclusive: `vertex_multimodal_dataset_destination`, `gcs_destination`, `bigquery_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] predictions_format
           #   @return [::String]
           #     Required. The format in which Vertex AI gives the predictions, must be
@@ -428,14 +440,21 @@ module Google
           #     Output only. The full path of the Cloud Storage directory created, into
           #     which the prediction output is written.
           #
-          #     Note: The following fields are mutually exclusive: `gcs_output_directory`, `bigquery_output_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `gcs_output_directory`, `bigquery_output_dataset`, `vertex_multimodal_dataset_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] bigquery_output_dataset
           #   @return [::String]
           #     Output only. The path of the BigQuery dataset created, in
           #     `bq://projectId.bqDatasetId`
           #     format, into which the prediction output is written.
           #
-          #     Note: The following fields are mutually exclusive: `bigquery_output_dataset`, `gcs_output_directory`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `bigquery_output_dataset`, `gcs_output_directory`, `vertex_multimodal_dataset_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [r] vertex_multimodal_dataset_name
+          #   @return [::String]
+          #     Output only. The resource name of the Vertex Managed Dataset created,
+          #     into which the prediction output is written. Format:
+          #     `projects/{project}/locations/{location}/datasets/{dataset}`
+          #
+          #     Note: The following fields are mutually exclusive: `vertex_multimodal_dataset_name`, `gcs_output_directory`, `bigquery_output_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] bigquery_output_table
           #   @return [::String]
           #     Output only. The name of the BigQuery table created, in

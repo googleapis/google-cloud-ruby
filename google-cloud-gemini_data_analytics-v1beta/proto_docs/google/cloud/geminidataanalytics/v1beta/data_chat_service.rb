@@ -68,9 +68,35 @@ module Google
         # @!attribute [rw] datasource_references
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DatasourceReferences]
         #     Required. The datasource references to use for the query.
+        # @!attribute [rw] parameterized_secure_view_parameters
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ParameterizedSecureViewParameters]
+        #     Optional. Parameters for Parameterized Secure Views (PSV).
         class QueryDataContext
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Parameters for Parameterized Secure Views (PSV). These parameters are
+        # used to enforce row-level security during SQL generation and query
+        # execution.
+        # @!attribute [rw] parameters
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::ParameterizedSecureViewParameters::Parameter>]
+        #     Optional. Named parameters for Parameterized Secure Views (PSV).
+        class ParameterizedSecureViewParameters
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents a single parameter for Parameterized Secure Views.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     Required. The parameter key (e.g., `"user_id"`).
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     Required. The parameter value (e.g., `"123"`).
+          class Parameter
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Response containing the generated query and related information.
@@ -172,8 +198,9 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Requested page size. Server may return fewer items than
-        #     requested. The max page size is 100. All larger page sizes will be coerced
-        #     to 100. If unspecified, server will pick 50 as an approperiate default.
+        #     requested. The max page size is `100`. All larger page sizes will be
+        #     coerced to `100`. If unspecified, server will pick `50` as an appropriate
+        #     default.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token identifying a page of results the server should return.
@@ -242,10 +269,14 @@ module Google
         #     conversations and agents resources.
         #
         #     Note: The following fields are mutually exclusive: `client_managed_resource_context`, `inline_context`, `conversation_reference`, `data_agent_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] looker_settings
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::LookerSettings]
+        #     Optional. Looker specific settings.
         # @!attribute [rw] project
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     Optional. The Google Cloud project to be used for quota and billing.
+        #     Optional. Deprecated: Use `parent` field instead.
+        #     The Google Cloud project to be used for quota and billing.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent value for chat request.
@@ -253,9 +284,49 @@ module Google
         # @!attribute [rw] messages
         #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::Message>]
         #     Required. Content of current conversation.
+        # @!attribute [rw] credentials
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::Credentials]
+        #     Optional. The credentials to use when calling the data source(s) specified
+        #     in the context.
+        #
+        #     This field can be used to provide credentials for various data sources.
+        #     For example, when connecting to Looker, it currently supports both OAuth
+        #     token and API key-based credentials, as described in
+        #     [Authentication with an
+        #     SDK](https://cloud.google.com/looker/docs/api-auth#authentication_with_an_sdk).
+        # @!attribute [rw] thinking_mode
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest::ThinkingMode]
+        #     Optional. The thinking mode to use for the agent loop.
+        #     Defaults to THINKING_MODE_UNSPECIFIED if not specified.
+        # @!attribute [rw] model
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest::Model]
+        #     Optional. The model to use for the agent loop when processing the request.
+        #     This setting only has an effect when context.options.model is not set.
         class ChatRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Mode of thinking for the agent.
+          module ThinkingMode
+            # Unspecified thinking mode, agent will use THINKING mode by default.
+            THINKING_MODE_UNSPECIFIED = 0
+
+            # Fast mode, answers quickly.
+            FAST = 1
+
+            # Thinking mode, solves complex problems.
+            THINKING = 2
+          end
+
+          # Model selection for the agent.
+          module Model
+            # No model specified. The default model will be used.
+            MODEL_UNSPECIFIED = 0
+
+            # Use the most up-to-date non-preview model. This may constrain certain
+            # request level settings.
+            LATEST_GA_MODEL = 1
+          end
         end
 
         # Context for the chat request using a data agent.
@@ -263,8 +334,10 @@ module Google
         #   @return [::String]
         #     Required. The name of the data agent resource.
         # @!attribute [rw] credentials
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::Credentials]
-        #     Optional. The credentials to use when calling the Looker data source.
+        #     Optional. Deprecated: Use credentials in ChatRequest.
+        #     The credentials to use when calling the Looker data source.
         #
         #     Currently supports both OAuth token and API key-based credentials, as
         #     described in
@@ -351,6 +424,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message to hold Looker specific custom settings.
+        # @!attribute [rw] enable_dev_mode
+        #   @return [::Boolean]
+        #     Optional. Whether to operate in Looker's Development Mode.
+        #     If true, the API session will be switched to the "dev" workspace,
+        #     allowing interaction with LookML changes in the user's development branch.
+        #     If false or unset, the session remains in the default state (Production
+        #     Mode).
+        #     See https://cloud.google.com/looker/docs/dev-mode-prod-mode.
+        class LookerSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A message from the user that is interacting with the system.
         # @!attribute [rw] text
         #   @return [::String]
@@ -361,48 +448,58 @@ module Google
         end
 
         # A message from the system in response to the user. This message can also be a
-        # message from the user as historical context for multiturn conversations with
+        # message from the user as historical context for multi-turn conversations with
         # the system.
         # @!attribute [rw] text
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::TextMessage]
         #     A direct natural language response to the user message.
         #
-        #     Note: The following fields are mutually exclusive: `text`, `schema`, `data`, `analysis`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `text`, `schema`, `data`, `analysis`, `chart`, `error`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] schema
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::SchemaMessage]
         #     A message produced during schema resolution.
         #
-        #     Note: The following fields are mutually exclusive: `schema`, `text`, `data`, `analysis`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `schema`, `text`, `data`, `analysis`, `chart`, `error`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DataMessage]
         #     A message produced during data retrieval.
         #
-        #     Note: The following fields are mutually exclusive: `data`, `text`, `schema`, `analysis`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `data`, `text`, `schema`, `analysis`, `chart`, `error`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] analysis
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AnalysisMessage]
         #     A message produced during analysis.
         #
-        #     Note: The following fields are mutually exclusive: `analysis`, `text`, `schema`, `data`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `analysis`, `text`, `schema`, `data`, `chart`, `error`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] chart
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ChartMessage]
         #     A message produced during chart generation.
         #
-        #     Note: The following fields are mutually exclusive: `chart`, `text`, `schema`, `data`, `analysis`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `chart`, `text`, `schema`, `data`, `analysis`, `error`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] error
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ErrorMessage]
         #     An error message.
         #
-        #     Note: The following fields are mutually exclusive: `error`, `text`, `schema`, `data`, `analysis`, `chart`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `error`, `text`, `schema`, `data`, `analysis`, `chart`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] example_queries
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ExampleQueries]
         #     Optional. A message containing example queries.
         #
-        #     Note: The following fields are mutually exclusive: `example_queries`, `text`, `schema`, `data`, `analysis`, `chart`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `example_queries`, `text`, `schema`, `data`, `analysis`, `chart`, `error`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] clarification
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ClarificationMessage]
+        #     Optional. Deprecated: Use TextMessage with TextType.FINAL_RESPONSE
+        #     instead. A message containing clarification questions.
+        #
+        #     Note: The following fields are mutually exclusive: `clarification`, `text`, `schema`, `data`, `analysis`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] group_id
         #   @return [::Integer]
         #     Identifies the group that the event belongs to. Similar events are deemed
         #     to be logically relevant to each other and should be shown together in
         #     the UI.
+        # @!attribute [r] citation
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::Citation]
+        #     Output only. Citation information for the system message.
         class SystemMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -415,6 +512,10 @@ module Google
         # @!attribute [rw] text_type
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::TextMessage::TextType]
         #     Optional. The type of the text message.
+        # @!attribute [rw] thought_signature
+        #   @return [::String]
+        #     Optional. An opaque signature for a thought so it can be reused in
+        #     subsequent requests.
         class TextMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -427,7 +528,7 @@ module Google
             # The text is a final response to the user question.
             FINAL_RESPONSE = 1
 
-            # The text is a thinking plan generated by the thinking tool.
+            # The text is a thought from the model.
             THOUGHT = 2
 
             # The text is an informational message about the agent's progress, such as
@@ -436,6 +537,10 @@ module Google
             # (`FINAL_RESPONSE`). These messages provide insight into the agent's
             # actions.
             PROGRESS = 3
+
+            # The text is a list of follow-up questions suggested.
+            # Each item in parts is a follow-up question.
+            FOLLOWUP_QUESTIONS = 4
           end
         end
 
@@ -478,70 +583,37 @@ module Google
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DataQuery]
         #     A data retrieval query.
         #
-        #     Note: The following fields are mutually exclusive: `query`, `generated_sql`, `result`, `generated_looker_query`, `big_query_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `query`, `generated_sql`, `result`, `generated_looker_query`, `big_query_job`, `matched_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] generated_sql
         #   @return [::String]
         #     SQL generated by the system to retrieve data.
         #
-        #     Note: The following fields are mutually exclusive: `generated_sql`, `query`, `result`, `generated_looker_query`, `big_query_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `generated_sql`, `query`, `result`, `generated_looker_query`, `big_query_job`, `matched_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] result
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DataResult]
         #     Retrieved data.
         #
-        #     Note: The following fields are mutually exclusive: `result`, `query`, `generated_sql`, `generated_looker_query`, `big_query_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `result`, `query`, `generated_sql`, `generated_looker_query`, `big_query_job`, `matched_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] generated_looker_query
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::LookerQuery]
+        #     Deprecated: generated looker query is now under DataQuery.looker.
         #     Looker Query generated by the system to retrieve data.
-        #     DEPRECATED: generated looker query is now under DataQuery.looker.
         #
-        #     Note: The following fields are mutually exclusive: `generated_looker_query`, `query`, `generated_sql`, `result`, `big_query_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `generated_looker_query`, `query`, `generated_sql`, `result`, `big_query_job`, `matched_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] big_query_job
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::BigQueryJob]
         #     A BigQuery job executed by the system to retrieve data.
         #
-        #     Note: The following fields are mutually exclusive: `big_query_job`, `query`, `generated_sql`, `result`, `generated_looker_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `big_query_job`, `query`, `generated_sql`, `result`, `generated_looker_query`, `matched_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] matched_query
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::MatchedQuery]
+        #     A pre-existing query that was matched to retrieve data.
+        #
+        #     Note: The following fields are mutually exclusive: `matched_query`, `query`, `generated_sql`, `result`, `generated_looker_query`, `big_query_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DataMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A query for retrieving data from a Looker Explore. See
-        # [Run Inline
-        # Query](https://cloud.google.com/looker/docs/reference/looker-api/latest/methods/Query/run_inline_query).
-        # @!attribute [rw] model
-        #   @return [::String]
-        #     Required. The LookML model used to generate the query.
-        # @!attribute [rw] explore
-        #   @return [::String]
-        #     Required. The LookML Explore used to generate the query.
-        # @!attribute [rw] fields
-        #   @return [::Array<::String>]
-        #     Optional. The fields to retrieve from the Explore.
-        # @!attribute [rw] filters
-        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::LookerQuery::Filter>]
-        #     Optional. The filters to apply to the Explore.
-        # @!attribute [rw] sorts
-        #   @return [::Array<::String>]
-        #     Optional. The sorts to apply to the Explore.
-        # @!attribute [rw] limit
-        #   @return [::String]
-        #     Optional. Limit in the query.
-        class LookerQuery
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # A Looker query filter.
-          # @!attribute [rw] field
-          #   @return [::String]
-          #     Required. The field to filter on.
-          # @!attribute [rw] value
-          #   @return [::String]
-          #     Required. The value f field to filter on.
-          class Filter
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
         end
 
         # A query for retrieving data.
@@ -584,6 +656,15 @@ module Google
         #     Optional. The content of the data. Each row is a struct that matches the
         #     schema. Simple values are represented as strings, while nested structures
         #     are represented as lists or structs.
+        # @!attribute [rw] formatted_data
+        #   @return [::Array<::Google::Protobuf::Struct>]
+        #     Optional. Formatted representation of the data, when applicable.
+        #     Each row is a struct that directly corresponds to the row at the same index
+        #     within the `data` field. Its values are string representations of the
+        #     original data, formatted according to data source specifications (e.g.,
+        #     "$1,234.56" for currency). Columns without formatting will default to
+        #     their raw value representation. If no columns have formatting rules, this
+        #     field will be empty.
         class DataResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -769,6 +850,86 @@ module Google
         #   @return [::String]
         #     Output only. The text of the error.
         class ErrorMessage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Deprecated: Use TextMessage with TextType.FINAL_RESPONSE instead.
+        # Represents a single question to the user to help clarify their query.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
+        # @!attribute [rw] question
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::String]
+        #     Required. Deprecated: The parent message is deprecated.
+        #     The natural language question to ask the user.
+        # @!attribute [rw] selection_mode
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ClarificationQuestion::SelectionMode]
+        #     Required. Deprecated: The parent message is deprecated.
+        #     The selection mode for this question.
+        # @!attribute [rw] options
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Array<::String>]
+        #     Required. Deprecated: The parent message is deprecated.
+        #     A list of distinct options for the user to choose from.
+        #     The number of options is limited to a maximum of 5.
+        # @!attribute [rw] clarification_question_type
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ClarificationQuestion::ClarificationQuestionType]
+        #     Optional. Deprecated: The parent message is deprecated.
+        #     The type of clarification question.
+        class ClarificationQuestion
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Deprecated: The parent message is deprecated.
+          # The selection mode for the clarification question.
+          # @deprecated This enum is deprecated and may be removed in the next major version update.
+          module SelectionMode
+            # Deprecated: The parent message is deprecated.
+            # Unspecified selection mode.
+            SELECTION_MODE_UNSPECIFIED = 0
+
+            # Deprecated: The parent message is deprecated.
+            # The user can select only one option.
+            SINGLE_SELECT = 1
+
+            # Deprecated: The parent message is deprecated.
+            # The user can select multiple options.
+            MULTI_SELECT = 2
+          end
+
+          # Deprecated: The parent message is deprecated.
+          # The type of clarification question.
+          # This enum may be extended with new values in the future.
+          # @deprecated This enum is deprecated and may be removed in the next major version update.
+          module ClarificationQuestionType
+            # Deprecated: The parent message is deprecated.
+            # Unspecified clarification question type.
+            CLARIFICATION_QUESTION_TYPE_UNSPECIFIED = 0
+
+            # Deprecated: The parent message is deprecated.
+            # The clarification question is for filter values.
+            FILTER_VALUES = 1
+
+            # Deprecated: The parent message is deprecated.
+            # The clarification question is for data fields. This is a generic term
+            # encompassing SQL columns, Looker fields (dimensions/measures), or
+            # nested data structure properties.
+            FIELDS = 2
+          end
+        end
+
+        # Deprecated: Use TextMessage with TextType.FINAL_RESPONSE instead.
+        # A message of questions to help clarify the user's query. This is returned
+        # when the system cannot confidently answer the user's question.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
+        # @!attribute [rw] questions
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::ClarificationQuestion>]
+        #     Required. Deprecated: The parent message is deprecated.
+        #     A batch of clarification questions to ask the user.
+        class ClarificationMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

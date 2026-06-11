@@ -330,6 +330,106 @@ module Google
               end
 
               ##
+              # Lists Memberships bound to a Scope. The response includes relevant
+              # Memberships from all regions.
+              #
+              # @overload list_bound_memberships(request, options = nil)
+              #   Pass arguments to `list_bound_memberships` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::ListBoundMembershipsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::ListBoundMembershipsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_bound_memberships(scope_name: nil, filter: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_bound_memberships` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param scope_name [::String]
+              #     Required. Name of the Scope, in the format
+              #     `projects/*/locations/global/scopes/*`, to which the Memberships are bound.
+              #   @param filter [::String]
+              #     Optional. Lists Memberships that match the filter expression, following the
+              #     syntax outlined in https://google.aip.dev/160. Currently, filtering
+              #     can be done only based on Memberships's `name`, `labels`, `create_time`,
+              #     `update_time`, and `unique_id`.
+              #   @param page_size [::Integer]
+              #     Optional. When requesting a 'page' of resources, `page_size` specifies
+              #     number of resources to return. If unspecified or set to 0, all resources
+              #     will be returned. Pagination is currently not supported; therefore, setting
+              #     this field does not have any impact for now.
+              #   @param page_token [::String]
+              #     Optional. Token returned by previous call to `ListBoundMemberships` which
+              #     specifies the position in the list from where to continue listing the
+              #     resources.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::Membership>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::Membership>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::ListBoundMembershipsRequest.new
+              #
+              #   # Call the list_bound_memberships method.
+              #   result = client.list_bound_memberships request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeHub::V1::Membership.
+              #     p item
+              #   end
+              #
+              def list_bound_memberships request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::ListBoundMembershipsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_bound_memberships.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_bound_memberships.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_bound_memberships.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.list_bound_memberships request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gke_hub_stub, :list_bound_memberships, "memberships", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Lists Features in a given project and location.
               #
               # @overload list_features(request, options = nil)
@@ -342,7 +442,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_features(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              # @overload list_features(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, return_partial_success: nil)
               #   Pass arguments to `list_features` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -378,6 +478,11 @@ module Google
               #   @param order_by [::String]
               #     One or more fields to compare and use to sort the output.
               #     See https://google.aip.dev/132#ordering.
+              #   @param return_partial_success [::Boolean]
+              #     Optional. If set to true, the response will return partial results when
+              #     some regions are unreachable and the unreachable field in Feature proto
+              #     will be populated. If set to false, the request will fail when some regions
+              #     are unreachable.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::Feature>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -534,7 +639,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_feature(name: nil)
+              # @overload get_feature(name: nil, return_partial_success: nil)
               #   Pass arguments to `get_feature` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -542,6 +647,11 @@ module Google
               #   @param name [::String]
               #     Required. The Feature resource name in the format
               #     `projects/*/locations/*/features/*`
+              #   @param return_partial_success [::Boolean]
+              #     Optional. If set to true, the response will return partial results when
+              #     some regions are unreachable and the unreachable field in Feature proto
+              #     will be populated. If set to false, the request will fail when some regions
+              #     are unreachable.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::GkeHub::V1::Feature]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -744,7 +854,7 @@ module Google
               #   @param resource [::Google::Cloud::GkeHub::V1::Feature, ::Hash]
               #     The Feature resource to create.
               #   @param request_id [::String]
-              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     A request ID to identify requests. Specify a unique request ID
               #     so that if you must retry your request, the server will know to ignore
               #     the request if it has already been completed. The server will guarantee
               #     that for at least 60 minutes after the first request.
@@ -1186,7 +1296,7 @@ module Google
               #     If you specify the update_mask to be a special path "*", fully replaces all
               #     user-modifiable fields to match `resource`.
               #   @param request_id [::String]
-              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     A request ID to identify requests. Specify a unique request ID
               #     so that if you must retry your request, the server will know to ignore
               #     the request if it has already been completed. The server will guarantee
               #     that for at least 60 minutes after the first request.
@@ -1373,6 +1483,2875 @@ module Google
               end
 
               ##
+              # Creates a fleet.
+              #
+              # @overload create_fleet(request, options = nil)
+              #   Pass arguments to `create_fleet` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::CreateFleetRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::CreateFleetRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_fleet(parent: nil, fleet: nil)
+              #   Pass arguments to `create_fleet` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the Fleet will be
+              #     created. Specified in the format `projects/*/locations/*`.
+              #   @param fleet [::Google::Cloud::GkeHub::V1::Fleet, ::Hash]
+              #     Required. The fleet to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::CreateFleetRequest.new
+              #
+              #   # Call the create_fleet method.
+              #   result = client.create_fleet request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_fleet request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::CreateFleetRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_fleet.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_fleet.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_fleet.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.create_fleet request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the details of a fleet.
+              #
+              # @overload get_fleet(request, options = nil)
+              #   Pass arguments to `get_fleet` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::GetFleetRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::GetFleetRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_fleet(name: nil)
+              #   Pass arguments to `get_fleet` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The Fleet resource name in the format
+              #     `projects/*/locations/*/fleets/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::Fleet]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::Fleet]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::GetFleetRequest.new
+              #
+              #   # Call the get_fleet method.
+              #   result = client.get_fleet request
+              #
+              #   # The returned object is of type Google::Cloud::GkeHub::V1::Fleet.
+              #   p result
+              #
+              def get_fleet request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::GetFleetRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_fleet.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_fleet.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_fleet.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.get_fleet request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a fleet.
+              #
+              # @overload update_fleet(request, options = nil)
+              #   Pass arguments to `update_fleet` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::UpdateFleetRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::UpdateFleetRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_fleet(fleet: nil, update_mask: nil)
+              #   Pass arguments to `update_fleet` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param fleet [::Google::Cloud::GkeHub::V1::Fleet, ::Hash]
+              #     Required. The Fleet to update.
+              #
+              #     The `name` field of the Fleet object identifies which fleet will be
+              #     updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The fields to be updated;
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::UpdateFleetRequest.new
+              #
+              #   # Call the update_fleet method.
+              #   result = client.update_fleet request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_fleet request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::UpdateFleetRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_fleet.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_fleet.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_fleet.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.update_fleet request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Removes a Fleet. There must be no memberships remaining in the Fleet.
+              #
+              # @overload delete_fleet(request, options = nil)
+              #   Pass arguments to `delete_fleet` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::DeleteFleetRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::DeleteFleetRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_fleet(name: nil)
+              #   Pass arguments to `delete_fleet` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The Fleet resource name in the format
+              #     `projects/*/locations/*/fleets/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::DeleteFleetRequest.new
+              #
+              #   # Call the delete_fleet method.
+              #   result = client.delete_fleet request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_fleet request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::DeleteFleetRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_fleet.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_fleet.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_fleet.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.delete_fleet request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns all fleets within an organization or a project that the caller has
+              # access to.
+              #
+              # @overload list_fleets(request, options = nil)
+              #   Pass arguments to `list_fleets` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::ListFleetsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::ListFleetsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_fleets(parent: nil, page_token: nil, page_size: nil)
+              #   Pass arguments to `list_fleets` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The organization or project to list for Fleets under, in the
+              #     format `organizations/*/locations/*` or `projects/*/locations/*`.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListFleets` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListFleets` must match
+              #     the call that provided the page token.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of fleets to return. The service may return
+              #     fewer than this value. If unspecified, at most 200 fleets will be returned.
+              #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::Fleet>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::Fleet>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::ListFleetsRequest.new
+              #
+              #   # Call the list_fleets method.
+              #   result = client.list_fleets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeHub::V1::Fleet.
+              #     p item
+              #   end
+              #
+              def list_fleets request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::ListFleetsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_fleets.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_fleets.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_fleets.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.list_fleets request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gke_hub_stub, :list_fleets, "fleets", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the details of a fleet namespace.
+              #
+              # @overload get_scope_namespace(request, options = nil)
+              #   Pass arguments to `get_scope_namespace` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::GetScopeNamespaceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::GetScopeNamespaceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_scope_namespace(name: nil)
+              #   Pass arguments to `get_scope_namespace` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The Namespace resource name in the format
+              #     `projects/*/locations/*/scopes/*/namespaces/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::Namespace]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::Namespace]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::GetScopeNamespaceRequest.new
+              #
+              #   # Call the get_scope_namespace method.
+              #   result = client.get_scope_namespace request
+              #
+              #   # The returned object is of type Google::Cloud::GkeHub::V1::Namespace.
+              #   p result
+              #
+              def get_scope_namespace request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::GetScopeNamespaceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_scope_namespace.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_scope_namespace.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_scope_namespace.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.get_scope_namespace request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a fleet namespace.
+              #
+              # @overload create_scope_namespace(request, options = nil)
+              #   Pass arguments to `create_scope_namespace` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::CreateScopeNamespaceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::CreateScopeNamespaceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_scope_namespace(parent: nil, scope_namespace_id: nil, scope_namespace: nil)
+              #   Pass arguments to `create_scope_namespace` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the Namespace will be
+              #     created. Specified in the format `projects/*/locations/*/scopes/*`.
+              #   @param scope_namespace_id [::String]
+              #     Required. Client chosen ID for the Namespace. `namespace_id` must be a
+              #     valid RFC 1123 compliant DNS label:
+              #
+              #       1. At most 63 characters in length
+              #       2. It must consist of lower case alphanumeric characters or `-`
+              #       3. It must start and end with an alphanumeric character
+              #
+              #     Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+              #     with a maximum length of 63 characters.
+              #   @param scope_namespace [::Google::Cloud::GkeHub::V1::Namespace, ::Hash]
+              #     Required. The fleet namespace to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::CreateScopeNamespaceRequest.new
+              #
+              #   # Call the create_scope_namespace method.
+              #   result = client.create_scope_namespace request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_scope_namespace request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::CreateScopeNamespaceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_scope_namespace.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_scope_namespace.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_scope_namespace.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.create_scope_namespace request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a fleet namespace.
+              #
+              # @overload update_scope_namespace(request, options = nil)
+              #   Pass arguments to `update_scope_namespace` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::UpdateScopeNamespaceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::UpdateScopeNamespaceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_scope_namespace(scope_namespace: nil, update_mask: nil)
+              #   Pass arguments to `update_scope_namespace` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param scope_namespace [::Google::Cloud::GkeHub::V1::Namespace, ::Hash]
+              #     Required. A namespace with fields updated. The 'name' field in this
+              #     namespace is used to identify the resource to update. Given 'updated'
+              #     prefix to follow go/proto-best-practices-checkers#keyword_conflict
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The fields to be updated.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::UpdateScopeNamespaceRequest.new
+              #
+              #   # Call the update_scope_namespace method.
+              #   result = client.update_scope_namespace request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_scope_namespace request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::UpdateScopeNamespaceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_scope_namespace.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_scope_namespace.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_scope_namespace.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.update_scope_namespace request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a fleet namespace.
+              #
+              # @overload delete_scope_namespace(request, options = nil)
+              #   Pass arguments to `delete_scope_namespace` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::DeleteScopeNamespaceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::DeleteScopeNamespaceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_scope_namespace(name: nil)
+              #   Pass arguments to `delete_scope_namespace` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The Namespace resource name in the format
+              #     `projects/*/locations/*/scopes/*/namespaces/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::DeleteScopeNamespaceRequest.new
+              #
+              #   # Call the delete_scope_namespace method.
+              #   result = client.delete_scope_namespace request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_scope_namespace request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::DeleteScopeNamespaceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_scope_namespace.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_scope_namespace.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_scope_namespace.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.delete_scope_namespace request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists fleet namespaces.
+              #
+              # @overload list_scope_namespaces(request, options = nil)
+              #   Pass arguments to `list_scope_namespaces` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::ListScopeNamespacesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::ListScopeNamespacesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_scope_namespaces(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_scope_namespaces` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the Features will be
+              #     listed. Specified in the format `projects/*/locations/*/scopes/*`.
+              #   @param page_size [::Integer]
+              #     Optional. When requesting a 'page' of resources, `page_size` specifies
+              #     number of resources to return. If unspecified or set to 0, all resources
+              #     will be returned.
+              #   @param page_token [::String]
+              #     Optional. Token returned by previous call to `ListFeatures` which
+              #     specifies the position in the list from where to continue listing the
+              #     resources.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::Namespace>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::Namespace>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::ListScopeNamespacesRequest.new
+              #
+              #   # Call the list_scope_namespaces method.
+              #   result = client.list_scope_namespaces request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeHub::V1::Namespace.
+              #     p item
+              #   end
+              #
+              def list_scope_namespaces request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::ListScopeNamespacesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_scope_namespaces.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_scope_namespaces.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_scope_namespaces.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.list_scope_namespaces request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gke_hub_stub, :list_scope_namespaces, "scope_namespaces", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the details of a Scope RBACRoleBinding.
+              #
+              # @overload get_scope_rbac_role_binding(request, options = nil)
+              #   Pass arguments to `get_scope_rbac_role_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::GetScopeRBACRoleBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::GetScopeRBACRoleBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_scope_rbac_role_binding(name: nil)
+              #   Pass arguments to `get_scope_rbac_role_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The RBACRoleBinding resource name in the format
+              #     `projects/*/locations/*/scopes/*/rbacrolebindings/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::GetScopeRBACRoleBindingRequest.new
+              #
+              #   # Call the get_scope_rbac_role_binding method.
+              #   result = client.get_scope_rbac_role_binding request
+              #
+              #   # The returned object is of type Google::Cloud::GkeHub::V1::RBACRoleBinding.
+              #   p result
+              #
+              def get_scope_rbac_role_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::GetScopeRBACRoleBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_scope_rbac_role_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_scope_rbac_role_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_scope_rbac_role_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.get_scope_rbac_role_binding request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a Scope RBACRoleBinding.
+              #
+              # @overload create_scope_rbac_role_binding(request, options = nil)
+              #   Pass arguments to `create_scope_rbac_role_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::CreateScopeRBACRoleBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::CreateScopeRBACRoleBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_scope_rbac_role_binding(parent: nil, rbacrolebinding_id: nil, rbacrolebinding: nil)
+              #   Pass arguments to `create_scope_rbac_role_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the RBACRoleBinding will
+              #     be created. Specified in the format `projects/*/locations/*/scopes/*`.
+              #   @param rbacrolebinding_id [::String]
+              #     Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
+              #     must be a valid RFC 1123 compliant DNS label:
+              #
+              #       1. At most 63 characters in length
+              #       2. It must consist of lower case alphanumeric characters or `-`
+              #       3. It must start and end with an alphanumeric character
+              #
+              #     Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+              #     with a maximum length of 63 characters.
+              #   @param rbacrolebinding [::Google::Cloud::GkeHub::V1::RBACRoleBinding, ::Hash]
+              #     Required. The rbacrolebindings to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::CreateScopeRBACRoleBindingRequest.new
+              #
+              #   # Call the create_scope_rbac_role_binding method.
+              #   result = client.create_scope_rbac_role_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_scope_rbac_role_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::CreateScopeRBACRoleBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_scope_rbac_role_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_scope_rbac_role_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_scope_rbac_role_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.create_scope_rbac_role_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a Scope RBACRoleBinding.
+              #
+              # @overload update_scope_rbac_role_binding(request, options = nil)
+              #   Pass arguments to `update_scope_rbac_role_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::UpdateScopeRBACRoleBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::UpdateScopeRBACRoleBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_scope_rbac_role_binding(rbacrolebinding: nil, update_mask: nil)
+              #   Pass arguments to `update_scope_rbac_role_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param rbacrolebinding [::Google::Cloud::GkeHub::V1::RBACRoleBinding, ::Hash]
+              #     Required. A rbacrolebinding with fields updated. The 'name' field in this
+              #     rbacrolebinding is used to identify the resource to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The fields to be updated.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::UpdateScopeRBACRoleBindingRequest.new
+              #
+              #   # Call the update_scope_rbac_role_binding method.
+              #   result = client.update_scope_rbac_role_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_scope_rbac_role_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::UpdateScopeRBACRoleBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_scope_rbac_role_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_scope_rbac_role_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_scope_rbac_role_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.update_scope_rbac_role_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a Scope RBACRoleBinding.
+              #
+              # @overload delete_scope_rbac_role_binding(request, options = nil)
+              #   Pass arguments to `delete_scope_rbac_role_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::DeleteScopeRBACRoleBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::DeleteScopeRBACRoleBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_scope_rbac_role_binding(name: nil)
+              #   Pass arguments to `delete_scope_rbac_role_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The RBACRoleBinding resource name in the format
+              #     `projects/*/locations/*/scopes/*/rbacrolebindings/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::DeleteScopeRBACRoleBindingRequest.new
+              #
+              #   # Call the delete_scope_rbac_role_binding method.
+              #   result = client.delete_scope_rbac_role_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_scope_rbac_role_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::DeleteScopeRBACRoleBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_scope_rbac_role_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_scope_rbac_role_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_scope_rbac_role_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.delete_scope_rbac_role_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all Scope RBACRoleBindings.
+              #
+              # @overload list_scope_rbac_role_bindings(request, options = nil)
+              #   Pass arguments to `list_scope_rbac_role_bindings` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_scope_rbac_role_bindings(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_scope_rbac_role_bindings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the Features will be
+              #     listed. Specified in the format `projects/*/locations/*/scopes/*`.
+              #   @param page_size [::Integer]
+              #     Optional. When requesting a 'page' of resources, `page_size` specifies
+              #     number of resources to return. If unspecified or set to 0, all resources
+              #     will be returned.
+              #   @param page_token [::String]
+              #     Optional. Token returned by previous call to `ListScopeRBACRoleBindings`
+              #     which specifies the position in the list from where to continue listing the
+              #     resources.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::RBACRoleBinding>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::RBACRoleBinding>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsRequest.new
+              #
+              #   # Call the list_scope_rbac_role_bindings method.
+              #   result = client.list_scope_rbac_role_bindings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeHub::V1::RBACRoleBinding.
+              #     p item
+              #   end
+              #
+              def list_scope_rbac_role_bindings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_scope_rbac_role_bindings.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_scope_rbac_role_bindings.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_scope_rbac_role_bindings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.list_scope_rbac_role_bindings request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gke_hub_stub, :list_scope_rbac_role_bindings, "rbacrolebindings", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the details of a Scope.
+              #
+              # @overload get_scope(request, options = nil)
+              #   Pass arguments to `get_scope` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::GetScopeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::GetScopeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_scope(name: nil)
+              #   Pass arguments to `get_scope` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The Scope resource name in the format
+              #     `projects/*/locations/*/scopes/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::Scope]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::Scope]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::GetScopeRequest.new
+              #
+              #   # Call the get_scope method.
+              #   result = client.get_scope request
+              #
+              #   # The returned object is of type Google::Cloud::GkeHub::V1::Scope.
+              #   p result
+              #
+              def get_scope request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::GetScopeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_scope.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_scope.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_scope.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.get_scope request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a Scope.
+              #
+              # @overload create_scope(request, options = nil)
+              #   Pass arguments to `create_scope` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::CreateScopeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::CreateScopeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_scope(parent: nil, scope_id: nil, scope: nil)
+              #   Pass arguments to `create_scope` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the Scope will be
+              #     created. Specified in the format `projects/*/locations/*`.
+              #   @param scope_id [::String]
+              #     Required. Client chosen ID for the Scope. `scope_id` must be a
+              #     ????
+              #   @param scope [::Google::Cloud::GkeHub::V1::Scope, ::Hash]
+              #     Required. The Scope to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::CreateScopeRequest.new
+              #
+              #   # Call the create_scope method.
+              #   result = client.create_scope request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_scope request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::CreateScopeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_scope.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_scope.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_scope.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.create_scope request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a scopes.
+              #
+              # @overload update_scope(request, options = nil)
+              #   Pass arguments to `update_scope` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::UpdateScopeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::UpdateScopeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_scope(scope: nil, update_mask: nil)
+              #   Pass arguments to `update_scope` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param scope [::Google::Cloud::GkeHub::V1::Scope, ::Hash]
+              #     Required. A Scope with fields updated. The 'name' field in this
+              #     namespace is used to identify the resource to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The fields to be updated.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::UpdateScopeRequest.new
+              #
+              #   # Call the update_scope method.
+              #   result = client.update_scope request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_scope request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::UpdateScopeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_scope.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_scope.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_scope.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.update_scope request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a Scope.
+              #
+              # @overload delete_scope(request, options = nil)
+              #   Pass arguments to `delete_scope` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::DeleteScopeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::DeleteScopeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_scope(name: nil)
+              #   Pass arguments to `delete_scope` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The Scope resource name in the format
+              #     `projects/*/locations/*/scopes/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::DeleteScopeRequest.new
+              #
+              #   # Call the delete_scope method.
+              #   result = client.delete_scope request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_scope request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::DeleteScopeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_scope.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_scope.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_scope.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.delete_scope request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists Scopes.
+              #
+              # @overload list_scopes(request, options = nil)
+              #   Pass arguments to `list_scopes` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::ListScopesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::ListScopesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_scopes(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_scopes` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the Scope will be listed.
+              #     Specified in the format `projects/*/locations/*`.
+              #   @param page_size [::Integer]
+              #     Optional. When requesting a 'page' of resources, `page_size` specifies
+              #     number of resources to return. If unspecified or set to 0, all resources
+              #     will be returned.
+              #   @param page_token [::String]
+              #     Optional. Token returned by previous call to `ListScopes` which
+              #     specifies the position in the list from where to continue listing the
+              #     resources.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::Scope>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::Scope>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::ListScopesRequest.new
+              #
+              #   # Call the list_scopes method.
+              #   result = client.list_scopes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeHub::V1::Scope.
+              #     p item
+              #   end
+              #
+              def list_scopes request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::ListScopesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_scopes.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_scopes.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_scopes.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.list_scopes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gke_hub_stub, :list_scopes, "scopes", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists permitted Scopes.
+              #
+              # @overload list_permitted_scopes(request, options = nil)
+              #   Pass arguments to `list_permitted_scopes` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::ListPermittedScopesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::ListPermittedScopesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_permitted_scopes(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_permitted_scopes` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the Scope will be listed.
+              #     Specified in the format `projects/*/locations/*`.
+              #   @param page_size [::Integer]
+              #     Optional. When requesting a 'page' of resources, `page_size` specifies
+              #     number of resources to return. If unspecified or set to 0, all resources
+              #     will be returned.
+              #   @param page_token [::String]
+              #     Optional. Token returned by previous call to `ListPermittedScopes` which
+              #     specifies the position in the list from where to continue listing the
+              #     resources.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::Scope>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::Scope>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::ListPermittedScopesRequest.new
+              #
+              #   # Call the list_permitted_scopes method.
+              #   result = client.list_permitted_scopes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeHub::V1::Scope.
+              #     p item
+              #   end
+              #
+              def list_permitted_scopes request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::ListPermittedScopesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_permitted_scopes.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_permitted_scopes.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_permitted_scopes.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.list_permitted_scopes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gke_hub_stub, :list_permitted_scopes, "scopes", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the details of a MembershipBinding.
+              #
+              # @overload get_membership_binding(request, options = nil)
+              #   Pass arguments to `get_membership_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::GetMembershipBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::GetMembershipBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_membership_binding(name: nil)
+              #   Pass arguments to `get_membership_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The MembershipBinding resource name in the format
+              #     `projects/*/locations/*/memberships/*/bindings/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::MembershipBinding]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::MembershipBinding]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::GetMembershipBindingRequest.new
+              #
+              #   # Call the get_membership_binding method.
+              #   result = client.get_membership_binding request
+              #
+              #   # The returned object is of type Google::Cloud::GkeHub::V1::MembershipBinding.
+              #   p result
+              #
+              def get_membership_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::GetMembershipBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_membership_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_membership_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_membership_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.get_membership_binding request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a MembershipBinding.
+              #
+              # @overload create_membership_binding(request, options = nil)
+              #   Pass arguments to `create_membership_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::CreateMembershipBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::CreateMembershipBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_membership_binding(parent: nil, membership_binding: nil, membership_binding_id: nil)
+              #   Pass arguments to `create_membership_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the MembershipBinding
+              #     will be created. Specified in the format
+              #     `projects/*/locations/*/memberships/*`.
+              #   @param membership_binding [::Google::Cloud::GkeHub::V1::MembershipBinding, ::Hash]
+              #     Required. The MembershipBinding to create.
+              #   @param membership_binding_id [::String]
+              #     Required. The ID to use for the MembershipBinding.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::CreateMembershipBindingRequest.new
+              #
+              #   # Call the create_membership_binding method.
+              #   result = client.create_membership_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_membership_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::CreateMembershipBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_membership_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_membership_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_membership_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.create_membership_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a MembershipBinding.
+              #
+              # @overload update_membership_binding(request, options = nil)
+              #   Pass arguments to `update_membership_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::UpdateMembershipBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::UpdateMembershipBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_membership_binding(membership_binding: nil, update_mask: nil)
+              #   Pass arguments to `update_membership_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param membership_binding [::Google::Cloud::GkeHub::V1::MembershipBinding, ::Hash]
+              #     Required. The MembershipBinding object with fields updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The fields to be updated.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::UpdateMembershipBindingRequest.new
+              #
+              #   # Call the update_membership_binding method.
+              #   result = client.update_membership_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_membership_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::UpdateMembershipBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_membership_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_membership_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_membership_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.update_membership_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a MembershipBinding.
+              #
+              # @overload delete_membership_binding(request, options = nil)
+              #   Pass arguments to `delete_membership_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::DeleteMembershipBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::DeleteMembershipBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_membership_binding(name: nil)
+              #   Pass arguments to `delete_membership_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The MembershipBinding resource name in the format
+              #     `projects/*/locations/*/memberships/*/bindings/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::DeleteMembershipBindingRequest.new
+              #
+              #   # Call the delete_membership_binding method.
+              #   result = client.delete_membership_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_membership_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::DeleteMembershipBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_membership_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_membership_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_membership_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.delete_membership_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists MembershipBindings.
+              #
+              # @overload list_membership_bindings(request, options = nil)
+              #   Pass arguments to `list_membership_bindings` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::ListMembershipBindingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::ListMembershipBindingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_membership_bindings(parent: nil, page_size: nil, page_token: nil, filter: nil)
+              #   Pass arguments to `list_membership_bindings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent Membership for which the MembershipBindings will be
+              #     listed. Specified in the format `projects/*/locations/*/memberships/*`.
+              #   @param page_size [::Integer]
+              #     Optional. When requesting a 'page' of resources, `page_size` specifies
+              #     number of resources to return. If unspecified or set to 0, all resources
+              #     will be returned.
+              #   @param page_token [::String]
+              #     Optional. Token returned by previous call to `ListMembershipBindings` which
+              #     specifies the position in the list from where to continue listing the
+              #     resources.
+              #   @param filter [::String]
+              #     Optional. Lists MembershipBindings that match the filter expression,
+              #     following the syntax outlined in https://google.aip.dev/160.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::MembershipBinding>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::MembershipBinding>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::ListMembershipBindingsRequest.new
+              #
+              #   # Call the list_membership_bindings method.
+              #   result = client.list_membership_bindings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeHub::V1::MembershipBinding.
+              #     p item
+              #   end
+              #
+              def list_membership_bindings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::ListMembershipBindingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_membership_bindings.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_membership_bindings.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_membership_bindings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.list_membership_bindings request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gke_hub_stub, :list_membership_bindings, "membership_bindings", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the details of a Membership RBACRoleBinding.
+              #
+              # @overload get_membership_rbac_role_binding(request, options = nil)
+              #   Pass arguments to `get_membership_rbac_role_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::GetMembershipRBACRoleBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::GetMembershipRBACRoleBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_membership_rbac_role_binding(name: nil)
+              #   Pass arguments to `get_membership_rbac_role_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The RBACRoleBinding resource name in the format
+              #     `projects/*/locations/*/memberships/*/rbacrolebindings/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::GetMembershipRBACRoleBindingRequest.new
+              #
+              #   # Call the get_membership_rbac_role_binding method.
+              #   result = client.get_membership_rbac_role_binding request
+              #
+              #   # The returned object is of type Google::Cloud::GkeHub::V1::RBACRoleBinding.
+              #   p result
+              #
+              def get_membership_rbac_role_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::GetMembershipRBACRoleBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_membership_rbac_role_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_membership_rbac_role_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_membership_rbac_role_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.get_membership_rbac_role_binding request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a Membership RBACRoleBinding.
+              #
+              # @overload create_membership_rbac_role_binding(request, options = nil)
+              #   Pass arguments to `create_membership_rbac_role_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::CreateMembershipRBACRoleBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::CreateMembershipRBACRoleBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_membership_rbac_role_binding(parent: nil, rbacrolebinding_id: nil, rbacrolebinding: nil)
+              #   Pass arguments to `create_membership_rbac_role_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the RBACRoleBinding will
+              #     be created. Specified in the format `projects/*/locations/*/memberships/*`.
+              #   @param rbacrolebinding_id [::String]
+              #     Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
+              #     must be a valid RFC 1123 compliant DNS label:
+              #
+              #       1. At most 63 characters in length
+              #       2. It must consist of lower case alphanumeric characters or `-`
+              #       3. It must start and end with an alphanumeric character
+              #
+              #     Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+              #     with a maximum length of 63 characters.
+              #   @param rbacrolebinding [::Google::Cloud::GkeHub::V1::RBACRoleBinding, ::Hash]
+              #     Required. The rbacrolebindings to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::CreateMembershipRBACRoleBindingRequest.new
+              #
+              #   # Call the create_membership_rbac_role_binding method.
+              #   result = client.create_membership_rbac_role_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_membership_rbac_role_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::CreateMembershipRBACRoleBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_membership_rbac_role_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_membership_rbac_role_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_membership_rbac_role_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.create_membership_rbac_role_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a Membership RBACRoleBinding.
+              #
+              # @overload update_membership_rbac_role_binding(request, options = nil)
+              #   Pass arguments to `update_membership_rbac_role_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::UpdateMembershipRBACRoleBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::UpdateMembershipRBACRoleBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_membership_rbac_role_binding(rbacrolebinding: nil, update_mask: nil)
+              #   Pass arguments to `update_membership_rbac_role_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param rbacrolebinding [::Google::Cloud::GkeHub::V1::RBACRoleBinding, ::Hash]
+              #     Required. A rbacrolebinding with fields updated. The 'name' field in this
+              #     rbacrolebinding is used to identify the resource to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The fields to be updated.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::UpdateMembershipRBACRoleBindingRequest.new
+              #
+              #   # Call the update_membership_rbac_role_binding method.
+              #   result = client.update_membership_rbac_role_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_membership_rbac_role_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::UpdateMembershipRBACRoleBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_membership_rbac_role_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_membership_rbac_role_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_membership_rbac_role_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.update_membership_rbac_role_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a Membership RBACRoleBinding.
+              #
+              # @overload delete_membership_rbac_role_binding(request, options = nil)
+              #   Pass arguments to `delete_membership_rbac_role_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::DeleteMembershipRBACRoleBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::DeleteMembershipRBACRoleBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_membership_rbac_role_binding(name: nil)
+              #   Pass arguments to `delete_membership_rbac_role_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The RBACRoleBinding resource name in the format
+              #     `projects/*/locations/*/memberships/*/rbacrolebindings/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::DeleteMembershipRBACRoleBindingRequest.new
+              #
+              #   # Call the delete_membership_rbac_role_binding method.
+              #   result = client.delete_membership_rbac_role_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_membership_rbac_role_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::DeleteMembershipRBACRoleBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_membership_rbac_role_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_membership_rbac_role_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_membership_rbac_role_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.delete_membership_rbac_role_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all Membership RBACRoleBindings.
+              #
+              # @overload list_membership_rbac_role_bindings(request, options = nil)
+              #   Pass arguments to `list_membership_rbac_role_bindings` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_membership_rbac_role_bindings(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_membership_rbac_role_bindings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the Features will be
+              #     listed. Specified in the format `projects/*/locations/*/memberships/*`.
+              #   @param page_size [::Integer]
+              #     Optional. When requesting a 'page' of resources, `page_size` specifies
+              #     number of resources to return. If unspecified or set to 0, all resources
+              #     will be returned.
+              #   @param page_token [::String]
+              #     Optional. Token returned by previous call to
+              #     `ListMembershipRBACRoleBindings` which specifies the position in the list
+              #     from where to continue listing the resources.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::RBACRoleBinding>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeHub::V1::RBACRoleBinding>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsRequest.new
+              #
+              #   # Call the list_membership_rbac_role_bindings method.
+              #   result = client.list_membership_rbac_role_bindings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeHub::V1::RBACRoleBinding.
+              #     p item
+              #   end
+              #
+              def list_membership_rbac_role_bindings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_membership_rbac_role_bindings.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_membership_rbac_role_bindings.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_membership_rbac_role_bindings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.list_membership_rbac_role_bindings request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gke_hub_stub, :list_membership_rbac_role_bindings, "rbacrolebindings", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Generates a YAML of the  RBAC policies for the specified
+              # RoleBinding and its associated impersonation resources.
+              #
+              # @overload generate_membership_rbac_role_binding_yaml(request, options = nil)
+              #   Pass arguments to `generate_membership_rbac_role_binding_yaml` via a request object, either of type
+              #   {::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload generate_membership_rbac_role_binding_yaml(parent: nil, rbacrolebinding_id: nil, rbacrolebinding: nil)
+              #   Pass arguments to `generate_membership_rbac_role_binding_yaml` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent (project and location) where the RBACRoleBinding will
+              #     be created. Specified in the format `projects/*/locations/*/memberships/*`.
+              #   @param rbacrolebinding_id [::String]
+              #     Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
+              #     must be a valid RFC 1123 compliant DNS label:
+              #
+              #       1. At most 63 characters in length
+              #       2. It must consist of lower case alphanumeric characters or `-`
+              #       3. It must start and end with an alphanumeric character
+              #
+              #     Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+              #     with a maximum length of 63 characters.
+              #   @param rbacrolebinding [::Google::Cloud::GkeHub::V1::RBACRoleBinding, ::Hash]
+              #     Required. The rbacrolebindings to generate the YAML for.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLRequest.new
+              #
+              #   # Call the generate_membership_rbac_role_binding_yaml method.
+              #   result = client.generate_membership_rbac_role_binding_yaml request
+              #
+              #   # The returned object is of type Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLResponse.
+              #   p result
+              #
+              def generate_membership_rbac_role_binding_yaml request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.generate_membership_rbac_role_binding_yaml.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.generate_membership_rbac_role_binding_yaml.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.generate_membership_rbac_role_binding_yaml.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gke_hub_stub.generate_membership_rbac_role_binding_yaml request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the GkeHub REST API.
               #
               # This class represents the configuration for GkeHub REST,
@@ -1524,6 +4503,11 @@ module Google
                   #
                   attr_reader :list_memberships
                   ##
+                  # RPC-specific configuration for `list_bound_memberships`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_bound_memberships
+                  ##
                   # RPC-specific configuration for `list_features`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1573,11 +4557,173 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :generate_connect_manifest
+                  ##
+                  # RPC-specific configuration for `create_fleet`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_fleet
+                  ##
+                  # RPC-specific configuration for `get_fleet`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_fleet
+                  ##
+                  # RPC-specific configuration for `update_fleet`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_fleet
+                  ##
+                  # RPC-specific configuration for `delete_fleet`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_fleet
+                  ##
+                  # RPC-specific configuration for `list_fleets`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_fleets
+                  ##
+                  # RPC-specific configuration for `get_scope_namespace`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_scope_namespace
+                  ##
+                  # RPC-specific configuration for `create_scope_namespace`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_scope_namespace
+                  ##
+                  # RPC-specific configuration for `update_scope_namespace`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_scope_namespace
+                  ##
+                  # RPC-specific configuration for `delete_scope_namespace`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_scope_namespace
+                  ##
+                  # RPC-specific configuration for `list_scope_namespaces`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_scope_namespaces
+                  ##
+                  # RPC-specific configuration for `get_scope_rbac_role_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_scope_rbac_role_binding
+                  ##
+                  # RPC-specific configuration for `create_scope_rbac_role_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_scope_rbac_role_binding
+                  ##
+                  # RPC-specific configuration for `update_scope_rbac_role_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_scope_rbac_role_binding
+                  ##
+                  # RPC-specific configuration for `delete_scope_rbac_role_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_scope_rbac_role_binding
+                  ##
+                  # RPC-specific configuration for `list_scope_rbac_role_bindings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_scope_rbac_role_bindings
+                  ##
+                  # RPC-specific configuration for `get_scope`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_scope
+                  ##
+                  # RPC-specific configuration for `create_scope`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_scope
+                  ##
+                  # RPC-specific configuration for `update_scope`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_scope
+                  ##
+                  # RPC-specific configuration for `delete_scope`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_scope
+                  ##
+                  # RPC-specific configuration for `list_scopes`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_scopes
+                  ##
+                  # RPC-specific configuration for `list_permitted_scopes`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_permitted_scopes
+                  ##
+                  # RPC-specific configuration for `get_membership_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_membership_binding
+                  ##
+                  # RPC-specific configuration for `create_membership_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_membership_binding
+                  ##
+                  # RPC-specific configuration for `update_membership_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_membership_binding
+                  ##
+                  # RPC-specific configuration for `delete_membership_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_membership_binding
+                  ##
+                  # RPC-specific configuration for `list_membership_bindings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_membership_bindings
+                  ##
+                  # RPC-specific configuration for `get_membership_rbac_role_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_membership_rbac_role_binding
+                  ##
+                  # RPC-specific configuration for `create_membership_rbac_role_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_membership_rbac_role_binding
+                  ##
+                  # RPC-specific configuration for `update_membership_rbac_role_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_membership_rbac_role_binding
+                  ##
+                  # RPC-specific configuration for `delete_membership_rbac_role_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_membership_rbac_role_binding
+                  ##
+                  # RPC-specific configuration for `list_membership_rbac_role_bindings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_membership_rbac_role_bindings
+                  ##
+                  # RPC-specific configuration for `generate_membership_rbac_role_binding_yaml`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :generate_membership_rbac_role_binding_yaml
 
                   # @private
                   def initialize parent_rpcs = nil
                     list_memberships_config = parent_rpcs.list_memberships if parent_rpcs.respond_to? :list_memberships
                     @list_memberships = ::Gapic::Config::Method.new list_memberships_config
+                    list_bound_memberships_config = parent_rpcs.list_bound_memberships if parent_rpcs.respond_to? :list_bound_memberships
+                    @list_bound_memberships = ::Gapic::Config::Method.new list_bound_memberships_config
                     list_features_config = parent_rpcs.list_features if parent_rpcs.respond_to? :list_features
                     @list_features = ::Gapic::Config::Method.new list_features_config
                     get_membership_config = parent_rpcs.get_membership if parent_rpcs.respond_to? :get_membership
@@ -1598,6 +4744,70 @@ module Google
                     @update_feature = ::Gapic::Config::Method.new update_feature_config
                     generate_connect_manifest_config = parent_rpcs.generate_connect_manifest if parent_rpcs.respond_to? :generate_connect_manifest
                     @generate_connect_manifest = ::Gapic::Config::Method.new generate_connect_manifest_config
+                    create_fleet_config = parent_rpcs.create_fleet if parent_rpcs.respond_to? :create_fleet
+                    @create_fleet = ::Gapic::Config::Method.new create_fleet_config
+                    get_fleet_config = parent_rpcs.get_fleet if parent_rpcs.respond_to? :get_fleet
+                    @get_fleet = ::Gapic::Config::Method.new get_fleet_config
+                    update_fleet_config = parent_rpcs.update_fleet if parent_rpcs.respond_to? :update_fleet
+                    @update_fleet = ::Gapic::Config::Method.new update_fleet_config
+                    delete_fleet_config = parent_rpcs.delete_fleet if parent_rpcs.respond_to? :delete_fleet
+                    @delete_fleet = ::Gapic::Config::Method.new delete_fleet_config
+                    list_fleets_config = parent_rpcs.list_fleets if parent_rpcs.respond_to? :list_fleets
+                    @list_fleets = ::Gapic::Config::Method.new list_fleets_config
+                    get_scope_namespace_config = parent_rpcs.get_scope_namespace if parent_rpcs.respond_to? :get_scope_namespace
+                    @get_scope_namespace = ::Gapic::Config::Method.new get_scope_namespace_config
+                    create_scope_namespace_config = parent_rpcs.create_scope_namespace if parent_rpcs.respond_to? :create_scope_namespace
+                    @create_scope_namespace = ::Gapic::Config::Method.new create_scope_namespace_config
+                    update_scope_namespace_config = parent_rpcs.update_scope_namespace if parent_rpcs.respond_to? :update_scope_namespace
+                    @update_scope_namespace = ::Gapic::Config::Method.new update_scope_namespace_config
+                    delete_scope_namespace_config = parent_rpcs.delete_scope_namespace if parent_rpcs.respond_to? :delete_scope_namespace
+                    @delete_scope_namespace = ::Gapic::Config::Method.new delete_scope_namespace_config
+                    list_scope_namespaces_config = parent_rpcs.list_scope_namespaces if parent_rpcs.respond_to? :list_scope_namespaces
+                    @list_scope_namespaces = ::Gapic::Config::Method.new list_scope_namespaces_config
+                    get_scope_rbac_role_binding_config = parent_rpcs.get_scope_rbac_role_binding if parent_rpcs.respond_to? :get_scope_rbac_role_binding
+                    @get_scope_rbac_role_binding = ::Gapic::Config::Method.new get_scope_rbac_role_binding_config
+                    create_scope_rbac_role_binding_config = parent_rpcs.create_scope_rbac_role_binding if parent_rpcs.respond_to? :create_scope_rbac_role_binding
+                    @create_scope_rbac_role_binding = ::Gapic::Config::Method.new create_scope_rbac_role_binding_config
+                    update_scope_rbac_role_binding_config = parent_rpcs.update_scope_rbac_role_binding if parent_rpcs.respond_to? :update_scope_rbac_role_binding
+                    @update_scope_rbac_role_binding = ::Gapic::Config::Method.new update_scope_rbac_role_binding_config
+                    delete_scope_rbac_role_binding_config = parent_rpcs.delete_scope_rbac_role_binding if parent_rpcs.respond_to? :delete_scope_rbac_role_binding
+                    @delete_scope_rbac_role_binding = ::Gapic::Config::Method.new delete_scope_rbac_role_binding_config
+                    list_scope_rbac_role_bindings_config = parent_rpcs.list_scope_rbac_role_bindings if parent_rpcs.respond_to? :list_scope_rbac_role_bindings
+                    @list_scope_rbac_role_bindings = ::Gapic::Config::Method.new list_scope_rbac_role_bindings_config
+                    get_scope_config = parent_rpcs.get_scope if parent_rpcs.respond_to? :get_scope
+                    @get_scope = ::Gapic::Config::Method.new get_scope_config
+                    create_scope_config = parent_rpcs.create_scope if parent_rpcs.respond_to? :create_scope
+                    @create_scope = ::Gapic::Config::Method.new create_scope_config
+                    update_scope_config = parent_rpcs.update_scope if parent_rpcs.respond_to? :update_scope
+                    @update_scope = ::Gapic::Config::Method.new update_scope_config
+                    delete_scope_config = parent_rpcs.delete_scope if parent_rpcs.respond_to? :delete_scope
+                    @delete_scope = ::Gapic::Config::Method.new delete_scope_config
+                    list_scopes_config = parent_rpcs.list_scopes if parent_rpcs.respond_to? :list_scopes
+                    @list_scopes = ::Gapic::Config::Method.new list_scopes_config
+                    list_permitted_scopes_config = parent_rpcs.list_permitted_scopes if parent_rpcs.respond_to? :list_permitted_scopes
+                    @list_permitted_scopes = ::Gapic::Config::Method.new list_permitted_scopes_config
+                    get_membership_binding_config = parent_rpcs.get_membership_binding if parent_rpcs.respond_to? :get_membership_binding
+                    @get_membership_binding = ::Gapic::Config::Method.new get_membership_binding_config
+                    create_membership_binding_config = parent_rpcs.create_membership_binding if parent_rpcs.respond_to? :create_membership_binding
+                    @create_membership_binding = ::Gapic::Config::Method.new create_membership_binding_config
+                    update_membership_binding_config = parent_rpcs.update_membership_binding if parent_rpcs.respond_to? :update_membership_binding
+                    @update_membership_binding = ::Gapic::Config::Method.new update_membership_binding_config
+                    delete_membership_binding_config = parent_rpcs.delete_membership_binding if parent_rpcs.respond_to? :delete_membership_binding
+                    @delete_membership_binding = ::Gapic::Config::Method.new delete_membership_binding_config
+                    list_membership_bindings_config = parent_rpcs.list_membership_bindings if parent_rpcs.respond_to? :list_membership_bindings
+                    @list_membership_bindings = ::Gapic::Config::Method.new list_membership_bindings_config
+                    get_membership_rbac_role_binding_config = parent_rpcs.get_membership_rbac_role_binding if parent_rpcs.respond_to? :get_membership_rbac_role_binding
+                    @get_membership_rbac_role_binding = ::Gapic::Config::Method.new get_membership_rbac_role_binding_config
+                    create_membership_rbac_role_binding_config = parent_rpcs.create_membership_rbac_role_binding if parent_rpcs.respond_to? :create_membership_rbac_role_binding
+                    @create_membership_rbac_role_binding = ::Gapic::Config::Method.new create_membership_rbac_role_binding_config
+                    update_membership_rbac_role_binding_config = parent_rpcs.update_membership_rbac_role_binding if parent_rpcs.respond_to? :update_membership_rbac_role_binding
+                    @update_membership_rbac_role_binding = ::Gapic::Config::Method.new update_membership_rbac_role_binding_config
+                    delete_membership_rbac_role_binding_config = parent_rpcs.delete_membership_rbac_role_binding if parent_rpcs.respond_to? :delete_membership_rbac_role_binding
+                    @delete_membership_rbac_role_binding = ::Gapic::Config::Method.new delete_membership_rbac_role_binding_config
+                    list_membership_rbac_role_bindings_config = parent_rpcs.list_membership_rbac_role_bindings if parent_rpcs.respond_to? :list_membership_rbac_role_bindings
+                    @list_membership_rbac_role_bindings = ::Gapic::Config::Method.new list_membership_rbac_role_bindings_config
+                    generate_membership_rbac_role_binding_yaml_config = parent_rpcs.generate_membership_rbac_role_binding_yaml if parent_rpcs.respond_to? :generate_membership_rbac_role_binding_yaml
+                    @generate_membership_rbac_role_binding_yaml = ::Gapic::Config::Method.new generate_membership_rbac_role_binding_yaml_config
 
                     yield self if block_given?
                   end

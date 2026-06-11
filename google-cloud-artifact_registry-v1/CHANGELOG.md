@@ -1,5 +1,32 @@
 # Changelog
 
+### 1.13.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33430](https://github.com/googleapis/google-cloud-ruby/issues/33430)) 
+
+### 1.12.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.11.0 (2026-02-18)
+
+#### Features
+
+* add DIRSUM_SHA256 hash type ([#32417](https://github.com/googleapis/google-cloud-ruby/issues/32417)) 
+
+### 1.10.0 (2026-01-13)
+
+#### Features
+
+* add Fingerprint to Artifact Registry Version resource ([#32303](https://github.com/googleapis/google-cloud-ruby/issues/32303)) 
+#### Documentation
+
+* update the description of ExportArtifact 
+
 ### 1.9.0 (2025-12-10)
 
 #### Features

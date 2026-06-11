@@ -137,7 +137,7 @@ module Google
             # Batch creates pull request comments. This function is used to create
             # multiple PullRequestComments for code review. There needs to be exactly one
             # PullRequestComment of type Review, and at most 100 PullRequestComments of
-            # type Code per request. The Postition of the code comments must be unique
+            # type Code per request. The Position of the code comments must be unique
             # within the request.
             rpc :BatchCreatePullRequestComments, ::Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest, ::Google::Longrunning::Operation
             # Resolves pull request comments. A list of PullRequestComment names must be

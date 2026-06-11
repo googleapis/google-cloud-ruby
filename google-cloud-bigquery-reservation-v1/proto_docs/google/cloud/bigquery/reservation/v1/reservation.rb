@@ -269,7 +269,7 @@ module Google
               # reservation will scale up to 1000 slots with 200 baseline and 800 idle
               # slots.
               # 2. if there are 500 idle slots available in other reservations, the
-              # reservation will scale up to 700 slots with 200 baseline and 300 idle
+              # reservation will scale up to 700 slots with 200 baseline and 500 idle
               # slots.
               # Please note, in this mode, the reservation might not be able to scale up
               # to max_slots.
@@ -815,15 +815,13 @@ module Google
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Assignment::State]
           #     Output only. State of the assignment.
           # @!attribute [rw] enable_gemini_in_bigquery
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Boolean]
-          #     Optional. This field controls if "Gemini in BigQuery"
+          #     Optional. Deprecated: "Gemini in BigQuery" is now available by
+          #     default for all BigQuery editions and should not be explicitly set.
+          #     Controls if "Gemini in BigQuery"
           #     (https://cloud.google.com/gemini/docs/bigquery/overview) features should be
-          #     enabled for this reservation assignment, which is not on by default.
-          #     "Gemini in BigQuery" has a distinct compliance posture from BigQuery.  If
-          #     this field is set to true, the assignment job type is QUERY, and
-          #     the parent reservation edition is ENTERPRISE_PLUS, then the assignment will
-          #     give the grantee project/organization access to "Gemini in BigQuery"
-          #     features.
+          #     enabled for this reservation assignment.
           # @!attribute [rw] scheduling_policy
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::SchedulingPolicy]
           #     Optional. The scheduling policy to use for jobs and queries of this
@@ -832,6 +830,23 @@ module Google
           #     overrides the default scheduling policy specified on the reservation.
           #
           #     This feature is not yet generally available.
+          # @!attribute [rw] principal
+          #   @return [::String]
+          #     Optional. Represents the principal for this assignment. If not empty, jobs
+          #     run by this principal will utilize the associated reservation. Otherwise,
+          #     jobs will fall back to using the reservation assigned to the project,
+          #     folder, or organization (in that order). If no reservation is assigned at
+          #     any of these levels, on-demand capacity will be used.
+          #
+          #     The supported formats are:
+          #
+          #     * `principal://goog/subject/USER_EMAIL_ADDRESS` for users,
+          #     * `principal://iam.googleapis.com/projects/-/serviceAccounts/SA_EMAIL_ADDRESS`
+          #       for service accounts,
+          #     * `principal://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/subject/SUBJECT_ID`
+          #       for workload identity pool identities.
+          #     * The special value `unknown_or_deleted_user` represents principals which
+          #       cannot be read from the user info service, for example deleted users.
           class Assignment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

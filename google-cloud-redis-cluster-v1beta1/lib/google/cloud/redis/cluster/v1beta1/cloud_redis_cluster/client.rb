@@ -866,6 +866,94 @@ module Google
               end
 
               ##
+              # Gets the details of regional certificate authority information for Redis
+              # cluster.
+              #
+              # @overload get_shared_regional_certificate_authority(request, options = nil)
+              #   Pass arguments to `get_shared_regional_certificate_authority` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1beta1::GetSharedRegionalCertificateAuthorityRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1beta1::GetSharedRegionalCertificateAuthorityRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_shared_regional_certificate_authority(name: nil)
+              #   Pass arguments to `get_shared_regional_certificate_authority` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Regional certificate authority resource name using the form:
+              #         `projects/{project_id}/locations/{location_id}/sharedRegionalCertificateAuthority`
+              #     where `location_id` refers to a Google Cloud region.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Redis::Cluster::V1beta1::SharedRegionalCertificateAuthority]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Redis::Cluster::V1beta1::SharedRegionalCertificateAuthority]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1beta1::GetSharedRegionalCertificateAuthorityRequest.new
+              #
+              #   # Call the get_shared_regional_certificate_authority method.
+              #   result = client.get_shared_regional_certificate_authority request
+              #
+              #   # The returned object is of type Google::Cloud::Redis::Cluster::V1beta1::SharedRegionalCertificateAuthority.
+              #   p result
+              #
+              def get_shared_regional_certificate_authority request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1beta1::GetSharedRegionalCertificateAuthorityRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_shared_regional_certificate_authority.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_shared_regional_certificate_authority.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_shared_regional_certificate_authority.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :get_shared_regional_certificate_authority, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Reschedules upcoming maintenance event.
               #
               # @overload reschedule_cluster_maintenance(request, options = nil)
@@ -1874,6 +1962,11 @@ module Google
                   #
                   attr_reader :get_cluster_certificate_authority
                   ##
+                  # RPC-specific configuration for `get_shared_regional_certificate_authority`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_shared_regional_certificate_authority
+                  ##
                   # RPC-specific configuration for `reschedule_cluster_maintenance`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1928,6 +2021,8 @@ module Google
                     @create_cluster = ::Gapic::Config::Method.new create_cluster_config
                     get_cluster_certificate_authority_config = parent_rpcs.get_cluster_certificate_authority if parent_rpcs.respond_to? :get_cluster_certificate_authority
                     @get_cluster_certificate_authority = ::Gapic::Config::Method.new get_cluster_certificate_authority_config
+                    get_shared_regional_certificate_authority_config = parent_rpcs.get_shared_regional_certificate_authority if parent_rpcs.respond_to? :get_shared_regional_certificate_authority
+                    @get_shared_regional_certificate_authority = ::Gapic::Config::Method.new get_shared_regional_certificate_authority_config
                     reschedule_cluster_maintenance_config = parent_rpcs.reschedule_cluster_maintenance if parent_rpcs.respond_to? :reschedule_cluster_maintenance
                     @reschedule_cluster_maintenance = ::Gapic::Config::Method.new reschedule_cluster_maintenance_config
                     list_backup_collections_config = parent_rpcs.list_backup_collections if parent_rpcs.respond_to? :list_backup_collections

@@ -21,7 +21,7 @@ module Google
   module Shopping
     module Merchant
       module Reports
-        VERSION = "0.4.2"
+        VERSION = "0.5.0"
       end
     end
   end

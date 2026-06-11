@@ -24,8 +24,7 @@ module Google
     module Dataflow
       module V1beta3
         module MessagesV1Beta3
-          # The Dataflow Messages API is used for monitoring the progress of
-          # Dataflow jobs.
+          # The Dataflow Messages API is used to monitor the progress of Dataflow jobs.
           class Service
 
             include ::GRPC::GenericService

@@ -198,6 +198,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientTest < Minitest:
     process = {}
     update_mask = {}
     allow_missing = true
+    request_id = "hello world"
 
     update_process_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_process, name
@@ -205,6 +206,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientTest < Minitest:
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::Lineage::V1::Process), request["process"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       assert_equal true, request["allow_missing"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -215,31 +217,31 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientTest < Minitest:
       end
 
       # Use hash object
-      client.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
+      client.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_process process: process, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
+      client.update_process process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_process ::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
+      client.update_process ::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      client.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_process(::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
+      client.update_process(::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1136,6 +1138,89 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientTest < Minitest:
 
       # Verify method calls
       assert_equal 5, batch_search_link_processes_client_stub.call_rpc_count
+    end
+  end
+
+  def test_search_lineage_streaming
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a server streaming method.
+    parent = "hello world"
+    locations = ["hello world"]
+    root_criteria = {}
+    direction = :SEARCH_DIRECTION_UNSPECIFIED
+    filters = {}
+    limits = {}
+
+    search_lineage_streaming_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :search_lineage_streaming, name
+      assert_kind_of ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["locations"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::RootCriteria), request["root_criteria"]
+      assert_equal :SEARCH_DIRECTION_UNSPECIFIED, request["direction"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::SearchFilters), request["filters"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::SearchLimits), request["limits"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, search_lineage_streaming_client_stub do
+      # Create client
+      client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.search_lineage_streaming({ parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits }) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.search_lineage_streaming parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.search_lineage_streaming ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest.new(parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.search_lineage_streaming({ parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits }, grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.search_lineage_streaming(::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest.new(parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits), grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, search_lineage_streaming_client_stub.call_rpc_count
     end
   end
 

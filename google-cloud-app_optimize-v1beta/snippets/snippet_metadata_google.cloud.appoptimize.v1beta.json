@@ -1,0 +1,215 @@
+{
+  "client_library": {
+    "name": "google-cloud-app_optimize-v1beta",
+    "version": "0.1.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.appoptimize.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "appoptimize_v1beta_generated_AppOptimize_CreateReport_sync",
+      "title": "Snippet for the create_report call in the AppOptimize service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Appoptimize::V1beta::AppOptimize::Client#create_report.",
+      "file": "app_optimize/create_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_report",
+        "full_name": "::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client#create_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Appoptimize::V1beta::CreateReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppOptimize::Client",
+          "full_name": "::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client"
+        },
+        "method": {
+          "short_name": "CreateReport",
+          "full_name": "google.cloud.appoptimize.v1beta.AppOptimize.CreateReport",
+          "service": {
+            "short_name": "AppOptimize",
+            "full_name": "google.cloud.appoptimize.v1beta.AppOptimize"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "appoptimize_v1beta_generated_AppOptimize_GetReport_sync",
+      "title": "Snippet for the get_report call in the AppOptimize service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Appoptimize::V1beta::AppOptimize::Client#get_report.",
+      "file": "app_optimize/get_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_report",
+        "full_name": "::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client#get_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Appoptimize::V1beta::GetReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Appoptimize::V1beta::Report",
+        "client": {
+          "short_name": "AppOptimize::Client",
+          "full_name": "::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client"
+        },
+        "method": {
+          "short_name": "GetReport",
+          "full_name": "google.cloud.appoptimize.v1beta.AppOptimize.GetReport",
+          "service": {
+            "short_name": "AppOptimize",
+            "full_name": "google.cloud.appoptimize.v1beta.AppOptimize"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "appoptimize_v1beta_generated_AppOptimize_ListReports_sync",
+      "title": "Snippet for the list_reports call in the AppOptimize service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Appoptimize::V1beta::AppOptimize::Client#list_reports.",
+      "file": "app_optimize/list_reports.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_reports",
+        "full_name": "::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client#list_reports",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Appoptimize::V1beta::ListReportsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Appoptimize::V1beta::ListReportsResponse",
+        "client": {
+          "short_name": "AppOptimize::Client",
+          "full_name": "::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client"
+        },
+        "method": {
+          "short_name": "ListReports",
+          "full_name": "google.cloud.appoptimize.v1beta.AppOptimize.ListReports",
+          "service": {
+            "short_name": "AppOptimize",
+            "full_name": "google.cloud.appoptimize.v1beta.AppOptimize"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "appoptimize_v1beta_generated_AppOptimize_DeleteReport_sync",
+      "title": "Snippet for the delete_report call in the AppOptimize service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Appoptimize::V1beta::AppOptimize::Client#delete_report.",
+      "file": "app_optimize/delete_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_report",
+        "full_name": "::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client#delete_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Appoptimize::V1beta::DeleteReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AppOptimize::Client",
+          "full_name": "::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client"
+        },
+        "method": {
+          "short_name": "DeleteReport",
+          "full_name": "google.cloud.appoptimize.v1beta.AppOptimize.DeleteReport",
+          "service": {
+            "short_name": "AppOptimize",
+            "full_name": "google.cloud.appoptimize.v1beta.AppOptimize"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "appoptimize_v1beta_generated_AppOptimize_ReadReport_sync",
+      "title": "Snippet for the read_report call in the AppOptimize service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Appoptimize::V1beta::AppOptimize::Client#read_report.",
+      "file": "app_optimize/read_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "read_report",
+        "full_name": "::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client#read_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Appoptimize::V1beta::ReadReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Appoptimize::V1beta::ReadReportResponse",
+        "client": {
+          "short_name": "AppOptimize::Client",
+          "full_name": "::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client"
+        },
+        "method": {
+          "short_name": "ReadReport",
+          "full_name": "google.cloud.appoptimize.v1beta.AppOptimize.ReadReport",
+          "service": {
+            "short_name": "AppOptimize",
+            "full_name": "google.cloud.appoptimize.v1beta.AppOptimize"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

@@ -153,13 +153,15 @@ module Google
       # ## About AutokeyAdmin
       #
       # Provides interfaces for managing [Cloud KMS
-      # Autokey](https://cloud.google.com/kms/help/autokey) folder-level
-      # configurations. A configuration is inherited by all descendent projects. A
-      # configuration at one folder overrides any other configurations in its
-      # ancestry. Setting a configuration on a folder is a prerequisite for Cloud KMS
-      # Autokey, so that users working in a descendant project can request
-      # provisioned CryptoKeys, ready for Customer
-      # Managed Encryption Key (CMEK) use, on-demand.
+      # Autokey](https://cloud.google.com/kms/help/autokey) folder-level or
+      # project-level configurations. A configuration is inherited by all descendent
+      # folders and projects. A configuration at a folder or project overrides any
+      # other configurations in its ancestry. Setting a configuration on a folder is
+      # a prerequisite for Cloud KMS Autokey, so that users working in a descendant
+      # project can request provisioned CryptoKeys,
+      # ready for Customer Managed Encryption Key (CMEK) use, on-demand when using
+      # the dedicated key project mode. This is not required when using the delegated
+      # key management mode for same-project keys.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -274,6 +276,82 @@ module Google
         service_module = Google::Cloud::Kms.const_get package_name
         return false unless service_module.const_defined? :EkmService
         service_module = service_module.const_get :EkmService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for HsmManagement.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Kms::V1::HsmManagement::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-kms-v1/latest/Google-Cloud-Kms-V1-HsmManagement-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the HsmManagement service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the HsmManagement service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Kms.hsm_management_available?}.
+      #
+      # ## About HsmManagement
+      #
+      # Google Cloud HSM Management Service
+      #
+      # Provides interfaces for managing HSM instances.
+      #
+      # Implements a REST model with the following objects:
+      # * SingleTenantHsmInstance
+      # * SingleTenantHsmInstanceProposal
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.hsm_management version: :v1, transport: :grpc, &block
+        require "google/cloud/kms/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Kms
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Kms.const_get(package_name).const_get(:HsmManagement)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the HsmManagement service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Kms.hsm_management}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the HsmManagement service,
+      # or if the versioned client gem needs an update to support the HsmManagement service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.hsm_management_available? version: :v1, transport: :grpc
+        require "google/cloud/kms/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Kms
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Kms.const_get package_name
+        return false unless service_module.const_defined? :HsmManagement
+        service_module = service_module.const_get :HsmManagement
         if transport == :rest
           return false unless service_module.const_defined? :Rest
           service_module = service_module.const_get :Rest

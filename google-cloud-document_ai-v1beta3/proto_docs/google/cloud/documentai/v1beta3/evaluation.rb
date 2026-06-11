@@ -63,6 +63,9 @@ module Google
         # @!attribute [rw] kms_key_version_name
         #   @return [::String]
         #     The KMS key version with which data is encrypted.
+        # @!attribute [rw] revisions
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Evaluation::EvaluationRevision>]
+        #     Contains all revisions of the evaluation, excluding the latest one.
         class Evaluation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -96,7 +99,7 @@ module Google
           #     The calculated recall.
           # @!attribute [rw] f1_score
           #   @return [::Float]
-          #     The calculated f1 score.
+          #     The calculated F1 score.
           # @!attribute [rw] predicted_occurrences_count
           #   @return [::Integer]
           #     The amount of occurrences in predicted documents.
@@ -181,6 +184,33 @@ module Google
               # TP/FP/FN values for the label type. Metrics for parent (i.e., non-leaf)
               # entity types are an aggregate of metrics for their children.
               AGGREGATE = 1
+            end
+          end
+
+          # A revision of the evaluation.
+          # @!attribute [r] revision_id
+          #   @return [::String]
+          #     Output only. The revision ID of the evaluation.
+          # @!attribute [r] document_counters
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::Evaluation::Counters]
+          #     Output only. Counters for the documents used in the evaluation.
+          # @!attribute [r] all_entities_metrics
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::Evaluation::MultiConfidenceMetrics]
+          #     Output only. Metrics for all the entities in aggregate.
+          # @!attribute [r] entity_metrics
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DocumentAI::V1beta3::Evaluation::MultiConfidenceMetrics}]
+          #     Output only. Metrics across confidence levels, for different entities.
+          class EvaluationRevision
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::DocumentAI::V1beta3::Evaluation::MultiConfidenceMetrics]
+            class EntityMetricsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 

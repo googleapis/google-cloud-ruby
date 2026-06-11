@@ -24,8 +24,7 @@ module Google
     module Dataflow
       module V1beta3
         module MetricsV1Beta3
-          # The Dataflow Metrics API lets you monitor the progress of Dataflow
-          # jobs.
+          # The Dataflow Metrics API lets you monitor the progress of Dataflow jobs.
           class Service
 
             include ::GRPC::GenericService

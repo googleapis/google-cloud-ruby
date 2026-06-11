@@ -43,6 +43,9 @@ module Google
             # delimit contiguous sections of the table of approximately equal size,
             # which can be used to break up the data for distributed tasks like
             # mapreduces.
+            #
+            # If a `row_range` is provided in the request, the returned samples will be
+            # restricted to the specified range.
             rpc :SampleRowKeys, ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest, stream(::Google::Cloud::Bigtable::V2::SampleRowKeysResponse)
             # Mutates a row atomically. Cells already present in the row are left
             # unchanged unless explicitly changed by `mutation`.
@@ -76,6 +79,22 @@ module Google
             rpc :PrepareQuery, ::Google::Cloud::Bigtable::V2::PrepareQueryRequest, ::Google::Cloud::Bigtable::V2::PrepareQueryResponse
             # Executes a SQL query against a particular Bigtable instance.
             rpc :ExecuteQuery, ::Google::Cloud::Bigtable::V2::ExecuteQueryRequest, stream(::Google::Cloud::Bigtable::V2::ExecuteQueryResponse)
+            # This RPC is only intended to be used by the official Cloud Bigtable client
+            # libraries to implement the Bigtable Session based protocol. It is subject
+            # to change without notice.
+            rpc :GetClientConfiguration, ::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest, ::Google::Cloud::Bigtable::V2::ClientConfiguration
+            # This RPC is only intended to be used by the official Cloud Bigtable client
+            # libraries to implement the Bigtable Session based protocol. It is subject
+            # to change without notice.
+            rpc :OpenTable, stream(::Google::Cloud::Bigtable::V2::SessionRequest), stream(::Google::Cloud::Bigtable::V2::SessionResponse)
+            # This RPC is only intended to be used by the official Cloud Bigtable client
+            # libraries to implement the Bigtable Session based protocol. It is subject
+            # to change without notice.
+            rpc :OpenAuthorizedView, stream(::Google::Cloud::Bigtable::V2::SessionRequest), stream(::Google::Cloud::Bigtable::V2::SessionResponse)
+            # This RPC is only intended to be used by the official Cloud Bigtable client
+            # libraries to implement the Bigtable Session based protocol. It is subject
+            # to change without notice.
+            rpc :OpenMaterializedView, stream(::Google::Cloud::Bigtable::V2::SessionRequest), stream(::Google::Cloud::Bigtable::V2::SessionResponse)
           end
 
           Stub = Service.rpc_stub_class

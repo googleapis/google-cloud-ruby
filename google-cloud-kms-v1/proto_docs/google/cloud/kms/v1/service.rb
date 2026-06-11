@@ -173,6 +173,32 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#list_retired_resources KeyManagementService.ListRetiredResources}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The project-specific location holding the
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResources}, in the format
+        #     `projects/*/locations/*`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Optional limit on the number of
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResources} to be included in
+        #     the response. Further
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResources} can subsequently be
+        #     obtained by including the
+        #     {::Google::Cloud::Kms::V1::ListRetiredResourcesResponse#next_page_token ListRetiredResourcesResponse.next_page_token}
+        #     in a subsequent request. If unspecified, the server will pick an
+        #     appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Optional pagination token, returned earlier via
+        #     {::Google::Cloud::Kms::V1::ListRetiredResourcesResponse#next_page_token ListRetiredResourcesResponse.next_page_token}.
+        class ListRetiredResourcesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Response message for
         # {::Google::Cloud::Kms::V1::KeyManagementService::Client#list_key_rings KeyManagementService.ListKeyRings}.
         # @!attribute [rw] key_rings
@@ -266,6 +292,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Response message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#list_retired_resources KeyManagementService.ListRetiredResources}.
+        # @!attribute [rw] retired_resources
+        #   @return [::Array<::Google::Cloud::Kms::V1::RetiredResource>]
+        #     The list of {::Google::Cloud::Kms::V1::RetiredResource RetiredResources}.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results. Pass this value in
+        #     {::Google::Cloud::Kms::V1::ListRetiredResourcesRequest#page_token ListRetiredResourcesRequest.page_token}
+        #     to retrieve the next page of results.
+        # @!attribute [rw] total_size
+        #   @return [::Integer]
+        #     The total number of {::Google::Cloud::Kms::V1::RetiredResource RetiredResources}
+        #     that matched the query.
+        class ListRetiredResourcesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for
         # {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_key_ring KeyManagementService.GetKeyRing}.
         # @!attribute [rw] name
@@ -331,6 +376,17 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_retired_resource KeyManagementService.GetRetiredResource}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::RetiredResource#name name} of the
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResource} to get.
+        class GetRetiredResourceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::Kms::V1::KeyManagementService::Client#create_key_ring KeyManagementService.CreateKeyRing}.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -391,6 +447,28 @@ module Google
         #     Required. A {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with
         #     initial field values.
         class CreateCryptoKeyVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key KeyManagementService.DeleteCryptoKey}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to delete.
+        class DeleteCryptoKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key_version KeyManagementService.DeleteCryptoKeyVersion}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to delete.
+        class DeleteCryptoKeyVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1761,17 +1839,25 @@ module Google
         #   @return [::String]
         #     A message digest produced with the SHA-256 algorithm.
         #
-        #     Note: The following fields are mutually exclusive: `sha256`, `sha384`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sha256`, `sha384`, `sha512`, `external_mu`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sha384
         #   @return [::String]
         #     A message digest produced with the SHA-384 algorithm.
         #
-        #     Note: The following fields are mutually exclusive: `sha384`, `sha256`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sha384`, `sha256`, `sha512`, `external_mu`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sha512
         #   @return [::String]
         #     A message digest produced with the SHA-512 algorithm.
         #
-        #     Note: The following fields are mutually exclusive: `sha512`, `sha256`, `sha384`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sha512`, `sha256`, `sha384`, `external_mu`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] external_mu
+        #   @return [::String]
+        #     A message digest produced with SHAKE-256, to be used with ML-DSA
+        #     external-μ algorithms only. See "message representative" note in
+        #     section 6.2, algorithm 7 of the FIPS-204 standard:
+        #     https://doi.org/10.6028/nist.fips.204
+        #
+        #     Note: The following fields are mutually exclusive: `external_mu`, `sha256`, `sha384`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Digest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1791,7 +1877,35 @@ module Google
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}
         #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL EXTERNAL} can be created in
         #     this location.
+        # @!attribute [rw] hsm_single_tenant_available
+        #   @return [::Boolean]
+        #     Indicates whether {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}
+        #     can be created in this location.
         class LocationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the metadata of the
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key KeyManagementService.DeleteCryptoKey}
+        # long-running operation.
+        # @!attribute [r] retired_resource
+        #   @return [::String]
+        #     Output only. The resource name of the
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResource} created as a result
+        #     of this operation, in the format
+        #     `projects/*/locations/*/retiredResources/*`.
+        class DeleteCryptoKeyMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the metadata of the
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key_version KeyManagementService.DeleteCryptoKeyVersion}
+        # long-running operation.
+        class DeleteCryptoKeyVersionMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.3.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.2.0 (2026-03-05)
+
+#### Features
+
+* Add Secure Source Manager and Generic HTTP Endpoint connection types ([#32772](https://github.com/googleapis/google-cloud-ruby/issues/32772)) 
+
 ### 2.1.1 (2025-09-12)
 
 #### Documentation

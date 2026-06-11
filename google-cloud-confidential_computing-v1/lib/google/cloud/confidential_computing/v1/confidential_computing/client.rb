@@ -324,7 +324,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload verify_attestation(td_ccel: nil, sev_snp_attestation: nil, challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil, attester: nil)
+            # @overload verify_attestation(td_ccel: nil, sev_snp_attestation: nil, nvidia_attestation: nil, challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil, attester: nil)
             #   Pass arguments to `verify_attestation` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -337,6 +337,8 @@ module Google
             #     Optional. An SEV-SNP Attestation Report.
             #
             #     Note: The following parameters are mutually exclusive: `sev_snp_attestation`, `td_ccel`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param nvidia_attestation [::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation, ::Hash]
+            #     Optional. An Nvidia attestation report for GPU and NVSwitch devices.
             #   @param challenge [::String]
             #     Required. The name of the Challenge whose nonce was used to generate the
             #     attestation, in the format `projects/*/locations/*/challenges/*`. The
@@ -434,7 +436,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload verify_confidential_space(td_ccel: nil, tpm_attestation: nil, challenge: nil, gcp_credentials: nil, signed_entities: nil, gce_shielded_identity: nil, options: nil)
+            # @overload verify_confidential_space(td_ccel: nil, tpm_attestation: nil, challenge: nil, gcp_credentials: nil, signed_entities: nil, gce_shielded_identity: nil, options: nil, nvidia_attestation: nil)
             #   Pass arguments to `verify_confidential_space` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -464,6 +466,9 @@ module Google
             #     this information in the attestation.
             #   @param options [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest::ConfidentialSpaceOptions, ::Hash]
             #     Optional. A collection of fields that modify the token output.
+            #   @param nvidia_attestation [::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation, ::Hash]
+            #     Optional. An optional Nvidia attestation report, used to populate hardware
+            #     rooted claims for Nvidia devices.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceResponse]
@@ -543,7 +548,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload verify_confidential_gke(tpm_attestation: nil, challenge: nil)
+            # @overload verify_confidential_gke(tpm_attestation: nil, challenge: nil, options: nil)
             #   Pass arguments to `verify_confidential_gke` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -555,6 +560,8 @@ module Google
             #     Required. The name of the Challenge whose nonce was used to generate the
             #     attestation, in the format projects/*/locations/*/challenges/*. The
             #     provided Challenge will be consumed, and cannot be used again.
+            #   @param options [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest::ConfidentialGkeOptions, ::Hash]
+            #     Optional. A collection of fields that modify the token output.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeResponse]

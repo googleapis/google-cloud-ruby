@@ -43,28 +43,28 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::Text]
           #     Returns a text response.
           #
-          #     Note: The following fields are mutually exclusive: `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`, `tool_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] payload
           #   @return [::Google::Protobuf::Struct]
           #     Returns a response containing a custom, platform-specific payload.
           #
-          #     Note: The following fields are mutually exclusive: `payload`, `text`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `payload`, `text`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`, `tool_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] conversation_success
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::ConversationSuccess]
           #     Indicates that the conversation succeeded.
           #
-          #     Note: The following fields are mutually exclusive: `conversation_success`, `text`, `payload`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `conversation_success`, `text`, `payload`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`, `tool_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] output_audio_text
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::OutputAudioText]
           #     A text or ssml response that is preferentially used for TTS output audio
           #     synthesis, as described in the comment on the ResponseMessage message.
           #
-          #     Note: The following fields are mutually exclusive: `output_audio_text`, `text`, `payload`, `conversation_success`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `output_audio_text`, `text`, `payload`, `conversation_success`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`, `tool_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] live_agent_handoff
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::LiveAgentHandoff]
           #     Hands off conversation to a human agent.
           #
-          #     Note: The following fields are mutually exclusive: `live_agent_handoff`, `text`, `payload`, `conversation_success`, `output_audio_text`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `live_agent_handoff`, `text`, `payload`, `conversation_success`, `output_audio_text`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`, `tool_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] end_interaction
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::EndInteraction]
           #     Output only. A signal that indicates the interaction with the Dialogflow
@@ -74,7 +74,7 @@ module Google
           #
           #     It's guaranteed that there is at most one such message in each response.
           #
-          #     Note: The following fields are mutually exclusive: `end_interaction`, `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `end_interaction`, `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`, `tool_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] play_audio
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::PlayAudio]
           #     Signal that the client should play an audio clip hosted at a
@@ -83,7 +83,7 @@ module Google
           #     However, Dialogflow itself does not try to read or process the URI in any
           #     way.
           #
-          #     Note: The following fields are mutually exclusive: `play_audio`, `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `play_audio`, `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`, `tool_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] mixed_audio
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::MixedAudio]
           #     Output only. An audio response message composed of both the synthesized
@@ -92,19 +92,25 @@ module Google
           #     This message is generated by Dialogflow only and not supposed to be
           #     defined by the user.
           #
-          #     Note: The following fields are mutually exclusive: `mixed_audio`, `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `telephony_transfer_call`, `knowledge_info_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `mixed_audio`, `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `telephony_transfer_call`, `knowledge_info_card`, `tool_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] telephony_transfer_call
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::TelephonyTransferCall]
           #     A signal that the client should transfer the phone call connected to
           #     this agent to a third-party endpoint.
           #
-          #     Note: The following fields are mutually exclusive: `telephony_transfer_call`, `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `knowledge_info_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `telephony_transfer_call`, `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `knowledge_info_card`, `tool_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] knowledge_info_card
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::KnowledgeInfoCard]
           #     Represents info card for knowledge answers, to be better rendered in
           #     Dialogflow Messenger.
           #
-          #     Note: The following fields are mutually exclusive: `knowledge_info_card`, `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `knowledge_info_card`, `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `tool_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] tool_call
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::ToolCall]
+          #     Returns the definition of a tool call that should be executed by the
+          #     client.
+          #
+          #     Note: The following fields are mutually exclusive: `tool_call`, `text`, `payload`, `conversation_success`, `output_audio_text`, `live_agent_handoff`, `end_interaction`, `play_audio`, `mixed_audio`, `telephony_transfer_call`, `knowledge_info_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] response_type
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::ResponseType]
           #     Response type.

@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.7.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.6.0 (2026-02-24)
+
+#### Features
+
+* Update GCP Client Libraries in v1beta1 to support Folders, TeamFolders, and other relevant APIs ([#32441](https://github.com/googleapis/google-cloud-ruby/issues/32441)) 
+
 ### 0.5.2 (2025-09-12)
 
 #### Documentation

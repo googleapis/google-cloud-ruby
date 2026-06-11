@@ -32,7 +32,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/memorystore/v1"
 
-client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new
 request = ::Google::Cloud::Memorystore::V1::ListInstancesRequest.new # (request fields as keyword arguments...)
 response = client.list_instances request
 ```
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/cloud/memorystore/v1"
 require "logger"
 
-client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

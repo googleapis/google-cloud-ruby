@@ -1,5 +1,32 @@
 # Release History
 
+### 2.7.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33482](https://github.com/googleapis/google-cloud-ruby/issues/33482)) 
+
+### 2.7.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33439](https://github.com/googleapis/google-cloud-ruby/issues/33439)) 
+
+### 2.6.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.5.0 (2026-01-13)
+
+#### Features
+
+* Exposing total CPU related fields in AutoscalingConfig ([#32299](https://github.com/googleapis/google-cloud-ruby/issues/32299)) 
+#### Documentation
+
+* Update high_priority_cpu_utilization_percent in AutoscalingConfig to be Optional and clarify its behavior when not specified 
+
 ### 2.4.0 (2025-11-03)
 
 #### Features

@@ -31,13 +31,18 @@ module Google
         #   @return [::Integer]
         #     An opaque identifier for the application frontend which serviced this
         #     request.
+        # @!attribute [rw] application_frontend_region
+        #   @return [::String]
+        #     The Cloud region of the application frontend that served this request.
         # @!attribute [rw] application_frontend_zone
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     The Cloud zone of the application frontend that served this request.
         # @!attribute [rw] application_frontend_subzone
         #   @return [::String]
         #     The subzone of the application frontend that served this request, e.g. an
-        #     identifier for where within the zone the application frontend is.
+        #     identifier for where within a zone (within the reported region) the
+        #     application frontend is.
         # @!attribute [rw] transport_type
         #   @return [::Google::Cloud::Bigtable::V2::PeerInfo::TransportType]
         class PeerInfo

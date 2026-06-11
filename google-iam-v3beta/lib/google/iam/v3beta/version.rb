@@ -20,7 +20,7 @@
 module Google
   module Iam
     module V3beta
-      VERSION = "0.3.1"
+      VERSION = "0.6.0"
     end
   end
 end

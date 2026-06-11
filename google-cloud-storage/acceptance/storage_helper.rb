@@ -22,6 +22,11 @@ require "retriable"
 require "google/cloud/storage"
 require "google/cloud/pubsub"
 
+PAP_SKIP_MESSAGE = "Skipping this test due to a change in GCS behavior that disallows copying " \
+                   "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
+                   "access prevention is enforced. See " \
+                   "https://cloud.google.com/storage/docs/public-access-prevention for more details.".freeze
+
 # Generate JUnit format test reports
 if ENV["GCLOUD_TEST_GENERATE_XML_REPORT"]
   require "minitest/reporters"
@@ -199,6 +204,27 @@ def clean_up_storage_bucket bucket
   safe_gcs_execute { bucket.delete }
 rescue => e
   puts "Error while cleaning up bucket #{bucket.name}\n\n#{e}"
+end
+
+def set_object_contexts bucket_name:, file_name:, custom_context_key:, custom_context_value:
+  bucket  = storage.bucket bucket_name
+  file    = bucket.file file_name
+  contexts = Google::Apis::StorageV1::Object::Contexts.new(
+    custom: context_custom_hash(custom_context_key: custom_context_key, custom_context_value: custom_context_value)
+  )
+  file.update do |file|
+    file.contexts = contexts
+  end
+end
+
+def context_custom_hash custom_context_key: ,custom_context_value:
+  payload = Google::Apis::StorageV1::ObjectCustomContextPayload.new(
+    value: custom_context_value
+  )
+  custom_hash = {
+    custom_context_key => payload
+  }
+  custom_hash
 end
 
 Minitest.after_run do

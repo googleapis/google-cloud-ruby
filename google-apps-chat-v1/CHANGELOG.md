@@ -1,5 +1,40 @@
 # Changelog
 
+### 0.22.0 (2026-04-03)
+
+#### Features
+
+* Addition of Section and SectionItem APIs 
+* Support app authentication with admin-consent scopes for Chat API ListMessages, GetMessage, GetSpaceEvent and ListSpaceEvents ([#33662](https://github.com/googleapis/google-cloud-ruby/issues/33662)) 
+
+### 0.22.0 (2026-04-03)
+
+#### Features
+
+* Addition of Section and SectionItem APIs 
+* Support app authentication with admin-consent scopes for Chat API ListMessages, GetMessage, GetSpaceEvent and ListSpaceEvents ([#33662](https://github.com/googleapis/google-cloud-ruby/issues/33662)) 
+
+### 0.21.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33429](https://github.com/googleapis/google-cloud-ruby/issues/33429)) 
+
+### 0.20.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.19.0 (2026-02-08)
+
+#### Features
+
+* Addition of QuoteType enum, QuotedMessageSnapshot & ForwardMetadata in the QuotedMessageMetadata proto 
+#### Documentation
+
+* update reference documentation for `SelectionInput.DROPDOWN` to include dynamic data sources and autosuggestion ([#32413](https://github.com/googleapis/google-cloud-ruby/issues/32413)) 
+
 ### 0.18.0 (2025-12-16)
 
 #### Features

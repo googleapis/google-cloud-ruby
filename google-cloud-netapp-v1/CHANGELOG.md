@@ -1,5 +1,36 @@
 # Changelog
 
+### 2.11.0 (2026-05-07)
+
+#### Features
+
+* add ScaleType for Storage Pools and LargeCapacityConfig for Volumes ([#33881](https://github.com/googleapis/google-cloud-ruby/issues/33881)) 
+#### Documentation
+
+* A comment for field `large_capacity` in message `.google.cloud.netapp.v1.Volume` is changed 
+
+### 2.10.0 (2026-04-02)
+
+#### Features
+
+* Add ONTAP passthrough APIs ([#33444](https://github.com/googleapis/google-cloud-ruby/issues/33444)) 
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+
+### 2.9.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.8.0 (2026-01-23)
+
+#### Features
+
+* Update NetApp v1 API with Host Groups, Block Volumes, Cache Volumes, and Backup Restore ([#32365](https://github.com/googleapis/google-cloud-ruby/issues/32365)) 
+#### Documentation
+
+* A comment for field `backup_retention_policy` in message `.google.cloud.netapp.v1.BackupVault` is changed 
+
 ### 2.7.0 (2025-11-21)
 
 #### Features

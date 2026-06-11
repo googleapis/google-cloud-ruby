@@ -824,6 +824,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     options = {}
     request_options = {}
     mutation_key = {}
+    routing_hint = {}
 
     begin_transaction_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :begin_transaction, name
@@ -832,6 +833,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionOptions), request["options"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::RequestOptions), request["request_options"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::Mutation), request["mutation_key"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::RoutingHint), request["routing_hint"]
       refute_nil options
     end
 
@@ -842,31 +844,31 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.begin_transaction({ session: session, options: options, request_options: request_options, mutation_key: mutation_key }) do |response, operation|
+      client.begin_transaction({ session: session, options: options, request_options: request_options, mutation_key: mutation_key, routing_hint: routing_hint }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.begin_transaction session: session, options: options, request_options: request_options, mutation_key: mutation_key do |response, operation|
+      client.begin_transaction session: session, options: options, request_options: request_options, mutation_key: mutation_key, routing_hint: routing_hint do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.begin_transaction ::Google::Cloud::Spanner::V1::BeginTransactionRequest.new(session: session, options: options, request_options: request_options, mutation_key: mutation_key) do |response, operation|
+      client.begin_transaction ::Google::Cloud::Spanner::V1::BeginTransactionRequest.new(session: session, options: options, request_options: request_options, mutation_key: mutation_key, routing_hint: routing_hint) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.begin_transaction({ session: session, options: options, request_options: request_options, mutation_key: mutation_key }, grpc_options) do |response, operation|
+      client.begin_transaction({ session: session, options: options, request_options: request_options, mutation_key: mutation_key, routing_hint: routing_hint }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.begin_transaction(::Google::Cloud::Spanner::V1::BeginTransactionRequest.new(session: session, options: options, request_options: request_options, mutation_key: mutation_key), grpc_options) do |response, operation|
+      client.begin_transaction(::Google::Cloud::Spanner::V1::BeginTransactionRequest.new(session: session, options: options, request_options: request_options, mutation_key: mutation_key, routing_hint: routing_hint), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -891,6 +893,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     max_commit_delay = {}
     request_options = {}
     precommit_token = {}
+    routing_hint = {}
 
     commit_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :commit, name
@@ -903,6 +906,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["max_commit_delay"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::RequestOptions), request["request_options"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken), request["precommit_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::RoutingHint), request["routing_hint"]
       refute_nil options
     end
 
@@ -913,31 +917,31 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.commit({ session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats, max_commit_delay: max_commit_delay, request_options: request_options, precommit_token: precommit_token }) do |response, operation|
+      client.commit({ session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats, max_commit_delay: max_commit_delay, request_options: request_options, precommit_token: precommit_token, routing_hint: routing_hint }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.commit session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats, max_commit_delay: max_commit_delay, request_options: request_options, precommit_token: precommit_token do |response, operation|
+      client.commit session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats, max_commit_delay: max_commit_delay, request_options: request_options, precommit_token: precommit_token, routing_hint: routing_hint do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.commit ::Google::Cloud::Spanner::V1::CommitRequest.new(session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats, max_commit_delay: max_commit_delay, request_options: request_options, precommit_token: precommit_token) do |response, operation|
+      client.commit ::Google::Cloud::Spanner::V1::CommitRequest.new(session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats, max_commit_delay: max_commit_delay, request_options: request_options, precommit_token: precommit_token, routing_hint: routing_hint) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.commit({ session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats, max_commit_delay: max_commit_delay, request_options: request_options, precommit_token: precommit_token }, grpc_options) do |response, operation|
+      client.commit({ session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats, max_commit_delay: max_commit_delay, request_options: request_options, precommit_token: precommit_token, routing_hint: routing_hint }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.commit(::Google::Cloud::Spanner::V1::CommitRequest.new(session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats, max_commit_delay: max_commit_delay, request_options: request_options, precommit_token: precommit_token), grpc_options) do |response, operation|
+      client.commit(::Google::Cloud::Spanner::V1::CommitRequest.new(session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats, max_commit_delay: max_commit_delay, request_options: request_options, precommit_token: precommit_token, routing_hint: routing_hint), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1221,6 +1225,83 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, batch_write_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_cache_update
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Spanner::V1::CacheUpdate.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a server streaming method.
+    database = "hello world"
+    max_recipe_count = 42
+    max_range_count = 42
+
+    fetch_cache_update_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :fetch_cache_update, name
+      assert_kind_of ::Google::Cloud::Spanner::V1::FetchCacheUpdateRequest, request
+      assert_equal "hello world", request["database"]
+      assert_equal 42, request["max_recipe_count"]
+      assert_equal 42, request["max_range_count"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_cache_update_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::V1::Spanner::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.fetch_cache_update({ database: database, max_recipe_count: max_recipe_count, max_range_count: max_range_count }) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Spanner::V1::CacheUpdate, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.fetch_cache_update database: database, max_recipe_count: max_recipe_count, max_range_count: max_range_count do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Spanner::V1::CacheUpdate, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.fetch_cache_update ::Google::Cloud::Spanner::V1::FetchCacheUpdateRequest.new(database: database, max_recipe_count: max_recipe_count, max_range_count: max_range_count) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Spanner::V1::CacheUpdate, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.fetch_cache_update({ database: database, max_recipe_count: max_recipe_count, max_range_count: max_range_count }, grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Spanner::V1::CacheUpdate, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.fetch_cache_update(::Google::Cloud::Spanner::V1::FetchCacheUpdateRequest.new(database: database, max_recipe_count: max_recipe_count, max_range_count: max_range_count), grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Spanner::V1::CacheUpdate, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_cache_update_client_stub.call_rpc_count
     end
   end
 

@@ -71,7 +71,7 @@ module Google
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Optional. A human-readable name you can set to display in a user interface.
-          #     Must be not longer than 1024 characters and only contain UTF-8 letters
+          #     Must be not longer than 200 characters and only contain UTF-8 letters
           #     or numbers, spaces or characters like `_-:&.`
           # @!attribute [rw] attributes
           #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
@@ -156,7 +156,19 @@ module Google
           # @!attribute [rw] target
           #   @return [::Google::Cloud::DataCatalog::Lineage::V1::EntityReference]
           #     Required. Reference to the target entity
+          # @!attribute [rw] dependency_info
+          #   @return [::Google::Cloud::DataCatalog::Lineage::V1::DependencyInfo]
+          #     Optional. Describes how the target depends on the source.
           class EventLink
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Dependency info describes how one entity depends on another.
+          # @!attribute [rw] dependency_type
+          #   @return [::Google::Cloud::DataCatalog::Lineage::V1::DependencyType]
+          #     Required. Type of dependency.
+          class DependencyInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -165,8 +177,20 @@ module Google
           # @!attribute [rw] fully_qualified_name
           #   @return [::String]
           #     Required. [Fully Qualified Name
-          #     (FQN)](https://cloud.google.com/data-catalog/docs/fully-qualified-names)
+          #     (FQN)](https://cloud.google.com/dataplex/docs/fully-qualified-names)
           #     of the entity.
+          # @!attribute [rw] field
+          #   @return [::Array<::String>]
+          #     Optional. Field path within the entity. Each nesting level should be a
+          #     separate value in the repeated field. The order matters. Must be empty for
+          #     asset level lineage
+          #
+          #     For example to address "salary.net" subfield where "salary" is a column and
+          #     "net" is a proto field two values in the `field` should be reported,
+          #     the first is "salary" and the second is "net".
+          #
+          #     Each field length is limited to 500 characters.
+          #     Maximum supported nesting level is 20.
           class EntityReference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -230,7 +254,7 @@ module Google
           end
 
           # Request message for
-          # [ProcessOpenLineageRunEvent][google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEvent].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#process_open_lineage_run_event ProcessOpenLineageRunEvent}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The name of the project and its location that should own the
@@ -241,16 +265,16 @@ module Google
           #     https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json
           # @!attribute [rw] request_id
           #   @return [::String]
-          #     A unique identifier for this request. Restricted to 36 ASCII characters.
-          #     A random UUID is recommended. This request is idempotent only if a
-          #     `request_id` is provided.
+          #     Optional. A unique identifier for this request. Restricted to 36 ASCII
+          #     characters. A random UUID is recommended. This request is idempotent only
+          #     if a `request_id` is provided.
           class ProcessOpenLineageRunEventRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Response message for
-          # [ProcessOpenLineageRunEvent][google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEvent].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#process_open_lineage_run_event ProcessOpenLineageRunEvent}.
           # @!attribute [rw] process
           #   @return [::String]
           #     Created process name.
@@ -271,7 +295,7 @@ module Google
           end
 
           # Request message for
-          # [CreateProcess][google.cloud.datacatalog.lineage.v1.CreateProcess].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#create_process CreateProcess}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The name of the project and its location that should own the
@@ -281,16 +305,16 @@ module Google
           #     Required. The process to create.
           # @!attribute [rw] request_id
           #   @return [::String]
-          #     A unique identifier for this request. Restricted to 36 ASCII characters.
-          #     A random UUID is recommended. This request is idempotent only if a
-          #     `request_id` is provided.
+          #     Optional. A unique identifier for this request. Restricted to 36 ASCII
+          #     characters. A random UUID is recommended. This request is idempotent only
+          #     if a `request_id` is provided.
           class CreateProcessRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Request message for
-          # [UpdateProcess][google.cloud.datacatalog.lineage.v1.UpdateProcess].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#update_process UpdateProcess}.
           # @!attribute [rw] process
           #   @return [::Google::Cloud::DataCatalog::Lineage::V1::Process]
           #     Required. The lineage process to update.
@@ -298,18 +322,24 @@ module Google
           #     The process's `name` field is used to identify the process to update.
           # @!attribute [rw] update_mask
           #   @return [::Google::Protobuf::FieldMask]
-          #     The list of fields to update. Currently not used. The whole message is
-          #     updated.
+          #     Optional. The list of fields to update. Currently not used. The whole
+          #     message is updated.
           # @!attribute [rw] allow_missing
           #   @return [::Boolean]
-          #     If set to true and the process is not found, the request inserts it.
+          #     Optional. If set to true and the process is not found, the request inserts
+          #     it.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. Restricted to 36 ASCII
+          #     characters. A random UUID is recommended. This request is idempotent only
+          #     if a `request_id` is provided.
           class UpdateProcessRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Request message for
-          # [GetProcess][google.cloud.datacatalog.lineage.v1.GetProcess].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#get_process GetProcess}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the process to get.
@@ -319,21 +349,21 @@ module Google
           end
 
           # Request message for
-          # [ListProcesses][google.cloud.datacatalog.lineage.v1.ListProcesses].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_processes ListProcesses}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The name of the project and its location that owns this
           #     collection of processes.
           # @!attribute [rw] page_size
           #   @return [::Integer]
-          #     The maximum number of processes to return. The service may return
+          #     Optional. The maximum number of processes to return. The service may return
           #     fewer than this value. If unspecified, at most 50 processes are
           #     returned. The maximum value is 100; values greater than 100 are cut to
           #     100.
           # @!attribute [rw] page_token
           #   @return [::String]
-          #     The page token received from a previous `ListProcesses` call. Specify
-          #     it to get the next page.
+          #     Optional. The page token received from a previous `ListProcesses` call.
+          #     Specify it to get the next page.
           #
           #     When paginating, all other parameters specified in this call must
           #     match the parameters of the call that provided the page token.
@@ -343,7 +373,7 @@ module Google
           end
 
           # Response message for
-          # [ListProcesses][google.cloud.datacatalog.lineage.v1.ListProcesses].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_processes ListProcesses}.
           # @!attribute [rw] processes
           #   @return [::Array<::Google::Cloud::DataCatalog::Lineage::V1::Process>]
           #     The processes from the specified project and location.
@@ -357,13 +387,13 @@ module Google
           end
 
           # Request message for
-          # [DeleteProcess][google.cloud.datacatalog.lineage.v1.DeleteProcess].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#delete_process DeleteProcess}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the process to delete.
           # @!attribute [rw] allow_missing
           #   @return [::Boolean]
-          #     If set to true and the process is not found, the request
+          #     Optional. If set to true and the process is not found, the request
           #     succeeds but the server doesn't perform any actions.
           class DeleteProcessRequest
             include ::Google::Protobuf::MessageExts
@@ -371,7 +401,7 @@ module Google
           end
 
           # Request message for
-          # [CreateRun][google.cloud.datacatalog.lineage.v1.CreateRun].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#create_run CreateRun}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The name of the process that should own the run.
@@ -380,16 +410,16 @@ module Google
           #     Required. The run to create.
           # @!attribute [rw] request_id
           #   @return [::String]
-          #     A unique identifier for this request. Restricted to 36 ASCII characters.
-          #     A random UUID is recommended. This request is idempotent only if a
-          #     `request_id` is provided.
+          #     Optional. A unique identifier for this request. Restricted to 36 ASCII
+          #     characters. A random UUID is recommended. This request is idempotent only
+          #     if a `request_id` is provided.
           class CreateRunRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Request message for
-          # [UpdateRun][google.cloud.datacatalog.lineage.v1.UpdateRun].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#update_run UpdateRun}.
           # @!attribute [rw] run
           #   @return [::Google::Cloud::DataCatalog::Lineage::V1::Run]
           #     Required. The lineage run to update.
@@ -400,18 +430,18 @@ module Google
           #     `projects/{project}/locations/{location}/processes/{process}/runs/{run}`.
           # @!attribute [rw] update_mask
           #   @return [::Google::Protobuf::FieldMask]
-          #     The list of fields to update. Currently not used. The whole message is
-          #     updated.
+          #     Optional. The list of fields to update. Currently not used. The whole
+          #     message is updated.
           # @!attribute [rw] allow_missing
           #   @return [::Boolean]
-          #     If set to true and the run is not found, the request creates it.
+          #     Optional. If set to true and the run is not found, the request creates it.
           class UpdateRunRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Request message for
-          # [GetRun][google.cloud.datacatalog.lineage.v1.GetRun].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#get_run GetRun}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the run to get.
@@ -421,19 +451,19 @@ module Google
           end
 
           # Request message for
-          # [ListRuns][google.cloud.datacatalog.lineage.v1.ListRuns].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_runs ListRuns}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The name of process that owns this collection of runs.
           # @!attribute [rw] page_size
           #   @return [::Integer]
-          #     The maximum number of runs to return. The service may return
+          #     Optional. The maximum number of runs to return. The service may return
           #     fewer than this value. If unspecified, at most 50 runs are
           #     returned. The maximum value is 100; values greater than 100 are cut to
           #     100.
           # @!attribute [rw] page_token
           #   @return [::String]
-          #     The page token received from a previous `ListRuns` call. Specify
+          #     Optional. The page token received from a previous `ListRuns` call. Specify
           #     it to get the next page.
           #
           #     When paginating, all other parameters specified in this call must
@@ -444,7 +474,7 @@ module Google
           end
 
           # Response message for
-          # [ListRuns][google.cloud.datacatalog.lineage.v1.ListRuns].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_runs ListRuns}.
           # @!attribute [rw] runs
           #   @return [::Array<::Google::Cloud::DataCatalog::Lineage::V1::Run>]
           #     The runs from the specified project and location.
@@ -458,13 +488,13 @@ module Google
           end
 
           # Request message for
-          # [DeleteRun][google.cloud.datacatalog.lineage.v1.DeleteRun].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#delete_run DeleteRun}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the run to delete.
           # @!attribute [rw] allow_missing
           #   @return [::Boolean]
-          #     If set to true and the run is not found, the request
+          #     Optional. If set to true and the run is not found, the request
           #     succeeds but the server doesn't perform any actions.
           class DeleteRunRequest
             include ::Google::Protobuf::MessageExts
@@ -472,7 +502,7 @@ module Google
           end
 
           # Request message for
-          # [CreateLineageEvent][google.cloud.datacatalog.lineage.v1.CreateLineageEvent].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#create_lineage_event CreateLineageEvent}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The name of the run that should own the lineage event.
@@ -481,16 +511,16 @@ module Google
           #     Required. The lineage event to create.
           # @!attribute [rw] request_id
           #   @return [::String]
-          #     A unique identifier for this request. Restricted to 36 ASCII characters.
-          #     A random UUID is recommended. This request is idempotent only if a
-          #     `request_id` is provided.
+          #     Optional. A unique identifier for this request. Restricted to 36 ASCII
+          #     characters. A random UUID is recommended. This request is idempotent only
+          #     if a `request_id` is provided.
           class CreateLineageEventRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Request message for
-          # [GetLineageEvent][google.cloud.datacatalog.lineage.v1.GetLineageEvent].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#get_lineage_event GetLineageEvent}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the lineage event to get.
@@ -500,22 +530,22 @@ module Google
           end
 
           # Request message for
-          # [ListLineageEvents][google.cloud.datacatalog.lineage.v1.ListLineageEvents].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_lineage_events ListLineageEvents}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The name of the run that owns the collection of lineage events to
           #     get.
           # @!attribute [rw] page_size
           #   @return [::Integer]
-          #     The maximum number of lineage events to return.
+          #     Optional. The maximum number of lineage events to return.
           #
           #     The service may return fewer events than this value.
           #     If unspecified, at most 50 events are returned. The maximum value is 100;
           #     values greater than 100 are cut to 100.
           # @!attribute [rw] page_token
           #   @return [::String]
-          #     The page token received from a previous `ListLineageEvents` call. Specify
-          #     it to get the next page.
+          #     Optional. The page token received from a previous `ListLineageEvents` call.
+          #     Specify it to get the next page.
           #
           #     When paginating, all other parameters specified in this call must
           #     match the parameters of the call that provided the page token.
@@ -525,7 +555,7 @@ module Google
           end
 
           # Response message for
-          # [ListLineageEvents][google.cloud.datacatalog.lineage.v1.ListLineageEvents].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_lineage_events ListLineageEvents}.
           # @!attribute [rw] lineage_events
           #   @return [::Array<::Google::Cloud::DataCatalog::Lineage::V1::LineageEvent>]
           #     Lineage events from the specified project and location.
@@ -539,13 +569,13 @@ module Google
           end
 
           # Request message for
-          # [DeleteLineageEvent][google.cloud.datacatalog.lineage.v1.DeleteLineageEvent].
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#delete_lineage_event DeleteLineageEvent}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the lineage event to delete.
           # @!attribute [rw] allow_missing
           #   @return [::Boolean]
-          #     If set to true and the lineage event is not found, the request
+          #     Optional. If set to true and the lineage event is not found, the request
           #     succeeds but the server doesn't perform any actions.
           class DeleteLineageEventRequest
             include ::Google::Protobuf::MessageExts
@@ -562,13 +592,35 @@ module Google
           #     Optional. Send asset information in the **source** field to retrieve all
           #     links that lead from the specified asset to downstream assets.
           #
-          #     Note: The following fields are mutually exclusive: `source`, `target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `source`, `target`, `sources`, `targets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] target
           #   @return [::Google::Cloud::DataCatalog::Lineage::V1::EntityReference]
           #     Optional. Send asset information in the **target** field to retrieve all
           #     links that lead from upstream assets to the specified asset.
           #
-          #     Note: The following fields are mutually exclusive: `target`, `source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `target`, `source`, `sources`, `targets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] sources
+          #   @return [::Google::Cloud::DataCatalog::Lineage::V1::MultipleEntityReference]
+          #     Optional. Send a list of asset information in the **sources** field to
+          #     retrieve all links that lead from the specified assets to downstream
+          #     assets. This field is similar to the `source`
+          #     {::Google::Cloud::DataCatalog::Lineage::V1::SearchLinksRequest#source source}
+          #     field but allows providing multiple entities.
+          #     All entities within the `MultipleEntityReference` must have the same
+          #     `fully_qualified_name`.
+          #
+          #     Note: The following fields are mutually exclusive: `sources`, `source`, `target`, `targets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] targets
+          #   @return [::Google::Cloud::DataCatalog::Lineage::V1::MultipleEntityReference]
+          #     Optional. Send a list of asset information in the **targets** field to
+          #     retrieve all links that lead from upstream assets to the specified
+          #     assets. This field is similar to the `target`
+          #     {::Google::Cloud::DataCatalog::Lineage::V1::SearchLinksRequest#target target}
+          #     field but allows providing multiple entities.
+          #     All entities within the `MultipleEntityReference` must have the same
+          #     `fully_qualified_name`.
+          #
+          #     Note: The following fields are mutually exclusive: `targets`, `source`, `target`, `sources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     Optional. The maximum number of links to return in a single page of the
@@ -585,6 +637,16 @@ module Google
           #     all parameters must match the values you provided
           #     in the original request.
           class SearchLinksRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Multiple entity reference for SearchLinksRequest.
+          # @!attribute [rw] entities
+          #   @return [::Array<::Google::Cloud::DataCatalog::Lineage::V1::EntityReference>]
+          #     Optional. The list of entities to search for links. The maximum number of
+          #     entities is 20.
+          class MultipleEntityReference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -625,9 +687,22 @@ module Google
           # @!attribute [rw] end_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The end of the last event establishing this link.
+          # @!attribute [rw] dependency_info
+          #   @return [::Array<::Google::Cloud::DataCatalog::Lineage::V1::Link::DependencyInfo>]
+          #     Optional. The dependency info of the link (applies only to column level
+          #     links).
           class Link
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Dependency info describes how one entity depends on another.
+            # @!attribute [rw] dependency_type
+            #   @return [::Google::Cloud::DataCatalog::Lineage::V1::DependencyType]
+            #     The type of dependency.
+            class DependencyInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Request message for
@@ -646,12 +721,12 @@ module Google
           #     Format: `projects/{project}/locations/{location}/links/{link}`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
-          #     The maximum number of processes to return in a single page of the response.
-          #     A page may contain fewer results than this value.
+          #     Optional. The maximum number of processes to return in a single page of the
+          #     response. A page may contain fewer results than this value.
           # @!attribute [rw] page_token
           #   @return [::String]
-          #     The page token received from a previous `BatchSearchLinkProcesses` call.
-          #     Use it to get the next page.
+          #     Optional. The page token received from a previous
+          #     `BatchSearchLinkProcesses` call. Use it to get the next page.
           #
           #     When requesting subsequent pages of a response, remember that
           #     all parameters must match the values you provided
@@ -715,12 +790,13 @@ module Google
           #     Type of the source.
           #
           #     Use of a source_type other than `CUSTOM` for process creation
-          #     or updating is highly discouraged, and may be restricted in the future
-          #     without notice.
+          #     or updating is highly discouraged. It might be restricted in the future
+          #     without notice. There will be increase in cost if you use any of the source
+          #     types other than `CUSTOM`.
           # @!attribute [rw] name
           #   @return [::String]
-          #     If the source_type isn't CUSTOM, the value of this field should be a GCP
-          #     resource name of the system, which reports lineage. The project and
+          #     If the source_type isn't CUSTOM, the value of this field should be a Google
+          #     Cloud resource name of the system, which reports lineage. The project and
           #     location parts of the resource name must match the project and location of
           #     the lineage resource being created. Examples:
           #
@@ -754,7 +830,188 @@ module Google
 
               # Dataproc
               DATAPROC = 6
+
+              # Vertex AI
+              VERTEX_AI = 7
+
+              # Dataflow
+              DATAFLOW = 8
+
+              # Looker Core
+              LOOKER_CORE = 9
             end
+          end
+
+          # Lineage link between two entities.
+          # @!attribute [rw] source
+          #   @return [::Google::Cloud::DataCatalog::Lineage::V1::EntityReference]
+          #     The entity that is the **source** of this link.
+          # @!attribute [rw] target
+          #   @return [::Google::Cloud::DataCatalog::Lineage::V1::EntityReference]
+          #     The entity that is the **target** of this link.
+          # @!attribute [rw] processes
+          #   @return [::Array<::Google::Cloud::DataCatalog::Lineage::V1::LineageLink::LineageProcess>]
+          #     Processes metadata associated with the link.
+          # @!attribute [rw] dependency_info
+          #   @return [::Array<::Google::Cloud::DataCatalog::Lineage::V1::LineageLink::DependencyInfo>]
+          #     Describes how the target entity is dependent on the source entity.
+          # @!attribute [rw] depth
+          #   @return [::Integer]
+          #     Depth of the current link in the graph starting from 1.
+          # @!attribute [rw] location
+          #   @return [::String]
+          #     The location where the LineageEvent that created the link is stored.
+          class LineageLink
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Process metadata for the link.
+            # @!attribute [rw] process
+            #   @return [::Google::Cloud::DataCatalog::Lineage::V1::Process]
+            #     Process that created the link.
+            class LineageProcess
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Dependency info describes how one entity is dependent on another.
+            # @!attribute [rw] dependency_type
+            #   @return [::Google::Cloud::DataCatalog::Lineage::V1::DependencyType]
+            #     The type of dependency.
+            class DependencyInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Request message for
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#search_lineage_streaming SearchLineageStreaming}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The project and location to initiate the search from.
+          # @!attribute [rw] locations
+          #   @return [::Array<::String>]
+          #     Required. The locations to search in.
+          # @!attribute [rw] root_criteria
+          #   @return [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::RootCriteria]
+          #     Required. Criteria for the root of the search.
+          # @!attribute [rw] direction
+          #   @return [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::SearchDirection]
+          #     Required. Direction of the search.
+          # @!attribute [rw] filters
+          #   @return [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::SearchFilters]
+          #     Optional. Filters for the search.
+          # @!attribute [rw] limits
+          #   @return [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::SearchLimits]
+          #     Optional. Limits for the search.
+          class SearchLineageStreamingRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Filters for the search.
+            # @!attribute [rw] dependency_types
+            #   @return [::Array<::Google::Cloud::DataCatalog::Lineage::V1::DependencyType>]
+            #     Optional. Types of dependencies between entities to retrieve.
+            #     If unspecified, all dependency types are returned.
+            # @!attribute [rw] entity_set
+            #   @return [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::EntitySet]
+            #     Optional. Entity set restriction. If unspecified, the method returns all
+            #     entities.
+            # @!attribute [rw] time_range
+            #   @return [::Google::Type::Interval]
+            #     Optional. Time interval to search for lineage. If unspecified, all
+            #     lineage is returned. Currently, at most one of `start_time` and
+            #     `end_time` can be set.
+            class SearchFilters
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Limits for the search results.
+            # @!attribute [rw] max_depth
+            #   @return [::Integer]
+            #     Optional. The maximum depth of the search. The default value is 5 and
+            #     maximum value is 100.
+            # @!attribute [rw] max_results
+            #   @return [::Integer]
+            #     Optional. The maximum number of links to return in the response. The
+            #     default value is 1_000 and the maximum value is 10_000.
+            # @!attribute [rw] max_process_per_link
+            #   @return [::Integer]
+            #     Optional. The maximum number of processes to return per link. The default
+            #     value is 0 and the maximum value is 100. If this value is non-zero, the
+            #     response will contain process names for the links. To retrieve full
+            #     process details in the response, include `links.processes.process` in the
+            #     [FieldMask](https://developers.google.com/workspace/docs/api/how-tos/field-masks#read_with_a_field_mask).
+            class SearchLimits
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Criteria for the root of the search.
+            # @!attribute [rw] entities
+            #   @return [::Google::Cloud::DataCatalog::Lineage::V1::MultipleEntityReference]
+            #     Optional. The entities to initiate the search from. Entities can be
+            #     specified by FQN only, or by FQN and field. To search by FQN and all
+            #     available fields for that FQN, use the wildcard `*` as the field value.
+            class RootCriteria
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Direction of the search.
+            module SearchDirection
+              # Direction is unspecified.
+              SEARCH_DIRECTION_UNSPECIFIED = 0
+
+              # Retrieve links that lead from the specified asset to downstream assets.
+              DOWNSTREAM = 1
+
+              # Retrieve links that lead from upstream assets to the specified asset.
+              UPSTREAM = 2
+            end
+
+            # Entity set restriction.
+            module EntitySet
+              # The entity set is unspecified. Returns all the data.
+              ENTITY_SET_UNSPECIFIED = 0
+
+              # Returns entities with only FQN specified. For example, entities with the
+              # `field` field set are not returned.
+              ENTITIES = 1
+            end
+          end
+
+          # Response message for
+          # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#search_lineage_streaming SearchLineageStreaming}.
+          # @!attribute [r] links
+          #   @return [::Array<::Google::Cloud::DataCatalog::Lineage::V1::LineageLink>]
+          #     Output only. The lineage links that match the search criteria. Can be empty
+          #     if no links match.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     Unordered list. Unreachable resources. If non-empty, the result set might
+          #     be incomplete.
+          #
+          #     Currently, only locations are supported.
+          #
+          #     Format: `projects/[PROJECT_NUMBER]/locations/[LOCATION]`
+          #     Example: projects/123456789/locations/us-east1
+          class SearchLineageStreamingResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Type of dependency between entities.
+          module DependencyType
+            # Dependency type unspecified.
+            DEPENDENCY_TYPE_UNSPECIFIED = 0
+
+            # Exact data copy without any change.
+            EXACT_COPY = 1
+
+            # Other types of dependencies like filtering or grouping.
+            OTHER = 3
           end
         end
       end

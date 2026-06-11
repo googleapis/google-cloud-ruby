@@ -324,12 +324,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param page_size [::Integer]
-              #     The maximum number of resources to return. The service may return
+              #     Optional. The maximum number of resources to return. The service may return
               #     fewer than this value, even if there are additional pages.
               #     If unspecified, at most 50 resources will be returned.
               #     The maximum value is 200; (higher values will be coerced to the maximum)
               #   @param page_token [::String]
-              #     A page token, received from a previous `ListAccounts` call.
+              #     Optional. A page token, received from a previous `ListAccounts` call.
               #     Provide this to retrieve the subsequent page.
               #     When paginating, all other parameters provided to `ListAccounts` must
               #     match the call that provided the page token.
@@ -675,15 +675,15 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param page_size [::Integer]
-              #     The maximum number of AccountSummary resources to return. The service may
-              #     return fewer than this value, even if there are additional pages.
-              #     If unspecified, at most 50 resources will be returned.
-              #     The maximum value is 200; (higher values will be coerced to the maximum)
+              #     Optional. The maximum number of AccountSummary resources to return. The
+              #     service may return fewer than this value, even if there are additional
+              #     pages. If unspecified, at most 50 resources will be returned. The maximum
+              #     value is 200; (higher values will be coerced to the maximum)
               #   @param page_token [::String]
-              #     A page token, received from a previous `ListAccountSummaries` call.
-              #     Provide this to retrieve the subsequent page.
-              #     When paginating, all other parameters provided to `ListAccountSummaries`
-              #     must match the call that provided the page token.
+              #     Optional. A page token, received from a previous `ListAccountSummaries`
+              #     call. Provide this to retrieve the subsequent page. When paginating, all
+              #     other parameters provided to `ListAccountSummaries` must match the call
+              #     that provided the page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::AccountSummary>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -868,12 +868,12 @@ module Google
               #     | firebase_project:123        | The firebase project with number: 123.    |
               #     ```
               #   @param page_size [::Integer]
-              #     The maximum number of resources to return. The service may return
+              #     Optional. The maximum number of resources to return. The service may return
               #     fewer than this value, even if there are additional pages.
               #     If unspecified, at most 50 resources will be returned.
               #     The maximum value is 200; (higher values will be coerced to the maximum)
               #   @param page_token [::String]
-              #     A page token, received from a previous `ListProperties` call.
+              #     Optional. A page token, received from a previous `ListProperties` call.
               #     Provide this to retrieve the subsequent page.
               #     When paginating, all other parameters provided to `ListProperties` must
               #     match the call that provided the page token.
@@ -1388,12 +1388,12 @@ module Google
               #
               #     Example: `properties/1234`
               #   @param page_size [::Integer]
-              #     The maximum number of resources to return. The service may return
+              #     Optional. The maximum number of resources to return. The service may return
               #     fewer than this value, even if there are additional pages.
               #     If unspecified, at most 50 resources will be returned.
               #     The maximum value is 200; (higher values will be coerced to the maximum)
               #   @param page_token [::String]
-              #     A page token, received from a previous `ListFirebaseLinks` call.
+              #     Optional. A page token, received from a previous `ListFirebaseLinks` call.
               #     Provide this to retrieve the subsequent page.
               #     When paginating, all other parameters provided to `ListFirebaseLinks` must
               #     match the call that provided the page token.
@@ -1806,11 +1806,11 @@ module Google
               #   @param parent [::String]
               #     Required. Example format: properties/1234
               #   @param page_size [::Integer]
-              #     The maximum number of resources to return.
+              #     Optional. The maximum number of resources to return.
               #     If unspecified, at most 50 resources will be returned.
               #     The maximum value is 200 (higher values will be coerced to the maximum).
               #   @param page_token [::String]
-              #     A page token, received from a previous `ListGoogleAdsLinks` call.
+              #     Optional. A page token, received from a previous `ListGoogleAdsLinks` call.
               #     Provide this to retrieve the subsequent page.
               #
               #     When paginating, all other parameters provided to `ListGoogleAdsLinks` must
@@ -2065,14 +2065,15 @@ module Google
               #     Format:
               #     properties/\\{property}/dataStreams/\\{dataStream}/measurementProtocolSecrets
               #   @param page_size [::Integer]
-              #     The maximum number of resources to return.
+              #     Optional. The maximum number of resources to return.
               #     If unspecified, at most 10 resources will be returned.
               #     The maximum value is 10. Higher values will be coerced to the maximum.
               #   @param page_token [::String]
-              #     A page token, received from a previous `ListMeasurementProtocolSecrets`
-              #     call. Provide this to retrieve the subsequent page. When paginating, all
-              #     other parameters provided to `ListMeasurementProtocolSecrets` must match
-              #     the call that provided the page token.
+              #     Optional. A page token, received from a previous
+              #     `ListMeasurementProtocolSecrets` call. Provide this to retrieve the
+              #     subsequent page. When paginating, all other parameters provided to
+              #     `ListMeasurementProtocolSecrets` must match the call that provided the page
+              #     token.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2817,12 +2818,12 @@ module Google
               #     properties/\\{property_id}/dataStreams/\\{dataStream}
               #     Example: properties/1234/dataStreams/5678
               #   @param page_size [::Integer]
-              #     The maximum number of resources to return. The service may return
+              #     Optional. The maximum number of resources to return. The service may return
               #     fewer than this value, even if there are additional pages.
               #     If unspecified, at most 50 resources will be returned.
               #     The maximum value is 200; (higher values will be coerced to the maximum)
               #   @param page_token [::String]
-              #     A page token, received from a previous
+              #     Optional. A page token, received from a previous
               #     `ListSKAdNetworkConversionValueSchemas` call. Provide this to retrieve the
               #     subsequent page. When paginating, all other parameters provided to
               #     `ListSKAdNetworkConversionValueSchema` must match the call that provided
@@ -3534,14 +3535,14 @@ module Google
               #     Required. The resource name of the parent property.
               #     Example: 'properties/123'
               #   @param page_size [::Integer]
-              #     The maximum number of resources to return.
+              #     Optional. The maximum number of resources to return.
               #     If unspecified, at most 50 resources will be returned.
               #     The maximum value is 200; (higher values will be coerced to the maximum)
               #   @param page_token [::String]
-              #     A page token, received from a previous `ListConversionEvents` call.
-              #     Provide this to retrieve the subsequent page.
-              #     When paginating, all other parameters provided to `ListConversionEvents`
-              #     must match the call that provided the page token.
+              #     Optional. A page token, received from a previous `ListConversionEvents`
+              #     call. Provide this to retrieve the subsequent page. When paginating, all
+              #     other parameters provided to `ListConversionEvents` must match the call
+              #     that provided the page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ConversionEvent>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3954,11 +3955,11 @@ module Google
               #     Required. The resource name of the parent property.
               #     Example: 'properties/123'
               #   @param page_size [::Integer]
-              #     The maximum number of resources to return.
+              #     Optional. The maximum number of resources to return.
               #     If unspecified, at most 50 resources will be returned.
               #     The maximum value is 200; (higher values will be coerced to the maximum)
               #   @param page_token [::String]
-              #     A page token, received from a previous `ListKeyEvents` call.
+              #     Optional. A page token, received from a previous `ListKeyEvents` call.
               #     Provide this to retrieve the subsequent page.
               #     When paginating, all other parameters provided to `ListKeyEvents`
               #     must match the call that provided the page token.
@@ -5127,12 +5128,12 @@ module Google
               #   @param parent [::String]
               #     Required. Example format: properties/1234
               #   @param page_size [::Integer]
-              #     The maximum number of resources to return.
+              #     Optional. The maximum number of resources to return.
               #     If unspecified, at most 50 resources will be returned.
               #     The maximum value is 200 (higher values will be coerced to the maximum).
               #   @param page_token [::String]
-              #     A page token, received from a previous `ListCustomDimensions` call.
-              #     Provide this to retrieve the subsequent page.
+              #     Optional. A page token, received from a previous `ListCustomDimensions`
+              #     call. Provide this to retrieve the subsequent page.
               #
               #     When paginating, all other parameters provided to `ListCustomDimensions`
               #     must match the call that provided the page token.
@@ -13328,7 +13329,7 @@ module Google
               end
 
               ##
-              # Returns the singleton data retention settings for this property.
+              # Returns the reporting identity settings for this property.
               #
               # @overload get_reporting_identity_settings(request, options = nil)
               #   Pass arguments to `get_reporting_identity_settings` via a request object, either of type
@@ -13402,6 +13403,85 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @analytics_admin_service_stub.get_reporting_identity_settings request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Looks up settings related to user-provided data for a property.
+              #
+              # @overload get_user_provided_data_settings(request, options = nil)
+              #   Pass arguments to `get_user_provided_data_settings` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::GetUserProvidedDataSettingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::GetUserProvidedDataSettingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_user_provided_data_settings(name: nil)
+              #   Pass arguments to `get_user_provided_data_settings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the user provided data settings to retrieve.
+              #     Format: properties/\\{property}/userProvidedDataSettings
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::UserProvidedDataSettings]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::UserProvidedDataSettings]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetUserProvidedDataSettingsRequest.new
+              #
+              #   # Call the get_user_provided_data_settings method.
+              #   result = client.get_user_provided_data_settings request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::UserProvidedDataSettings.
+              #   p result
+              #
+              def get_user_provided_data_settings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetUserProvidedDataSettingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_user_provided_data_settings.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_user_provided_data_settings.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_user_provided_data_settings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.get_user_provided_data_settings request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -14324,6 +14404,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_reporting_identity_settings
+                  ##
+                  # RPC-specific configuration for `get_user_provided_data_settings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_user_provided_data_settings
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -14635,6 +14720,8 @@ module Google
                     @get_subproperty_sync_config = ::Gapic::Config::Method.new get_subproperty_sync_config_config
                     get_reporting_identity_settings_config = parent_rpcs.get_reporting_identity_settings if parent_rpcs.respond_to? :get_reporting_identity_settings
                     @get_reporting_identity_settings = ::Gapic::Config::Method.new get_reporting_identity_settings_config
+                    get_user_provided_data_settings_config = parent_rpcs.get_user_provided_data_settings if parent_rpcs.respond_to? :get_user_provided_data_settings
+                    @get_user_provided_data_settings = ::Gapic::Config::Method.new get_user_provided_data_settings_config
 
                     yield self if block_given?
                   end

@@ -46,6 +46,9 @@ module Google
 
             # The deal is paused by the buyer.
             BUYER_PAUSED = 5
+
+            # The deal is past its end date.
+            COMPLETED = 6
           end
         end
       end

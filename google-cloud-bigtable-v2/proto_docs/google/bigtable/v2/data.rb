@@ -292,6 +292,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Restricts the output to cells whose values match the given bitmask.
+        # @!attribute [rw] mask
+        #   @return [::String]
+        #     Required. Mask applied to the value.
+        #     Evaluated as: `(value & mask) == mask`
+        #     The mask length must exactly match the value length, otherwise the cell is
+        #     not considered a match.
+        class ValueBitmask
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Takes a row as input and produces an alternate view of the row based on
         # specified rules. For example, a RowFilter might trim down a row to include
         # just the cells from columns matching a given regular expression, or might
@@ -330,19 +342,19 @@ module Google
         #     Applies several RowFilters to the data in sequence, progressively
         #     narrowing the results.
         #
-        #     Note: The following fields are mutually exclusive: `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] interleave
         #   @return [::Google::Cloud::Bigtable::V2::RowFilter::Interleave]
         #     Applies several RowFilters to the data in parallel and combines the
         #     results.
         #
-        #     Note: The following fields are mutually exclusive: `interleave`, `chain`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `interleave`, `chain`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] condition
         #   @return [::Google::Cloud::Bigtable::V2::RowFilter::Condition]
         #     Applies one of two possible RowFilters to the data based on the output of
         #     a predicate RowFilter.
         #
-        #     Note: The following fields are mutually exclusive: `condition`, `chain`, `interleave`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `condition`, `chain`, `interleave`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sink
         #   @return [::Boolean]
         #     ADVANCED USE ONLY.
@@ -405,19 +417,19 @@ module Google
         #     Cannot be used within the `predicate_filter`, `true_filter`, or
         #     `false_filter` of a {::Google::Cloud::Bigtable::V2::RowFilter::Condition Condition}.
         #
-        #     Note: The following fields are mutually exclusive: `sink`, `chain`, `interleave`, `condition`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sink`, `chain`, `interleave`, `condition`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pass_all_filter
         #   @return [::Boolean]
         #     Matches all cells, regardless of input. Functionally equivalent to
         #     leaving `filter` unset, but included for completeness.
         #
-        #     Note: The following fields are mutually exclusive: `pass_all_filter`, `chain`, `interleave`, `condition`, `sink`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `pass_all_filter`, `chain`, `interleave`, `condition`, `sink`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] block_all_filter
         #   @return [::Boolean]
         #     Does not match any cells, regardless of input. Useful for temporarily
         #     disabling just part of a filter.
         #
-        #     Note: The following fields are mutually exclusive: `block_all_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `block_all_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] row_key_regex_filter
         #   @return [::String]
         #     Matches only cells from rows whose keys satisfy the given RE2 regex. In
@@ -428,13 +440,13 @@ module Google
         #     will not match the new line character `\n`, which may be present in a
         #     binary key.
         #
-        #     Note: The following fields are mutually exclusive: `row_key_regex_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `row_key_regex_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] row_sample_filter
         #   @return [::Float]
         #     Matches all cells from a row with probability p, and matches no cells
         #     from the row with probability 1-p.
         #
-        #     Note: The following fields are mutually exclusive: `row_sample_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `row_sample_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] family_name_regex_filter
         #   @return [::String]
         #     Matches only cells from columns whose families satisfy the given RE2
@@ -444,7 +456,7 @@ module Google
         #     `\n`, it is sufficient to use `.` as a full wildcard when matching
         #     column family names.
         #
-        #     Note: The following fields are mutually exclusive: `family_name_regex_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `family_name_regex_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] column_qualifier_regex_filter
         #   @return [::String]
         #     Matches only cells from columns whose qualifiers satisfy the given RE2
@@ -454,17 +466,17 @@ module Google
         #     character will not match the new line character `\n`, which may be
         #     present in a binary qualifier.
         #
-        #     Note: The following fields are mutually exclusive: `column_qualifier_regex_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `column_qualifier_regex_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] column_range_filter
         #   @return [::Google::Cloud::Bigtable::V2::ColumnRange]
         #     Matches only cells from columns within the given range.
         #
-        #     Note: The following fields are mutually exclusive: `column_range_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `column_range_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp_range_filter
         #   @return [::Google::Cloud::Bigtable::V2::TimestampRange]
         #     Matches only cells with timestamps within the given range.
         #
-        #     Note: The following fields are mutually exclusive: `timestamp_range_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `timestamp_range_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] value_regex_filter
         #   @return [::String]
         #     Matches only cells with values that satisfy the given regular expression.
@@ -473,26 +485,26 @@ module Google
         #     will not match the new line character `\n`, which may be present in a
         #     binary value.
         #
-        #     Note: The following fields are mutually exclusive: `value_regex_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `value_regex_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] value_range_filter
         #   @return [::Google::Cloud::Bigtable::V2::ValueRange]
         #     Matches only cells with values that fall within the given range.
         #
-        #     Note: The following fields are mutually exclusive: `value_range_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `value_range_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cells_per_row_offset_filter
         #   @return [::Integer]
         #     Skips the first N cells of each row, matching all subsequent cells.
         #     If duplicate cells are present, as is possible when using an Interleave,
         #     each copy of the cell is counted separately.
         #
-        #     Note: The following fields are mutually exclusive: `cells_per_row_offset_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cells_per_row_offset_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cells_per_row_limit_filter
         #   @return [::Integer]
         #     Matches only the first N cells of each row.
         #     If duplicate cells are present, as is possible when using an Interleave,
         #     each copy of the cell is counted separately.
         #
-        #     Note: The following fields are mutually exclusive: `cells_per_row_limit_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cells_per_row_limit_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cells_per_column_limit_filter
         #   @return [::Integer]
         #     Matches only the most recent N cells within each column. For example,
@@ -502,12 +514,12 @@ module Google
         #     If duplicate cells are present, as is possible when using an Interleave,
         #     each copy of the cell is counted separately.
         #
-        #     Note: The following fields are mutually exclusive: `cells_per_column_limit_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cells_per_column_limit_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `strip_value_transformer`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] strip_value_transformer
         #   @return [::Boolean]
         #     Replaces each cell's value with the empty string.
         #
-        #     Note: The following fields are mutually exclusive: `strip_value_transformer`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `strip_value_transformer`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `apply_label_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] apply_label_transformer
         #   @return [::String]
         #     Applies the given label to all cells in the output row. This allows
@@ -524,7 +536,15 @@ module Google
         #     will be applied to separate copies of the input. This may be relaxed in
         #     the future.
         #
-        #     Note: The following fields are mutually exclusive: `apply_label_transformer`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `apply_label_transformer`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `value_bitmask_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] value_bitmask_filter
+        #   @return [::Google::Cloud::Bigtable::V2::ValueBitmask]
+        #     Matches only cells with values that satisfy the condition `(value & mask)
+        #     == mask`.
+        #     The mask length must exactly match the value length, otherwise the cell
+        #     is not considered a match.
+        #
+        #     Note: The following fields are mutually exclusive: `value_bitmask_filter`, `chain`, `interleave`, `condition`, `sink`, `pass_all_filter`, `block_all_filter`, `row_key_regex_filter`, `row_sample_filter`, `family_name_regex_filter`, `column_qualifier_regex_filter`, `column_range_filter`, `timestamp_range_filter`, `value_regex_filter`, `value_range_filter`, `cells_per_row_offset_filter`, `cells_per_row_limit_filter`, `cells_per_column_limit_filter`, `strip_value_transformer`, `apply_label_transformer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RowFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

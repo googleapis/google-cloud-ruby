@@ -402,19 +402,25 @@ module Google
         #     ComputeInstanceDataSourceProperties has a subset of Compute Instance
         #     properties that are useful at the Datasource level.
         #
-        #     Note: The following fields are mutually exclusive: `compute_instance_datasource_properties`, `cloud_sql_instance_datasource_properties`, `disk_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `compute_instance_datasource_properties`, `cloud_sql_instance_datasource_properties`, `alloy_db_cluster_datasource_properties`, `disk_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] cloud_sql_instance_datasource_properties
         #   @return [::Google::Cloud::BackupDR::V1::CloudSqlInstanceDataSourceProperties]
         #     Output only. CloudSqlInstanceDataSourceProperties has a subset of Cloud
         #     SQL Instance properties that are useful at the Datasource level.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_sql_instance_datasource_properties`, `compute_instance_datasource_properties`, `disk_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_sql_instance_datasource_properties`, `compute_instance_datasource_properties`, `alloy_db_cluster_datasource_properties`, `disk_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] alloy_db_cluster_datasource_properties
+        #   @return [::Google::Cloud::BackupDR::V1::AlloyDBClusterDataSourceProperties]
+        #     Output only. AlloyDBClusterDataSourceProperties has a subset of AlloyDB
+        #     cluster properties that are useful at the Datasource level.
+        #
+        #     Note: The following fields are mutually exclusive: `alloy_db_cluster_datasource_properties`, `compute_instance_datasource_properties`, `cloud_sql_instance_datasource_properties`, `disk_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] disk_datasource_properties
         #   @return [::Google::Cloud::BackupDR::V1::DiskDataSourceProperties]
         #     DiskDataSourceProperties has a subset of Disk properties that are useful
         #     at the Datasource level.
         #
-        #     Note: The following fields are mutually exclusive: `disk_datasource_properties`, `compute_instance_datasource_properties`, `cloud_sql_instance_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `disk_datasource_properties`, `compute_instance_datasource_properties`, `cloud_sql_instance_datasource_properties`, `alloy_db_cluster_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DataSourceGcpResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -568,22 +574,27 @@ module Google
         #   @return [::Google::Cloud::BackupDR::V1::ComputeInstanceBackupProperties]
         #     Output only. Compute Engine specific backup properties.
         #
-        #     Note: The following fields are mutually exclusive: `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `backup_appliance_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `backup_appliance_backup_properties`, `alloy_db_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] cloud_sql_instance_backup_properties
         #   @return [::Google::Cloud::BackupDR::V1::CloudSqlInstanceBackupProperties]
         #     Output only. Cloud SQL specific backup properties.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_sql_instance_backup_properties`, `compute_instance_backup_properties`, `backup_appliance_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_sql_instance_backup_properties`, `compute_instance_backup_properties`, `backup_appliance_backup_properties`, `alloy_db_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] backup_appliance_backup_properties
         #   @return [::Google::Cloud::BackupDR::V1::BackupApplianceBackupProperties]
         #     Output only. Backup Appliance specific backup properties.
         #
-        #     Note: The following fields are mutually exclusive: `backup_appliance_backup_properties`, `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `backup_appliance_backup_properties`, `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `alloy_db_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] alloy_db_backup_properties
+        #   @return [::Google::Cloud::BackupDR::V1::AlloyDbClusterBackupProperties]
+        #     Output only. AlloyDB specific backup properties.
+        #
+        #     Note: The following fields are mutually exclusive: `alloy_db_backup_properties`, `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `backup_appliance_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] disk_backup_properties
         #   @return [::Google::Cloud::BackupDR::V1::DiskBackupProperties]
         #     Output only. Disk specific backup properties.
         #
-        #     Note: The following fields are mutually exclusive: `disk_backup_properties`, `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `backup_appliance_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `disk_backup_properties`, `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `backup_appliance_backup_properties`, `alloy_db_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] backup_type
         #   @return [::Google::Cloud::BackupDR::V1::Backup::BackupType]
         #     Output only. Type of the backup, unspecified, scheduled or ondemand.

@@ -22,6 +22,19 @@ module Google
     module AdManager
       module V1
         # Request object for `SearchAdReviewCenterAds` method.
+        # @!attribute [rw] status
+        #   @return [::Google::Ads::AdManager::V1::AdReviewCenterAdStatusEnum::AdReviewCenterAdStatus]
+        #     Optional. Only return ads with the given status.
+        #
+        #     Note: The following fields are mutually exclusive: `status`, `manual_review_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] manual_review_status
+        #   @return [::Google::Ads::AdManager::V1::ManualAdReviewCenterAdStatusEnum::ManualAdReviewCenterAdStatus]
+        #     Optional. Only return ads with the given manual review status. Only
+        #     available for networks with Manual Creative Review enabled. For more
+        #     information, see
+        #     https://support.google.com/admanager/answer/2586531#manual-creative-review.
+        #
+        #     Note: The following fields are mutually exclusive: `manual_review_status`, `status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of AdReviewCenterAds.
@@ -48,9 +61,6 @@ module Google
         #   @return [::String]
         #     Optional. The page token to fetch the next page of AdReviewCenterAds. This
         #     is the value returned from a previous Search request, or empty.
-        # @!attribute [rw] status
-        #   @return [::Google::Ads::AdManager::V1::AdReviewCenterAdStatusEnum::AdReviewCenterAdStatus]
-        #     Optional. Only return ads with the given status.
         # @!attribute [rw] ad_review_center_ad_id
         #   @return [::Array<::String>]
         #     Optional. Only return ads with the given AdReviewCenterAd IDs. If provided,
@@ -59,7 +69,8 @@ module Google
         #   @return [::Google::Type::Interval]
         #     Optional. If provided, only return ads that served within the given date
         #     range (inclusive). The  date range must be within the last 30 days. If not
-        #     provided, the date range will be the last 30 days.
+        #     provided, the date range will be the last 30 days. This filter does not
+        #     apply to the PENDING manual review status.
         # @!attribute [rw] search_text
         #   @return [::Array<::String>]
         #     Optional. If provided, restrict the search to AdReviewCenterAds associated
@@ -71,7 +82,7 @@ module Google
         #   @return [::Array<::Integer>]
         #     Optional. If provided, restrict the search to creatives belonging to one of
         #     the given Adx buyer account IDs. Only applicable to RTB creatives. Adx
-        #     buyer account IDs can be found via the ProgrammaticBuyerService.
+        #     buyer account IDs can be found using the `ProgrammaticBuyerService`.
         class SearchAdReviewCenterAdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

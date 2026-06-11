@@ -112,33 +112,38 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary]
         #     A list of phrases to detect as a CustomInfoType.
         #
-        #     Note: The following fields are mutually exclusive: `dictionary`, `regex`, `surrogate_type`, `stored_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `dictionary`, `regex`, `surrogate_type`, `stored_type`, `metadata_key_value_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] regex
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Regex]
         #     Regular expression based CustomInfoType.
         #
-        #     Note: The following fields are mutually exclusive: `regex`, `dictionary`, `surrogate_type`, `stored_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `regex`, `dictionary`, `surrogate_type`, `stored_type`, `metadata_key_value_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] surrogate_type
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::SurrogateType]
         #     Message for detecting output from deidentification transformations that
         #     support reversing.
         #
-        #     Note: The following fields are mutually exclusive: `surrogate_type`, `dictionary`, `regex`, `stored_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `surrogate_type`, `dictionary`, `regex`, `stored_type`, `metadata_key_value_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] stored_type
         #   @return [::Google::Cloud::Dlp::V2::StoredType]
-        #     Load an existing `StoredInfoType` resource for use in
-        #     `InspectDataSource`. Not currently supported in `InspectContent`.
+        #     Loads an existing `StoredInfoType` resource.
         #
-        #     Note: The following fields are mutually exclusive: `stored_type`, `dictionary`, `regex`, `surrogate_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `stored_type`, `dictionary`, `regex`, `surrogate_type`, `metadata_key_value_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] metadata_key_value_expression
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::MetadataKeyValueExpression]
+        #     Key-value pair to detect in the metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `metadata_key_value_expression`, `dictionary`, `regex`, `surrogate_type`, `stored_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] detection_rules
         #   @return [::Array<::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule>]
         #     Set of detection rules to apply to all findings of this CustomInfoType.
-        #     Rules are applied in order that they are specified. Not supported for the
-        #     `surrogate_type` CustomInfoType.
+        #     Rules are applied in the order that they are specified. Only supported
+        #     for the `dictionary`, `regex`, and `stored_type` CustomInfoTypes.
         # @!attribute [rw] exclusion_type
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::ExclusionType]
         #     If set to EXCLUSION_TYPE_EXCLUDE this infoType will not cause a finding
-        #     to be returned. It still can be used for rules matching.
+        #     to be returned. It still can be used for rules matching. Only supported
+        #     for the `dictionary`, `regex`, and `stored_type` CustomInfoTypes.
         # @!attribute [rw] sensitivity_score
         #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
         #     Sensitivity for this CustomInfoType. If this CustomInfoType extends an
@@ -224,6 +229,20 @@ module Google
           # transformation such as `surrogate_info_type`. This CustomInfoType does
           # not support the use of `detection_rules`.
           class SurrogateType
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for a custom infoType that detects key-value pairs in the
+          # metadata matching the specified regular expressions.
+          # @!attribute [rw] key_regex
+          #   @return [::String]
+          #     The regular expression for the key. Key should be
+          #     non-empty.
+          # @!attribute [rw] value_regex
+          #   @return [::String]
+          #     The regular expression for the value. Value should be non-empty.
+          class MetadataKeyValueExpression
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

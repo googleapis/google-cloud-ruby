@@ -52,8 +52,21 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Expression to filter the response.
-        #     See syntax details at
-        #     https://developers.google.com/ad-manager/api/beta/filters
+        #      See syntax details at
+        #      https://developers.google.com/ad-manager/api/beta/filters
+        #
+        #     <b>Filterable fields:</b>
+        #     <ul style="list-style-type:none">
+        #       <li><code>appStoreId</code></li>
+        #       <li><code>appStores</code></li>
+        #       <li><code>applicationCode</code></li>
+        #       <li><code>approvalStatus</code></li>
+        #       <li><code>archived</code></li>
+        #       <li><code>displayName</code></li>
+        #       <li><code>name</code></li>
+        #       <li><code>platform</code></li>
+        #       <li><code>webviewClaimingStatus</code></li>
+        #     </ul>
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.
@@ -90,6 +103,119 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListApplicationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `CreateApplication` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this `Application` will be created.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] application
+        #   @return [::Google::Ads::AdManager::V1::Application]
+        #     Required. The `Application` to create.
+        class CreateApplicationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateApplications` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `Applications` will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreateApplicationRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateApplicationRequest>]
+        #     Required. The `Application` objects to create.
+        class BatchCreateApplicationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateApplications` method.
+        # @!attribute [rw] applications
+        #   @return [::Array<::Google::Ads::AdManager::V1::Application>]
+        #     The `Application` objects created.
+        class BatchCreateApplicationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateApplication` method.
+        # @!attribute [rw] application
+        #   @return [::Google::Ads::AdManager::V1::Application]
+        #     Required. The `Application` to update.
+        #
+        #     The `Application`'s `name` is used to identify the `Application` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateApplicationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateApplications` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `Applications` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateApplicationRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateApplicationRequest>]
+        #     Required. The `Application` objects to update.
+        class BatchUpdateApplicationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateApplications` method.
+        # @!attribute [rw] applications
+        #   @return [::Array<::Google::Ads::AdManager::V1::Application>]
+        #     The `Application` objects updated.
+        class BatchUpdateApplicationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchArchiveApplications` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource shared by all `Applications` to archive.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The `Application` objects to archive.
+        class BatchArchiveApplicationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchArchiveApplications` method.
+        class BatchArchiveApplicationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUnarchiveApplications` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource shared by all `Applications` to Unarchive.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The `Application` objects to unarchive.
+        class BatchUnarchiveApplicationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUnarchiveApplications` method.
+        class BatchUnarchiveApplicationsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

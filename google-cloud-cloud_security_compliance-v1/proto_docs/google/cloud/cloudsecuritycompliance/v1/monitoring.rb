@@ -37,6 +37,9 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. The filtering results.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::CloudSecurityCompliance::V1::FrameworkComplianceSummaryView]
+        #     Optional. Specifies the level of detail to return in the response.
         class ListFrameworkComplianceSummariesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,6 +107,9 @@ module Google
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The end time of the report.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The filtering results.
         class FetchFrameworkComplianceReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -260,6 +266,12 @@ module Google
         # @!attribute [rw] target_resource_details
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::TargetResourceDetails>]
         #     The target resource details for the framework.
+        # @!attribute [r] finding_count
+        #   @return [::Integer]
+        #     Output only. The count of the findings generated against the framework.
+        # @!attribute [r] controls_passing_trend
+        #   @return [::Google::Cloud::CloudSecurityCompliance::V1::Trend]
+        #     Output only. The trend of controls that are passing for the given duration.
         class FrameworkComplianceSummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -467,6 +479,19 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The trend of a compliance metric.
+        # @!attribute [r] duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. The duration for the trend.
+        # @!attribute [r] value_percent
+        #   @return [::Float]
+        #     Output only. The trend value as a percentage. The value can be positive or
+        #     negative.
+        class Trend
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The evaluation state of the control.
         module EvaluationState
           # Default value. This value is unused.
@@ -520,6 +545,23 @@ module Google
           # A resource or resource group where high risk attack paths
           # converge, based on attack path simulations (APS).
           CHOKEPOINT = 9
+        end
+
+        # Specifies the view of the framework compliance summary to be returned.
+        # New values may be added in the future.
+        module FrameworkComplianceSummaryView
+          # The default / unset value. The API will default to the BASIC view.
+          FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_UNSPECIFIED = 0
+
+          # Includes basic compliance metadata, but omits trend data.
+          FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_BASIC = 1
+
+          # Includes all information, including
+          # [finding_count][google.cloud.cloudsecuritycompliance.v1main.FrameworkComplianceSummary.finding_count]
+          # and
+          # [controls_passing_trend][google.cloud.cloudsecuritycompliance.v1main.FrameworkComplianceSummary.controls_passing_trend].
+          # Trend data is provided for the last 30 days.
+          FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_FULL = 2
         end
       end
     end

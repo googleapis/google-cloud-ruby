@@ -223,7 +223,8 @@ module Google
 
           block&.call batch
           return nil if batch.messages.count.zero?
-          batch.publish_batch_messages name, service
+          reason = block_given? ? "synchronous publish multiple" : "synchronous publish single"
+          batch.publish_batch_messages name, service, reason: reason
         end
 
         ##

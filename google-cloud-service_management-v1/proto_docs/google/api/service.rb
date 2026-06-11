@@ -135,8 +135,7 @@ module Google
     # @!attribute [rw] monitored_resources
     #   @return [::Array<::Google::Api::MonitoredResourceDescriptor>]
     #     Defines the monitored resources used by this service. This is required
-    #     by the {::Google::Api::Service#monitoring Service.monitoring} and
-    #     {::Google::Api::Service#logging Service.logging} configurations.
+    #     by the `Service.monitoring` and `Service.logging` configurations.
     # @!attribute [rw] billing
     #   @return [::Google::Api::Billing]
     #     Billing configuration.

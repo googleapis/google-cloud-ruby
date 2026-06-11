@@ -1,5 +1,28 @@
 # Changelog
 
+### 0.15.0 (2026-05-11)
+
+#### Features
+
+* A new method SearchLineageStreaming is added ([#33931](https://github.com/googleapis/google-cloud-ruby/issues/33931)) 
+* Added support for column level lineage information to be passed and returned from the Lineage service 
+* SearchLinks can now accept multiple source and target entity references as search criteria 
+#### Documentation
+
+* Documentation for SearchLineageStreaming API was added 
+
+### 0.14.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33432](https://github.com/googleapis/google-cloud-ruby/issues/33432)) 
+
+### 0.13.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.12.1 (2025-10-27)
 
 #### Documentation

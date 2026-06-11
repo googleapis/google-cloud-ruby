@@ -468,7 +468,7 @@ module Google
               #     The `PrivateAuction`'s `name` is used to identify the
               #     `PrivateAuction` to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The list of fields to update.
+              #     Optional. The list of fields to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::PrivateAuction]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

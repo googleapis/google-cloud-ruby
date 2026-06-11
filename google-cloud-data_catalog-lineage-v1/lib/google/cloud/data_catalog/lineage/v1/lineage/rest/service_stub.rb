@@ -755,6 +755,40 @@ module Google
                 end
 
                 ##
+                # Baseline implementation for the search_lineage_streaming REST call
+                #
+                # @param request_pb [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yieldparam chunk [::String] The chunk of data received during server streaming.
+                #
+                # @return [::Gapic::Rest::TransportOperation]
+                def search_lineage_streaming(request_pb, options = nil, &)
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_search_lineage_streaming_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "search_lineage_streaming",
+                    options: options,
+                    is_server_streaming: true,
+                    &
+                  )
+                  ::Gapic::Rest::TransportOperation.new response
+                end
+
+                ##
                 # @private
                 #
                 # GRPC transcoding helper method for the process_open_lineage_run_event REST call
@@ -1111,6 +1145,28 @@ module Google
                                                           .with_bindings(
                                                             uri_method: :post,
                                                             uri_template: "/v1/{parent}:batchSearchLinkProcesses",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the search_lineage_streaming REST call
+                #
+                # @param request_pb [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_search_lineage_streaming_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1/{parent}:searchLineageStreaming",
                                                             body: "*",
                                                             matches: [
                                                               ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]

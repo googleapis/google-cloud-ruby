@@ -814,8 +814,9 @@ module Google
             # Creates a GitRepositoryLink. Upon linking a Git Repository, Developer
             # Connect will configure the Git Repository to send webhook events to
             # Developer Connect. Connections that use Firebase GitHub Application will
-            # have events forwarded to the Firebase service. All other Connections will
-            # have events forwarded to Cloud Build.
+            # have events forwarded to the Firebase service. Connections that use Gemini
+            # Code Assist will have events forwarded to Gemini Code Assist service. All
+            # other Connections will have events forwarded to Cloud Build.
             #
             # @overload create_git_repository_link(request, options = nil)
             #   Pass arguments to `create_git_repository_link` via a request object, either of type
@@ -2698,6 +2699,186 @@ module Google
             end
 
             ##
+            # Starts OAuth flow for an account connector.
+            #
+            # @overload start_o_auth(request, options = nil)
+            #   Pass arguments to `start_o_auth` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::StartOAuthRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::StartOAuthRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload start_o_auth(account_connector: nil)
+            #   Pass arguments to `start_o_auth` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param account_connector [::String]
+            #     Required. The resource name of the AccountConnector in the format
+            #     `projects/*/locations/*/accountConnectors/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DeveloperConnect::V1::StartOAuthResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DeveloperConnect::V1::StartOAuthResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::StartOAuthRequest.new
+            #
+            #   # Call the start_o_auth method.
+            #   result = client.start_o_auth request
+            #
+            #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::StartOAuthResponse.
+            #   p result
+            #
+            def start_o_auth request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::StartOAuthRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.start_o_auth.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.account_connector
+                header_params["account_connector"] = request.account_connector
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.start_o_auth.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.start_o_auth.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :start_o_auth, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Finishes OAuth flow for an account connector.
+            #
+            # @overload finish_o_auth(request, options = nil)
+            #   Pass arguments to `finish_o_auth` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload finish_o_auth(oauth_params: nil, google_oauth_params: nil, account_connector: nil)
+            #   Pass arguments to `finish_o_auth` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param oauth_params [::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest::OAuthParams, ::Hash]
+            #     The params returned by non-Google OAuth 2.0 flow redirect.
+            #
+            #     Note: The following parameters are mutually exclusive: `oauth_params`, `google_oauth_params`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param google_oauth_params [::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest::GoogleOAuthParams, ::Hash]
+            #     The params returned by Google OAuth flow redirects.
+            #
+            #     Note: The following parameters are mutually exclusive: `google_oauth_params`, `oauth_params`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param account_connector [::String]
+            #     Required. The resource name of the AccountConnector in the format
+            #     `projects/*/locations/*/accountConnectors/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DeveloperConnect::V1::FinishOAuthResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DeveloperConnect::V1::FinishOAuthResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest.new
+            #
+            #   # Call the finish_o_auth method.
+            #   result = client.finish_o_auth request
+            #
+            #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::FinishOAuthResponse.
+            #   p result
+            #
+            def finish_o_auth request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.finish_o_auth.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.account_connector
+                header_params["account_connector"] = request.account_connector
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.finish_o_auth.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.finish_o_auth.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :finish_o_auth, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DeveloperConnect API.
             #
             # This class represents the configuration for DeveloperConnect,
@@ -3000,6 +3181,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_self
+                ##
+                # RPC-specific configuration for `start_o_auth`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :start_o_auth
+                ##
+                # RPC-specific configuration for `finish_o_auth`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :finish_o_auth
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -3051,6 +3242,10 @@ module Google
                   @fetch_self = ::Gapic::Config::Method.new fetch_self_config
                   delete_self_config = parent_rpcs.delete_self if parent_rpcs.respond_to? :delete_self
                   @delete_self = ::Gapic::Config::Method.new delete_self_config
+                  start_o_auth_config = parent_rpcs.start_o_auth if parent_rpcs.respond_to? :start_o_auth
+                  @start_o_auth = ::Gapic::Config::Method.new start_o_auth_config
+                  finish_o_auth_config = parent_rpcs.finish_o_auth if parent_rpcs.respond_to? :finish_o_auth
+                  @finish_o_auth = ::Gapic::Config::Method.new finish_o_auth_config
 
                   yield self if block_given?
                 end

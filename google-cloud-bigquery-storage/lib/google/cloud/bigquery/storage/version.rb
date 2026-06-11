@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Bigquery
       module Storage
-        VERSION = "1.6.2"
+        VERSION = "1.7.0"
       end
     end
   end

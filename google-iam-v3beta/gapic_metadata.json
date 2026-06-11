@@ -5,6 +5,45 @@
   "protoPackage": "google.iam.v3beta",
   "libraryPackage": "::Google::Iam::V3beta",
   "services": {
+    "AccessPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Iam::V3beta::AccessPolicies::Client",
+          "rpcs": {
+            "CreateAccessPolicy": {
+              "methods": [
+                "create_access_policy"
+              ]
+            },
+            "GetAccessPolicy": {
+              "methods": [
+                "get_access_policy"
+              ]
+            },
+            "UpdateAccessPolicy": {
+              "methods": [
+                "update_access_policy"
+              ]
+            },
+            "DeleteAccessPolicy": {
+              "methods": [
+                "delete_access_policy"
+              ]
+            },
+            "ListAccessPolicies": {
+              "methods": [
+                "list_access_policies"
+              ]
+            },
+            "SearchAccessPolicyBindings": {
+              "methods": [
+                "search_access_policy_bindings"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PolicyBindings": {
       "clients": {
         "grpc": {

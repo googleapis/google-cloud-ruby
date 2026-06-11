@@ -28,8 +28,9 @@ module Google
         #     Format:
         #     `networks/{network_code}/privateAuctions/{private_auction_id}`
         # @!attribute [r] private_auction_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. `PrivateAuction` ID.
+        #     Output only. Deprecated: `PrivateAuction` ID.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. Display name of the `PrivateAuction`. This attribute has a

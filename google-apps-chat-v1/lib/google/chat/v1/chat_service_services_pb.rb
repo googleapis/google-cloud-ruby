@@ -94,9 +94,8 @@ module Google
             # - [App
             # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
             # with [administrator
-            # approval](https://support.google.com/a?p=chat-app-auth) in
-            # [Developer Preview](https://developers.google.com/workspace/preview)
-            #  with the authorization scope:
+            # approval](https://support.google.com/a?p=chat-app-auth)
+            # with the authorization scope:
             #     - `https://www.googleapis.com/auth/chat.app.messages.readonly`. When
             #     using this authentication scope, this method only returns public
             #     messages in a space. It doesn't include private messages.
@@ -186,8 +185,7 @@ module Google
             #     that invoke the Chat app.
             #     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
             #     with [administrator
-            #     approval](https://support.google.com/a?p=chat-app-auth) (available in
-            #     [Developer Preview](https://developers.google.com/workspace/preview)).
+            #     approval](https://support.google.com/a?p=chat-app-auth).
             #     When using this authentication scope,
             #     this method returns details about a public message in a space.
             #
@@ -829,12 +827,13 @@ module Google
             # - [App
             # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
             # with [administrator
-            # approval](https://support.google.com/a?p=chat-app-auth) in
-            # [Developer Preview](https://developers.google.com/workspace/preview)
-            #  with one of the following authorization scopes:
+            # approval](https://support.google.com/a?p=chat-app-auth)
+            # with one of the following authorization scopes:
             #     - `https://www.googleapis.com/auth/chat.app.spaces`
+            #     - `https://www.googleapis.com/auth/chat.app.spaces.readonly`
             #     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
             #     - `https://www.googleapis.com/auth/chat.app.memberships`
+            #     - `https://www.googleapis.com/auth/chat.app.memberships.readonly`
             #
             # - [User
             # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
@@ -872,12 +871,13 @@ module Google
             # - [App
             # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
             # with [administrator
-            # approval](https://support.google.com/a?p=chat-app-auth) in
-            # [Developer Preview](https://developers.google.com/workspace/preview)
-            #  with one of the following authorization scopes:
+            # approval](https://support.google.com/a?p=chat-app-auth)
+            # with one of the following authorization scopes:
             #     - `https://www.googleapis.com/auth/chat.app.spaces`
+            #     - `https://www.googleapis.com/auth/chat.app.spaces.readonly`
             #     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
             #     - `https://www.googleapis.com/auth/chat.app.memberships`
+            #     - `https://www.googleapis.com/auth/chat.app.memberships.readonly`
             #
             # - [User
             # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
@@ -918,6 +918,93 @@ module Google
             #
             #   - `https://www.googleapis.com/auth/chat.users.spacesettings`
             rpc :UpdateSpaceNotificationSetting, ::Google::Apps::Chat::V1::UpdateSpaceNotificationSettingRequest, ::Google::Apps::Chat::V1::SpaceNotificationSetting
+            # Creates a section in Google Chat. Sections help users group conversations
+            # and customize the list of spaces displayed in Chat navigation panel. Only
+            # sections of type `CUSTOM_SECTION` can be created. For details, see [Create
+            # and organize sections in Google
+            # Chat](https://support.google.com/chat/answer/16059854).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with the [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.sections`
+            rpc :CreateSection, ::Google::Apps::Chat::V1::CreateSectionRequest, ::Google::Apps::Chat::V1::Section
+            # Deletes a section of type `CUSTOM_SECTION`.
+            #
+            # If the section contains items, such as spaces, the items are moved to
+            # Google Chat's default sections and are not deleted.
+            #
+            # For details, see [Create and organize sections in Google
+            # Chat](https://support.google.com/chat/answer/16059854).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with the [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.sections`
+            rpc :DeleteSection, ::Google::Apps::Chat::V1::DeleteSectionRequest, ::Google::Protobuf::Empty
+            # Updates a section. Only sections of type `CUSTOM_SECTION` can be updated.
+            # For details, see [Create and organize sections in Google
+            # Chat](https://support.google.com/chat/answer/16059854).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with the [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.sections`
+            rpc :UpdateSection, ::Google::Apps::Chat::V1::UpdateSectionRequest, ::Google::Apps::Chat::V1::Section
+            # Lists sections available to the Chat user. Sections help users group their
+            # conversations and customize the list of spaces displayed in Chat
+            # navigation panel. For details, see [Create and organize sections in Google
+            # Chat](https://support.google.com/chat/answer/16059854).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with the [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.sections`
+            #   - `https://www.googleapis.com/auth/chat.users.sections.readonly`
+            rpc :ListSections, ::Google::Apps::Chat::V1::ListSectionsRequest, ::Google::Apps::Chat::V1::ListSectionsResponse
+            # Changes the sort order of a section. For details, see [Create and organize
+            # sections in Google Chat](https://support.google.com/chat/answer/16059854).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with the [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.sections`
+            rpc :PositionSection, ::Google::Apps::Chat::V1::PositionSectionRequest, ::Google::Apps::Chat::V1::PositionSectionResponse
+            # Lists items in a section.
+            #
+            # Only spaces can be section items. For details, see [Create and organize
+            # sections in Google Chat](https://support.google.com/chat/answer/16059854).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with the [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.sections`
+            #   - `https://www.googleapis.com/auth/chat.users.sections.readonly`
+            rpc :ListSectionItems, ::Google::Apps::Chat::V1::ListSectionItemsRequest, ::Google::Apps::Chat::V1::ListSectionItemsResponse
+            # Moves an item from one section to another. For example, if a section
+            # contains spaces, this method can be used to move a space to a different
+            # section. For details, see [Create and organize sections in Google
+            # Chat](https://support.google.com/chat/answer/16059854).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with the [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.sections`
+            rpc :MoveSectionItem, ::Google::Apps::Chat::V1::MoveSectionItemRequest, ::Google::Apps::Chat::V1::MoveSectionItemResponse
           end
 
           Stub = Service.rpc_stub_class

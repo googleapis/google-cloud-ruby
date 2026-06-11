@@ -216,6 +216,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the CSS product to retrieve.
+            #     Format: `accounts/{account}/cssProducts/{css_product}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Shopping::Css::V1::CssProduct]

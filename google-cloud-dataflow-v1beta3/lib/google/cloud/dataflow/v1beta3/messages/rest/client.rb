@@ -29,8 +29,7 @@ module Google
             ##
             # REST client for the Messages service.
             #
-            # The Dataflow Messages API is used for monitoring the progress of
-            # Dataflow jobs.
+            # The Dataflow Messages API is used to monitor the progress of Dataflow jobs.
             #
             class Client
               # @private

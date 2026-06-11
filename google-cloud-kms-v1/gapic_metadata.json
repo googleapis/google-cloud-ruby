@@ -97,6 +97,60 @@
         }
       }
     },
+    "HsmManagement": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Kms::V1::HsmManagement::Client",
+          "rpcs": {
+            "ListSingleTenantHsmInstances": {
+              "methods": [
+                "list_single_tenant_hsm_instances"
+              ]
+            },
+            "GetSingleTenantHsmInstance": {
+              "methods": [
+                "get_single_tenant_hsm_instance"
+              ]
+            },
+            "CreateSingleTenantHsmInstance": {
+              "methods": [
+                "create_single_tenant_hsm_instance"
+              ]
+            },
+            "CreateSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "create_single_tenant_hsm_instance_proposal"
+              ]
+            },
+            "ApproveSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "approve_single_tenant_hsm_instance_proposal"
+              ]
+            },
+            "ExecuteSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "execute_single_tenant_hsm_instance_proposal"
+              ]
+            },
+            "GetSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "get_single_tenant_hsm_instance_proposal"
+              ]
+            },
+            "ListSingleTenantHsmInstanceProposals": {
+              "methods": [
+                "list_single_tenant_hsm_instance_proposals"
+              ]
+            },
+            "DeleteSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "delete_single_tenant_hsm_instance_proposal"
+              ]
+            }
+          }
+        }
+      }
+    },
     "KeyManagementService": {
       "clients": {
         "grpc": {
@@ -120,6 +174,11 @@
             "ListImportJobs": {
               "methods": [
                 "list_import_jobs"
+              ]
+            },
+            "ListRetiredResources": {
+              "methods": [
+                "list_retired_resources"
               ]
             },
             "GetKeyRing": {
@@ -147,6 +206,11 @@
                 "get_import_job"
               ]
             },
+            "GetRetiredResource": {
+              "methods": [
+                "get_retired_resource"
+              ]
+            },
             "CreateKeyRing": {
               "methods": [
                 "create_key_ring"
@@ -160,6 +224,16 @@
             "CreateCryptoKeyVersion": {
               "methods": [
                 "create_crypto_key_version"
+              ]
+            },
+            "DeleteCryptoKey": {
+              "methods": [
+                "delete_crypto_key"
+              ]
+            },
+            "DeleteCryptoKeyVersion": {
+              "methods": [
+                "delete_crypto_key_version"
               ]
             },
             "ImportCryptoKeyVersion": {

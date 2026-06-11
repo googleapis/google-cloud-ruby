@@ -33,7 +33,7 @@ describe Google::Cloud::PubSub::Convert, :number_to_duration, :mock_pubsub do
     number = -42
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
     _(duration).must_be_kind_of Google::Protobuf::Duration
-    _(duration.seconds).must_equal -42
+    _(duration.seconds).must_equal(-42)
     _(duration.nanos).must_equal 0
   end
 
@@ -49,8 +49,8 @@ describe Google::Cloud::PubSub::Convert, :number_to_duration, :mock_pubsub do
     number = -1.5
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
     _(duration).must_be_kind_of Google::Protobuf::Duration
-    _(duration.seconds).must_equal -1
-    _(duration.nanos).must_equal -500000000
+    _(duration.seconds).must_equal(-1)
+    _(duration.nanos).must_equal(-500000000)
   end
 
   it "converts a BigDecimal" do
@@ -65,8 +65,8 @@ describe Google::Cloud::PubSub::Convert, :number_to_duration, :mock_pubsub do
     number = BigDecimal "-643383279502884.1971693993751058209749445923078164062"
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
     _(duration).must_be_kind_of Google::Protobuf::Duration
-    _(duration.seconds).must_equal -643383279502884
-    _(duration.nanos).must_equal -197169399
+    _(duration.seconds).must_equal(-643383279502884)
+    _(duration.nanos).must_equal(-197169399)
   end
 
   it "converts a Rational" do
@@ -81,8 +81,8 @@ describe Google::Cloud::PubSub::Convert, :number_to_duration, :mock_pubsub do
     number = Rational "-3.14159265358979323846264338327950288419716939937510582097"
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
     _(duration).must_be_kind_of Google::Protobuf::Duration
-    _(duration.seconds).must_equal -3
-    _(duration.nanos).must_equal -141592654
+    _(duration.seconds).must_equal(-3)
+    _(duration.nanos).must_equal(-141592654)
   end
 
   it "returns nil when given nil" do

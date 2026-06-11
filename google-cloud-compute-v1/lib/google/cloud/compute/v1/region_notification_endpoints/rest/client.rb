@@ -71,6 +71,11 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.rpcs.aggregated_list.timeout = 600.0
+                  default_config.rpcs.aggregated_list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
                   default_config.rpcs.delete.timeout = 600.0
 
                   default_config.rpcs.get.timeout = 600.0
@@ -84,6 +89,8 @@ module Google
                   default_config.rpcs.list.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
+
+                  default_config.rpcs.test_iam_permissions.timeout = 600.0
 
                   default_config
                 end
@@ -204,6 +211,186 @@ module Google
               # Service calls
 
               ##
+              # Retrieves the list of all NotificationEndpoint resources,
+              # regional and global, available to the specified project.
+              #
+              # @overload aggregated_list(request, options = nil)
+              #   Pass arguments to `aggregated_list` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::AggregatedListRegionNotificationEndpointsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::AggregatedListRegionNotificationEndpointsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil, service_project_number: nil)
+              #   Pass arguments to `aggregated_list` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param filter [::String]
+              #     A filter expression that filters resources listed in the response. Most
+              #     Compute resources support two types of filter expressions:
+              #     expressions that support regular expressions and expressions that follow
+              #     API improvement proposal AIP-160.
+              #     These two types of filter expressions cannot be mixed in one request.
+              #
+              #     If you want to use AIP-160, your expression must specify the field name, an
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The operator
+              #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+              #
+              #     For example, if you are filtering Compute Engine instances, you can
+              #     exclude instances named `example-instance` by specifying
+              #     `name != example-instance`.
+              #
+              #     The `:*` comparison can be used to test whether a key has been defined.
+              #     For example, to find all objects with `owner` label use:
+              #     ```
+              #     labels.owner:*
+              #     ```
+              #
+              #     You can also filter nested fields. For example, you could specify
+              #     `scheduling.automaticRestart = false` to include instances only
+              #     if they are not scheduled for automatic restarts. You can use filtering
+              #     on nested fields to filter based onresource labels.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (scheduling.automaticRestart = true)
+              #     (cpuPlatform = "Intel Skylake")
+              #     ```
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (cpuPlatform = "Intel Skylake") OR
+              #     (cpuPlatform = "Intel Broadwell") AND
+              #     (scheduling.automaticRestart = true)
+              #     ```
+              #
+              #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+              #     (not equal) operator against a single un-parenthesized expression with or
+              #     without quotes or against multiple parenthesized expressions. Examples:
+              #
+              #     `fieldname eq unquoted literal`
+              #     `fieldname eq 'single quoted literal'`
+              #     `fieldname eq "double quoted literal"`
+              #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+              #
+              #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+              #     The literal value must match the entire field.
+              #
+              #     For example, to filter for instances that do not end with name "instance",
+              #     you would use `name ne .*instance`.
+              #
+              #     You cannot combine constraints on multiple fields using regular
+              #     expressions.
+              #   @param include_all_scopes [::Boolean]
+              #     Indicates whether every visible scope for each scope type (zone, region,
+              #     global) should be included in the response. For new resource types added
+              #     after this field, the flag has no effect as new resource types will always
+              #     include every visible scope for each scope type in response. For resource
+              #     types which predate this field, if this flag is omitted or false, only
+              #     scopes of the scope types where the resource type is expected to be found
+              #     will be included.
+              #   @param max_results [::Integer]
+              #     The maximum number of results per page that should be returned.
+              #     If the number of available results is larger than `maxResults`,
+              #     Compute Engine returns a `nextPageToken` that can be used to get
+              #     the next page of results in subsequent list requests. Acceptable values are
+              #     `0` to `500`, inclusive. (Default: `500`)
+              #   @param order_by [::String]
+              #     Sorts list results by a certain order. By default, results
+              #     are returned in alphanumerical order based on the resource name.
+              #
+              #     You can also sort results in descending order based on the creation
+              #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+              #     results based on the `creationTimestamp` field in
+              #     reverse chronological order (newest result first). Use this to sort
+              #     resources like operations so that the newest operation is returned first.
+              #
+              #     Currently, only sorting by `name` or
+              #     `creationTimestamp desc` is supported.
+              #   @param page_token [::String]
+              #     Specifies a page token to use. Set `pageToken` to the
+              #     `nextPageToken` returned by a previous list request to get
+              #     the next page of results.
+              #   @param project [::String]
+              #     Name of the project scoping this request.
+              #   @param return_partial_success [::Boolean]
+              #     Opt-in for partial success behavior which provides partial results in case
+              #     of failure. The default value is false.
+              #
+              #     For example, when partial success behavior is enabled, aggregatedList for a
+              #     single zone scope either returns all resources in the zone or no resources,
+              #     with an error code.
+              #   @param service_project_number [::Integer]
+              #     The Shared VPC service project id or service project number for which
+              #     aggregated list request is invoked for subnetworks list-usable api.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::NotificationEndpointsScopedList>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::NotificationEndpointsScopedList>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::RegionNotificationEndpoints::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::AggregatedListRegionNotificationEndpointsRequest.new
+              #
+              #   # Call the aggregated_list method.
+              #   result = client.aggregated_list request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::NotificationEndpointAggregatedList.
+              #   p result
+              #
+              def aggregated_list request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AggregatedListRegionNotificationEndpointsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.aggregated_list.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.aggregated_list.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.aggregated_list.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_notification_endpoints_stub.aggregated_list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @region_notification_endpoints_stub, :aggregated_list, "items", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Deletes the specified NotificationEndpoint in the given region
               #
               # @overload delete(request, options = nil)
@@ -228,7 +415,19 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -380,7 +579,8 @@ module Google
               end
 
               ##
-              # Create a NotificationEndpoint in the specified project in the given region using the parameters that are included in the request.
+              # Create a NotificationEndpoint in the specified project in the given region
+              # using the parameters that are included in the request.
               #
               # @overload insert(request, options = nil)
               #   Pass arguments to `insert` via a request object, either of type
@@ -404,7 +604,19 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -492,19 +704,97 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+              #     A filter expression that filters resources listed in the response. Most
+              #     Compute resources support two types of filter expressions:
+              #     expressions that support regular expressions and expressions that follow
+              #     API improvement proposal AIP-160.
+              #     These two types of filter expressions cannot be mixed in one request.
+              #
+              #     If you want to use AIP-160, your expression must specify the field name, an
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The operator
+              #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+              #
+              #     For example, if you are filtering Compute Engine instances, you can
+              #     exclude instances named `example-instance` by specifying
+              #     `name != example-instance`.
+              #
+              #     The `:*` comparison can be used to test whether a key has been defined.
+              #     For example, to find all objects with `owner` label use:
+              #     ```
+              #     labels.owner:*
+              #     ```
+              #
+              #     You can also filter nested fields. For example, you could specify
+              #     `scheduling.automaticRestart = false` to include instances only
+              #     if they are not scheduled for automatic restarts. You can use filtering
+              #     on nested fields to filter based onresource labels.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (scheduling.automaticRestart = true)
+              #     (cpuPlatform = "Intel Skylake")
+              #     ```
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (cpuPlatform = "Intel Skylake") OR
+              #     (cpuPlatform = "Intel Broadwell") AND
+              #     (scheduling.automaticRestart = true)
+              #     ```
+              #
+              #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+              #     (not equal) operator against a single un-parenthesized expression with or
+              #     without quotes or against multiple parenthesized expressions. Examples:
+              #
+              #     `fieldname eq unquoted literal`
+              #     `fieldname eq 'single quoted literal'`
+              #     `fieldname eq "double quoted literal"`
+              #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+              #
+              #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+              #     The literal value must match the entire field.
+              #
+              #     For example, to filter for instances that do not end with name "instance",
+              #     you would use `name ne .*instance`.
+              #
+              #     You cannot combine constraints on multiple fields using regular
+              #     expressions.
               #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+              #     The maximum number of results per page that should be returned.
+              #     If the number of available results is larger than `maxResults`,
+              #     Compute Engine returns a `nextPageToken` that can be used to get
+              #     the next page of results in subsequent list requests. Acceptable values are
+              #     `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #     Sorts list results by a certain order. By default, results
+              #     are returned in alphanumerical order based on the resource name.
+              #
+              #     You can also sort results in descending order based on the creation
+              #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+              #     results based on the `creationTimestamp` field in
+              #     reverse chronological order (newest result first). Use this to sort
+              #     resources like operations so that the newest operation is returned first.
+              #
+              #     Currently, only sorting by `name` or
+              #     `creationTimestamp desc` is supported.
               #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+              #     Specifies a page token to use. Set `pageToken` to the
+              #     `nextPageToken` returned by a previous list request to get
+              #     the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+              #     Opt-in for partial success behavior which provides partial results in case
+              #     of failure. The default value is false.
+              #
+              #     For example, when partial success behavior is enabled, aggregatedList for a
+              #     single zone scope either returns all resources in the zone or no resources,
+              #     with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::NotificationEndpoint>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -566,6 +856,90 @@ module Google
               end
 
               ##
+              # Returns permissions that a caller has on the specified resource.
+              #
+              # @overload test_iam_permissions(request, options = nil)
+              #   Pass arguments to `test_iam_permissions` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::TestIamPermissionsRegionNotificationEndpointRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::TestIamPermissionsRegionNotificationEndpointRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload test_iam_permissions(project: nil, region: nil, resource: nil, test_permissions_request_resource: nil)
+              #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
+              #   @param test_permissions_request_resource [::Google::Cloud::Compute::V1::TestPermissionsRequest, ::Hash]
+              #     The body resource for this request
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::RegionNotificationEndpoints::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::TestIamPermissionsRegionNotificationEndpointRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::TestPermissionsResponse.
+              #   p result
+              #
+              def test_iam_permissions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::TestIamPermissionsRegionNotificationEndpointRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.test_iam_permissions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_notification_endpoints_stub.test_iam_permissions request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the RegionNotificationEndpoints REST API.
               #
               # This class represents the configuration for RegionNotificationEndpoints REST,
@@ -581,17 +955,17 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # delete to 20 seconds,
+              #   # aggregated_list to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
               #   ::Google::Cloud::Compute::V1::RegionNotificationEndpoints::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.delete.timeout = 20.0
+              #     config.rpcs.aggregated_list.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
               #   client = ::Google::Cloud::Compute::V1::RegionNotificationEndpoints::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.delete.timeout = 20.0
+              #     config.rpcs.aggregated_list.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
@@ -712,6 +1086,11 @@ module Google
                 #
                 class Rpcs
                   ##
+                  # RPC-specific configuration for `aggregated_list`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :aggregated_list
+                  ##
                   # RPC-specific configuration for `delete`
                   # @return [::Gapic::Config::Method]
                   #
@@ -731,9 +1110,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list
+                  ##
+                  # RPC-specific configuration for `test_iam_permissions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :test_iam_permissions
 
                   # @private
                   def initialize parent_rpcs = nil
+                    aggregated_list_config = parent_rpcs.aggregated_list if parent_rpcs.respond_to? :aggregated_list
+                    @aggregated_list = ::Gapic::Config::Method.new aggregated_list_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
                     @delete = ::Gapic::Config::Method.new delete_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
@@ -742,6 +1128,8 @@ module Google
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                    @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                     yield self if block_given?
                   end

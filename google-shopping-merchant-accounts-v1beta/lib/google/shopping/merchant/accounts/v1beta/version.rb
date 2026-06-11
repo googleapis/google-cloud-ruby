@@ -22,7 +22,7 @@ module Google
     module Merchant
       module Accounts
         module V1beta
-          VERSION = "0.12.2"
+          VERSION = "0.13.1"
         end
       end
     end

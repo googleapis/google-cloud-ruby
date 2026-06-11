@@ -72,8 +72,8 @@ module Google
           #   @return [::String]
           #     Optional. The strategy used for executing this Rollout.
           #     This strategy will override whatever strategy is specified in the
-          #     RolloutType. If not specified on creation, the
-          #     strategy from RolloutType will be used.
+          #     RolloutKind. If not specified on creation, the
+          #     strategy from RolloutKind will be used.
           #
           #     There are two supported values strategies which are used to control
           #     - "Google.Cloud.Simple.AllAtOnce"
@@ -86,11 +86,11 @@ module Google
           #     Optional. CEL(https://github.com/google/cel-spec) formatted filter string
           #     against Unit. The filter will be applied to determine the eligible unit
           #     population. This filter can only reduce, but not expand the scope of the
-          #     rollout. If not provided, the unit_filter from the RolloutType will be
+          #     rollout. If not provided, the unit_filter from the RolloutKind will be
           #     used.
           # @!attribute [rw] rollout_kind
           #   @return [::String]
-          #     Optional. Immutable. Name of the RolloutKind this rollout is stemming from
+          #     Required. Immutable. Name of the RolloutKind this rollout is stemming from
           #     and adhering to.
           # @!attribute [r] stats
           #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::RolloutStats]
@@ -103,6 +103,15 @@ module Google
           #     all natural Rollout States (such as RUNNING -> SUCCEEDED or RUNNING ->
           #     FAILED). Requests can only be made when the Rollout is in a non-terminal
           #     state.
+          # @!attribute [r] effective_unit_filter
+          #   @return [::String]
+          #     Optional. Output only. Output only snapshot of the effective unit filter at
+          #     Rollout start time. Contains a CEL(https://github.com/google/cel-spec)
+          #     expression consisting of a conjunction of Rollout.unit_filter and
+          #     RolloutKind.unit_filter. This field captures the filter applied by the
+          #     Rollout to determine the Unit population. If the associated RolloutKind's
+          #     unit_filter is modified after the rollout is started, it will not be
+          #     updated here.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. The labels on the resource, which can be used for categorization.
@@ -135,6 +144,10 @@ module Google
           #     Output only. The timestamp when the resource was last updated. Any
           #     change to the resource made by users must refresh this value.
           #     Changes to a resource made by the service should refresh this value.
+          # @!attribute [r] delete_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp when the resource was marked for deletion
+          #     (deletion is an asynchronous operation).
           class Rollout
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -316,10 +329,10 @@ module Google
           # RolloutStats contains information about the progress of a rollout.
           # @!attribute [r] operations_by_state
           #   @return [::Array<::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Aggregate>]
-          #     Output only. A breakdown of the progress of operations triggered by the
-          #     rollout. Provides a count of Operations by their state. This can be used to
-          #     determine the number of units which have been updated, or are scheduled to
-          #     be updated.
+          #     Optional. Output only. Unordered list. A breakdown of the progress of
+          #     operations triggered by the rollout. Provides a count of Operations by
+          #     their state. This can be used to determine the number of units which have
+          #     been updated, or are scheduled to be updated.
           #
           #     There will be at most one entry per group.
           #     Possible values for operation groups are:
@@ -329,6 +342,10 @@ module Google
           #     - "SUCCEEDED"
           #     - "FAILED"
           #     - "CANCELLED"
+          # @!attribute [r] estimated_total_unit_count
+          #   @return [::Integer]
+          #     Optional. Output only. Estimated number of units based. The estimation is
+          #     computed upon creation of the rollout.
           class RolloutStats
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

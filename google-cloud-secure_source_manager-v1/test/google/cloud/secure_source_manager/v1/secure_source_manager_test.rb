@@ -271,12 +271,14 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
     request_id = "hello world"
+    force = true
 
     delete_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_instance, name
       assert_kind_of ::Google::Cloud::SecureSourceManager::V1::DeleteInstanceRequest, request
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["request_id"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -287,35 +289,35 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
       end
 
       # Use hash object
-      client.delete_instance({ name: name, request_id: request_id }) do |response, operation|
+      client.delete_instance({ name: name, request_id: request_id, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance name: name, request_id: request_id do |response, operation|
+      client.delete_instance name: name, request_id: request_id, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance ::Google::Cloud::SecureSourceManager::V1::DeleteInstanceRequest.new(name: name, request_id: request_id) do |response, operation|
+      client.delete_instance ::Google::Cloud::SecureSourceManager::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      client.delete_instance({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance(::Google::Cloud::SecureSourceManager::V1::DeleteInstanceRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      client.delete_instance(::Google::Cloud::SecureSourceManager::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

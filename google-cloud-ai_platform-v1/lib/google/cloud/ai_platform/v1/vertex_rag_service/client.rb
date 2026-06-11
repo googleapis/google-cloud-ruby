@@ -151,6 +151,13 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+                config.universe_domain = @config.universe_domain
+              end
+
               @vertex_rag_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::AIPlatform::V1::VertexRagService::Stub,
                 credentials: credentials,
@@ -189,6 +196,13 @@ module Google
                 config.logger = @vertex_rag_service_stub.logger if config.respond_to? :logger=
               end
             end
+
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::VertexRagService::Operations]
+            #
+            attr_reader :operations_client
 
             ##
             # Get the associated client for mix-in of the Locations.
@@ -502,6 +516,199 @@ module Google
             end
 
             ##
+            # Agentic Retrieval Ask API for RAG.
+            #
+            # @overload ask_contexts(request, options = nil)
+            #   Pass arguments to `ask_contexts` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::AskContextsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::AskContextsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload ask_contexts(parent: nil, query: nil, tools: nil)
+            #   Pass arguments to `ask_contexts` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the Location from which to retrieve
+            #     RagContexts. The users must have permission to make a call in the project.
+            #     Format:
+            #     `projects/{project}/locations/{location}`.
+            #   @param query [::Google::Cloud::AIPlatform::V1::RagQuery, ::Hash]
+            #     Required. Single RAG retrieve query.
+            #   @param tools [::Array<::Google::Cloud::AIPlatform::V1::Tool, ::Hash>]
+            #     Optional. The tools to use for AskContexts.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::AskContextsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::AskContextsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::VertexRagService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::AskContextsRequest.new
+            #
+            #   # Call the ask_contexts method.
+            #   result = client.ask_contexts request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::AskContextsResponse.
+            #   p result
+            #
+            def ask_contexts request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::AskContextsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.ask_contexts.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.ask_contexts.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.ask_contexts.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vertex_rag_service_stub.call_rpc :ask_contexts, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Asynchronous API to retrieves relevant contexts for a query.
+            #
+            # @overload async_retrieve_contexts(request, options = nil)
+            #   Pass arguments to `async_retrieve_contexts` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::AsyncRetrieveContextsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::AsyncRetrieveContextsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload async_retrieve_contexts(parent: nil, query: nil, tools: nil)
+            #   Pass arguments to `async_retrieve_contexts` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the Location from which to retrieve
+            #     RagContexts. The users must have permission to make a call in the project.
+            #     Format:
+            #     `projects/{project}/locations/{location}`.
+            #   @param query [::Google::Cloud::AIPlatform::V1::RagQuery, ::Hash]
+            #     Required. Single RAG retrieve query.
+            #   @param tools [::Array<::Google::Cloud::AIPlatform::V1::Tool, ::Hash>]
+            #     Optional. The tools to use for AskContexts.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::VertexRagService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::AsyncRetrieveContextsRequest.new
+            #
+            #   # Call the async_retrieve_contexts method.
+            #   result = client.async_retrieve_contexts request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def async_retrieve_contexts request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::AsyncRetrieveContextsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.async_retrieve_contexts.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.async_retrieve_contexts.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.async_retrieve_contexts.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vertex_rag_service_stub.call_rpc :async_retrieve_contexts, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the VertexRagService API.
             #
             # This class represents the configuration for VertexRagService,
@@ -699,6 +906,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :corroborate_content
+                ##
+                # RPC-specific configuration for `ask_contexts`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :ask_contexts
+                ##
+                # RPC-specific configuration for `async_retrieve_contexts`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :async_retrieve_contexts
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -708,6 +925,10 @@ module Google
                   @augment_prompt = ::Gapic::Config::Method.new augment_prompt_config
                   corroborate_content_config = parent_rpcs.corroborate_content if parent_rpcs.respond_to? :corroborate_content
                   @corroborate_content = ::Gapic::Config::Method.new corroborate_content_config
+                  ask_contexts_config = parent_rpcs.ask_contexts if parent_rpcs.respond_to? :ask_contexts
+                  @ask_contexts = ::Gapic::Config::Method.new ask_contexts_config
+                  async_retrieve_contexts_config = parent_rpcs.async_retrieve_contexts if parent_rpcs.respond_to? :async_retrieve_contexts
+                  @async_retrieve_contexts = ::Gapic::Config::Method.new async_retrieve_contexts_config
 
                   yield self if block_given?
                 end

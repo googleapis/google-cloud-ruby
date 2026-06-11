@@ -368,7 +368,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
       ordering_key = ""
       batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher, ordering_key
 
-      msg = pubsub_message "hello world", {}, ""
+      _msg = pubsub_message "hello world", {}, ""
 
       assert_equal false, batch.stopping?
       assert_equal true, batch.empty?
@@ -382,7 +382,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
       ordering_key = ""
       batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher, ordering_key
 
-      msg = pubsub_message "hello world", {}, ""
+      _msg = pubsub_message "hello world", {}, ""
 
       assert_equal false, batch.canceled?
       assert_equal true, batch.empty?

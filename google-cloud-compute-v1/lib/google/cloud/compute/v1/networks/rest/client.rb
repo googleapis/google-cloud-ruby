@@ -73,6 +73,8 @@ module Google
 
                   default_config.rpcs.add_peering.timeout = 600.0
 
+                  default_config.rpcs.cancel_request_remove_peering.timeout = 600.0
+
                   default_config.rpcs.delete.timeout = 600.0
 
                   default_config.rpcs.get.timeout = 600.0
@@ -250,7 +252,19 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -319,6 +333,113 @@ module Google
               end
 
               ##
+              # Cancel requests to remove a peering from the specified network. Applicable
+              # only for PeeringConnection with update_strategy=CONSENSUS.  Cancels a
+              # request to remove a peering from the specified network.
+              #
+              # @overload cancel_request_remove_peering(request, options = nil)
+              #   Pass arguments to `cancel_request_remove_peering` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::CancelRequestRemovePeeringNetworkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::CancelRequestRemovePeeringNetworkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload cancel_request_remove_peering(network: nil, networks_cancel_request_remove_peering_request_resource: nil, project: nil, request_id: nil)
+              #   Pass arguments to `cancel_request_remove_peering` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param network [::String]
+              #     Name of the network resource to remove peering from.
+              #   @param networks_cancel_request_remove_peering_request_resource [::Google::Cloud::Compute::V1::NetworksCancelRequestRemovePeeringRequest, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::CancelRequestRemovePeeringNetworkRequest.new
+              #
+              #   # Call the cancel_request_remove_peering method.
+              #   result = client.cancel_request_remove_peering request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def cancel_request_remove_peering request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::CancelRequestRemovePeeringNetworkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.cancel_request_remove_peering.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.cancel_request_remove_peering.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.cancel_request_remove_peering.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @networks_stub.cancel_request_remove_peering request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Deletes the specified network.
               #
               # @overload delete(request, options = nil)
@@ -341,7 +462,19 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -570,7 +703,8 @@ module Google
               end
 
               ##
-              # Creates a network in the specified project using the data included in the request.
+              # Creates a network in the specified project using the data included
+              # in the request.
               #
               # @overload insert(request, options = nil)
               #   Pass arguments to `insert` via a request object, either of type
@@ -592,7 +726,19 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -679,17 +825,95 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+              #     A filter expression that filters resources listed in the response. Most
+              #     Compute resources support two types of filter expressions:
+              #     expressions that support regular expressions and expressions that follow
+              #     API improvement proposal AIP-160.
+              #     These two types of filter expressions cannot be mixed in one request.
+              #
+              #     If you want to use AIP-160, your expression must specify the field name, an
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The operator
+              #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+              #
+              #     For example, if you are filtering Compute Engine instances, you can
+              #     exclude instances named `example-instance` by specifying
+              #     `name != example-instance`.
+              #
+              #     The `:*` comparison can be used to test whether a key has been defined.
+              #     For example, to find all objects with `owner` label use:
+              #     ```
+              #     labels.owner:*
+              #     ```
+              #
+              #     You can also filter nested fields. For example, you could specify
+              #     `scheduling.automaticRestart = false` to include instances only
+              #     if they are not scheduled for automatic restarts. You can use filtering
+              #     on nested fields to filter based onresource labels.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (scheduling.automaticRestart = true)
+              #     (cpuPlatform = "Intel Skylake")
+              #     ```
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (cpuPlatform = "Intel Skylake") OR
+              #     (cpuPlatform = "Intel Broadwell") AND
+              #     (scheduling.automaticRestart = true)
+              #     ```
+              #
+              #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+              #     (not equal) operator against a single un-parenthesized expression with or
+              #     without quotes or against multiple parenthesized expressions. Examples:
+              #
+              #     `fieldname eq unquoted literal`
+              #     `fieldname eq 'single quoted literal'`
+              #     `fieldname eq "double quoted literal"`
+              #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+              #
+              #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+              #     The literal value must match the entire field.
+              #
+              #     For example, to filter for instances that do not end with name "instance",
+              #     you would use `name ne .*instance`.
+              #
+              #     You cannot combine constraints on multiple fields using regular
+              #     expressions.
               #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+              #     The maximum number of results per page that should be returned.
+              #     If the number of available results is larger than `maxResults`,
+              #     Compute Engine returns a `nextPageToken` that can be used to get
+              #     the next page of results in subsequent list requests. Acceptable values are
+              #     `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #     Sorts list results by a certain order. By default, results
+              #     are returned in alphanumerical order based on the resource name.
+              #
+              #     You can also sort results in descending order based on the creation
+              #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+              #     results based on the `creationTimestamp` field in
+              #     reverse chronological order (newest result first). Use this to sort
+              #     resources like operations so that the newest operation is returned first.
+              #
+              #     Currently, only sorting by `name` or
+              #     `creationTimestamp desc` is supported.
               #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+              #     Specifies a page token to use. Set `pageToken` to the
+              #     `nextPageToken` returned by a previous list request to get
+              #     the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+              #     Opt-in for partial success behavior which provides partial results in case
+              #     of failure. The default value is false.
+              #
+              #     For example, when partial success behavior is enabled, aggregatedList for a
+              #     single zone scope either returns all resources in the zone or no resources,
+              #     with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Network>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -772,23 +996,102 @@ module Google
               #     The direction of the exchanged routes.
               #     Check the Direction enum for the list of possible values.
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+              #     A filter expression that filters resources listed in the response. Most
+              #     Compute resources support two types of filter expressions:
+              #     expressions that support regular expressions and expressions that follow
+              #     API improvement proposal AIP-160.
+              #     These two types of filter expressions cannot be mixed in one request.
+              #
+              #     If you want to use AIP-160, your expression must specify the field name, an
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The operator
+              #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+              #
+              #     For example, if you are filtering Compute Engine instances, you can
+              #     exclude instances named `example-instance` by specifying
+              #     `name != example-instance`.
+              #
+              #     The `:*` comparison can be used to test whether a key has been defined.
+              #     For example, to find all objects with `owner` label use:
+              #     ```
+              #     labels.owner:*
+              #     ```
+              #
+              #     You can also filter nested fields. For example, you could specify
+              #     `scheduling.automaticRestart = false` to include instances only
+              #     if they are not scheduled for automatic restarts. You can use filtering
+              #     on nested fields to filter based onresource labels.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (scheduling.automaticRestart = true)
+              #     (cpuPlatform = "Intel Skylake")
+              #     ```
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (cpuPlatform = "Intel Skylake") OR
+              #     (cpuPlatform = "Intel Broadwell") AND
+              #     (scheduling.automaticRestart = true)
+              #     ```
+              #
+              #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+              #     (not equal) operator against a single un-parenthesized expression with or
+              #     without quotes or against multiple parenthesized expressions. Examples:
+              #
+              #     `fieldname eq unquoted literal`
+              #     `fieldname eq 'single quoted literal'`
+              #     `fieldname eq "double quoted literal"`
+              #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+              #
+              #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+              #     The literal value must match the entire field.
+              #
+              #     For example, to filter for instances that do not end with name "instance",
+              #     you would use `name ne .*instance`.
+              #
+              #     You cannot combine constraints on multiple fields using regular
+              #     expressions.
               #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+              #     The maximum number of results per page that should be returned.
+              #     If the number of available results is larger than `maxResults`,
+              #     Compute Engine returns a `nextPageToken` that can be used to get
+              #     the next page of results in subsequent list requests. Acceptable values are
+              #     `0` to `500`, inclusive. (Default: `500`)
               #   @param network [::String]
               #     Name of the network for this request.
               #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #     Sorts list results by a certain order. By default, results
+              #     are returned in alphanumerical order based on the resource name.
+              #
+              #     You can also sort results in descending order based on the creation
+              #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+              #     results based on the `creationTimestamp` field in
+              #     reverse chronological order (newest result first). Use this to sort
+              #     resources like operations so that the newest operation is returned first.
+              #
+              #     Currently, only sorting by `name` or
+              #     `creationTimestamp desc` is supported.
               #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+              #     Specifies a page token to use. Set `pageToken` to the
+              #     `nextPageToken` returned by a previous list request to get
+              #     the next page of results.
               #   @param peering_name [::String]
               #     The response will show routes exchanged over the given peering connection.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param region [::String]
-              #     The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
+              #     The region of the request. The response will include all subnet routes,
+              #     static routes and dynamic routes in the region.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+              #     Opt-in for partial success behavior which provides partial results in case
+              #     of failure. The default value is false.
+              #
+              #     For example, when partial success behavior is enabled, aggregatedList for a
+              #     single zone scope either returns all resources in the zone or no resources,
+              #     with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::ExchangedPeeringRoute>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -850,7 +1153,8 @@ module Google
               end
 
               ##
-              # Patches the specified network with the data included in the request. Only routingConfig can be modified.
+              # Patches the specified network with the data included in the request.
+              # Only routingConfig can be modified.
               #
               # @overload patch(request, options = nil)
               #   Pass arguments to `patch` via a request object, either of type
@@ -874,7 +1178,19 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -967,7 +1283,19 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1036,7 +1364,8 @@ module Google
               end
 
               ##
-              # Requests to remove a peering from the specified network. Applicable only for PeeringConnection with update_strategy=CONSENSUS.
+              # Requests to remove a peering from the specified network. Applicable only
+              # for PeeringConnection with update_strategy=CONSENSUS.
               #
               # @overload request_remove_peering(request, options = nil)
               #   Pass arguments to `request_remove_peering` via a request object, either of type
@@ -1060,7 +1389,19 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1151,7 +1492,19 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1220,7 +1573,9 @@ module Google
               end
 
               ##
-              # Updates the specified network peering with the data included in the request. You can only modify the NetworkPeering.export_custom_routes field and the NetworkPeering.import_custom_routes field.
+              # Updates the specified network peering with the data included in the
+              # request. You can only modify the NetworkPeering.export_custom_routes field
+              # and the NetworkPeering.import_custom_routes field.
               #
               # @overload update_peering(request, options = nil)
               #   Pass arguments to `update_peering` via a request object, either of type
@@ -1244,7 +1599,19 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1464,6 +1831,11 @@ module Google
                   #
                   attr_reader :add_peering
                   ##
+                  # RPC-specific configuration for `cancel_request_remove_peering`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :cancel_request_remove_peering
+                  ##
                   # RPC-specific configuration for `delete`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1523,6 +1895,8 @@ module Google
                   def initialize parent_rpcs = nil
                     add_peering_config = parent_rpcs.add_peering if parent_rpcs.respond_to? :add_peering
                     @add_peering = ::Gapic::Config::Method.new add_peering_config
+                    cancel_request_remove_peering_config = parent_rpcs.cancel_request_remove_peering if parent_rpcs.respond_to? :cancel_request_remove_peering
+                    @cancel_request_remove_peering = ::Gapic::Config::Method.new cancel_request_remove_peering_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
                     @delete = ::Gapic::Config::Method.new delete_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get

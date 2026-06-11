@@ -113,6 +113,30 @@ class ::Google::Apps::Chat::V1::ChatService::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_section_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.section_path user: "value0", section: "value1"
+      assert_equal "users/value0/sections/value1", path
+    end
+  end
+
+  def test_section_item_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.section_item_path user: "value0", section: "value1", item: "value2"
+      assert_equal "users/value0/sections/value1/items/value2", path
+    end
+  end
+
   def test_space_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -182,6 +206,18 @@ class ::Google::Apps::Chat::V1::ChatService::ClientPathsTest < Minitest::Test
 
       path = client.thread_read_state_path user: "value0", space: "value1", thread: "value2"
       assert_equal "users/value0/spaces/value1/threads/value2/threadReadState", path
+    end
+  end
+
+  def test_user_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.user_path user: "value0"
+      assert_equal "users/value0", path
     end
   end
 end

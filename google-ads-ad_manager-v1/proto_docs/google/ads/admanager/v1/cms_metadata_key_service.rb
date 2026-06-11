@@ -52,8 +52,15 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Expression to filter the response.
-        #     See syntax details at
-        #     https://developers.google.com/ad-manager/api/beta/filters
+        #      See syntax details at
+        #      https://developers.google.com/ad-manager/api/beta/filters
+        #
+        #     <b>Filterable fields:</b>
+        #     <ul style="list-style-type:none">
+        #       <li><code>displayName</code></li>
+        #       <li><code>name</code></li>
+        #       <li><code>status</code></li>
+        #     </ul>
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.
@@ -90,6 +97,47 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListCmsMetadataKeysResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchActivateCmsMetadataKeys` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `CmsMetadataKeys` will be activated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `CmsMetadataKey`s to activate.
+        #     Format: `networks/{network_code}/cmsMetadataKeys/{cms_metadata_key_id}`
+        class BatchActivateCmsMetadataKeysRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchActivateCmsMetadataKeys` method.
+        class BatchActivateCmsMetadataKeysResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDeactivateCmsMetadataKeys` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `CmsMetadataKeys` will be
+        #     deactivated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `CmsMetadataKey`s to deactivate.
+        #     Format: `networks/{network_code}/cmsMetadataKeys/{cms_metadata_key_id}`
+        class BatchDeactivateCmsMetadataKeysRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDeactivateCmsMetadataKeys` method.
+        class BatchDeactivateCmsMetadataKeysResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

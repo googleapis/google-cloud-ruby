@@ -27,8 +27,7 @@ module Google
           ##
           # Client for the Metrics service.
           #
-          # The Dataflow Metrics API lets you monitor the progress of Dataflow
-          # jobs.
+          # The Dataflow Metrics API lets you monitor the progress of Dataflow jobs.
           #
           class Client
             # @private

@@ -868,7 +868,7 @@ module Google
             #     constraints). Given this, successful execution of a DML statement shouldn't
             #     be assumed until a subsequent `Commit` call completes successfully.
             #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
-            #     Optional. If present, it makes the Spanner requests location-aware.
+            #     Optional. Makes the Spanner requests location-aware if present.
             #
             #     It gives the server hints that can be used to route the request
             #     to an appropriate server, potentially significantly decreasing latency and
@@ -1056,7 +1056,7 @@ module Google
             #     constraints). Given this, successful execution of a DML statement shouldn't
             #     be assumed until a subsequent `Commit` call completes successfully.
             #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
-            #     Optional. If present, it makes the Spanner requests location-aware.
+            #     Optional. Makes the Spanner requests location-aware if present.
             #
             #     It gives the server hints that can be used to route the request
             #     to an appropriate server, potentially significantly decreasing latency and
@@ -1364,7 +1364,7 @@ module Google
             #     Optional. Lock Hint for the request, it can only be used with read-write
             #     transactions.
             #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
-            #     Optional. If present, it makes the Spanner requests location-aware.
+            #     Optional. Makes the Spanner requests location-aware if present.
             #
             #     It gives the server hints that can be used to route the request
             #     to an appropriate server, potentially significantly decreasing latency and
@@ -1530,7 +1530,7 @@ module Google
             #     Optional. Lock Hint for the request, it can only be used with read-write
             #     transactions.
             #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
-            #     Optional. If present, it makes the Spanner requests location-aware.
+            #     Optional. Makes the Spanner requests location-aware if present.
             #
             #     It gives the server hints that can be used to route the request
             #     to an appropriate server, potentially significantly decreasing latency and
@@ -1621,7 +1621,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload begin_transaction(session: nil, options: nil, request_options: nil, mutation_key: nil)
+            # @overload begin_transaction(session: nil, options: nil, request_options: nil, mutation_key: nil, routing_hint: nil)
             #   Pass arguments to `begin_transaction` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1641,6 +1641,13 @@ module Google
             #     that commit mutations but don't perform any reads or queries. You must
             #     randomly select one of the mutations from the mutation set and send it as a
             #     part of this request.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. Makes the Spanner requests location-aware if present.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::Transaction]
@@ -1732,7 +1739,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil, return_commit_stats: nil, max_commit_delay: nil, request_options: nil, precommit_token: nil)
+            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil, return_commit_stats: nil, max_commit_delay: nil, request_options: nil, precommit_token: nil, routing_hint: nil)
             #   Pass arguments to `commit` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1776,6 +1783,13 @@ module Google
             #     session, then you must include the precommit token with the highest
             #     sequence number received in this transaction attempt. Failing to do so
             #     results in a `FailedPrecondition` error.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. Makes the Spanner requests location-aware if present.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::CommitResponse]
@@ -1985,7 +1999,8 @@ module Google
             #     a `PartitionedDml` transaction for large, partition-friendly DML
             #     operations.
             #   @param params [::Google::Protobuf::Struct, ::Hash]
-            #     Parameter names and values that bind to placeholders in the SQL string.
+            #     Optional. Parameter names and values that bind to placeholders in the SQL
+            #     string.
             #
             #     A parameter placeholder consists of the `@` character followed by the
             #     parameter name (for example, `@firstName`). Parameter names can contain
@@ -1998,9 +2013,9 @@ module Google
             #
             #     It's an error to execute a SQL statement with unbound parameters.
             #   @param param_types [::Hash{::String => ::Google::Cloud::Spanner::V1::Type, ::Hash}]
-            #     It isn't always possible for Cloud Spanner to infer the right SQL type
-            #     from a JSON value. For example, values of type `BYTES` and values
-            #     of type `STRING` both appear in
+            #     Optional. It isn't always possible for Cloud Spanner to infer the right SQL
+            #     type from a JSON value. For example, values of type `BYTES` and values of
+            #     type `STRING` both appear in
             #     {::Google::Cloud::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
             #
             #     In these cases, `param_types` can be used to specify the exact
@@ -2311,6 +2326,108 @@ module Google
             end
 
             ##
+            # Retrieves a cache update for a given database.
+            #
+            # This RPC can be used to warm up the client cache by fetching key recipes
+            # and server information for a given database. It is recommended to call
+            # this RPC at the beginning of the client's lifecycle, prior to any other
+            # data plane operations.
+            #
+            # The cache update is returned as a stream because the response can be too
+            # large to fit into a single `CacheUpdate` message.
+            #
+            # @overload fetch_cache_update(request, options = nil)
+            #   Pass arguments to `fetch_cache_update` via a request object, either of type
+            #   {::Google::Cloud::Spanner::V1::FetchCacheUpdateRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Spanner::V1::FetchCacheUpdateRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_cache_update(database: nil, max_recipe_count: nil, max_range_count: nil)
+            #   Pass arguments to `fetch_cache_update` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param database [::String]
+            #     Required. The database for which to retrieve the cache update.
+            #   @param max_recipe_count [::Integer]
+            #     Optional. The maximum number of key recipes to return in the response.
+            #     If not set, a default limit of 100 will be used.
+            #   @param max_range_count [::Integer]
+            #     Optional. The maximum number of ranges to return in the response.
+            #     If not set, a default limit of 10000 will be used.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::CacheUpdate>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Spanner::V1::CacheUpdate>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::FetchCacheUpdateRequest.new
+            #
+            #   # Call the fetch_cache_update method to start streaming.
+            #   output = client.fetch_cache_update request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Spanner::V1::CacheUpdate
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def fetch_cache_update request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Spanner::V1::FetchCacheUpdateRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_cache_update.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Spanner::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_cache_update.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_cache_update.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @spanner_stub.call_rpc :fetch_cache_update, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the Spanner API.
             #
             # This class represents the configuration for Spanner,
@@ -2573,6 +2690,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :batch_write
+                ##
+                # RPC-specific configuration for `fetch_cache_update`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_cache_update
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2608,6 +2730,8 @@ module Google
                   @partition_read = ::Gapic::Config::Method.new partition_read_config
                   batch_write_config = parent_rpcs.batch_write if parent_rpcs.respond_to? :batch_write
                   @batch_write = ::Gapic::Config::Method.new batch_write_config
+                  fetch_cache_update_config = parent_rpcs.fetch_cache_update if parent_rpcs.respond_to? :fetch_cache_update
+                  @fetch_cache_update = ::Gapic::Config::Method.new fetch_cache_update_config
 
                   yield self if block_given?
                 end

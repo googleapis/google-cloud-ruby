@@ -17,4 +17,21 @@
 # When that gets fixed, remove this line.
 FileUtils.rm_rf File.join(OwlBot.staging_dir, "snippets")
 
+# b/498709248: Temporary escape to braces spanning multiple lines & reserved Ruby keywords.
+# To be removed when fixed in the generator or in the source proto file.
+brace_detector = /\A(?<pre>[^`]*(?:`[^`]*`[^`]*)*[^`\\])?\{(?<post>(?!::)[^\s].*)\z/m
+
+OwlBot.modifier path: %r{^proto_docs/google/cloud/compute/[\w/]+\.rb$} do |content|
+  content.gsub!(/(?<!`)@pattern(?!`)/, '`@pattern`')
+  content.gsub!(/(?<!`)@required(?!`)/, '`@required`')
+  lines = content.split("\n", -1)
+  lines.map! do |line|
+    while (m = brace_detector.match line)
+      line = "#{m[:pre]}\\\\{#{m[:post]}"
+    end
+    line
+  end
+  lines.join("\n")
+end
+
 OwlBot.move_files

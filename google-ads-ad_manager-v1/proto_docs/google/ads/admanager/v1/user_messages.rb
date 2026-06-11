@@ -27,8 +27,9 @@ module Google
         #     Identifier. The resource name of the User.
         #     Format: `networks/{network_code}/users/{user_id}`
         # @!attribute [r] user_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. `User` ID.
+        #     Output only. Deprecated: `User` ID.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The name of the User. It has a maximum length of 128 characters.

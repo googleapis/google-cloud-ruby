@@ -40,6 +40,20 @@ module Google
         #     `IsolationLevel.REPEATABLE_READ`, then the snapshot timestamp is the
         #     timestamp at which all reads in the transaction ran. This timestamp is
         #     never returned.
+        # @!attribute [rw] cache_update
+        #   @return [::Google::Cloud::Spanner::V1::CacheUpdate]
+        #     Optional. A cache update expresses a set of changes the client should
+        #     incorporate into its location cache. The client should discard the changes
+        #     if they are older than the data it already has. This data can be obtained
+        #     in response to requests that included a `RoutingHint` field, but may also
+        #     be obtained by explicit location-fetching RPCs which may be added in the
+        #     future.
+        # @!attribute [rw] isolation_level
+        #   @return [::Google::Cloud::Spanner::V1::TransactionOptions::IsolationLevel]
+        #     The isolation level used for the read-write transaction.
+        # @!attribute [rw] read_lock_mode
+        #   @return [::Google::Cloud::Spanner::V1::TransactionOptions::ReadWrite::ReadLockMode]
+        #     The read lock mode used for the read-write transaction.
         class CommitResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/vision_ai/v1/version"
+require "google/cloud/vision_ai/v1/bindings_override"
 
 require "google/cloud/vision_ai/v1/live_video_analytics/credentials"
 require "google/cloud/vision_ai/v1/live_video_analytics/paths"

@@ -1,5 +1,39 @@
 # Release History
 
+### 0.56.0 (2026-06-02)
+
+### ⚠ BREAKING CHANGES
+
+* remove image_family from container.v1beta1.CustomImageConfig ([#33992](https://github.com/googleapis/google-cloud-ruby/issues/33992))
+
+#### Bug Fixes
+
+* remove image_family from container.v1beta1.CustomImageConfig ([#33992](https://github.com/googleapis/google-cloud-ruby/issues/33992)) 
+
+### 0.55.0 (2026-05-18)
+
+#### Features
+
+* add confidential instance type and hyperdisk support to GKE API ([#33940](https://github.com/googleapis/google-cloud-ruby/issues/33940)) 
+
+### 0.54.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33432](https://github.com/googleapis/google-cloud-ruby/issues/33432)) 
+
+### 0.53.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.52.0 (2026-02-04)
+
+#### Features
+
+* Add GPUDirectConfig to configure GPU Direct for node pools ([#32389](https://github.com/googleapis/google-cloud-ruby/issues/32389)) 
+
 ### 0.51.1 (2025-10-27)
 
 #### Documentation

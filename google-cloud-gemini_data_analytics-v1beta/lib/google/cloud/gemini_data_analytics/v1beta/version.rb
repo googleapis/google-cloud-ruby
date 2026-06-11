@@ -21,7 +21,7 @@ module Google
   module Cloud
     module GeminiDataAnalytics
       module V1beta
-        VERSION = "0.5.1"
+        VERSION = "0.9.1"
       end
     end
   end

@@ -1,5 +1,23 @@
 # Release History
 
+### 1.18.0 (2026-04-03)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Add support for Flexible CA feature ([#33465](https://github.com/googleapis/google-cloud-ruby/issues/33465)) 
+
+### 1.17.0 (2026-04-02)
+
+#### Features
+
+* Support safety settings for Gemini voices and deprecate `relax_safety_filters` ([#33463](https://github.com/googleapis/google-cloud-ruby/issues/33463)) 
+
+### 1.16.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies to Ruby v4.0 and drop support for Ruby v3.1
+
 ### 1.15.1 (2025-10-27)
 
 #### Documentation

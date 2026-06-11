@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.3.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.2.0 (2026-03-05)
+
+#### Features
+
+* Add transcription fields to Session Service ([#32775](https://github.com/googleapis/google-cloud-ruby/issues/32775)) 
+
 ### 2.1.1 (2025-09-12)
 
 #### Documentation

@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.8.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.7.0 (2026-03-04)
+
+#### Features
+
+* add Natural Language Query Understanding fields and messages to DiscoveryEngine request, response, and datastore messages ([#32444](https://github.com/googleapis/google-cloud-ruby/issues/32444)) 
+
 ### 2.6.2 (2025-10-27)
 
 #### Documentation

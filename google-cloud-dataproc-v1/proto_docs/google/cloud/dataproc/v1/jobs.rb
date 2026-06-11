@@ -769,6 +769,14 @@ module Google
         #     TimelineServer that provides application-specific information. The URL uses
         #     the internal hostname, and requires a proxy server for resolution and,
         #     possibly, access.
+        # @!attribute [rw] vcore_seconds
+        #   @return [::Integer]
+        #     Optional. The cumulative CPU time consumed by the application for a job,
+        #     measured in vcore-seconds.
+        # @!attribute [rw] memory_mb_seconds
+        #   @return [::Integer]
+        #     Optional. The cumulative memory usage of the application for a job,
+        #     measured in mb-seconds.
         class YarnApplication
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1069,15 +1077,18 @@ module Google
         #
         #     [field = value] AND [field [= value]] ...
         #
-        #     where **field** is `status.state` or `labels.[KEY]`, and `[KEY]` is a label
-        #     key. **value** can be `*` to match all values.
+        #     where **field** is `status.state` or `insertTime`, or `labels.[KEY]`, and
+        #     `[KEY]` is a label key. **value** can be `*` to match all values.
         #     `status.state` can be either `ACTIVE` or `NON_ACTIVE`.
-        #     Only the logical `AND` operator is supported; space-separated items are
-        #     treated as having an implicit `AND` operator.
+        #     Allows `insertTime` to be a timestamp in RFC 3339 format in double quotes,
+        #     such as `2025-01-01T00:00:00Z`. Only the logical `AND` operator is
+        #     supported; space-separated items are treated as having an implicit `AND`
+        #     operator.
         #
         #     Example filter:
         #
-        #     status.state = ACTIVE AND labels.env = staging AND labels.starred = *
+        #     status.state = ACTIVE AND labels.env = staging AND labels.starred = * AND
+        #     insertTime <= "2025-01-01T00:00:00Z"
         class ListJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/appoptimize/v1beta/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-app_optimize-v1beta/$1

@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/iam/v3beta"
 
-client = ::Google::Iam::V3beta::PolicyBindings::Client.new do |config|
+client = ::Google::Iam::V3beta::AccessPolicies::Client.new do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -66,11 +66,11 @@ To configure a credentials file globally for all clients:
 ```ruby
 require "google/iam/v3beta"
 
-::Google::Iam::V3beta::PolicyBindings::Client.configure do |config|
+::Google::Iam::V3beta::AccessPolicies::Client.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = ::Google::Iam::V3beta::PolicyBindings::Client.new
+client = ::Google::Iam::V3beta::AccessPolicies::Client.new
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/iam/v3beta"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = ::Google::Iam::V3beta::PolicyBindings::Client.new
+client = ::Google::Iam::V3beta::AccessPolicies::Client.new
 ```
 
 ### Local ADC file

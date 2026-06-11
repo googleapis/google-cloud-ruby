@@ -254,6 +254,15 @@ module Google
         #     Contains details about groups of which this finding is a member. A group is
         #     a collection of findings that are related in some way.
         #     This field cannot be updated. Its value is ignored in all update requests.
+        # @!attribute [rw] chokepoint
+        #   @return [::Google::Cloud::SecurityCenter::V1::Chokepoint]
+        #     Contains details about a chokepoint, which is a resource or resource group
+        #     where high-risk attack paths converge, based on [attack path simulations]
+        #     (https://cloud.google.com/security-command-center/docs/attack-exposure-learn#attack_path_simulations).
+        #     This field cannot be updated. Its value is ignored in all update requests.
+        # @!attribute [rw] external_exposure
+        #   @return [::Google::Cloud::SecurityCenter::V1::ExternalExposure]
+        #     External exposure associated with the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -448,6 +457,18 @@ module Google
             # independently. A group of such issues is referred to as a toxic
             # combination.
             TOXIC_COMBINATION = 7
+
+            # Describes a potential security risk to data assets that contain sensitive
+            # data.
+            SENSITIVE_DATA_RISK = 8
+
+            # Describes a resource or resource group where high risk attack paths
+            # converge, based on attack path simulations (APS).
+            CHOKEPOINT = 9
+
+            # Describes a potential security risk due to the resource being exposed to
+            # the internet.
+            EXTERNAL_EXPOSURE = 10
           end
         end
       end

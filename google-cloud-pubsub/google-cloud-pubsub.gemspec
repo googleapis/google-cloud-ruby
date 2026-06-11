@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
                        "TROUBLESHOOTING.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.1"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "concurrent-ruby", "~> 1.3"
   gem.add_dependency "google-cloud-core", "~> 1.8"

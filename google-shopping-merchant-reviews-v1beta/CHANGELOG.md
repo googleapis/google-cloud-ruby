@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.8.1 (2026-04-08)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33485](https://github.com/googleapis/google-cloud-ruby/issues/33485)) 
+
+### 0.8.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33443](https://github.com/googleapis/google-cloud-ruby/issues/33443)) 
+
+### 0.7.0 (2026-03-18)
+
+#### Features
+
+* upgrade protobuf from v25.7 to v31.0 ([#32822](https://github.com/googleapis/google-cloud-ruby/issues/32822)) 
+
 ### 0.6.1 (2025-10-27)
 
 #### Documentation

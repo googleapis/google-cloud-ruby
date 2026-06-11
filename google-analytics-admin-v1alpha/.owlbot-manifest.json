@@ -145,6 +145,7 @@
     "snippets/analytics_admin_service/get_sk_ad_network_conversion_value_schema.rb",
     "snippets/analytics_admin_service/get_subproperty_event_filter.rb",
     "snippets/analytics_admin_service/get_subproperty_sync_config.rb",
+    "snippets/analytics_admin_service/get_user_provided_data_settings.rb",
     "snippets/analytics_admin_service/list_access_bindings.rb",
     "snippets/analytics_admin_service/list_account_summaries.rb",
     "snippets/analytics_admin_service/list_accounts.rb",

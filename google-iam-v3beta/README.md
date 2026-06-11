@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/iam/v3beta"
 
-client = ::Google::Iam::V3beta::PolicyBindings::Client.new
-request = ::Google::Iam::V3beta::CreatePolicyBindingRequest.new # (request fields as keyword arguments...)
-response = client.create_policy_binding request
+client = ::Google::Iam::V3beta::AccessPolicies::Client.new
+request = ::Google::Iam::V3beta::CreateAccessPolicyRequest.new # (request fields as keyword arguments...)
+response = client.create_access_policy request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-iam-v3beta/latest)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/iam/v3beta"
 require "logger"
 
-client = ::Google::Iam::V3beta::PolicyBindings::Client.new do |config|
+client = ::Google::Iam::V3beta::AccessPolicies::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

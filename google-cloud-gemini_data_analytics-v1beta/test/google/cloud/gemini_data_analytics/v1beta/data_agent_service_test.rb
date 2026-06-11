@@ -338,6 +338,70 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::ClientTest
     end
   end
 
+  def test_create_data_agent_sync
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    data_agent_id = "hello world"
+    data_agent = {}
+    request_id = "hello world"
+
+    create_data_agent_sync_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_data_agent_sync, name
+      assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["data_agent_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent), request["data_agent"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_data_agent_sync_client_stub do
+      # Create client
+      client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_data_agent_sync({ parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_data_agent_sync parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_data_agent_sync ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest.new(parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_data_agent_sync({ parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_data_agent_sync(::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest.new(parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_data_agent_sync_client_stub.call_rpc_count
+    end
+  end
+
   def test_update_data_agent
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -405,6 +469,68 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::ClientTest
     end
   end
 
+  def test_update_data_agent_sync
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    data_agent = {}
+    request_id = "hello world"
+
+    update_data_agent_sync_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_data_agent_sync, name
+      assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent), request["data_agent"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_data_agent_sync_client_stub do
+      # Create client
+      client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_data_agent_sync({ update_mask: update_mask, data_agent: data_agent, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_data_agent_sync update_mask: update_mask, data_agent: data_agent, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_data_agent_sync ::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest.new(update_mask: update_mask, data_agent: data_agent, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_data_agent_sync({ update_mask: update_mask, data_agent: data_agent, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_data_agent_sync(::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest.new(update_mask: update_mask, data_agent: data_agent, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_data_agent_sync_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_data_agent
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -467,6 +593,66 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::ClientTest
 
       # Verify method calls
       assert_equal 5, delete_data_agent_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_data_agent_sync
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_data_agent_sync_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_data_agent_sync, name
+      assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_data_agent_sync_client_stub do
+      # Create client
+      client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_data_agent_sync({ name: name, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_data_agent_sync name: name, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_data_agent_sync ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_data_agent_sync({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_data_agent_sync(::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_data_agent_sync_client_stub.call_rpc_count
     end
   end
 

@@ -23,6 +23,7 @@ gem "google-cloud-core"
 require "google/cloud" unless defined? Google::Cloud.new
 require "google/cloud/config"
 require "googleauth"
+require "logger"
 
 module Google
   module Cloud
@@ -142,6 +143,8 @@ Google::Cloud.configure.add_config! :pubsub do |config| # rubocop:disable Metric
     "https://www.googleapis.com/auth/pubsub"
   ]
 
+  default_logger = Logger.new $stdout
+
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds, match: [String, Hash, Google::Auth::Credentials], allow_nil: true
@@ -153,4 +156,5 @@ Google::Cloud.configure.add_config! :pubsub do |config| # rubocop:disable Metric
   config.add_field! :on_error, nil, match: Proc
   config.add_field! :endpoint, nil, match: String
   config.add_field! :universe_domain, nil, match: String
+  config.add_field! :logger, default_logger, match: Logger, allow_nil: true
 end

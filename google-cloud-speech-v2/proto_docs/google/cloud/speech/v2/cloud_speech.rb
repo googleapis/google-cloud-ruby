@@ -496,19 +496,23 @@ module Google
         # Configuration to enable speaker diarization.
         # @!attribute [rw] min_speaker_count
         #   @return [::Integer]
-        #     Required. Minimum number of speakers in the conversation. This range gives
-        #     you more flexibility by allowing the system to automatically determine the
-        #     correct number of speakers.
-        #
-        #     To fix the number of speakers detected in the audio, set
-        #     `min_speaker_count` = `max_speaker_count`.
+        #     Optional. The system automatically determines the number of speakers. This
+        #     value is not currently used.
         # @!attribute [rw] max_speaker_count
         #   @return [::Integer]
-        #     Required. Maximum number of speakers in the conversation. Valid values are:
-        #     1-6. Must be >= `min_speaker_count`. This range gives you more flexibility
-        #     by allowing the system to automatically determine the correct number of
-        #     speakers.
+        #     Optional. The system automatically determines the number of speakers. This
+        #     value is not currently used.
         class SpeakerDiarizationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration to enable custom prompt in chirp3.
+        # @!attribute [rw] custom_prompt
+        #   @return [::String]
+        #     Optional. The custom instructions to override the existing instructions for
+        #     chirp3.
+        class CustomPromptConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -553,20 +557,17 @@ module Google
         #     Mode for recognizing multi-channel audio.
         # @!attribute [rw] diarization_config
         #   @return [::Google::Cloud::Speech::V2::SpeakerDiarizationConfig]
-        #     Configuration to enable speaker diarization and set additional
-        #     parameters to make diarization better suited for your application.
-        #     When this is enabled, we send all the words from the beginning of the
-        #     audio for the top alternative in every consecutive STREAMING responses.
-        #     This is done in order to improve our speaker tags as our models learn to
-        #     identify the speakers in the conversation over time.
-        #     For non-streaming requests, the diarization results will be provided only
-        #     in the top alternative of the FINAL SpeechRecognitionResult.
+        #     Configuration to enable speaker diarization. To enable diarization, set
+        #     this field to an empty SpeakerDiarizationConfig message.
         # @!attribute [rw] max_alternatives
         #   @return [::Integer]
         #     Maximum number of recognition hypotheses to be returned.
         #     The server may return fewer than `max_alternatives`.
         #     Valid values are `0`-`30`. A value of `0` or `1` will return a maximum of
         #     one. If omitted, will return a maximum of one.
+        # @!attribute [rw] custom_prompt_config
+        #   @return [::Google::Cloud::Speech::V2::CustomPromptConfig]
+        #     Optional. Configuration to enable custom prompt for chirp3.
         class RecognitionFeatures
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -806,6 +807,10 @@ module Google
         # @!attribute [rw] total_billed_duration
         #   @return [::Google::Protobuf::Duration]
         #     When available, billed audio seconds for the corresponding request.
+        # @!attribute [r] prompt
+        #   @return [::String]
+        #     Optional. Output only. Provides the prompt used for the recognition
+        #     request.
         class RecognitionResponseMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -933,6 +938,9 @@ module Google
         #     If set, the server will automatically close the stream after the specified
         #     duration has elapsed after the last VOICE_ACTIVITY speech event has been
         #     sent. The field `voice_activity_events` must also be set to true.
+        # @!attribute [rw] endpointing_sensitivity
+        #   @return [::Google::Cloud::Speech::V2::StreamingRecognitionFeatures::EndpointingSensitivity]
+        #     Optional. Endpointing sensitivity for this stream.
         class StreamingRecognitionFeatures
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -951,6 +959,28 @@ module Google
           class VoiceActivityTimeout
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Endpointing sensitivity is intended for applications that want to minimize
+          # result latency, possibly at the expense of quality. Some utterances may be
+          # broken up into multiple fragments.
+          module EndpointingSensitivity
+            # If no value is specified, the values for
+            # ENDPOINTING_SENSITIVITY_STANDARD will be used.
+            ENDPOINTING_SENSITIVITY_UNSPECIFIED = 0
+
+            # Standard sensitivity, no optimization for latency.
+            ENDPOINTING_SENSITIVITY_STANDARD = 1
+
+            # Super short sensitivity, optimized for super short utterances like single
+            # words ("Yes", "No", "Hello", etc.) or a single phrase, command or short
+            # query (e.g. "check balance", "five dollars", "call Mom").
+            ENDPOINTING_SENSITIVITY_SUPERSHORT = 2
+
+            # Short sensitivity, optimized for short utterances like single sentences.
+            # (e.g. "Remind me to call the dentist tomorrow morning at nine",
+            # "Navigate to the nearest coffee shop that is currently open")
+            ENDPOINTING_SENSITIVITY_SHORT = 3
           end
         end
 

@@ -1,5 +1,30 @@
 # Changelog
 
+### 1.10.0 (2026-03-31)
+
+#### Features
+
+* Adding new workload specific fields for AlloyDB ([#33325](https://github.com/googleapis/google-cloud-ruby/issues/33325)) 
+
+### 1.9.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.8.0 (2026-02-18)
+
+#### Features
+
+* Add support for AlloyDB backup and restore ([#32401](https://github.com/googleapis/google-cloud-ruby/issues/32401)) 
+
+### 1.7.0 (2026-01-13)
+
+#### Features
+
+* A new message `ListResourceBackupConfigsRequest` is added 
+* A new service `BackupDrProtectionSummary` is added ([#32340](https://github.com/googleapis/google-cloud-ruby/issues/32340)) 
+
 ### 1.6.0 (2025-11-19)
 
 #### Features

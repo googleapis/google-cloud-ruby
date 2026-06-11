@@ -59,6 +59,23 @@ module Google
           #   @return [::String]
           #     Optional. Location of the product inside the store. Maximum length is 20
           #     bytes.
+          # @!attribute [rw] loyalty_programs
+          #   @return [::Array<::Google::Shopping::Merchant::Inventories::V1::InventoryLoyaltyProgram>]
+          #     Optional. An optional list of loyalty programs containing applicable
+          #     loyalty member prices for this product at this store.
+          #
+          #     This field is used to show store-specific member prices on Local
+          #     Inventory Ads (LIA).
+          #
+          #     To use this, the loyalty program must be configured in Google Merchant
+          #     Center. The benefits provided must match the merchant's website and be
+          #     clear to members. This is only applicable for merchants in supported
+          #     countries.
+          #
+          #     See [Loyalty program](https://support.google.com/merchants/answer/12922446)
+          #     for details on supported countries and loyalty program configuration.
+          #     For local inventory specific details, see the [Local inventory data
+          #     specification](https://support.google.com/merchants/answer/3061342).
           class LocalInventoryAttributes
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -140,6 +157,45 @@ module Google
             end
           end
 
+          # A message that represents loyalty program.
+          # @!attribute [rw] program_label
+          #   @return [::String]
+          #     The label of the loyalty program. This is an internal label that uniquely
+          #     identifies the relationship between a business entity and a loyalty
+          #     program entity. The label must be provided if there are multiple loyalty
+          #     programs available for the merchant, so that the system can associate
+          #     the assets below (for example, price and points) with the correct business.
+          #     The corresponding program must be linked to the Merchant Center account.
+          # @!attribute [rw] tier_label
+          #   @return [::String]
+          #     The label of the tier within the loyalty program.
+          #     Must match one of the labels within the program.
+          # @!attribute [rw] price
+          #   @return [::Google::Shopping::Type::Price]
+          #     The price for members of the given tier, that is, the instant discount
+          #     price. Must be smaller or equal to the regular price.
+          # @!attribute [rw] cashback_for_future_use
+          #   @return [::Google::Shopping::Type::Price]
+          #     The cashback that can be used for future purchases.
+          # @!attribute [rw] loyalty_points
+          #   @return [::Integer]
+          #     The amount of loyalty points earned on a purchase.
+          # @!attribute [rw] member_price_effective_interval
+          #   @return [::Google::Type::Interval]
+          #     A date range during which the item is eligible for member price. If not
+          #     specified, the member price is always applicable. The date range is
+          #     represented by a pair of ISO 8601 dates separated by a space,
+          #     comma, or slash.
+          # @!attribute [rw] shipping_label
+          #   @return [::String]
+          #     The label of the shipping benefit. If the field has value, this offer has
+          #     loyalty shipping benefit. If the field value isn't provided, the item is
+          #     not eligible for loyalty shipping for the given loyalty tier.
+          class InventoryLoyaltyProgram
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Regional inventory attributes.
           # @!attribute [rw] price
           #   @return [::Google::Shopping::Type::Price]
@@ -158,6 +214,27 @@ module Google
           #     Optional.
           #     [Availability](https://support.google.com/merchants/answer/14644124) of the
           #     product in this region.
+          # @!attribute [rw] loyalty_programs
+          #   @return [::Array<::Google::Shopping::Merchant::Inventories::V1::InventoryLoyaltyProgram>]
+          #     Optional. An optional list of loyalty programs containing applicable
+          #     loyalty member prices for this product in this region.
+          #
+          #     This field is used to show region-specific member prices on Product
+          #     Listing Ads (PLA).
+          #
+          #     To use this, the loyalty program must be configured in Google Merchant
+          #     Center, and the merchant must be using the Regional Availability and
+          #     Pricing (RAAP) feature. The benefits provided must match the merchant's
+          #     website and be clear to members. This is only applicable for merchants in
+          #     supported countries.
+          #
+          #     See [Loyalty program](https://support.google.com/merchants/answer/12922446)
+          #     for details on supported countries and loyalty program configuration.
+          #     Also see [Regional availability and
+          #     pricing](https://support.google.com/merchants/answer/14644124) and [How to
+          #     set up regional member
+          #     pricing](https://support.google.com/merchants/answer/16388178) for more
+          #     information.
           class RegionalInventoryAttributes
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

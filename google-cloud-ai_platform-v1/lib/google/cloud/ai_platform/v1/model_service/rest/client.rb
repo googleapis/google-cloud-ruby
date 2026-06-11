@@ -1347,7 +1347,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload copy_model(model_id: nil, parent_model: nil, parent: nil, source_model: nil, encryption_spec: nil)
+              # @overload copy_model(model_id: nil, parent_model: nil, parent: nil, source_model: nil, encryption_spec: nil, custom_service_account: nil)
               #   Pass arguments to `copy_model` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1376,6 +1376,17 @@ module Google
               #   @param encryption_spec [::Google::Cloud::AIPlatform::V1::EncryptionSpec, ::Hash]
               #     Customer-managed encryption key options. If this is set,
               #     then the Model copy will be encrypted with the provided encryption key.
+              #   @param custom_service_account [::String]
+              #     Optional. The user-provided custom service account to use to do the copy
+              #     model. If empty, [Vertex AI Service
+              #     Agent](https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
+              #     will be used to access resources needed to upload the model. This account
+              #     must belong to the destination project where the model is copied to,
+              #     i.e., the project specified in the `parent` field of this request and
+              #     have the Vertex AI Service Agent role in the source project.
+              #
+              #     Requires the user copying the Model to have the
+              #     `iam.serviceAccounts.actAs` permission on this service account.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

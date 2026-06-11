@@ -155,7 +155,7 @@ module Google
         # A representation of a session.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the session.
+        #     Identifier. The resource name of the session.
         # @!attribute [r] uuid
         #   @return [::String]
         #     Output only. A session UUID (Unique Universal Identifier). The service
@@ -170,7 +170,7 @@ module Google
         #     Note: The following fields are mutually exclusive: `jupyter_session`, `spark_connect_session`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_connect_session
         #   @return [::Google::Cloud::Dataproc::V1::SparkConnectConfig]
-        #     Optional. Spark Connect session config.
+        #     Optional. Spark connect session config.
         #
         #     Note: The following fields are mutually exclusive: `spark_connect_session`, `jupyter_session`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] runtime_info
@@ -298,7 +298,7 @@ module Google
           end
         end
 
-        # Spark Connect configuration for an interactive session.
+        # Spark connect configuration for an interactive session.
         class SparkConnectConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,5 +1,23 @@
 # Changelog
 
+### 2.4.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33432](https://github.com/googleapis/google-cloud-ruby/issues/33432)) 
+
+### 2.3.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.2.2 (2026-01-23)
+
+#### Documentation
+
+* Correct typo in comment for field `quota_id` ([#32375](https://github.com/googleapis/google-cloud-ruby/issues/32375)) 
+
 ### 2.2.1 (2025-10-27)
 
 #### Documentation

@@ -27,8 +27,9 @@ module Google
         #     Identifier. The resource name of the `TaxonomyCategory`.
         #     Format: `networks/{network_code}/taxonomyCategories/{taxonomy_category_id}`
         # @!attribute [r] taxonomy_category_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. `TaxonomyCategory` ID.
+        #     Output only. Deprecated: `TaxonomyCategory` ID.
         # @!attribute [r] display_name
         #   @return [::String]
         #     Output only. Display name of the `TaxonomyCategory`.

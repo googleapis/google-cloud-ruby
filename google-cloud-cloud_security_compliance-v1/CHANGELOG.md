@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.4.1 (2026-05-07)
+
+#### Documentation
+
+* Updated docs for the APIs ([#33882](https://github.com/googleapis/google-cloud-ruby/issues/33882)) 
+
+### 0.4.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33432](https://github.com/googleapis/google-cloud-ruby/issues/33432)) 
+
+### 0.3.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.2.0 (2025-11-03)
 
 #### Features

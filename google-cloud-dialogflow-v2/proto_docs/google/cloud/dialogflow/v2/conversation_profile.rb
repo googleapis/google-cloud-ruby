@@ -617,6 +617,30 @@ module Google
           #     {::Google::Cloud::Dialogflow::V2::ListMessagesResponse#messages ListMessagesResponse.messages.SentimentAnalysisResult}
           #     If Pub/Sub notification is configured, result will be in
           #     {::Google::Cloud::Dialogflow::V2::ConversationEvent#new_message_payload ConversationEvent.new_message_payload.SentimentAnalysisResult}.
+          # @!attribute [rw] enable_sentiment_analysis_v3
+          #   @return [::Boolean]
+          #     Optional. Enables sentiment analysis for audio input and conversation
+          #     messages. If unspecified, defaults to false. If this flag is set to true,
+          #     other 'enable_sentiment_analysis' fields will be ignored.
+          #
+          #     Sentiment analysis inspects user input and identifies the prevailing
+          #     subjective opinion, especially to determine a user's attitude as
+          #     positive, negative, or neutral.
+          #     https://cloud.google.com/natural-language/docs/basics#sentiment_analysis
+          #     For
+          #     {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}
+          #     method, result will be in
+          #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse#message StreamingAnalyzeContentResponse.message.SentimentAnalysisResult}.
+          #     For
+          #     {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent}
+          #     method, result will be in
+          #     {::Google::Cloud::Dialogflow::V2::AnalyzeContentResponse#message AnalyzeContentResponse.message.SentimentAnalysisResult}
+          #     For
+          #     {::Google::Cloud::Dialogflow::V2::Conversations::Client#list_messages Conversations.ListMessages}
+          #     method, result will be in
+          #     {::Google::Cloud::Dialogflow::V2::ListMessagesResponse#messages ListMessagesResponse.messages.SentimentAnalysisResult}
+          #     If Pub/Sub notification is configured, result will be in
+          #     {::Google::Cloud::Dialogflow::V2::ConversationEvent#new_message_payload ConversationEvent.new_message_payload.SentimentAnalysisResult}.
           class MessageAnalysisConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -24,8 +24,10 @@ module Google
         # Request message for [ListFrameworks][].
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name, in the format
-        #     `organizations/{organization}/locations/{location}`.
+        #     Required. The parent resource name, in one of the following formats:
+        #     - `organizations/{organization}/locations/{location}`
+        #     - `projects/{project}/locations/{location}`.
+        #
         #     The only supported location is `global`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -60,8 +62,12 @@ module Google
         # The request message for [GetFramework][].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the framework to retrieve, in the format
-        #     `organizations/{organization}/locations/{location}/frameworks/{framework_id}`
+        #     Required. The name of the framework to retrieve, in one of the following
+        #     formats:
+        #     `organizations/{organization}/locations/{location}/frameworks/{framework}`
+        #     or
+        #     `projects/{project}/locations/{location}/frameworks/{framework}`.
+        #
         #     The only supported location is `global`.
         # @!attribute [rw] major_revision_id
         #   @return [::Integer]
@@ -75,8 +81,10 @@ module Google
         # The request message for [CreateFramework][].
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name, in the format
-        #     `organizations/{organization}/locations/{location}`.
+        #     Required. The parent resource name, in one of the following formats:
+        #     - `organizations/{organization}/locations/{location}`
+        #     - `projects/{project}/locations/{location}`.
+        #
         #     The only supported location is `global`.
         # @!attribute [rw] framework_id
         #   @return [::String]
@@ -112,8 +120,11 @@ module Google
         # Request message for [DeleteFramework][].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the resource, in the format
-        #     `organizations/{organization}/locations/{location}/frameworks/{framework}`.
+        #     Required. The name of the resource, in one of the following formats:
+        #     `organizations/{organization}/locations/{location}/frameworks/{framework}`
+        #     or
+        #     `projects/{project}/locations/{location}/frameworks/{framework}`.
+        #
         #     The only supported location is `global`.
         class DeleteFrameworkRequest
           include ::Google::Protobuf::MessageExts
@@ -123,8 +134,10 @@ module Google
         # Request message for [ListCloudControls][].
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name, in the format
-        #     `organizations/{organization}/locations/{location}`.
+        #     Required. The parent resource name, in one of the following formats:
+        #     - `organizations/{organization}/locations/{location}`
+        #     - `projects/{project}/locations/{location}`.
+        #
         #     The only supported location is `global`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -163,8 +176,12 @@ module Google
         # The request message for [GetCloudControl][].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the cloud control to retrieve, in the format
-        #     `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`.
+        #     Required. The name of the cloud control to retrieve, in one of the
+        #     following formats:
+        #     `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`
+        #     or
+        #     `projects/{project}/locations/{location}/cloudControls/{cloud_control}`.
+        #
         #     The only supported location is `global`.
         # @!attribute [rw] major_revision_id
         #   @return [::Integer]
@@ -178,8 +195,10 @@ module Google
         # The request message for [CreateCloudControl][].
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name, in the format
-        #     `organizations/{organization}/locations/{location}`.
+        #     Required. The parent resource name, in one of the following formats:
+        #     - `organizations/{organization}/locations/{location}`.
+        #     - `projects/{project}/locations/{location}`.
+        #
         #     The only supported location is `global`.
         # @!attribute [rw] cloud_control_id
         #   @return [::String]
@@ -222,8 +241,12 @@ module Google
         # The request message for [DeleteCloudControl][].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the cloud control to delete, in the format
-        #     `organizations/{organization}/locations/{location}/CloudControls/{CloudControl}`.
+        #     Required. The name of the cloud control to delete, in one of the following
+        #     formats:
+        #     `organizations/{organization}/locations/{location}/CloudControls/{CloudControl}`
+        #     or
+        #     `projects/{project}/locations/{location}/CloudControls/{CloudControl}`.
+        #
         #     The only supported location is `global`.
         class DeleteCloudControlRequest
           include ::Google::Protobuf::MessageExts

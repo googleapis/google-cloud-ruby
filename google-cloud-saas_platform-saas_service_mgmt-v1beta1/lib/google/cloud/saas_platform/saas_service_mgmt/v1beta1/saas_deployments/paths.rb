@@ -26,6 +26,95 @@ module Google
             # Path helper methods for the SaasDeployments API.
             module Paths
               ##
+              # Create a fully-qualified Application resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/applications/{application}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param application [String]
+              #
+              # @return [::String]
+              def application_path project:, location:, application:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/applications/#{application}"
+              end
+
+              ##
+              # Create a fully-qualified ApplicationTemplate resource string.
+              #
+              # @overload application_template_path(project:, location:, space:, application_template:)
+              #   The resource will be in the following format:
+              #
+              #   `projects/{project}/locations/{location}/spaces/{space}/applicationTemplates/{application_template}`
+              #
+              #   @param project [String]
+              #   @param location [String]
+              #   @param space [String]
+              #   @param application_template [String]
+              #
+              # @overload application_template_path(project:, location:, workspace:, application_template:)
+              #   The resource will be in the following format:
+              #
+              #   `projects/{project}/locations/{location}/workspaces/{workspace}/applicationTemplates/{application_template}`
+              #
+              #   @param project [String]
+              #   @param location [String]
+              #   @param workspace [String]
+              #   @param application_template [String]
+              #
+              # @return [::String]
+              def application_template_path **args
+                resources = {
+                  "application_template:location:project:space" => (proc do |project:, location:, space:, application_template:|
+                    raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                    raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                    raise ::ArgumentError, "space cannot contain /" if space.to_s.include? "/"
+
+                    "projects/#{project}/locations/#{location}/spaces/#{space}/applicationTemplates/#{application_template}"
+                  end),
+                  "application_template:location:project:workspace" => (proc do |project:, location:, workspace:, application_template:|
+                    raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                    raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                    raise ::ArgumentError, "workspace cannot contain /" if workspace.to_s.include? "/"
+
+                    "projects/#{project}/locations/#{location}/workspaces/#{workspace}/applicationTemplates/#{application_template}"
+                  end)
+                }
+
+                resource = resources[args.keys.sort.join(":")]
+                raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+                resource.call(**args)
+              end
+
+              ##
+              # Create a fully-qualified ApplicationTemplateRevision resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/spaces/{space}/applicationTemplates/{application_template}/revisions/{revision}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param space [String]
+              # @param application_template [String]
+              # @param revision [String]
+              #
+              # @return [::String]
+              def application_template_revision_path project:, location:, space:, application_template:, revision:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "space cannot contain /" if space.to_s.include? "/"
+                raise ::ArgumentError, "application_template cannot contain /" if application_template.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/spaces/#{space}/applicationTemplates/#{application_template}/revisions/#{revision}"
+              end
+
+              ##
               # Create a fully-qualified Location resource string.
               #
               # The resource will be in the following format:

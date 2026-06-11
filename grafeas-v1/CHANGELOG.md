@@ -1,5 +1,27 @@
 # Release History
 
+### 1.8.0 (2026-04-15)
+
+#### Features
+
+* publish client batch config schema ([#33443](https://github.com/googleapis/google-cloud-ruby/issues/33443)) 
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33485](https://github.com/googleapis/google-cloud-ruby/issues/33485)) 
+
+### 1.7.0 (2026-02-18)
+
+#### Features
+
+* A new field `last_vulnerability_update_time` is added to message `.grafeas.v1.DiscoveryOccurrence` ([#32397](https://github.com/googleapis/google-cloud-ruby/issues/32397)) 
+
+### 1.6.0 (2026-01-13)
+
+#### Features
+
+* A new field `files` is added to message `.grafeas.v1.DiscoveryOccurrence` 
+* A new message `File` is added ([#32345](https://github.com/googleapis/google-cloud-ruby/issues/32345)) 
+
 ### 1.5.1 (2025-10-27)
 
 #### Documentation

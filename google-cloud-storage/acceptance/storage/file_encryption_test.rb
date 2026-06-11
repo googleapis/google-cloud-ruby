@@ -22,7 +22,7 @@ describe Google::Cloud::Storage::File, :storage do
   let(:bucket_location) { "us-central1" }
 
   let :bucket do
-    safe_gcs_execute {storage.create_bucket bucket_name, location: bucket_location }
+    safe_gcs_execute { storage.bucket(bucket_name) || storage.create_bucket(bucket_name, location: bucket_location) }
   end
 
   let(:file_path) { "acceptance/data/abc.txt" }

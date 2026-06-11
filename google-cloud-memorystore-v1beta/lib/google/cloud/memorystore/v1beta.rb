@@ -25,6 +25,11 @@ module Google
       ##
       # API client module.
       #
+      # @example Load this package, including all its services, and instantiate a gRPC client
+      #
+      #     require "google/cloud/memorystore/v1beta"
+      #     client = ::Google::Cloud::Memorystore::V1beta::Memorystore::Client.new
+      #
       # @example Load this package, including all its services, and instantiate a REST client
       #
       #     require "google/cloud/memorystore/v1beta"

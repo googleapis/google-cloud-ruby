@@ -25,6 +25,8 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Identifier. The resource name of the Dataset.
+        #     Format:
+        #     `projects/{project}/locations/{location}/datasets/{dataset}`
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The user-defined name of the Dataset.

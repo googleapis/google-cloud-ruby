@@ -30,8 +30,7 @@ module Google
     module Dataflow
       module V1beta3
         ##
-        # The Dataflow Metrics API lets you monitor the progress of Dataflow
-        # jobs.
+        # The Dataflow Metrics API lets you monitor the progress of Dataflow jobs.
         #
         # To load this service and instantiate a REST client:
         #

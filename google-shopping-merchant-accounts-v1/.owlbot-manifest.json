@@ -273,6 +273,7 @@
     "snippets/account_services_service/propose_account_service.rb",
     "snippets/account_services_service/reject_account_service.rb",
     "snippets/accounts_service/create_and_configure_account.rb",
+    "snippets/accounts_service/create_test_account.rb",
     "snippets/accounts_service/delete_account.rb",
     "snippets/accounts_service/get_account.rb",
     "snippets/accounts_service/list_accounts.rb",

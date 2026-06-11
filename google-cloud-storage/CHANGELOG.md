@@ -1,5 +1,26 @@
 # Release History
 
+### 1.60.0 (2026-05-11)
+
+#### Features
+
+* add support for object context ([#32902](https://github.com/googleapis/google-cloud-ruby/issues/32902)) 
+* setting default checksum ([#33331](https://github.com/googleapis/google-cloud-ruby/issues/33331)) 
+* Support bucket encryption config ([#33452](https://github.com/googleapis/google-cloud-ruby/issues/33452)) 
+
+### 1.59.0 (2026-03-19)
+
+#### Features
+
+* Adding dependencies for Ruby 4.0 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.58.0 (2026-01-08)
+
+#### Features
+
+* Adding support for partial success bucket list  ([#32173](https://github.com/googleapis/google-cloud-ruby/issues/32173)) 
+
 ### 1.57.1 (2025-11-04)
 
 #### Documentation

@@ -230,7 +230,7 @@ module Google
             ##
             # Creates a policy binding and returns a long-running operation.
             # Callers will need the IAM permissions on both the policy and target.
-            # Once the binding is created, the policy is applied to the target.
+            # After the binding is created, the policy is applied to the target.
             #
             # @overload create_policy_binding(request, options = nil)
             #   Pass arguments to `create_policy_binding` via a request object, either of type
@@ -425,9 +425,7 @@ module Google
             ##
             # Updates a policy binding and returns a long-running operation.
             # Callers will need the IAM permissions on the policy and target in the
-            # binding to update, and the IAM permission to remove the existing policy
-            # from the binding. Target is immutable and cannot be updated. Once the
-            # binding is updated, the new policy is applied to the target.
+            # binding to update. Target and policy are immutable and cannot be updated.
             #
             # @overload update_policy_binding(request, options = nil)
             #   Pass arguments to `update_policy_binding` via a request object, either of type
@@ -524,7 +522,7 @@ module Google
             ##
             # Deletes a policy binding and returns a long-running operation.
             # Callers will need the IAM permissions on both the policy and target.
-            # Once the binding is deleted, the policy no longer applies to the target.
+            # After the binding is deleted, the policy no longer applies to the target.
             #
             # @overload delete_policy_binding(request, options = nil)
             #   Pass arguments to `delete_policy_binding` via a request object, either of type
@@ -655,8 +653,7 @@ module Google
             #     Optional. The maximum number of policy bindings to return. The service may
             #     return fewer than this value.
             #
-            #     If unspecified, at most 50 policy bindings will be returned.
-            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #     The default value is 50. The maximum value is 1000.
             #   @param page_token [::String]
             #     Optional. A page token, received from a previous `ListPolicyBindings` call.
             #     Provide this to retrieve the subsequent page.
@@ -665,7 +662,8 @@ module Google
             #     match the call that provided the page token.
             #   @param filter [::String]
             #     Optional. An expression for filtering the results of the request. Filter
-            #     rules are case insensitive. Some eligible fields for filtering are:
+            #     rules are case insensitive. Some eligible fields for filtering are the
+            #     following:
             #
             #     + `target`
             #     + `policy`
@@ -753,7 +751,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
             #
-            # @overload search_target_policy_bindings(target: nil, page_size: nil, page_token: nil, parent: nil)
+            # @overload search_target_policy_bindings(target: nil, page_size: nil, page_token: nil, parent: nil, filter: nil)
             #   Pass arguments to `search_target_policy_bindings` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -773,8 +771,7 @@ module Google
             #     Optional. The maximum number of policy bindings to return. The service may
             #     return fewer than this value.
             #
-            #     If unspecified, at most 50 policy bindings will be returned.
-            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #     The default value is 50. The maximum value is 1000.
             #   @param page_token [::String]
             #     Optional. A page token, received from a previous
             #     `SearchTargetPolicyBindingsRequest` call. Provide this to retrieve the
@@ -794,6 +791,17 @@ module Google
             #     * `projects/{project_number}/locations/{location}`
             #     * `folders/{folder_id}/locations/{location}`
             #     * `organizations/{organization_id}/locations/{location}`
+            #   @param filter [::String]
+            #     Optional. Filtering currently only supports the kind of policies to return,
+            #     and must be in the format "policy_kind=\\{policy_kind}".
+            #
+            #     If String is empty, bindings bound to all kinds of policies would be
+            #     returned.
+            #
+            #     The only supported values are the following:
+            #
+            #     * "policy_kind=PRINCIPAL_ACCESS_BOUNDARY",
+            #     * "policy_kind=ACCESS"
             # @yield [result, operation] Access the result along with the TransportOperation object
             # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Iam::V3beta::PolicyBinding>]
             # @yieldparam operation [::Gapic::Rest::TransportOperation]

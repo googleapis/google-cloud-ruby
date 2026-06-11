@@ -7,31 +7,10 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n+google/ads/datamanager/v1/device_info.proto\x12\x19google.ads.datamanager.v1\x1a\x1fgoogle/api/field_behavior.proto\">\n\nDeviceInfo\x12\x17\n\nuser_agent\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12\x17\n\nip_address\x18\x02 \x01(\tB\x03\xe0\x41\x01\x42\xcf\x01\n\x1d\x63om.google.ads.datamanager.v1B\x0f\x44\x65viceInfoProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/datamanager/v1;datamanager\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
+descriptor_data = "\n+google/ads/datamanager/v1/device_info.proto\x12\x19google.ads.datamanager.v1\x1a\x1fgoogle/api/field_behavior.proto\"\xca\x02\n\nDeviceInfo\x12\x17\n\nuser_agent\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12\x17\n\nip_address\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12\x15\n\x08\x63\x61tegory\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12\x1a\n\rlanguage_code\x18\x04 \x01(\tB\x03\xe0\x41\x01\x12\x1a\n\rscreen_height\x18\x05 \x01(\x05\x42\x03\xe0\x41\x01\x12\x19\n\x0cscreen_width\x18\x06 \x01(\x05\x42\x03\xe0\x41\x01\x12\x1d\n\x10operating_system\x18\x07 \x01(\tB\x03\xe0\x41\x01\x12%\n\x18operating_system_version\x18\x08 \x01(\tB\x03\xe0\x41\x01\x12\x12\n\x05model\x18\t \x01(\tB\x03\xe0\x41\x01\x12\x12\n\x05\x62rand\x18\n \x01(\tB\x03\xe0\x41\x01\x12\x14\n\x07\x62rowser\x18\x0b \x01(\tB\x03\xe0\x41\x01\x12\x1c\n\x0f\x62rowser_version\x18\x0c \x01(\tB\x03\xe0\x41\x01\x42\xcc\x01\n\x1d\x63om.google.ads.datamanager.v1B\x0f\x44\x65viceInfoProtoP\x01ZAcloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
 
-pool = Google::Protobuf::DescriptorPool.generated_pool
-
-begin
-  pool.add_serialized_file(descriptor_data)
-rescue TypeError
-  # Compatibility code: will be removed in the next major version.
-  require 'google/protobuf/descriptor_pb'
-  parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
-  parsed.clear_dependency
-  serialized = parsed.class.encode(parsed)
-  file = pool.add_serialized_file(serialized)
-  warn "Warning: Protobuf detected an import path issue while loading generated file #{__FILE__}"
-  imports = [
-  ]
-  imports.each do |type_name, expected_filename|
-    import_file = pool.lookup(type_name).file_descriptor
-    if import_file.name != expected_filename
-      warn "- #{file.name} imports #{expected_filename}, but that import was loaded as #{import_file.name}"
-    end
-  end
-  warn "Each proto file must use a consistent fully-qualified name."
-  warn "This will become an error in the next major version."
-end
+pool = ::Google::Protobuf::DescriptorPool.generated_pool
+pool.add_serialized_file(descriptor_data)
 
 module Google
   module Ads

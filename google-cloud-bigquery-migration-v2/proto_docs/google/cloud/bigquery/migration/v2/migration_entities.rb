@@ -42,12 +42,12 @@ module Google
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigquery::Migration::V2::MigrationWorkflow::State]
           #     Output only. That status of the workflow.
-          # @!attribute [rw] create_time
+          # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the workflow was created.
-          # @!attribute [rw] last_update_time
+          #     Output only. Time when the workflow was created.
+          # @!attribute [r] last_update_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the workflow was last updated.
+          #     Output only. Time when the workflow was last updated.
           class MigrationWorkflow
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -86,29 +86,43 @@ module Google
 
           # A single task for a migration which has details about the configuration of
           # the task.
+          # @!attribute [rw] assessment_task_details
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::AssessmentTaskDetails]
+          #     Task configuration for Assessment.
+          #
+          #     Note: The following fields are mutually exclusive: `assessment_task_details`, `translation_config_details`, `translation_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] translation_config_details
           #   @return [::Google::Cloud::Bigquery::Migration::V2::TranslationConfigDetails]
           #     Task configuration for CW Batch/Offline SQL Translation.
           #
-          #     Note: The following fields are mutually exclusive: `translation_config_details`, `translation_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `translation_config_details`, `assessment_task_details`, `translation_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] translation_details
           #   @return [::Google::Cloud::Bigquery::Migration::V2::TranslationDetails]
           #     Task details for unified SQL Translation.
           #
-          #     Note: The following fields are mutually exclusive: `translation_details`, `translation_config_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `translation_details`, `assessment_task_details`, `translation_config_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] id
           #   @return [::String]
           #     Output only. Immutable. The unique identifier for the migration task. The
           #     ID is server-generated.
           # @!attribute [rw] type
           #   @return [::String]
-          #     The type of the task. This must be one of the supported task types:
-          #     Translation_Teradata2BQ, Translation_Redshift2BQ, Translation_Bteq2BQ,
-          #     Translation_Oracle2BQ, Translation_HiveQL2BQ, Translation_SparkSQL2BQ,
-          #     Translation_Snowflake2BQ, Translation_Netezza2BQ,
-          #     Translation_AzureSynapse2BQ, Translation_Vertica2BQ,
-          #     Translation_SQLServer2BQ, Translation_Presto2BQ, Translation_MySQL2BQ,
-          #     Translation_Postgresql2BQ, Translation_SQLite2BQ, Translation_Greenplum2BQ.
+          #     The type of the task. This must be one of the supported task types.
+          #
+          #     Assessment:
+          #
+          #     - `Assessment_Hive` - Assessment for Hive.
+          #     - `Assessment_Redshift` - Assessment for Redshift.
+          #     - `Assessment_Snowflake` - Assessment for Snowflake.
+          #     - `Assessment_Teradata_v2` - Assessment for Teradata.
+          #     - `Assessment_Oracle` - Assessment for Oracle.
+          #     - `Assessment_Hadoop` - Assessment for Hadoop.
+          #     - `Assessment_Informatica` - Assessment for Informatica.
+          #
+          #     Translation:
+          #     See [Supported Task
+          #     Types](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types)
+          #     for a list of supported task types.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigquery::Migration::V2::MigrationTask::State]
           #     Output only. The current state of the task.
@@ -116,35 +130,37 @@ module Google
           #   @return [::Google::Rpc::ErrorInfo]
           #     Output only. An explanation that may be populated when the task is in
           #     FAILED state.
-          # @!attribute [rw] create_time
+          # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the task was created.
-          # @!attribute [rw] last_update_time
+          #     Output only. Time when the task was created.
+          # @!attribute [r] last_update_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the task was last updated.
+          #     Output only. Time when the task was last updated.
           # @!attribute [r] resource_error_details
           #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::ResourceErrorDetail>]
           #     Output only. Provides details to errors and issues encountered while
           #     processing the task. Presence of error details does not mean that the task
           #     failed.
-          # @!attribute [rw] resource_error_count
+          # @!attribute [r] resource_error_count
           #   @return [::Integer]
-          #     The number or resources with errors. Note: This is not the total
-          #     number of errors as each resource can have more than one error.
-          #     This is used to indicate truncation by having a `resource_error_count`
-          #     that is higher than the size of `resource_error_details`.
-          # @!attribute [rw] metrics
+          #     Output only. The number or resources with errors. Note: This is not the
+          #     total number of errors as each resource can have more than one error. This
+          #     is used to indicate truncation by having a `resource_error_count` that is
+          #     higher than the size of `resource_error_details`.
+          # @!attribute [r] metrics
           #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::TimeSeries>]
-          #     The metrics for the task.
+          #     Output only. The metrics for the task.
           # @!attribute [r] task_result
           #   @return [::Google::Cloud::Bigquery::Migration::V2::MigrationTaskResult]
           #     Output only. The result of the task.
-          # @!attribute [rw] total_processing_error_count
+          # @!attribute [r] total_processing_error_count
           #   @return [::Integer]
-          #     Count of all the processing errors in this task and its subtasks.
-          # @!attribute [rw] total_resource_error_count
+          #     Output only. Count of all the processing errors in this task and its
+          #     subtasks.
+          # @!attribute [r] total_resource_error_count
           #   @return [::Integer]
-          #     Count of all the resource errors in this task and its subtasks.
+          #     Output only. Count of all the resource errors in this task and its
+          #     subtasks.
           class MigrationTask
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -163,7 +179,7 @@ module Google
               # The task is running, i.e. its subtasks are ready for execution.
               RUNNING = 3
 
-              # Tha task is paused. Assigned subtasks can continue, but no new subtasks
+              # The task is paused. Assigned subtasks can continue, but no new subtasks
               # will be scheduled.
               PAUSED = 4
 
@@ -205,21 +221,21 @@ module Google
           #     Output only. Provides details to errors and issues encountered while
           #     processing the subtask. Presence of error details does not mean that the
           #     subtask failed.
-          # @!attribute [rw] resource_error_count
+          # @!attribute [r] resource_error_count
           #   @return [::Integer]
-          #     The number or resources with errors. Note: This is not the total
-          #     number of errors as each resource can have more than one error.
-          #     This is used to indicate truncation by having a `resource_error_count`
-          #     that is higher than the size of `resource_error_details`.
-          # @!attribute [rw] create_time
+          #     Output only. The number or resources with errors. Note: This is not the
+          #     total number of errors as each resource can have more than one error. This
+          #     is used to indicate truncation by having a `resource_error_count` that is
+          #     higher than the size of `resource_error_details`.
+          # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the subtask was created.
-          # @!attribute [rw] last_update_time
+          #     Output only. Time when the subtask was created.
+          # @!attribute [r] last_update_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the subtask was last updated.
-          # @!attribute [rw] metrics
+          #     Output only. Time when the subtask was last updated.
+          # @!attribute [r] metrics
           #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::TimeSeries>]
-          #     The metrics for the subtask.
+          #     Output only. The metrics for the subtask.
           class MigrationSubtask
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -267,6 +283,9 @@ module Google
           # @!attribute [rw] report_log_messages
           #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::GcsReportLogMessage>]
           #     The records from the aggregate CSV report for a migration workflow.
+          # @!attribute [rw] console_uri
+          #   @return [::String]
+          #     The Cloud Console URI for the migration workflow.
           class TranslationTaskResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -24,6 +24,7 @@ require "google/cloud/ai_platform/v1/version"
 
 require "google/cloud/ai_platform/v1/reasoning_engine_execution_service/credentials"
 require "google/cloud/ai_platform/v1/reasoning_engine_execution_service/paths"
+require "google/cloud/ai_platform/v1/reasoning_engine_execution_service/operations"
 require "google/cloud/ai_platform/v1/reasoning_engine_execution_service/client"
 require "google/cloud/ai_platform/v1/reasoning_engine_execution_service/rest"
 

@@ -109,6 +109,11 @@
               "methods": [
                 "generate_access_token"
               ]
+            },
+            "PushCredentials": {
+              "methods": [
+                "push_credentials"
+              ]
             }
           }
         }

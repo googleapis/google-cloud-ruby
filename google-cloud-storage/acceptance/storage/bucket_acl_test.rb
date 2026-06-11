@@ -58,6 +58,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :storage do
   end
 
   it "updates predefined rules" do
+    skip PAP_SKIP_MESSAGE
     _(bucket.acl.readers).wont_include "allAuthenticatedUsers"
     bucket.acl.auth!
     _(bucket.acl.readers).must_include "allAuthenticatedUsers"
@@ -68,6 +69,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :storage do
   end
 
   it "deletes rules" do
+    skip PAP_SKIP_MESSAGE
     bucket.acl.auth!
     _(bucket.acl.readers).must_include "allAuthenticatedUsers"
     bucket.acl.delete "allAuthenticatedUsers"
@@ -117,6 +119,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :storage do
   end
 
   it "sets predefined ACL rules" do
+    skip PAP_SKIP_MESSAGE
     safe_gcs_execute { bucket.acl.authenticatedRead! }
     safe_gcs_execute { bucket.acl.auth! }
     safe_gcs_execute { bucket.acl.auth_read! }

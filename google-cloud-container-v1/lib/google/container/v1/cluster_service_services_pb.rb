@@ -136,7 +136,7 @@ module Google
             rpc :CheckAutopilotCompatibility, ::Google::Cloud::Container::V1::CheckAutopilotCompatibilityRequest, ::Google::Cloud::Container::V1::CheckAutopilotCompatibilityResponse
             # Fetch upgrade information of a specific cluster.
             rpc :FetchClusterUpgradeInfo, ::Google::Cloud::Container::V1::FetchClusterUpgradeInfoRequest, ::Google::Cloud::Container::V1::ClusterUpgradeInfo
-            # Fetch upgrade information of a specific nodepool.
+            # Fetch upgrade information of a specific node pool.
             rpc :FetchNodePoolUpgradeInfo, ::Google::Cloud::Container::V1::FetchNodePoolUpgradeInfoRequest, ::Google::Cloud::Container::V1::NodePoolUpgradeInfo
           end
 

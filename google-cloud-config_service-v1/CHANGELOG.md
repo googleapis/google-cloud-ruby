@@ -1,5 +1,30 @@
 # Changelog
 
+### 2.9.0 (2026-04-14)
+
+#### Features
+
+* adding DeploymentGroups, you can now manage deployment of multiple module root dependencies in a single DAG ([#33816](https://github.com/googleapis/google-cloud-ruby/issues/33816)) 
+
+### 2.8.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33432](https://github.com/googleapis/google-cloud-ruby/issues/33432)) 
+
+### 2.7.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.6.0 (2026-01-13)
+
+#### Features
+
+* add support for enabling automigration from deprecated Terraform versions ([#32341](https://github.com/googleapis/google-cloud-ruby/issues/32341)) 
+* added error code when failing import values from an external source 
+
 ### 2.5.1 (2025-10-27)
 
 #### Documentation

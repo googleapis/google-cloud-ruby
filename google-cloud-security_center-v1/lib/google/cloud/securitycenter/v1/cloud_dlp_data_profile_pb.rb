@@ -7,31 +7,10 @@ require 'google/protobuf'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n;google/cloud/securitycenter/v1/cloud_dlp_data_profile.proto\x12\x1egoogle.cloud.securitycenter.v1\x1a\x19google/api/resource.proto\"\xf4\x01\n\x13\x43loudDlpDataProfile\x12>\n\x0c\x64\x61ta_profile\x18\x01 \x01(\tB(\xfa\x41%\n#dlp.googleapis.com/TableDataProfile\x12S\n\x0bparent_type\x18\x02 \x01(\x0e\x32>.google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType\"H\n\nParentType\x12\x1b\n\x17PARENT_TYPE_UNSPECIFIED\x10\x00\x12\x10\n\x0cORGANIZATION\x10\x01\x12\x0b\n\x07PROJECT\x10\x02\x42\x94\x03\n\"com.google.cloud.securitycenter.v1B\x18\x43loudDlpDataProfileProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1\xea\x41\x9e\x01\n#dlp.googleapis.com/TableDataProfile\x12\x30projects/{project}/tableProfiles/{table_profile}\x12\x45projects/{project}/locations/{location}/tableProfiles/{table_profile}b\x06proto3"
+descriptor_data = "\n;google/cloud/securitycenter/v1/cloud_dlp_data_profile.proto\x12\x1egoogle.cloud.securitycenter.v1\x1a\x19google/api/resource.proto\"\xb2\x02\n\x13\x43loudDlpDataProfile\x12>\n\x0c\x64\x61ta_profile\x18\x01 \x01(\tB(\xfa\x41%\n#dlp.googleapis.com/TableDataProfile\x12S\n\x0bparent_type\x18\x02 \x01(\x0e\x32>.google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType\x12<\n\ninfo_types\x18\x03 \x03(\x0b\x32(.google.cloud.securitycenter.v1.InfoType\"H\n\nParentType\x12\x1b\n\x17PARENT_TYPE_UNSPECIFIED\x10\x00\x12\x10\n\x0cORGANIZATION\x10\x01\x12\x0b\n\x07PROJECT\x10\x02\"v\n\x08InfoType\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\x12K\n\x11sensitivity_score\x18\x03 \x01(\x0b\x32\x30.google.cloud.securitycenter.v1.SensitivityScore\"\x8a\x02\n\x10SensitivityScore\x12U\n\x05score\x18\x01 \x01(\x0e\x32\x46.google.cloud.securitycenter.v1.SensitivityScore.SensitivityScoreLevel\"\x9e\x01\n\x15SensitivityScoreLevel\x12\'\n#SENSITIVITY_SCORE_LEVEL_UNSPECIFIED\x10\x00\x12\x13\n\x0fSENSITIVITY_LOW\x10\n\x12\x17\n\x13SENSITIVITY_UNKNOWN\x10\x0c\x12\x18\n\x14SENSITIVITY_MODERATE\x10\x14\x12\x14\n\x10SENSITIVITY_HIGH\x10\x1e\x42\x94\x03\n\"com.google.cloud.securitycenter.v1B\x18\x43loudDlpDataProfileProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1\xea\x41\x9e\x01\n#dlp.googleapis.com/TableDataProfile\x12\x30projects/{project}/tableProfiles/{table_profile}\x12\x45projects/{project}/locations/{location}/tableProfiles/{table_profile}b\x06proto3"
 
-pool = Google::Protobuf::DescriptorPool.generated_pool
-
-begin
-  pool.add_serialized_file(descriptor_data)
-rescue TypeError
-  # Compatibility code: will be removed in the next major version.
-  require 'google/protobuf/descriptor_pb'
-  parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
-  parsed.clear_dependency
-  serialized = parsed.class.encode(parsed)
-  file = pool.add_serialized_file(serialized)
-  warn "Warning: Protobuf detected an import path issue while loading generated file #{__FILE__}"
-  imports = [
-  ]
-  imports.each do |type_name, expected_filename|
-    import_file = pool.lookup(type_name).file_descriptor
-    if import_file.name != expected_filename
-      warn "- #{file.name} imports #{expected_filename}, but that import was loaded as #{import_file.name}"
-    end
-  end
-  warn "Each proto file must use a consistent fully-qualified name."
-  warn "This will become an error in the next major version."
-end
+pool = ::Google::Protobuf::DescriptorPool.generated_pool
+pool.add_serialized_file(descriptor_data)
 
 module Google
   module Cloud
@@ -39,6 +18,9 @@ module Google
       module V1
         CloudDlpDataProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.CloudDlpDataProfile").msgclass
         CloudDlpDataProfile::ParentType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType").enummodule
+        InfoType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.InfoType").msgclass
+        SensitivityScore = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.SensitivityScore").msgclass
+        SensitivityScore::SensitivityScoreLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.SensitivityScore.SensitivityScoreLevel").enummodule
       end
     end
   end

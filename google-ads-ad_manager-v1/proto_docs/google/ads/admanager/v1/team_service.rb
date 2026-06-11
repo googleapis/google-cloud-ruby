@@ -52,8 +52,19 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Expression to filter the response.
-        #     See syntax details at
-        #     https://developers.google.com/ad-manager/api/beta/filters
+        #      See syntax details at
+        #      https://developers.google.com/ad-manager/api/beta/filters
+        #
+        #     <b>Filterable fields:</b>
+        #     <ul style="list-style-type:none">
+        #       <li><code>accessType</code></li>
+        #       <li><code>allCompaniesAccess</code></li>
+        #       <li><code>allInventoryAccess</code></li>
+        #       <li><code>description</code></li>
+        #       <li><code>displayName</code></li>
+        #       <li><code>name</code></li>
+        #       <li><code>status</code></li>
+        #     </ul>
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.
@@ -139,7 +150,7 @@ module Google
         #     The `Team`'s `name` is used to identify the `Team` to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to update.
+        #     Optional. The list of fields to update.
         class UpdateTeamRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -642,6 +642,20 @@ module Google
               "properties/#{property}/subpropertySyncConfigs/#{subproperty_sync_config}"
             end
 
+            ##
+            # Create a fully-qualified UserProvidedDataSettings resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/userProvidedDataSettings`
+            #
+            # @param property [String]
+            #
+            # @return [::String]
+            def user_provided_data_settings_path property:
+              "properties/#{property}/userProvidedDataSettings"
+            end
+
             extend self
           end
         end

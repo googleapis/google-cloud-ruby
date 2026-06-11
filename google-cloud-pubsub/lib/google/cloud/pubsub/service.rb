@@ -19,6 +19,7 @@ require "google/cloud/pubsub/convert"
 require "google/cloud/pubsub/version"
 require "google/cloud/pubsub/v1"
 require "google/cloud/pubsub/admin_clients"
+require "google/cloud/pubsub/internal_logger"
 require "securerandom"
 
 module Google
@@ -41,14 +42,19 @@ module Google
         attr_reader :universe_domain
 
         ##
+        # @private The InternalLogger object.
+        attr_reader :logger
+
+        ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil, universe_domain: nil
+        def initialize project, credentials, host: nil, timeout: nil, universe_domain: nil, logger: nil
           @project = project
           @credentials = credentials
           @host = host
           @timeout = timeout
           @client_id = SecureRandom.uuid.freeze
           @universe_domain = universe_domain || ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] || "googleapis.com"
+          @logger = logger
         end
 
         def subscription_admin
@@ -141,6 +147,7 @@ module Google
         ##
         # Acknowledges receipt of a message.
         def acknowledge subscription, *ack_ids
+          logger.log_ack_nack ack_ids, "ack"
           subscription_admin.acknowledge_internal subscription: subscription_path(subscription),
                                                   ack_ids: ack_ids
         end
@@ -148,6 +155,9 @@ module Google
         ##
         # Modifies the ack deadline for a specific message.
         def modify_ack_deadline subscription, ids, deadline
+          if deadline.zero?
+            logger.log_ack_nack Array(ids), "nack"
+          end
           subscription_admin.modify_ack_deadline_internal subscription: subscription_path(subscription),
                                                           ack_ids: Array(ids),
                                                           ack_deadline_seconds: deadline
@@ -193,6 +203,7 @@ module Google
             rpc.timeout = timeout if rpc.respond_to? :timeout=
           end
         end
+
       end
     end
     Pubsub = PubSub unless const_defined? :Pubsub

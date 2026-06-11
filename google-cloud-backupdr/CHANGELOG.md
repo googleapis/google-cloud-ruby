@@ -1,5 +1,18 @@
 # Changelog
 
+### 2.2.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.1.0 (2026-01-13)
+
+#### Features
+
+* A new message `ListResourceBackupConfigsRequest` is added 
+* A new service `BackupDrProtectionSummary` is added ([#32339](https://github.com/googleapis/google-cloud-ruby/issues/32339)) 
+
 ### 2.0.2 (2025-09-12)
 
 #### Documentation

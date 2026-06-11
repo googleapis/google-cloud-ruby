@@ -83,6 +83,9 @@ module Google
           #   @return [::String]
           #     Human readable description for better understanding an intent like its
           #     scope, content, result etc. Maximum character limit: 140 characters.
+          # @!attribute [rw] dtmf_pattern
+          #   @return [::String]
+          #     Optional. Matching DTMF pattern for the intent.
           class Intent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

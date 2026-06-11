@@ -1,5 +1,23 @@
 # Release History
 
+### 1.64.0 (2026-05-11)
+
+#### Features
+
+* Support bigdecimal 4.x ([#33930](https://github.com/googleapis/google-cloud-ruby/issues/33930)) 
+
+### 1.63.1 (2026-05-05)
+
+#### Bug Fixes
+
+* use destination table's project_id for queries ([#33886](https://github.com/googleapis/google-cloud-ruby/issues/33886)) ([df84fa9](https://github.com/googleapis/google-cloud-ruby/commit/df84fa9883aa9e159bcafbf8033780f33bf19fc5)), closes [#33810](https://github.com/googleapis/google-cloud-ruby/issues/33810)
+
+### 1.63.0 (2026-04-15)
+
+#### Features
+
+* Update minimum Ruby to v3.2 and support v4.0 ([#33811](https://github.com/googleapis/google-cloud-ruby/issues/33811)) 
+
 ### 1.62.0 (2026-01-06)
 
 #### Features

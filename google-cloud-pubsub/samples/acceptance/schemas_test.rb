@@ -28,6 +28,7 @@ require_relative "../pubsub_publish_avro_records"
 require_relative "../pubsub_subscribe_avro_records"
 require_relative "../pubsub_publish_proto_messages"
 require_relative "../pubsub_subscribe_proto_messages"
+require_relative "../pubsub_subscribe_avro_records_with_revisions"
 
 
 describe "schemas" do
@@ -36,6 +37,7 @@ describe "schemas" do
   let(:topic_id) { random_topic_id }
   let(:subscription_id) { random_subscription_id }
   let(:avsc_file) { File.expand_path "data/us-states.avsc", __dir__ }
+  let(:avsc_revision_file) { File.expand_path "data/us-states-plus.avsc", __dir__ }
   let(:topic_admin) { pubsub.topic_admin }
   let(:subscription_admin) { pubsub.subscription_admin }
   let(:schemas) { pubsub.schemas }
@@ -215,6 +217,53 @@ describe "schemas" do
       end
 
       assert_includes out, schema1.revision_id
+    end
+
+    it "supports pubsub_subscribe_avro_records_with_revisions" do
+      # Commit Rev B first (Rev A is already created in before block).
+      schema_b = nil
+      out, _err = capture_io do
+        schema_b = commit_avro_schema schema_id: schema_id, avsc_file: avsc_revision_file
+      end
+      
+      rev_a_id = @schema.revision_id
+      rev_b_id = schema_b.revision_id
+
+      # Create topic with schema range allowing both revisions.
+      schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
+                                                                      encoding: :BINARY,
+                                                                      first_revision_id: rev_a_id,
+                                                                      last_revision_id: rev_b_id
+      @topic = topic_admin.create_topic name: pubsub.topic_path(random_topic_id),
+                                        schema_settings: schema_settings
+
+      @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                             topic: @topic.name,
+                                                             ack_deadline_seconds: 60
+
+      # Publish message 1 (Old format - valid for both).
+      writer = Avro::IO::DatumWriter.new avro_schema
+      buffer = StringIO.new
+      writer.write record, Avro::IO::BinaryEncoder.new(buffer)
+      publisher = pubsub.publisher @topic.name
+      publisher.publish buffer
+
+      # Publish message 2 (New format - valid only for Rev B).
+      avsc_definition_plus = File.read avsc_revision_file
+      avro_schema_plus = Avro::Schema.parse avsc_definition_plus
+      record_plus = { "name" => "California", "post_abbr" => "CA", "population" => 39000000 }
+      
+      writer_plus = Avro::IO::DatumWriter.new avro_schema_plus
+      buffer_plus = StringIO.new
+      writer_plus.write record_plus, Avro::IO::BinaryEncoder.new(buffer_plus)
+      publisher.publish buffer_plus
+
+      # Verify we can subscribe and decode both.
+      expect_with_retry "pubsub_subscribe_avro_records_with_revisions" do
+        assert_output /Received a binary-encoded message:.*Alaska.*Received a binary-encoded message:.*California/m do
+          subscribe_avro_records_with_revisions subscription_id: @subscription.name
+        end
+      end
     end
   end
 

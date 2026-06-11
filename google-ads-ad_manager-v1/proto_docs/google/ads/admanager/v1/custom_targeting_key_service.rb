@@ -53,8 +53,18 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Expression to filter the response.
-        #     See syntax details at
-        #     https://developers.google.com/ad-manager/api/beta/filters
+        #      See syntax details at
+        #      https://developers.google.com/ad-manager/api/beta/filters
+        #
+        #     <b>Filterable fields:</b>
+        #     <ul style="list-style-type:none">
+        #       <li><code>adTagName</code></li>
+        #       <li><code>displayName</code></li>
+        #       <li><code>name</code></li>
+        #       <li><code>reportableType</code></li>
+        #       <li><code>status</code></li>
+        #       <li><code>type</code></li>
+        #     </ul>
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.
@@ -142,7 +152,7 @@ module Google
         #     `CustomTargetingKey` to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to update.
+        #     Optional. The list of fields to update.
         class UpdateCustomTargetingKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

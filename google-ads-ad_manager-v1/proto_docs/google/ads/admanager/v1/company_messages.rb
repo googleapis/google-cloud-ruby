@@ -21,76 +21,89 @@ module Google
   module Ads
     module AdManager
       module V1
-        # The `Company` resource.
+        # The {::Google::Ads::AdManager::V1::Company Company} resource.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. The resource name of the `Company`.
-        #     Format: `networks/{network_code}/companies/{company_id}`
+        #     Identifier. The resource name of the
+        #     {::Google::Ads::AdManager::V1::Company Company}. Format:
+        #     `networks/{network_code}/companies/{company_id}`
         # @!attribute [r] company_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. `Company` ID.
+        #     Output only. Deprecated: {::Google::Ads::AdManager::V1::Company Company} ID.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Required. The display name of the `Company`.
+        #     Required. The display name of the
+        #     {::Google::Ads::AdManager::V1::Company Company}.
         #
         #     This value has a maximum length of 127 characters.
         # @!attribute [rw] type
         #   @return [::Google::Ads::AdManager::V1::CompanyTypeEnum::CompanyType]
-        #     Required. The type of the `Company`.
+        #     Required. The type of the {::Google::Ads::AdManager::V1::Company Company}.
         # @!attribute [rw] address
         #   @return [::String]
-        #     Optional. The address for the `Company`.
+        #     Optional. The address for the {::Google::Ads::AdManager::V1::Company Company}.
         #
         #     This value has a maximum length of 1024 characters.
         # @!attribute [rw] email
         #   @return [::String]
-        #     Optional. The email for the `Company`.
+        #     Optional. The email for the {::Google::Ads::AdManager::V1::Company Company}.
         #
         #     This value has a maximum length of 128 characters.
         # @!attribute [rw] fax
         #   @return [::String]
-        #     Optional. The fax number for the `Company`.
+        #     Optional. The fax number for the
+        #     {::Google::Ads::AdManager::V1::Company Company}.
         #
         #     This value has a maximum length of 63 characters.
         # @!attribute [rw] phone
         #   @return [::String]
-        #     Optional. The phone number for the `Company`.
+        #     Optional. The phone number for the
+        #     {::Google::Ads::AdManager::V1::Company Company}.
         #
         #     This value has a maximum length of 63 characters.
         # @!attribute [rw] external_id
         #   @return [::String]
-        #     Optional. The external ID for the `Company`.
+        #     Optional. The external ID for the
+        #     {::Google::Ads::AdManager::V1::Company Company}.
         #
         #     This value has a maximum length of 255 characters.
         # @!attribute [rw] comment
         #   @return [::String]
-        #     Optional. Comments about the `Company`.
+        #     Optional. Comments about the {::Google::Ads::AdManager::V1::Company Company}.
         #
         #     This value has a maximum length of 1024 characters.
         # @!attribute [rw] credit_status
         #   @return [::Google::Ads::AdManager::V1::CompanyCreditStatusEnum::CompanyCreditStatus]
-        #     Optional. The credit status of the `Company`.
+        #     Optional. The credit status of the
+        #     {::Google::Ads::AdManager::V1::Company Company}.
         #
-        #     This attribute defaults to `ACTIVE` if basic settings are enabled and
-        #     `ON_HOLD` if advance settings are enabled.
+        #     This attribute defaults to [CompanyCreditStatus.ACTIVE][] if basic
+        #     settings are enabled and [CompanyCreditStatus.ON_HOLD][] if advance
+        #     settings are enabled.
         # @!attribute [rw] applied_labels
         #   @return [::Array<::Google::Ads::AdManager::V1::AppliedLabel>]
-        #     Optional. The labels that are directly applied to the `Company`.
+        #     Optional. The labels that are directly applied to the
+        #     {::Google::Ads::AdManager::V1::Company Company}.
         # @!attribute [rw] primary_contact
         #   @return [::String]
-        #     Optional. The resource names of primary Contact of the `Company`.
-        #     Format: "networks/\\{network_code}/contacts/\\{contact_id}"
+        #     Optional. The resource names of primary
+        #     {::Google::Ads::AdManager::V1::Contact Contact} of the
+        #     {::Google::Ads::AdManager::V1::Company Company}. Format:
+        #     "networks/\\{network_code}/contacts/\\{contact_id}"
         # @!attribute [rw] applied_teams
         #   @return [::Array<::String>]
         #     Optional. The resource names of Teams that are directly associated with the
-        #     `Company`. Format: "networks/\\{network_code}/teams/\\{team_id}"
+        #     {::Google::Ads::AdManager::V1::Company Company}. Format:
+        #     "networks/\\{network_code}/teams/\\{team_id}"
         # @!attribute [rw] third_party_company_id
         #   @return [::Integer]
         #     Optional. The ID of the Google-recognized canonicalized form of the
-        #     `Company`.
+        #     {::Google::Ads::AdManager::V1::Company Company}.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time the `Company` was last modified.
+        #     Output only. The time the {::Google::Ads::AdManager::V1::Company Company} was
+        #     last modified.
         class Company
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

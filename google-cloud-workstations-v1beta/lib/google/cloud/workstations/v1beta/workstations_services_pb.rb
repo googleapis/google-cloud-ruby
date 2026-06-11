@@ -75,7 +75,13 @@ module Google
             rpc :StopWorkstation, ::Google::Cloud::Workstations::V1beta::StopWorkstationRequest, ::Google::Longrunning::Operation
             # Returns a short-lived credential that can be used to send authenticated and
             # authorized traffic to a workstation.
+            # Once generated this token cannot be revoked and is good for the lifetime
+            # of the token.
             rpc :GenerateAccessToken, ::Google::Cloud::Workstations::V1beta::GenerateAccessTokenRequest, ::Google::Cloud::Workstations::V1beta::GenerateAccessTokenResponse
+            # Pushes credentials to a running workstation on behalf of a user. Once
+            # complete, supported credential types (application_default_credentials) are
+            # made available to processes running in the user container.
+            rpc :PushCredentials, ::Google::Cloud::Workstations::V1beta::PushCredentialsRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

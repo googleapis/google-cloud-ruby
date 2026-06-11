@@ -263,6 +263,18 @@ module Google
         #     https://developers.google.com/identity/protocols/OpenIDConnect#hd-param
         #     Note: IAP does not verify that the id token's hd claim matches this value
         #     since access behavior is managed by IAM policies.
+        # @!attribute [rw] client_id
+        #   @return [::Google::Protobuf::StringValue]
+        #     Optional. OAuth 2.0 client ID used in the OAuth flow.
+        #     This allows for client sharing. The risks of client sharing
+        #     are outlined here:
+        #     https://cloud.google.com/iap/docs/sharing-oauth-clients#risks.
+        # @!attribute [rw] client_secret
+        #   @return [::Google::Protobuf::StringValue]
+        #     Optional. Input only. OAuth secret paired with client ID.
+        # @!attribute [r] client_secret_sha256
+        #   @return [::Google::Protobuf::StringValue]
+        #     Output only. OAuth secret SHA256 paired with client ID.
         # @!attribute [rw] programmatic_clients
         #   @return [::Array<::String>]
         #     Optional. List of client ids allowed to use IAP programmatically.

@@ -1,5 +1,20 @@
 # Changelog
 
+### 1.6.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* Added line_number to FileLocation 
+* Upgrade dependencies for Ruby 4.0 
+* upgrade protobuf from v25.7 to v31.0 ([#32810](https://github.com/googleapis/google-cloud-ruby/issues/32810)) 
+
+### 1.5.0 (2026-02-24)
+
+#### Features
+
+* A new field `registry` is added to message `.grafeas.v1.BaseImage` ([#32452](https://github.com/googleapis/google-cloud-ruby/issues/32452)) 
+
 ### 1.4.1 (2025-10-27)
 
 #### Documentation

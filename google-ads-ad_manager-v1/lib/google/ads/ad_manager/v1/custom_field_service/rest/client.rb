@@ -289,8 +289,21 @@ module Google
               #     match the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
-              #     See syntax details at
-              #     https://developers.google.com/ad-manager/api/beta/filters
+              #      See syntax details at
+              #      https://developers.google.com/ad-manager/api/beta/filters
+              #
+              #     <b>Filterable fields:</b>
+              #     <ul style="list-style-type:none">
+              #       <li><code>dataType</code></li>
+              #       <li><code>description</code></li>
+              #       <li><code>displayName</code></li>
+              #       <li><code>entityType</code></li>
+              #       <li><code>name</code></li>
+              #       <li><code>options.customFieldOptionId</code></li>
+              #       <li><code>options.displayName</code></li>
+              #       <li><code>status</code></li>
+              #       <li><code>visibility</code></li>
+              #     </ul>
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
@@ -549,7 +562,7 @@ module Google
               #
               #     The `CustomField`'s `name` is used to identify the `CustomField` to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The list of fields to update.
+              #     Optional. The list of fields to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::CustomField]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

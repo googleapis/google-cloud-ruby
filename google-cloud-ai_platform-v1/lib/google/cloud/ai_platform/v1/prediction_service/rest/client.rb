@@ -1159,7 +1159,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload embed_content(model: nil, content: nil, title: nil, task_type: nil, output_dimensionality: nil, auto_truncate: nil)
+              # @overload embed_content(model: nil, content: nil, title: nil, task_type: nil, output_dimensionality: nil, auto_truncate: nil, embed_content_config: nil)
               #   Pass arguments to `embed_content` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1169,17 +1169,23 @@ module Google
               #     prediction. Format:
               #     `projects/{project}/locations/{location}/publishers/*/models/*`
               #   @param content [::Google::Cloud::AIPlatform::V1::Content, ::Hash]
-              #     Required. Input content to be embedded. Required.
+              #     Required. Input content to be embedded.
               #   @param title [::String]
-              #     Optional. An optional title for the text.
+              #     Optional. Deprecated: Please use EmbedContentConfig.title instead.
+              #     The title for the text.
               #   @param task_type [::Google::Cloud::AIPlatform::V1::EmbedContentRequest::EmbeddingTaskType]
-              #     Optional. The task type of the embedding.
+              #     Optional. Deprecated: Please use EmbedContentConfig.task_type instead.
+              #     The task type of the embedding.
               #   @param output_dimensionality [::Integer]
-              #     Optional. Optional reduced dimension for the output embedding. If set,
-              #     excessive values in the output embedding are truncated from the end.
+              #     Optional. Deprecated: Please use EmbedContentConfig.output_dimensionality
+              #     instead. Reduced dimension for the output embedding. If set, excessive
+              #     values in the output embedding are truncated from the end.
               #   @param auto_truncate [::Boolean]
-              #     Optional. Whether to silently truncate the input content if it's longer
+              #     Optional. Deprecated: Please use EmbedContentConfig.auto_truncate instead.
+              #     Whether to silently truncate the input content if it's longer
               #     than the maximum sequence length.
+              #   @param embed_content_config [::Google::Cloud::AIPlatform::V1::EmbedContentRequest::EmbedContentConfig, ::Hash]
+              #     Optional. Configuration for the EmbedContent request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::AIPlatform::V1::EmbedContentResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

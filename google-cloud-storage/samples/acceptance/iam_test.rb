@@ -55,6 +55,7 @@ describe "IAM Snippets" do
   end
 
   it "set_bucket_public_iam" do
+    skip PAP_SKIP_MESSAGE
     # set_bucket_public_iam
     assert_output "Bucket #{bucket.name} is now publicly readable\n" do
       set_bucket_public_iam bucket_name: bucket.name

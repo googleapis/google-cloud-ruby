@@ -71,6 +71,12 @@ module Google
         #     Output only. Timestamp in UTC of when this data agent is considered
         #     expired. This is *always* provided on output, regardless of what was sent
         #     on input.
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     Optional. Customer managed encryption key (CMEK) to use for encrypting the
+        #     DataAgent resources. Cloud KMS CryptoKeys must reside in the same location
+        #     as the DataAgent. The expected format is
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
         class DataAgent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

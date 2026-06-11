@@ -25,6 +25,23 @@ module Google
           # Path helper methods for the Config API.
           module Paths
             ##
+            # Create a fully-qualified AutoMigrationConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/autoMigrationConfig`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def auto_migration_config_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/autoMigrationConfig"
+            end
+
+            ##
             # Create a fully-qualified Deployment resource string.
             #
             # The resource will be in the following format:
@@ -41,6 +58,46 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/deployments/#{deployment}"
+            end
+
+            ##
+            # Create a fully-qualified DeploymentGroup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/deploymentGroups/{deployment_group}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param deployment_group [String]
+            #
+            # @return [::String]
+            def deployment_group_path project:, location:, deployment_group:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/deploymentGroups/#{deployment_group}"
+            end
+
+            ##
+            # Create a fully-qualified DeploymentGroupRevision resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/deploymentGroups/{deployment_group}/revisions/{revision}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param deployment_group [String]
+            # @param revision [String]
+            #
+            # @return [::String]
+            def deployment_group_revision_path project:, location:, deployment_group:, revision:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "deployment_group cannot contain /" if deployment_group.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/deploymentGroups/#{deployment_group}/revisions/#{revision}"
             end
 
             ##

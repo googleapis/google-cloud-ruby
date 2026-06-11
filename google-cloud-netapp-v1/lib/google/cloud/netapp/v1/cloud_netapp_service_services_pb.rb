@@ -63,6 +63,9 @@ module Google
             # Warning! This operation will permanently revert all changes made after the
             # snapshot was created.
             rpc :RevertVolume, ::Google::Cloud::NetApp::V1::RevertVolumeRequest, ::Google::Longrunning::Operation
+            # Establish volume peering. This is used to establish cluster and svm
+            # peerings between the GCNV and OnPrem clusters.
+            rpc :EstablishVolumePeering, ::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest, ::Google::Longrunning::Operation
             # Returns descriptions of all snapshots for a volume.
             rpc :ListSnapshots, ::Google::Cloud::NetApp::V1::ListSnapshotsRequest, ::Google::Cloud::NetApp::V1::ListSnapshotsResponse
             # Describe a snapshot for a volume.
@@ -164,6 +167,31 @@ module Google
             rpc :UpdateQuotaRule, ::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest, ::Google::Longrunning::Operation
             # Deletes a quota rule.
             rpc :DeleteQuotaRule, ::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest, ::Google::Longrunning::Operation
+            # Restore files from a backup to a volume.
+            rpc :RestoreBackupFiles, ::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest, ::Google::Longrunning::Operation
+            # Returns a list of host groups in a `location`. Use `-` as location to list
+            # host groups across all locations.
+            rpc :ListHostGroups, ::Google::Cloud::NetApp::V1::ListHostGroupsRequest, ::Google::Cloud::NetApp::V1::ListHostGroupsResponse
+            # Returns details of the specified host group.
+            rpc :GetHostGroup, ::Google::Cloud::NetApp::V1::GetHostGroupRequest, ::Google::Cloud::NetApp::V1::HostGroup
+            # Creates a new host group.
+            rpc :CreateHostGroup, ::Google::Cloud::NetApp::V1::CreateHostGroupRequest, ::Google::Longrunning::Operation
+            # Updates an existing host group.
+            rpc :UpdateHostGroup, ::Google::Cloud::NetApp::V1::UpdateHostGroupRequest, ::Google::Longrunning::Operation
+            # Deletes a host group.
+            rpc :DeleteHostGroup, ::Google::Cloud::NetApp::V1::DeleteHostGroupRequest, ::Google::Longrunning::Operation
+            # `ExecuteOntapPost` dispatches the ONTAP `POST` request to the
+            # `StoragePool` cluster.
+            rpc :ExecuteOntapPost, ::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapPostResponse
+            # `ExecuteOntapGet` dispatches the ONTAP `GET` request to the
+            # `StoragePool` cluster.
+            rpc :ExecuteOntapGet, ::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapGetResponse
+            # `ExecuteOntapDelete` dispatches the ONTAP `DELETE` request to the
+            # `StoragePool` cluster.
+            rpc :ExecuteOntapDelete, ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteResponse
+            # `ExecuteOntapPatch` dispatches the ONTAP `PATCH` request to the
+            # `StoragePool` cluster.
+            rpc :ExecuteOntapPatch, ::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapPatchResponse
           end
 
           Stub = Service.rpc_stub_class

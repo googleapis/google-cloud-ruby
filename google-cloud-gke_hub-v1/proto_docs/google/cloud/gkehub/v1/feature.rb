@@ -21,29 +21,30 @@ module Google
   module Cloud
     module GkeHub
       module V1
-        # Feature represents the settings and status of any Hub Feature.
+        # Feature represents the settings and status of any Fleet Feature.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The full, unique name of this Feature resource in the format
         #     `projects/*/locations/*/features/*`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     GCP labels for this Feature.
+        #     Labels for this Feature.
         # @!attribute [r] resource_state
         #   @return [::Google::Cloud::GkeHub::V1::FeatureResourceState]
         #     Output only. State of the Feature resource itself.
         # @!attribute [rw] spec
         #   @return [::Google::Cloud::GkeHub::V1::CommonFeatureSpec]
-        #     Optional. Hub-wide Feature configuration. If this Feature does not support any
-        #     Hub-wide configuration, this field may be unused.
+        #     Optional. Fleet-wide Feature configuration. If this Feature does not
+        #     support any Fleet-wide configuration, this field may be unused.
         # @!attribute [rw] membership_specs
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::GkeHub::V1::MembershipFeatureSpec}]
-        #     Optional. Membership-specific configuration for this Feature. If this Feature does
-        #     not support any per-Membership configuration, this field may be unused.
+        #     Optional. Membership-specific configuration for this Feature. If this
+        #     Feature does not support any per-Membership configuration, this field may
+        #     be unused.
         #
         #     The keys indicate which Membership the configuration is for, in the form:
         #
-        #         projects/{p}/locations/{l}/memberships/{m}
+        #     `projects/{p}/locations/{l}/memberships/{m}`
         #
         #     Where \\{p} is the project, \\{l} is a valid location and \\{m} is a valid
         #     Membership in this project at that location. \\{p} WILL match the Feature's
@@ -57,7 +58,7 @@ module Google
         #     mutating a Feature.
         # @!attribute [r] state
         #   @return [::Google::Cloud::GkeHub::V1::CommonFeatureState]
-        #     Output only. The Hub-wide Feature state.
+        #     Output only. The Fleet-wide Feature state.
         # @!attribute [r] membership_states
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::GkeHub::V1::MembershipFeatureState}]
         #     Output only. Membership-specific Feature status. If this Feature does
@@ -65,7 +66,7 @@ module Google
         #
         #     The keys indicate which Membership the state is for, in the form:
         #
-        #         projects/{p}/locations/{l}/memberships/{m}
+        #     `projects/{p}/locations/{l}/memberships/{m}`
         #
         #     Where \\{p} is the project number, \\{l} is a valid location and \\{m} is a valid
         #     Membership in this project at that location. \\{p} MUST match the Feature's
@@ -79,6 +80,39 @@ module Google
         # @!attribute [r] delete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. When the Feature resource was deleted.
+        # @!attribute [rw] scope_specs
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::GkeHub::V1::ScopeFeatureSpec}]
+        #     Optional. Scope-specific configuration for this Feature. If this Feature
+        #     does not support any per-Scope configuration, this field may be unused.
+        #
+        #     The keys indicate which Scope the configuration is for, in the form:
+        #
+        #     `projects/{p}/locations/global/scopes/{s}`
+        #
+        #     Where \\{p} is the project, \\{s} is a valid Scope in this project.
+        #     \\{p} WILL match the Feature's project.
+        #
+        #     \\{p} will always be returned as the project number, but the project ID is
+        #     also accepted during input. If the same Scope is specified in the map
+        #     twice (using the project ID form, and the project number form), exactly
+        #     ONE of the entries will be saved, with no guarantees as to which. For this
+        #     reason, it is recommended the same format be used for all entries when
+        #     mutating a Feature.
+        # @!attribute [r] scope_states
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::GkeHub::V1::ScopeFeatureState}]
+        #     Output only. Scope-specific Feature status. If this Feature does
+        #     report any per-Scope status, this field may be unused.
+        #
+        #     The keys indicate which Scope the state is for, in the form:
+        #
+        #     `projects/{p}/locations/global/scopes/{s}`
+        #
+        #     Where \\{p} is the project, \\{s} is a valid Scope in this project.
+        #     \\{p} WILL match the Feature's project.
+        # @!attribute [r] unreachable
+        #   @return [::Array<::String>]
+        #     Output only. List of locations that could not be reached while fetching
+        #     this feature.
         class Feature
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -109,11 +143,29 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::GkeHub::V1::ScopeFeatureSpec]
+          class ScopeSpecsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::GkeHub::V1::ScopeFeatureState]
+          class ScopeStatesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # FeatureResourceState describes the state of a Feature *resource* in the
         # GkeHub API. See `FeatureState` for the "running state" of the Feature in the
-        # Hub and across Memberships.
+        # Fleet and across Memberships.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::GkeHub::V1::FeatureResourceState::State]
         #     The current state of the Feature resource in the Hub API.
@@ -127,14 +179,14 @@ module Google
             STATE_UNSPECIFIED = 0
 
             # The Feature is being enabled, and the Feature resource is being created.
-            # Once complete, the corresponding Feature will be enabled in this Hub.
+            # Once complete, the corresponding Feature will be enabled in this Fleet.
             ENABLING = 1
 
-            # The Feature is enabled in this Hub, and the Feature resource is fully
+            # The Feature is enabled in this Fleet, and the Feature resource is fully
             # available.
             ACTIVE = 2
 
-            # The Feature is being disabled in this Hub, and the Feature resource
+            # The Feature is being disabled in this Fleet, and the Feature resource
             # is being deleted.
             DISABLING = 3
 
@@ -193,11 +245,29 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # CommonFeatureState contains Hub-wide Feature status information.
+        # CommonFeatureState contains Fleet-wide Feature status information.
+        # @!attribute [rw] rbacrolebindingactuation
+        #   @return [::Google::Cloud::GkeHub::RbacRoleBindingActuation::V1::FeatureState]
+        #     RBAC Role Binding Actuation feature state
         # @!attribute [r] state
         #   @return [::Google::Cloud::GkeHub::V1::FeatureState]
-        #     Output only. The "running state" of the Feature in this Hub.
+        #     Output only. The "running state" of the Feature in this Fleet.
         class CommonFeatureState
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ScopeFeatureSpec contains feature specs for a fleet scope.
+        class ScopeFeatureSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ScopeFeatureState contains Scope-wide Feature status information.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::GkeHub::V1::FeatureState]
+        #     Output only. The "running state" of the Feature in this Scope.
+        class ScopeFeatureState
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -32,4 +32,7 @@ jobs:
         gem install --no-document toys
     - name: Update PR
       run: |
-        toys update-pr -v ${{ github.event.inputs.options }} ${{ github.event.inputs.pr }}
+        toys update-pr -v ${GITHUB_EVENT_INPUTS_OPTIONS} ${GITHUB_EVENT_INPUTS_PR}
+      env:
+        GITHUB_EVENT_INPUTS_OPTIONS: ${{ github.event.inputs.options }}
+        GITHUB_EVENT_INPUTS_PR: ${{ github.event.inputs.pr }}

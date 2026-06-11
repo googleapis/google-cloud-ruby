@@ -37,7 +37,7 @@ module Google
         #
         # The InsightsConfig resource is the core configuration object to capture
         # events from your Software Development Lifecycle. It acts as the central hub
-        # for managing how Developer connect understands your application, its runtime
+        # for managing how Developer Connect understands your application, its runtime
         # environments, and the artifacts deployed within them.
         # A user can create an InsightsConfig, list previously-requested
         # InsightsConfigs or get InsightsConfigs by their ID to determine the status of

@@ -67,6 +67,12 @@ module Google
         # @!attribute [rw] peer_info
         #   @return [::Boolean]
         #     If the client can support using BigtablePeerInfo.
+        # @!attribute [rw] sessions_compatible
+        #   @return [::Boolean]
+        #     Indicates whether the client supports the Bigtable Sessions API.
+        # @!attribute [rw] sessions_required
+        #   @return [::Boolean]
+        #     Internal flag to force sessions for internal projects.
         class FeatureFlags
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

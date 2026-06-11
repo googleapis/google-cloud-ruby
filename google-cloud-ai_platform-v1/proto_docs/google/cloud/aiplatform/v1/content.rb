@@ -99,9 +99,41 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::VideoMetadata]
         #     Optional. Video metadata. The metadata should only be specified while the
         #     video data is presented in inline_data or file_data.
+        # @!attribute [rw] media_resolution
+        #   @return [::Google::Cloud::AIPlatform::V1::Part::MediaResolution]
+        #     per part media resolution.
+        #     Media resolution for the input media.
         class Part
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # per part media resolution.
+          # Media resolution for the input media.
+          # @!attribute [rw] level
+          #   @return [::Google::Cloud::AIPlatform::V1::Part::MediaResolution::Level]
+          #     The tokenization quality used for given media.
+          class MediaResolution
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The media resolution level.
+            module Level
+              # Media resolution has not been set.
+              MEDIA_RESOLUTION_UNSPECIFIED = 0
+
+              # Media resolution set to low.
+              MEDIA_RESOLUTION_LOW = 1
+
+              # Media resolution set to medium.
+              MEDIA_RESOLUTION_MEDIUM = 2
+
+              # Media resolution set to high.
+              MEDIA_RESOLUTION_HIGH = 3
+
+              # Media resolution set to ultra high. This is for image only.
+              MEDIA_RESOLUTION_ULTRA_HIGH = 4
+            end
+          end
         end
 
         # Content blob.
@@ -138,6 +170,10 @@ module Google
         # @!attribute [rw] end_offset
         #   @return [::Google::Protobuf::Duration]
         #     Optional. The end offset of the video.
+        # @!attribute [rw] fps
+        #   @return [::Float]
+        #     Optional. The frame rate of the video sent to the model. If not specified,
+        #     the default value is 1.0. The valid range is (0.0, 24.0].
         class VideoMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -224,6 +260,9 @@ module Google
         end
 
         # Config for image generation features.
+        # @!attribute [rw] image_output_options
+        #   @return [::Google::Cloud::AIPlatform::V1::ImageConfig::ImageOutputOptions]
+        #     Optional. The image output format for generated images.
         # @!attribute [rw] aspect_ratio
         #   @return [::String]
         #     Optional. The desired aspect ratio for the generated images. The following
@@ -235,9 +274,45 @@ module Google
         #     "4:5", "5:4"
         #     "9:16", "16:9"
         #     "21:9"
+        # @!attribute [rw] person_generation
+        #   @return [::Google::Cloud::AIPlatform::V1::ImageConfig::PersonGeneration]
+        #     Optional. Controls whether the model can generate people.
+        # @!attribute [rw] image_size
+        #   @return [::String]
+        #     Optional. Specifies the size of generated images. Supported values are
+        #     `1K`, `2K`, `4K`. If not specified, the model will use default value `1K`.
         class ImageConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The image output format for generated images.
+          # @!attribute [rw] mime_type
+          #   @return [::String]
+          #     Optional. The image format that the output should be saved as.
+          # @!attribute [rw] compression_quality
+          #   @return [::Integer]
+          #     Optional. The compression quality of the output image.
+          class ImageOutputOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Enum for controlling the generation of people in images.
+          module PersonGeneration
+            # The default behavior is unspecified. The model will decide whether to
+            # generate images of people.
+            PERSON_GENERATION_UNSPECIFIED = 0
+
+            # Allows the model to generate images of people, including adults and
+            # children.
+            ALLOW_ALL = 1
+
+            # Allows the model to generate images of adults, but not children.
+            ALLOW_ADULT = 2
+
+            # Prevents the model from generating images of people.
+            ALLOW_NONE = 3
+          end
         end
 
         # Generation config.
@@ -333,6 +408,25 @@ module Google
         # @!attribute [rw] routing_config
         #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::RoutingConfig]
         #     Optional. Routing configuration.
+        # @!attribute [rw] audio_timestamp
+        #   @return [::Boolean]
+        #     Optional. If enabled, audio timestamps will be included in the request to
+        #     the model. This can be useful for synchronizing audio with other modalities
+        #     in the response.
+        # @!attribute [rw] response_modalities
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::GenerationConfig::Modality>]
+        #     Optional. The modalities of the response. The model will generate a
+        #     response that includes all the specified modalities. For example, if this
+        #     is set to `[TEXT, IMAGE]`, the response will include both text and an
+        #     image.
+        # @!attribute [rw] media_resolution
+        #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::MediaResolution]
+        #     Optional. The token resolution at which input media content is sampled.
+        #     This is used to control the trade-off between the quality of the response
+        #     and the number of tokens used to represent the media. A higher resolution
+        #     allows the model to perceive more detail, which can lead to a more nuanced
+        #     response, but it will also use more tokens. This does not affect the
+        #     image dimensions sent to the model.
         # @!attribute [rw] speech_config
         #   @return [::Google::Cloud::AIPlatform::V1::SpeechConfig]
         #     Optional. The speech generation config.
@@ -409,9 +503,60 @@ module Google
           #   @return [::Integer]
           #     Optional. Indicates the thinking budget in tokens.
           #     This is only applied when enable_thinking is true.
+          # @!attribute [rw] thinking_level
+          #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::ThinkingConfig::ThinkingLevel]
+          #     Optional. The number of thoughts tokens that the model should generate.
           class ThinkingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The thinking level for the model.
+            module ThinkingLevel
+              # Unspecified thinking level.
+              THINKING_LEVEL_UNSPECIFIED = 0
+
+              # Low thinking level.
+              LOW = 1
+
+              # Medium thinking level.
+              MEDIUM = 2
+
+              # High thinking level.
+              HIGH = 3
+
+              # MINIMAL thinking level.
+              MINIMAL = 4
+            end
+          end
+
+          # The modalities of the response.
+          module Modality
+            # Unspecified modality. Will be processed as text.
+            MODALITY_UNSPECIFIED = 0
+
+            # Text modality.
+            TEXT = 1
+
+            # Image modality.
+            IMAGE = 2
+
+            # Audio modality.
+            AUDIO = 3
+          end
+
+          # Media resolution for the input media.
+          module MediaResolution
+            # Media resolution has not been set.
+            MEDIA_RESOLUTION_UNSPECIFIED = 0
+
+            # Media resolution set to low (64 tokens).
+            MEDIA_RESOLUTION_LOW = 1
+
+            # Media resolution set to medium (256 tokens).
+            MEDIA_RESOLUTION_MEDIUM = 2
+
+            # Media resolution set to high (zoomed reframing with 256 tokens).
+            MEDIA_RESOLUTION_HIGH = 3
           end
         end
 

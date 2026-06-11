@@ -194,6 +194,11 @@
               "methods": [
                 "fetch_node_pool_upgrade_info"
               ]
+            },
+            "CompleteControlPlaneUpgrade": {
+              "methods": [
+                "complete_control_plane_upgrade"
+              ]
             }
           }
         }

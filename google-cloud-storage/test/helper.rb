@@ -23,6 +23,7 @@ require "json"
 require "base64"
 require "uri"
 require "google/cloud/storage"
+require "cgi"
 
 ##
 # Monkey-Patch Google API Client to support Mocks
@@ -164,15 +165,18 @@ class MockStorage < Minitest::Spec
     }.delete_if { |_, v| v.nil? } if !retention_params.nil? && !retention_params.empty?
   end
 
-  def random_file_hash bucket=random_bucket_name,
-                       name=random_file_path,
-                       generation="1234567890",
-                       kms_key_name="path/to/encryption_key_name",
+  def random_file_hash bucket = random_bucket_name,
+                       name = random_file_path,
+                       generation = "1234567890",
+                       kms_key_name = "path/to/encryption_key_name",
                        custom_time: nil,
                        retention_params: nil,
                        override_unlocked_retention: nil,
                        soft_delete_time: nil,
-                       hard_delete_time: nil
+                       hard_delete_time: nil,
+                       custom_context_key: nil,
+                       custom_context_value: nil
+
     { "kind" => "storage#object",
       "id" => "#{bucket}/#{name}/1234567890",
       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
@@ -203,8 +207,21 @@ class MockStorage < Minitest::Spec
       "retention" => file_retention_hash(retention_params),
       "overrideUnlockedRetention" => override_unlocked_retention,
       "softDeleteTime" => soft_delete_time,
-      "hardDeleteTime" => hard_delete_time }
+      "hardDeleteTime" => hard_delete_time, 
+      "contexts" => context_custom_hash(custom_context_key: custom_context_key, custom_context_value: custom_context_value)
+    }
   end
+
+  def context_custom_hash custom_context_key:, custom_context_value:
+    if custom_context_key
+      custom_hash = {
+        custom: { custom_context_key => { "value" => custom_context_value, "createTime" => Time.now } }
+      }
+    else
+      nil
+    end
+  end
+
 
   def random_bucket_name
     (0...50).map { ("a".."z").to_a[rand(26)] }.join
@@ -243,8 +260,30 @@ class MockStorage < Minitest::Spec
     OpenStruct.new(header: headers)
   end
 
-  def encryption_gapi key_name
-    Google::Apis::StorageV1::Bucket::Encryption.new default_kms_key_name: key_name
+  def customer_managed_encryption
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new(
+      restriction_mode: "FullyRestricted"
+    )
+  end
+
+  def customer_supplied_encryption
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new(
+      restriction_mode: "NotRestricted"
+    )
+  end
+
+  def google_managed_encryption
+    Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
+      restriction_mode: "NotRestricted"
+    )
+  end
+
+  def encryption_gapi key_name: nil
+    params = {
+      default_kms_key_name: key_name
+    }.compact
+
+    Google::Apis::StorageV1::Bucket::Encryption.new(**params)
   end
 
   def lifecycle_gapi *rules
@@ -420,6 +459,7 @@ class MockStorage < Minitest::Spec
                         match_glob: nil,
                         include_folders_as_prefixes: nil,
                         soft_deleted: nil,
+                        filter: nil,
                         options: {}
     {
       delimiter: delimiter,
@@ -431,6 +471,7 @@ class MockStorage < Minitest::Spec
       match_glob: match_glob,
       include_folders_as_prefixes: include_folders_as_prefixes,
       soft_deleted: soft_deleted,
+      filter: filter,
       options: options
     }
   end
@@ -611,5 +652,15 @@ class MockStorage < Minitest::Spec
   def restore_file_gapi bucket, file_name, generation=nil
     file_hash = random_file_hash(bucket, file_name, generation).to_json
     Google::Apis::StorageV1::Object.from_json file_hash
+  end
+
+  def set_crc32c_as_default md5, crc32c, checksum, content = nil
+    # If no checksum type or specific value is provided, the default will be set to crc32c. 
+    # If the checksum is set to false, it will be disabled.
+    if [checksum, crc32c, md5].all?(&:nil?) || checksum == true
+      # if content is present and crc32c is not provided, calculate crc32c based on content
+      crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for(StringIO.new(content || "Hello world"))
+    end
+    crc32c
   end
 end

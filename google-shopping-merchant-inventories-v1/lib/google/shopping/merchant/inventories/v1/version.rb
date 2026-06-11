@@ -22,7 +22,7 @@ module Google
     module Merchant
       module Inventories
         module V1
-          VERSION = "0.3.0"
+          VERSION = "0.4.2"
         end
       end
     end

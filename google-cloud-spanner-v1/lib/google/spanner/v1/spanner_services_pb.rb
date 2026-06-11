@@ -206,6 +206,16 @@ module Google
             # mutation's table. We recommend structuring your mutation groups to be
             # idempotent to avoid this issue.
             rpc :BatchWrite, ::Google::Cloud::Spanner::V1::BatchWriteRequest, stream(::Google::Cloud::Spanner::V1::BatchWriteResponse)
+            # Retrieves a cache update for a given database.
+            #
+            # This RPC can be used to warm up the client cache by fetching key recipes
+            # and server information for a given database. It is recommended to call
+            # this RPC at the beginning of the client's lifecycle, prior to any other
+            # data plane operations.
+            #
+            # The cache update is returned as a stream because the response can be too
+            # large to fit into a single `CacheUpdate` message.
+            rpc :FetchCacheUpdate, ::Google::Cloud::Spanner::V1::FetchCacheUpdateRequest, stream(::Google::Cloud::Spanner::V1::CacheUpdate)
           end
 
           Stub = Service.rpc_stub_class

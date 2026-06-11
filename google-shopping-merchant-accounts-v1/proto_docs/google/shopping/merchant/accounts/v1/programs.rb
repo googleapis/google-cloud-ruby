@@ -35,6 +35,7 @@ module Google
           #
           # * `checkout`
           # * `free-listings`
+          # * `product-ratings`
           # * `shopping-ads`
           # * `youtube-shopping-checkout`
           # @!attribute [rw] name
