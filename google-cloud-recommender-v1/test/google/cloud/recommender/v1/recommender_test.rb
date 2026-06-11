@@ -88,40 +88,40 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_insights_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_insights({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_insights({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_insights parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_insights parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_insights ::Google::Cloud::Recommender::V1::ListInsightsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_insights ::Google::Cloud::Recommender::V1::ListInsightsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_insights({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_insights({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_insights(::Google::Cloud::Recommender::V1::ListInsightsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_insights(::Google::Cloud::Recommender::V1::ListInsightsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_insight_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_insight({ name: name }) do |response, operation|
+      c.get_insight({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_insight name: name do |response, operation|
+      c.get_insight name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_insight ::Google::Cloud::Recommender::V1::GetInsightRequest.new(name: name) do |response, operation|
+      c.get_insight ::Google::Cloud::Recommender::V1::GetInsightRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_insight({ name: name }, grpc_options) do |response, operation|
+      c.get_insight({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_insight(::Google::Cloud::Recommender::V1::GetInsightRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_insight(::Google::Cloud::Recommender::V1::GetInsightRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,36 +213,36 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, mark_insight_accepted_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.mark_insight_accepted({ name: name, state_metadata: state_metadata, etag: etag }) do |response, operation|
+      c.mark_insight_accepted({ name: name, state_metadata: state_metadata, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mark_insight_accepted name: name, state_metadata: state_metadata, etag: etag do |response, operation|
+      c.mark_insight_accepted name: name, state_metadata: state_metadata, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mark_insight_accepted ::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest.new(name: name, state_metadata: state_metadata, etag: etag) do |response, operation|
+      c.mark_insight_accepted ::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest.new(name: name, state_metadata: state_metadata, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mark_insight_accepted({ name: name, state_metadata: state_metadata, etag: etag }, grpc_options) do |response, operation|
+      c.mark_insight_accepted({ name: name, state_metadata: state_metadata, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mark_insight_accepted(::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
+      c.mark_insight_accepted(::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -277,40 +277,40 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_recommendations_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_recommendations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_recommendations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_recommendations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_recommendations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_recommendations ::Google::Cloud::Recommender::V1::ListRecommendationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_recommendations ::Google::Cloud::Recommender::V1::ListRecommendationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_recommendations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_recommendations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_recommendations(::Google::Cloud::Recommender::V1::ListRecommendationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_recommendations(::Google::Cloud::Recommender::V1::ListRecommendationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -340,36 +340,36 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_recommendation_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_recommendation({ name: name }) do |response, operation|
+      c.get_recommendation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_recommendation name: name do |response, operation|
+      c.get_recommendation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_recommendation ::Google::Cloud::Recommender::V1::GetRecommendationRequest.new(name: name) do |response, operation|
+      c.get_recommendation ::Google::Cloud::Recommender::V1::GetRecommendationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_recommendation({ name: name }, grpc_options) do |response, operation|
+      c.get_recommendation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_recommendation(::Google::Cloud::Recommender::V1::GetRecommendationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_recommendation(::Google::Cloud::Recommender::V1::GetRecommendationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -400,36 +400,36 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, mark_recommendation_dismissed_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.mark_recommendation_dismissed({ name: name, etag: etag }) do |response, operation|
+      c.mark_recommendation_dismissed({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mark_recommendation_dismissed name: name, etag: etag do |response, operation|
+      c.mark_recommendation_dismissed name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mark_recommendation_dismissed ::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest.new(name: name, etag: etag) do |response, operation|
+      c.mark_recommendation_dismissed ::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mark_recommendation_dismissed({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.mark_recommendation_dismissed({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mark_recommendation_dismissed(::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.mark_recommendation_dismissed(::Google::Cloud::Recommender::V1::MarkRecommendationDismissedRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -462,36 +462,36 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, mark_recommendation_claimed_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.mark_recommendation_claimed({ name: name, state_metadata: state_metadata, etag: etag }) do |response, operation|
+      c.mark_recommendation_claimed({ name: name, state_metadata: state_metadata, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mark_recommendation_claimed name: name, state_metadata: state_metadata, etag: etag do |response, operation|
+      c.mark_recommendation_claimed name: name, state_metadata: state_metadata, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mark_recommendation_claimed ::Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest.new(name: name, state_metadata: state_metadata, etag: etag) do |response, operation|
+      c.mark_recommendation_claimed ::Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest.new(name: name, state_metadata: state_metadata, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mark_recommendation_claimed({ name: name, state_metadata: state_metadata, etag: etag }, grpc_options) do |response, operation|
+      c.mark_recommendation_claimed({ name: name, state_metadata: state_metadata, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mark_recommendation_claimed(::Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
+      c.mark_recommendation_claimed(::Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -524,36 +524,36 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, mark_recommendation_succeeded_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.mark_recommendation_succeeded({ name: name, state_metadata: state_metadata, etag: etag }) do |response, operation|
+      c.mark_recommendation_succeeded({ name: name, state_metadata: state_metadata, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mark_recommendation_succeeded name: name, state_metadata: state_metadata, etag: etag do |response, operation|
+      c.mark_recommendation_succeeded name: name, state_metadata: state_metadata, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mark_recommendation_succeeded ::Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest.new(name: name, state_metadata: state_metadata, etag: etag) do |response, operation|
+      c.mark_recommendation_succeeded ::Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest.new(name: name, state_metadata: state_metadata, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mark_recommendation_succeeded({ name: name, state_metadata: state_metadata, etag: etag }, grpc_options) do |response, operation|
+      c.mark_recommendation_succeeded({ name: name, state_metadata: state_metadata, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mark_recommendation_succeeded(::Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
+      c.mark_recommendation_succeeded(::Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -586,36 +586,36 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, mark_recommendation_failed_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.mark_recommendation_failed({ name: name, state_metadata: state_metadata, etag: etag }) do |response, operation|
+      c.mark_recommendation_failed({ name: name, state_metadata: state_metadata, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mark_recommendation_failed name: name, state_metadata: state_metadata, etag: etag do |response, operation|
+      c.mark_recommendation_failed name: name, state_metadata: state_metadata, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mark_recommendation_failed ::Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest.new(name: name, state_metadata: state_metadata, etag: etag) do |response, operation|
+      c.mark_recommendation_failed ::Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest.new(name: name, state_metadata: state_metadata, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mark_recommendation_failed({ name: name, state_metadata: state_metadata, etag: etag }, grpc_options) do |response, operation|
+      c.mark_recommendation_failed({ name: name, state_metadata: state_metadata, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mark_recommendation_failed(::Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
+      c.mark_recommendation_failed(::Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -644,36 +644,36 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_recommender_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_recommender_config({ name: name }) do |response, operation|
+      c.get_recommender_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_recommender_config name: name do |response, operation|
+      c.get_recommender_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_recommender_config ::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest.new(name: name) do |response, operation|
+      c.get_recommender_config ::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_recommender_config({ name: name }, grpc_options) do |response, operation|
+      c.get_recommender_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_recommender_config(::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_recommender_config(::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -706,36 +706,36 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_recommender_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_recommender_config({ recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
+      c.update_recommender_config({ recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_recommender_config recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only do |response, operation|
+      c.update_recommender_config recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_recommender_config ::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest.new(recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only) do |response, operation|
+      c.update_recommender_config ::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest.new(recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_recommender_config({ recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_recommender_config({ recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_recommender_config(::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest.new(recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_recommender_config(::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest.new(recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -764,36 +764,36 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_insight_type_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_insight_type_config({ name: name }) do |response, operation|
+      c.get_insight_type_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_insight_type_config name: name do |response, operation|
+      c.get_insight_type_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_insight_type_config ::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest.new(name: name) do |response, operation|
+      c.get_insight_type_config ::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_insight_type_config({ name: name }, grpc_options) do |response, operation|
+      c.get_insight_type_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_insight_type_config(::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_insight_type_config(::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -826,36 +826,36 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_insight_type_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+      c = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_insight_type_config({ insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
+      c.update_insight_type_config({ insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_insight_type_config insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only do |response, operation|
+      c.update_insight_type_config insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_insight_type_config ::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest.new(insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only) do |response, operation|
+      c.update_insight_type_config ::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest.new(insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_insight_type_config({ insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_insight_type_config({ insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_insight_type_config(::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest.new(insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_insight_type_config(::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest.new(insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

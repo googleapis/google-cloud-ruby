@@ -124,36 +124,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_subscription_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_subscription({ name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, bigtable_config: bigtable_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms, tags: tags }) do |response, operation|
+      c.create_subscription({ name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, bigtable_config: bigtable_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms, tags: tags }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_subscription name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, bigtable_config: bigtable_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms, tags: tags do |response, operation|
+      c.create_subscription name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, bigtable_config: bigtable_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms, tags: tags do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_subscription ::Google::Cloud::PubSub::V1::Subscription.new(name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, bigtable_config: bigtable_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms, tags: tags) do |response, operation|
+      c.create_subscription ::Google::Cloud::PubSub::V1::Subscription.new(name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, bigtable_config: bigtable_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms, tags: tags) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_subscription({ name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, bigtable_config: bigtable_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms, tags: tags }, grpc_options) do |response, operation|
+      c.create_subscription({ name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, bigtable_config: bigtable_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms, tags: tags }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_subscription(::Google::Cloud::PubSub::V1::Subscription.new(name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, bigtable_config: bigtable_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms, tags: tags), grpc_options) do |response, operation|
+      c.create_subscription(::Google::Cloud::PubSub::V1::Subscription.new(name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, bigtable_config: bigtable_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms, tags: tags), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -182,36 +182,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_subscription_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_subscription({ subscription: subscription }) do |response, operation|
+      c.get_subscription({ subscription: subscription }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_subscription subscription: subscription do |response, operation|
+      c.get_subscription subscription: subscription do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_subscription ::Google::Cloud::PubSub::V1::GetSubscriptionRequest.new(subscription: subscription) do |response, operation|
+      c.get_subscription ::Google::Cloud::PubSub::V1::GetSubscriptionRequest.new(subscription: subscription) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_subscription({ subscription: subscription }, grpc_options) do |response, operation|
+      c.get_subscription({ subscription: subscription }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_subscription(::Google::Cloud::PubSub::V1::GetSubscriptionRequest.new(subscription: subscription), grpc_options) do |response, operation|
+      c.get_subscription(::Google::Cloud::PubSub::V1::GetSubscriptionRequest.new(subscription: subscription), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -242,36 +242,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_subscription_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_subscription({ subscription: subscription, update_mask: update_mask }) do |response, operation|
+      c.update_subscription({ subscription: subscription, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_subscription subscription: subscription, update_mask: update_mask do |response, operation|
+      c.update_subscription subscription: subscription, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_subscription ::Google::Cloud::PubSub::V1::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask) do |response, operation|
+      c.update_subscription ::Google::Cloud::PubSub::V1::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_subscription({ subscription: subscription, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_subscription({ subscription: subscription, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_subscription(::Google::Cloud::PubSub::V1::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_subscription(::Google::Cloud::PubSub::V1::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -304,40 +304,40 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_subscriptions_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_subscriptions({ project: project, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_subscriptions({ project: project, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_subscriptions project: project, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_subscriptions project: project, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_subscriptions ::Google::Cloud::PubSub::V1::ListSubscriptionsRequest.new(project: project, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_subscriptions ::Google::Cloud::PubSub::V1::ListSubscriptionsRequest.new(project: project, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_subscriptions({ project: project, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_subscriptions({ project: project, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_subscriptions(::Google::Cloud::PubSub::V1::ListSubscriptionsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_subscriptions(::Google::Cloud::PubSub::V1::ListSubscriptionsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -367,36 +367,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, delete_subscription_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_subscription({ subscription: subscription }) do |response, operation|
+      c.delete_subscription({ subscription: subscription }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_subscription subscription: subscription do |response, operation|
+      c.delete_subscription subscription: subscription do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_subscription ::Google::Cloud::PubSub::V1::DeleteSubscriptionRequest.new(subscription: subscription) do |response, operation|
+      c.delete_subscription ::Google::Cloud::PubSub::V1::DeleteSubscriptionRequest.new(subscription: subscription) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_subscription({ subscription: subscription }, grpc_options) do |response, operation|
+      c.delete_subscription({ subscription: subscription }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_subscription(::Google::Cloud::PubSub::V1::DeleteSubscriptionRequest.new(subscription: subscription), grpc_options) do |response, operation|
+      c.delete_subscription(::Google::Cloud::PubSub::V1::DeleteSubscriptionRequest.new(subscription: subscription), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -429,36 +429,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, modify_ack_deadline_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.modify_ack_deadline({ subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds }) do |response, operation|
+      c.modify_ack_deadline({ subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.modify_ack_deadline subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds do |response, operation|
+      c.modify_ack_deadline subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.modify_ack_deadline ::Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest.new(subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds) do |response, operation|
+      c.modify_ack_deadline ::Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest.new(subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.modify_ack_deadline({ subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds }, grpc_options) do |response, operation|
+      c.modify_ack_deadline({ subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.modify_ack_deadline(::Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest.new(subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds), grpc_options) do |response, operation|
+      c.modify_ack_deadline(::Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest.new(subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -489,36 +489,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, acknowledge_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.acknowledge({ subscription: subscription, ack_ids: ack_ids }) do |response, operation|
+      c.acknowledge({ subscription: subscription, ack_ids: ack_ids }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.acknowledge subscription: subscription, ack_ids: ack_ids do |response, operation|
+      c.acknowledge subscription: subscription, ack_ids: ack_ids do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.acknowledge ::Google::Cloud::PubSub::V1::AcknowledgeRequest.new(subscription: subscription, ack_ids: ack_ids) do |response, operation|
+      c.acknowledge ::Google::Cloud::PubSub::V1::AcknowledgeRequest.new(subscription: subscription, ack_ids: ack_ids) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.acknowledge({ subscription: subscription, ack_ids: ack_ids }, grpc_options) do |response, operation|
+      c.acknowledge({ subscription: subscription, ack_ids: ack_ids }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.acknowledge(::Google::Cloud::PubSub::V1::AcknowledgeRequest.new(subscription: subscription, ack_ids: ack_ids), grpc_options) do |response, operation|
+      c.acknowledge(::Google::Cloud::PubSub::V1::AcknowledgeRequest.new(subscription: subscription, ack_ids: ack_ids), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -551,36 +551,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, pull_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.pull({ subscription: subscription, return_immediately: return_immediately, max_messages: max_messages }) do |response, operation|
+      c.pull({ subscription: subscription, return_immediately: return_immediately, max_messages: max_messages }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.pull subscription: subscription, return_immediately: return_immediately, max_messages: max_messages do |response, operation|
+      c.pull subscription: subscription, return_immediately: return_immediately, max_messages: max_messages do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.pull ::Google::Cloud::PubSub::V1::PullRequest.new(subscription: subscription, return_immediately: return_immediately, max_messages: max_messages) do |response, operation|
+      c.pull ::Google::Cloud::PubSub::V1::PullRequest.new(subscription: subscription, return_immediately: return_immediately, max_messages: max_messages) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.pull({ subscription: subscription, return_immediately: return_immediately, max_messages: max_messages }, grpc_options) do |response, operation|
+      c.pull({ subscription: subscription, return_immediately: return_immediately, max_messages: max_messages }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.pull(::Google::Cloud::PubSub::V1::PullRequest.new(subscription: subscription, return_immediately: return_immediately, max_messages: max_messages), grpc_options) do |response, operation|
+      c.pull(::Google::Cloud::PubSub::V1::PullRequest.new(subscription: subscription, return_immediately: return_immediately, max_messages: max_messages), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -617,7 +617,7 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, streaming_pull_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -625,7 +625,7 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
       request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version }
       request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_pull enum_input do |response, operation|
+      c.streaming_pull enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::PubSub::V1::StreamingPullResponse, r
@@ -637,7 +637,7 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
       request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version }
       request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version
       stream_input = Gapic::StreamInput.new
-      client.streaming_pull stream_input do |response, operation|
+      c.streaming_pull stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::PubSub::V1::StreamingPullResponse, r
@@ -652,7 +652,7 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
       request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version }
       request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_pull enum_input, grpc_options do |response, operation|
+      c.streaming_pull enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::PubSub::V1::StreamingPullResponse, r
@@ -664,7 +664,7 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
       request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version }
       request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version
       stream_input = Gapic::StreamInput.new
-      client.streaming_pull stream_input, grpc_options do |response, operation|
+      c.streaming_pull stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::PubSub::V1::StreamingPullResponse, r
@@ -715,36 +715,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, modify_push_config_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.modify_push_config({ subscription: subscription, push_config: push_config }) do |response, operation|
+      c.modify_push_config({ subscription: subscription, push_config: push_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.modify_push_config subscription: subscription, push_config: push_config do |response, operation|
+      c.modify_push_config subscription: subscription, push_config: push_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.modify_push_config ::Google::Cloud::PubSub::V1::ModifyPushConfigRequest.new(subscription: subscription, push_config: push_config) do |response, operation|
+      c.modify_push_config ::Google::Cloud::PubSub::V1::ModifyPushConfigRequest.new(subscription: subscription, push_config: push_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.modify_push_config({ subscription: subscription, push_config: push_config }, grpc_options) do |response, operation|
+      c.modify_push_config({ subscription: subscription, push_config: push_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.modify_push_config(::Google::Cloud::PubSub::V1::ModifyPushConfigRequest.new(subscription: subscription, push_config: push_config), grpc_options) do |response, operation|
+      c.modify_push_config(::Google::Cloud::PubSub::V1::ModifyPushConfigRequest.new(subscription: subscription, push_config: push_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -773,36 +773,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_snapshot({ snapshot: snapshot }) do |response, operation|
+      c.get_snapshot({ snapshot: snapshot }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_snapshot snapshot: snapshot do |response, operation|
+      c.get_snapshot snapshot: snapshot do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_snapshot ::Google::Cloud::PubSub::V1::GetSnapshotRequest.new(snapshot: snapshot) do |response, operation|
+      c.get_snapshot ::Google::Cloud::PubSub::V1::GetSnapshotRequest.new(snapshot: snapshot) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_snapshot({ snapshot: snapshot }, grpc_options) do |response, operation|
+      c.get_snapshot({ snapshot: snapshot }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_snapshot(::Google::Cloud::PubSub::V1::GetSnapshotRequest.new(snapshot: snapshot), grpc_options) do |response, operation|
+      c.get_snapshot(::Google::Cloud::PubSub::V1::GetSnapshotRequest.new(snapshot: snapshot), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -835,40 +835,40 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_snapshots_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_snapshots({ project: project, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_snapshots({ project: project, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_snapshots project: project, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_snapshots project: project, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_snapshots ::Google::Cloud::PubSub::V1::ListSnapshotsRequest.new(project: project, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_snapshots ::Google::Cloud::PubSub::V1::ListSnapshotsRequest.new(project: project, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_snapshots({ project: project, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_snapshots({ project: project, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_snapshots(::Google::Cloud::PubSub::V1::ListSnapshotsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_snapshots(::Google::Cloud::PubSub::V1::ListSnapshotsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -904,36 +904,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_snapshot({ name: name, subscription: subscription, labels: labels, tags: tags }) do |response, operation|
+      c.create_snapshot({ name: name, subscription: subscription, labels: labels, tags: tags }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_snapshot name: name, subscription: subscription, labels: labels, tags: tags do |response, operation|
+      c.create_snapshot name: name, subscription: subscription, labels: labels, tags: tags do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_snapshot ::Google::Cloud::PubSub::V1::CreateSnapshotRequest.new(name: name, subscription: subscription, labels: labels, tags: tags) do |response, operation|
+      c.create_snapshot ::Google::Cloud::PubSub::V1::CreateSnapshotRequest.new(name: name, subscription: subscription, labels: labels, tags: tags) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_snapshot({ name: name, subscription: subscription, labels: labels, tags: tags }, grpc_options) do |response, operation|
+      c.create_snapshot({ name: name, subscription: subscription, labels: labels, tags: tags }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_snapshot(::Google::Cloud::PubSub::V1::CreateSnapshotRequest.new(name: name, subscription: subscription, labels: labels, tags: tags), grpc_options) do |response, operation|
+      c.create_snapshot(::Google::Cloud::PubSub::V1::CreateSnapshotRequest.new(name: name, subscription: subscription, labels: labels, tags: tags), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -964,36 +964,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_snapshot({ snapshot: snapshot, update_mask: update_mask }) do |response, operation|
+      c.update_snapshot({ snapshot: snapshot, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_snapshot snapshot: snapshot, update_mask: update_mask do |response, operation|
+      c.update_snapshot snapshot: snapshot, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_snapshot ::Google::Cloud::PubSub::V1::UpdateSnapshotRequest.new(snapshot: snapshot, update_mask: update_mask) do |response, operation|
+      c.update_snapshot ::Google::Cloud::PubSub::V1::UpdateSnapshotRequest.new(snapshot: snapshot, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_snapshot({ snapshot: snapshot, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_snapshot({ snapshot: snapshot, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_snapshot(::Google::Cloud::PubSub::V1::UpdateSnapshotRequest.new(snapshot: snapshot, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_snapshot(::Google::Cloud::PubSub::V1::UpdateSnapshotRequest.new(snapshot: snapshot, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1022,36 +1022,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, delete_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_snapshot({ snapshot: snapshot }) do |response, operation|
+      c.delete_snapshot({ snapshot: snapshot }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_snapshot snapshot: snapshot do |response, operation|
+      c.delete_snapshot snapshot: snapshot do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_snapshot ::Google::Cloud::PubSub::V1::DeleteSnapshotRequest.new(snapshot: snapshot) do |response, operation|
+      c.delete_snapshot ::Google::Cloud::PubSub::V1::DeleteSnapshotRequest.new(snapshot: snapshot) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_snapshot({ snapshot: snapshot }, grpc_options) do |response, operation|
+      c.delete_snapshot({ snapshot: snapshot }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_snapshot(::Google::Cloud::PubSub::V1::DeleteSnapshotRequest.new(snapshot: snapshot), grpc_options) do |response, operation|
+      c.delete_snapshot(::Google::Cloud::PubSub::V1::DeleteSnapshotRequest.new(snapshot: snapshot), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1083,36 +1083,36 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, seek_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.seek({ subscription: subscription, time: time }) do |response, operation|
+      c.seek({ subscription: subscription, time: time }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.seek subscription: subscription, time: time do |response, operation|
+      c.seek subscription: subscription, time: time do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.seek ::Google::Cloud::PubSub::V1::SeekRequest.new(subscription: subscription, time: time) do |response, operation|
+      c.seek ::Google::Cloud::PubSub::V1::SeekRequest.new(subscription: subscription, time: time) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.seek({ subscription: subscription, time: time }, grpc_options) do |response, operation|
+      c.seek({ subscription: subscription, time: time }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.seek(::Google::Cloud::PubSub::V1::SeekRequest.new(subscription: subscription, time: time), grpc_options) do |response, operation|
+      c.seek(::Google::Cloud::PubSub::V1::SeekRequest.new(subscription: subscription, time: time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

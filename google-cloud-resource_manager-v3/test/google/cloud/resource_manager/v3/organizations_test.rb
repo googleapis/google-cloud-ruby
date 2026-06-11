@@ -82,36 +82,36 @@ class ::Google::Cloud::ResourceManager::V3::Organizations::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_organization_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_organization({ name: name }) do |response, operation|
+      c.get_organization({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_organization name: name do |response, operation|
+      c.get_organization name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_organization ::Google::Cloud::ResourceManager::V3::GetOrganizationRequest.new(name: name) do |response, operation|
+      c.get_organization ::Google::Cloud::ResourceManager::V3::GetOrganizationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_organization({ name: name }, grpc_options) do |response, operation|
+      c.get_organization({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_organization(::Google::Cloud::ResourceManager::V3::GetOrganizationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_organization(::Google::Cloud::ResourceManager::V3::GetOrganizationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,40 +144,40 @@ class ::Google::Cloud::ResourceManager::V3::Organizations::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, search_organizations_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_organizations({ page_size: page_size, page_token: page_token, query: query }) do |response, operation|
+      c.search_organizations({ page_size: page_size, page_token: page_token, query: query }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_organizations page_size: page_size, page_token: page_token, query: query do |response, operation|
+      c.search_organizations page_size: page_size, page_token: page_token, query: query do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_organizations ::Google::Cloud::ResourceManager::V3::SearchOrganizationsRequest.new(page_size: page_size, page_token: page_token, query: query) do |response, operation|
+      c.search_organizations ::Google::Cloud::ResourceManager::V3::SearchOrganizationsRequest.new(page_size: page_size, page_token: page_token, query: query) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_organizations({ page_size: page_size, page_token: page_token, query: query }, grpc_options) do |response, operation|
+      c.search_organizations({ page_size: page_size, page_token: page_token, query: query }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_organizations(::Google::Cloud::ResourceManager::V3::SearchOrganizationsRequest.new(page_size: page_size, page_token: page_token, query: query), grpc_options) do |response, operation|
+      c.search_organizations(::Google::Cloud::ResourceManager::V3::SearchOrganizationsRequest.new(page_size: page_size, page_token: page_token, query: query), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -209,36 +209,36 @@ class ::Google::Cloud::ResourceManager::V3::Organizations::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -271,36 +271,36 @@ class ::Google::Cloud::ResourceManager::V3::Organizations::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,36 +331,36 @@ class ::Google::Cloud::ResourceManager::V3::Organizations::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

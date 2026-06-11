@@ -98,32 +98,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
     ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::ServiceStub.stub :transcode_create_prediction_api_key_registration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_prediction_api_key_registration_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_prediction_api_key_registration({ parent: parent, prediction_api_key_registration: prediction_api_key_registration }) do |_result, response|
+        c.create_prediction_api_key_registration({ parent: parent, prediction_api_key_registration: prediction_api_key_registration }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_prediction_api_key_registration parent: parent, prediction_api_key_registration: prediction_api_key_registration do |_result, response|
+        c.create_prediction_api_key_registration parent: parent, prediction_api_key_registration: prediction_api_key_registration do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_prediction_api_key_registration ::Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new(parent: parent, prediction_api_key_registration: prediction_api_key_registration) do |_result, response|
+        c.create_prediction_api_key_registration ::Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new(parent: parent, prediction_api_key_registration: prediction_api_key_registration) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_prediction_api_key_registration({ parent: parent, prediction_api_key_registration: prediction_api_key_registration }, call_options) do |_result, response|
+        c.create_prediction_api_key_registration({ parent: parent, prediction_api_key_registration: prediction_api_key_registration }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_prediction_api_key_registration(::Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new(parent: parent, prediction_api_key_registration: prediction_api_key_registration), call_options) do |_result, response|
+        c.create_prediction_api_key_registration(::Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new(parent: parent, prediction_api_key_registration: prediction_api_key_registration), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
     ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::ServiceStub.stub :transcode_list_prediction_api_key_registrations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_prediction_api_key_registrations_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_prediction_api_key_registrations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_prediction_api_key_registrations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_prediction_api_key_registrations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_prediction_api_key_registrations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_prediction_api_key_registrations ::Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_prediction_api_key_registrations ::Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_prediction_api_key_registrations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_prediction_api_key_registrations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_prediction_api_key_registrations(::Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_prediction_api_key_registrations(::Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
     ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::ServiceStub.stub :transcode_delete_prediction_api_key_registration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_prediction_api_key_registration_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_prediction_api_key_registration({ name: name }) do |_result, response|
+        c.delete_prediction_api_key_registration({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_prediction_api_key_registration name: name do |_result, response|
+        c.delete_prediction_api_key_registration name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_prediction_api_key_registration ::Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new(name: name) do |_result, response|
+        c.delete_prediction_api_key_registration ::Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_prediction_api_key_registration({ name: name }, call_options) do |_result, response|
+        c.delete_prediction_api_key_registration({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_prediction_api_key_registration(::Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new(name: name), call_options) do |_result, response|
+        c.delete_prediction_api_key_registration(::Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -86,36 +86,36 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_schema({ parent: parent, schema: schema, schema_id: schema_id }) do |response, operation|
+      c.create_schema({ parent: parent, schema: schema, schema_id: schema_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_schema parent: parent, schema: schema, schema_id: schema_id do |response, operation|
+      c.create_schema parent: parent, schema: schema, schema_id: schema_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_schema ::Google::Cloud::PubSub::V1::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id) do |response, operation|
+      c.create_schema ::Google::Cloud::PubSub::V1::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_schema({ parent: parent, schema: schema, schema_id: schema_id }, grpc_options) do |response, operation|
+      c.create_schema({ parent: parent, schema: schema, schema_id: schema_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_schema(::Google::Cloud::PubSub::V1::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id), grpc_options) do |response, operation|
+      c.create_schema(::Google::Cloud::PubSub::V1::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,36 +146,36 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_schema({ name: name, view: view }) do |response, operation|
+      c.get_schema({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_schema name: name, view: view do |response, operation|
+      c.get_schema name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_schema ::Google::Cloud::PubSub::V1::GetSchemaRequest.new(name: name, view: view) do |response, operation|
+      c.get_schema ::Google::Cloud::PubSub::V1::GetSchemaRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_schema({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_schema({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_schema(::Google::Cloud::PubSub::V1::GetSchemaRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_schema(::Google::Cloud::PubSub::V1::GetSchemaRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -210,40 +210,40 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_schemas_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_schemas({ parent: parent, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_schemas({ parent: parent, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_schemas parent: parent, view: view, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_schemas parent: parent, view: view, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_schemas ::Google::Cloud::PubSub::V1::ListSchemasRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_schemas ::Google::Cloud::PubSub::V1::ListSchemasRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_schemas({ parent: parent, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_schemas({ parent: parent, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_schemas(::Google::Cloud::PubSub::V1::ListSchemasRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_schemas(::Google::Cloud::PubSub::V1::ListSchemasRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -279,40 +279,40 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_schema_revisions_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_schema_revisions({ name: name, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_schema_revisions({ name: name, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_schema_revisions name: name, view: view, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_schema_revisions name: name, view: view, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_schema_revisions ::Google::Cloud::PubSub::V1::ListSchemaRevisionsRequest.new(name: name, view: view, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_schema_revisions ::Google::Cloud::PubSub::V1::ListSchemaRevisionsRequest.new(name: name, view: view, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_schema_revisions({ name: name, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_schema_revisions({ name: name, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_schema_revisions(::Google::Cloud::PubSub::V1::ListSchemaRevisionsRequest.new(name: name, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_schema_revisions(::Google::Cloud::PubSub::V1::ListSchemaRevisionsRequest.new(name: name, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -344,36 +344,36 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, commit_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.commit_schema({ name: name, schema: schema }) do |response, operation|
+      c.commit_schema({ name: name, schema: schema }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.commit_schema name: name, schema: schema do |response, operation|
+      c.commit_schema name: name, schema: schema do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.commit_schema ::Google::Cloud::PubSub::V1::CommitSchemaRequest.new(name: name, schema: schema) do |response, operation|
+      c.commit_schema ::Google::Cloud::PubSub::V1::CommitSchemaRequest.new(name: name, schema: schema) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.commit_schema({ name: name, schema: schema }, grpc_options) do |response, operation|
+      c.commit_schema({ name: name, schema: schema }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.commit_schema(::Google::Cloud::PubSub::V1::CommitSchemaRequest.new(name: name, schema: schema), grpc_options) do |response, operation|
+      c.commit_schema(::Google::Cloud::PubSub::V1::CommitSchemaRequest.new(name: name, schema: schema), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -404,36 +404,36 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, rollback_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.rollback_schema({ name: name, revision_id: revision_id }) do |response, operation|
+      c.rollback_schema({ name: name, revision_id: revision_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rollback_schema name: name, revision_id: revision_id do |response, operation|
+      c.rollback_schema name: name, revision_id: revision_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rollback_schema ::Google::Cloud::PubSub::V1::RollbackSchemaRequest.new(name: name, revision_id: revision_id) do |response, operation|
+      c.rollback_schema ::Google::Cloud::PubSub::V1::RollbackSchemaRequest.new(name: name, revision_id: revision_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rollback_schema({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
+      c.rollback_schema({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rollback_schema(::Google::Cloud::PubSub::V1::RollbackSchemaRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
+      c.rollback_schema(::Google::Cloud::PubSub::V1::RollbackSchemaRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -464,36 +464,36 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_schema_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_schema_revision({ name: name, revision_id: revision_id }) do |response, operation|
+      c.delete_schema_revision({ name: name, revision_id: revision_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_schema_revision name: name, revision_id: revision_id do |response, operation|
+      c.delete_schema_revision name: name, revision_id: revision_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_schema_revision ::Google::Cloud::PubSub::V1::DeleteSchemaRevisionRequest.new(name: name, revision_id: revision_id) do |response, operation|
+      c.delete_schema_revision ::Google::Cloud::PubSub::V1::DeleteSchemaRevisionRequest.new(name: name, revision_id: revision_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_schema_revision({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
+      c.delete_schema_revision({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_schema_revision(::Google::Cloud::PubSub::V1::DeleteSchemaRevisionRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
+      c.delete_schema_revision(::Google::Cloud::PubSub::V1::DeleteSchemaRevisionRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -522,36 +522,36 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_schema({ name: name }) do |response, operation|
+      c.delete_schema({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_schema name: name do |response, operation|
+      c.delete_schema name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_schema ::Google::Cloud::PubSub::V1::DeleteSchemaRequest.new(name: name) do |response, operation|
+      c.delete_schema ::Google::Cloud::PubSub::V1::DeleteSchemaRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_schema({ name: name }, grpc_options) do |response, operation|
+      c.delete_schema({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_schema(::Google::Cloud::PubSub::V1::DeleteSchemaRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_schema(::Google::Cloud::PubSub::V1::DeleteSchemaRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -582,36 +582,36 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, validate_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.validate_schema({ parent: parent, schema: schema }) do |response, operation|
+      c.validate_schema({ parent: parent, schema: schema }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.validate_schema parent: parent, schema: schema do |response, operation|
+      c.validate_schema parent: parent, schema: schema do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.validate_schema ::Google::Cloud::PubSub::V1::ValidateSchemaRequest.new(parent: parent, schema: schema) do |response, operation|
+      c.validate_schema ::Google::Cloud::PubSub::V1::ValidateSchemaRequest.new(parent: parent, schema: schema) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.validate_schema({ parent: parent, schema: schema }, grpc_options) do |response, operation|
+      c.validate_schema({ parent: parent, schema: schema }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.validate_schema(::Google::Cloud::PubSub::V1::ValidateSchemaRequest.new(parent: parent, schema: schema), grpc_options) do |response, operation|
+      c.validate_schema(::Google::Cloud::PubSub::V1::ValidateSchemaRequest.new(parent: parent, schema: schema), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -647,36 +647,36 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, validate_message_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.validate_message({ parent: parent, name: name, message: message, encoding: encoding }) do |response, operation|
+      c.validate_message({ parent: parent, name: name, message: message, encoding: encoding }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.validate_message parent: parent, name: name, message: message, encoding: encoding do |response, operation|
+      c.validate_message parent: parent, name: name, message: message, encoding: encoding do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.validate_message ::Google::Cloud::PubSub::V1::ValidateMessageRequest.new(parent: parent, name: name, message: message, encoding: encoding) do |response, operation|
+      c.validate_message ::Google::Cloud::PubSub::V1::ValidateMessageRequest.new(parent: parent, name: name, message: message, encoding: encoding) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.validate_message({ parent: parent, name: name, message: message, encoding: encoding }, grpc_options) do |response, operation|
+      c.validate_message({ parent: parent, name: name, message: message, encoding: encoding }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.validate_message(::Google::Cloud::PubSub::V1::ValidateMessageRequest.new(parent: parent, name: name, message: message, encoding: encoding), grpc_options) do |response, operation|
+      c.validate_message(::Google::Cloud::PubSub::V1::ValidateMessageRequest.new(parent: parent, name: name, message: message, encoding: encoding), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
