@@ -153,6 +153,16 @@ module Google
             rpc :ListGatewayRouteViews, ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest, ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsResponse
             # Lists RouteViews
             rpc :ListMeshRouteViews, ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest, ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsResponse
+            # Lists AgentGateways in a given project and location.
+            rpc :ListAgentGateways, ::Google::Cloud::NetworkServices::V1::ListAgentGatewaysRequest, ::Google::Cloud::NetworkServices::V1::ListAgentGatewaysResponse
+            # Gets details of a single AgentGateway.
+            rpc :GetAgentGateway, ::Google::Cloud::NetworkServices::V1::GetAgentGatewayRequest, ::Google::Cloud::NetworkServices::V1::AgentGateway
+            # Creates a new AgentGateway in a given project and location.
+            rpc :CreateAgentGateway, ::Google::Cloud::NetworkServices::V1::CreateAgentGatewayRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single AgentGateway.
+            rpc :UpdateAgentGateway, ::Google::Cloud::NetworkServices::V1::UpdateAgentGatewayRequest, ::Google::Longrunning::Operation
+            # Deletes a single AgentGateway.
+            rpc :DeleteAgentGateway, ::Google::Cloud::NetworkServices::V1::DeleteAgentGatewayRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

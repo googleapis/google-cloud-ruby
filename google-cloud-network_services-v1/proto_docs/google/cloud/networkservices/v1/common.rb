@@ -151,10 +151,10 @@ module Google
           NONE = 1
 
           # Envoy will insert default internal debug headers into upstream requests:
-          # x-envoy-attempt-count
-          # x-envoy-is-timeout-retry
-          # x-envoy-expected-rq-timeout-ms
-          # x-envoy-original-path
+          # x-envoy-attempt-count,
+          # x-envoy-is-timeout-retry,
+          # x-envoy-expected-rq-timeout-ms,
+          # x-envoy-original-path,
           # x-envoy-upstream-stream-duration-ms
           DEBUG_HEADERS = 2
         end

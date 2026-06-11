@@ -53,6 +53,18 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
     end
   end
 
+  def test_agent_gateway_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.agent_gateway_path project: "value0", location: "value1", agent_gateway: "value2"
+      assert_equal "projects/value0/locations/value1/agentGateways/value2", path
+    end
+  end
+
   def test_authorization_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -278,6 +290,18 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
 
       path = client.subnetwork_path project: "value0", region: "value1", subnetwork: "value2"
       assert_equal "projects/value0/regions/value1/subnetworks/value2", path
+    end
+  end
+
+  def test_target_tcp_proxy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.target_tcp_proxy_path project: "value0", location: "value1", target_tcp_proxy: "value2"
+      assert_equal "projects/value0/locations/value1/targetTcpProxies/value2", path
     end
   end
 
