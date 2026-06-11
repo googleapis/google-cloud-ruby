@@ -1,0 +1,18 @@
+{
+    "api_id": "essentialcontacts.googleapis.com",
+    "api_shortname": "essentialcontacts",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-essential_contacts/latest",
+    "distribution_name": "google-cloud-essential_contacts",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "essentialcontacts",
+    "name_pretty": "Essential Contacts API",
+    "product_documentation": "https://cloud.google.com/resource-manager/docs/managing-notification-contacts/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Many Google Cloud services, such as Cloud Billing, send out notifications to share important information with Google Cloud users. By default, these notifications are sent to members with certain Identity and Access Management (IAM) roles. With Essential Contacts, you can customize who receives notifications by providing your own list of contacts.",
+    "ruby-cloud-env-prefix": "ESSENTIAL_CONTACTS",
+    "ruby-cloud-product-url": "https://cloud.google.com/resource-manager/docs/managing-notification-contacts/",
+    "library_type": "GAPIC_AUTO"
+}
