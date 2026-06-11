@@ -428,7 +428,7 @@ module Google
         #   Acceptable values are:
         #   - {Google::Apis::StorageV1::Bucket::IpFilter} object
         #   - Hash that can be converted to a {Google::Apis::StorageV1::Bucket::IpFilter} object
-        #     - :mode - [String] The mode of the IP filter. Acceptable values are: "Disabled", "Enforced", "Preview"
+        #     - :mode - [String] The mode of the IP filter. Acceptable values are: "Disabled", "Enabled"
         #     - :public_network_source - [Hash] The public network source configuration:
         #       - :allowed_ip_cidr_ranges - [Array<String>] Array of IP CIDR ranges allowed for public access.
         #     - :vpc_network_sources - [Array<Hash>] The VPC network sources configuration:
