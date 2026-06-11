@@ -1,0 +1,47 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.shopping.merchant.issueresolution.v1",
+  "libraryPackage": "::Google::Shopping::Merchant::IssueResolution::V1",
+  "services": {
+    "AggregateProductStatusesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::IssueResolution::V1::AggregateProductStatusesService::Client",
+          "rpcs": {
+            "ListAggregateProductStatuses": {
+              "methods": [
+                "list_aggregate_product_statuses"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "IssueResolutionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client",
+          "rpcs": {
+            "RenderAccountIssues": {
+              "methods": [
+                "render_account_issues"
+              ]
+            },
+            "RenderProductIssues": {
+              "methods": [
+                "render_product_issues"
+              ]
+            },
+            "TriggerAction": {
+              "methods": [
+                "trigger_action"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
