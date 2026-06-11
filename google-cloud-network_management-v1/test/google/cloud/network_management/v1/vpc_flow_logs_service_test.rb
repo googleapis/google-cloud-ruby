@@ -90,40 +90,40 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, list_vpc_flow_logs_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+      c = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_vpc_flow_logs_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_vpc_flow_logs_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_vpc_flow_logs_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_vpc_flow_logs_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_vpc_flow_logs_configs ::Google::Cloud::NetworkManagement::V1::ListVpcFlowLogsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_vpc_flow_logs_configs ::Google::Cloud::NetworkManagement::V1::ListVpcFlowLogsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_vpc_flow_logs_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_vpc_flow_logs_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_vpc_flow_logs_configs(::Google::Cloud::NetworkManagement::V1::ListVpcFlowLogsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_vpc_flow_logs_configs(::Google::Cloud::NetworkManagement::V1::ListVpcFlowLogsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, get_vpc_flow_logs_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+      c = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_vpc_flow_logs_config({ name: name }) do |response, operation|
+      c.get_vpc_flow_logs_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_vpc_flow_logs_config name: name do |response, operation|
+      c.get_vpc_flow_logs_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_vpc_flow_logs_config ::Google::Cloud::NetworkManagement::V1::GetVpcFlowLogsConfigRequest.new(name: name) do |response, operation|
+      c.get_vpc_flow_logs_config ::Google::Cloud::NetworkManagement::V1::GetVpcFlowLogsConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_vpc_flow_logs_config({ name: name }, grpc_options) do |response, operation|
+      c.get_vpc_flow_logs_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_vpc_flow_logs_config(::Google::Cloud::NetworkManagement::V1::GetVpcFlowLogsConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_vpc_flow_logs_config(::Google::Cloud::NetworkManagement::V1::GetVpcFlowLogsConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, create_vpc_flow_logs_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+      c = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_vpc_flow_logs_config({ parent: parent, vpc_flow_logs_config_id: vpc_flow_logs_config_id, vpc_flow_logs_config: vpc_flow_logs_config }) do |response, operation|
+      c.create_vpc_flow_logs_config({ parent: parent, vpc_flow_logs_config_id: vpc_flow_logs_config_id, vpc_flow_logs_config: vpc_flow_logs_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_vpc_flow_logs_config parent: parent, vpc_flow_logs_config_id: vpc_flow_logs_config_id, vpc_flow_logs_config: vpc_flow_logs_config do |response, operation|
+      c.create_vpc_flow_logs_config parent: parent, vpc_flow_logs_config_id: vpc_flow_logs_config_id, vpc_flow_logs_config: vpc_flow_logs_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_vpc_flow_logs_config ::Google::Cloud::NetworkManagement::V1::CreateVpcFlowLogsConfigRequest.new(parent: parent, vpc_flow_logs_config_id: vpc_flow_logs_config_id, vpc_flow_logs_config: vpc_flow_logs_config) do |response, operation|
+      c.create_vpc_flow_logs_config ::Google::Cloud::NetworkManagement::V1::CreateVpcFlowLogsConfigRequest.new(parent: parent, vpc_flow_logs_config_id: vpc_flow_logs_config_id, vpc_flow_logs_config: vpc_flow_logs_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_vpc_flow_logs_config({ parent: parent, vpc_flow_logs_config_id: vpc_flow_logs_config_id, vpc_flow_logs_config: vpc_flow_logs_config }, grpc_options) do |response, operation|
+      c.create_vpc_flow_logs_config({ parent: parent, vpc_flow_logs_config_id: vpc_flow_logs_config_id, vpc_flow_logs_config: vpc_flow_logs_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_vpc_flow_logs_config(::Google::Cloud::NetworkManagement::V1::CreateVpcFlowLogsConfigRequest.new(parent: parent, vpc_flow_logs_config_id: vpc_flow_logs_config_id, vpc_flow_logs_config: vpc_flow_logs_config), grpc_options) do |response, operation|
+      c.create_vpc_flow_logs_config(::Google::Cloud::NetworkManagement::V1::CreateVpcFlowLogsConfigRequest.new(parent: parent, vpc_flow_logs_config_id: vpc_flow_logs_config_id, vpc_flow_logs_config: vpc_flow_logs_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, update_vpc_flow_logs_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+      c = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_vpc_flow_logs_config({ update_mask: update_mask, vpc_flow_logs_config: vpc_flow_logs_config }) do |response, operation|
+      c.update_vpc_flow_logs_config({ update_mask: update_mask, vpc_flow_logs_config: vpc_flow_logs_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_vpc_flow_logs_config update_mask: update_mask, vpc_flow_logs_config: vpc_flow_logs_config do |response, operation|
+      c.update_vpc_flow_logs_config update_mask: update_mask, vpc_flow_logs_config: vpc_flow_logs_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_vpc_flow_logs_config ::Google::Cloud::NetworkManagement::V1::UpdateVpcFlowLogsConfigRequest.new(update_mask: update_mask, vpc_flow_logs_config: vpc_flow_logs_config) do |response, operation|
+      c.update_vpc_flow_logs_config ::Google::Cloud::NetworkManagement::V1::UpdateVpcFlowLogsConfigRequest.new(update_mask: update_mask, vpc_flow_logs_config: vpc_flow_logs_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_vpc_flow_logs_config({ update_mask: update_mask, vpc_flow_logs_config: vpc_flow_logs_config }, grpc_options) do |response, operation|
+      c.update_vpc_flow_logs_config({ update_mask: update_mask, vpc_flow_logs_config: vpc_flow_logs_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_vpc_flow_logs_config(::Google::Cloud::NetworkManagement::V1::UpdateVpcFlowLogsConfigRequest.new(update_mask: update_mask, vpc_flow_logs_config: vpc_flow_logs_config), grpc_options) do |response, operation|
+      c.update_vpc_flow_logs_config(::Google::Cloud::NetworkManagement::V1::UpdateVpcFlowLogsConfigRequest.new(update_mask: update_mask, vpc_flow_logs_config: vpc_flow_logs_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -343,40 +343,40 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, delete_vpc_flow_logs_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+      c = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_vpc_flow_logs_config({ name: name }) do |response, operation|
+      c.delete_vpc_flow_logs_config({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_vpc_flow_logs_config name: name do |response, operation|
+      c.delete_vpc_flow_logs_config name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_vpc_flow_logs_config ::Google::Cloud::NetworkManagement::V1::DeleteVpcFlowLogsConfigRequest.new(name: name) do |response, operation|
+      c.delete_vpc_flow_logs_config ::Google::Cloud::NetworkManagement::V1::DeleteVpcFlowLogsConfigRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_vpc_flow_logs_config({ name: name }, grpc_options) do |response, operation|
+      c.delete_vpc_flow_logs_config({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_vpc_flow_logs_config(::Google::Cloud::NetworkManagement::V1::DeleteVpcFlowLogsConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_vpc_flow_logs_config(::Google::Cloud::NetworkManagement::V1::DeleteVpcFlowLogsConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -412,40 +412,40 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, query_org_vpc_flow_logs_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+      c = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_org_vpc_flow_logs_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.query_org_vpc_flow_logs_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_org_vpc_flow_logs_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.query_org_vpc_flow_logs_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_org_vpc_flow_logs_configs ::Google::Cloud::NetworkManagement::V1::QueryOrgVpcFlowLogsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.query_org_vpc_flow_logs_configs ::Google::Cloud::NetworkManagement::V1::QueryOrgVpcFlowLogsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_org_vpc_flow_logs_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.query_org_vpc_flow_logs_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_org_vpc_flow_logs_configs(::Google::Cloud::NetworkManagement::V1::QueryOrgVpcFlowLogsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.query_org_vpc_flow_logs_configs(::Google::Cloud::NetworkManagement::V1::QueryOrgVpcFlowLogsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -483,40 +483,40 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, show_effective_flow_logs_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+      c = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.show_effective_flow_logs_configs({ parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.show_effective_flow_logs_configs({ parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.show_effective_flow_logs_configs parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.show_effective_flow_logs_configs parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.show_effective_flow_logs_configs ::Google::Cloud::NetworkManagement::V1::ShowEffectiveFlowLogsConfigsRequest.new(parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.show_effective_flow_logs_configs ::Google::Cloud::NetworkManagement::V1::ShowEffectiveFlowLogsConfigsRequest.new(parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.show_effective_flow_logs_configs({ parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.show_effective_flow_logs_configs({ parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.show_effective_flow_logs_configs(::Google::Cloud::NetworkManagement::V1::ShowEffectiveFlowLogsConfigsRequest.new(parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.show_effective_flow_logs_configs(::Google::Cloud::NetworkManagement::V1::ShowEffectiveFlowLogsConfigsRequest.new(parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

@@ -100,32 +100,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_endpoint_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_endpoint_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_endpoint_policies parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
+        c.list_endpoint_policies parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_endpoint_policies ::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
+        c.list_endpoint_policies ::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_endpoint_policies(::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_endpoint_policies(::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_endpoint_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_endpoint_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_endpoint_policy({ name: name }) do |_result, response|
+        c.get_endpoint_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_endpoint_policy name: name do |_result, response|
+        c.get_endpoint_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_endpoint_policy ::Google::Cloud::NetworkServices::V1::GetEndpointPolicyRequest.new(name: name) do |_result, response|
+        c.get_endpoint_policy ::Google::Cloud::NetworkServices::V1::GetEndpointPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_endpoint_policy({ name: name }, call_options) do |_result, response|
+        c.get_endpoint_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_endpoint_policy(::Google::Cloud::NetworkServices::V1::GetEndpointPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_endpoint_policy(::Google::Cloud::NetworkServices::V1::GetEndpointPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_endpoint_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_endpoint_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_endpoint_policy({ parent: parent, endpoint_policy_id: endpoint_policy_id, endpoint_policy: endpoint_policy }) do |_result, response|
+        c.create_endpoint_policy({ parent: parent, endpoint_policy_id: endpoint_policy_id, endpoint_policy: endpoint_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_endpoint_policy parent: parent, endpoint_policy_id: endpoint_policy_id, endpoint_policy: endpoint_policy do |_result, response|
+        c.create_endpoint_policy parent: parent, endpoint_policy_id: endpoint_policy_id, endpoint_policy: endpoint_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_endpoint_policy ::Google::Cloud::NetworkServices::V1::CreateEndpointPolicyRequest.new(parent: parent, endpoint_policy_id: endpoint_policy_id, endpoint_policy: endpoint_policy) do |_result, response|
+        c.create_endpoint_policy ::Google::Cloud::NetworkServices::V1::CreateEndpointPolicyRequest.new(parent: parent, endpoint_policy_id: endpoint_policy_id, endpoint_policy: endpoint_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_endpoint_policy({ parent: parent, endpoint_policy_id: endpoint_policy_id, endpoint_policy: endpoint_policy }, call_options) do |_result, response|
+        c.create_endpoint_policy({ parent: parent, endpoint_policy_id: endpoint_policy_id, endpoint_policy: endpoint_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_endpoint_policy(::Google::Cloud::NetworkServices::V1::CreateEndpointPolicyRequest.new(parent: parent, endpoint_policy_id: endpoint_policy_id, endpoint_policy: endpoint_policy), call_options) do |_result, response|
+        c.create_endpoint_policy(::Google::Cloud::NetworkServices::V1::CreateEndpointPolicyRequest.new(parent: parent, endpoint_policy_id: endpoint_policy_id, endpoint_policy: endpoint_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_endpoint_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_endpoint_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_endpoint_policy({ update_mask: update_mask, endpoint_policy: endpoint_policy }) do |_result, response|
+        c.update_endpoint_policy({ update_mask: update_mask, endpoint_policy: endpoint_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_endpoint_policy update_mask: update_mask, endpoint_policy: endpoint_policy do |_result, response|
+        c.update_endpoint_policy update_mask: update_mask, endpoint_policy: endpoint_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_endpoint_policy ::Google::Cloud::NetworkServices::V1::UpdateEndpointPolicyRequest.new(update_mask: update_mask, endpoint_policy: endpoint_policy) do |_result, response|
+        c.update_endpoint_policy ::Google::Cloud::NetworkServices::V1::UpdateEndpointPolicyRequest.new(update_mask: update_mask, endpoint_policy: endpoint_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_endpoint_policy({ update_mask: update_mask, endpoint_policy: endpoint_policy }, call_options) do |_result, response|
+        c.update_endpoint_policy({ update_mask: update_mask, endpoint_policy: endpoint_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_endpoint_policy(::Google::Cloud::NetworkServices::V1::UpdateEndpointPolicyRequest.new(update_mask: update_mask, endpoint_policy: endpoint_policy), call_options) do |_result, response|
+        c.update_endpoint_policy(::Google::Cloud::NetworkServices::V1::UpdateEndpointPolicyRequest.new(update_mask: update_mask, endpoint_policy: endpoint_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_endpoint_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_endpoint_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_endpoint_policy({ name: name }) do |_result, response|
+        c.delete_endpoint_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_endpoint_policy name: name do |_result, response|
+        c.delete_endpoint_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_endpoint_policy ::Google::Cloud::NetworkServices::V1::DeleteEndpointPolicyRequest.new(name: name) do |_result, response|
+        c.delete_endpoint_policy ::Google::Cloud::NetworkServices::V1::DeleteEndpointPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_endpoint_policy({ name: name }, call_options) do |_result, response|
+        c.delete_endpoint_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_endpoint_policy(::Google::Cloud::NetworkServices::V1::DeleteEndpointPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.delete_endpoint_policy(::Google::Cloud::NetworkServices::V1::DeleteEndpointPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_wasm_plugin_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_wasm_plugin_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_wasm_plugin_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_wasm_plugin_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_wasm_plugin_versions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_wasm_plugin_versions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_wasm_plugin_versions ::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_wasm_plugin_versions ::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_wasm_plugin_versions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_wasm_plugin_versions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_wasm_plugin_versions(::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_wasm_plugin_versions(::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -429,32 +429,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_wasm_plugin_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_wasm_plugin_version_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_wasm_plugin_version({ name: name }) do |_result, response|
+        c.get_wasm_plugin_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_wasm_plugin_version name: name do |_result, response|
+        c.get_wasm_plugin_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest.new(name: name) do |_result, response|
+        c.get_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_wasm_plugin_version({ name: name }, call_options) do |_result, response|
+        c.get_wasm_plugin_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest.new(name: name), call_options) do |_result, response|
+        c.get_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -485,32 +485,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_wasm_plugin_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_wasm_plugin_version_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_wasm_plugin_version({ parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version }) do |_result, response|
+        c.create_wasm_plugin_version({ parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_wasm_plugin_version parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version do |_result, response|
+        c.create_wasm_plugin_version parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest.new(parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version) do |_result, response|
+        c.create_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest.new(parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_wasm_plugin_version({ parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version }, call_options) do |_result, response|
+        c.create_wasm_plugin_version({ parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest.new(parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version), call_options) do |_result, response|
+        c.create_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest.new(parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -539,32 +539,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_wasm_plugin_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_wasm_plugin_version_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_wasm_plugin_version({ name: name }) do |_result, response|
+        c.delete_wasm_plugin_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_wasm_plugin_version name: name do |_result, response|
+        c.delete_wasm_plugin_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest.new(name: name) do |_result, response|
+        c.delete_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_wasm_plugin_version({ name: name }, call_options) do |_result, response|
+        c.delete_wasm_plugin_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest.new(name: name), call_options) do |_result, response|
+        c.delete_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -595,32 +595,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_wasm_plugins_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_wasm_plugins_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_wasm_plugins({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_wasm_plugins({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_wasm_plugins parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_wasm_plugins parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_wasm_plugins ::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_wasm_plugins ::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_wasm_plugins({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_wasm_plugins({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_wasm_plugins(::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_wasm_plugins(::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -650,32 +650,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_wasm_plugin_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_wasm_plugin_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_wasm_plugin({ name: name, view: view }) do |_result, response|
+        c.get_wasm_plugin({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_wasm_plugin name: name, view: view do |_result, response|
+        c.get_wasm_plugin name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_wasm_plugin ::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest.new(name: name, view: view) do |_result, response|
+        c.get_wasm_plugin ::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_wasm_plugin({ name: name, view: view }, call_options) do |_result, response|
+        c.get_wasm_plugin({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_wasm_plugin(::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_wasm_plugin(::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -706,32 +706,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_wasm_plugin_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_wasm_plugin_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_wasm_plugin({ parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin }) do |_result, response|
+        c.create_wasm_plugin({ parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_wasm_plugin parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin do |_result, response|
+        c.create_wasm_plugin parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_wasm_plugin ::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest.new(parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin) do |_result, response|
+        c.create_wasm_plugin ::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest.new(parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_wasm_plugin({ parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin }, call_options) do |_result, response|
+        c.create_wasm_plugin({ parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_wasm_plugin(::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest.new(parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin), call_options) do |_result, response|
+        c.create_wasm_plugin(::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest.new(parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -761,32 +761,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_wasm_plugin_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_wasm_plugin_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_wasm_plugin({ update_mask: update_mask, wasm_plugin: wasm_plugin }) do |_result, response|
+        c.update_wasm_plugin({ update_mask: update_mask, wasm_plugin: wasm_plugin }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_wasm_plugin update_mask: update_mask, wasm_plugin: wasm_plugin do |_result, response|
+        c.update_wasm_plugin update_mask: update_mask, wasm_plugin: wasm_plugin do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_wasm_plugin ::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest.new(update_mask: update_mask, wasm_plugin: wasm_plugin) do |_result, response|
+        c.update_wasm_plugin ::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest.new(update_mask: update_mask, wasm_plugin: wasm_plugin) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_wasm_plugin({ update_mask: update_mask, wasm_plugin: wasm_plugin }, call_options) do |_result, response|
+        c.update_wasm_plugin({ update_mask: update_mask, wasm_plugin: wasm_plugin }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_wasm_plugin(::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest.new(update_mask: update_mask, wasm_plugin: wasm_plugin), call_options) do |_result, response|
+        c.update_wasm_plugin(::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest.new(update_mask: update_mask, wasm_plugin: wasm_plugin), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -815,32 +815,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_wasm_plugin_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_wasm_plugin_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_wasm_plugin({ name: name }) do |_result, response|
+        c.delete_wasm_plugin({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_wasm_plugin name: name do |_result, response|
+        c.delete_wasm_plugin name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_wasm_plugin ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest.new(name: name) do |_result, response|
+        c.delete_wasm_plugin ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_wasm_plugin({ name: name }, call_options) do |_result, response|
+        c.delete_wasm_plugin({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_wasm_plugin(::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest.new(name: name), call_options) do |_result, response|
+        c.delete_wasm_plugin(::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -871,32 +871,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_gateways_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_gateways_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_gateways({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_gateways({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_gateways parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_gateways parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_gateways ::Google::Cloud::NetworkServices::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_gateways ::Google::Cloud::NetworkServices::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_gateways({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_gateways({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_gateways(::Google::Cloud::NetworkServices::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_gateways(::Google::Cloud::NetworkServices::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -925,32 +925,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_gateway_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_gateway_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_gateway({ name: name }) do |_result, response|
+        c.get_gateway({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_gateway name: name do |_result, response|
+        c.get_gateway name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_gateway ::Google::Cloud::NetworkServices::V1::GetGatewayRequest.new(name: name) do |_result, response|
+        c.get_gateway ::Google::Cloud::NetworkServices::V1::GetGatewayRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_gateway({ name: name }, call_options) do |_result, response|
+        c.get_gateway({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_gateway(::Google::Cloud::NetworkServices::V1::GetGatewayRequest.new(name: name), call_options) do |_result, response|
+        c.get_gateway(::Google::Cloud::NetworkServices::V1::GetGatewayRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -981,32 +981,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_gateway_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_gateway_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }) do |_result, response|
+        c.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_gateway parent: parent, gateway_id: gateway_id, gateway: gateway do |_result, response|
+        c.create_gateway parent: parent, gateway_id: gateway_id, gateway: gateway do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_gateway ::Google::Cloud::NetworkServices::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway) do |_result, response|
+        c.create_gateway ::Google::Cloud::NetworkServices::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }, call_options) do |_result, response|
+        c.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_gateway(::Google::Cloud::NetworkServices::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway), call_options) do |_result, response|
+        c.create_gateway(::Google::Cloud::NetworkServices::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1036,32 +1036,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_gateway_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_gateway_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_gateway({ update_mask: update_mask, gateway: gateway }) do |_result, response|
+        c.update_gateway({ update_mask: update_mask, gateway: gateway }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_gateway update_mask: update_mask, gateway: gateway do |_result, response|
+        c.update_gateway update_mask: update_mask, gateway: gateway do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_gateway ::Google::Cloud::NetworkServices::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway) do |_result, response|
+        c.update_gateway ::Google::Cloud::NetworkServices::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_gateway({ update_mask: update_mask, gateway: gateway }, call_options) do |_result, response|
+        c.update_gateway({ update_mask: update_mask, gateway: gateway }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_gateway(::Google::Cloud::NetworkServices::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway), call_options) do |_result, response|
+        c.update_gateway(::Google::Cloud::NetworkServices::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1090,32 +1090,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_gateway_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_gateway_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_gateway({ name: name }) do |_result, response|
+        c.delete_gateway({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_gateway name: name do |_result, response|
+        c.delete_gateway name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_gateway ::Google::Cloud::NetworkServices::V1::DeleteGatewayRequest.new(name: name) do |_result, response|
+        c.delete_gateway ::Google::Cloud::NetworkServices::V1::DeleteGatewayRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_gateway({ name: name }, call_options) do |_result, response|
+        c.delete_gateway({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_gateway(::Google::Cloud::NetworkServices::V1::DeleteGatewayRequest.new(name: name), call_options) do |_result, response|
+        c.delete_gateway(::Google::Cloud::NetworkServices::V1::DeleteGatewayRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1147,32 +1147,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_grpc_routes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_grpc_routes_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_grpc_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
+        c.list_grpc_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_grpc_routes ::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
+        c.list_grpc_routes ::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_grpc_routes(::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_grpc_routes(::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1201,32 +1201,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_grpc_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_grpc_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_grpc_route({ name: name }) do |_result, response|
+        c.get_grpc_route({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_grpc_route name: name do |_result, response|
+        c.get_grpc_route name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_grpc_route ::Google::Cloud::NetworkServices::V1::GetGrpcRouteRequest.new(name: name) do |_result, response|
+        c.get_grpc_route ::Google::Cloud::NetworkServices::V1::GetGrpcRouteRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_grpc_route({ name: name }, call_options) do |_result, response|
+        c.get_grpc_route({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_grpc_route(::Google::Cloud::NetworkServices::V1::GetGrpcRouteRequest.new(name: name), call_options) do |_result, response|
+        c.get_grpc_route(::Google::Cloud::NetworkServices::V1::GetGrpcRouteRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1257,32 +1257,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_grpc_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_grpc_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_grpc_route({ parent: parent, grpc_route_id: grpc_route_id, grpc_route: grpc_route }) do |_result, response|
+        c.create_grpc_route({ parent: parent, grpc_route_id: grpc_route_id, grpc_route: grpc_route }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_grpc_route parent: parent, grpc_route_id: grpc_route_id, grpc_route: grpc_route do |_result, response|
+        c.create_grpc_route parent: parent, grpc_route_id: grpc_route_id, grpc_route: grpc_route do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_grpc_route ::Google::Cloud::NetworkServices::V1::CreateGrpcRouteRequest.new(parent: parent, grpc_route_id: grpc_route_id, grpc_route: grpc_route) do |_result, response|
+        c.create_grpc_route ::Google::Cloud::NetworkServices::V1::CreateGrpcRouteRequest.new(parent: parent, grpc_route_id: grpc_route_id, grpc_route: grpc_route) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_grpc_route({ parent: parent, grpc_route_id: grpc_route_id, grpc_route: grpc_route }, call_options) do |_result, response|
+        c.create_grpc_route({ parent: parent, grpc_route_id: grpc_route_id, grpc_route: grpc_route }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_grpc_route(::Google::Cloud::NetworkServices::V1::CreateGrpcRouteRequest.new(parent: parent, grpc_route_id: grpc_route_id, grpc_route: grpc_route), call_options) do |_result, response|
+        c.create_grpc_route(::Google::Cloud::NetworkServices::V1::CreateGrpcRouteRequest.new(parent: parent, grpc_route_id: grpc_route_id, grpc_route: grpc_route), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1312,32 +1312,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_grpc_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_grpc_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_grpc_route({ update_mask: update_mask, grpc_route: grpc_route }) do |_result, response|
+        c.update_grpc_route({ update_mask: update_mask, grpc_route: grpc_route }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_grpc_route update_mask: update_mask, grpc_route: grpc_route do |_result, response|
+        c.update_grpc_route update_mask: update_mask, grpc_route: grpc_route do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_grpc_route ::Google::Cloud::NetworkServices::V1::UpdateGrpcRouteRequest.new(update_mask: update_mask, grpc_route: grpc_route) do |_result, response|
+        c.update_grpc_route ::Google::Cloud::NetworkServices::V1::UpdateGrpcRouteRequest.new(update_mask: update_mask, grpc_route: grpc_route) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_grpc_route({ update_mask: update_mask, grpc_route: grpc_route }, call_options) do |_result, response|
+        c.update_grpc_route({ update_mask: update_mask, grpc_route: grpc_route }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_grpc_route(::Google::Cloud::NetworkServices::V1::UpdateGrpcRouteRequest.new(update_mask: update_mask, grpc_route: grpc_route), call_options) do |_result, response|
+        c.update_grpc_route(::Google::Cloud::NetworkServices::V1::UpdateGrpcRouteRequest.new(update_mask: update_mask, grpc_route: grpc_route), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1366,32 +1366,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_grpc_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_grpc_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_grpc_route({ name: name }) do |_result, response|
+        c.delete_grpc_route({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_grpc_route name: name do |_result, response|
+        c.delete_grpc_route name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_grpc_route ::Google::Cloud::NetworkServices::V1::DeleteGrpcRouteRequest.new(name: name) do |_result, response|
+        c.delete_grpc_route ::Google::Cloud::NetworkServices::V1::DeleteGrpcRouteRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_grpc_route({ name: name }, call_options) do |_result, response|
+        c.delete_grpc_route({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_grpc_route(::Google::Cloud::NetworkServices::V1::DeleteGrpcRouteRequest.new(name: name), call_options) do |_result, response|
+        c.delete_grpc_route(::Google::Cloud::NetworkServices::V1::DeleteGrpcRouteRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1423,32 +1423,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_http_routes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_http_routes_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_http_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
+        c.list_http_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_http_routes ::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
+        c.list_http_routes ::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_http_routes(::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_http_routes(::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1477,32 +1477,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_http_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_http_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_http_route({ name: name }) do |_result, response|
+        c.get_http_route({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_http_route name: name do |_result, response|
+        c.get_http_route name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_http_route ::Google::Cloud::NetworkServices::V1::GetHttpRouteRequest.new(name: name) do |_result, response|
+        c.get_http_route ::Google::Cloud::NetworkServices::V1::GetHttpRouteRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_http_route({ name: name }, call_options) do |_result, response|
+        c.get_http_route({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_http_route(::Google::Cloud::NetworkServices::V1::GetHttpRouteRequest.new(name: name), call_options) do |_result, response|
+        c.get_http_route(::Google::Cloud::NetworkServices::V1::GetHttpRouteRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1533,32 +1533,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_http_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_http_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_http_route({ parent: parent, http_route_id: http_route_id, http_route: http_route }) do |_result, response|
+        c.create_http_route({ parent: parent, http_route_id: http_route_id, http_route: http_route }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_http_route parent: parent, http_route_id: http_route_id, http_route: http_route do |_result, response|
+        c.create_http_route parent: parent, http_route_id: http_route_id, http_route: http_route do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_http_route ::Google::Cloud::NetworkServices::V1::CreateHttpRouteRequest.new(parent: parent, http_route_id: http_route_id, http_route: http_route) do |_result, response|
+        c.create_http_route ::Google::Cloud::NetworkServices::V1::CreateHttpRouteRequest.new(parent: parent, http_route_id: http_route_id, http_route: http_route) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_http_route({ parent: parent, http_route_id: http_route_id, http_route: http_route }, call_options) do |_result, response|
+        c.create_http_route({ parent: parent, http_route_id: http_route_id, http_route: http_route }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_http_route(::Google::Cloud::NetworkServices::V1::CreateHttpRouteRequest.new(parent: parent, http_route_id: http_route_id, http_route: http_route), call_options) do |_result, response|
+        c.create_http_route(::Google::Cloud::NetworkServices::V1::CreateHttpRouteRequest.new(parent: parent, http_route_id: http_route_id, http_route: http_route), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1588,32 +1588,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_http_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_http_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_http_route({ update_mask: update_mask, http_route: http_route }) do |_result, response|
+        c.update_http_route({ update_mask: update_mask, http_route: http_route }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_http_route update_mask: update_mask, http_route: http_route do |_result, response|
+        c.update_http_route update_mask: update_mask, http_route: http_route do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_http_route ::Google::Cloud::NetworkServices::V1::UpdateHttpRouteRequest.new(update_mask: update_mask, http_route: http_route) do |_result, response|
+        c.update_http_route ::Google::Cloud::NetworkServices::V1::UpdateHttpRouteRequest.new(update_mask: update_mask, http_route: http_route) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_http_route({ update_mask: update_mask, http_route: http_route }, call_options) do |_result, response|
+        c.update_http_route({ update_mask: update_mask, http_route: http_route }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_http_route(::Google::Cloud::NetworkServices::V1::UpdateHttpRouteRequest.new(update_mask: update_mask, http_route: http_route), call_options) do |_result, response|
+        c.update_http_route(::Google::Cloud::NetworkServices::V1::UpdateHttpRouteRequest.new(update_mask: update_mask, http_route: http_route), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1642,32 +1642,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_http_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_http_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_http_route({ name: name }) do |_result, response|
+        c.delete_http_route({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_http_route name: name do |_result, response|
+        c.delete_http_route name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_http_route ::Google::Cloud::NetworkServices::V1::DeleteHttpRouteRequest.new(name: name) do |_result, response|
+        c.delete_http_route ::Google::Cloud::NetworkServices::V1::DeleteHttpRouteRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_http_route({ name: name }, call_options) do |_result, response|
+        c.delete_http_route({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_http_route(::Google::Cloud::NetworkServices::V1::DeleteHttpRouteRequest.new(name: name), call_options) do |_result, response|
+        c.delete_http_route(::Google::Cloud::NetworkServices::V1::DeleteHttpRouteRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1699,32 +1699,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_tcp_routes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tcp_routes_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tcp_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
+        c.list_tcp_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tcp_routes ::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
+        c.list_tcp_routes ::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tcp_routes(::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_tcp_routes(::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1753,32 +1753,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_tcp_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_tcp_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_tcp_route({ name: name }) do |_result, response|
+        c.get_tcp_route({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_tcp_route name: name do |_result, response|
+        c.get_tcp_route name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_tcp_route ::Google::Cloud::NetworkServices::V1::GetTcpRouteRequest.new(name: name) do |_result, response|
+        c.get_tcp_route ::Google::Cloud::NetworkServices::V1::GetTcpRouteRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_tcp_route({ name: name }, call_options) do |_result, response|
+        c.get_tcp_route({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_tcp_route(::Google::Cloud::NetworkServices::V1::GetTcpRouteRequest.new(name: name), call_options) do |_result, response|
+        c.get_tcp_route(::Google::Cloud::NetworkServices::V1::GetTcpRouteRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1809,32 +1809,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_tcp_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tcp_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tcp_route({ parent: parent, tcp_route_id: tcp_route_id, tcp_route: tcp_route }) do |_result, response|
+        c.create_tcp_route({ parent: parent, tcp_route_id: tcp_route_id, tcp_route: tcp_route }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tcp_route parent: parent, tcp_route_id: tcp_route_id, tcp_route: tcp_route do |_result, response|
+        c.create_tcp_route parent: parent, tcp_route_id: tcp_route_id, tcp_route: tcp_route do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tcp_route ::Google::Cloud::NetworkServices::V1::CreateTcpRouteRequest.new(parent: parent, tcp_route_id: tcp_route_id, tcp_route: tcp_route) do |_result, response|
+        c.create_tcp_route ::Google::Cloud::NetworkServices::V1::CreateTcpRouteRequest.new(parent: parent, tcp_route_id: tcp_route_id, tcp_route: tcp_route) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tcp_route({ parent: parent, tcp_route_id: tcp_route_id, tcp_route: tcp_route }, call_options) do |_result, response|
+        c.create_tcp_route({ parent: parent, tcp_route_id: tcp_route_id, tcp_route: tcp_route }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tcp_route(::Google::Cloud::NetworkServices::V1::CreateTcpRouteRequest.new(parent: parent, tcp_route_id: tcp_route_id, tcp_route: tcp_route), call_options) do |_result, response|
+        c.create_tcp_route(::Google::Cloud::NetworkServices::V1::CreateTcpRouteRequest.new(parent: parent, tcp_route_id: tcp_route_id, tcp_route: tcp_route), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1864,32 +1864,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_tcp_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_tcp_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_tcp_route({ update_mask: update_mask, tcp_route: tcp_route }) do |_result, response|
+        c.update_tcp_route({ update_mask: update_mask, tcp_route: tcp_route }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_tcp_route update_mask: update_mask, tcp_route: tcp_route do |_result, response|
+        c.update_tcp_route update_mask: update_mask, tcp_route: tcp_route do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_tcp_route ::Google::Cloud::NetworkServices::V1::UpdateTcpRouteRequest.new(update_mask: update_mask, tcp_route: tcp_route) do |_result, response|
+        c.update_tcp_route ::Google::Cloud::NetworkServices::V1::UpdateTcpRouteRequest.new(update_mask: update_mask, tcp_route: tcp_route) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_tcp_route({ update_mask: update_mask, tcp_route: tcp_route }, call_options) do |_result, response|
+        c.update_tcp_route({ update_mask: update_mask, tcp_route: tcp_route }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_tcp_route(::Google::Cloud::NetworkServices::V1::UpdateTcpRouteRequest.new(update_mask: update_mask, tcp_route: tcp_route), call_options) do |_result, response|
+        c.update_tcp_route(::Google::Cloud::NetworkServices::V1::UpdateTcpRouteRequest.new(update_mask: update_mask, tcp_route: tcp_route), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1918,32 +1918,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_tcp_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tcp_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tcp_route({ name: name }) do |_result, response|
+        c.delete_tcp_route({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tcp_route name: name do |_result, response|
+        c.delete_tcp_route name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tcp_route ::Google::Cloud::NetworkServices::V1::DeleteTcpRouteRequest.new(name: name) do |_result, response|
+        c.delete_tcp_route ::Google::Cloud::NetworkServices::V1::DeleteTcpRouteRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tcp_route({ name: name }, call_options) do |_result, response|
+        c.delete_tcp_route({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tcp_route(::Google::Cloud::NetworkServices::V1::DeleteTcpRouteRequest.new(name: name), call_options) do |_result, response|
+        c.delete_tcp_route(::Google::Cloud::NetworkServices::V1::DeleteTcpRouteRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1975,32 +1975,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_tls_routes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tls_routes_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tls_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
+        c.list_tls_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tls_routes ::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
+        c.list_tls_routes ::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tls_routes(::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_tls_routes(::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2029,32 +2029,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_tls_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_tls_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_tls_route({ name: name }) do |_result, response|
+        c.get_tls_route({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_tls_route name: name do |_result, response|
+        c.get_tls_route name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_tls_route ::Google::Cloud::NetworkServices::V1::GetTlsRouteRequest.new(name: name) do |_result, response|
+        c.get_tls_route ::Google::Cloud::NetworkServices::V1::GetTlsRouteRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_tls_route({ name: name }, call_options) do |_result, response|
+        c.get_tls_route({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_tls_route(::Google::Cloud::NetworkServices::V1::GetTlsRouteRequest.new(name: name), call_options) do |_result, response|
+        c.get_tls_route(::Google::Cloud::NetworkServices::V1::GetTlsRouteRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2085,32 +2085,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_tls_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tls_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tls_route({ parent: parent, tls_route_id: tls_route_id, tls_route: tls_route }) do |_result, response|
+        c.create_tls_route({ parent: parent, tls_route_id: tls_route_id, tls_route: tls_route }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tls_route parent: parent, tls_route_id: tls_route_id, tls_route: tls_route do |_result, response|
+        c.create_tls_route parent: parent, tls_route_id: tls_route_id, tls_route: tls_route do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tls_route ::Google::Cloud::NetworkServices::V1::CreateTlsRouteRequest.new(parent: parent, tls_route_id: tls_route_id, tls_route: tls_route) do |_result, response|
+        c.create_tls_route ::Google::Cloud::NetworkServices::V1::CreateTlsRouteRequest.new(parent: parent, tls_route_id: tls_route_id, tls_route: tls_route) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tls_route({ parent: parent, tls_route_id: tls_route_id, tls_route: tls_route }, call_options) do |_result, response|
+        c.create_tls_route({ parent: parent, tls_route_id: tls_route_id, tls_route: tls_route }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tls_route(::Google::Cloud::NetworkServices::V1::CreateTlsRouteRequest.new(parent: parent, tls_route_id: tls_route_id, tls_route: tls_route), call_options) do |_result, response|
+        c.create_tls_route(::Google::Cloud::NetworkServices::V1::CreateTlsRouteRequest.new(parent: parent, tls_route_id: tls_route_id, tls_route: tls_route), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2140,32 +2140,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_tls_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_tls_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_tls_route({ update_mask: update_mask, tls_route: tls_route }) do |_result, response|
+        c.update_tls_route({ update_mask: update_mask, tls_route: tls_route }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_tls_route update_mask: update_mask, tls_route: tls_route do |_result, response|
+        c.update_tls_route update_mask: update_mask, tls_route: tls_route do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_tls_route ::Google::Cloud::NetworkServices::V1::UpdateTlsRouteRequest.new(update_mask: update_mask, tls_route: tls_route) do |_result, response|
+        c.update_tls_route ::Google::Cloud::NetworkServices::V1::UpdateTlsRouteRequest.new(update_mask: update_mask, tls_route: tls_route) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_tls_route({ update_mask: update_mask, tls_route: tls_route }, call_options) do |_result, response|
+        c.update_tls_route({ update_mask: update_mask, tls_route: tls_route }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_tls_route(::Google::Cloud::NetworkServices::V1::UpdateTlsRouteRequest.new(update_mask: update_mask, tls_route: tls_route), call_options) do |_result, response|
+        c.update_tls_route(::Google::Cloud::NetworkServices::V1::UpdateTlsRouteRequest.new(update_mask: update_mask, tls_route: tls_route), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2194,32 +2194,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_tls_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tls_route_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tls_route({ name: name }) do |_result, response|
+        c.delete_tls_route({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tls_route name: name do |_result, response|
+        c.delete_tls_route name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tls_route ::Google::Cloud::NetworkServices::V1::DeleteTlsRouteRequest.new(name: name) do |_result, response|
+        c.delete_tls_route ::Google::Cloud::NetworkServices::V1::DeleteTlsRouteRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tls_route({ name: name }, call_options) do |_result, response|
+        c.delete_tls_route({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tls_route(::Google::Cloud::NetworkServices::V1::DeleteTlsRouteRequest.new(name: name), call_options) do |_result, response|
+        c.delete_tls_route(::Google::Cloud::NetworkServices::V1::DeleteTlsRouteRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2250,32 +2250,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_service_bindings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_service_bindings_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_service_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_service_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_service_bindings parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_service_bindings parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_service_bindings ::Google::Cloud::NetworkServices::V1::ListServiceBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_service_bindings ::Google::Cloud::NetworkServices::V1::ListServiceBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_service_bindings({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_service_bindings({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_service_bindings(::Google::Cloud::NetworkServices::V1::ListServiceBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_service_bindings(::Google::Cloud::NetworkServices::V1::ListServiceBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2304,32 +2304,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_service_binding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_service_binding_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_service_binding({ name: name }) do |_result, response|
+        c.get_service_binding({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_service_binding name: name do |_result, response|
+        c.get_service_binding name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_service_binding ::Google::Cloud::NetworkServices::V1::GetServiceBindingRequest.new(name: name) do |_result, response|
+        c.get_service_binding ::Google::Cloud::NetworkServices::V1::GetServiceBindingRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_service_binding({ name: name }, call_options) do |_result, response|
+        c.get_service_binding({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_service_binding(::Google::Cloud::NetworkServices::V1::GetServiceBindingRequest.new(name: name), call_options) do |_result, response|
+        c.get_service_binding(::Google::Cloud::NetworkServices::V1::GetServiceBindingRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2360,32 +2360,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_service_binding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_service_binding_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_service_binding({ parent: parent, service_binding_id: service_binding_id, service_binding: service_binding }) do |_result, response|
+        c.create_service_binding({ parent: parent, service_binding_id: service_binding_id, service_binding: service_binding }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_service_binding parent: parent, service_binding_id: service_binding_id, service_binding: service_binding do |_result, response|
+        c.create_service_binding parent: parent, service_binding_id: service_binding_id, service_binding: service_binding do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_service_binding ::Google::Cloud::NetworkServices::V1::CreateServiceBindingRequest.new(parent: parent, service_binding_id: service_binding_id, service_binding: service_binding) do |_result, response|
+        c.create_service_binding ::Google::Cloud::NetworkServices::V1::CreateServiceBindingRequest.new(parent: parent, service_binding_id: service_binding_id, service_binding: service_binding) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_service_binding({ parent: parent, service_binding_id: service_binding_id, service_binding: service_binding }, call_options) do |_result, response|
+        c.create_service_binding({ parent: parent, service_binding_id: service_binding_id, service_binding: service_binding }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_service_binding(::Google::Cloud::NetworkServices::V1::CreateServiceBindingRequest.new(parent: parent, service_binding_id: service_binding_id, service_binding: service_binding), call_options) do |_result, response|
+        c.create_service_binding(::Google::Cloud::NetworkServices::V1::CreateServiceBindingRequest.new(parent: parent, service_binding_id: service_binding_id, service_binding: service_binding), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2415,32 +2415,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_service_binding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_service_binding_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_service_binding({ update_mask: update_mask, service_binding: service_binding }) do |_result, response|
+        c.update_service_binding({ update_mask: update_mask, service_binding: service_binding }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_service_binding update_mask: update_mask, service_binding: service_binding do |_result, response|
+        c.update_service_binding update_mask: update_mask, service_binding: service_binding do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_service_binding ::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest.new(update_mask: update_mask, service_binding: service_binding) do |_result, response|
+        c.update_service_binding ::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest.new(update_mask: update_mask, service_binding: service_binding) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_service_binding({ update_mask: update_mask, service_binding: service_binding }, call_options) do |_result, response|
+        c.update_service_binding({ update_mask: update_mask, service_binding: service_binding }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_service_binding(::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest.new(update_mask: update_mask, service_binding: service_binding), call_options) do |_result, response|
+        c.update_service_binding(::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest.new(update_mask: update_mask, service_binding: service_binding), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2469,32 +2469,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_service_binding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_service_binding_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_service_binding({ name: name }) do |_result, response|
+        c.delete_service_binding({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_service_binding name: name do |_result, response|
+        c.delete_service_binding name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_service_binding ::Google::Cloud::NetworkServices::V1::DeleteServiceBindingRequest.new(name: name) do |_result, response|
+        c.delete_service_binding ::Google::Cloud::NetworkServices::V1::DeleteServiceBindingRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_service_binding({ name: name }, call_options) do |_result, response|
+        c.delete_service_binding({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_service_binding(::Google::Cloud::NetworkServices::V1::DeleteServiceBindingRequest.new(name: name), call_options) do |_result, response|
+        c.delete_service_binding(::Google::Cloud::NetworkServices::V1::DeleteServiceBindingRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2526,32 +2526,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_meshes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_meshes_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_meshes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_meshes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_meshes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
+        c.list_meshes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_meshes ::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
+        c.list_meshes ::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_meshes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_meshes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_meshes(::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_meshes(::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2580,32 +2580,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_mesh_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_mesh_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_mesh({ name: name }) do |_result, response|
+        c.get_mesh({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_mesh name: name do |_result, response|
+        c.get_mesh name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_mesh ::Google::Cloud::NetworkServices::V1::GetMeshRequest.new(name: name) do |_result, response|
+        c.get_mesh ::Google::Cloud::NetworkServices::V1::GetMeshRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_mesh({ name: name }, call_options) do |_result, response|
+        c.get_mesh({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_mesh(::Google::Cloud::NetworkServices::V1::GetMeshRequest.new(name: name), call_options) do |_result, response|
+        c.get_mesh(::Google::Cloud::NetworkServices::V1::GetMeshRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2636,32 +2636,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_mesh_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_mesh_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_mesh({ parent: parent, mesh_id: mesh_id, mesh: mesh }) do |_result, response|
+        c.create_mesh({ parent: parent, mesh_id: mesh_id, mesh: mesh }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_mesh parent: parent, mesh_id: mesh_id, mesh: mesh do |_result, response|
+        c.create_mesh parent: parent, mesh_id: mesh_id, mesh: mesh do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_mesh ::Google::Cloud::NetworkServices::V1::CreateMeshRequest.new(parent: parent, mesh_id: mesh_id, mesh: mesh) do |_result, response|
+        c.create_mesh ::Google::Cloud::NetworkServices::V1::CreateMeshRequest.new(parent: parent, mesh_id: mesh_id, mesh: mesh) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_mesh({ parent: parent, mesh_id: mesh_id, mesh: mesh }, call_options) do |_result, response|
+        c.create_mesh({ parent: parent, mesh_id: mesh_id, mesh: mesh }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_mesh(::Google::Cloud::NetworkServices::V1::CreateMeshRequest.new(parent: parent, mesh_id: mesh_id, mesh: mesh), call_options) do |_result, response|
+        c.create_mesh(::Google::Cloud::NetworkServices::V1::CreateMeshRequest.new(parent: parent, mesh_id: mesh_id, mesh: mesh), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2691,32 +2691,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_mesh_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_mesh_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_mesh({ update_mask: update_mask, mesh: mesh }) do |_result, response|
+        c.update_mesh({ update_mask: update_mask, mesh: mesh }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_mesh update_mask: update_mask, mesh: mesh do |_result, response|
+        c.update_mesh update_mask: update_mask, mesh: mesh do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_mesh ::Google::Cloud::NetworkServices::V1::UpdateMeshRequest.new(update_mask: update_mask, mesh: mesh) do |_result, response|
+        c.update_mesh ::Google::Cloud::NetworkServices::V1::UpdateMeshRequest.new(update_mask: update_mask, mesh: mesh) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_mesh({ update_mask: update_mask, mesh: mesh }, call_options) do |_result, response|
+        c.update_mesh({ update_mask: update_mask, mesh: mesh }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_mesh(::Google::Cloud::NetworkServices::V1::UpdateMeshRequest.new(update_mask: update_mask, mesh: mesh), call_options) do |_result, response|
+        c.update_mesh(::Google::Cloud::NetworkServices::V1::UpdateMeshRequest.new(update_mask: update_mask, mesh: mesh), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2745,32 +2745,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_mesh_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_mesh_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_mesh({ name: name }) do |_result, response|
+        c.delete_mesh({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_mesh name: name do |_result, response|
+        c.delete_mesh name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_mesh ::Google::Cloud::NetworkServices::V1::DeleteMeshRequest.new(name: name) do |_result, response|
+        c.delete_mesh ::Google::Cloud::NetworkServices::V1::DeleteMeshRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_mesh({ name: name }, call_options) do |_result, response|
+        c.delete_mesh({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_mesh(::Google::Cloud::NetworkServices::V1::DeleteMeshRequest.new(name: name), call_options) do |_result, response|
+        c.delete_mesh(::Google::Cloud::NetworkServices::V1::DeleteMeshRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2801,32 +2801,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_service_lb_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_service_lb_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_service_lb_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_service_lb_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_service_lb_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_service_lb_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_service_lb_policies ::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_service_lb_policies ::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_service_lb_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_service_lb_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_service_lb_policies(::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_service_lb_policies(::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2855,32 +2855,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_service_lb_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_service_lb_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_service_lb_policy({ name: name }) do |_result, response|
+        c.get_service_lb_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_service_lb_policy name: name do |_result, response|
+        c.get_service_lb_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_service_lb_policy ::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest.new(name: name) do |_result, response|
+        c.get_service_lb_policy ::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_service_lb_policy({ name: name }, call_options) do |_result, response|
+        c.get_service_lb_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_service_lb_policy(::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_service_lb_policy(::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2911,32 +2911,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_service_lb_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_service_lb_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_service_lb_policy({ parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy }) do |_result, response|
+        c.create_service_lb_policy({ parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_service_lb_policy parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy do |_result, response|
+        c.create_service_lb_policy parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_service_lb_policy ::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest.new(parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy) do |_result, response|
+        c.create_service_lb_policy ::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest.new(parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_service_lb_policy({ parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy }, call_options) do |_result, response|
+        c.create_service_lb_policy({ parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_service_lb_policy(::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest.new(parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy), call_options) do |_result, response|
+        c.create_service_lb_policy(::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest.new(parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2966,32 +2966,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_service_lb_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_service_lb_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_service_lb_policy({ update_mask: update_mask, service_lb_policy: service_lb_policy }) do |_result, response|
+        c.update_service_lb_policy({ update_mask: update_mask, service_lb_policy: service_lb_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_service_lb_policy update_mask: update_mask, service_lb_policy: service_lb_policy do |_result, response|
+        c.update_service_lb_policy update_mask: update_mask, service_lb_policy: service_lb_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_service_lb_policy ::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest.new(update_mask: update_mask, service_lb_policy: service_lb_policy) do |_result, response|
+        c.update_service_lb_policy ::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest.new(update_mask: update_mask, service_lb_policy: service_lb_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_service_lb_policy({ update_mask: update_mask, service_lb_policy: service_lb_policy }, call_options) do |_result, response|
+        c.update_service_lb_policy({ update_mask: update_mask, service_lb_policy: service_lb_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_service_lb_policy(::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest.new(update_mask: update_mask, service_lb_policy: service_lb_policy), call_options) do |_result, response|
+        c.update_service_lb_policy(::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest.new(update_mask: update_mask, service_lb_policy: service_lb_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3020,32 +3020,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_service_lb_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_service_lb_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_service_lb_policy({ name: name }) do |_result, response|
+        c.delete_service_lb_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_service_lb_policy name: name do |_result, response|
+        c.delete_service_lb_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_service_lb_policy ::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest.new(name: name) do |_result, response|
+        c.delete_service_lb_policy ::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_service_lb_policy({ name: name }, call_options) do |_result, response|
+        c.delete_service_lb_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_service_lb_policy(::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.delete_service_lb_policy(::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3074,32 +3074,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_gateway_route_view_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_gateway_route_view_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_gateway_route_view({ name: name }) do |_result, response|
+        c.get_gateway_route_view({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_gateway_route_view name: name do |_result, response|
+        c.get_gateway_route_view name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_gateway_route_view ::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest.new(name: name) do |_result, response|
+        c.get_gateway_route_view ::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_gateway_route_view({ name: name }, call_options) do |_result, response|
+        c.get_gateway_route_view({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_gateway_route_view(::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest.new(name: name), call_options) do |_result, response|
+        c.get_gateway_route_view(::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3128,32 +3128,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_mesh_route_view_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_mesh_route_view_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_mesh_route_view({ name: name }) do |_result, response|
+        c.get_mesh_route_view({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_mesh_route_view name: name do |_result, response|
+        c.get_mesh_route_view name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_mesh_route_view ::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest.new(name: name) do |_result, response|
+        c.get_mesh_route_view ::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_mesh_route_view({ name: name }, call_options) do |_result, response|
+        c.get_mesh_route_view({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_mesh_route_view(::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest.new(name: name), call_options) do |_result, response|
+        c.get_mesh_route_view(::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3184,32 +3184,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_gateway_route_views_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_gateway_route_views_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_gateway_route_views({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_gateway_route_views({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_gateway_route_views parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_gateway_route_views parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_gateway_route_views ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_gateway_route_views ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_gateway_route_views({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_gateway_route_views({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_gateway_route_views(::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_gateway_route_views(::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3240,32 +3240,32 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_mesh_route_views_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_mesh_route_views_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_mesh_route_views({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_mesh_route_views({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_mesh_route_views parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_mesh_route_views parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_mesh_route_views ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_mesh_route_views ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_mesh_route_views({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_mesh_route_views({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_mesh_route_views(::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_mesh_route_views(::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
