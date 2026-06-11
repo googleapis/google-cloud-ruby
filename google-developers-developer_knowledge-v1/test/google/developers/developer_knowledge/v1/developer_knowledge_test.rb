@@ -88,40 +88,40 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::ClientTe
 
     Gapic::ServiceStub.stub :new, search_document_chunks_client_stub do
       # Create client
-      client = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client.new do |config|
+      c = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_document_chunks({ query: query, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.search_document_chunks({ query: query, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_document_chunks query: query, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.search_document_chunks query: query, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_document_chunks ::Google::Developers::DeveloperKnowledge::V1::SearchDocumentChunksRequest.new(query: query, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.search_document_chunks ::Google::Developers::DeveloperKnowledge::V1::SearchDocumentChunksRequest.new(query: query, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_document_chunks({ query: query, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.search_document_chunks({ query: query, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_document_chunks(::Google::Developers::DeveloperKnowledge::V1::SearchDocumentChunksRequest.new(query: query, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.search_document_chunks(::Google::Developers::DeveloperKnowledge::V1::SearchDocumentChunksRequest.new(query: query, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::ClientTe
 
     Gapic::ServiceStub.stub :new, get_document_client_stub do
       # Create client
-      client = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client.new do |config|
+      c = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_document({ name: name, view: view }) do |response, operation|
+      c.get_document({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_document name: name, view: view do |response, operation|
+      c.get_document name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_document ::Google::Developers::DeveloperKnowledge::V1::GetDocumentRequest.new(name: name, view: view) do |response, operation|
+      c.get_document ::Google::Developers::DeveloperKnowledge::V1::GetDocumentRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_document({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_document({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_document(::Google::Developers::DeveloperKnowledge::V1::GetDocumentRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_document(::Google::Developers::DeveloperKnowledge::V1::GetDocumentRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,36 +213,36 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::ClientTe
 
     Gapic::ServiceStub.stub :new, batch_get_documents_client_stub do
       # Create client
-      client = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client.new do |config|
+      c = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_get_documents({ names: names, view: view }) do |response, operation|
+      c.batch_get_documents({ names: names, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_get_documents names: names, view: view do |response, operation|
+      c.batch_get_documents names: names, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_get_documents ::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsRequest.new(names: names, view: view) do |response, operation|
+      c.batch_get_documents ::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsRequest.new(names: names, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_get_documents({ names: names, view: view }, grpc_options) do |response, operation|
+      c.batch_get_documents({ names: names, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_get_documents(::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsRequest.new(names: names, view: view), grpc_options) do |response, operation|
+      c.batch_get_documents(::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsRequest.new(names: names, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -98,32 +98,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_create_scan_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_scan_config_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_scan_config({ parent: parent, scan_config: scan_config }) do |_result, response|
+        c.create_scan_config({ parent: parent, scan_config: scan_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_scan_config parent: parent, scan_config: scan_config do |_result, response|
+        c.create_scan_config parent: parent, scan_config: scan_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::CreateScanConfigRequest.new(parent: parent, scan_config: scan_config) do |_result, response|
+        c.create_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::CreateScanConfigRequest.new(parent: parent, scan_config: scan_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_scan_config({ parent: parent, scan_config: scan_config }, call_options) do |_result, response|
+        c.create_scan_config({ parent: parent, scan_config: scan_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::CreateScanConfigRequest.new(parent: parent, scan_config: scan_config), call_options) do |_result, response|
+        c.create_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::CreateScanConfigRequest.new(parent: parent, scan_config: scan_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_delete_scan_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_scan_config_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_scan_config({ name: name }) do |_result, response|
+        c.delete_scan_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_scan_config name: name do |_result, response|
+        c.delete_scan_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::DeleteScanConfigRequest.new(name: name) do |_result, response|
+        c.delete_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::DeleteScanConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_scan_config({ name: name }, call_options) do |_result, response|
+        c.delete_scan_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::DeleteScanConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::DeleteScanConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,32 +206,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_get_scan_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_scan_config_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_scan_config({ name: name }) do |_result, response|
+        c.get_scan_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_scan_config name: name do |_result, response|
+        c.get_scan_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::GetScanConfigRequest.new(name: name) do |_result, response|
+        c.get_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::GetScanConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_scan_config({ name: name }, call_options) do |_result, response|
+        c.get_scan_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::GetScanConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::GetScanConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_list_scan_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_scan_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_scan_configs({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_scan_configs({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_scan_configs parent: parent, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_scan_configs parent: parent, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_scan_configs ::Google::Cloud::WebSecurityScanner::V1beta::ListScanConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_scan_configs ::Google::Cloud::WebSecurityScanner::V1beta::ListScanConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_scan_configs({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_scan_configs({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_scan_configs(::Google::Cloud::WebSecurityScanner::V1beta::ListScanConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_scan_configs(::Google::Cloud::WebSecurityScanner::V1beta::ListScanConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_update_scan_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_scan_config_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_scan_config({ scan_config: scan_config, update_mask: update_mask }) do |_result, response|
+        c.update_scan_config({ scan_config: scan_config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_scan_config scan_config: scan_config, update_mask: update_mask do |_result, response|
+        c.update_scan_config scan_config: scan_config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::UpdateScanConfigRequest.new(scan_config: scan_config, update_mask: update_mask) do |_result, response|
+        c.update_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::UpdateScanConfigRequest.new(scan_config: scan_config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_scan_config({ scan_config: scan_config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_scan_config({ scan_config: scan_config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::UpdateScanConfigRequest.new(scan_config: scan_config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::UpdateScanConfigRequest.new(scan_config: scan_config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -371,32 +371,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_start_scan_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_scan_run_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_scan_run({ name: name }) do |_result, response|
+        c.start_scan_run({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_scan_run name: name do |_result, response|
+        c.start_scan_run name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_scan_run ::Google::Cloud::WebSecurityScanner::V1beta::StartScanRunRequest.new(name: name) do |_result, response|
+        c.start_scan_run ::Google::Cloud::WebSecurityScanner::V1beta::StartScanRunRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_scan_run({ name: name }, call_options) do |_result, response|
+        c.start_scan_run({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_scan_run(::Google::Cloud::WebSecurityScanner::V1beta::StartScanRunRequest.new(name: name), call_options) do |_result, response|
+        c.start_scan_run(::Google::Cloud::WebSecurityScanner::V1beta::StartScanRunRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -425,32 +425,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_get_scan_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_scan_run_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_scan_run({ name: name }) do |_result, response|
+        c.get_scan_run({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_scan_run name: name do |_result, response|
+        c.get_scan_run name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_scan_run ::Google::Cloud::WebSecurityScanner::V1beta::GetScanRunRequest.new(name: name) do |_result, response|
+        c.get_scan_run ::Google::Cloud::WebSecurityScanner::V1beta::GetScanRunRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_scan_run({ name: name }, call_options) do |_result, response|
+        c.get_scan_run({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_scan_run(::Google::Cloud::WebSecurityScanner::V1beta::GetScanRunRequest.new(name: name), call_options) do |_result, response|
+        c.get_scan_run(::Google::Cloud::WebSecurityScanner::V1beta::GetScanRunRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -481,32 +481,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_list_scan_runs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_scan_runs_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_scan_runs({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_scan_runs({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_scan_runs parent: parent, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_scan_runs parent: parent, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_scan_runs ::Google::Cloud::WebSecurityScanner::V1beta::ListScanRunsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_scan_runs ::Google::Cloud::WebSecurityScanner::V1beta::ListScanRunsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_scan_runs({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_scan_runs({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_scan_runs(::Google::Cloud::WebSecurityScanner::V1beta::ListScanRunsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_scan_runs(::Google::Cloud::WebSecurityScanner::V1beta::ListScanRunsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -535,32 +535,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_stop_scan_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_scan_run_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_scan_run({ name: name }) do |_result, response|
+        c.stop_scan_run({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_scan_run name: name do |_result, response|
+        c.stop_scan_run name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_scan_run ::Google::Cloud::WebSecurityScanner::V1beta::StopScanRunRequest.new(name: name) do |_result, response|
+        c.stop_scan_run ::Google::Cloud::WebSecurityScanner::V1beta::StopScanRunRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_scan_run({ name: name }, call_options) do |_result, response|
+        c.stop_scan_run({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_scan_run(::Google::Cloud::WebSecurityScanner::V1beta::StopScanRunRequest.new(name: name), call_options) do |_result, response|
+        c.stop_scan_run(::Google::Cloud::WebSecurityScanner::V1beta::StopScanRunRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -591,32 +591,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_list_crawled_urls_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_crawled_urls_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_crawled_urls({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_crawled_urls({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_crawled_urls parent: parent, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_crawled_urls parent: parent, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_crawled_urls ::Google::Cloud::WebSecurityScanner::V1beta::ListCrawledUrlsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_crawled_urls ::Google::Cloud::WebSecurityScanner::V1beta::ListCrawledUrlsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_crawled_urls({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_crawled_urls({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_crawled_urls(::Google::Cloud::WebSecurityScanner::V1beta::ListCrawledUrlsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_crawled_urls(::Google::Cloud::WebSecurityScanner::V1beta::ListCrawledUrlsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -645,32 +645,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_get_finding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_finding_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_finding({ name: name }) do |_result, response|
+        c.get_finding({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_finding name: name do |_result, response|
+        c.get_finding name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_finding ::Google::Cloud::WebSecurityScanner::V1beta::GetFindingRequest.new(name: name) do |_result, response|
+        c.get_finding ::Google::Cloud::WebSecurityScanner::V1beta::GetFindingRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_finding({ name: name }, call_options) do |_result, response|
+        c.get_finding({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_finding(::Google::Cloud::WebSecurityScanner::V1beta::GetFindingRequest.new(name: name), call_options) do |_result, response|
+        c.get_finding(::Google::Cloud::WebSecurityScanner::V1beta::GetFindingRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -702,32 +702,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_list_findings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_findings_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_findings({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_findings({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_findings parent: parent, filter: filter, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_findings parent: parent, filter: filter, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_findings ::Google::Cloud::WebSecurityScanner::V1beta::ListFindingsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_findings ::Google::Cloud::WebSecurityScanner::V1beta::ListFindingsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_findings({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_findings({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_findings(::Google::Cloud::WebSecurityScanner::V1beta::ListFindingsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_findings(::Google::Cloud::WebSecurityScanner::V1beta::ListFindingsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -756,32 +756,32 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Cli
     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::ServiceStub.stub :transcode_list_finding_type_stats_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_finding_type_stats_client_stub do
         # Create client
-        client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_finding_type_stats({ parent: parent }) do |_result, response|
+        c.list_finding_type_stats({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_finding_type_stats parent: parent do |_result, response|
+        c.list_finding_type_stats parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_finding_type_stats ::Google::Cloud::WebSecurityScanner::V1beta::ListFindingTypeStatsRequest.new(parent: parent) do |_result, response|
+        c.list_finding_type_stats ::Google::Cloud::WebSecurityScanner::V1beta::ListFindingTypeStatsRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_finding_type_stats({ parent: parent }, call_options) do |_result, response|
+        c.list_finding_type_stats({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_finding_type_stats(::Google::Cloud::WebSecurityScanner::V1beta::ListFindingTypeStatsRequest.new(parent: parent), call_options) do |_result, response|
+        c.list_finding_type_stats(::Google::Cloud::WebSecurityScanner::V1beta::ListFindingTypeStatsRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

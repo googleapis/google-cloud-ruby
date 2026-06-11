@@ -101,32 +101,32 @@ class ::Google::Cloud::Workflows::V1::Workflows::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Workflows::V1::Workflows::Rest::ServiceStub.stub :transcode_list_workflows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_workflows_client_stub do
         # Create client
-        client = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_workflows({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_workflows({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workflows parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_workflows parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workflows ::Google::Cloud::Workflows::V1::ListWorkflowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_workflows ::Google::Cloud::Workflows::V1::ListWorkflowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workflows({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_workflows({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workflows(::Google::Cloud::Workflows::V1::ListWorkflowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_workflows(::Google::Cloud::Workflows::V1::ListWorkflowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Workflows::V1::Workflows::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Workflows::V1::Workflows::Rest::ServiceStub.stub :transcode_get_workflow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_workflow_client_stub do
         # Create client
-        client = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_workflow({ name: name, revision_id: revision_id }) do |_result, response|
+        c.get_workflow({ name: name, revision_id: revision_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_workflow name: name, revision_id: revision_id do |_result, response|
+        c.get_workflow name: name, revision_id: revision_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_workflow ::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name, revision_id: revision_id) do |_result, response|
+        c.get_workflow ::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name, revision_id: revision_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_workflow({ name: name, revision_id: revision_id }, call_options) do |_result, response|
+        c.get_workflow({ name: name, revision_id: revision_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_workflow(::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name, revision_id: revision_id), call_options) do |_result, response|
+        c.get_workflow(::Google::Cloud::Workflows::V1::GetWorkflowRequest.new(name: name, revision_id: revision_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Workflows::V1::Workflows::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Workflows::V1::Workflows::Rest::ServiceStub.stub :transcode_create_workflow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_workflow_client_stub do
         # Create client
-        client = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_workflow({ parent: parent, workflow: workflow, workflow_id: workflow_id }) do |_result, response|
+        c.create_workflow({ parent: parent, workflow: workflow, workflow_id: workflow_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_workflow parent: parent, workflow: workflow, workflow_id: workflow_id do |_result, response|
+        c.create_workflow parent: parent, workflow: workflow, workflow_id: workflow_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_workflow ::Google::Cloud::Workflows::V1::CreateWorkflowRequest.new(parent: parent, workflow: workflow, workflow_id: workflow_id) do |_result, response|
+        c.create_workflow ::Google::Cloud::Workflows::V1::CreateWorkflowRequest.new(parent: parent, workflow: workflow, workflow_id: workflow_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_workflow({ parent: parent, workflow: workflow, workflow_id: workflow_id }, call_options) do |_result, response|
+        c.create_workflow({ parent: parent, workflow: workflow, workflow_id: workflow_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_workflow(::Google::Cloud::Workflows::V1::CreateWorkflowRequest.new(parent: parent, workflow: workflow, workflow_id: workflow_id), call_options) do |_result, response|
+        c.create_workflow(::Google::Cloud::Workflows::V1::CreateWorkflowRequest.new(parent: parent, workflow: workflow, workflow_id: workflow_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::Workflows::V1::Workflows::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Workflows::V1::Workflows::Rest::ServiceStub.stub :transcode_delete_workflow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_workflow_client_stub do
         # Create client
-        client = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_workflow({ name: name }) do |_result, response|
+        c.delete_workflow({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_workflow name: name do |_result, response|
+        c.delete_workflow name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_workflow ::Google::Cloud::Workflows::V1::DeleteWorkflowRequest.new(name: name) do |_result, response|
+        c.delete_workflow ::Google::Cloud::Workflows::V1::DeleteWorkflowRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_workflow({ name: name }, call_options) do |_result, response|
+        c.delete_workflow({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_workflow(::Google::Cloud::Workflows::V1::DeleteWorkflowRequest.new(name: name), call_options) do |_result, response|
+        c.delete_workflow(::Google::Cloud::Workflows::V1::DeleteWorkflowRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Cloud::Workflows::V1::Workflows::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Workflows::V1::Workflows::Rest::ServiceStub.stub :transcode_update_workflow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_workflow_client_stub do
         # Create client
-        client = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_workflow({ workflow: workflow, update_mask: update_mask }) do |_result, response|
+        c.update_workflow({ workflow: workflow, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_workflow workflow: workflow, update_mask: update_mask do |_result, response|
+        c.update_workflow workflow: workflow, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_workflow ::Google::Cloud::Workflows::V1::UpdateWorkflowRequest.new(workflow: workflow, update_mask: update_mask) do |_result, response|
+        c.update_workflow ::Google::Cloud::Workflows::V1::UpdateWorkflowRequest.new(workflow: workflow, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_workflow({ workflow: workflow, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_workflow({ workflow: workflow, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_workflow(::Google::Cloud::Workflows::V1::UpdateWorkflowRequest.new(workflow: workflow, update_mask: update_mask), call_options) do |_result, response|
+        c.update_workflow(::Google::Cloud::Workflows::V1::UpdateWorkflowRequest.new(workflow: workflow, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -377,32 +377,32 @@ class ::Google::Cloud::Workflows::V1::Workflows::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Workflows::V1::Workflows::Rest::ServiceStub.stub :transcode_list_workflow_revisions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_workflow_revisions_client_stub do
         # Create client
-        client = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workflows::V1::Workflows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_workflow_revisions({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_workflow_revisions({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workflow_revisions name: name, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_workflow_revisions name: name, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workflow_revisions ::Google::Cloud::Workflows::V1::ListWorkflowRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_workflow_revisions ::Google::Cloud::Workflows::V1::ListWorkflowRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workflow_revisions({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_workflow_revisions({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workflow_revisions(::Google::Cloud::Workflows::V1::ListWorkflowRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_workflow_revisions(::Google::Cloud::Workflows::V1::ListWorkflowRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
