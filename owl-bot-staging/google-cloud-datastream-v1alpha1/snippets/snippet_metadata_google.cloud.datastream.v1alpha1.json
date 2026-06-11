@@ -1,0 +1,855 @@
+{
+  "client_library": {
+    "name": "google-cloud-datastream-v1alpha1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.datastream.v1alpha1",
+        "version": "v1alpha1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_ListConnectionProfiles_sync",
+      "title": "Snippet for the list_connection_profiles call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#list_connection_profiles.",
+      "file": "datastream/list_connection_profiles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_connection_profiles",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#list_connection_profiles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::ListConnectionProfilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Datastream::V1alpha1::ListConnectionProfilesResponse",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "ListConnectionProfiles",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.ListConnectionProfiles",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_GetConnectionProfile_sync",
+      "title": "Snippet for the get_connection_profile call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#get_connection_profile.",
+      "file": "datastream/get_connection_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_connection_profile",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#get_connection_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::GetConnectionProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Datastream::V1alpha1::ConnectionProfile",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "GetConnectionProfile",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.GetConnectionProfile",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_CreateConnectionProfile_sync",
+      "title": "Snippet for the create_connection_profile call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#create_connection_profile.",
+      "file": "datastream/create_connection_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_connection_profile",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#create_connection_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::CreateConnectionProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "CreateConnectionProfile",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.CreateConnectionProfile",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_UpdateConnectionProfile_sync",
+      "title": "Snippet for the update_connection_profile call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#update_connection_profile.",
+      "file": "datastream/update_connection_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_connection_profile",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#update_connection_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::UpdateConnectionProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "UpdateConnectionProfile",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.UpdateConnectionProfile",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_DeleteConnectionProfile_sync",
+      "title": "Snippet for the delete_connection_profile call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#delete_connection_profile.",
+      "file": "datastream/delete_connection_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_connection_profile",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#delete_connection_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::DeleteConnectionProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "DeleteConnectionProfile",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.DeleteConnectionProfile",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_DiscoverConnectionProfile_sync",
+      "title": "Snippet for the discover_connection_profile call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#discover_connection_profile.",
+      "file": "datastream/discover_connection_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "discover_connection_profile",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#discover_connection_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::DiscoverConnectionProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Datastream::V1alpha1::DiscoverConnectionProfileResponse",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "DiscoverConnectionProfile",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.DiscoverConnectionProfile",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_ListStreams_sync",
+      "title": "Snippet for the list_streams call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#list_streams.",
+      "file": "datastream/list_streams.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_streams",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#list_streams",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::ListStreamsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Datastream::V1alpha1::ListStreamsResponse",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "ListStreams",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.ListStreams",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_GetStream_sync",
+      "title": "Snippet for the get_stream call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#get_stream.",
+      "file": "datastream/get_stream.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_stream",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#get_stream",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::GetStreamRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Datastream::V1alpha1::Stream",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "GetStream",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.GetStream",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_CreateStream_sync",
+      "title": "Snippet for the create_stream call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#create_stream.",
+      "file": "datastream/create_stream.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_stream",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#create_stream",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::CreateStreamRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "CreateStream",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.CreateStream",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_UpdateStream_sync",
+      "title": "Snippet for the update_stream call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#update_stream.",
+      "file": "datastream/update_stream.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_stream",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#update_stream",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::UpdateStreamRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "UpdateStream",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.UpdateStream",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_DeleteStream_sync",
+      "title": "Snippet for the delete_stream call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#delete_stream.",
+      "file": "datastream/delete_stream.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_stream",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#delete_stream",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::DeleteStreamRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "DeleteStream",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.DeleteStream",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_FetchErrors_sync",
+      "title": "Snippet for the fetch_errors call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#fetch_errors.",
+      "file": "datastream/fetch_errors.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_errors",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#fetch_errors",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::FetchErrorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "FetchErrors",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.FetchErrors",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_FetchStaticIps_sync",
+      "title": "Snippet for the fetch_static_ips call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#fetch_static_ips.",
+      "file": "datastream/fetch_static_ips.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_static_ips",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#fetch_static_ips",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::FetchStaticIpsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Datastream::V1alpha1::FetchStaticIpsResponse",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "FetchStaticIps",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.FetchStaticIps",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_CreatePrivateConnection_sync",
+      "title": "Snippet for the create_private_connection call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#create_private_connection.",
+      "file": "datastream/create_private_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_private_connection",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#create_private_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::CreatePrivateConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "CreatePrivateConnection",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.CreatePrivateConnection",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_GetPrivateConnection_sync",
+      "title": "Snippet for the get_private_connection call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#get_private_connection.",
+      "file": "datastream/get_private_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_private_connection",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#get_private_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::GetPrivateConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Datastream::V1alpha1::PrivateConnection",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "GetPrivateConnection",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.GetPrivateConnection",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_ListPrivateConnections_sync",
+      "title": "Snippet for the list_private_connections call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#list_private_connections.",
+      "file": "datastream/list_private_connections.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_private_connections",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#list_private_connections",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::ListPrivateConnectionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Datastream::V1alpha1::ListPrivateConnectionsResponse",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "ListPrivateConnections",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.ListPrivateConnections",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_DeletePrivateConnection_sync",
+      "title": "Snippet for the delete_private_connection call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#delete_private_connection.",
+      "file": "datastream/delete_private_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_private_connection",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#delete_private_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::DeletePrivateConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "DeletePrivateConnection",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.DeletePrivateConnection",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_CreateRoute_sync",
+      "title": "Snippet for the create_route call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#create_route.",
+      "file": "datastream/create_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_route",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#create_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::CreateRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "CreateRoute",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.CreateRoute",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_GetRoute_sync",
+      "title": "Snippet for the get_route call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#get_route.",
+      "file": "datastream/get_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_route",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#get_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::GetRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Datastream::V1alpha1::Route",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "GetRoute",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.GetRoute",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_ListRoutes_sync",
+      "title": "Snippet for the list_routes call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#list_routes.",
+      "file": "datastream/list_routes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_routes",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#list_routes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::ListRoutesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Datastream::V1alpha1::ListRoutesResponse",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "ListRoutes",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.ListRoutes",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastream_v1alpha1_generated_Datastream_DeleteRoute_sync",
+      "title": "Snippet for the delete_route call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1alpha1::Datastream::Client#delete_route.",
+      "file": "datastream/delete_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_route",
+        "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client#delete_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1alpha1::DeleteRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1alpha1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "DeleteRoute",
+          "full_name": "google.cloud.datastream.v1alpha1.Datastream.DeleteRoute",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1alpha1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

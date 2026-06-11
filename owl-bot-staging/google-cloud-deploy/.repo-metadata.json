@@ -1,0 +1,17 @@
+{
+    "api_id": "clouddeploy.googleapis.com",
+    "api_shortname": "clouddeploy",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-deploy/latest",
+    "distribution_name": "google-cloud-deploy",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "clouddeploy",
+    "name_pretty": "Google Cloud Deploy API",
+    "product_documentation": "https://cloud.google.com/deploy/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Google Cloud Deploy is a managed service that automates delivery of your applications to a series of target environments in a defined promotion sequence.",
+    "ruby-cloud-product-url": "https://cloud.google.com/deploy/",
+    "library_type": "GAPIC_AUTO"
+}
