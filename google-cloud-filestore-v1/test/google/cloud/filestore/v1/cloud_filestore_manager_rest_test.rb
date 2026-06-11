@@ -101,32 +101,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instances parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_instances parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instances ::Google::Cloud::Filestore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_instances ::Google::Cloud::Filestore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instances(::Google::Cloud::Filestore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_instances(::Google::Cloud::Filestore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_get_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance({ name: name }) do |_result, response|
+        c.get_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance name: name do |_result, response|
+        c.get_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance ::Google::Cloud::Filestore::V1::GetInstanceRequest.new(name: name) do |_result, response|
+        c.get_instance ::Google::Cloud::Filestore::V1::GetInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance({ name: name }, call_options) do |_result, response|
+        c.get_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance(::Google::Cloud::Filestore::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance(::Google::Cloud::Filestore::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_create_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_instance parent: parent, instance_id: instance_id, instance: instance do |_result, response|
+        c.create_instance parent: parent, instance_id: instance_id, instance: instance do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_instance ::Google::Cloud::Filestore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |_result, response|
+        c.create_instance ::Google::Cloud::Filestore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, call_options) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_instance(::Google::Cloud::Filestore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), call_options) do |_result, response|
+        c.create_instance(::Google::Cloud::Filestore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_update_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_instance({ update_mask: update_mask, instance: instance }) do |_result, response|
+        c.update_instance({ update_mask: update_mask, instance: instance }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_instance update_mask: update_mask, instance: instance do |_result, response|
+        c.update_instance update_mask: update_mask, instance: instance do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_instance ::Google::Cloud::Filestore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance) do |_result, response|
+        c.update_instance ::Google::Cloud::Filestore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_instance({ update_mask: update_mask, instance: instance }, call_options) do |_result, response|
+        c.update_instance({ update_mask: update_mask, instance: instance }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_instance(::Google::Cloud::Filestore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance), call_options) do |_result, response|
+        c.update_instance(::Google::Cloud::Filestore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_restore_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_instance({ name: name, file_share: file_share, source_backup: source_backup }) do |_result, response|
+        c.restore_instance({ name: name, file_share: file_share, source_backup: source_backup }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_instance name: name, file_share: file_share, source_backup: source_backup do |_result, response|
+        c.restore_instance name: name, file_share: file_share, source_backup: source_backup do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_instance ::Google::Cloud::Filestore::V1::RestoreInstanceRequest.new(name: name, file_share: file_share, source_backup: source_backup) do |_result, response|
+        c.restore_instance ::Google::Cloud::Filestore::V1::RestoreInstanceRequest.new(name: name, file_share: file_share, source_backup: source_backup) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_instance({ name: name, file_share: file_share, source_backup: source_backup }, call_options) do |_result, response|
+        c.restore_instance({ name: name, file_share: file_share, source_backup: source_backup }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_instance(::Google::Cloud::Filestore::V1::RestoreInstanceRequest.new(name: name, file_share: file_share, source_backup: source_backup), call_options) do |_result, response|
+        c.restore_instance(::Google::Cloud::Filestore::V1::RestoreInstanceRequest.new(name: name, file_share: file_share, source_backup: source_backup), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -377,32 +377,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_revert_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, revert_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.revert_instance({ name: name, target_snapshot_id: target_snapshot_id }) do |_result, response|
+        c.revert_instance({ name: name, target_snapshot_id: target_snapshot_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.revert_instance name: name, target_snapshot_id: target_snapshot_id do |_result, response|
+        c.revert_instance name: name, target_snapshot_id: target_snapshot_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.revert_instance ::Google::Cloud::Filestore::V1::RevertInstanceRequest.new(name: name, target_snapshot_id: target_snapshot_id) do |_result, response|
+        c.revert_instance ::Google::Cloud::Filestore::V1::RevertInstanceRequest.new(name: name, target_snapshot_id: target_snapshot_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.revert_instance({ name: name, target_snapshot_id: target_snapshot_id }, call_options) do |_result, response|
+        c.revert_instance({ name: name, target_snapshot_id: target_snapshot_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.revert_instance(::Google::Cloud::Filestore::V1::RevertInstanceRequest.new(name: name, target_snapshot_id: target_snapshot_id), call_options) do |_result, response|
+        c.revert_instance(::Google::Cloud::Filestore::V1::RevertInstanceRequest.new(name: name, target_snapshot_id: target_snapshot_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -432,32 +432,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_delete_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_instance({ name: name, force: force }) do |_result, response|
+        c.delete_instance({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_instance name: name, force: force do |_result, response|
+        c.delete_instance name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_instance ::Google::Cloud::Filestore::V1::DeleteInstanceRequest.new(name: name, force: force) do |_result, response|
+        c.delete_instance ::Google::Cloud::Filestore::V1::DeleteInstanceRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_instance({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_instance({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_instance(::Google::Cloud::Filestore::V1::DeleteInstanceRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_instance(::Google::Cloud::Filestore::V1::DeleteInstanceRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -491,32 +491,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_list_snapshots_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_snapshots_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_snapshots parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success do |_result, response|
+        c.list_snapshots parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_snapshots ::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success) do |_result, response|
+        c.list_snapshots ::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_snapshots(::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_snapshots(::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -545,32 +545,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_get_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_snapshot({ name: name }) do |_result, response|
+        c.get_snapshot({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_snapshot name: name do |_result, response|
+        c.get_snapshot name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_snapshot ::Google::Cloud::Filestore::V1::GetSnapshotRequest.new(name: name) do |_result, response|
+        c.get_snapshot ::Google::Cloud::Filestore::V1::GetSnapshotRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_snapshot({ name: name }, call_options) do |_result, response|
+        c.get_snapshot({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_snapshot(::Google::Cloud::Filestore::V1::GetSnapshotRequest.new(name: name), call_options) do |_result, response|
+        c.get_snapshot(::Google::Cloud::Filestore::V1::GetSnapshotRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -601,32 +601,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_create_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_snapshot({ parent: parent, snapshot_id: snapshot_id, snapshot: snapshot }) do |_result, response|
+        c.create_snapshot({ parent: parent, snapshot_id: snapshot_id, snapshot: snapshot }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_snapshot parent: parent, snapshot_id: snapshot_id, snapshot: snapshot do |_result, response|
+        c.create_snapshot parent: parent, snapshot_id: snapshot_id, snapshot: snapshot do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_snapshot ::Google::Cloud::Filestore::V1::CreateSnapshotRequest.new(parent: parent, snapshot_id: snapshot_id, snapshot: snapshot) do |_result, response|
+        c.create_snapshot ::Google::Cloud::Filestore::V1::CreateSnapshotRequest.new(parent: parent, snapshot_id: snapshot_id, snapshot: snapshot) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_snapshot({ parent: parent, snapshot_id: snapshot_id, snapshot: snapshot }, call_options) do |_result, response|
+        c.create_snapshot({ parent: parent, snapshot_id: snapshot_id, snapshot: snapshot }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_snapshot(::Google::Cloud::Filestore::V1::CreateSnapshotRequest.new(parent: parent, snapshot_id: snapshot_id, snapshot: snapshot), call_options) do |_result, response|
+        c.create_snapshot(::Google::Cloud::Filestore::V1::CreateSnapshotRequest.new(parent: parent, snapshot_id: snapshot_id, snapshot: snapshot), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -655,32 +655,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_delete_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_snapshot({ name: name }) do |_result, response|
+        c.delete_snapshot({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_snapshot name: name do |_result, response|
+        c.delete_snapshot name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_snapshot ::Google::Cloud::Filestore::V1::DeleteSnapshotRequest.new(name: name) do |_result, response|
+        c.delete_snapshot ::Google::Cloud::Filestore::V1::DeleteSnapshotRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_snapshot({ name: name }, call_options) do |_result, response|
+        c.delete_snapshot({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_snapshot(::Google::Cloud::Filestore::V1::DeleteSnapshotRequest.new(name: name), call_options) do |_result, response|
+        c.delete_snapshot(::Google::Cloud::Filestore::V1::DeleteSnapshotRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -710,32 +710,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_update_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_snapshot({ update_mask: update_mask, snapshot: snapshot }) do |_result, response|
+        c.update_snapshot({ update_mask: update_mask, snapshot: snapshot }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_snapshot update_mask: update_mask, snapshot: snapshot do |_result, response|
+        c.update_snapshot update_mask: update_mask, snapshot: snapshot do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_snapshot ::Google::Cloud::Filestore::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot) do |_result, response|
+        c.update_snapshot ::Google::Cloud::Filestore::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_snapshot({ update_mask: update_mask, snapshot: snapshot }, call_options) do |_result, response|
+        c.update_snapshot({ update_mask: update_mask, snapshot: snapshot }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_snapshot(::Google::Cloud::Filestore::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot), call_options) do |_result, response|
+        c.update_snapshot(::Google::Cloud::Filestore::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -768,32 +768,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_list_backups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backups_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backups parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_backups parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backups ::Google::Cloud::Filestore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_backups ::Google::Cloud::Filestore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backups(::Google::Cloud::Filestore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_backups(::Google::Cloud::Filestore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -822,32 +822,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_get_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup({ name: name }) do |_result, response|
+        c.get_backup({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup name: name do |_result, response|
+        c.get_backup name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup ::Google::Cloud::Filestore::V1::GetBackupRequest.new(name: name) do |_result, response|
+        c.get_backup ::Google::Cloud::Filestore::V1::GetBackupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup({ name: name }, call_options) do |_result, response|
+        c.get_backup({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup(::Google::Cloud::Filestore::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup(::Google::Cloud::Filestore::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -878,32 +878,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_create_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup({ parent: parent, backup: backup, backup_id: backup_id }) do |_result, response|
+        c.create_backup({ parent: parent, backup: backup, backup_id: backup_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup parent: parent, backup: backup, backup_id: backup_id do |_result, response|
+        c.create_backup parent: parent, backup: backup, backup_id: backup_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup ::Google::Cloud::Filestore::V1::CreateBackupRequest.new(parent: parent, backup: backup, backup_id: backup_id) do |_result, response|
+        c.create_backup ::Google::Cloud::Filestore::V1::CreateBackupRequest.new(parent: parent, backup: backup, backup_id: backup_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup({ parent: parent, backup: backup, backup_id: backup_id }, call_options) do |_result, response|
+        c.create_backup({ parent: parent, backup: backup, backup_id: backup_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup(::Google::Cloud::Filestore::V1::CreateBackupRequest.new(parent: parent, backup: backup, backup_id: backup_id), call_options) do |_result, response|
+        c.create_backup(::Google::Cloud::Filestore::V1::CreateBackupRequest.new(parent: parent, backup: backup, backup_id: backup_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -932,32 +932,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_delete_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup({ name: name }) do |_result, response|
+        c.delete_backup({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup name: name do |_result, response|
+        c.delete_backup name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup ::Google::Cloud::Filestore::V1::DeleteBackupRequest.new(name: name) do |_result, response|
+        c.delete_backup ::Google::Cloud::Filestore::V1::DeleteBackupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup({ name: name }, call_options) do |_result, response|
+        c.delete_backup({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup(::Google::Cloud::Filestore::V1::DeleteBackupRequest.new(name: name), call_options) do |_result, response|
+        c.delete_backup(::Google::Cloud::Filestore::V1::DeleteBackupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -987,32 +987,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_update_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup({ backup: backup, update_mask: update_mask }) do |_result, response|
+        c.update_backup({ backup: backup, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup backup: backup, update_mask: update_mask do |_result, response|
+        c.update_backup backup: backup, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup ::Google::Cloud::Filestore::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask) do |_result, response|
+        c.update_backup ::Google::Cloud::Filestore::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup({ backup: backup, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_backup({ backup: backup, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup(::Google::Cloud::Filestore::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask), call_options) do |_result, response|
+        c.update_backup(::Google::Cloud::Filestore::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1042,32 +1042,32 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_promote_replica_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, promote_replica_client_stub do
         # Create client
-        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.promote_replica({ name: name, peer_instance: peer_instance }) do |_result, response|
+        c.promote_replica({ name: name, peer_instance: peer_instance }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.promote_replica name: name, peer_instance: peer_instance do |_result, response|
+        c.promote_replica name: name, peer_instance: peer_instance do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.promote_replica ::Google::Cloud::Filestore::V1::PromoteReplicaRequest.new(name: name, peer_instance: peer_instance) do |_result, response|
+        c.promote_replica ::Google::Cloud::Filestore::V1::PromoteReplicaRequest.new(name: name, peer_instance: peer_instance) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.promote_replica({ name: name, peer_instance: peer_instance }, call_options) do |_result, response|
+        c.promote_replica({ name: name, peer_instance: peer_instance }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.promote_replica(::Google::Cloud::Filestore::V1::PromoteReplicaRequest.new(name: name, peer_instance: peer_instance), call_options) do |_result, response|
+        c.promote_replica(::Google::Cloud::Filestore::V1::PromoteReplicaRequest.new(name: name, peer_instance: peer_instance), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

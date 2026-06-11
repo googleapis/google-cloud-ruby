@@ -90,40 +90,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_instances parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::Filestore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_instances ::Google::Cloud::Filestore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::Filestore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_instances(::Google::Cloud::Filestore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name }) do |response, operation|
+      c.get_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name do |response, operation|
+      c.get_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::Filestore::V1::GetInstanceRequest.new(name: name) do |response, operation|
+      c.get_instance ::Google::Cloud::Filestore::V1::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::Filestore::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::Filestore::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance parent: parent, instance_id: instance_id, instance: instance do |response, operation|
+      c.create_instance parent: parent, instance_id: instance_id, instance: instance do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance ::Google::Cloud::Filestore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |response, operation|
+      c.create_instance ::Google::Cloud::Filestore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, grpc_options) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance(::Google::Cloud::Filestore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options) do |response, operation|
+      c.create_instance(::Google::Cloud::Filestore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_instance({ update_mask: update_mask, instance: instance }) do |response, operation|
+      c.update_instance({ update_mask: update_mask, instance: instance }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance update_mask: update_mask, instance: instance do |response, operation|
+      c.update_instance update_mask: update_mask, instance: instance do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance ::Google::Cloud::Filestore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance) do |response, operation|
+      c.update_instance ::Google::Cloud::Filestore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance({ update_mask: update_mask, instance: instance }, grpc_options) do |response, operation|
+      c.update_instance({ update_mask: update_mask, instance: instance }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance(::Google::Cloud::Filestore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance), grpc_options) do |response, operation|
+      c.update_instance(::Google::Cloud::Filestore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -348,40 +348,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, restore_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restore_instance({ name: name, file_share: file_share, source_backup: source_backup }) do |response, operation|
+      c.restore_instance({ name: name, file_share: file_share, source_backup: source_backup }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restore_instance name: name, file_share: file_share, source_backup: source_backup do |response, operation|
+      c.restore_instance name: name, file_share: file_share, source_backup: source_backup do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restore_instance ::Google::Cloud::Filestore::V1::RestoreInstanceRequest.new(name: name, file_share: file_share, source_backup: source_backup) do |response, operation|
+      c.restore_instance ::Google::Cloud::Filestore::V1::RestoreInstanceRequest.new(name: name, file_share: file_share, source_backup: source_backup) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restore_instance({ name: name, file_share: file_share, source_backup: source_backup }, grpc_options) do |response, operation|
+      c.restore_instance({ name: name, file_share: file_share, source_backup: source_backup }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restore_instance(::Google::Cloud::Filestore::V1::RestoreInstanceRequest.new(name: name, file_share: file_share, source_backup: source_backup), grpc_options) do |response, operation|
+      c.restore_instance(::Google::Cloud::Filestore::V1::RestoreInstanceRequest.new(name: name, file_share: file_share, source_backup: source_backup), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -413,40 +413,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, revert_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.revert_instance({ name: name, target_snapshot_id: target_snapshot_id }) do |response, operation|
+      c.revert_instance({ name: name, target_snapshot_id: target_snapshot_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.revert_instance name: name, target_snapshot_id: target_snapshot_id do |response, operation|
+      c.revert_instance name: name, target_snapshot_id: target_snapshot_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.revert_instance ::Google::Cloud::Filestore::V1::RevertInstanceRequest.new(name: name, target_snapshot_id: target_snapshot_id) do |response, operation|
+      c.revert_instance ::Google::Cloud::Filestore::V1::RevertInstanceRequest.new(name: name, target_snapshot_id: target_snapshot_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.revert_instance({ name: name, target_snapshot_id: target_snapshot_id }, grpc_options) do |response, operation|
+      c.revert_instance({ name: name, target_snapshot_id: target_snapshot_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.revert_instance(::Google::Cloud::Filestore::V1::RevertInstanceRequest.new(name: name, target_snapshot_id: target_snapshot_id), grpc_options) do |response, operation|
+      c.revert_instance(::Google::Cloud::Filestore::V1::RevertInstanceRequest.new(name: name, target_snapshot_id: target_snapshot_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -478,40 +478,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance({ name: name, force: force }) do |response, operation|
+      c.delete_instance({ name: name, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance name: name, force: force do |response, operation|
+      c.delete_instance name: name, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance ::Google::Cloud::Filestore::V1::DeleteInstanceRequest.new(name: name, force: force) do |response, operation|
+      c.delete_instance ::Google::Cloud::Filestore::V1::DeleteInstanceRequest.new(name: name, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_instance({ name: name, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance(::Google::Cloud::Filestore::V1::DeleteInstanceRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_instance(::Google::Cloud::Filestore::V1::DeleteInstanceRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -551,40 +551,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_snapshots_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success }) do |response, operation|
+      c.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_snapshots parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success do |response, operation|
+      c.list_snapshots parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_snapshots ::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success) do |response, operation|
+      c.list_snapshots ::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
+      c.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_snapshots(::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success), grpc_options) do |response, operation|
+      c.list_snapshots(::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -614,36 +614,36 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_snapshot({ name: name }) do |response, operation|
+      c.get_snapshot({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_snapshot name: name do |response, operation|
+      c.get_snapshot name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_snapshot ::Google::Cloud::Filestore::V1::GetSnapshotRequest.new(name: name) do |response, operation|
+      c.get_snapshot ::Google::Cloud::Filestore::V1::GetSnapshotRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_snapshot({ name: name }, grpc_options) do |response, operation|
+      c.get_snapshot({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_snapshot(::Google::Cloud::Filestore::V1::GetSnapshotRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_snapshot(::Google::Cloud::Filestore::V1::GetSnapshotRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -676,40 +676,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_snapshot({ parent: parent, snapshot_id: snapshot_id, snapshot: snapshot }) do |response, operation|
+      c.create_snapshot({ parent: parent, snapshot_id: snapshot_id, snapshot: snapshot }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_snapshot parent: parent, snapshot_id: snapshot_id, snapshot: snapshot do |response, operation|
+      c.create_snapshot parent: parent, snapshot_id: snapshot_id, snapshot: snapshot do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_snapshot ::Google::Cloud::Filestore::V1::CreateSnapshotRequest.new(parent: parent, snapshot_id: snapshot_id, snapshot: snapshot) do |response, operation|
+      c.create_snapshot ::Google::Cloud::Filestore::V1::CreateSnapshotRequest.new(parent: parent, snapshot_id: snapshot_id, snapshot: snapshot) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_snapshot({ parent: parent, snapshot_id: snapshot_id, snapshot: snapshot }, grpc_options) do |response, operation|
+      c.create_snapshot({ parent: parent, snapshot_id: snapshot_id, snapshot: snapshot }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_snapshot(::Google::Cloud::Filestore::V1::CreateSnapshotRequest.new(parent: parent, snapshot_id: snapshot_id, snapshot: snapshot), grpc_options) do |response, operation|
+      c.create_snapshot(::Google::Cloud::Filestore::V1::CreateSnapshotRequest.new(parent: parent, snapshot_id: snapshot_id, snapshot: snapshot), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -739,40 +739,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_snapshot({ name: name }) do |response, operation|
+      c.delete_snapshot({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_snapshot name: name do |response, operation|
+      c.delete_snapshot name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_snapshot ::Google::Cloud::Filestore::V1::DeleteSnapshotRequest.new(name: name) do |response, operation|
+      c.delete_snapshot ::Google::Cloud::Filestore::V1::DeleteSnapshotRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_snapshot({ name: name }, grpc_options) do |response, operation|
+      c.delete_snapshot({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_snapshot(::Google::Cloud::Filestore::V1::DeleteSnapshotRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_snapshot(::Google::Cloud::Filestore::V1::DeleteSnapshotRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -804,40 +804,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_snapshot({ update_mask: update_mask, snapshot: snapshot }) do |response, operation|
+      c.update_snapshot({ update_mask: update_mask, snapshot: snapshot }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_snapshot update_mask: update_mask, snapshot: snapshot do |response, operation|
+      c.update_snapshot update_mask: update_mask, snapshot: snapshot do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_snapshot ::Google::Cloud::Filestore::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot) do |response, operation|
+      c.update_snapshot ::Google::Cloud::Filestore::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_snapshot({ update_mask: update_mask, snapshot: snapshot }, grpc_options) do |response, operation|
+      c.update_snapshot({ update_mask: update_mask, snapshot: snapshot }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_snapshot(::Google::Cloud::Filestore::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot), grpc_options) do |response, operation|
+      c.update_snapshot(::Google::Cloud::Filestore::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -875,40 +875,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_backups_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_backups parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_backups parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_backups ::Google::Cloud::Filestore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_backups ::Google::Cloud::Filestore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_backups(::Google::Cloud::Filestore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_backups(::Google::Cloud::Filestore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -938,36 +938,36 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_backup({ name: name }) do |response, operation|
+      c.get_backup({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_backup name: name do |response, operation|
+      c.get_backup name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_backup ::Google::Cloud::Filestore::V1::GetBackupRequest.new(name: name) do |response, operation|
+      c.get_backup ::Google::Cloud::Filestore::V1::GetBackupRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_backup({ name: name }, grpc_options) do |response, operation|
+      c.get_backup({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_backup(::Google::Cloud::Filestore::V1::GetBackupRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_backup(::Google::Cloud::Filestore::V1::GetBackupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1000,40 +1000,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_backup({ parent: parent, backup: backup, backup_id: backup_id }) do |response, operation|
+      c.create_backup({ parent: parent, backup: backup, backup_id: backup_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_backup parent: parent, backup: backup, backup_id: backup_id do |response, operation|
+      c.create_backup parent: parent, backup: backup, backup_id: backup_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_backup ::Google::Cloud::Filestore::V1::CreateBackupRequest.new(parent: parent, backup: backup, backup_id: backup_id) do |response, operation|
+      c.create_backup ::Google::Cloud::Filestore::V1::CreateBackupRequest.new(parent: parent, backup: backup, backup_id: backup_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_backup({ parent: parent, backup: backup, backup_id: backup_id }, grpc_options) do |response, operation|
+      c.create_backup({ parent: parent, backup: backup, backup_id: backup_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_backup(::Google::Cloud::Filestore::V1::CreateBackupRequest.new(parent: parent, backup: backup, backup_id: backup_id), grpc_options) do |response, operation|
+      c.create_backup(::Google::Cloud::Filestore::V1::CreateBackupRequest.new(parent: parent, backup: backup, backup_id: backup_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1063,40 +1063,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_backup({ name: name }) do |response, operation|
+      c.delete_backup({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_backup name: name do |response, operation|
+      c.delete_backup name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_backup ::Google::Cloud::Filestore::V1::DeleteBackupRequest.new(name: name) do |response, operation|
+      c.delete_backup ::Google::Cloud::Filestore::V1::DeleteBackupRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_backup({ name: name }, grpc_options) do |response, operation|
+      c.delete_backup({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_backup(::Google::Cloud::Filestore::V1::DeleteBackupRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_backup(::Google::Cloud::Filestore::V1::DeleteBackupRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1128,40 +1128,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_backup({ backup: backup, update_mask: update_mask }) do |response, operation|
+      c.update_backup({ backup: backup, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_backup backup: backup, update_mask: update_mask do |response, operation|
+      c.update_backup backup: backup, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_backup ::Google::Cloud::Filestore::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask) do |response, operation|
+      c.update_backup ::Google::Cloud::Filestore::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_backup({ backup: backup, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_backup({ backup: backup, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_backup(::Google::Cloud::Filestore::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_backup(::Google::Cloud::Filestore::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1193,40 +1193,40 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, promote_replica_client_stub do
       # Create client
-      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+      c = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.promote_replica({ name: name, peer_instance: peer_instance }) do |response, operation|
+      c.promote_replica({ name: name, peer_instance: peer_instance }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.promote_replica name: name, peer_instance: peer_instance do |response, operation|
+      c.promote_replica name: name, peer_instance: peer_instance do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.promote_replica ::Google::Cloud::Filestore::V1::PromoteReplicaRequest.new(name: name, peer_instance: peer_instance) do |response, operation|
+      c.promote_replica ::Google::Cloud::Filestore::V1::PromoteReplicaRequest.new(name: name, peer_instance: peer_instance) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.promote_replica({ name: name, peer_instance: peer_instance }, grpc_options) do |response, operation|
+      c.promote_replica({ name: name, peer_instance: peer_instance }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.promote_replica(::Google::Cloud::Filestore::V1::PromoteReplicaRequest.new(name: name, peer_instance: peer_instance), grpc_options) do |response, operation|
+      c.promote_replica(::Google::Cloud::Filestore::V1::PromoteReplicaRequest.new(name: name, peer_instance: peer_instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

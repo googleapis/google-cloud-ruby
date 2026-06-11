@@ -101,32 +101,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instances ::Google::Cloud::FinancialServices::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_instances ::Google::Cloud::FinancialServices::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instances(::Google::Cloud::FinancialServices::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_instances(::Google::Cloud::FinancialServices::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_get_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance({ name: name }) do |_result, response|
+        c.get_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance name: name do |_result, response|
+        c.get_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance ::Google::Cloud::FinancialServices::V1::GetInstanceRequest.new(name: name) do |_result, response|
+        c.get_instance ::Google::Cloud::FinancialServices::V1::GetInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance({ name: name }, call_options) do |_result, response|
+        c.get_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance(::Google::Cloud::FinancialServices::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance(::Google::Cloud::FinancialServices::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_create_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |_result, response|
+        c.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_instance ::Google::Cloud::FinancialServices::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |_result, response|
+        c.create_instance ::Google::Cloud::FinancialServices::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, call_options) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_instance(::Google::Cloud::FinancialServices::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), call_options) do |_result, response|
+        c.create_instance(::Google::Cloud::FinancialServices::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_update_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }) do |_result, response|
+        c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_instance update_mask: update_mask, instance: instance, request_id: request_id do |_result, response|
+        c.update_instance update_mask: update_mask, instance: instance, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_instance ::Google::Cloud::FinancialServices::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id) do |_result, response|
+        c.update_instance ::Google::Cloud::FinancialServices::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }, call_options) do |_result, response|
+        c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_instance(::Google::Cloud::FinancialServices::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id), call_options) do |_result, response|
+        c.update_instance(::Google::Cloud::FinancialServices::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_delete_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_instance({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_instance({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_instance name: name, request_id: request_id do |_result, response|
+        c.delete_instance name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_instance ::Google::Cloud::FinancialServices::V1::DeleteInstanceRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_instance ::Google::Cloud::FinancialServices::V1::DeleteInstanceRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_instance({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_instance({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_instance(::Google::Cloud::FinancialServices::V1::DeleteInstanceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_instance(::Google::Cloud::FinancialServices::V1::DeleteInstanceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -381,32 +381,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_import_registered_parties_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_registered_parties_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_registered_parties({ name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business }) do |_result, response|
+        c.import_registered_parties({ name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_registered_parties name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business do |_result, response|
+        c.import_registered_parties name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_registered_parties ::Google::Cloud::FinancialServices::V1::ImportRegisteredPartiesRequest.new(name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business) do |_result, response|
+        c.import_registered_parties ::Google::Cloud::FinancialServices::V1::ImportRegisteredPartiesRequest.new(name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_registered_parties({ name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business }, call_options) do |_result, response|
+        c.import_registered_parties({ name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_registered_parties(::Google::Cloud::FinancialServices::V1::ImportRegisteredPartiesRequest.new(name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business), call_options) do |_result, response|
+        c.import_registered_parties(::Google::Cloud::FinancialServices::V1::ImportRegisteredPartiesRequest.new(name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -437,32 +437,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_export_registered_parties_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_registered_parties_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_registered_parties({ name: name, dataset: dataset, line_of_business: line_of_business }) do |_result, response|
+        c.export_registered_parties({ name: name, dataset: dataset, line_of_business: line_of_business }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_registered_parties name: name, dataset: dataset, line_of_business: line_of_business do |_result, response|
+        c.export_registered_parties name: name, dataset: dataset, line_of_business: line_of_business do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_registered_parties ::Google::Cloud::FinancialServices::V1::ExportRegisteredPartiesRequest.new(name: name, dataset: dataset, line_of_business: line_of_business) do |_result, response|
+        c.export_registered_parties ::Google::Cloud::FinancialServices::V1::ExportRegisteredPartiesRequest.new(name: name, dataset: dataset, line_of_business: line_of_business) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_registered_parties({ name: name, dataset: dataset, line_of_business: line_of_business }, call_options) do |_result, response|
+        c.export_registered_parties({ name: name, dataset: dataset, line_of_business: line_of_business }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_registered_parties(::Google::Cloud::FinancialServices::V1::ExportRegisteredPartiesRequest.new(name: name, dataset: dataset, line_of_business: line_of_business), call_options) do |_result, response|
+        c.export_registered_parties(::Google::Cloud::FinancialServices::V1::ExportRegisteredPartiesRequest.new(name: name, dataset: dataset, line_of_business: line_of_business), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -495,32 +495,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_list_datasets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_datasets_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_datasets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_datasets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_datasets ::Google::Cloud::FinancialServices::V1::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_datasets ::Google::Cloud::FinancialServices::V1::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_datasets(::Google::Cloud::FinancialServices::V1::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_datasets(::Google::Cloud::FinancialServices::V1::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -549,32 +549,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_get_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_dataset({ name: name }) do |_result, response|
+        c.get_dataset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_dataset name: name do |_result, response|
+        c.get_dataset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_dataset ::Google::Cloud::FinancialServices::V1::GetDatasetRequest.new(name: name) do |_result, response|
+        c.get_dataset ::Google::Cloud::FinancialServices::V1::GetDatasetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_dataset({ name: name }, call_options) do |_result, response|
+        c.get_dataset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_dataset(::Google::Cloud::FinancialServices::V1::GetDatasetRequest.new(name: name), call_options) do |_result, response|
+        c.get_dataset(::Google::Cloud::FinancialServices::V1::GetDatasetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -606,32 +606,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_create_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_dataset({ parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id }) do |_result, response|
+        c.create_dataset({ parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_dataset parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id do |_result, response|
+        c.create_dataset parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_dataset ::Google::Cloud::FinancialServices::V1::CreateDatasetRequest.new(parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id) do |_result, response|
+        c.create_dataset ::Google::Cloud::FinancialServices::V1::CreateDatasetRequest.new(parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_dataset({ parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id }, call_options) do |_result, response|
+        c.create_dataset({ parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_dataset(::Google::Cloud::FinancialServices::V1::CreateDatasetRequest.new(parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id), call_options) do |_result, response|
+        c.create_dataset(::Google::Cloud::FinancialServices::V1::CreateDatasetRequest.new(parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -662,32 +662,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_update_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_dataset({ update_mask: update_mask, dataset: dataset, request_id: request_id }) do |_result, response|
+        c.update_dataset({ update_mask: update_mask, dataset: dataset, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_dataset update_mask: update_mask, dataset: dataset, request_id: request_id do |_result, response|
+        c.update_dataset update_mask: update_mask, dataset: dataset, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_dataset ::Google::Cloud::FinancialServices::V1::UpdateDatasetRequest.new(update_mask: update_mask, dataset: dataset, request_id: request_id) do |_result, response|
+        c.update_dataset ::Google::Cloud::FinancialServices::V1::UpdateDatasetRequest.new(update_mask: update_mask, dataset: dataset, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_dataset({ update_mask: update_mask, dataset: dataset, request_id: request_id }, call_options) do |_result, response|
+        c.update_dataset({ update_mask: update_mask, dataset: dataset, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_dataset(::Google::Cloud::FinancialServices::V1::UpdateDatasetRequest.new(update_mask: update_mask, dataset: dataset, request_id: request_id), call_options) do |_result, response|
+        c.update_dataset(::Google::Cloud::FinancialServices::V1::UpdateDatasetRequest.new(update_mask: update_mask, dataset: dataset, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -717,32 +717,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_delete_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_dataset({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_dataset({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_dataset name: name, request_id: request_id do |_result, response|
+        c.delete_dataset name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_dataset ::Google::Cloud::FinancialServices::V1::DeleteDatasetRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_dataset ::Google::Cloud::FinancialServices::V1::DeleteDatasetRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_dataset({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_dataset({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_dataset(::Google::Cloud::FinancialServices::V1::DeleteDatasetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_dataset(::Google::Cloud::FinancialServices::V1::DeleteDatasetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -775,32 +775,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_list_models_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_models_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_models({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_models({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_models parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_models parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_models ::Google::Cloud::FinancialServices::V1::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_models ::Google::Cloud::FinancialServices::V1::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_models({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_models({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_models(::Google::Cloud::FinancialServices::V1::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_models(::Google::Cloud::FinancialServices::V1::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -829,32 +829,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_get_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_model_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_model({ name: name }) do |_result, response|
+        c.get_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_model name: name do |_result, response|
+        c.get_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_model ::Google::Cloud::FinancialServices::V1::GetModelRequest.new(name: name) do |_result, response|
+        c.get_model ::Google::Cloud::FinancialServices::V1::GetModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_model({ name: name }, call_options) do |_result, response|
+        c.get_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_model(::Google::Cloud::FinancialServices::V1::GetModelRequest.new(name: name), call_options) do |_result, response|
+        c.get_model(::Google::Cloud::FinancialServices::V1::GetModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -886,32 +886,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_create_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_model_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_model({ parent: parent, model_id: model_id, model: model, request_id: request_id }) do |_result, response|
+        c.create_model({ parent: parent, model_id: model_id, model: model, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_model parent: parent, model_id: model_id, model: model, request_id: request_id do |_result, response|
+        c.create_model parent: parent, model_id: model_id, model: model, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_model ::Google::Cloud::FinancialServices::V1::CreateModelRequest.new(parent: parent, model_id: model_id, model: model, request_id: request_id) do |_result, response|
+        c.create_model ::Google::Cloud::FinancialServices::V1::CreateModelRequest.new(parent: parent, model_id: model_id, model: model, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_model({ parent: parent, model_id: model_id, model: model, request_id: request_id }, call_options) do |_result, response|
+        c.create_model({ parent: parent, model_id: model_id, model: model, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_model(::Google::Cloud::FinancialServices::V1::CreateModelRequest.new(parent: parent, model_id: model_id, model: model, request_id: request_id), call_options) do |_result, response|
+        c.create_model(::Google::Cloud::FinancialServices::V1::CreateModelRequest.new(parent: parent, model_id: model_id, model: model, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -942,32 +942,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_update_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_model_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_model({ update_mask: update_mask, model: model, request_id: request_id }) do |_result, response|
+        c.update_model({ update_mask: update_mask, model: model, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_model update_mask: update_mask, model: model, request_id: request_id do |_result, response|
+        c.update_model update_mask: update_mask, model: model, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_model ::Google::Cloud::FinancialServices::V1::UpdateModelRequest.new(update_mask: update_mask, model: model, request_id: request_id) do |_result, response|
+        c.update_model ::Google::Cloud::FinancialServices::V1::UpdateModelRequest.new(update_mask: update_mask, model: model, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_model({ update_mask: update_mask, model: model, request_id: request_id }, call_options) do |_result, response|
+        c.update_model({ update_mask: update_mask, model: model, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_model(::Google::Cloud::FinancialServices::V1::UpdateModelRequest.new(update_mask: update_mask, model: model, request_id: request_id), call_options) do |_result, response|
+        c.update_model(::Google::Cloud::FinancialServices::V1::UpdateModelRequest.new(update_mask: update_mask, model: model, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -997,32 +997,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_export_model_metadata_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_model_metadata_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_model_metadata({ model: model, structured_metadata_destination: structured_metadata_destination }) do |_result, response|
+        c.export_model_metadata({ model: model, structured_metadata_destination: structured_metadata_destination }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_model_metadata model: model, structured_metadata_destination: structured_metadata_destination do |_result, response|
+        c.export_model_metadata model: model, structured_metadata_destination: structured_metadata_destination do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_model_metadata ::Google::Cloud::FinancialServices::V1::ExportModelMetadataRequest.new(model: model, structured_metadata_destination: structured_metadata_destination) do |_result, response|
+        c.export_model_metadata ::Google::Cloud::FinancialServices::V1::ExportModelMetadataRequest.new(model: model, structured_metadata_destination: structured_metadata_destination) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_model_metadata({ model: model, structured_metadata_destination: structured_metadata_destination }, call_options) do |_result, response|
+        c.export_model_metadata({ model: model, structured_metadata_destination: structured_metadata_destination }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_model_metadata(::Google::Cloud::FinancialServices::V1::ExportModelMetadataRequest.new(model: model, structured_metadata_destination: structured_metadata_destination), call_options) do |_result, response|
+        c.export_model_metadata(::Google::Cloud::FinancialServices::V1::ExportModelMetadataRequest.new(model: model, structured_metadata_destination: structured_metadata_destination), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1052,32 +1052,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_delete_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_model_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_model({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_model({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_model name: name, request_id: request_id do |_result, response|
+        c.delete_model name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_model ::Google::Cloud::FinancialServices::V1::DeleteModelRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_model ::Google::Cloud::FinancialServices::V1::DeleteModelRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_model({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_model({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_model(::Google::Cloud::FinancialServices::V1::DeleteModelRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_model(::Google::Cloud::FinancialServices::V1::DeleteModelRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1110,32 +1110,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_list_engine_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_engine_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_engine_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_engine_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_engine_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_engine_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_engine_configs ::Google::Cloud::FinancialServices::V1::ListEngineConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_engine_configs ::Google::Cloud::FinancialServices::V1::ListEngineConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_engine_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_engine_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_engine_configs(::Google::Cloud::FinancialServices::V1::ListEngineConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_engine_configs(::Google::Cloud::FinancialServices::V1::ListEngineConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1164,32 +1164,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_get_engine_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_engine_config_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_engine_config({ name: name }) do |_result, response|
+        c.get_engine_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_engine_config name: name do |_result, response|
+        c.get_engine_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_engine_config ::Google::Cloud::FinancialServices::V1::GetEngineConfigRequest.new(name: name) do |_result, response|
+        c.get_engine_config ::Google::Cloud::FinancialServices::V1::GetEngineConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_engine_config({ name: name }, call_options) do |_result, response|
+        c.get_engine_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_engine_config(::Google::Cloud::FinancialServices::V1::GetEngineConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_engine_config(::Google::Cloud::FinancialServices::V1::GetEngineConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1221,32 +1221,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_create_engine_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_engine_config_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_engine_config({ parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id }) do |_result, response|
+        c.create_engine_config({ parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_engine_config parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id do |_result, response|
+        c.create_engine_config parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_engine_config ::Google::Cloud::FinancialServices::V1::CreateEngineConfigRequest.new(parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id) do |_result, response|
+        c.create_engine_config ::Google::Cloud::FinancialServices::V1::CreateEngineConfigRequest.new(parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_engine_config({ parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id }, call_options) do |_result, response|
+        c.create_engine_config({ parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_engine_config(::Google::Cloud::FinancialServices::V1::CreateEngineConfigRequest.new(parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id), call_options) do |_result, response|
+        c.create_engine_config(::Google::Cloud::FinancialServices::V1::CreateEngineConfigRequest.new(parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1277,32 +1277,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_update_engine_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_engine_config_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_engine_config({ update_mask: update_mask, engine_config: engine_config, request_id: request_id }) do |_result, response|
+        c.update_engine_config({ update_mask: update_mask, engine_config: engine_config, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_engine_config update_mask: update_mask, engine_config: engine_config, request_id: request_id do |_result, response|
+        c.update_engine_config update_mask: update_mask, engine_config: engine_config, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_engine_config ::Google::Cloud::FinancialServices::V1::UpdateEngineConfigRequest.new(update_mask: update_mask, engine_config: engine_config, request_id: request_id) do |_result, response|
+        c.update_engine_config ::Google::Cloud::FinancialServices::V1::UpdateEngineConfigRequest.new(update_mask: update_mask, engine_config: engine_config, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_engine_config({ update_mask: update_mask, engine_config: engine_config, request_id: request_id }, call_options) do |_result, response|
+        c.update_engine_config({ update_mask: update_mask, engine_config: engine_config, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_engine_config(::Google::Cloud::FinancialServices::V1::UpdateEngineConfigRequest.new(update_mask: update_mask, engine_config: engine_config, request_id: request_id), call_options) do |_result, response|
+        c.update_engine_config(::Google::Cloud::FinancialServices::V1::UpdateEngineConfigRequest.new(update_mask: update_mask, engine_config: engine_config, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1332,32 +1332,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_export_engine_config_metadata_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_engine_config_metadata_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_engine_config_metadata({ engine_config: engine_config, structured_metadata_destination: structured_metadata_destination }) do |_result, response|
+        c.export_engine_config_metadata({ engine_config: engine_config, structured_metadata_destination: structured_metadata_destination }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_engine_config_metadata engine_config: engine_config, structured_metadata_destination: structured_metadata_destination do |_result, response|
+        c.export_engine_config_metadata engine_config: engine_config, structured_metadata_destination: structured_metadata_destination do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_engine_config_metadata ::Google::Cloud::FinancialServices::V1::ExportEngineConfigMetadataRequest.new(engine_config: engine_config, structured_metadata_destination: structured_metadata_destination) do |_result, response|
+        c.export_engine_config_metadata ::Google::Cloud::FinancialServices::V1::ExportEngineConfigMetadataRequest.new(engine_config: engine_config, structured_metadata_destination: structured_metadata_destination) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_engine_config_metadata({ engine_config: engine_config, structured_metadata_destination: structured_metadata_destination }, call_options) do |_result, response|
+        c.export_engine_config_metadata({ engine_config: engine_config, structured_metadata_destination: structured_metadata_destination }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_engine_config_metadata(::Google::Cloud::FinancialServices::V1::ExportEngineConfigMetadataRequest.new(engine_config: engine_config, structured_metadata_destination: structured_metadata_destination), call_options) do |_result, response|
+        c.export_engine_config_metadata(::Google::Cloud::FinancialServices::V1::ExportEngineConfigMetadataRequest.new(engine_config: engine_config, structured_metadata_destination: structured_metadata_destination), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1387,32 +1387,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_delete_engine_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_engine_config_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_engine_config({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_engine_config({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_engine_config name: name, request_id: request_id do |_result, response|
+        c.delete_engine_config name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_engine_config ::Google::Cloud::FinancialServices::V1::DeleteEngineConfigRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_engine_config ::Google::Cloud::FinancialServices::V1::DeleteEngineConfigRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_engine_config({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_engine_config({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_engine_config(::Google::Cloud::FinancialServices::V1::DeleteEngineConfigRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_engine_config(::Google::Cloud::FinancialServices::V1::DeleteEngineConfigRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1441,32 +1441,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_get_engine_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_engine_version_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_engine_version({ name: name }) do |_result, response|
+        c.get_engine_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_engine_version name: name do |_result, response|
+        c.get_engine_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_engine_version ::Google::Cloud::FinancialServices::V1::GetEngineVersionRequest.new(name: name) do |_result, response|
+        c.get_engine_version ::Google::Cloud::FinancialServices::V1::GetEngineVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_engine_version({ name: name }, call_options) do |_result, response|
+        c.get_engine_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_engine_version(::Google::Cloud::FinancialServices::V1::GetEngineVersionRequest.new(name: name), call_options) do |_result, response|
+        c.get_engine_version(::Google::Cloud::FinancialServices::V1::GetEngineVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1499,32 +1499,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_list_engine_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_engine_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_engine_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_engine_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_engine_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_engine_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_engine_versions ::Google::Cloud::FinancialServices::V1::ListEngineVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_engine_versions ::Google::Cloud::FinancialServices::V1::ListEngineVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_engine_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_engine_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_engine_versions(::Google::Cloud::FinancialServices::V1::ListEngineVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_engine_versions(::Google::Cloud::FinancialServices::V1::ListEngineVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1557,32 +1557,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_list_prediction_results_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_prediction_results_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_prediction_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_prediction_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_prediction_results parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_prediction_results parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_prediction_results ::Google::Cloud::FinancialServices::V1::ListPredictionResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_prediction_results ::Google::Cloud::FinancialServices::V1::ListPredictionResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_prediction_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_prediction_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_prediction_results(::Google::Cloud::FinancialServices::V1::ListPredictionResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_prediction_results(::Google::Cloud::FinancialServices::V1::ListPredictionResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1611,32 +1611,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_get_prediction_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_prediction_result_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_prediction_result({ name: name }) do |_result, response|
+        c.get_prediction_result({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_prediction_result name: name do |_result, response|
+        c.get_prediction_result name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_prediction_result ::Google::Cloud::FinancialServices::V1::GetPredictionResultRequest.new(name: name) do |_result, response|
+        c.get_prediction_result ::Google::Cloud::FinancialServices::V1::GetPredictionResultRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_prediction_result({ name: name }, call_options) do |_result, response|
+        c.get_prediction_result({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_prediction_result(::Google::Cloud::FinancialServices::V1::GetPredictionResultRequest.new(name: name), call_options) do |_result, response|
+        c.get_prediction_result(::Google::Cloud::FinancialServices::V1::GetPredictionResultRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1668,32 +1668,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_create_prediction_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_prediction_result_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_prediction_result({ parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id }) do |_result, response|
+        c.create_prediction_result({ parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_prediction_result parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id do |_result, response|
+        c.create_prediction_result parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_prediction_result ::Google::Cloud::FinancialServices::V1::CreatePredictionResultRequest.new(parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id) do |_result, response|
+        c.create_prediction_result ::Google::Cloud::FinancialServices::V1::CreatePredictionResultRequest.new(parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_prediction_result({ parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id }, call_options) do |_result, response|
+        c.create_prediction_result({ parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_prediction_result(::Google::Cloud::FinancialServices::V1::CreatePredictionResultRequest.new(parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id), call_options) do |_result, response|
+        c.create_prediction_result(::Google::Cloud::FinancialServices::V1::CreatePredictionResultRequest.new(parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1724,32 +1724,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_update_prediction_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_prediction_result_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_prediction_result({ update_mask: update_mask, prediction_result: prediction_result, request_id: request_id }) do |_result, response|
+        c.update_prediction_result({ update_mask: update_mask, prediction_result: prediction_result, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_prediction_result update_mask: update_mask, prediction_result: prediction_result, request_id: request_id do |_result, response|
+        c.update_prediction_result update_mask: update_mask, prediction_result: prediction_result, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_prediction_result ::Google::Cloud::FinancialServices::V1::UpdatePredictionResultRequest.new(update_mask: update_mask, prediction_result: prediction_result, request_id: request_id) do |_result, response|
+        c.update_prediction_result ::Google::Cloud::FinancialServices::V1::UpdatePredictionResultRequest.new(update_mask: update_mask, prediction_result: prediction_result, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_prediction_result({ update_mask: update_mask, prediction_result: prediction_result, request_id: request_id }, call_options) do |_result, response|
+        c.update_prediction_result({ update_mask: update_mask, prediction_result: prediction_result, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_prediction_result(::Google::Cloud::FinancialServices::V1::UpdatePredictionResultRequest.new(update_mask: update_mask, prediction_result: prediction_result, request_id: request_id), call_options) do |_result, response|
+        c.update_prediction_result(::Google::Cloud::FinancialServices::V1::UpdatePredictionResultRequest.new(update_mask: update_mask, prediction_result: prediction_result, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1779,32 +1779,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_export_prediction_result_metadata_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_prediction_result_metadata_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_prediction_result_metadata({ prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination }) do |_result, response|
+        c.export_prediction_result_metadata({ prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_prediction_result_metadata prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination do |_result, response|
+        c.export_prediction_result_metadata prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_prediction_result_metadata ::Google::Cloud::FinancialServices::V1::ExportPredictionResultMetadataRequest.new(prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination) do |_result, response|
+        c.export_prediction_result_metadata ::Google::Cloud::FinancialServices::V1::ExportPredictionResultMetadataRequest.new(prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_prediction_result_metadata({ prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination }, call_options) do |_result, response|
+        c.export_prediction_result_metadata({ prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_prediction_result_metadata(::Google::Cloud::FinancialServices::V1::ExportPredictionResultMetadataRequest.new(prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination), call_options) do |_result, response|
+        c.export_prediction_result_metadata(::Google::Cloud::FinancialServices::V1::ExportPredictionResultMetadataRequest.new(prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1834,32 +1834,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_delete_prediction_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_prediction_result_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_prediction_result({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_prediction_result({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_prediction_result name: name, request_id: request_id do |_result, response|
+        c.delete_prediction_result name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_prediction_result ::Google::Cloud::FinancialServices::V1::DeletePredictionResultRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_prediction_result ::Google::Cloud::FinancialServices::V1::DeletePredictionResultRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_prediction_result({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_prediction_result({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_prediction_result(::Google::Cloud::FinancialServices::V1::DeletePredictionResultRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_prediction_result(::Google::Cloud::FinancialServices::V1::DeletePredictionResultRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1892,32 +1892,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_list_backtest_results_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backtest_results_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backtest_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_backtest_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backtest_results parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_backtest_results parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backtest_results ::Google::Cloud::FinancialServices::V1::ListBacktestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_backtest_results ::Google::Cloud::FinancialServices::V1::ListBacktestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backtest_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_backtest_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backtest_results(::Google::Cloud::FinancialServices::V1::ListBacktestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_backtest_results(::Google::Cloud::FinancialServices::V1::ListBacktestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1946,32 +1946,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_get_backtest_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backtest_result_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backtest_result({ name: name }) do |_result, response|
+        c.get_backtest_result({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backtest_result name: name do |_result, response|
+        c.get_backtest_result name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backtest_result ::Google::Cloud::FinancialServices::V1::GetBacktestResultRequest.new(name: name) do |_result, response|
+        c.get_backtest_result ::Google::Cloud::FinancialServices::V1::GetBacktestResultRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backtest_result({ name: name }, call_options) do |_result, response|
+        c.get_backtest_result({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backtest_result(::Google::Cloud::FinancialServices::V1::GetBacktestResultRequest.new(name: name), call_options) do |_result, response|
+        c.get_backtest_result(::Google::Cloud::FinancialServices::V1::GetBacktestResultRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2003,32 +2003,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_create_backtest_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backtest_result_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backtest_result({ parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id }) do |_result, response|
+        c.create_backtest_result({ parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backtest_result parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id do |_result, response|
+        c.create_backtest_result parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backtest_result ::Google::Cloud::FinancialServices::V1::CreateBacktestResultRequest.new(parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id) do |_result, response|
+        c.create_backtest_result ::Google::Cloud::FinancialServices::V1::CreateBacktestResultRequest.new(parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backtest_result({ parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id }, call_options) do |_result, response|
+        c.create_backtest_result({ parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backtest_result(::Google::Cloud::FinancialServices::V1::CreateBacktestResultRequest.new(parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id), call_options) do |_result, response|
+        c.create_backtest_result(::Google::Cloud::FinancialServices::V1::CreateBacktestResultRequest.new(parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2059,32 +2059,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_update_backtest_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backtest_result_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backtest_result({ update_mask: update_mask, backtest_result: backtest_result, request_id: request_id }) do |_result, response|
+        c.update_backtest_result({ update_mask: update_mask, backtest_result: backtest_result, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backtest_result update_mask: update_mask, backtest_result: backtest_result, request_id: request_id do |_result, response|
+        c.update_backtest_result update_mask: update_mask, backtest_result: backtest_result, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backtest_result ::Google::Cloud::FinancialServices::V1::UpdateBacktestResultRequest.new(update_mask: update_mask, backtest_result: backtest_result, request_id: request_id) do |_result, response|
+        c.update_backtest_result ::Google::Cloud::FinancialServices::V1::UpdateBacktestResultRequest.new(update_mask: update_mask, backtest_result: backtest_result, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backtest_result({ update_mask: update_mask, backtest_result: backtest_result, request_id: request_id }, call_options) do |_result, response|
+        c.update_backtest_result({ update_mask: update_mask, backtest_result: backtest_result, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backtest_result(::Google::Cloud::FinancialServices::V1::UpdateBacktestResultRequest.new(update_mask: update_mask, backtest_result: backtest_result, request_id: request_id), call_options) do |_result, response|
+        c.update_backtest_result(::Google::Cloud::FinancialServices::V1::UpdateBacktestResultRequest.new(update_mask: update_mask, backtest_result: backtest_result, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2114,32 +2114,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_export_backtest_result_metadata_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_backtest_result_metadata_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_backtest_result_metadata({ backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination }) do |_result, response|
+        c.export_backtest_result_metadata({ backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_backtest_result_metadata backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination do |_result, response|
+        c.export_backtest_result_metadata backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_backtest_result_metadata ::Google::Cloud::FinancialServices::V1::ExportBacktestResultMetadataRequest.new(backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination) do |_result, response|
+        c.export_backtest_result_metadata ::Google::Cloud::FinancialServices::V1::ExportBacktestResultMetadataRequest.new(backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_backtest_result_metadata({ backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination }, call_options) do |_result, response|
+        c.export_backtest_result_metadata({ backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_backtest_result_metadata(::Google::Cloud::FinancialServices::V1::ExportBacktestResultMetadataRequest.new(backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination), call_options) do |_result, response|
+        c.export_backtest_result_metadata(::Google::Cloud::FinancialServices::V1::ExportBacktestResultMetadataRequest.new(backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2169,32 +2169,32 @@ class ::Google::Cloud::FinancialServices::V1::AML::Rest::ClientTest < Minitest::
     ::Google::Cloud::FinancialServices::V1::AML::Rest::ServiceStub.stub :transcode_delete_backtest_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backtest_result_client_stub do
         # Create client
-        client = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
+        c = ::Google::Cloud::FinancialServices::V1::AML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backtest_result({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_backtest_result({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backtest_result name: name, request_id: request_id do |_result, response|
+        c.delete_backtest_result name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backtest_result ::Google::Cloud::FinancialServices::V1::DeleteBacktestResultRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_backtest_result ::Google::Cloud::FinancialServices::V1::DeleteBacktestResultRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backtest_result({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_backtest_result({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backtest_result(::Google::Cloud::FinancialServices::V1::DeleteBacktestResultRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_backtest_result(::Google::Cloud::FinancialServices::V1::DeleteBacktestResultRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

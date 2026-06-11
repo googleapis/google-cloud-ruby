@@ -97,32 +97,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_initialize_zone_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, initialize_zone_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.initialize_zone({ name: name }) do |_result, response|
+        c.initialize_zone({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.initialize_zone name: name do |_result, response|
+        c.initialize_zone name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.initialize_zone ::Google::Cloud::EdgeNetwork::V1::InitializeZoneRequest.new(name: name) do |_result, response|
+        c.initialize_zone ::Google::Cloud::EdgeNetwork::V1::InitializeZoneRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.initialize_zone({ name: name }, call_options) do |_result, response|
+        c.initialize_zone({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.initialize_zone(::Google::Cloud::EdgeNetwork::V1::InitializeZoneRequest.new(name: name), call_options) do |_result, response|
+        c.initialize_zone(::Google::Cloud::EdgeNetwork::V1::InitializeZoneRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_list_zones_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_zones_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_zones parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_zones parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_zones ::Google::Cloud::EdgeNetwork::V1::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_zones ::Google::Cloud::EdgeNetwork::V1::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_zones(::Google::Cloud::EdgeNetwork::V1::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_zones(::Google::Cloud::EdgeNetwork::V1::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_get_zone_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_zone_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_zone({ name: name }) do |_result, response|
+        c.get_zone({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_zone name: name do |_result, response|
+        c.get_zone name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_zone ::Google::Cloud::EdgeNetwork::V1::GetZoneRequest.new(name: name) do |_result, response|
+        c.get_zone ::Google::Cloud::EdgeNetwork::V1::GetZoneRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_zone({ name: name }, call_options) do |_result, response|
+        c.get_zone({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_zone(::Google::Cloud::EdgeNetwork::V1::GetZoneRequest.new(name: name), call_options) do |_result, response|
+        c.get_zone(::Google::Cloud::EdgeNetwork::V1::GetZoneRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_list_networks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_networks_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_networks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_networks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_networks parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_networks parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_networks ::Google::Cloud::EdgeNetwork::V1::ListNetworksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_networks ::Google::Cloud::EdgeNetwork::V1::ListNetworksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_networks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_networks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_networks(::Google::Cloud::EdgeNetwork::V1::ListNetworksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_networks(::Google::Cloud::EdgeNetwork::V1::ListNetworksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_get_network_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_network_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_network({ name: name }) do |_result, response|
+        c.get_network({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_network name: name do |_result, response|
+        c.get_network name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_network ::Google::Cloud::EdgeNetwork::V1::GetNetworkRequest.new(name: name) do |_result, response|
+        c.get_network ::Google::Cloud::EdgeNetwork::V1::GetNetworkRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_network({ name: name }, call_options) do |_result, response|
+        c.get_network({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_network(::Google::Cloud::EdgeNetwork::V1::GetNetworkRequest.new(name: name), call_options) do |_result, response|
+        c.get_network(::Google::Cloud::EdgeNetwork::V1::GetNetworkRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_diagnose_network_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, diagnose_network_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.diagnose_network({ name: name }) do |_result, response|
+        c.diagnose_network({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.diagnose_network name: name do |_result, response|
+        c.diagnose_network name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.diagnose_network ::Google::Cloud::EdgeNetwork::V1::DiagnoseNetworkRequest.new(name: name) do |_result, response|
+        c.diagnose_network ::Google::Cloud::EdgeNetwork::V1::DiagnoseNetworkRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.diagnose_network({ name: name }, call_options) do |_result, response|
+        c.diagnose_network({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.diagnose_network(::Google::Cloud::EdgeNetwork::V1::DiagnoseNetworkRequest.new(name: name), call_options) do |_result, response|
+        c.diagnose_network(::Google::Cloud::EdgeNetwork::V1::DiagnoseNetworkRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -432,32 +432,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_create_network_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_network_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_network({ parent: parent, network_id: network_id, network: network, request_id: request_id }) do |_result, response|
+        c.create_network({ parent: parent, network_id: network_id, network: network, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_network parent: parent, network_id: network_id, network: network, request_id: request_id do |_result, response|
+        c.create_network parent: parent, network_id: network_id, network: network, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_network ::Google::Cloud::EdgeNetwork::V1::CreateNetworkRequest.new(parent: parent, network_id: network_id, network: network, request_id: request_id) do |_result, response|
+        c.create_network ::Google::Cloud::EdgeNetwork::V1::CreateNetworkRequest.new(parent: parent, network_id: network_id, network: network, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_network({ parent: parent, network_id: network_id, network: network, request_id: request_id }, call_options) do |_result, response|
+        c.create_network({ parent: parent, network_id: network_id, network: network, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_network(::Google::Cloud::EdgeNetwork::V1::CreateNetworkRequest.new(parent: parent, network_id: network_id, network: network, request_id: request_id), call_options) do |_result, response|
+        c.create_network(::Google::Cloud::EdgeNetwork::V1::CreateNetworkRequest.new(parent: parent, network_id: network_id, network: network, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -487,32 +487,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_delete_network_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_network_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_network({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_network({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_network name: name, request_id: request_id do |_result, response|
+        c.delete_network name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_network ::Google::Cloud::EdgeNetwork::V1::DeleteNetworkRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_network ::Google::Cloud::EdgeNetwork::V1::DeleteNetworkRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_network({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_network({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_network(::Google::Cloud::EdgeNetwork::V1::DeleteNetworkRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_network(::Google::Cloud::EdgeNetwork::V1::DeleteNetworkRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -545,32 +545,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_list_subnets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_subnets_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_subnets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_subnets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_subnets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_subnets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_subnets ::Google::Cloud::EdgeNetwork::V1::ListSubnetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_subnets ::Google::Cloud::EdgeNetwork::V1::ListSubnetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_subnets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_subnets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_subnets(::Google::Cloud::EdgeNetwork::V1::ListSubnetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_subnets(::Google::Cloud::EdgeNetwork::V1::ListSubnetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -599,32 +599,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_get_subnet_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_subnet_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_subnet({ name: name }) do |_result, response|
+        c.get_subnet({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_subnet name: name do |_result, response|
+        c.get_subnet name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_subnet ::Google::Cloud::EdgeNetwork::V1::GetSubnetRequest.new(name: name) do |_result, response|
+        c.get_subnet ::Google::Cloud::EdgeNetwork::V1::GetSubnetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_subnet({ name: name }, call_options) do |_result, response|
+        c.get_subnet({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_subnet(::Google::Cloud::EdgeNetwork::V1::GetSubnetRequest.new(name: name), call_options) do |_result, response|
+        c.get_subnet(::Google::Cloud::EdgeNetwork::V1::GetSubnetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -656,32 +656,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_create_subnet_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_subnet_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_subnet({ parent: parent, subnet_id: subnet_id, subnet: subnet, request_id: request_id }) do |_result, response|
+        c.create_subnet({ parent: parent, subnet_id: subnet_id, subnet: subnet, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_subnet parent: parent, subnet_id: subnet_id, subnet: subnet, request_id: request_id do |_result, response|
+        c.create_subnet parent: parent, subnet_id: subnet_id, subnet: subnet, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_subnet ::Google::Cloud::EdgeNetwork::V1::CreateSubnetRequest.new(parent: parent, subnet_id: subnet_id, subnet: subnet, request_id: request_id) do |_result, response|
+        c.create_subnet ::Google::Cloud::EdgeNetwork::V1::CreateSubnetRequest.new(parent: parent, subnet_id: subnet_id, subnet: subnet, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_subnet({ parent: parent, subnet_id: subnet_id, subnet: subnet, request_id: request_id }, call_options) do |_result, response|
+        c.create_subnet({ parent: parent, subnet_id: subnet_id, subnet: subnet, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_subnet(::Google::Cloud::EdgeNetwork::V1::CreateSubnetRequest.new(parent: parent, subnet_id: subnet_id, subnet: subnet, request_id: request_id), call_options) do |_result, response|
+        c.create_subnet(::Google::Cloud::EdgeNetwork::V1::CreateSubnetRequest.new(parent: parent, subnet_id: subnet_id, subnet: subnet, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -712,32 +712,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_update_subnet_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_subnet_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_subnet({ update_mask: update_mask, subnet: subnet, request_id: request_id }) do |_result, response|
+        c.update_subnet({ update_mask: update_mask, subnet: subnet, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_subnet update_mask: update_mask, subnet: subnet, request_id: request_id do |_result, response|
+        c.update_subnet update_mask: update_mask, subnet: subnet, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_subnet ::Google::Cloud::EdgeNetwork::V1::UpdateSubnetRequest.new(update_mask: update_mask, subnet: subnet, request_id: request_id) do |_result, response|
+        c.update_subnet ::Google::Cloud::EdgeNetwork::V1::UpdateSubnetRequest.new(update_mask: update_mask, subnet: subnet, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_subnet({ update_mask: update_mask, subnet: subnet, request_id: request_id }, call_options) do |_result, response|
+        c.update_subnet({ update_mask: update_mask, subnet: subnet, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_subnet(::Google::Cloud::EdgeNetwork::V1::UpdateSubnetRequest.new(update_mask: update_mask, subnet: subnet, request_id: request_id), call_options) do |_result, response|
+        c.update_subnet(::Google::Cloud::EdgeNetwork::V1::UpdateSubnetRequest.new(update_mask: update_mask, subnet: subnet, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -767,32 +767,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_delete_subnet_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_subnet_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_subnet({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_subnet({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_subnet name: name, request_id: request_id do |_result, response|
+        c.delete_subnet name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_subnet ::Google::Cloud::EdgeNetwork::V1::DeleteSubnetRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_subnet ::Google::Cloud::EdgeNetwork::V1::DeleteSubnetRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_subnet({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_subnet({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_subnet(::Google::Cloud::EdgeNetwork::V1::DeleteSubnetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_subnet(::Google::Cloud::EdgeNetwork::V1::DeleteSubnetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -825,32 +825,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_list_interconnects_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_interconnects_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_interconnects({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_interconnects({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_interconnects parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_interconnects parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_interconnects ::Google::Cloud::EdgeNetwork::V1::ListInterconnectsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_interconnects ::Google::Cloud::EdgeNetwork::V1::ListInterconnectsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_interconnects({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_interconnects({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_interconnects(::Google::Cloud::EdgeNetwork::V1::ListInterconnectsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_interconnects(::Google::Cloud::EdgeNetwork::V1::ListInterconnectsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -879,32 +879,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_get_interconnect_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_interconnect_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_interconnect({ name: name }) do |_result, response|
+        c.get_interconnect({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_interconnect name: name do |_result, response|
+        c.get_interconnect name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_interconnect ::Google::Cloud::EdgeNetwork::V1::GetInterconnectRequest.new(name: name) do |_result, response|
+        c.get_interconnect ::Google::Cloud::EdgeNetwork::V1::GetInterconnectRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_interconnect({ name: name }, call_options) do |_result, response|
+        c.get_interconnect({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_interconnect(::Google::Cloud::EdgeNetwork::V1::GetInterconnectRequest.new(name: name), call_options) do |_result, response|
+        c.get_interconnect(::Google::Cloud::EdgeNetwork::V1::GetInterconnectRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -933,32 +933,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_diagnose_interconnect_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, diagnose_interconnect_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.diagnose_interconnect({ name: name }) do |_result, response|
+        c.diagnose_interconnect({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.diagnose_interconnect name: name do |_result, response|
+        c.diagnose_interconnect name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.diagnose_interconnect ::Google::Cloud::EdgeNetwork::V1::DiagnoseInterconnectRequest.new(name: name) do |_result, response|
+        c.diagnose_interconnect ::Google::Cloud::EdgeNetwork::V1::DiagnoseInterconnectRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.diagnose_interconnect({ name: name }, call_options) do |_result, response|
+        c.diagnose_interconnect({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.diagnose_interconnect(::Google::Cloud::EdgeNetwork::V1::DiagnoseInterconnectRequest.new(name: name), call_options) do |_result, response|
+        c.diagnose_interconnect(::Google::Cloud::EdgeNetwork::V1::DiagnoseInterconnectRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -991,32 +991,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_list_interconnect_attachments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_interconnect_attachments_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_interconnect_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_interconnect_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_interconnect_attachments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_interconnect_attachments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_interconnect_attachments ::Google::Cloud::EdgeNetwork::V1::ListInterconnectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_interconnect_attachments ::Google::Cloud::EdgeNetwork::V1::ListInterconnectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_interconnect_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_interconnect_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_interconnect_attachments(::Google::Cloud::EdgeNetwork::V1::ListInterconnectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_interconnect_attachments(::Google::Cloud::EdgeNetwork::V1::ListInterconnectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1045,32 +1045,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_get_interconnect_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_interconnect_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_interconnect_attachment({ name: name }) do |_result, response|
+        c.get_interconnect_attachment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_interconnect_attachment name: name do |_result, response|
+        c.get_interconnect_attachment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_interconnect_attachment ::Google::Cloud::EdgeNetwork::V1::GetInterconnectAttachmentRequest.new(name: name) do |_result, response|
+        c.get_interconnect_attachment ::Google::Cloud::EdgeNetwork::V1::GetInterconnectAttachmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_interconnect_attachment({ name: name }, call_options) do |_result, response|
+        c.get_interconnect_attachment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_interconnect_attachment(::Google::Cloud::EdgeNetwork::V1::GetInterconnectAttachmentRequest.new(name: name), call_options) do |_result, response|
+        c.get_interconnect_attachment(::Google::Cloud::EdgeNetwork::V1::GetInterconnectAttachmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1102,32 +1102,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_create_interconnect_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_interconnect_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_interconnect_attachment({ parent: parent, interconnect_attachment_id: interconnect_attachment_id, interconnect_attachment: interconnect_attachment, request_id: request_id }) do |_result, response|
+        c.create_interconnect_attachment({ parent: parent, interconnect_attachment_id: interconnect_attachment_id, interconnect_attachment: interconnect_attachment, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_interconnect_attachment parent: parent, interconnect_attachment_id: interconnect_attachment_id, interconnect_attachment: interconnect_attachment, request_id: request_id do |_result, response|
+        c.create_interconnect_attachment parent: parent, interconnect_attachment_id: interconnect_attachment_id, interconnect_attachment: interconnect_attachment, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_interconnect_attachment ::Google::Cloud::EdgeNetwork::V1::CreateInterconnectAttachmentRequest.new(parent: parent, interconnect_attachment_id: interconnect_attachment_id, interconnect_attachment: interconnect_attachment, request_id: request_id) do |_result, response|
+        c.create_interconnect_attachment ::Google::Cloud::EdgeNetwork::V1::CreateInterconnectAttachmentRequest.new(parent: parent, interconnect_attachment_id: interconnect_attachment_id, interconnect_attachment: interconnect_attachment, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_interconnect_attachment({ parent: parent, interconnect_attachment_id: interconnect_attachment_id, interconnect_attachment: interconnect_attachment, request_id: request_id }, call_options) do |_result, response|
+        c.create_interconnect_attachment({ parent: parent, interconnect_attachment_id: interconnect_attachment_id, interconnect_attachment: interconnect_attachment, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_interconnect_attachment(::Google::Cloud::EdgeNetwork::V1::CreateInterconnectAttachmentRequest.new(parent: parent, interconnect_attachment_id: interconnect_attachment_id, interconnect_attachment: interconnect_attachment, request_id: request_id), call_options) do |_result, response|
+        c.create_interconnect_attachment(::Google::Cloud::EdgeNetwork::V1::CreateInterconnectAttachmentRequest.new(parent: parent, interconnect_attachment_id: interconnect_attachment_id, interconnect_attachment: interconnect_attachment, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1157,32 +1157,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_delete_interconnect_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_interconnect_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_interconnect_attachment({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_interconnect_attachment({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_interconnect_attachment name: name, request_id: request_id do |_result, response|
+        c.delete_interconnect_attachment name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_interconnect_attachment ::Google::Cloud::EdgeNetwork::V1::DeleteInterconnectAttachmentRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_interconnect_attachment ::Google::Cloud::EdgeNetwork::V1::DeleteInterconnectAttachmentRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_interconnect_attachment({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_interconnect_attachment({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_interconnect_attachment(::Google::Cloud::EdgeNetwork::V1::DeleteInterconnectAttachmentRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_interconnect_attachment(::Google::Cloud::EdgeNetwork::V1::DeleteInterconnectAttachmentRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1215,32 +1215,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_list_routers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_routers_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_routers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_routers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_routers parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_routers parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_routers ::Google::Cloud::EdgeNetwork::V1::ListRoutersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_routers ::Google::Cloud::EdgeNetwork::V1::ListRoutersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_routers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_routers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_routers(::Google::Cloud::EdgeNetwork::V1::ListRoutersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_routers(::Google::Cloud::EdgeNetwork::V1::ListRoutersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1269,32 +1269,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_get_router_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_router_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_router({ name: name }) do |_result, response|
+        c.get_router({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_router name: name do |_result, response|
+        c.get_router name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_router ::Google::Cloud::EdgeNetwork::V1::GetRouterRequest.new(name: name) do |_result, response|
+        c.get_router ::Google::Cloud::EdgeNetwork::V1::GetRouterRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_router({ name: name }, call_options) do |_result, response|
+        c.get_router({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_router(::Google::Cloud::EdgeNetwork::V1::GetRouterRequest.new(name: name), call_options) do |_result, response|
+        c.get_router(::Google::Cloud::EdgeNetwork::V1::GetRouterRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1323,32 +1323,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_diagnose_router_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, diagnose_router_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.diagnose_router({ name: name }) do |_result, response|
+        c.diagnose_router({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.diagnose_router name: name do |_result, response|
+        c.diagnose_router name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.diagnose_router ::Google::Cloud::EdgeNetwork::V1::DiagnoseRouterRequest.new(name: name) do |_result, response|
+        c.diagnose_router ::Google::Cloud::EdgeNetwork::V1::DiagnoseRouterRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.diagnose_router({ name: name }, call_options) do |_result, response|
+        c.diagnose_router({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.diagnose_router(::Google::Cloud::EdgeNetwork::V1::DiagnoseRouterRequest.new(name: name), call_options) do |_result, response|
+        c.diagnose_router(::Google::Cloud::EdgeNetwork::V1::DiagnoseRouterRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1380,32 +1380,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_create_router_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_router_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_router({ parent: parent, router_id: router_id, router: router, request_id: request_id }) do |_result, response|
+        c.create_router({ parent: parent, router_id: router_id, router: router, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_router parent: parent, router_id: router_id, router: router, request_id: request_id do |_result, response|
+        c.create_router parent: parent, router_id: router_id, router: router, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_router ::Google::Cloud::EdgeNetwork::V1::CreateRouterRequest.new(parent: parent, router_id: router_id, router: router, request_id: request_id) do |_result, response|
+        c.create_router ::Google::Cloud::EdgeNetwork::V1::CreateRouterRequest.new(parent: parent, router_id: router_id, router: router, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_router({ parent: parent, router_id: router_id, router: router, request_id: request_id }, call_options) do |_result, response|
+        c.create_router({ parent: parent, router_id: router_id, router: router, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_router(::Google::Cloud::EdgeNetwork::V1::CreateRouterRequest.new(parent: parent, router_id: router_id, router: router, request_id: request_id), call_options) do |_result, response|
+        c.create_router(::Google::Cloud::EdgeNetwork::V1::CreateRouterRequest.new(parent: parent, router_id: router_id, router: router, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1436,32 +1436,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_update_router_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_router_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_router({ update_mask: update_mask, router: router, request_id: request_id }) do |_result, response|
+        c.update_router({ update_mask: update_mask, router: router, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_router update_mask: update_mask, router: router, request_id: request_id do |_result, response|
+        c.update_router update_mask: update_mask, router: router, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_router ::Google::Cloud::EdgeNetwork::V1::UpdateRouterRequest.new(update_mask: update_mask, router: router, request_id: request_id) do |_result, response|
+        c.update_router ::Google::Cloud::EdgeNetwork::V1::UpdateRouterRequest.new(update_mask: update_mask, router: router, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_router({ update_mask: update_mask, router: router, request_id: request_id }, call_options) do |_result, response|
+        c.update_router({ update_mask: update_mask, router: router, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_router(::Google::Cloud::EdgeNetwork::V1::UpdateRouterRequest.new(update_mask: update_mask, router: router, request_id: request_id), call_options) do |_result, response|
+        c.update_router(::Google::Cloud::EdgeNetwork::V1::UpdateRouterRequest.new(update_mask: update_mask, router: router, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1491,32 +1491,32 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ServiceStub.stub :transcode_delete_router_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_router_client_stub do
         # Create client
-        client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
+        c = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_router({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_router({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_router name: name, request_id: request_id do |_result, response|
+        c.delete_router name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_router ::Google::Cloud::EdgeNetwork::V1::DeleteRouterRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_router ::Google::Cloud::EdgeNetwork::V1::DeleteRouterRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_router({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_router({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_router(::Google::Cloud::EdgeNetwork::V1::DeleteRouterRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_router(::Google::Cloud::EdgeNetwork::V1::DeleteRouterRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

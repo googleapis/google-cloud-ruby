@@ -86,36 +86,36 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, publish_channel_connection_events_client_stub do
       # Create client
-      client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new do |config|
+      c = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.publish_channel_connection_events({ channel_connection: channel_connection, events: events, text_events: text_events }) do |response, operation|
+      c.publish_channel_connection_events({ channel_connection: channel_connection, events: events, text_events: text_events }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.publish_channel_connection_events channel_connection: channel_connection, events: events, text_events: text_events do |response, operation|
+      c.publish_channel_connection_events channel_connection: channel_connection, events: events, text_events: text_events do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.publish_channel_connection_events ::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events, text_events: text_events) do |response, operation|
+      c.publish_channel_connection_events ::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events, text_events: text_events) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.publish_channel_connection_events({ channel_connection: channel_connection, events: events, text_events: text_events }, grpc_options) do |response, operation|
+      c.publish_channel_connection_events({ channel_connection: channel_connection, events: events, text_events: text_events }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.publish_channel_connection_events(::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events, text_events: text_events), grpc_options) do |response, operation|
+      c.publish_channel_connection_events(::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events, text_events: text_events), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,36 +148,36 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, publish_events_client_stub do
       # Create client
-      client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new do |config|
+      c = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.publish_events({ channel: channel, events: events, text_events: text_events }) do |response, operation|
+      c.publish_events({ channel: channel, events: events, text_events: text_events }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.publish_events channel: channel, events: events, text_events: text_events do |response, operation|
+      c.publish_events channel: channel, events: events, text_events: text_events do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.publish_events ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events, text_events: text_events) do |response, operation|
+      c.publish_events ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events, text_events: text_events) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.publish_events({ channel: channel, events: events, text_events: text_events }, grpc_options) do |response, operation|
+      c.publish_events({ channel: channel, events: events, text_events: text_events }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.publish_events(::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events, text_events: text_events), grpc_options) do |response, operation|
+      c.publish_events(::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events, text_events: text_events), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,36 +209,36 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, publish_client_stub do
       # Create client
-      client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new do |config|
+      c = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.publish({ message_bus: message_bus, proto_message: proto_message }) do |response, operation|
+      c.publish({ message_bus: message_bus, proto_message: proto_message }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.publish message_bus: message_bus, proto_message: proto_message do |response, operation|
+      c.publish message_bus: message_bus, proto_message: proto_message do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.publish ::Google::Cloud::Eventarc::Publishing::V1::PublishRequest.new(message_bus: message_bus, proto_message: proto_message) do |response, operation|
+      c.publish ::Google::Cloud::Eventarc::Publishing::V1::PublishRequest.new(message_bus: message_bus, proto_message: proto_message) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.publish({ message_bus: message_bus, proto_message: proto_message }, grpc_options) do |response, operation|
+      c.publish({ message_bus: message_bus, proto_message: proto_message }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.publish(::Google::Cloud::Eventarc::Publishing::V1::PublishRequest.new(message_bus: message_bus, proto_message: proto_message), grpc_options) do |response, operation|
+      c.publish(::Google::Cloud::Eventarc::Publishing::V1::PublishRequest.new(message_bus: message_bus, proto_message: proto_message), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
