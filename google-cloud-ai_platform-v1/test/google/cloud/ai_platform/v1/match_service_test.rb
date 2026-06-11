@@ -88,36 +88,36 @@ class ::Google::Cloud::AIPlatform::V1::MatchService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, find_neighbors_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MatchService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MatchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.find_neighbors({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint }) do |response, operation|
+      c.find_neighbors({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.find_neighbors index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint do |response, operation|
+      c.find_neighbors index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.find_neighbors ::Google::Cloud::AIPlatform::V1::FindNeighborsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint) do |response, operation|
+      c.find_neighbors ::Google::Cloud::AIPlatform::V1::FindNeighborsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.find_neighbors({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint }, grpc_options) do |response, operation|
+      c.find_neighbors({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.find_neighbors(::Google::Cloud::AIPlatform::V1::FindNeighborsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint), grpc_options) do |response, operation|
+      c.find_neighbors(::Google::Cloud::AIPlatform::V1::FindNeighborsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -150,36 +150,36 @@ class ::Google::Cloud::AIPlatform::V1::MatchService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, read_index_datapoints_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MatchService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MatchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_index_datapoints({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids }) do |response, operation|
+      c.read_index_datapoints({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.read_index_datapoints index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids do |response, operation|
+      c.read_index_datapoints index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.read_index_datapoints ::Google::Cloud::AIPlatform::V1::ReadIndexDatapointsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids) do |response, operation|
+      c.read_index_datapoints ::Google::Cloud::AIPlatform::V1::ReadIndexDatapointsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.read_index_datapoints({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids }, grpc_options) do |response, operation|
+      c.read_index_datapoints({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.read_index_datapoints(::Google::Cloud::AIPlatform::V1::ReadIndexDatapointsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids), grpc_options) do |response, operation|
+      c.read_index_datapoints(::Google::Cloud::AIPlatform::V1::ReadIndexDatapointsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

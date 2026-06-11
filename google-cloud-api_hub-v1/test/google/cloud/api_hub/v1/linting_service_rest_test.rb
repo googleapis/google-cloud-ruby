@@ -97,32 +97,32 @@ class ::Google::Cloud::ApiHub::V1::LintingService::Rest::ClientTest < Minitest::
     ::Google::Cloud::ApiHub::V1::LintingService::Rest::ServiceStub.stub :transcode_get_style_guide_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_style_guide_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::LintingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::LintingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_style_guide({ name: name }) do |_result, response|
+        c.get_style_guide({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_style_guide name: name do |_result, response|
+        c.get_style_guide name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_style_guide ::Google::Cloud::ApiHub::V1::GetStyleGuideRequest.new(name: name) do |_result, response|
+        c.get_style_guide ::Google::Cloud::ApiHub::V1::GetStyleGuideRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_style_guide({ name: name }, call_options) do |_result, response|
+        c.get_style_guide({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_style_guide(::Google::Cloud::ApiHub::V1::GetStyleGuideRequest.new(name: name), call_options) do |_result, response|
+        c.get_style_guide(::Google::Cloud::ApiHub::V1::GetStyleGuideRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::ApiHub::V1::LintingService::Rest::ClientTest < Minitest::
     ::Google::Cloud::ApiHub::V1::LintingService::Rest::ServiceStub.stub :transcode_update_style_guide_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_style_guide_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::LintingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::LintingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_style_guide({ style_guide: style_guide, update_mask: update_mask }) do |_result, response|
+        c.update_style_guide({ style_guide: style_guide, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_style_guide style_guide: style_guide, update_mask: update_mask do |_result, response|
+        c.update_style_guide style_guide: style_guide, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_style_guide ::Google::Cloud::ApiHub::V1::UpdateStyleGuideRequest.new(style_guide: style_guide, update_mask: update_mask) do |_result, response|
+        c.update_style_guide ::Google::Cloud::ApiHub::V1::UpdateStyleGuideRequest.new(style_guide: style_guide, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_style_guide({ style_guide: style_guide, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_style_guide({ style_guide: style_guide, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_style_guide(::Google::Cloud::ApiHub::V1::UpdateStyleGuideRequest.new(style_guide: style_guide, update_mask: update_mask), call_options) do |_result, response|
+        c.update_style_guide(::Google::Cloud::ApiHub::V1::UpdateStyleGuideRequest.new(style_guide: style_guide, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,32 +206,32 @@ class ::Google::Cloud::ApiHub::V1::LintingService::Rest::ClientTest < Minitest::
     ::Google::Cloud::ApiHub::V1::LintingService::Rest::ServiceStub.stub :transcode_get_style_guide_contents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_style_guide_contents_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::LintingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::LintingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_style_guide_contents({ name: name }) do |_result, response|
+        c.get_style_guide_contents({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_style_guide_contents name: name do |_result, response|
+        c.get_style_guide_contents name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_style_guide_contents ::Google::Cloud::ApiHub::V1::GetStyleGuideContentsRequest.new(name: name) do |_result, response|
+        c.get_style_guide_contents ::Google::Cloud::ApiHub::V1::GetStyleGuideContentsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_style_guide_contents({ name: name }, call_options) do |_result, response|
+        c.get_style_guide_contents({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_style_guide_contents(::Google::Cloud::ApiHub::V1::GetStyleGuideContentsRequest.new(name: name), call_options) do |_result, response|
+        c.get_style_guide_contents(::Google::Cloud::ApiHub::V1::GetStyleGuideContentsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -260,32 +260,32 @@ class ::Google::Cloud::ApiHub::V1::LintingService::Rest::ClientTest < Minitest::
     ::Google::Cloud::ApiHub::V1::LintingService::Rest::ServiceStub.stub :transcode_lint_spec_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, lint_spec_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::LintingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::LintingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.lint_spec({ name: name }) do |_result, response|
+        c.lint_spec({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lint_spec name: name do |_result, response|
+        c.lint_spec name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lint_spec ::Google::Cloud::ApiHub::V1::LintSpecRequest.new(name: name) do |_result, response|
+        c.lint_spec ::Google::Cloud::ApiHub::V1::LintSpecRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lint_spec({ name: name }, call_options) do |_result, response|
+        c.lint_spec({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lint_spec(::Google::Cloud::ApiHub::V1::LintSpecRequest.new(name: name), call_options) do |_result, response|
+        c.lint_spec(::Google::Cloud::ApiHub::V1::LintSpecRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -86,40 +86,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_metadata_store_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_metadata_store({ parent: parent, metadata_store: metadata_store, metadata_store_id: metadata_store_id }) do |response, operation|
+      c.create_metadata_store({ parent: parent, metadata_store: metadata_store, metadata_store_id: metadata_store_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_metadata_store parent: parent, metadata_store: metadata_store, metadata_store_id: metadata_store_id do |response, operation|
+      c.create_metadata_store parent: parent, metadata_store: metadata_store, metadata_store_id: metadata_store_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_metadata_store ::Google::Cloud::AIPlatform::V1::CreateMetadataStoreRequest.new(parent: parent, metadata_store: metadata_store, metadata_store_id: metadata_store_id) do |response, operation|
+      c.create_metadata_store ::Google::Cloud::AIPlatform::V1::CreateMetadataStoreRequest.new(parent: parent, metadata_store: metadata_store, metadata_store_id: metadata_store_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_metadata_store({ parent: parent, metadata_store: metadata_store, metadata_store_id: metadata_store_id }, grpc_options) do |response, operation|
+      c.create_metadata_store({ parent: parent, metadata_store: metadata_store, metadata_store_id: metadata_store_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_metadata_store(::Google::Cloud::AIPlatform::V1::CreateMetadataStoreRequest.new(parent: parent, metadata_store: metadata_store, metadata_store_id: metadata_store_id), grpc_options) do |response, operation|
+      c.create_metadata_store(::Google::Cloud::AIPlatform::V1::CreateMetadataStoreRequest.new(parent: parent, metadata_store: metadata_store, metadata_store_id: metadata_store_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_metadata_store_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_metadata_store({ name: name }) do |response, operation|
+      c.get_metadata_store({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_metadata_store name: name do |response, operation|
+      c.get_metadata_store name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_metadata_store ::Google::Cloud::AIPlatform::V1::GetMetadataStoreRequest.new(name: name) do |response, operation|
+      c.get_metadata_store ::Google::Cloud::AIPlatform::V1::GetMetadataStoreRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_metadata_store({ name: name }, grpc_options) do |response, operation|
+      c.get_metadata_store({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_metadata_store(::Google::Cloud::AIPlatform::V1::GetMetadataStoreRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_metadata_store(::Google::Cloud::AIPlatform::V1::GetMetadataStoreRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,40 +211,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_metadata_stores_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_metadata_stores({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_metadata_stores({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_metadata_stores parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_metadata_stores parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_metadata_stores ::Google::Cloud::AIPlatform::V1::ListMetadataStoresRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_metadata_stores ::Google::Cloud::AIPlatform::V1::ListMetadataStoresRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_metadata_stores({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_metadata_stores({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_metadata_stores(::Google::Cloud::AIPlatform::V1::ListMetadataStoresRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_metadata_stores(::Google::Cloud::AIPlatform::V1::ListMetadataStoresRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -276,40 +276,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_metadata_store_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_metadata_store({ name: name, force: force }) do |response, operation|
+      c.delete_metadata_store({ name: name, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_metadata_store name: name, force: force do |response, operation|
+      c.delete_metadata_store name: name, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_metadata_store ::Google::Cloud::AIPlatform::V1::DeleteMetadataStoreRequest.new(name: name, force: force) do |response, operation|
+      c.delete_metadata_store ::Google::Cloud::AIPlatform::V1::DeleteMetadataStoreRequest.new(name: name, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_metadata_store({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_metadata_store({ name: name, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_metadata_store(::Google::Cloud::AIPlatform::V1::DeleteMetadataStoreRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_metadata_store(::Google::Cloud::AIPlatform::V1::DeleteMetadataStoreRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -343,36 +343,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_artifact_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_artifact({ parent: parent, artifact: artifact, artifact_id: artifact_id }) do |response, operation|
+      c.create_artifact({ parent: parent, artifact: artifact, artifact_id: artifact_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_artifact parent: parent, artifact: artifact, artifact_id: artifact_id do |response, operation|
+      c.create_artifact parent: parent, artifact: artifact, artifact_id: artifact_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_artifact ::Google::Cloud::AIPlatform::V1::CreateArtifactRequest.new(parent: parent, artifact: artifact, artifact_id: artifact_id) do |response, operation|
+      c.create_artifact ::Google::Cloud::AIPlatform::V1::CreateArtifactRequest.new(parent: parent, artifact: artifact, artifact_id: artifact_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_artifact({ parent: parent, artifact: artifact, artifact_id: artifact_id }, grpc_options) do |response, operation|
+      c.create_artifact({ parent: parent, artifact: artifact, artifact_id: artifact_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_artifact(::Google::Cloud::AIPlatform::V1::CreateArtifactRequest.new(parent: parent, artifact: artifact, artifact_id: artifact_id), grpc_options) do |response, operation|
+      c.create_artifact(::Google::Cloud::AIPlatform::V1::CreateArtifactRequest.new(parent: parent, artifact: artifact, artifact_id: artifact_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -401,36 +401,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_artifact_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_artifact({ name: name }) do |response, operation|
+      c.get_artifact({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_artifact name: name do |response, operation|
+      c.get_artifact name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_artifact ::Google::Cloud::AIPlatform::V1::GetArtifactRequest.new(name: name) do |response, operation|
+      c.get_artifact ::Google::Cloud::AIPlatform::V1::GetArtifactRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_artifact({ name: name }, grpc_options) do |response, operation|
+      c.get_artifact({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_artifact(::Google::Cloud::AIPlatform::V1::GetArtifactRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_artifact(::Google::Cloud::AIPlatform::V1::GetArtifactRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -467,40 +467,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_artifacts_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_artifacts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_artifacts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_artifacts ::Google::Cloud::AIPlatform::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_artifacts ::Google::Cloud::AIPlatform::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_artifacts(::Google::Cloud::AIPlatform::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_artifacts(::Google::Cloud::AIPlatform::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -534,36 +534,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_artifact_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_artifact({ artifact: artifact, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
+      c.update_artifact({ artifact: artifact, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_artifact artifact: artifact, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
+      c.update_artifact artifact: artifact, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_artifact ::Google::Cloud::AIPlatform::V1::UpdateArtifactRequest.new(artifact: artifact, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
+      c.update_artifact ::Google::Cloud::AIPlatform::V1::UpdateArtifactRequest.new(artifact: artifact, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_artifact({ artifact: artifact, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_artifact({ artifact: artifact, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_artifact(::Google::Cloud::AIPlatform::V1::UpdateArtifactRequest.new(artifact: artifact, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_artifact(::Google::Cloud::AIPlatform::V1::UpdateArtifactRequest.new(artifact: artifact, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -594,40 +594,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_artifact_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_artifact({ name: name, etag: etag }) do |response, operation|
+      c.delete_artifact({ name: name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_artifact name: name, etag: etag do |response, operation|
+      c.delete_artifact name: name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_artifact ::Google::Cloud::AIPlatform::V1::DeleteArtifactRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_artifact ::Google::Cloud::AIPlatform::V1::DeleteArtifactRequest.new(name: name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_artifact({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_artifact({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_artifact(::Google::Cloud::AIPlatform::V1::DeleteArtifactRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_artifact(::Google::Cloud::AIPlatform::V1::DeleteArtifactRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -661,40 +661,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, purge_artifacts_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.purge_artifacts({ parent: parent, filter: filter, force: force }) do |response, operation|
+      c.purge_artifacts({ parent: parent, filter: filter, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.purge_artifacts parent: parent, filter: filter, force: force do |response, operation|
+      c.purge_artifacts parent: parent, filter: filter, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.purge_artifacts ::Google::Cloud::AIPlatform::V1::PurgeArtifactsRequest.new(parent: parent, filter: filter, force: force) do |response, operation|
+      c.purge_artifacts ::Google::Cloud::AIPlatform::V1::PurgeArtifactsRequest.new(parent: parent, filter: filter, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.purge_artifacts({ parent: parent, filter: filter, force: force }, grpc_options) do |response, operation|
+      c.purge_artifacts({ parent: parent, filter: filter, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.purge_artifacts(::Google::Cloud::AIPlatform::V1::PurgeArtifactsRequest.new(parent: parent, filter: filter, force: force), grpc_options) do |response, operation|
+      c.purge_artifacts(::Google::Cloud::AIPlatform::V1::PurgeArtifactsRequest.new(parent: parent, filter: filter, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -728,36 +728,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_context_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_context({ parent: parent, context: context, context_id: context_id }) do |response, operation|
+      c.create_context({ parent: parent, context: context, context_id: context_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_context parent: parent, context: context, context_id: context_id do |response, operation|
+      c.create_context parent: parent, context: context, context_id: context_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_context ::Google::Cloud::AIPlatform::V1::CreateContextRequest.new(parent: parent, context: context, context_id: context_id) do |response, operation|
+      c.create_context ::Google::Cloud::AIPlatform::V1::CreateContextRequest.new(parent: parent, context: context, context_id: context_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_context({ parent: parent, context: context, context_id: context_id }, grpc_options) do |response, operation|
+      c.create_context({ parent: parent, context: context, context_id: context_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_context(::Google::Cloud::AIPlatform::V1::CreateContextRequest.new(parent: parent, context: context, context_id: context_id), grpc_options) do |response, operation|
+      c.create_context(::Google::Cloud::AIPlatform::V1::CreateContextRequest.new(parent: parent, context: context, context_id: context_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -786,36 +786,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_context_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_context({ name: name }) do |response, operation|
+      c.get_context({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_context name: name do |response, operation|
+      c.get_context name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_context ::Google::Cloud::AIPlatform::V1::GetContextRequest.new(name: name) do |response, operation|
+      c.get_context ::Google::Cloud::AIPlatform::V1::GetContextRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_context({ name: name }, grpc_options) do |response, operation|
+      c.get_context({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_context(::Google::Cloud::AIPlatform::V1::GetContextRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_context(::Google::Cloud::AIPlatform::V1::GetContextRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -852,40 +852,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_contexts_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_contexts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_contexts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_contexts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_contexts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_contexts ::Google::Cloud::AIPlatform::V1::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_contexts ::Google::Cloud::AIPlatform::V1::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_contexts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_contexts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_contexts(::Google::Cloud::AIPlatform::V1::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_contexts(::Google::Cloud::AIPlatform::V1::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -919,36 +919,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_context_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_context({ context: context, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
+      c.update_context({ context: context, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_context context: context, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
+      c.update_context context: context, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_context ::Google::Cloud::AIPlatform::V1::UpdateContextRequest.new(context: context, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
+      c.update_context ::Google::Cloud::AIPlatform::V1::UpdateContextRequest.new(context: context, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_context({ context: context, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_context({ context: context, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_context(::Google::Cloud::AIPlatform::V1::UpdateContextRequest.new(context: context, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_context(::Google::Cloud::AIPlatform::V1::UpdateContextRequest.new(context: context, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -981,40 +981,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_context_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_context({ name: name, force: force, etag: etag }) do |response, operation|
+      c.delete_context({ name: name, force: force, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_context name: name, force: force, etag: etag do |response, operation|
+      c.delete_context name: name, force: force, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_context ::Google::Cloud::AIPlatform::V1::DeleteContextRequest.new(name: name, force: force, etag: etag) do |response, operation|
+      c.delete_context ::Google::Cloud::AIPlatform::V1::DeleteContextRequest.new(name: name, force: force, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_context({ name: name, force: force, etag: etag }, grpc_options) do |response, operation|
+      c.delete_context({ name: name, force: force, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_context(::Google::Cloud::AIPlatform::V1::DeleteContextRequest.new(name: name, force: force, etag: etag), grpc_options) do |response, operation|
+      c.delete_context(::Google::Cloud::AIPlatform::V1::DeleteContextRequest.new(name: name, force: force, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1048,40 +1048,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, purge_contexts_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.purge_contexts({ parent: parent, filter: filter, force: force }) do |response, operation|
+      c.purge_contexts({ parent: parent, filter: filter, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.purge_contexts parent: parent, filter: filter, force: force do |response, operation|
+      c.purge_contexts parent: parent, filter: filter, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.purge_contexts ::Google::Cloud::AIPlatform::V1::PurgeContextsRequest.new(parent: parent, filter: filter, force: force) do |response, operation|
+      c.purge_contexts ::Google::Cloud::AIPlatform::V1::PurgeContextsRequest.new(parent: parent, filter: filter, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.purge_contexts({ parent: parent, filter: filter, force: force }, grpc_options) do |response, operation|
+      c.purge_contexts({ parent: parent, filter: filter, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.purge_contexts(::Google::Cloud::AIPlatform::V1::PurgeContextsRequest.new(parent: parent, filter: filter, force: force), grpc_options) do |response, operation|
+      c.purge_contexts(::Google::Cloud::AIPlatform::V1::PurgeContextsRequest.new(parent: parent, filter: filter, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1115,36 +1115,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, add_context_artifacts_and_executions_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.add_context_artifacts_and_executions({ context: context, artifacts: artifacts, executions: executions }) do |response, operation|
+      c.add_context_artifacts_and_executions({ context: context, artifacts: artifacts, executions: executions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.add_context_artifacts_and_executions context: context, artifacts: artifacts, executions: executions do |response, operation|
+      c.add_context_artifacts_and_executions context: context, artifacts: artifacts, executions: executions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.add_context_artifacts_and_executions ::Google::Cloud::AIPlatform::V1::AddContextArtifactsAndExecutionsRequest.new(context: context, artifacts: artifacts, executions: executions) do |response, operation|
+      c.add_context_artifacts_and_executions ::Google::Cloud::AIPlatform::V1::AddContextArtifactsAndExecutionsRequest.new(context: context, artifacts: artifacts, executions: executions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.add_context_artifacts_and_executions({ context: context, artifacts: artifacts, executions: executions }, grpc_options) do |response, operation|
+      c.add_context_artifacts_and_executions({ context: context, artifacts: artifacts, executions: executions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.add_context_artifacts_and_executions(::Google::Cloud::AIPlatform::V1::AddContextArtifactsAndExecutionsRequest.new(context: context, artifacts: artifacts, executions: executions), grpc_options) do |response, operation|
+      c.add_context_artifacts_and_executions(::Google::Cloud::AIPlatform::V1::AddContextArtifactsAndExecutionsRequest.new(context: context, artifacts: artifacts, executions: executions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1175,36 +1175,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, add_context_children_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.add_context_children({ context: context, child_contexts: child_contexts }) do |response, operation|
+      c.add_context_children({ context: context, child_contexts: child_contexts }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.add_context_children context: context, child_contexts: child_contexts do |response, operation|
+      c.add_context_children context: context, child_contexts: child_contexts do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.add_context_children ::Google::Cloud::AIPlatform::V1::AddContextChildrenRequest.new(context: context, child_contexts: child_contexts) do |response, operation|
+      c.add_context_children ::Google::Cloud::AIPlatform::V1::AddContextChildrenRequest.new(context: context, child_contexts: child_contexts) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.add_context_children({ context: context, child_contexts: child_contexts }, grpc_options) do |response, operation|
+      c.add_context_children({ context: context, child_contexts: child_contexts }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.add_context_children(::Google::Cloud::AIPlatform::V1::AddContextChildrenRequest.new(context: context, child_contexts: child_contexts), grpc_options) do |response, operation|
+      c.add_context_children(::Google::Cloud::AIPlatform::V1::AddContextChildrenRequest.new(context: context, child_contexts: child_contexts), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1235,36 +1235,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, remove_context_children_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.remove_context_children({ context: context, child_contexts: child_contexts }) do |response, operation|
+      c.remove_context_children({ context: context, child_contexts: child_contexts }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.remove_context_children context: context, child_contexts: child_contexts do |response, operation|
+      c.remove_context_children context: context, child_contexts: child_contexts do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.remove_context_children ::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest.new(context: context, child_contexts: child_contexts) do |response, operation|
+      c.remove_context_children ::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest.new(context: context, child_contexts: child_contexts) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.remove_context_children({ context: context, child_contexts: child_contexts }, grpc_options) do |response, operation|
+      c.remove_context_children({ context: context, child_contexts: child_contexts }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.remove_context_children(::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest.new(context: context, child_contexts: child_contexts), grpc_options) do |response, operation|
+      c.remove_context_children(::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest.new(context: context, child_contexts: child_contexts), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1293,36 +1293,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, query_context_lineage_subgraph_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_context_lineage_subgraph({ context: context }) do |response, operation|
+      c.query_context_lineage_subgraph({ context: context }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_context_lineage_subgraph context: context do |response, operation|
+      c.query_context_lineage_subgraph context: context do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_context_lineage_subgraph ::Google::Cloud::AIPlatform::V1::QueryContextLineageSubgraphRequest.new(context: context) do |response, operation|
+      c.query_context_lineage_subgraph ::Google::Cloud::AIPlatform::V1::QueryContextLineageSubgraphRequest.new(context: context) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_context_lineage_subgraph({ context: context }, grpc_options) do |response, operation|
+      c.query_context_lineage_subgraph({ context: context }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_context_lineage_subgraph(::Google::Cloud::AIPlatform::V1::QueryContextLineageSubgraphRequest.new(context: context), grpc_options) do |response, operation|
+      c.query_context_lineage_subgraph(::Google::Cloud::AIPlatform::V1::QueryContextLineageSubgraphRequest.new(context: context), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1355,36 +1355,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_execution_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_execution({ parent: parent, execution: execution, execution_id: execution_id }) do |response, operation|
+      c.create_execution({ parent: parent, execution: execution, execution_id: execution_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_execution parent: parent, execution: execution, execution_id: execution_id do |response, operation|
+      c.create_execution parent: parent, execution: execution, execution_id: execution_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_execution ::Google::Cloud::AIPlatform::V1::CreateExecutionRequest.new(parent: parent, execution: execution, execution_id: execution_id) do |response, operation|
+      c.create_execution ::Google::Cloud::AIPlatform::V1::CreateExecutionRequest.new(parent: parent, execution: execution, execution_id: execution_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_execution({ parent: parent, execution: execution, execution_id: execution_id }, grpc_options) do |response, operation|
+      c.create_execution({ parent: parent, execution: execution, execution_id: execution_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_execution(::Google::Cloud::AIPlatform::V1::CreateExecutionRequest.new(parent: parent, execution: execution, execution_id: execution_id), grpc_options) do |response, operation|
+      c.create_execution(::Google::Cloud::AIPlatform::V1::CreateExecutionRequest.new(parent: parent, execution: execution, execution_id: execution_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1413,36 +1413,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_execution_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_execution({ name: name }) do |response, operation|
+      c.get_execution({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_execution name: name do |response, operation|
+      c.get_execution name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_execution ::Google::Cloud::AIPlatform::V1::GetExecutionRequest.new(name: name) do |response, operation|
+      c.get_execution ::Google::Cloud::AIPlatform::V1::GetExecutionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_execution({ name: name }, grpc_options) do |response, operation|
+      c.get_execution({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_execution(::Google::Cloud::AIPlatform::V1::GetExecutionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_execution(::Google::Cloud::AIPlatform::V1::GetExecutionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1479,40 +1479,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_executions_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_executions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_executions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_executions ::Google::Cloud::AIPlatform::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_executions ::Google::Cloud::AIPlatform::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_executions(::Google::Cloud::AIPlatform::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_executions(::Google::Cloud::AIPlatform::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1546,36 +1546,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_execution_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_execution({ execution: execution, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
+      c.update_execution({ execution: execution, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_execution execution: execution, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
+      c.update_execution execution: execution, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_execution ::Google::Cloud::AIPlatform::V1::UpdateExecutionRequest.new(execution: execution, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
+      c.update_execution ::Google::Cloud::AIPlatform::V1::UpdateExecutionRequest.new(execution: execution, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_execution({ execution: execution, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_execution({ execution: execution, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_execution(::Google::Cloud::AIPlatform::V1::UpdateExecutionRequest.new(execution: execution, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_execution(::Google::Cloud::AIPlatform::V1::UpdateExecutionRequest.new(execution: execution, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1606,40 +1606,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_execution_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_execution({ name: name, etag: etag }) do |response, operation|
+      c.delete_execution({ name: name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_execution name: name, etag: etag do |response, operation|
+      c.delete_execution name: name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_execution ::Google::Cloud::AIPlatform::V1::DeleteExecutionRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_execution ::Google::Cloud::AIPlatform::V1::DeleteExecutionRequest.new(name: name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_execution({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_execution({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_execution(::Google::Cloud::AIPlatform::V1::DeleteExecutionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_execution(::Google::Cloud::AIPlatform::V1::DeleteExecutionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1673,40 +1673,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, purge_executions_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.purge_executions({ parent: parent, filter: filter, force: force }) do |response, operation|
+      c.purge_executions({ parent: parent, filter: filter, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.purge_executions parent: parent, filter: filter, force: force do |response, operation|
+      c.purge_executions parent: parent, filter: filter, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.purge_executions ::Google::Cloud::AIPlatform::V1::PurgeExecutionsRequest.new(parent: parent, filter: filter, force: force) do |response, operation|
+      c.purge_executions ::Google::Cloud::AIPlatform::V1::PurgeExecutionsRequest.new(parent: parent, filter: filter, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.purge_executions({ parent: parent, filter: filter, force: force }, grpc_options) do |response, operation|
+      c.purge_executions({ parent: parent, filter: filter, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.purge_executions(::Google::Cloud::AIPlatform::V1::PurgeExecutionsRequest.new(parent: parent, filter: filter, force: force), grpc_options) do |response, operation|
+      c.purge_executions(::Google::Cloud::AIPlatform::V1::PurgeExecutionsRequest.new(parent: parent, filter: filter, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1738,36 +1738,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, add_execution_events_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.add_execution_events({ execution: execution, events: events }) do |response, operation|
+      c.add_execution_events({ execution: execution, events: events }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.add_execution_events execution: execution, events: events do |response, operation|
+      c.add_execution_events execution: execution, events: events do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.add_execution_events ::Google::Cloud::AIPlatform::V1::AddExecutionEventsRequest.new(execution: execution, events: events) do |response, operation|
+      c.add_execution_events ::Google::Cloud::AIPlatform::V1::AddExecutionEventsRequest.new(execution: execution, events: events) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.add_execution_events({ execution: execution, events: events }, grpc_options) do |response, operation|
+      c.add_execution_events({ execution: execution, events: events }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.add_execution_events(::Google::Cloud::AIPlatform::V1::AddExecutionEventsRequest.new(execution: execution, events: events), grpc_options) do |response, operation|
+      c.add_execution_events(::Google::Cloud::AIPlatform::V1::AddExecutionEventsRequest.new(execution: execution, events: events), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1796,36 +1796,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, query_execution_inputs_and_outputs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_execution_inputs_and_outputs({ execution: execution }) do |response, operation|
+      c.query_execution_inputs_and_outputs({ execution: execution }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_execution_inputs_and_outputs execution: execution do |response, operation|
+      c.query_execution_inputs_and_outputs execution: execution do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_execution_inputs_and_outputs ::Google::Cloud::AIPlatform::V1::QueryExecutionInputsAndOutputsRequest.new(execution: execution) do |response, operation|
+      c.query_execution_inputs_and_outputs ::Google::Cloud::AIPlatform::V1::QueryExecutionInputsAndOutputsRequest.new(execution: execution) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_execution_inputs_and_outputs({ execution: execution }, grpc_options) do |response, operation|
+      c.query_execution_inputs_and_outputs({ execution: execution }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_execution_inputs_and_outputs(::Google::Cloud::AIPlatform::V1::QueryExecutionInputsAndOutputsRequest.new(execution: execution), grpc_options) do |response, operation|
+      c.query_execution_inputs_and_outputs(::Google::Cloud::AIPlatform::V1::QueryExecutionInputsAndOutputsRequest.new(execution: execution), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1858,36 +1858,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_metadata_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_metadata_schema({ parent: parent, metadata_schema: metadata_schema, metadata_schema_id: metadata_schema_id }) do |response, operation|
+      c.create_metadata_schema({ parent: parent, metadata_schema: metadata_schema, metadata_schema_id: metadata_schema_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_metadata_schema parent: parent, metadata_schema: metadata_schema, metadata_schema_id: metadata_schema_id do |response, operation|
+      c.create_metadata_schema parent: parent, metadata_schema: metadata_schema, metadata_schema_id: metadata_schema_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_metadata_schema ::Google::Cloud::AIPlatform::V1::CreateMetadataSchemaRequest.new(parent: parent, metadata_schema: metadata_schema, metadata_schema_id: metadata_schema_id) do |response, operation|
+      c.create_metadata_schema ::Google::Cloud::AIPlatform::V1::CreateMetadataSchemaRequest.new(parent: parent, metadata_schema: metadata_schema, metadata_schema_id: metadata_schema_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_metadata_schema({ parent: parent, metadata_schema: metadata_schema, metadata_schema_id: metadata_schema_id }, grpc_options) do |response, operation|
+      c.create_metadata_schema({ parent: parent, metadata_schema: metadata_schema, metadata_schema_id: metadata_schema_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_metadata_schema(::Google::Cloud::AIPlatform::V1::CreateMetadataSchemaRequest.new(parent: parent, metadata_schema: metadata_schema, metadata_schema_id: metadata_schema_id), grpc_options) do |response, operation|
+      c.create_metadata_schema(::Google::Cloud::AIPlatform::V1::CreateMetadataSchemaRequest.new(parent: parent, metadata_schema: metadata_schema, metadata_schema_id: metadata_schema_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1916,36 +1916,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_metadata_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_metadata_schema({ name: name }) do |response, operation|
+      c.get_metadata_schema({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_metadata_schema name: name do |response, operation|
+      c.get_metadata_schema name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_metadata_schema ::Google::Cloud::AIPlatform::V1::GetMetadataSchemaRequest.new(name: name) do |response, operation|
+      c.get_metadata_schema ::Google::Cloud::AIPlatform::V1::GetMetadataSchemaRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_metadata_schema({ name: name }, grpc_options) do |response, operation|
+      c.get_metadata_schema({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_metadata_schema(::Google::Cloud::AIPlatform::V1::GetMetadataSchemaRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_metadata_schema(::Google::Cloud::AIPlatform::V1::GetMetadataSchemaRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1980,40 +1980,40 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_metadata_schemas_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_metadata_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_metadata_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_metadata_schemas parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_metadata_schemas parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_metadata_schemas ::Google::Cloud::AIPlatform::V1::ListMetadataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_metadata_schemas ::Google::Cloud::AIPlatform::V1::ListMetadataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_metadata_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_metadata_schemas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_metadata_schemas(::Google::Cloud::AIPlatform::V1::ListMetadataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_metadata_schemas(::Google::Cloud::AIPlatform::V1::ListMetadataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2047,36 +2047,36 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, query_artifact_lineage_subgraph_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_artifact_lineage_subgraph({ artifact: artifact, max_hops: max_hops, filter: filter }) do |response, operation|
+      c.query_artifact_lineage_subgraph({ artifact: artifact, max_hops: max_hops, filter: filter }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_artifact_lineage_subgraph artifact: artifact, max_hops: max_hops, filter: filter do |response, operation|
+      c.query_artifact_lineage_subgraph artifact: artifact, max_hops: max_hops, filter: filter do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_artifact_lineage_subgraph ::Google::Cloud::AIPlatform::V1::QueryArtifactLineageSubgraphRequest.new(artifact: artifact, max_hops: max_hops, filter: filter) do |response, operation|
+      c.query_artifact_lineage_subgraph ::Google::Cloud::AIPlatform::V1::QueryArtifactLineageSubgraphRequest.new(artifact: artifact, max_hops: max_hops, filter: filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_artifact_lineage_subgraph({ artifact: artifact, max_hops: max_hops, filter: filter }, grpc_options) do |response, operation|
+      c.query_artifact_lineage_subgraph({ artifact: artifact, max_hops: max_hops, filter: filter }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_artifact_lineage_subgraph(::Google::Cloud::AIPlatform::V1::QueryArtifactLineageSubgraphRequest.new(artifact: artifact, max_hops: max_hops, filter: filter), grpc_options) do |response, operation|
+      c.query_artifact_lineage_subgraph(::Google::Cloud::AIPlatform::V1::QueryArtifactLineageSubgraphRequest.new(artifact: artifact, max_hops: max_hops, filter: filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

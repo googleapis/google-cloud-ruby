@@ -99,32 +99,32 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ClientTe
     ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ServiceStub.stub :transcode_create_persistent_resource_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_persistent_resource_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_persistent_resource({ parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id }) do |_result, response|
+        c.create_persistent_resource({ parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_persistent_resource parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id do |_result, response|
+        c.create_persistent_resource parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_persistent_resource ::Google::Cloud::AIPlatform::V1::CreatePersistentResourceRequest.new(parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id) do |_result, response|
+        c.create_persistent_resource ::Google::Cloud::AIPlatform::V1::CreatePersistentResourceRequest.new(parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_persistent_resource({ parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id }, call_options) do |_result, response|
+        c.create_persistent_resource({ parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_persistent_resource(::Google::Cloud::AIPlatform::V1::CreatePersistentResourceRequest.new(parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id), call_options) do |_result, response|
+        c.create_persistent_resource(::Google::Cloud::AIPlatform::V1::CreatePersistentResourceRequest.new(parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ClientTe
     ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ServiceStub.stub :transcode_get_persistent_resource_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_persistent_resource_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_persistent_resource({ name: name }) do |_result, response|
+        c.get_persistent_resource({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_persistent_resource name: name do |_result, response|
+        c.get_persistent_resource name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_persistent_resource ::Google::Cloud::AIPlatform::V1::GetPersistentResourceRequest.new(name: name) do |_result, response|
+        c.get_persistent_resource ::Google::Cloud::AIPlatform::V1::GetPersistentResourceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_persistent_resource({ name: name }, call_options) do |_result, response|
+        c.get_persistent_resource({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_persistent_resource(::Google::Cloud::AIPlatform::V1::GetPersistentResourceRequest.new(name: name), call_options) do |_result, response|
+        c.get_persistent_resource(::Google::Cloud::AIPlatform::V1::GetPersistentResourceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ClientTe
     ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ServiceStub.stub :transcode_list_persistent_resources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_persistent_resources_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_persistent_resources({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_persistent_resources({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_persistent_resources parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_persistent_resources parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_persistent_resources ::Google::Cloud::AIPlatform::V1::ListPersistentResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_persistent_resources ::Google::Cloud::AIPlatform::V1::ListPersistentResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_persistent_resources({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_persistent_resources({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_persistent_resources(::Google::Cloud::AIPlatform::V1::ListPersistentResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_persistent_resources(::Google::Cloud::AIPlatform::V1::ListPersistentResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ClientTe
     ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ServiceStub.stub :transcode_delete_persistent_resource_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_persistent_resource_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_persistent_resource({ name: name }) do |_result, response|
+        c.delete_persistent_resource({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_persistent_resource name: name do |_result, response|
+        c.delete_persistent_resource name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_persistent_resource ::Google::Cloud::AIPlatform::V1::DeletePersistentResourceRequest.new(name: name) do |_result, response|
+        c.delete_persistent_resource ::Google::Cloud::AIPlatform::V1::DeletePersistentResourceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_persistent_resource({ name: name }, call_options) do |_result, response|
+        c.delete_persistent_resource({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_persistent_resource(::Google::Cloud::AIPlatform::V1::DeletePersistentResourceRequest.new(name: name), call_options) do |_result, response|
+        c.delete_persistent_resource(::Google::Cloud::AIPlatform::V1::DeletePersistentResourceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ClientTe
     ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ServiceStub.stub :transcode_update_persistent_resource_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_persistent_resource_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_persistent_resource({ persistent_resource: persistent_resource, update_mask: update_mask }) do |_result, response|
+        c.update_persistent_resource({ persistent_resource: persistent_resource, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_persistent_resource persistent_resource: persistent_resource, update_mask: update_mask do |_result, response|
+        c.update_persistent_resource persistent_resource: persistent_resource, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_persistent_resource ::Google::Cloud::AIPlatform::V1::UpdatePersistentResourceRequest.new(persistent_resource: persistent_resource, update_mask: update_mask) do |_result, response|
+        c.update_persistent_resource ::Google::Cloud::AIPlatform::V1::UpdatePersistentResourceRequest.new(persistent_resource: persistent_resource, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_persistent_resource({ persistent_resource: persistent_resource, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_persistent_resource({ persistent_resource: persistent_resource, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_persistent_resource(::Google::Cloud::AIPlatform::V1::UpdatePersistentResourceRequest.new(persistent_resource: persistent_resource, update_mask: update_mask), call_options) do |_result, response|
+        c.update_persistent_resource(::Google::Cloud::AIPlatform::V1::UpdatePersistentResourceRequest.new(persistent_resource: persistent_resource, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -372,32 +372,32 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ClientTe
     ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::ServiceStub.stub :transcode_reboot_persistent_resource_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reboot_persistent_resource_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reboot_persistent_resource({ name: name }) do |_result, response|
+        c.reboot_persistent_resource({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reboot_persistent_resource name: name do |_result, response|
+        c.reboot_persistent_resource name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reboot_persistent_resource ::Google::Cloud::AIPlatform::V1::RebootPersistentResourceRequest.new(name: name) do |_result, response|
+        c.reboot_persistent_resource ::Google::Cloud::AIPlatform::V1::RebootPersistentResourceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reboot_persistent_resource({ name: name }, call_options) do |_result, response|
+        c.reboot_persistent_resource({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reboot_persistent_resource(::Google::Cloud::AIPlatform::V1::RebootPersistentResourceRequest.new(name: name), call_options) do |_result, response|
+        c.reboot_persistent_resource(::Google::Cloud::AIPlatform::V1::RebootPersistentResourceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

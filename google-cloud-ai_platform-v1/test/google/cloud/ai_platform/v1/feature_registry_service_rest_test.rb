@@ -99,32 +99,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ClientTest 
     ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ServiceStub.stub :transcode_create_feature_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_feature_group_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_feature_group({ parent: parent, feature_group: feature_group, feature_group_id: feature_group_id }) do |_result, response|
+        c.create_feature_group({ parent: parent, feature_group: feature_group, feature_group_id: feature_group_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_feature_group parent: parent, feature_group: feature_group, feature_group_id: feature_group_id do |_result, response|
+        c.create_feature_group parent: parent, feature_group: feature_group, feature_group_id: feature_group_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_feature_group ::Google::Cloud::AIPlatform::V1::CreateFeatureGroupRequest.new(parent: parent, feature_group: feature_group, feature_group_id: feature_group_id) do |_result, response|
+        c.create_feature_group ::Google::Cloud::AIPlatform::V1::CreateFeatureGroupRequest.new(parent: parent, feature_group: feature_group, feature_group_id: feature_group_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_feature_group({ parent: parent, feature_group: feature_group, feature_group_id: feature_group_id }, call_options) do |_result, response|
+        c.create_feature_group({ parent: parent, feature_group: feature_group, feature_group_id: feature_group_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_feature_group(::Google::Cloud::AIPlatform::V1::CreateFeatureGroupRequest.new(parent: parent, feature_group: feature_group, feature_group_id: feature_group_id), call_options) do |_result, response|
+        c.create_feature_group(::Google::Cloud::AIPlatform::V1::CreateFeatureGroupRequest.new(parent: parent, feature_group: feature_group, feature_group_id: feature_group_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ClientTest 
     ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ServiceStub.stub :transcode_get_feature_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_feature_group_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_feature_group({ name: name }) do |_result, response|
+        c.get_feature_group({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_feature_group name: name do |_result, response|
+        c.get_feature_group name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_feature_group ::Google::Cloud::AIPlatform::V1::GetFeatureGroupRequest.new(name: name) do |_result, response|
+        c.get_feature_group ::Google::Cloud::AIPlatform::V1::GetFeatureGroupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_feature_group({ name: name }, call_options) do |_result, response|
+        c.get_feature_group({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_feature_group(::Google::Cloud::AIPlatform::V1::GetFeatureGroupRequest.new(name: name), call_options) do |_result, response|
+        c.get_feature_group(::Google::Cloud::AIPlatform::V1::GetFeatureGroupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ClientTest 
     ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ServiceStub.stub :transcode_list_feature_groups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_feature_groups_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_feature_groups({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
+        c.list_feature_groups({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_feature_groups parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
+        c.list_feature_groups parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_feature_groups ::Google::Cloud::AIPlatform::V1::ListFeatureGroupsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
+        c.list_feature_groups ::Google::Cloud::AIPlatform::V1::ListFeatureGroupsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_feature_groups({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
+        c.list_feature_groups({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_feature_groups(::Google::Cloud::AIPlatform::V1::ListFeatureGroupsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
+        c.list_feature_groups(::Google::Cloud::AIPlatform::V1::ListFeatureGroupsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ClientTest 
     ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ServiceStub.stub :transcode_update_feature_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_feature_group_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_feature_group({ feature_group: feature_group, update_mask: update_mask }) do |_result, response|
+        c.update_feature_group({ feature_group: feature_group, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_feature_group feature_group: feature_group, update_mask: update_mask do |_result, response|
+        c.update_feature_group feature_group: feature_group, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_feature_group ::Google::Cloud::AIPlatform::V1::UpdateFeatureGroupRequest.new(feature_group: feature_group, update_mask: update_mask) do |_result, response|
+        c.update_feature_group ::Google::Cloud::AIPlatform::V1::UpdateFeatureGroupRequest.new(feature_group: feature_group, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_feature_group({ feature_group: feature_group, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_feature_group({ feature_group: feature_group, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_feature_group(::Google::Cloud::AIPlatform::V1::UpdateFeatureGroupRequest.new(feature_group: feature_group, update_mask: update_mask), call_options) do |_result, response|
+        c.update_feature_group(::Google::Cloud::AIPlatform::V1::UpdateFeatureGroupRequest.new(feature_group: feature_group, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ClientTest 
     ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ServiceStub.stub :transcode_delete_feature_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_feature_group_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_feature_group({ name: name, force: force }) do |_result, response|
+        c.delete_feature_group({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_feature_group name: name, force: force do |_result, response|
+        c.delete_feature_group name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_feature_group ::Google::Cloud::AIPlatform::V1::DeleteFeatureGroupRequest.new(name: name, force: force) do |_result, response|
+        c.delete_feature_group ::Google::Cloud::AIPlatform::V1::DeleteFeatureGroupRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_feature_group({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_feature_group({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_feature_group(::Google::Cloud::AIPlatform::V1::DeleteFeatureGroupRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_feature_group(::Google::Cloud::AIPlatform::V1::DeleteFeatureGroupRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -377,32 +377,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ClientTest 
     ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ServiceStub.stub :transcode_create_feature_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_feature_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_feature({ parent: parent, feature: feature, feature_id: feature_id }) do |_result, response|
+        c.create_feature({ parent: parent, feature: feature, feature_id: feature_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_feature parent: parent, feature: feature, feature_id: feature_id do |_result, response|
+        c.create_feature parent: parent, feature: feature, feature_id: feature_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_feature ::Google::Cloud::AIPlatform::V1::CreateFeatureRequest.new(parent: parent, feature: feature, feature_id: feature_id) do |_result, response|
+        c.create_feature ::Google::Cloud::AIPlatform::V1::CreateFeatureRequest.new(parent: parent, feature: feature, feature_id: feature_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_feature({ parent: parent, feature: feature, feature_id: feature_id }, call_options) do |_result, response|
+        c.create_feature({ parent: parent, feature: feature, feature_id: feature_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_feature(::Google::Cloud::AIPlatform::V1::CreateFeatureRequest.new(parent: parent, feature: feature, feature_id: feature_id), call_options) do |_result, response|
+        c.create_feature(::Google::Cloud::AIPlatform::V1::CreateFeatureRequest.new(parent: parent, feature: feature, feature_id: feature_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -432,32 +432,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ClientTest 
     ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ServiceStub.stub :transcode_batch_create_features_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_create_features_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_create_features({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_create_features({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_create_features parent: parent, requests: requests do |_result, response|
+        c.batch_create_features parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_create_features ::Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_create_features ::Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_create_features({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_create_features({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_create_features(::Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_create_features(::Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ClientTest 
     ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ServiceStub.stub :transcode_get_feature_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_feature_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_feature({ name: name }) do |_result, response|
+        c.get_feature({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_feature name: name do |_result, response|
+        c.get_feature name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_feature ::Google::Cloud::AIPlatform::V1::GetFeatureRequest.new(name: name) do |_result, response|
+        c.get_feature ::Google::Cloud::AIPlatform::V1::GetFeatureRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_feature({ name: name }, call_options) do |_result, response|
+        c.get_feature({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_feature(::Google::Cloud::AIPlatform::V1::GetFeatureRequest.new(name: name), call_options) do |_result, response|
+        c.get_feature(::Google::Cloud::AIPlatform::V1::GetFeatureRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -546,32 +546,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ClientTest 
     ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ServiceStub.stub :transcode_list_features_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_features_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_features({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask, latest_stats_count: latest_stats_count }) do |_result, response|
+        c.list_features({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask, latest_stats_count: latest_stats_count }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_features parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask, latest_stats_count: latest_stats_count do |_result, response|
+        c.list_features parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask, latest_stats_count: latest_stats_count do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_features ::Google::Cloud::AIPlatform::V1::ListFeaturesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask, latest_stats_count: latest_stats_count) do |_result, response|
+        c.list_features ::Google::Cloud::AIPlatform::V1::ListFeaturesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask, latest_stats_count: latest_stats_count) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_features({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask, latest_stats_count: latest_stats_count }, call_options) do |_result, response|
+        c.list_features({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask, latest_stats_count: latest_stats_count }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_features(::Google::Cloud::AIPlatform::V1::ListFeaturesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask, latest_stats_count: latest_stats_count), call_options) do |_result, response|
+        c.list_features(::Google::Cloud::AIPlatform::V1::ListFeaturesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask, latest_stats_count: latest_stats_count), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -601,32 +601,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ClientTest 
     ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ServiceStub.stub :transcode_update_feature_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_feature_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_feature({ feature: feature, update_mask: update_mask }) do |_result, response|
+        c.update_feature({ feature: feature, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_feature feature: feature, update_mask: update_mask do |_result, response|
+        c.update_feature feature: feature, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_feature ::Google::Cloud::AIPlatform::V1::UpdateFeatureRequest.new(feature: feature, update_mask: update_mask) do |_result, response|
+        c.update_feature ::Google::Cloud::AIPlatform::V1::UpdateFeatureRequest.new(feature: feature, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_feature({ feature: feature, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_feature({ feature: feature, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_feature(::Google::Cloud::AIPlatform::V1::UpdateFeatureRequest.new(feature: feature, update_mask: update_mask), call_options) do |_result, response|
+        c.update_feature(::Google::Cloud::AIPlatform::V1::UpdateFeatureRequest.new(feature: feature, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -655,32 +655,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ClientTest 
     ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::ServiceStub.stub :transcode_delete_feature_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_feature_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_feature({ name: name }) do |_result, response|
+        c.delete_feature({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_feature name: name do |_result, response|
+        c.delete_feature name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_feature ::Google::Cloud::AIPlatform::V1::DeleteFeatureRequest.new(name: name) do |_result, response|
+        c.delete_feature ::Google::Cloud::AIPlatform::V1::DeleteFeatureRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_feature({ name: name }, call_options) do |_result, response|
+        c.delete_feature({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_feature(::Google::Cloud::AIPlatform::V1::DeleteFeatureRequest.new(name: name), call_options) do |_result, response|
+        c.delete_feature(::Google::Cloud::AIPlatform::V1::DeleteFeatureRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -84,36 +84,36 @@ class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_cached_content_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_cached_content({ parent: parent, cached_content: cached_content }) do |response, operation|
+      c.create_cached_content({ parent: parent, cached_content: cached_content }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_cached_content parent: parent, cached_content: cached_content do |response, operation|
+      c.create_cached_content parent: parent, cached_content: cached_content do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_cached_content ::Google::Cloud::AIPlatform::V1::CreateCachedContentRequest.new(parent: parent, cached_content: cached_content) do |response, operation|
+      c.create_cached_content ::Google::Cloud::AIPlatform::V1::CreateCachedContentRequest.new(parent: parent, cached_content: cached_content) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_cached_content({ parent: parent, cached_content: cached_content }, grpc_options) do |response, operation|
+      c.create_cached_content({ parent: parent, cached_content: cached_content }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_cached_content(::Google::Cloud::AIPlatform::V1::CreateCachedContentRequest.new(parent: parent, cached_content: cached_content), grpc_options) do |response, operation|
+      c.create_cached_content(::Google::Cloud::AIPlatform::V1::CreateCachedContentRequest.new(parent: parent, cached_content: cached_content), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_cached_content_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_cached_content({ name: name }) do |response, operation|
+      c.get_cached_content({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_cached_content name: name do |response, operation|
+      c.get_cached_content name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_cached_content ::Google::Cloud::AIPlatform::V1::GetCachedContentRequest.new(name: name) do |response, operation|
+      c.get_cached_content ::Google::Cloud::AIPlatform::V1::GetCachedContentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_cached_content({ name: name }, grpc_options) do |response, operation|
+      c.get_cached_content({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_cached_content(::Google::Cloud::AIPlatform::V1::GetCachedContentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_cached_content(::Google::Cloud::AIPlatform::V1::GetCachedContentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -202,36 +202,36 @@ class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_cached_content_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_cached_content({ cached_content: cached_content, update_mask: update_mask }) do |response, operation|
+      c.update_cached_content({ cached_content: cached_content, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_cached_content cached_content: cached_content, update_mask: update_mask do |response, operation|
+      c.update_cached_content cached_content: cached_content, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_cached_content ::Google::Cloud::AIPlatform::V1::UpdateCachedContentRequest.new(cached_content: cached_content, update_mask: update_mask) do |response, operation|
+      c.update_cached_content ::Google::Cloud::AIPlatform::V1::UpdateCachedContentRequest.new(cached_content: cached_content, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_cached_content({ cached_content: cached_content, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_cached_content({ cached_content: cached_content, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_cached_content(::Google::Cloud::AIPlatform::V1::UpdateCachedContentRequest.new(cached_content: cached_content, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_cached_content(::Google::Cloud::AIPlatform::V1::UpdateCachedContentRequest.new(cached_content: cached_content, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -260,36 +260,36 @@ class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_cached_content_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_cached_content({ name: name }) do |response, operation|
+      c.delete_cached_content({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_cached_content name: name do |response, operation|
+      c.delete_cached_content name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_cached_content ::Google::Cloud::AIPlatform::V1::DeleteCachedContentRequest.new(name: name) do |response, operation|
+      c.delete_cached_content ::Google::Cloud::AIPlatform::V1::DeleteCachedContentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_cached_content({ name: name }, grpc_options) do |response, operation|
+      c.delete_cached_content({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_cached_content(::Google::Cloud::AIPlatform::V1::DeleteCachedContentRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_cached_content(::Google::Cloud::AIPlatform::V1::DeleteCachedContentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -322,40 +322,40 @@ class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_cached_contents_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_cached_contents({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_cached_contents({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_cached_contents parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_cached_contents parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_cached_contents ::Google::Cloud::AIPlatform::V1::ListCachedContentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_cached_contents ::Google::Cloud::AIPlatform::V1::ListCachedContentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_cached_contents({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_cached_contents({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_cached_contents(::Google::Cloud::AIPlatform::V1::ListCachedContentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_cached_contents(::Google::Cloud::AIPlatform::V1::ListCachedContentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

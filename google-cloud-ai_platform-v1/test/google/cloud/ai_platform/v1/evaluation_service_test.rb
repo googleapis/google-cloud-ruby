@@ -85,36 +85,36 @@ class ::Google::Cloud::AIPlatform::V1::EvaluationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, evaluate_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::EvaluationService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::EvaluationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.evaluate_instances({ exact_match_input: exact_match_input, location: location }) do |response, operation|
+      c.evaluate_instances({ exact_match_input: exact_match_input, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.evaluate_instances exact_match_input: exact_match_input, location: location do |response, operation|
+      c.evaluate_instances exact_match_input: exact_match_input, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.evaluate_instances ::Google::Cloud::AIPlatform::V1::EvaluateInstancesRequest.new(exact_match_input: exact_match_input, location: location) do |response, operation|
+      c.evaluate_instances ::Google::Cloud::AIPlatform::V1::EvaluateInstancesRequest.new(exact_match_input: exact_match_input, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.evaluate_instances({ exact_match_input: exact_match_input, location: location }, grpc_options) do |response, operation|
+      c.evaluate_instances({ exact_match_input: exact_match_input, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.evaluate_instances(::Google::Cloud::AIPlatform::V1::EvaluateInstancesRequest.new(exact_match_input: exact_match_input, location: location), grpc_options) do |response, operation|
+      c.evaluate_instances(::Google::Cloud::AIPlatform::V1::EvaluateInstancesRequest.new(exact_match_input: exact_match_input, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

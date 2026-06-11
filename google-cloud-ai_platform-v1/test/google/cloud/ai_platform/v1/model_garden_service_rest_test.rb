@@ -101,32 +101,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelGardenService::Rest::ClientTest < Mi
     ::Google::Cloud::AIPlatform::V1::ModelGardenService::Rest::ServiceStub.stub :transcode_get_publisher_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_publisher_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_publisher_model({ name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token }) do |_result, response|
+        c.get_publisher_model({ name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_publisher_model name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token do |_result, response|
+        c.get_publisher_model name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_publisher_model ::Google::Cloud::AIPlatform::V1::GetPublisherModelRequest.new(name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token) do |_result, response|
+        c.get_publisher_model ::Google::Cloud::AIPlatform::V1::GetPublisherModelRequest.new(name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_publisher_model({ name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token }, call_options) do |_result, response|
+        c.get_publisher_model({ name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_publisher_model(::Google::Cloud::AIPlatform::V1::GetPublisherModelRequest.new(name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token), call_options) do |_result, response|
+        c.get_publisher_model(::Google::Cloud::AIPlatform::V1::GetPublisherModelRequest.new(name: name, language_code: language_code, view: view, is_hugging_face_model: is_hugging_face_model, hugging_face_token: hugging_face_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -159,32 +159,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelGardenService::Rest::ClientTest < Mi
     ::Google::Cloud::AIPlatform::V1::ModelGardenService::Rest::ServiceStub.stub :transcode_deploy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, deploy_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.deploy({ publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config }) do |_result, response|
+        c.deploy({ publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.deploy publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config do |_result, response|
+        c.deploy publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.deploy ::Google::Cloud::AIPlatform::V1::DeployRequest.new(publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config) do |_result, response|
+        c.deploy ::Google::Cloud::AIPlatform::V1::DeployRequest.new(publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.deploy({ publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config }, call_options) do |_result, response|
+        c.deploy({ publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.deploy(::Google::Cloud::AIPlatform::V1::DeployRequest.new(publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config), call_options) do |_result, response|
+        c.deploy(::Google::Cloud::AIPlatform::V1::DeployRequest.new(publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

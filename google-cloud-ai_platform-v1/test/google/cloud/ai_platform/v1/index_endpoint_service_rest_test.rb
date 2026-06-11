@@ -98,32 +98,32 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ServiceStub.stub :transcode_create_index_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_index_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_index_endpoint({ parent: parent, index_endpoint: index_endpoint }) do |_result, response|
+        c.create_index_endpoint({ parent: parent, index_endpoint: index_endpoint }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_index_endpoint parent: parent, index_endpoint: index_endpoint do |_result, response|
+        c.create_index_endpoint parent: parent, index_endpoint: index_endpoint do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_index_endpoint ::Google::Cloud::AIPlatform::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint: index_endpoint) do |_result, response|
+        c.create_index_endpoint ::Google::Cloud::AIPlatform::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint: index_endpoint) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_index_endpoint({ parent: parent, index_endpoint: index_endpoint }, call_options) do |_result, response|
+        c.create_index_endpoint({ parent: parent, index_endpoint: index_endpoint }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_index_endpoint(::Google::Cloud::AIPlatform::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint: index_endpoint), call_options) do |_result, response|
+        c.create_index_endpoint(::Google::Cloud::AIPlatform::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint: index_endpoint), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ServiceStub.stub :transcode_get_index_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_index_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_index_endpoint({ name: name }) do |_result, response|
+        c.get_index_endpoint({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_index_endpoint name: name do |_result, response|
+        c.get_index_endpoint name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_index_endpoint ::Google::Cloud::AIPlatform::V1::GetIndexEndpointRequest.new(name: name) do |_result, response|
+        c.get_index_endpoint ::Google::Cloud::AIPlatform::V1::GetIndexEndpointRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_index_endpoint({ name: name }, call_options) do |_result, response|
+        c.get_index_endpoint({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_index_endpoint(::Google::Cloud::AIPlatform::V1::GetIndexEndpointRequest.new(name: name), call_options) do |_result, response|
+        c.get_index_endpoint(::Google::Cloud::AIPlatform::V1::GetIndexEndpointRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ServiceStub.stub :transcode_list_index_endpoints_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_index_endpoints_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_index_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
+        c.list_index_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_index_endpoints parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
+        c.list_index_endpoints parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_index_endpoints ::Google::Cloud::AIPlatform::V1::ListIndexEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
+        c.list_index_endpoints ::Google::Cloud::AIPlatform::V1::ListIndexEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_index_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
+        c.list_index_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_index_endpoints(::Google::Cloud::AIPlatform::V1::ListIndexEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
+        c.list_index_endpoints(::Google::Cloud::AIPlatform::V1::ListIndexEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ServiceStub.stub :transcode_update_index_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_index_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }) do |_result, response|
+        c.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_index_endpoint index_endpoint: index_endpoint, update_mask: update_mask do |_result, response|
+        c.update_index_endpoint index_endpoint: index_endpoint, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_index_endpoint ::Google::Cloud::AIPlatform::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask) do |_result, response|
+        c.update_index_endpoint ::Google::Cloud::AIPlatform::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_index_endpoint(::Google::Cloud::AIPlatform::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask), call_options) do |_result, response|
+        c.update_index_endpoint(::Google::Cloud::AIPlatform::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ServiceStub.stub :transcode_delete_index_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_index_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_index_endpoint({ name: name }) do |_result, response|
+        c.delete_index_endpoint({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_index_endpoint name: name do |_result, response|
+        c.delete_index_endpoint name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_index_endpoint ::Google::Cloud::AIPlatform::V1::DeleteIndexEndpointRequest.new(name: name) do |_result, response|
+        c.delete_index_endpoint ::Google::Cloud::AIPlatform::V1::DeleteIndexEndpointRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_index_endpoint({ name: name }, call_options) do |_result, response|
+        c.delete_index_endpoint({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_index_endpoint(::Google::Cloud::AIPlatform::V1::DeleteIndexEndpointRequest.new(name: name), call_options) do |_result, response|
+        c.delete_index_endpoint(::Google::Cloud::AIPlatform::V1::DeleteIndexEndpointRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ServiceStub.stub :transcode_deploy_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, deploy_index_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |_result, response|
+        c.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.deploy_index index_endpoint: index_endpoint, deployed_index: deployed_index do |_result, response|
+        c.deploy_index index_endpoint: index_endpoint, deployed_index: deployed_index do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.deploy_index ::Google::Cloud::AIPlatform::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |_result, response|
+        c.deploy_index ::Google::Cloud::AIPlatform::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, call_options) do |_result, response|
+        c.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.deploy_index(::Google::Cloud::AIPlatform::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), call_options) do |_result, response|
+        c.deploy_index(::Google::Cloud::AIPlatform::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -429,32 +429,32 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ServiceStub.stub :transcode_undeploy_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undeploy_index_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undeploy_index({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id }) do |_result, response|
+        c.undeploy_index({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undeploy_index index_endpoint: index_endpoint, deployed_index_id: deployed_index_id do |_result, response|
+        c.undeploy_index index_endpoint: index_endpoint, deployed_index_id: deployed_index_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undeploy_index ::Google::Cloud::AIPlatform::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id) do |_result, response|
+        c.undeploy_index ::Google::Cloud::AIPlatform::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undeploy_index({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id }, call_options) do |_result, response|
+        c.undeploy_index({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undeploy_index(::Google::Cloud::AIPlatform::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id), call_options) do |_result, response|
+        c.undeploy_index(::Google::Cloud::AIPlatform::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -484,32 +484,32 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::ServiceStub.stub :transcode_mutate_deployed_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, mutate_deployed_index_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.mutate_deployed_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |_result, response|
+        c.mutate_deployed_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.mutate_deployed_index index_endpoint: index_endpoint, deployed_index: deployed_index do |_result, response|
+        c.mutate_deployed_index index_endpoint: index_endpoint, deployed_index: deployed_index do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.mutate_deployed_index ::Google::Cloud::AIPlatform::V1::MutateDeployedIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |_result, response|
+        c.mutate_deployed_index ::Google::Cloud::AIPlatform::V1::MutateDeployedIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.mutate_deployed_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, call_options) do |_result, response|
+        c.mutate_deployed_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.mutate_deployed_index(::Google::Cloud::AIPlatform::V1::MutateDeployedIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), call_options) do |_result, response|
+        c.mutate_deployed_index(::Google::Cloud::AIPlatform::V1::MutateDeployedIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

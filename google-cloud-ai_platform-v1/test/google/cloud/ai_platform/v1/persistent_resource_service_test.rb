@@ -86,40 +86,40 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, create_persistent_resource_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_persistent_resource({ parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id }) do |response, operation|
+      c.create_persistent_resource({ parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_persistent_resource parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id do |response, operation|
+      c.create_persistent_resource parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_persistent_resource ::Google::Cloud::AIPlatform::V1::CreatePersistentResourceRequest.new(parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id) do |response, operation|
+      c.create_persistent_resource ::Google::Cloud::AIPlatform::V1::CreatePersistentResourceRequest.new(parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_persistent_resource({ parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id }, grpc_options) do |response, operation|
+      c.create_persistent_resource({ parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_persistent_resource(::Google::Cloud::AIPlatform::V1::CreatePersistentResourceRequest.new(parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id), grpc_options) do |response, operation|
+      c.create_persistent_resource(::Google::Cloud::AIPlatform::V1::CreatePersistentResourceRequest.new(parent: parent, persistent_resource: persistent_resource, persistent_resource_id: persistent_resource_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, get_persistent_resource_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_persistent_resource({ name: name }) do |response, operation|
+      c.get_persistent_resource({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_persistent_resource name: name do |response, operation|
+      c.get_persistent_resource name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_persistent_resource ::Google::Cloud::AIPlatform::V1::GetPersistentResourceRequest.new(name: name) do |response, operation|
+      c.get_persistent_resource ::Google::Cloud::AIPlatform::V1::GetPersistentResourceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_persistent_resource({ name: name }, grpc_options) do |response, operation|
+      c.get_persistent_resource({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_persistent_resource(::Google::Cloud::AIPlatform::V1::GetPersistentResourceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_persistent_resource(::Google::Cloud::AIPlatform::V1::GetPersistentResourceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,40 +211,40 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, list_persistent_resources_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_persistent_resources({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_persistent_resources({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_persistent_resources parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_persistent_resources parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_persistent_resources ::Google::Cloud::AIPlatform::V1::ListPersistentResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_persistent_resources ::Google::Cloud::AIPlatform::V1::ListPersistentResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_persistent_resources({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_persistent_resources({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_persistent_resources(::Google::Cloud::AIPlatform::V1::ListPersistentResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_persistent_resources(::Google::Cloud::AIPlatform::V1::ListPersistentResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -274,40 +274,40 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, delete_persistent_resource_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_persistent_resource({ name: name }) do |response, operation|
+      c.delete_persistent_resource({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_persistent_resource name: name do |response, operation|
+      c.delete_persistent_resource name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_persistent_resource ::Google::Cloud::AIPlatform::V1::DeletePersistentResourceRequest.new(name: name) do |response, operation|
+      c.delete_persistent_resource ::Google::Cloud::AIPlatform::V1::DeletePersistentResourceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_persistent_resource({ name: name }, grpc_options) do |response, operation|
+      c.delete_persistent_resource({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_persistent_resource(::Google::Cloud::AIPlatform::V1::DeletePersistentResourceRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_persistent_resource(::Google::Cloud::AIPlatform::V1::DeletePersistentResourceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -339,40 +339,40 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, update_persistent_resource_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_persistent_resource({ persistent_resource: persistent_resource, update_mask: update_mask }) do |response, operation|
+      c.update_persistent_resource({ persistent_resource: persistent_resource, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_persistent_resource persistent_resource: persistent_resource, update_mask: update_mask do |response, operation|
+      c.update_persistent_resource persistent_resource: persistent_resource, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_persistent_resource ::Google::Cloud::AIPlatform::V1::UpdatePersistentResourceRequest.new(persistent_resource: persistent_resource, update_mask: update_mask) do |response, operation|
+      c.update_persistent_resource ::Google::Cloud::AIPlatform::V1::UpdatePersistentResourceRequest.new(persistent_resource: persistent_resource, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_persistent_resource({ persistent_resource: persistent_resource, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_persistent_resource({ persistent_resource: persistent_resource, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_persistent_resource(::Google::Cloud::AIPlatform::V1::UpdatePersistentResourceRequest.new(persistent_resource: persistent_resource, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_persistent_resource(::Google::Cloud::AIPlatform::V1::UpdatePersistentResourceRequest.new(persistent_resource: persistent_resource, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -402,40 +402,40 @@ class ::Google::Cloud::AIPlatform::V1::PersistentResourceService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, reboot_persistent_resource_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reboot_persistent_resource({ name: name }) do |response, operation|
+      c.reboot_persistent_resource({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reboot_persistent_resource name: name do |response, operation|
+      c.reboot_persistent_resource name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reboot_persistent_resource ::Google::Cloud::AIPlatform::V1::RebootPersistentResourceRequest.new(name: name) do |response, operation|
+      c.reboot_persistent_resource ::Google::Cloud::AIPlatform::V1::RebootPersistentResourceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reboot_persistent_resource({ name: name }, grpc_options) do |response, operation|
+      c.reboot_persistent_resource({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reboot_persistent_resource(::Google::Cloud::AIPlatform::V1::RebootPersistentResourceRequest.new(name: name), grpc_options) do |response, operation|
+      c.reboot_persistent_resource(::Google::Cloud::AIPlatform::V1::RebootPersistentResourceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

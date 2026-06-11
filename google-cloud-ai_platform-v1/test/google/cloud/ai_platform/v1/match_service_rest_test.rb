@@ -100,32 +100,32 @@ class ::Google::Cloud::AIPlatform::V1::MatchService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::MatchService::Rest::ServiceStub.stub :transcode_find_neighbors_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, find_neighbors_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::MatchService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::MatchService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.find_neighbors({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint }) do |_result, response|
+        c.find_neighbors({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.find_neighbors index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint do |_result, response|
+        c.find_neighbors index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.find_neighbors ::Google::Cloud::AIPlatform::V1::FindNeighborsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint) do |_result, response|
+        c.find_neighbors ::Google::Cloud::AIPlatform::V1::FindNeighborsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.find_neighbors({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint }, call_options) do |_result, response|
+        c.find_neighbors({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.find_neighbors(::Google::Cloud::AIPlatform::V1::FindNeighborsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint), call_options) do |_result, response|
+        c.find_neighbors(::Google::Cloud::AIPlatform::V1::FindNeighborsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, queries: queries, return_full_datapoint: return_full_datapoint), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::AIPlatform::V1::MatchService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::MatchService::Rest::ServiceStub.stub :transcode_read_index_datapoints_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, read_index_datapoints_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::MatchService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::MatchService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.read_index_datapoints({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids }) do |_result, response|
+        c.read_index_datapoints({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.read_index_datapoints index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids do |_result, response|
+        c.read_index_datapoints index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.read_index_datapoints ::Google::Cloud::AIPlatform::V1::ReadIndexDatapointsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids) do |_result, response|
+        c.read_index_datapoints ::Google::Cloud::AIPlatform::V1::ReadIndexDatapointsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.read_index_datapoints({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids }, call_options) do |_result, response|
+        c.read_index_datapoints({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.read_index_datapoints(::Google::Cloud::AIPlatform::V1::ReadIndexDatapointsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids), call_options) do |_result, response|
+        c.read_index_datapoints(::Google::Cloud::AIPlatform::V1::ReadIndexDatapointsRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id, ids: ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -98,32 +98,32 @@ class ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::ClientTest <
     ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::ServiceStub.stub :transcode_create_specialist_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_specialist_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_specialist_pool({ parent: parent, specialist_pool: specialist_pool }) do |_result, response|
+        c.create_specialist_pool({ parent: parent, specialist_pool: specialist_pool }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_specialist_pool parent: parent, specialist_pool: specialist_pool do |_result, response|
+        c.create_specialist_pool parent: parent, specialist_pool: specialist_pool do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_specialist_pool ::Google::Cloud::AIPlatform::V1::CreateSpecialistPoolRequest.new(parent: parent, specialist_pool: specialist_pool) do |_result, response|
+        c.create_specialist_pool ::Google::Cloud::AIPlatform::V1::CreateSpecialistPoolRequest.new(parent: parent, specialist_pool: specialist_pool) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_specialist_pool({ parent: parent, specialist_pool: specialist_pool }, call_options) do |_result, response|
+        c.create_specialist_pool({ parent: parent, specialist_pool: specialist_pool }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_specialist_pool(::Google::Cloud::AIPlatform::V1::CreateSpecialistPoolRequest.new(parent: parent, specialist_pool: specialist_pool), call_options) do |_result, response|
+        c.create_specialist_pool(::Google::Cloud::AIPlatform::V1::CreateSpecialistPoolRequest.new(parent: parent, specialist_pool: specialist_pool), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::ClientTest <
     ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::ServiceStub.stub :transcode_get_specialist_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_specialist_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_specialist_pool({ name: name }) do |_result, response|
+        c.get_specialist_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_specialist_pool name: name do |_result, response|
+        c.get_specialist_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_specialist_pool ::Google::Cloud::AIPlatform::V1::GetSpecialistPoolRequest.new(name: name) do |_result, response|
+        c.get_specialist_pool ::Google::Cloud::AIPlatform::V1::GetSpecialistPoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_specialist_pool({ name: name }, call_options) do |_result, response|
+        c.get_specialist_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_specialist_pool(::Google::Cloud::AIPlatform::V1::GetSpecialistPoolRequest.new(name: name), call_options) do |_result, response|
+        c.get_specialist_pool(::Google::Cloud::AIPlatform::V1::GetSpecialistPoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::ClientTest <
     ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::ServiceStub.stub :transcode_list_specialist_pools_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_specialist_pools_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_specialist_pools({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
+        c.list_specialist_pools({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_specialist_pools parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
+        c.list_specialist_pools parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_specialist_pools ::Google::Cloud::AIPlatform::V1::ListSpecialistPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
+        c.list_specialist_pools ::Google::Cloud::AIPlatform::V1::ListSpecialistPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_specialist_pools({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
+        c.list_specialist_pools({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_specialist_pools(::Google::Cloud::AIPlatform::V1::ListSpecialistPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
+        c.list_specialist_pools(::Google::Cloud::AIPlatform::V1::ListSpecialistPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::ClientTest <
     ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::ServiceStub.stub :transcode_delete_specialist_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_specialist_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_specialist_pool({ name: name, force: force }) do |_result, response|
+        c.delete_specialist_pool({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_specialist_pool name: name, force: force do |_result, response|
+        c.delete_specialist_pool name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_specialist_pool ::Google::Cloud::AIPlatform::V1::DeleteSpecialistPoolRequest.new(name: name, force: force) do |_result, response|
+        c.delete_specialist_pool ::Google::Cloud::AIPlatform::V1::DeleteSpecialistPoolRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_specialist_pool({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_specialist_pool({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_specialist_pool(::Google::Cloud::AIPlatform::V1::DeleteSpecialistPoolRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_specialist_pool(::Google::Cloud::AIPlatform::V1::DeleteSpecialistPoolRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::ClientTest <
     ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::ServiceStub.stub :transcode_update_specialist_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_specialist_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_specialist_pool({ specialist_pool: specialist_pool, update_mask: update_mask }) do |_result, response|
+        c.update_specialist_pool({ specialist_pool: specialist_pool, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_specialist_pool specialist_pool: specialist_pool, update_mask: update_mask do |_result, response|
+        c.update_specialist_pool specialist_pool: specialist_pool, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_specialist_pool ::Google::Cloud::AIPlatform::V1::UpdateSpecialistPoolRequest.new(specialist_pool: specialist_pool, update_mask: update_mask) do |_result, response|
+        c.update_specialist_pool ::Google::Cloud::AIPlatform::V1::UpdateSpecialistPoolRequest.new(specialist_pool: specialist_pool, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_specialist_pool({ specialist_pool: specialist_pool, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_specialist_pool({ specialist_pool: specialist_pool, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_specialist_pool(::Google::Cloud::AIPlatform::V1::UpdateSpecialistPoolRequest.new(specialist_pool: specialist_pool, update_mask: update_mask), call_options) do |_result, response|
+        c.update_specialist_pool(::Google::Cloud::AIPlatform::V1::UpdateSpecialistPoolRequest.new(specialist_pool: specialist_pool, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

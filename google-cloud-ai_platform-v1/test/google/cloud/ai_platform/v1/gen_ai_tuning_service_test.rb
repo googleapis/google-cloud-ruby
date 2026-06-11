@@ -84,36 +84,36 @@ class ::Google::Cloud::AIPlatform::V1::GenAiTuningService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_tuning_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tuning_job({ parent: parent, tuning_job: tuning_job }) do |response, operation|
+      c.create_tuning_job({ parent: parent, tuning_job: tuning_job }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tuning_job parent: parent, tuning_job: tuning_job do |response, operation|
+      c.create_tuning_job parent: parent, tuning_job: tuning_job do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tuning_job ::Google::Cloud::AIPlatform::V1::CreateTuningJobRequest.new(parent: parent, tuning_job: tuning_job) do |response, operation|
+      c.create_tuning_job ::Google::Cloud::AIPlatform::V1::CreateTuningJobRequest.new(parent: parent, tuning_job: tuning_job) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tuning_job({ parent: parent, tuning_job: tuning_job }, grpc_options) do |response, operation|
+      c.create_tuning_job({ parent: parent, tuning_job: tuning_job }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tuning_job(::Google::Cloud::AIPlatform::V1::CreateTuningJobRequest.new(parent: parent, tuning_job: tuning_job), grpc_options) do |response, operation|
+      c.create_tuning_job(::Google::Cloud::AIPlatform::V1::CreateTuningJobRequest.new(parent: parent, tuning_job: tuning_job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::AIPlatform::V1::GenAiTuningService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_tuning_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tuning_job({ name: name }) do |response, operation|
+      c.get_tuning_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tuning_job name: name do |response, operation|
+      c.get_tuning_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tuning_job ::Google::Cloud::AIPlatform::V1::GetTuningJobRequest.new(name: name) do |response, operation|
+      c.get_tuning_job ::Google::Cloud::AIPlatform::V1::GetTuningJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tuning_job({ name: name }, grpc_options) do |response, operation|
+      c.get_tuning_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tuning_job(::Google::Cloud::AIPlatform::V1::GetTuningJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tuning_job(::Google::Cloud::AIPlatform::V1::GetTuningJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -206,40 +206,40 @@ class ::Google::Cloud::AIPlatform::V1::GenAiTuningService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_tuning_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tuning_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_tuning_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tuning_jobs ::Google::Cloud::AIPlatform::V1::ListTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_tuning_jobs ::Google::Cloud::AIPlatform::V1::ListTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tuning_jobs(::Google::Cloud::AIPlatform::V1::ListTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_tuning_jobs(::Google::Cloud::AIPlatform::V1::ListTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -269,36 +269,36 @@ class ::Google::Cloud::AIPlatform::V1::GenAiTuningService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, cancel_tuning_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_tuning_job({ name: name }) do |response, operation|
+      c.cancel_tuning_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_tuning_job name: name do |response, operation|
+      c.cancel_tuning_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_tuning_job ::Google::Cloud::AIPlatform::V1::CancelTuningJobRequest.new(name: name) do |response, operation|
+      c.cancel_tuning_job ::Google::Cloud::AIPlatform::V1::CancelTuningJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_tuning_job({ name: name }, grpc_options) do |response, operation|
+      c.cancel_tuning_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_tuning_job(::Google::Cloud::AIPlatform::V1::CancelTuningJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_tuning_job(::Google::Cloud::AIPlatform::V1::CancelTuningJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,40 +335,40 @@ class ::Google::Cloud::AIPlatform::V1::GenAiTuningService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, rebase_tuned_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.rebase_tuned_model({ parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint }) do |response, operation|
+      c.rebase_tuned_model({ parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rebase_tuned_model parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint do |response, operation|
+      c.rebase_tuned_model parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rebase_tuned_model ::Google::Cloud::AIPlatform::V1::RebaseTunedModelRequest.new(parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint) do |response, operation|
+      c.rebase_tuned_model ::Google::Cloud::AIPlatform::V1::RebaseTunedModelRequest.new(parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rebase_tuned_model({ parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint }, grpc_options) do |response, operation|
+      c.rebase_tuned_model({ parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rebase_tuned_model(::Google::Cloud::AIPlatform::V1::RebaseTunedModelRequest.new(parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint), grpc_options) do |response, operation|
+      c.rebase_tuned_model(::Google::Cloud::AIPlatform::V1::RebaseTunedModelRequest.new(parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -99,32 +99,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_create_feature_online_store_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_feature_online_store_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_feature_online_store({ parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id }) do |_result, response|
+        c.create_feature_online_store({ parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_feature_online_store parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id do |_result, response|
+        c.create_feature_online_store parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_feature_online_store ::Google::Cloud::AIPlatform::V1::CreateFeatureOnlineStoreRequest.new(parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id) do |_result, response|
+        c.create_feature_online_store ::Google::Cloud::AIPlatform::V1::CreateFeatureOnlineStoreRequest.new(parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_feature_online_store({ parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id }, call_options) do |_result, response|
+        c.create_feature_online_store({ parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_feature_online_store(::Google::Cloud::AIPlatform::V1::CreateFeatureOnlineStoreRequest.new(parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id), call_options) do |_result, response|
+        c.create_feature_online_store(::Google::Cloud::AIPlatform::V1::CreateFeatureOnlineStoreRequest.new(parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_get_feature_online_store_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_feature_online_store_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_feature_online_store({ name: name }) do |_result, response|
+        c.get_feature_online_store({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_feature_online_store name: name do |_result, response|
+        c.get_feature_online_store name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_feature_online_store ::Google::Cloud::AIPlatform::V1::GetFeatureOnlineStoreRequest.new(name: name) do |_result, response|
+        c.get_feature_online_store ::Google::Cloud::AIPlatform::V1::GetFeatureOnlineStoreRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_feature_online_store({ name: name }, call_options) do |_result, response|
+        c.get_feature_online_store({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_feature_online_store(::Google::Cloud::AIPlatform::V1::GetFeatureOnlineStoreRequest.new(name: name), call_options) do |_result, response|
+        c.get_feature_online_store(::Google::Cloud::AIPlatform::V1::GetFeatureOnlineStoreRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_list_feature_online_stores_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_feature_online_stores_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_feature_online_stores({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
+        c.list_feature_online_stores({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_feature_online_stores parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
+        c.list_feature_online_stores parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_feature_online_stores ::Google::Cloud::AIPlatform::V1::ListFeatureOnlineStoresRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
+        c.list_feature_online_stores ::Google::Cloud::AIPlatform::V1::ListFeatureOnlineStoresRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_feature_online_stores({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
+        c.list_feature_online_stores({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_feature_online_stores(::Google::Cloud::AIPlatform::V1::ListFeatureOnlineStoresRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
+        c.list_feature_online_stores(::Google::Cloud::AIPlatform::V1::ListFeatureOnlineStoresRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_update_feature_online_store_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_feature_online_store_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_feature_online_store({ feature_online_store: feature_online_store, update_mask: update_mask }) do |_result, response|
+        c.update_feature_online_store({ feature_online_store: feature_online_store, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_feature_online_store feature_online_store: feature_online_store, update_mask: update_mask do |_result, response|
+        c.update_feature_online_store feature_online_store: feature_online_store, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_feature_online_store ::Google::Cloud::AIPlatform::V1::UpdateFeatureOnlineStoreRequest.new(feature_online_store: feature_online_store, update_mask: update_mask) do |_result, response|
+        c.update_feature_online_store ::Google::Cloud::AIPlatform::V1::UpdateFeatureOnlineStoreRequest.new(feature_online_store: feature_online_store, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_feature_online_store({ feature_online_store: feature_online_store, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_feature_online_store({ feature_online_store: feature_online_store, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_feature_online_store(::Google::Cloud::AIPlatform::V1::UpdateFeatureOnlineStoreRequest.new(feature_online_store: feature_online_store, update_mask: update_mask), call_options) do |_result, response|
+        c.update_feature_online_store(::Google::Cloud::AIPlatform::V1::UpdateFeatureOnlineStoreRequest.new(feature_online_store: feature_online_store, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_delete_feature_online_store_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_feature_online_store_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_feature_online_store({ name: name, force: force }) do |_result, response|
+        c.delete_feature_online_store({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_feature_online_store name: name, force: force do |_result, response|
+        c.delete_feature_online_store name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_feature_online_store ::Google::Cloud::AIPlatform::V1::DeleteFeatureOnlineStoreRequest.new(name: name, force: force) do |_result, response|
+        c.delete_feature_online_store ::Google::Cloud::AIPlatform::V1::DeleteFeatureOnlineStoreRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_feature_online_store({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_feature_online_store({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_feature_online_store(::Google::Cloud::AIPlatform::V1::DeleteFeatureOnlineStoreRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_feature_online_store(::Google::Cloud::AIPlatform::V1::DeleteFeatureOnlineStoreRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -378,32 +378,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_create_feature_view_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_feature_view_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_feature_view({ parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately }) do |_result, response|
+        c.create_feature_view({ parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_feature_view parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately do |_result, response|
+        c.create_feature_view parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_feature_view ::Google::Cloud::AIPlatform::V1::CreateFeatureViewRequest.new(parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately) do |_result, response|
+        c.create_feature_view ::Google::Cloud::AIPlatform::V1::CreateFeatureViewRequest.new(parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_feature_view({ parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately }, call_options) do |_result, response|
+        c.create_feature_view({ parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_feature_view(::Google::Cloud::AIPlatform::V1::CreateFeatureViewRequest.new(parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately), call_options) do |_result, response|
+        c.create_feature_view(::Google::Cloud::AIPlatform::V1::CreateFeatureViewRequest.new(parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -432,32 +432,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_get_feature_view_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_feature_view_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_feature_view({ name: name }) do |_result, response|
+        c.get_feature_view({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_feature_view name: name do |_result, response|
+        c.get_feature_view name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_feature_view ::Google::Cloud::AIPlatform::V1::GetFeatureViewRequest.new(name: name) do |_result, response|
+        c.get_feature_view ::Google::Cloud::AIPlatform::V1::GetFeatureViewRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_feature_view({ name: name }, call_options) do |_result, response|
+        c.get_feature_view({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_feature_view(::Google::Cloud::AIPlatform::V1::GetFeatureViewRequest.new(name: name), call_options) do |_result, response|
+        c.get_feature_view(::Google::Cloud::AIPlatform::V1::GetFeatureViewRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -490,32 +490,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_list_feature_views_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_feature_views_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_feature_views({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
+        c.list_feature_views({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_feature_views parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
+        c.list_feature_views parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_feature_views ::Google::Cloud::AIPlatform::V1::ListFeatureViewsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
+        c.list_feature_views ::Google::Cloud::AIPlatform::V1::ListFeatureViewsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_feature_views({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
+        c.list_feature_views({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_feature_views(::Google::Cloud::AIPlatform::V1::ListFeatureViewsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
+        c.list_feature_views(::Google::Cloud::AIPlatform::V1::ListFeatureViewsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -545,32 +545,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_update_feature_view_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_feature_view_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_feature_view({ feature_view: feature_view, update_mask: update_mask }) do |_result, response|
+        c.update_feature_view({ feature_view: feature_view, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_feature_view feature_view: feature_view, update_mask: update_mask do |_result, response|
+        c.update_feature_view feature_view: feature_view, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_feature_view ::Google::Cloud::AIPlatform::V1::UpdateFeatureViewRequest.new(feature_view: feature_view, update_mask: update_mask) do |_result, response|
+        c.update_feature_view ::Google::Cloud::AIPlatform::V1::UpdateFeatureViewRequest.new(feature_view: feature_view, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_feature_view({ feature_view: feature_view, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_feature_view({ feature_view: feature_view, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_feature_view(::Google::Cloud::AIPlatform::V1::UpdateFeatureViewRequest.new(feature_view: feature_view, update_mask: update_mask), call_options) do |_result, response|
+        c.update_feature_view(::Google::Cloud::AIPlatform::V1::UpdateFeatureViewRequest.new(feature_view: feature_view, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -599,32 +599,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_delete_feature_view_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_feature_view_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_feature_view({ name: name }) do |_result, response|
+        c.delete_feature_view({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_feature_view name: name do |_result, response|
+        c.delete_feature_view name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_feature_view ::Google::Cloud::AIPlatform::V1::DeleteFeatureViewRequest.new(name: name) do |_result, response|
+        c.delete_feature_view ::Google::Cloud::AIPlatform::V1::DeleteFeatureViewRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_feature_view({ name: name }, call_options) do |_result, response|
+        c.delete_feature_view({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_feature_view(::Google::Cloud::AIPlatform::V1::DeleteFeatureViewRequest.new(name: name), call_options) do |_result, response|
+        c.delete_feature_view(::Google::Cloud::AIPlatform::V1::DeleteFeatureViewRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -653,32 +653,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_sync_feature_view_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, sync_feature_view_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.sync_feature_view({ feature_view: feature_view }) do |_result, response|
+        c.sync_feature_view({ feature_view: feature_view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.sync_feature_view feature_view: feature_view do |_result, response|
+        c.sync_feature_view feature_view: feature_view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.sync_feature_view ::Google::Cloud::AIPlatform::V1::SyncFeatureViewRequest.new(feature_view: feature_view) do |_result, response|
+        c.sync_feature_view ::Google::Cloud::AIPlatform::V1::SyncFeatureViewRequest.new(feature_view: feature_view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.sync_feature_view({ feature_view: feature_view }, call_options) do |_result, response|
+        c.sync_feature_view({ feature_view: feature_view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.sync_feature_view(::Google::Cloud::AIPlatform::V1::SyncFeatureViewRequest.new(feature_view: feature_view), call_options) do |_result, response|
+        c.sync_feature_view(::Google::Cloud::AIPlatform::V1::SyncFeatureViewRequest.new(feature_view: feature_view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -707,32 +707,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_get_feature_view_sync_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_feature_view_sync_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_feature_view_sync({ name: name }) do |_result, response|
+        c.get_feature_view_sync({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_feature_view_sync name: name do |_result, response|
+        c.get_feature_view_sync name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_feature_view_sync ::Google::Cloud::AIPlatform::V1::GetFeatureViewSyncRequest.new(name: name) do |_result, response|
+        c.get_feature_view_sync ::Google::Cloud::AIPlatform::V1::GetFeatureViewSyncRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_feature_view_sync({ name: name }, call_options) do |_result, response|
+        c.get_feature_view_sync({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_feature_view_sync(::Google::Cloud::AIPlatform::V1::GetFeatureViewSyncRequest.new(name: name), call_options) do |_result, response|
+        c.get_feature_view_sync(::Google::Cloud::AIPlatform::V1::GetFeatureViewSyncRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -765,32 +765,32 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::ServiceStub.stub :transcode_list_feature_view_syncs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_feature_view_syncs_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_feature_view_syncs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
+        c.list_feature_view_syncs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_feature_view_syncs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
+        c.list_feature_view_syncs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_feature_view_syncs ::Google::Cloud::AIPlatform::V1::ListFeatureViewSyncsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
+        c.list_feature_view_syncs ::Google::Cloud::AIPlatform::V1::ListFeatureViewSyncsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_feature_view_syncs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
+        c.list_feature_view_syncs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_feature_view_syncs(::Google::Cloud::AIPlatform::V1::ListFeatureViewSyncsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
+        c.list_feature_view_syncs(::Google::Cloud::AIPlatform::V1::ListFeatureViewSyncsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

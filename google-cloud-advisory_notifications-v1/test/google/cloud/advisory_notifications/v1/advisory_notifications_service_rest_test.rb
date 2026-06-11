@@ -101,32 +101,32 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
     ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::ServiceStub.stub :transcode_list_notifications_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_notifications_client_stub do
         # Create client
-        client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_notifications({ parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code }) do |_result, response|
+        c.list_notifications({ parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_notifications parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code do |_result, response|
+        c.list_notifications parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_notifications ::Google::Cloud::AdvisoryNotifications::V1::ListNotificationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code) do |_result, response|
+        c.list_notifications ::Google::Cloud::AdvisoryNotifications::V1::ListNotificationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_notifications({ parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code }, call_options) do |_result, response|
+        c.list_notifications({ parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_notifications(::Google::Cloud::AdvisoryNotifications::V1::ListNotificationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code), call_options) do |_result, response|
+        c.list_notifications(::Google::Cloud::AdvisoryNotifications::V1::ListNotificationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
     ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::ServiceStub.stub :transcode_get_notification_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_notification_client_stub do
         # Create client
-        client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_notification({ name: name, language_code: language_code }) do |_result, response|
+        c.get_notification({ name: name, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_notification name: name, language_code: language_code do |_result, response|
+        c.get_notification name: name, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_notification ::Google::Cloud::AdvisoryNotifications::V1::GetNotificationRequest.new(name: name, language_code: language_code) do |_result, response|
+        c.get_notification ::Google::Cloud::AdvisoryNotifications::V1::GetNotificationRequest.new(name: name, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_notification({ name: name, language_code: language_code }, call_options) do |_result, response|
+        c.get_notification({ name: name, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_notification(::Google::Cloud::AdvisoryNotifications::V1::GetNotificationRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
+        c.get_notification(::Google::Cloud::AdvisoryNotifications::V1::GetNotificationRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
     ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::ServiceStub.stub :transcode_get_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_settings({ name: name }) do |_result, response|
+        c.get_settings({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_settings name: name do |_result, response|
+        c.get_settings name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_settings ::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest.new(name: name) do |_result, response|
+        c.get_settings ::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_settings({ name: name }, call_options) do |_result, response|
+        c.get_settings({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_settings(::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest.new(name: name), call_options) do |_result, response|
+        c.get_settings(::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
     ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::ServiceStub.stub :transcode_update_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_settings({ settings: settings }) do |_result, response|
+        c.update_settings({ settings: settings }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_settings settings: settings do |_result, response|
+        c.update_settings settings: settings do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_settings ::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest.new(settings: settings) do |_result, response|
+        c.update_settings ::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest.new(settings: settings) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_settings({ settings: settings }, call_options) do |_result, response|
+        c.update_settings({ settings: settings }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_settings(::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest.new(settings: settings), call_options) do |_result, response|
+        c.update_settings(::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest.new(settings: settings), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

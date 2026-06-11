@@ -86,40 +86,40 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, create_feature_online_store_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_feature_online_store({ parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id }) do |response, operation|
+      c.create_feature_online_store({ parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_feature_online_store parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id do |response, operation|
+      c.create_feature_online_store parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_feature_online_store ::Google::Cloud::AIPlatform::V1::CreateFeatureOnlineStoreRequest.new(parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id) do |response, operation|
+      c.create_feature_online_store ::Google::Cloud::AIPlatform::V1::CreateFeatureOnlineStoreRequest.new(parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_feature_online_store({ parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id }, grpc_options) do |response, operation|
+      c.create_feature_online_store({ parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_feature_online_store(::Google::Cloud::AIPlatform::V1::CreateFeatureOnlineStoreRequest.new(parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id), grpc_options) do |response, operation|
+      c.create_feature_online_store(::Google::Cloud::AIPlatform::V1::CreateFeatureOnlineStoreRequest.new(parent: parent, feature_online_store: feature_online_store, feature_online_store_id: feature_online_store_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, get_feature_online_store_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_feature_online_store({ name: name }) do |response, operation|
+      c.get_feature_online_store({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_feature_online_store name: name do |response, operation|
+      c.get_feature_online_store name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_feature_online_store ::Google::Cloud::AIPlatform::V1::GetFeatureOnlineStoreRequest.new(name: name) do |response, operation|
+      c.get_feature_online_store ::Google::Cloud::AIPlatform::V1::GetFeatureOnlineStoreRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_feature_online_store({ name: name }, grpc_options) do |response, operation|
+      c.get_feature_online_store({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_feature_online_store(::Google::Cloud::AIPlatform::V1::GetFeatureOnlineStoreRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_feature_online_store(::Google::Cloud::AIPlatform::V1::GetFeatureOnlineStoreRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, list_feature_online_stores_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_feature_online_stores({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
+      c.list_feature_online_stores({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_feature_online_stores parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
+      c.list_feature_online_stores parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_feature_online_stores ::Google::Cloud::AIPlatform::V1::ListFeatureOnlineStoresRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
+      c.list_feature_online_stores ::Google::Cloud::AIPlatform::V1::ListFeatureOnlineStoresRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_feature_online_stores({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_feature_online_stores({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_feature_online_stores(::Google::Cloud::AIPlatform::V1::ListFeatureOnlineStoresRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
+      c.list_feature_online_stores(::Google::Cloud::AIPlatform::V1::ListFeatureOnlineStoresRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, update_feature_online_store_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_feature_online_store({ feature_online_store: feature_online_store, update_mask: update_mask }) do |response, operation|
+      c.update_feature_online_store({ feature_online_store: feature_online_store, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_feature_online_store feature_online_store: feature_online_store, update_mask: update_mask do |response, operation|
+      c.update_feature_online_store feature_online_store: feature_online_store, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_feature_online_store ::Google::Cloud::AIPlatform::V1::UpdateFeatureOnlineStoreRequest.new(feature_online_store: feature_online_store, update_mask: update_mask) do |response, operation|
+      c.update_feature_online_store ::Google::Cloud::AIPlatform::V1::UpdateFeatureOnlineStoreRequest.new(feature_online_store: feature_online_store, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_feature_online_store({ feature_online_store: feature_online_store, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_feature_online_store({ feature_online_store: feature_online_store, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_feature_online_store(::Google::Cloud::AIPlatform::V1::UpdateFeatureOnlineStoreRequest.new(feature_online_store: feature_online_store, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_feature_online_store(::Google::Cloud::AIPlatform::V1::UpdateFeatureOnlineStoreRequest.new(feature_online_store: feature_online_store, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -345,40 +345,40 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, delete_feature_online_store_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_feature_online_store({ name: name, force: force }) do |response, operation|
+      c.delete_feature_online_store({ name: name, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_feature_online_store name: name, force: force do |response, operation|
+      c.delete_feature_online_store name: name, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_feature_online_store ::Google::Cloud::AIPlatform::V1::DeleteFeatureOnlineStoreRequest.new(name: name, force: force) do |response, operation|
+      c.delete_feature_online_store ::Google::Cloud::AIPlatform::V1::DeleteFeatureOnlineStoreRequest.new(name: name, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_feature_online_store({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_feature_online_store({ name: name, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_feature_online_store(::Google::Cloud::AIPlatform::V1::DeleteFeatureOnlineStoreRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_feature_online_store(::Google::Cloud::AIPlatform::V1::DeleteFeatureOnlineStoreRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -414,40 +414,40 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, create_feature_view_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_feature_view({ parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately }) do |response, operation|
+      c.create_feature_view({ parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_feature_view parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately do |response, operation|
+      c.create_feature_view parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_feature_view ::Google::Cloud::AIPlatform::V1::CreateFeatureViewRequest.new(parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately) do |response, operation|
+      c.create_feature_view ::Google::Cloud::AIPlatform::V1::CreateFeatureViewRequest.new(parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_feature_view({ parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately }, grpc_options) do |response, operation|
+      c.create_feature_view({ parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_feature_view(::Google::Cloud::AIPlatform::V1::CreateFeatureViewRequest.new(parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately), grpc_options) do |response, operation|
+      c.create_feature_view(::Google::Cloud::AIPlatform::V1::CreateFeatureViewRequest.new(parent: parent, feature_view: feature_view, feature_view_id: feature_view_id, run_sync_immediately: run_sync_immediately), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -477,36 +477,36 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, get_feature_view_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_feature_view({ name: name }) do |response, operation|
+      c.get_feature_view({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_feature_view name: name do |response, operation|
+      c.get_feature_view name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_feature_view ::Google::Cloud::AIPlatform::V1::GetFeatureViewRequest.new(name: name) do |response, operation|
+      c.get_feature_view ::Google::Cloud::AIPlatform::V1::GetFeatureViewRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_feature_view({ name: name }, grpc_options) do |response, operation|
+      c.get_feature_view({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_feature_view(::Google::Cloud::AIPlatform::V1::GetFeatureViewRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_feature_view(::Google::Cloud::AIPlatform::V1::GetFeatureViewRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -543,40 +543,40 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, list_feature_views_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_feature_views({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
+      c.list_feature_views({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_feature_views parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
+      c.list_feature_views parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_feature_views ::Google::Cloud::AIPlatform::V1::ListFeatureViewsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
+      c.list_feature_views ::Google::Cloud::AIPlatform::V1::ListFeatureViewsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_feature_views({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_feature_views({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_feature_views(::Google::Cloud::AIPlatform::V1::ListFeatureViewsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
+      c.list_feature_views(::Google::Cloud::AIPlatform::V1::ListFeatureViewsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -608,40 +608,40 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, update_feature_view_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_feature_view({ feature_view: feature_view, update_mask: update_mask }) do |response, operation|
+      c.update_feature_view({ feature_view: feature_view, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_feature_view feature_view: feature_view, update_mask: update_mask do |response, operation|
+      c.update_feature_view feature_view: feature_view, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_feature_view ::Google::Cloud::AIPlatform::V1::UpdateFeatureViewRequest.new(feature_view: feature_view, update_mask: update_mask) do |response, operation|
+      c.update_feature_view ::Google::Cloud::AIPlatform::V1::UpdateFeatureViewRequest.new(feature_view: feature_view, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_feature_view({ feature_view: feature_view, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_feature_view({ feature_view: feature_view, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_feature_view(::Google::Cloud::AIPlatform::V1::UpdateFeatureViewRequest.new(feature_view: feature_view, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_feature_view(::Google::Cloud::AIPlatform::V1::UpdateFeatureViewRequest.new(feature_view: feature_view, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -671,40 +671,40 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, delete_feature_view_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_feature_view({ name: name }) do |response, operation|
+      c.delete_feature_view({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_feature_view name: name do |response, operation|
+      c.delete_feature_view name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_feature_view ::Google::Cloud::AIPlatform::V1::DeleteFeatureViewRequest.new(name: name) do |response, operation|
+      c.delete_feature_view ::Google::Cloud::AIPlatform::V1::DeleteFeatureViewRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_feature_view({ name: name }, grpc_options) do |response, operation|
+      c.delete_feature_view({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_feature_view(::Google::Cloud::AIPlatform::V1::DeleteFeatureViewRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_feature_view(::Google::Cloud::AIPlatform::V1::DeleteFeatureViewRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -734,36 +734,36 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, sync_feature_view_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.sync_feature_view({ feature_view: feature_view }) do |response, operation|
+      c.sync_feature_view({ feature_view: feature_view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.sync_feature_view feature_view: feature_view do |response, operation|
+      c.sync_feature_view feature_view: feature_view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.sync_feature_view ::Google::Cloud::AIPlatform::V1::SyncFeatureViewRequest.new(feature_view: feature_view) do |response, operation|
+      c.sync_feature_view ::Google::Cloud::AIPlatform::V1::SyncFeatureViewRequest.new(feature_view: feature_view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.sync_feature_view({ feature_view: feature_view }, grpc_options) do |response, operation|
+      c.sync_feature_view({ feature_view: feature_view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.sync_feature_view(::Google::Cloud::AIPlatform::V1::SyncFeatureViewRequest.new(feature_view: feature_view), grpc_options) do |response, operation|
+      c.sync_feature_view(::Google::Cloud::AIPlatform::V1::SyncFeatureViewRequest.new(feature_view: feature_view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -792,36 +792,36 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, get_feature_view_sync_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_feature_view_sync({ name: name }) do |response, operation|
+      c.get_feature_view_sync({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_feature_view_sync name: name do |response, operation|
+      c.get_feature_view_sync name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_feature_view_sync ::Google::Cloud::AIPlatform::V1::GetFeatureViewSyncRequest.new(name: name) do |response, operation|
+      c.get_feature_view_sync ::Google::Cloud::AIPlatform::V1::GetFeatureViewSyncRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_feature_view_sync({ name: name }, grpc_options) do |response, operation|
+      c.get_feature_view_sync({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_feature_view_sync(::Google::Cloud::AIPlatform::V1::GetFeatureViewSyncRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_feature_view_sync(::Google::Cloud::AIPlatform::V1::GetFeatureViewSyncRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -858,40 +858,40 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientTes
 
     Gapic::ServiceStub.stub :new, list_feature_view_syncs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_feature_view_syncs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
+      c.list_feature_view_syncs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_feature_view_syncs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
+      c.list_feature_view_syncs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_feature_view_syncs ::Google::Cloud::AIPlatform::V1::ListFeatureViewSyncsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
+      c.list_feature_view_syncs ::Google::Cloud::AIPlatform::V1::ListFeatureViewSyncsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_feature_view_syncs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_feature_view_syncs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_feature_view_syncs(::Google::Cloud::AIPlatform::V1::ListFeatureViewSyncsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
+      c.list_feature_view_syncs(::Google::Cloud::AIPlatform::V1::ListFeatureViewSyncsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
