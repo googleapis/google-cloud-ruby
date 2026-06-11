@@ -84,36 +84,36 @@ class ::Google::Cloud::Talent::V4::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_job({ parent: parent, job: job }) do |response, operation|
+      c.create_job({ parent: parent, job: job }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_job parent: parent, job: job do |response, operation|
+      c.create_job parent: parent, job: job do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_job ::Google::Cloud::Talent::V4::CreateJobRequest.new(parent: parent, job: job) do |response, operation|
+      c.create_job ::Google::Cloud::Talent::V4::CreateJobRequest.new(parent: parent, job: job) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_job({ parent: parent, job: job }, grpc_options) do |response, operation|
+      c.create_job({ parent: parent, job: job }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_job(::Google::Cloud::Talent::V4::CreateJobRequest.new(parent: parent, job: job), grpc_options) do |response, operation|
+      c.create_job(::Google::Cloud::Talent::V4::CreateJobRequest.new(parent: parent, job: job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,40 +144,40 @@ class ::Google::Cloud::Talent::V4::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_create_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_jobs({ parent: parent, jobs: jobs }) do |response, operation|
+      c.batch_create_jobs({ parent: parent, jobs: jobs }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_jobs parent: parent, jobs: jobs do |response, operation|
+      c.batch_create_jobs parent: parent, jobs: jobs do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_jobs ::Google::Cloud::Talent::V4::BatchCreateJobsRequest.new(parent: parent, jobs: jobs) do |response, operation|
+      c.batch_create_jobs ::Google::Cloud::Talent::V4::BatchCreateJobsRequest.new(parent: parent, jobs: jobs) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_jobs({ parent: parent, jobs: jobs }, grpc_options) do |response, operation|
+      c.batch_create_jobs({ parent: parent, jobs: jobs }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_jobs(::Google::Cloud::Talent::V4::BatchCreateJobsRequest.new(parent: parent, jobs: jobs), grpc_options) do |response, operation|
+      c.batch_create_jobs(::Google::Cloud::Talent::V4::BatchCreateJobsRequest.new(parent: parent, jobs: jobs), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -207,36 +207,36 @@ class ::Google::Cloud::Talent::V4::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_job({ name: name }) do |response, operation|
+      c.get_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_job name: name do |response, operation|
+      c.get_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_job ::Google::Cloud::Talent::V4::GetJobRequest.new(name: name) do |response, operation|
+      c.get_job ::Google::Cloud::Talent::V4::GetJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_job({ name: name }, grpc_options) do |response, operation|
+      c.get_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_job(::Google::Cloud::Talent::V4::GetJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_job(::Google::Cloud::Talent::V4::GetJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -267,36 +267,36 @@ class ::Google::Cloud::Talent::V4::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_job({ job: job, update_mask: update_mask }) do |response, operation|
+      c.update_job({ job: job, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_job job: job, update_mask: update_mask do |response, operation|
+      c.update_job job: job, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_job ::Google::Cloud::Talent::V4::UpdateJobRequest.new(job: job, update_mask: update_mask) do |response, operation|
+      c.update_job ::Google::Cloud::Talent::V4::UpdateJobRequest.new(job: job, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_job({ job: job, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_job({ job: job, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_job(::Google::Cloud::Talent::V4::UpdateJobRequest.new(job: job, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_job(::Google::Cloud::Talent::V4::UpdateJobRequest.new(job: job, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -329,40 +329,40 @@ class ::Google::Cloud::Talent::V4::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_update_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_update_jobs({ parent: parent, jobs: jobs, update_mask: update_mask }) do |response, operation|
+      c.batch_update_jobs({ parent: parent, jobs: jobs, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_update_jobs parent: parent, jobs: jobs, update_mask: update_mask do |response, operation|
+      c.batch_update_jobs parent: parent, jobs: jobs, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_update_jobs ::Google::Cloud::Talent::V4::BatchUpdateJobsRequest.new(parent: parent, jobs: jobs, update_mask: update_mask) do |response, operation|
+      c.batch_update_jobs ::Google::Cloud::Talent::V4::BatchUpdateJobsRequest.new(parent: parent, jobs: jobs, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_update_jobs({ parent: parent, jobs: jobs, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.batch_update_jobs({ parent: parent, jobs: jobs, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_update_jobs(::Google::Cloud::Talent::V4::BatchUpdateJobsRequest.new(parent: parent, jobs: jobs, update_mask: update_mask), grpc_options) do |response, operation|
+      c.batch_update_jobs(::Google::Cloud::Talent::V4::BatchUpdateJobsRequest.new(parent: parent, jobs: jobs, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -392,36 +392,36 @@ class ::Google::Cloud::Talent::V4::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_job({ name: name }) do |response, operation|
+      c.delete_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_job name: name do |response, operation|
+      c.delete_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_job ::Google::Cloud::Talent::V4::DeleteJobRequest.new(name: name) do |response, operation|
+      c.delete_job ::Google::Cloud::Talent::V4::DeleteJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_job({ name: name }, grpc_options) do |response, operation|
+      c.delete_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_job(::Google::Cloud::Talent::V4::DeleteJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_job(::Google::Cloud::Talent::V4::DeleteJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -452,40 +452,40 @@ class ::Google::Cloud::Talent::V4::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_delete_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_delete_jobs({ parent: parent, names: names }) do |response, operation|
+      c.batch_delete_jobs({ parent: parent, names: names }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_delete_jobs parent: parent, names: names do |response, operation|
+      c.batch_delete_jobs parent: parent, names: names do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_delete_jobs ::Google::Cloud::Talent::V4::BatchDeleteJobsRequest.new(parent: parent, names: names) do |response, operation|
+      c.batch_delete_jobs ::Google::Cloud::Talent::V4::BatchDeleteJobsRequest.new(parent: parent, names: names) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_delete_jobs({ parent: parent, names: names }, grpc_options) do |response, operation|
+      c.batch_delete_jobs({ parent: parent, names: names }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_delete_jobs(::Google::Cloud::Talent::V4::BatchDeleteJobsRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
+      c.batch_delete_jobs(::Google::Cloud::Talent::V4::BatchDeleteJobsRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -523,40 +523,40 @@ class ::Google::Cloud::Talent::V4::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_jobs({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view }) do |response, operation|
+      c.list_jobs({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_jobs parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view do |response, operation|
+      c.list_jobs parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_jobs ::Google::Cloud::Talent::V4::ListJobsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view) do |response, operation|
+      c.list_jobs ::Google::Cloud::Talent::V4::ListJobsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_jobs({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view }, grpc_options) do |response, operation|
+      c.list_jobs({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_jobs(::Google::Cloud::Talent::V4::ListJobsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view), grpc_options) do |response, operation|
+      c.list_jobs(::Google::Cloud::Talent::V4::ListJobsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -616,36 +616,36 @@ class ::Google::Cloud::Talent::V4::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }) do |response, operation|
+      c.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_jobs parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold do |response, operation|
+      c.search_jobs parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_jobs ::Google::Cloud::Talent::V4::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold) do |response, operation|
+      c.search_jobs ::Google::Cloud::Talent::V4::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }, grpc_options) do |response, operation|
+      c.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_jobs(::Google::Cloud::Talent::V4::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold), grpc_options) do |response, operation|
+      c.search_jobs(::Google::Cloud::Talent::V4::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -704,36 +704,36 @@ class ::Google::Cloud::Talent::V4::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_jobs_for_alert_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }) do |response, operation|
+      c.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_jobs_for_alert parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold do |response, operation|
+      c.search_jobs_for_alert parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_jobs_for_alert ::Google::Cloud::Talent::V4::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold) do |response, operation|
+      c.search_jobs_for_alert ::Google::Cloud::Talent::V4::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }, grpc_options) do |response, operation|
+      c.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_jobs_for_alert(::Google::Cloud::Talent::V4::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold), grpc_options) do |response, operation|
+      c.search_jobs_for_alert(::Google::Cloud::Talent::V4::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, histogram_queries: histogram_queries, job_view: job_view, offset: offset, max_page_size: max_page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

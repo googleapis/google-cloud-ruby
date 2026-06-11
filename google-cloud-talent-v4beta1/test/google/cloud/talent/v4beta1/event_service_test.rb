@@ -84,36 +84,36 @@ class ::Google::Cloud::Talent::V4beta1::EventService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_client_event_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4beta1::EventService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4beta1::EventService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_client_event({ parent: parent, client_event: client_event }) do |response, operation|
+      c.create_client_event({ parent: parent, client_event: client_event }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_client_event parent: parent, client_event: client_event do |response, operation|
+      c.create_client_event parent: parent, client_event: client_event do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_client_event ::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event) do |response, operation|
+      c.create_client_event ::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_client_event({ parent: parent, client_event: client_event }, grpc_options) do |response, operation|
+      c.create_client_event({ parent: parent, client_event: client_event }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_client_event(::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event), grpc_options) do |response, operation|
+      c.create_client_event(::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

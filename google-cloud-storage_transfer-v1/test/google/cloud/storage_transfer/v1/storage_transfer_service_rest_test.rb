@@ -97,32 +97,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_get_google_service_account_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_google_service_account_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_google_service_account({ project_id: project_id }) do |_result, response|
+        c.get_google_service_account({ project_id: project_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_google_service_account project_id: project_id do |_result, response|
+        c.get_google_service_account project_id: project_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_google_service_account ::Google::Cloud::StorageTransfer::V1::GetGoogleServiceAccountRequest.new(project_id: project_id) do |_result, response|
+        c.get_google_service_account ::Google::Cloud::StorageTransfer::V1::GetGoogleServiceAccountRequest.new(project_id: project_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_google_service_account({ project_id: project_id }, call_options) do |_result, response|
+        c.get_google_service_account({ project_id: project_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_google_service_account(::Google::Cloud::StorageTransfer::V1::GetGoogleServiceAccountRequest.new(project_id: project_id), call_options) do |_result, response|
+        c.get_google_service_account(::Google::Cloud::StorageTransfer::V1::GetGoogleServiceAccountRequest.new(project_id: project_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -151,32 +151,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_create_transfer_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_transfer_job_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_transfer_job({ transfer_job: transfer_job }) do |_result, response|
+        c.create_transfer_job({ transfer_job: transfer_job }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_transfer_job transfer_job: transfer_job do |_result, response|
+        c.create_transfer_job transfer_job: transfer_job do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_transfer_job ::Google::Cloud::StorageTransfer::V1::CreateTransferJobRequest.new(transfer_job: transfer_job) do |_result, response|
+        c.create_transfer_job ::Google::Cloud::StorageTransfer::V1::CreateTransferJobRequest.new(transfer_job: transfer_job) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_transfer_job({ transfer_job: transfer_job }, call_options) do |_result, response|
+        c.create_transfer_job({ transfer_job: transfer_job }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_transfer_job(::Google::Cloud::StorageTransfer::V1::CreateTransferJobRequest.new(transfer_job: transfer_job), call_options) do |_result, response|
+        c.create_transfer_job(::Google::Cloud::StorageTransfer::V1::CreateTransferJobRequest.new(transfer_job: transfer_job), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_update_transfer_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_transfer_job_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_transfer_job({ job_name: job_name, project_id: project_id, transfer_job: transfer_job, update_transfer_job_field_mask: update_transfer_job_field_mask }) do |_result, response|
+        c.update_transfer_job({ job_name: job_name, project_id: project_id, transfer_job: transfer_job, update_transfer_job_field_mask: update_transfer_job_field_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_transfer_job job_name: job_name, project_id: project_id, transfer_job: transfer_job, update_transfer_job_field_mask: update_transfer_job_field_mask do |_result, response|
+        c.update_transfer_job job_name: job_name, project_id: project_id, transfer_job: transfer_job, update_transfer_job_field_mask: update_transfer_job_field_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_transfer_job ::Google::Cloud::StorageTransfer::V1::UpdateTransferJobRequest.new(job_name: job_name, project_id: project_id, transfer_job: transfer_job, update_transfer_job_field_mask: update_transfer_job_field_mask) do |_result, response|
+        c.update_transfer_job ::Google::Cloud::StorageTransfer::V1::UpdateTransferJobRequest.new(job_name: job_name, project_id: project_id, transfer_job: transfer_job, update_transfer_job_field_mask: update_transfer_job_field_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_transfer_job({ job_name: job_name, project_id: project_id, transfer_job: transfer_job, update_transfer_job_field_mask: update_transfer_job_field_mask }, call_options) do |_result, response|
+        c.update_transfer_job({ job_name: job_name, project_id: project_id, transfer_job: transfer_job, update_transfer_job_field_mask: update_transfer_job_field_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_transfer_job(::Google::Cloud::StorageTransfer::V1::UpdateTransferJobRequest.new(job_name: job_name, project_id: project_id, transfer_job: transfer_job, update_transfer_job_field_mask: update_transfer_job_field_mask), call_options) do |_result, response|
+        c.update_transfer_job(::Google::Cloud::StorageTransfer::V1::UpdateTransferJobRequest.new(job_name: job_name, project_id: project_id, transfer_job: transfer_job, update_transfer_job_field_mask: update_transfer_job_field_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_get_transfer_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_transfer_job_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_transfer_job({ job_name: job_name, project_id: project_id }) do |_result, response|
+        c.get_transfer_job({ job_name: job_name, project_id: project_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_transfer_job job_name: job_name, project_id: project_id do |_result, response|
+        c.get_transfer_job job_name: job_name, project_id: project_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_transfer_job ::Google::Cloud::StorageTransfer::V1::GetTransferJobRequest.new(job_name: job_name, project_id: project_id) do |_result, response|
+        c.get_transfer_job ::Google::Cloud::StorageTransfer::V1::GetTransferJobRequest.new(job_name: job_name, project_id: project_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_transfer_job({ job_name: job_name, project_id: project_id }, call_options) do |_result, response|
+        c.get_transfer_job({ job_name: job_name, project_id: project_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_transfer_job(::Google::Cloud::StorageTransfer::V1::GetTransferJobRequest.new(job_name: job_name, project_id: project_id), call_options) do |_result, response|
+        c.get_transfer_job(::Google::Cloud::StorageTransfer::V1::GetTransferJobRequest.new(job_name: job_name, project_id: project_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_list_transfer_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_transfer_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_transfer_jobs({ filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_transfer_jobs({ filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_transfer_jobs filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_transfer_jobs filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_transfer_jobs ::Google::Cloud::StorageTransfer::V1::ListTransferJobsRequest.new(filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_transfer_jobs ::Google::Cloud::StorageTransfer::V1::ListTransferJobsRequest.new(filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_transfer_jobs({ filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_transfer_jobs({ filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_transfer_jobs(::Google::Cloud::StorageTransfer::V1::ListTransferJobsRequest.new(filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_transfer_jobs(::Google::Cloud::StorageTransfer::V1::ListTransferJobsRequest.new(filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -373,32 +373,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_pause_transfer_operation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, pause_transfer_operation_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.pause_transfer_operation({ name: name }) do |_result, response|
+        c.pause_transfer_operation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.pause_transfer_operation name: name do |_result, response|
+        c.pause_transfer_operation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.pause_transfer_operation ::Google::Cloud::StorageTransfer::V1::PauseTransferOperationRequest.new(name: name) do |_result, response|
+        c.pause_transfer_operation ::Google::Cloud::StorageTransfer::V1::PauseTransferOperationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.pause_transfer_operation({ name: name }, call_options) do |_result, response|
+        c.pause_transfer_operation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.pause_transfer_operation(::Google::Cloud::StorageTransfer::V1::PauseTransferOperationRequest.new(name: name), call_options) do |_result, response|
+        c.pause_transfer_operation(::Google::Cloud::StorageTransfer::V1::PauseTransferOperationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -427,32 +427,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_resume_transfer_operation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resume_transfer_operation_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resume_transfer_operation({ name: name }) do |_result, response|
+        c.resume_transfer_operation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resume_transfer_operation name: name do |_result, response|
+        c.resume_transfer_operation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resume_transfer_operation ::Google::Cloud::StorageTransfer::V1::ResumeTransferOperationRequest.new(name: name) do |_result, response|
+        c.resume_transfer_operation ::Google::Cloud::StorageTransfer::V1::ResumeTransferOperationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resume_transfer_operation({ name: name }, call_options) do |_result, response|
+        c.resume_transfer_operation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resume_transfer_operation(::Google::Cloud::StorageTransfer::V1::ResumeTransferOperationRequest.new(name: name), call_options) do |_result, response|
+        c.resume_transfer_operation(::Google::Cloud::StorageTransfer::V1::ResumeTransferOperationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -482,32 +482,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_run_transfer_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_transfer_job_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_transfer_job({ job_name: job_name, project_id: project_id }) do |_result, response|
+        c.run_transfer_job({ job_name: job_name, project_id: project_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_transfer_job job_name: job_name, project_id: project_id do |_result, response|
+        c.run_transfer_job job_name: job_name, project_id: project_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_transfer_job ::Google::Cloud::StorageTransfer::V1::RunTransferJobRequest.new(job_name: job_name, project_id: project_id) do |_result, response|
+        c.run_transfer_job ::Google::Cloud::StorageTransfer::V1::RunTransferJobRequest.new(job_name: job_name, project_id: project_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_transfer_job({ job_name: job_name, project_id: project_id }, call_options) do |_result, response|
+        c.run_transfer_job({ job_name: job_name, project_id: project_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_transfer_job(::Google::Cloud::StorageTransfer::V1::RunTransferJobRequest.new(job_name: job_name, project_id: project_id), call_options) do |_result, response|
+        c.run_transfer_job(::Google::Cloud::StorageTransfer::V1::RunTransferJobRequest.new(job_name: job_name, project_id: project_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -537,32 +537,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_delete_transfer_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_transfer_job_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_transfer_job({ job_name: job_name, project_id: project_id }) do |_result, response|
+        c.delete_transfer_job({ job_name: job_name, project_id: project_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_transfer_job job_name: job_name, project_id: project_id do |_result, response|
+        c.delete_transfer_job job_name: job_name, project_id: project_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_transfer_job ::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest.new(job_name: job_name, project_id: project_id) do |_result, response|
+        c.delete_transfer_job ::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest.new(job_name: job_name, project_id: project_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_transfer_job({ job_name: job_name, project_id: project_id }, call_options) do |_result, response|
+        c.delete_transfer_job({ job_name: job_name, project_id: project_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_transfer_job(::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest.new(job_name: job_name, project_id: project_id), call_options) do |_result, response|
+        c.delete_transfer_job(::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest.new(job_name: job_name, project_id: project_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -593,32 +593,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_create_agent_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_agent_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_agent_pool({ project_id: project_id, agent_pool: agent_pool, agent_pool_id: agent_pool_id }) do |_result, response|
+        c.create_agent_pool({ project_id: project_id, agent_pool: agent_pool, agent_pool_id: agent_pool_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_agent_pool project_id: project_id, agent_pool: agent_pool, agent_pool_id: agent_pool_id do |_result, response|
+        c.create_agent_pool project_id: project_id, agent_pool: agent_pool, agent_pool_id: agent_pool_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_agent_pool ::Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest.new(project_id: project_id, agent_pool: agent_pool, agent_pool_id: agent_pool_id) do |_result, response|
+        c.create_agent_pool ::Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest.new(project_id: project_id, agent_pool: agent_pool, agent_pool_id: agent_pool_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_agent_pool({ project_id: project_id, agent_pool: agent_pool, agent_pool_id: agent_pool_id }, call_options) do |_result, response|
+        c.create_agent_pool({ project_id: project_id, agent_pool: agent_pool, agent_pool_id: agent_pool_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_agent_pool(::Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest.new(project_id: project_id, agent_pool: agent_pool, agent_pool_id: agent_pool_id), call_options) do |_result, response|
+        c.create_agent_pool(::Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest.new(project_id: project_id, agent_pool: agent_pool, agent_pool_id: agent_pool_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -648,32 +648,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_update_agent_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_agent_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_agent_pool({ agent_pool: agent_pool, update_mask: update_mask }) do |_result, response|
+        c.update_agent_pool({ agent_pool: agent_pool, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_agent_pool agent_pool: agent_pool, update_mask: update_mask do |_result, response|
+        c.update_agent_pool agent_pool: agent_pool, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_agent_pool ::Google::Cloud::StorageTransfer::V1::UpdateAgentPoolRequest.new(agent_pool: agent_pool, update_mask: update_mask) do |_result, response|
+        c.update_agent_pool ::Google::Cloud::StorageTransfer::V1::UpdateAgentPoolRequest.new(agent_pool: agent_pool, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_agent_pool({ agent_pool: agent_pool, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_agent_pool({ agent_pool: agent_pool, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_agent_pool(::Google::Cloud::StorageTransfer::V1::UpdateAgentPoolRequest.new(agent_pool: agent_pool, update_mask: update_mask), call_options) do |_result, response|
+        c.update_agent_pool(::Google::Cloud::StorageTransfer::V1::UpdateAgentPoolRequest.new(agent_pool: agent_pool, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -702,32 +702,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_get_agent_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_agent_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_agent_pool({ name: name }) do |_result, response|
+        c.get_agent_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_agent_pool name: name do |_result, response|
+        c.get_agent_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_agent_pool ::Google::Cloud::StorageTransfer::V1::GetAgentPoolRequest.new(name: name) do |_result, response|
+        c.get_agent_pool ::Google::Cloud::StorageTransfer::V1::GetAgentPoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_agent_pool({ name: name }, call_options) do |_result, response|
+        c.get_agent_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_agent_pool(::Google::Cloud::StorageTransfer::V1::GetAgentPoolRequest.new(name: name), call_options) do |_result, response|
+        c.get_agent_pool(::Google::Cloud::StorageTransfer::V1::GetAgentPoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -759,32 +759,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_list_agent_pools_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_agent_pools_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_agent_pools({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_agent_pools({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_agent_pools project_id: project_id, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_agent_pools project_id: project_id, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_agent_pools ::Google::Cloud::StorageTransfer::V1::ListAgentPoolsRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_agent_pools ::Google::Cloud::StorageTransfer::V1::ListAgentPoolsRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_agent_pools({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_agent_pools({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_agent_pools(::Google::Cloud::StorageTransfer::V1::ListAgentPoolsRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_agent_pools(::Google::Cloud::StorageTransfer::V1::ListAgentPoolsRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -813,32 +813,32 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client
     ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::ServiceStub.stub :transcode_delete_agent_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_agent_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_agent_pool({ name: name }) do |_result, response|
+        c.delete_agent_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_agent_pool name: name do |_result, response|
+        c.delete_agent_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_agent_pool ::Google::Cloud::StorageTransfer::V1::DeleteAgentPoolRequest.new(name: name) do |_result, response|
+        c.delete_agent_pool ::Google::Cloud::StorageTransfer::V1::DeleteAgentPoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_agent_pool({ name: name }, call_options) do |_result, response|
+        c.delete_agent_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_agent_pool(::Google::Cloud::StorageTransfer::V1::DeleteAgentPoolRequest.new(name: name), call_options) do |_result, response|
+        c.delete_agent_pool(::Google::Cloud::StorageTransfer::V1::DeleteAgentPoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

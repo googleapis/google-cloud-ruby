@@ -86,40 +86,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, list_instance_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instance_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_instance_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instance_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_instance_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instance_configs ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_instance_configs ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instance_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_instance_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instance_configs(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_instance_configs(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, get_instance_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance_config({ name: name }) do |response, operation|
+      c.get_instance_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance_config name: name do |response, operation|
+      c.get_instance_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new(name: name) do |response, operation|
+      c.get_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance_config({ name: name }, grpc_options) do |response, operation|
+      c.get_instance_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,40 +213,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, create_instance_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance_config({ parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only }) do |response, operation|
+      c.create_instance_config({ parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance_config parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only do |response, operation|
+      c.create_instance_config parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest.new(parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only) do |response, operation|
+      c.create_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest.new(parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance_config({ parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_instance_config({ parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest.new(parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest.new(parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, update_instance_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_instance_config({ instance_config: instance_config, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
+      c.update_instance_config({ instance_config: instance_config, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance_config instance_config: instance_config, update_mask: update_mask, validate_only: validate_only do |response, operation|
+      c.update_instance_config instance_config: instance_config, update_mask: update_mask, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest.new(instance_config: instance_config, update_mask: update_mask, validate_only: validate_only) do |response, operation|
+      c.update_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest.new(instance_config: instance_config, update_mask: update_mask, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance_config({ instance_config: instance_config, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_instance_config({ instance_config: instance_config, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest.new(instance_config: instance_config, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest.new(instance_config: instance_config, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -347,36 +347,36 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, delete_instance_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance_config({ name: name, etag: etag, validate_only: validate_only }) do |response, operation|
+      c.delete_instance_config({ name: name, etag: etag, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance_config name: name, etag: etag, validate_only: validate_only do |response, operation|
+      c.delete_instance_config name: name, etag: etag, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest.new(name: name, etag: etag, validate_only: validate_only) do |response, operation|
+      c.delete_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest.new(name: name, etag: etag, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance_config({ name: name, etag: etag, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.delete_instance_config({ name: name, etag: etag, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest.new(name: name, etag: etag, validate_only: validate_only), grpc_options) do |response, operation|
+      c.delete_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest.new(name: name, etag: etag, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -411,40 +411,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, list_instance_config_operations_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instance_config_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_instance_config_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instance_config_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_instance_config_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instance_config_operations ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_instance_config_operations ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instance_config_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_instance_config_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instance_config_operations(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_instance_config_operations(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -482,40 +482,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline }) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline do |response, operation|
+      c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline) do |response, operation|
+      c.list_instances ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline }, grpc_options) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline), grpc_options) do |response, operation|
+      c.list_instances(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -551,40 +551,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, list_instance_partitions_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instance_partitions({ parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }) do |response, operation|
+      c.list_instance_partitions({ parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instance_partitions parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline do |response, operation|
+      c.list_instance_partitions parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instance_partitions ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline) do |response, operation|
+      c.list_instance_partitions ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instance_partitions({ parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }, grpc_options) do |response, operation|
+      c.list_instance_partitions({ parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instance_partitions(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline), grpc_options) do |response, operation|
+      c.list_instance_partitions(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -616,36 +616,36 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name, field_mask: field_mask }) do |response, operation|
+      c.get_instance({ name: name, field_mask: field_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name, field_mask: field_mask do |response, operation|
+      c.get_instance name: name, field_mask: field_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest.new(name: name, field_mask: field_mask) do |response, operation|
+      c.get_instance ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest.new(name: name, field_mask: field_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name, field_mask: field_mask }, grpc_options) do |response, operation|
+      c.get_instance({ name: name, field_mask: field_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest.new(name: name, field_mask: field_mask), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest.new(name: name, field_mask: field_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -678,40 +678,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance parent: parent, instance_id: instance_id, instance: instance do |response, operation|
+      c.create_instance parent: parent, instance_id: instance_id, instance: instance do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |response, operation|
+      c.create_instance ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, grpc_options) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options) do |response, operation|
+      c.create_instance(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -743,40 +743,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, update_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_instance({ instance: instance, field_mask: field_mask }) do |response, operation|
+      c.update_instance({ instance: instance, field_mask: field_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance instance: instance, field_mask: field_mask do |response, operation|
+      c.update_instance instance: instance, field_mask: field_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new(instance: instance, field_mask: field_mask) do |response, operation|
+      c.update_instance ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new(instance: instance, field_mask: field_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance({ instance: instance, field_mask: field_mask }, grpc_options) do |response, operation|
+      c.update_instance({ instance: instance, field_mask: field_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new(instance: instance, field_mask: field_mask), grpc_options) do |response, operation|
+      c.update_instance(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new(instance: instance, field_mask: field_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -806,36 +806,36 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance({ name: name }) do |response, operation|
+      c.delete_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance name: name do |response, operation|
+      c.delete_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new(name: name) do |response, operation|
+      c.delete_instance ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance({ name: name }, grpc_options) do |response, operation|
+      c.delete_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_instance(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -868,36 +868,36 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -928,36 +928,36 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -988,36 +988,36 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1046,36 +1046,36 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, get_instance_partition_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance_partition({ name: name }) do |response, operation|
+      c.get_instance_partition({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance_partition name: name do |response, operation|
+      c.get_instance_partition name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest.new(name: name) do |response, operation|
+      c.get_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance_partition({ name: name }, grpc_options) do |response, operation|
+      c.get_instance_partition({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1108,40 +1108,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, create_instance_partition_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance_partition({ parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition }) do |response, operation|
+      c.create_instance_partition({ parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance_partition parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition do |response, operation|
+      c.create_instance_partition parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest.new(parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition) do |response, operation|
+      c.create_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest.new(parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance_partition({ parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition }, grpc_options) do |response, operation|
+      c.create_instance_partition({ parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest.new(parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition), grpc_options) do |response, operation|
+      c.create_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest.new(parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1173,36 +1173,36 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, delete_instance_partition_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance_partition({ name: name, etag: etag }) do |response, operation|
+      c.delete_instance_partition({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance_partition name: name, etag: etag do |response, operation|
+      c.delete_instance_partition name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance_partition({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_instance_partition({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1233,40 +1233,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, update_instance_partition_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_instance_partition({ instance_partition: instance_partition, field_mask: field_mask }) do |response, operation|
+      c.update_instance_partition({ instance_partition: instance_partition, field_mask: field_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance_partition instance_partition: instance_partition, field_mask: field_mask do |response, operation|
+      c.update_instance_partition instance_partition: instance_partition, field_mask: field_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest.new(instance_partition: instance_partition, field_mask: field_mask) do |response, operation|
+      c.update_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest.new(instance_partition: instance_partition, field_mask: field_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance_partition({ instance_partition: instance_partition, field_mask: field_mask }, grpc_options) do |response, operation|
+      c.update_instance_partition({ instance_partition: instance_partition, field_mask: field_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest.new(instance_partition: instance_partition, field_mask: field_mask), grpc_options) do |response, operation|
+      c.update_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest.new(instance_partition: instance_partition, field_mask: field_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1304,40 +1304,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, list_instance_partition_operations_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instance_partition_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }) do |response, operation|
+      c.list_instance_partition_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instance_partition_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline do |response, operation|
+      c.list_instance_partition_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instance_partition_operations ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline) do |response, operation|
+      c.list_instance_partition_operations ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instance_partition_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }, grpc_options) do |response, operation|
+      c.list_instance_partition_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instance_partition_operations(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline), grpc_options) do |response, operation|
+      c.list_instance_partition_operations(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1369,40 +1369,40 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
     Gapic::ServiceStub.stub :new, move_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.move_instance({ name: name, target_config: target_config }) do |response, operation|
+      c.move_instance({ name: name, target_config: target_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.move_instance name: name, target_config: target_config do |response, operation|
+      c.move_instance name: name, target_config: target_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.move_instance ::Google::Cloud::Spanner::Admin::Instance::V1::MoveInstanceRequest.new(name: name, target_config: target_config) do |response, operation|
+      c.move_instance ::Google::Cloud::Spanner::Admin::Instance::V1::MoveInstanceRequest.new(name: name, target_config: target_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.move_instance({ name: name, target_config: target_config }, grpc_options) do |response, operation|
+      c.move_instance({ name: name, target_config: target_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.move_instance(::Google::Cloud::Spanner::Admin::Instance::V1::MoveInstanceRequest.new(name: name, target_config: target_config), grpc_options) do |response, operation|
+      c.move_instance(::Google::Cloud::Spanner::Admin::Instance::V1::MoveInstanceRequest.new(name: name, target_config: target_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

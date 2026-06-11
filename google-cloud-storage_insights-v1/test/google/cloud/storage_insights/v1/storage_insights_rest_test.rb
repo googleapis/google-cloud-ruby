@@ -101,32 +101,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_list_report_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_report_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_report_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_report_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_report_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_report_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_report_configs ::Google::Cloud::StorageInsights::V1::ListReportConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_report_configs ::Google::Cloud::StorageInsights::V1::ListReportConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_report_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_report_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_report_configs(::Google::Cloud::StorageInsights::V1::ListReportConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_report_configs(::Google::Cloud::StorageInsights::V1::ListReportConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_get_report_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_report_config_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_report_config({ name: name }) do |_result, response|
+        c.get_report_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_report_config name: name do |_result, response|
+        c.get_report_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_report_config ::Google::Cloud::StorageInsights::V1::GetReportConfigRequest.new(name: name) do |_result, response|
+        c.get_report_config ::Google::Cloud::StorageInsights::V1::GetReportConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_report_config({ name: name }, call_options) do |_result, response|
+        c.get_report_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_report_config(::Google::Cloud::StorageInsights::V1::GetReportConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_report_config(::Google::Cloud::StorageInsights::V1::GetReportConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_create_report_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_report_config_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_report_config({ parent: parent, report_config: report_config, request_id: request_id }) do |_result, response|
+        c.create_report_config({ parent: parent, report_config: report_config, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_report_config parent: parent, report_config: report_config, request_id: request_id do |_result, response|
+        c.create_report_config parent: parent, report_config: report_config, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_report_config ::Google::Cloud::StorageInsights::V1::CreateReportConfigRequest.new(parent: parent, report_config: report_config, request_id: request_id) do |_result, response|
+        c.create_report_config ::Google::Cloud::StorageInsights::V1::CreateReportConfigRequest.new(parent: parent, report_config: report_config, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_report_config({ parent: parent, report_config: report_config, request_id: request_id }, call_options) do |_result, response|
+        c.create_report_config({ parent: parent, report_config: report_config, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_report_config(::Google::Cloud::StorageInsights::V1::CreateReportConfigRequest.new(parent: parent, report_config: report_config, request_id: request_id), call_options) do |_result, response|
+        c.create_report_config(::Google::Cloud::StorageInsights::V1::CreateReportConfigRequest.new(parent: parent, report_config: report_config, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_update_report_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_report_config_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_report_config({ update_mask: update_mask, report_config: report_config, request_id: request_id }) do |_result, response|
+        c.update_report_config({ update_mask: update_mask, report_config: report_config, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_report_config update_mask: update_mask, report_config: report_config, request_id: request_id do |_result, response|
+        c.update_report_config update_mask: update_mask, report_config: report_config, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_report_config ::Google::Cloud::StorageInsights::V1::UpdateReportConfigRequest.new(update_mask: update_mask, report_config: report_config, request_id: request_id) do |_result, response|
+        c.update_report_config ::Google::Cloud::StorageInsights::V1::UpdateReportConfigRequest.new(update_mask: update_mask, report_config: report_config, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_report_config({ update_mask: update_mask, report_config: report_config, request_id: request_id }, call_options) do |_result, response|
+        c.update_report_config({ update_mask: update_mask, report_config: report_config, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_report_config(::Google::Cloud::StorageInsights::V1::UpdateReportConfigRequest.new(update_mask: update_mask, report_config: report_config, request_id: request_id), call_options) do |_result, response|
+        c.update_report_config(::Google::Cloud::StorageInsights::V1::UpdateReportConfigRequest.new(update_mask: update_mask, report_config: report_config, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_delete_report_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_report_config_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_report_config({ name: name, force: force, request_id: request_id }) do |_result, response|
+        c.delete_report_config({ name: name, force: force, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_report_config name: name, force: force, request_id: request_id do |_result, response|
+        c.delete_report_config name: name, force: force, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_report_config ::Google::Cloud::StorageInsights::V1::DeleteReportConfigRequest.new(name: name, force: force, request_id: request_id) do |_result, response|
+        c.delete_report_config ::Google::Cloud::StorageInsights::V1::DeleteReportConfigRequest.new(name: name, force: force, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_report_config({ name: name, force: force, request_id: request_id }, call_options) do |_result, response|
+        c.delete_report_config({ name: name, force: force, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_report_config(::Google::Cloud::StorageInsights::V1::DeleteReportConfigRequest.new(name: name, force: force, request_id: request_id), call_options) do |_result, response|
+        c.delete_report_config(::Google::Cloud::StorageInsights::V1::DeleteReportConfigRequest.new(name: name, force: force, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -381,32 +381,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_list_report_details_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_report_details_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_report_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_report_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_report_details parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_report_details parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_report_details ::Google::Cloud::StorageInsights::V1::ListReportDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_report_details ::Google::Cloud::StorageInsights::V1::ListReportDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_report_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_report_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_report_details(::Google::Cloud::StorageInsights::V1::ListReportDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_report_details(::Google::Cloud::StorageInsights::V1::ListReportDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -435,32 +435,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_get_report_detail_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_report_detail_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_report_detail({ name: name }) do |_result, response|
+        c.get_report_detail({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_report_detail name: name do |_result, response|
+        c.get_report_detail name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_report_detail ::Google::Cloud::StorageInsights::V1::GetReportDetailRequest.new(name: name) do |_result, response|
+        c.get_report_detail ::Google::Cloud::StorageInsights::V1::GetReportDetailRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_report_detail({ name: name }, call_options) do |_result, response|
+        c.get_report_detail({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_report_detail(::Google::Cloud::StorageInsights::V1::GetReportDetailRequest.new(name: name), call_options) do |_result, response|
+        c.get_report_detail(::Google::Cloud::StorageInsights::V1::GetReportDetailRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -493,32 +493,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_list_dataset_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_dataset_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_dataset_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_dataset_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_dataset_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_dataset_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_dataset_configs ::Google::Cloud::StorageInsights::V1::ListDatasetConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_dataset_configs ::Google::Cloud::StorageInsights::V1::ListDatasetConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_dataset_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_dataset_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_dataset_configs(::Google::Cloud::StorageInsights::V1::ListDatasetConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_dataset_configs(::Google::Cloud::StorageInsights::V1::ListDatasetConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -547,32 +547,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_get_dataset_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_dataset_config_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_dataset_config({ name: name }) do |_result, response|
+        c.get_dataset_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_dataset_config name: name do |_result, response|
+        c.get_dataset_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_dataset_config ::Google::Cloud::StorageInsights::V1::GetDatasetConfigRequest.new(name: name) do |_result, response|
+        c.get_dataset_config ::Google::Cloud::StorageInsights::V1::GetDatasetConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_dataset_config({ name: name }, call_options) do |_result, response|
+        c.get_dataset_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_dataset_config(::Google::Cloud::StorageInsights::V1::GetDatasetConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_dataset_config(::Google::Cloud::StorageInsights::V1::GetDatasetConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -604,32 +604,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_create_dataset_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_dataset_config_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_dataset_config({ parent: parent, dataset_config_id: dataset_config_id, dataset_config: dataset_config, request_id: request_id }) do |_result, response|
+        c.create_dataset_config({ parent: parent, dataset_config_id: dataset_config_id, dataset_config: dataset_config, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_dataset_config parent: parent, dataset_config_id: dataset_config_id, dataset_config: dataset_config, request_id: request_id do |_result, response|
+        c.create_dataset_config parent: parent, dataset_config_id: dataset_config_id, dataset_config: dataset_config, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_dataset_config ::Google::Cloud::StorageInsights::V1::CreateDatasetConfigRequest.new(parent: parent, dataset_config_id: dataset_config_id, dataset_config: dataset_config, request_id: request_id) do |_result, response|
+        c.create_dataset_config ::Google::Cloud::StorageInsights::V1::CreateDatasetConfigRequest.new(parent: parent, dataset_config_id: dataset_config_id, dataset_config: dataset_config, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_dataset_config({ parent: parent, dataset_config_id: dataset_config_id, dataset_config: dataset_config, request_id: request_id }, call_options) do |_result, response|
+        c.create_dataset_config({ parent: parent, dataset_config_id: dataset_config_id, dataset_config: dataset_config, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_dataset_config(::Google::Cloud::StorageInsights::V1::CreateDatasetConfigRequest.new(parent: parent, dataset_config_id: dataset_config_id, dataset_config: dataset_config, request_id: request_id), call_options) do |_result, response|
+        c.create_dataset_config(::Google::Cloud::StorageInsights::V1::CreateDatasetConfigRequest.new(parent: parent, dataset_config_id: dataset_config_id, dataset_config: dataset_config, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -660,32 +660,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_update_dataset_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_dataset_config_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_dataset_config({ update_mask: update_mask, dataset_config: dataset_config, request_id: request_id }) do |_result, response|
+        c.update_dataset_config({ update_mask: update_mask, dataset_config: dataset_config, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_dataset_config update_mask: update_mask, dataset_config: dataset_config, request_id: request_id do |_result, response|
+        c.update_dataset_config update_mask: update_mask, dataset_config: dataset_config, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_dataset_config ::Google::Cloud::StorageInsights::V1::UpdateDatasetConfigRequest.new(update_mask: update_mask, dataset_config: dataset_config, request_id: request_id) do |_result, response|
+        c.update_dataset_config ::Google::Cloud::StorageInsights::V1::UpdateDatasetConfigRequest.new(update_mask: update_mask, dataset_config: dataset_config, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_dataset_config({ update_mask: update_mask, dataset_config: dataset_config, request_id: request_id }, call_options) do |_result, response|
+        c.update_dataset_config({ update_mask: update_mask, dataset_config: dataset_config, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_dataset_config(::Google::Cloud::StorageInsights::V1::UpdateDatasetConfigRequest.new(update_mask: update_mask, dataset_config: dataset_config, request_id: request_id), call_options) do |_result, response|
+        c.update_dataset_config(::Google::Cloud::StorageInsights::V1::UpdateDatasetConfigRequest.new(update_mask: update_mask, dataset_config: dataset_config, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -715,32 +715,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_delete_dataset_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_dataset_config_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_dataset_config({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_dataset_config({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_dataset_config name: name, request_id: request_id do |_result, response|
+        c.delete_dataset_config name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_dataset_config ::Google::Cloud::StorageInsights::V1::DeleteDatasetConfigRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_dataset_config ::Google::Cloud::StorageInsights::V1::DeleteDatasetConfigRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_dataset_config({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_dataset_config({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_dataset_config(::Google::Cloud::StorageInsights::V1::DeleteDatasetConfigRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_dataset_config(::Google::Cloud::StorageInsights::V1::DeleteDatasetConfigRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -769,32 +769,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_link_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, link_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.link_dataset({ name: name }) do |_result, response|
+        c.link_dataset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.link_dataset name: name do |_result, response|
+        c.link_dataset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.link_dataset ::Google::Cloud::StorageInsights::V1::LinkDatasetRequest.new(name: name) do |_result, response|
+        c.link_dataset ::Google::Cloud::StorageInsights::V1::LinkDatasetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.link_dataset({ name: name }, call_options) do |_result, response|
+        c.link_dataset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.link_dataset(::Google::Cloud::StorageInsights::V1::LinkDatasetRequest.new(name: name), call_options) do |_result, response|
+        c.link_dataset(::Google::Cloud::StorageInsights::V1::LinkDatasetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -823,32 +823,32 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ClientTest < 
     ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::ServiceStub.stub :transcode_unlink_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, unlink_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
+        c = ::Google::Cloud::StorageInsights::V1::StorageInsights::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.unlink_dataset({ name: name }) do |_result, response|
+        c.unlink_dataset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.unlink_dataset name: name do |_result, response|
+        c.unlink_dataset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.unlink_dataset ::Google::Cloud::StorageInsights::V1::UnlinkDatasetRequest.new(name: name) do |_result, response|
+        c.unlink_dataset ::Google::Cloud::StorageInsights::V1::UnlinkDatasetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.unlink_dataset({ name: name }, call_options) do |_result, response|
+        c.unlink_dataset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.unlink_dataset(::Google::Cloud::StorageInsights::V1::UnlinkDatasetRequest.new(name: name), call_options) do |_result, response|
+        c.unlink_dataset(::Google::Cloud::StorageInsights::V1::UnlinkDatasetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

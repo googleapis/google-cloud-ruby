@@ -82,36 +82,36 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_case_client_stub do
       # Create client
-      client = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
+      c = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_case({ name: name }) do |response, operation|
+      c.get_case({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_case name: name do |response, operation|
+      c.get_case name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_case ::Google::Cloud::Support::V2::GetCaseRequest.new(name: name) do |response, operation|
+      c.get_case ::Google::Cloud::Support::V2::GetCaseRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_case({ name: name }, grpc_options) do |response, operation|
+      c.get_case({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_case(::Google::Cloud::Support::V2::GetCaseRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_case(::Google::Cloud::Support::V2::GetCaseRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_cases_client_stub do
       # Create client
-      client = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
+      c = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_cases({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_cases({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_cases parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_cases parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_cases ::Google::Cloud::Support::V2::ListCasesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_cases ::Google::Cloud::Support::V2::ListCasesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_cases({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_cases({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_cases(::Google::Cloud::Support::V2::ListCasesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_cases(::Google::Cloud::Support::V2::ListCasesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -215,40 +215,40 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_cases_client_stub do
       # Create client
-      client = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
+      c = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_cases({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_cases({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_cases parent: parent, query: query, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_cases parent: parent, query: query, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_cases ::Google::Cloud::Support::V2::SearchCasesRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_cases ::Google::Cloud::Support::V2::SearchCasesRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_cases({ parent: parent, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_cases({ parent: parent, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_cases(::Google::Cloud::Support::V2::SearchCasesRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_cases(::Google::Cloud::Support::V2::SearchCasesRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -280,36 +280,36 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_case_client_stub do
       # Create client
-      client = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
+      c = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_case({ parent: parent, case: case_param }) do |response, operation|
+      c.create_case({ parent: parent, case: case_param }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_case parent: parent, case: case_param do |response, operation|
+      c.create_case parent: parent, case: case_param do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_case ::Google::Cloud::Support::V2::CreateCaseRequest.new(parent: parent, case: case_param) do |response, operation|
+      c.create_case ::Google::Cloud::Support::V2::CreateCaseRequest.new(parent: parent, case: case_param) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_case({ parent: parent, case: case_param }, grpc_options) do |response, operation|
+      c.create_case({ parent: parent, case: case_param }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_case(::Google::Cloud::Support::V2::CreateCaseRequest.new(parent: parent, case: case_param), grpc_options) do |response, operation|
+      c.create_case(::Google::Cloud::Support::V2::CreateCaseRequest.new(parent: parent, case: case_param), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,36 +340,36 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_case_client_stub do
       # Create client
-      client = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
+      c = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_case({ case: case_param, update_mask: update_mask }) do |response, operation|
+      c.update_case({ case: case_param, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_case case: case_param, update_mask: update_mask do |response, operation|
+      c.update_case case: case_param, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_case ::Google::Cloud::Support::V2::UpdateCaseRequest.new(case: case_param, update_mask: update_mask) do |response, operation|
+      c.update_case ::Google::Cloud::Support::V2::UpdateCaseRequest.new(case: case_param, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_case({ case: case_param, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_case({ case: case_param, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_case(::Google::Cloud::Support::V2::UpdateCaseRequest.new(case: case_param, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_case(::Google::Cloud::Support::V2::UpdateCaseRequest.new(case: case_param, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -400,36 +400,36 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, escalate_case_client_stub do
       # Create client
-      client = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
+      c = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.escalate_case({ name: name, escalation: escalation }) do |response, operation|
+      c.escalate_case({ name: name, escalation: escalation }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.escalate_case name: name, escalation: escalation do |response, operation|
+      c.escalate_case name: name, escalation: escalation do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.escalate_case ::Google::Cloud::Support::V2::EscalateCaseRequest.new(name: name, escalation: escalation) do |response, operation|
+      c.escalate_case ::Google::Cloud::Support::V2::EscalateCaseRequest.new(name: name, escalation: escalation) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.escalate_case({ name: name, escalation: escalation }, grpc_options) do |response, operation|
+      c.escalate_case({ name: name, escalation: escalation }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.escalate_case(::Google::Cloud::Support::V2::EscalateCaseRequest.new(name: name, escalation: escalation), grpc_options) do |response, operation|
+      c.escalate_case(::Google::Cloud::Support::V2::EscalateCaseRequest.new(name: name, escalation: escalation), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -458,36 +458,36 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, close_case_client_stub do
       # Create client
-      client = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
+      c = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.close_case({ name: name }) do |response, operation|
+      c.close_case({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.close_case name: name do |response, operation|
+      c.close_case name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.close_case ::Google::Cloud::Support::V2::CloseCaseRequest.new(name: name) do |response, operation|
+      c.close_case ::Google::Cloud::Support::V2::CloseCaseRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.close_case({ name: name }, grpc_options) do |response, operation|
+      c.close_case({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.close_case(::Google::Cloud::Support::V2::CloseCaseRequest.new(name: name), grpc_options) do |response, operation|
+      c.close_case(::Google::Cloud::Support::V2::CloseCaseRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -520,40 +520,40 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_case_classifications_client_stub do
       # Create client
-      client = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
+      c = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_case_classifications({ query: query, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_case_classifications({ query: query, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_case_classifications query: query, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_case_classifications query: query, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_case_classifications ::Google::Cloud::Support::V2::SearchCaseClassificationsRequest.new(query: query, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_case_classifications ::Google::Cloud::Support::V2::SearchCaseClassificationsRequest.new(query: query, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_case_classifications({ query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_case_classifications({ query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_case_classifications(::Google::Cloud::Support::V2::SearchCaseClassificationsRequest.new(query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_case_classifications(::Google::Cloud::Support::V2::SearchCaseClassificationsRequest.new(query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
