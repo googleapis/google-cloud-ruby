@@ -98,32 +98,32 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ClientTest < 
     ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ServiceStub.stub :transcode_update_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_dataset({ dataset: dataset, update_mask: update_mask }) do |_result, response|
+        c.update_dataset({ dataset: dataset, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_dataset dataset: dataset, update_mask: update_mask do |_result, response|
+        c.update_dataset dataset: dataset, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_dataset ::Google::Cloud::DocumentAI::V1beta3::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask) do |_result, response|
+        c.update_dataset ::Google::Cloud::DocumentAI::V1beta3::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_dataset({ dataset: dataset, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_dataset({ dataset: dataset, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_dataset(::Google::Cloud::DocumentAI::V1beta3::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), call_options) do |_result, response|
+        c.update_dataset(::Google::Cloud::DocumentAI::V1beta3::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ClientTest < 
     ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ServiceStub.stub :transcode_import_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_documents_client_stub do
         # Create client
-        client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_documents({ dataset: dataset, batch_documents_import_configs: batch_documents_import_configs }) do |_result, response|
+        c.import_documents({ dataset: dataset, batch_documents_import_configs: batch_documents_import_configs }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_documents dataset: dataset, batch_documents_import_configs: batch_documents_import_configs do |_result, response|
+        c.import_documents dataset: dataset, batch_documents_import_configs: batch_documents_import_configs do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_documents ::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest.new(dataset: dataset, batch_documents_import_configs: batch_documents_import_configs) do |_result, response|
+        c.import_documents ::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest.new(dataset: dataset, batch_documents_import_configs: batch_documents_import_configs) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_documents({ dataset: dataset, batch_documents_import_configs: batch_documents_import_configs }, call_options) do |_result, response|
+        c.import_documents({ dataset: dataset, batch_documents_import_configs: batch_documents_import_configs }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_documents(::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest.new(dataset: dataset, batch_documents_import_configs: batch_documents_import_configs), call_options) do |_result, response|
+        c.import_documents(::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest.new(dataset: dataset, batch_documents_import_configs: batch_documents_import_configs), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ClientTest < 
     ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ServiceStub.stub :transcode_get_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_document_client_stub do
         # Create client
-        client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_document({ dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range }) do |_result, response|
+        c.get_document({ dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_document dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range do |_result, response|
+        c.get_document dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_document ::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest.new(dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range) do |_result, response|
+        c.get_document ::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest.new(dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_document({ dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range }, call_options) do |_result, response|
+        c.get_document({ dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_document(::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest.new(dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range), call_options) do |_result, response|
+        c.get_document(::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest.new(dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -269,32 +269,32 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ClientTest < 
     ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ServiceStub.stub :transcode_list_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_documents_client_stub do
         # Create client
-        client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_documents({ dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip }) do |_result, response|
+        c.list_documents({ dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_documents dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip do |_result, response|
+        c.list_documents dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_documents ::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest.new(dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip) do |_result, response|
+        c.list_documents ::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest.new(dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_documents({ dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip }, call_options) do |_result, response|
+        c.list_documents({ dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_documents(::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest.new(dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip), call_options) do |_result, response|
+        c.list_documents(::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest.new(dataset: dataset, page_size: page_size, page_token: page_token, filter: filter, return_total_size: return_total_size, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -324,32 +324,32 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ClientTest < 
     ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ServiceStub.stub :transcode_batch_delete_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_delete_documents_client_stub do
         # Create client
-        client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_delete_documents({ dataset: dataset, dataset_documents: dataset_documents }) do |_result, response|
+        c.batch_delete_documents({ dataset: dataset, dataset_documents: dataset_documents }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_delete_documents dataset: dataset, dataset_documents: dataset_documents do |_result, response|
+        c.batch_delete_documents dataset: dataset, dataset_documents: dataset_documents do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_delete_documents ::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest.new(dataset: dataset, dataset_documents: dataset_documents) do |_result, response|
+        c.batch_delete_documents ::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest.new(dataset: dataset, dataset_documents: dataset_documents) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_delete_documents({ dataset: dataset, dataset_documents: dataset_documents }, call_options) do |_result, response|
+        c.batch_delete_documents({ dataset: dataset, dataset_documents: dataset_documents }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_delete_documents(::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest.new(dataset: dataset, dataset_documents: dataset_documents), call_options) do |_result, response|
+        c.batch_delete_documents(::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest.new(dataset: dataset, dataset_documents: dataset_documents), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ClientTest < 
     ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ServiceStub.stub :transcode_get_dataset_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_dataset_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_dataset_schema({ name: name, visible_fields_only: visible_fields_only }) do |_result, response|
+        c.get_dataset_schema({ name: name, visible_fields_only: visible_fields_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_dataset_schema name: name, visible_fields_only: visible_fields_only do |_result, response|
+        c.get_dataset_schema name: name, visible_fields_only: visible_fields_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_dataset_schema ::Google::Cloud::DocumentAI::V1beta3::GetDatasetSchemaRequest.new(name: name, visible_fields_only: visible_fields_only) do |_result, response|
+        c.get_dataset_schema ::Google::Cloud::DocumentAI::V1beta3::GetDatasetSchemaRequest.new(name: name, visible_fields_only: visible_fields_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_dataset_schema({ name: name, visible_fields_only: visible_fields_only }, call_options) do |_result, response|
+        c.get_dataset_schema({ name: name, visible_fields_only: visible_fields_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_dataset_schema(::Google::Cloud::DocumentAI::V1beta3::GetDatasetSchemaRequest.new(name: name, visible_fields_only: visible_fields_only), call_options) do |_result, response|
+        c.get_dataset_schema(::Google::Cloud::DocumentAI::V1beta3::GetDatasetSchemaRequest.new(name: name, visible_fields_only: visible_fields_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -434,32 +434,32 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ClientTest < 
     ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ServiceStub.stub :transcode_update_dataset_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_dataset_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_dataset_schema({ dataset_schema: dataset_schema, update_mask: update_mask }) do |_result, response|
+        c.update_dataset_schema({ dataset_schema: dataset_schema, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_dataset_schema dataset_schema: dataset_schema, update_mask: update_mask do |_result, response|
+        c.update_dataset_schema dataset_schema: dataset_schema, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_dataset_schema ::Google::Cloud::DocumentAI::V1beta3::UpdateDatasetSchemaRequest.new(dataset_schema: dataset_schema, update_mask: update_mask) do |_result, response|
+        c.update_dataset_schema ::Google::Cloud::DocumentAI::V1beta3::UpdateDatasetSchemaRequest.new(dataset_schema: dataset_schema, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_dataset_schema({ dataset_schema: dataset_schema, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_dataset_schema({ dataset_schema: dataset_schema, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_dataset_schema(::Google::Cloud::DocumentAI::V1beta3::UpdateDatasetSchemaRequest.new(dataset_schema: dataset_schema, update_mask: update_mask), call_options) do |_result, response|
+        c.update_dataset_schema(::Google::Cloud::DocumentAI::V1beta3::UpdateDatasetSchemaRequest.new(dataset_schema: dataset_schema, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
