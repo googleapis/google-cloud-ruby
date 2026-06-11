@@ -99,32 +99,32 @@ class ::Google::Cloud::Retail::V2::UserEventService::Rest::ClientTest < Minitest
     ::Google::Cloud::Retail::V2::UserEventService::Rest::ServiceStub.stub :transcode_write_user_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, write_user_event_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }) do |_result, response|
+        c.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.write_user_event parent: parent, user_event: user_event, write_async: write_async do |_result, response|
+        c.write_user_event parent: parent, user_event: user_event, write_async: write_async do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.write_user_event ::Google::Cloud::Retail::V2::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async) do |_result, response|
+        c.write_user_event ::Google::Cloud::Retail::V2::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }, call_options) do |_result, response|
+        c.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.write_user_event(::Google::Cloud::Retail::V2::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async), call_options) do |_result, response|
+        c.write_user_event(::Google::Cloud::Retail::V2::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -158,32 +158,32 @@ class ::Google::Cloud::Retail::V2::UserEventService::Rest::ClientTest < Minitest
     ::Google::Cloud::Retail::V2::UserEventService::Rest::ServiceStub.stub :transcode_collect_user_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, collect_user_event_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.collect_user_event({ prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json }) do |_result, response|
+        c.collect_user_event({ prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.collect_user_event prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json do |_result, response|
+        c.collect_user_event prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.collect_user_event ::Google::Cloud::Retail::V2::CollectUserEventRequest.new(prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json) do |_result, response|
+        c.collect_user_event ::Google::Cloud::Retail::V2::CollectUserEventRequest.new(prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.collect_user_event({ prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json }, call_options) do |_result, response|
+        c.collect_user_event({ prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.collect_user_event(::Google::Cloud::Retail::V2::CollectUserEventRequest.new(prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json), call_options) do |_result, response|
+        c.collect_user_event(::Google::Cloud::Retail::V2::CollectUserEventRequest.new(prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -214,32 +214,32 @@ class ::Google::Cloud::Retail::V2::UserEventService::Rest::ClientTest < Minitest
     ::Google::Cloud::Retail::V2::UserEventService::Rest::ServiceStub.stub :transcode_purge_user_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, purge_user_events_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.purge_user_events({ parent: parent, filter: filter, force: force }) do |_result, response|
+        c.purge_user_events({ parent: parent, filter: filter, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.purge_user_events parent: parent, filter: filter, force: force do |_result, response|
+        c.purge_user_events parent: parent, filter: filter, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.purge_user_events ::Google::Cloud::Retail::V2::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force) do |_result, response|
+        c.purge_user_events ::Google::Cloud::Retail::V2::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.purge_user_events({ parent: parent, filter: filter, force: force }, call_options) do |_result, response|
+        c.purge_user_events({ parent: parent, filter: filter, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.purge_user_events(::Google::Cloud::Retail::V2::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force), call_options) do |_result, response|
+        c.purge_user_events(::Google::Cloud::Retail::V2::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -270,32 +270,32 @@ class ::Google::Cloud::Retail::V2::UserEventService::Rest::ClientTest < Minitest
     ::Google::Cloud::Retail::V2::UserEventService::Rest::ServiceStub.stub :transcode_import_user_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_user_events_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_user_events({ parent: parent, input_config: input_config, errors_config: errors_config }) do |_result, response|
+        c.import_user_events({ parent: parent, input_config: input_config, errors_config: errors_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_user_events parent: parent, input_config: input_config, errors_config: errors_config do |_result, response|
+        c.import_user_events parent: parent, input_config: input_config, errors_config: errors_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_user_events ::Google::Cloud::Retail::V2::ImportUserEventsRequest.new(parent: parent, input_config: input_config, errors_config: errors_config) do |_result, response|
+        c.import_user_events ::Google::Cloud::Retail::V2::ImportUserEventsRequest.new(parent: parent, input_config: input_config, errors_config: errors_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_user_events({ parent: parent, input_config: input_config, errors_config: errors_config }, call_options) do |_result, response|
+        c.import_user_events({ parent: parent, input_config: input_config, errors_config: errors_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_user_events(::Google::Cloud::Retail::V2::ImportUserEventsRequest.new(parent: parent, input_config: input_config, errors_config: errors_config), call_options) do |_result, response|
+        c.import_user_events(::Google::Cloud::Retail::V2::ImportUserEventsRequest.new(parent: parent, input_config: input_config, errors_config: errors_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -325,32 +325,32 @@ class ::Google::Cloud::Retail::V2::UserEventService::Rest::ClientTest < Minitest
     ::Google::Cloud::Retail::V2::UserEventService::Rest::ServiceStub.stub :transcode_rejoin_user_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rejoin_user_events_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rejoin_user_events({ parent: parent, user_event_rejoin_scope: user_event_rejoin_scope }) do |_result, response|
+        c.rejoin_user_events({ parent: parent, user_event_rejoin_scope: user_event_rejoin_scope }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rejoin_user_events parent: parent, user_event_rejoin_scope: user_event_rejoin_scope do |_result, response|
+        c.rejoin_user_events parent: parent, user_event_rejoin_scope: user_event_rejoin_scope do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rejoin_user_events ::Google::Cloud::Retail::V2::RejoinUserEventsRequest.new(parent: parent, user_event_rejoin_scope: user_event_rejoin_scope) do |_result, response|
+        c.rejoin_user_events ::Google::Cloud::Retail::V2::RejoinUserEventsRequest.new(parent: parent, user_event_rejoin_scope: user_event_rejoin_scope) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rejoin_user_events({ parent: parent, user_event_rejoin_scope: user_event_rejoin_scope }, call_options) do |_result, response|
+        c.rejoin_user_events({ parent: parent, user_event_rejoin_scope: user_event_rejoin_scope }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rejoin_user_events(::Google::Cloud::Retail::V2::RejoinUserEventsRequest.new(parent: parent, user_event_rejoin_scope: user_event_rejoin_scope), call_options) do |_result, response|
+        c.rejoin_user_events(::Google::Cloud::Retail::V2::RejoinUserEventsRequest.new(parent: parent, user_event_rejoin_scope: user_event_rejoin_scope), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

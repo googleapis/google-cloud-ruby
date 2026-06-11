@@ -88,40 +88,40 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_secrets_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_secrets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_secrets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_secrets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_secrets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_secrets ::Google::Cloud::SecretManager::V1beta2::ListSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_secrets ::Google::Cloud::SecretManager::V1beta2::ListSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_secrets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_secrets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_secrets(::Google::Cloud::SecretManager::V1beta2::ListSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_secrets(::Google::Cloud::SecretManager::V1beta2::ListSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -155,36 +155,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, create_secret_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_secret({ parent: parent, secret_id: secret_id, secret: secret }) do |response, operation|
+      c.create_secret({ parent: parent, secret_id: secret_id, secret: secret }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_secret parent: parent, secret_id: secret_id, secret: secret do |response, operation|
+      c.create_secret parent: parent, secret_id: secret_id, secret: secret do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_secret ::Google::Cloud::SecretManager::V1beta2::CreateSecretRequest.new(parent: parent, secret_id: secret_id, secret: secret) do |response, operation|
+      c.create_secret ::Google::Cloud::SecretManager::V1beta2::CreateSecretRequest.new(parent: parent, secret_id: secret_id, secret: secret) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_secret({ parent: parent, secret_id: secret_id, secret: secret }, grpc_options) do |response, operation|
+      c.create_secret({ parent: parent, secret_id: secret_id, secret: secret }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_secret(::Google::Cloud::SecretManager::V1beta2::CreateSecretRequest.new(parent: parent, secret_id: secret_id, secret: secret), grpc_options) do |response, operation|
+      c.create_secret(::Google::Cloud::SecretManager::V1beta2::CreateSecretRequest.new(parent: parent, secret_id: secret_id, secret: secret), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,36 +215,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, add_secret_version_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.add_secret_version({ parent: parent, payload: payload }) do |response, operation|
+      c.add_secret_version({ parent: parent, payload: payload }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.add_secret_version parent: parent, payload: payload do |response, operation|
+      c.add_secret_version parent: parent, payload: payload do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.add_secret_version ::Google::Cloud::SecretManager::V1beta2::AddSecretVersionRequest.new(parent: parent, payload: payload) do |response, operation|
+      c.add_secret_version ::Google::Cloud::SecretManager::V1beta2::AddSecretVersionRequest.new(parent: parent, payload: payload) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.add_secret_version({ parent: parent, payload: payload }, grpc_options) do |response, operation|
+      c.add_secret_version({ parent: parent, payload: payload }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.add_secret_version(::Google::Cloud::SecretManager::V1beta2::AddSecretVersionRequest.new(parent: parent, payload: payload), grpc_options) do |response, operation|
+      c.add_secret_version(::Google::Cloud::SecretManager::V1beta2::AddSecretVersionRequest.new(parent: parent, payload: payload), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -273,36 +273,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_secret_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_secret({ name: name }) do |response, operation|
+      c.get_secret({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_secret name: name do |response, operation|
+      c.get_secret name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_secret ::Google::Cloud::SecretManager::V1beta2::GetSecretRequest.new(name: name) do |response, operation|
+      c.get_secret ::Google::Cloud::SecretManager::V1beta2::GetSecretRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_secret({ name: name }, grpc_options) do |response, operation|
+      c.get_secret({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_secret(::Google::Cloud::SecretManager::V1beta2::GetSecretRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_secret(::Google::Cloud::SecretManager::V1beta2::GetSecretRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -333,36 +333,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, update_secret_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_secret({ secret: secret, update_mask: update_mask }) do |response, operation|
+      c.update_secret({ secret: secret, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_secret secret: secret, update_mask: update_mask do |response, operation|
+      c.update_secret secret: secret, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_secret ::Google::Cloud::SecretManager::V1beta2::UpdateSecretRequest.new(secret: secret, update_mask: update_mask) do |response, operation|
+      c.update_secret ::Google::Cloud::SecretManager::V1beta2::UpdateSecretRequest.new(secret: secret, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_secret({ secret: secret, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_secret({ secret: secret, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_secret(::Google::Cloud::SecretManager::V1beta2::UpdateSecretRequest.new(secret: secret, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_secret(::Google::Cloud::SecretManager::V1beta2::UpdateSecretRequest.new(secret: secret, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -393,36 +393,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, delete_secret_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_secret({ name: name, etag: etag }) do |response, operation|
+      c.delete_secret({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_secret name: name, etag: etag do |response, operation|
+      c.delete_secret name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_secret ::Google::Cloud::SecretManager::V1beta2::DeleteSecretRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_secret ::Google::Cloud::SecretManager::V1beta2::DeleteSecretRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_secret({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_secret({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_secret(::Google::Cloud::SecretManager::V1beta2::DeleteSecretRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_secret(::Google::Cloud::SecretManager::V1beta2::DeleteSecretRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -457,40 +457,40 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_secret_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_secret_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_secret_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_secret_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_secret_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_secret_versions ::Google::Cloud::SecretManager::V1beta2::ListSecretVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_secret_versions ::Google::Cloud::SecretManager::V1beta2::ListSecretVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_secret_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_secret_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_secret_versions(::Google::Cloud::SecretManager::V1beta2::ListSecretVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_secret_versions(::Google::Cloud::SecretManager::V1beta2::ListSecretVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -520,36 +520,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_secret_version_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_secret_version({ name: name }) do |response, operation|
+      c.get_secret_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_secret_version name: name do |response, operation|
+      c.get_secret_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_secret_version ::Google::Cloud::SecretManager::V1beta2::GetSecretVersionRequest.new(name: name) do |response, operation|
+      c.get_secret_version ::Google::Cloud::SecretManager::V1beta2::GetSecretVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_secret_version({ name: name }, grpc_options) do |response, operation|
+      c.get_secret_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_secret_version(::Google::Cloud::SecretManager::V1beta2::GetSecretVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_secret_version(::Google::Cloud::SecretManager::V1beta2::GetSecretVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -578,36 +578,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, access_secret_version_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.access_secret_version({ name: name }) do |response, operation|
+      c.access_secret_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.access_secret_version name: name do |response, operation|
+      c.access_secret_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.access_secret_version ::Google::Cloud::SecretManager::V1beta2::AccessSecretVersionRequest.new(name: name) do |response, operation|
+      c.access_secret_version ::Google::Cloud::SecretManager::V1beta2::AccessSecretVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.access_secret_version({ name: name }, grpc_options) do |response, operation|
+      c.access_secret_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.access_secret_version(::Google::Cloud::SecretManager::V1beta2::AccessSecretVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.access_secret_version(::Google::Cloud::SecretManager::V1beta2::AccessSecretVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -638,36 +638,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, disable_secret_version_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.disable_secret_version({ name: name, etag: etag }) do |response, operation|
+      c.disable_secret_version({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.disable_secret_version name: name, etag: etag do |response, operation|
+      c.disable_secret_version name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.disable_secret_version ::Google::Cloud::SecretManager::V1beta2::DisableSecretVersionRequest.new(name: name, etag: etag) do |response, operation|
+      c.disable_secret_version ::Google::Cloud::SecretManager::V1beta2::DisableSecretVersionRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.disable_secret_version({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.disable_secret_version({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.disable_secret_version(::Google::Cloud::SecretManager::V1beta2::DisableSecretVersionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.disable_secret_version(::Google::Cloud::SecretManager::V1beta2::DisableSecretVersionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -698,36 +698,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, enable_secret_version_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.enable_secret_version({ name: name, etag: etag }) do |response, operation|
+      c.enable_secret_version({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.enable_secret_version name: name, etag: etag do |response, operation|
+      c.enable_secret_version name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.enable_secret_version ::Google::Cloud::SecretManager::V1beta2::EnableSecretVersionRequest.new(name: name, etag: etag) do |response, operation|
+      c.enable_secret_version ::Google::Cloud::SecretManager::V1beta2::EnableSecretVersionRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.enable_secret_version({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.enable_secret_version({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.enable_secret_version(::Google::Cloud::SecretManager::V1beta2::EnableSecretVersionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.enable_secret_version(::Google::Cloud::SecretManager::V1beta2::EnableSecretVersionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -758,36 +758,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, destroy_secret_version_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.destroy_secret_version({ name: name, etag: etag }) do |response, operation|
+      c.destroy_secret_version({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.destroy_secret_version name: name, etag: etag do |response, operation|
+      c.destroy_secret_version name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.destroy_secret_version ::Google::Cloud::SecretManager::V1beta2::DestroySecretVersionRequest.new(name: name, etag: etag) do |response, operation|
+      c.destroy_secret_version ::Google::Cloud::SecretManager::V1beta2::DestroySecretVersionRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.destroy_secret_version({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.destroy_secret_version({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.destroy_secret_version(::Google::Cloud::SecretManager::V1beta2::DestroySecretVersionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.destroy_secret_version(::Google::Cloud::SecretManager::V1beta2::DestroySecretVersionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -820,36 +820,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -880,36 +880,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -940,36 +940,36 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientTest 
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
+      c = ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

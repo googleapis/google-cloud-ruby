@@ -84,36 +84,36 @@ class ::Google::Cloud::Retail::V2::GenerativeQuestionService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, update_generative_questions_feature_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::GenerativeQuestionService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::GenerativeQuestionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_generative_questions_feature_config({ generative_questions_feature_config: generative_questions_feature_config, update_mask: update_mask }) do |response, operation|
+      c.update_generative_questions_feature_config({ generative_questions_feature_config: generative_questions_feature_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_generative_questions_feature_config generative_questions_feature_config: generative_questions_feature_config, update_mask: update_mask do |response, operation|
+      c.update_generative_questions_feature_config generative_questions_feature_config: generative_questions_feature_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_generative_questions_feature_config ::Google::Cloud::Retail::V2::UpdateGenerativeQuestionsFeatureConfigRequest.new(generative_questions_feature_config: generative_questions_feature_config, update_mask: update_mask) do |response, operation|
+      c.update_generative_questions_feature_config ::Google::Cloud::Retail::V2::UpdateGenerativeQuestionsFeatureConfigRequest.new(generative_questions_feature_config: generative_questions_feature_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_generative_questions_feature_config({ generative_questions_feature_config: generative_questions_feature_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_generative_questions_feature_config({ generative_questions_feature_config: generative_questions_feature_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_generative_questions_feature_config(::Google::Cloud::Retail::V2::UpdateGenerativeQuestionsFeatureConfigRequest.new(generative_questions_feature_config: generative_questions_feature_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_generative_questions_feature_config(::Google::Cloud::Retail::V2::UpdateGenerativeQuestionsFeatureConfigRequest.new(generative_questions_feature_config: generative_questions_feature_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::Retail::V2::GenerativeQuestionService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, get_generative_questions_feature_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::GenerativeQuestionService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::GenerativeQuestionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_generative_questions_feature_config({ catalog: catalog }) do |response, operation|
+      c.get_generative_questions_feature_config({ catalog: catalog }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_generative_questions_feature_config catalog: catalog do |response, operation|
+      c.get_generative_questions_feature_config catalog: catalog do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_generative_questions_feature_config ::Google::Cloud::Retail::V2::GetGenerativeQuestionsFeatureConfigRequest.new(catalog: catalog) do |response, operation|
+      c.get_generative_questions_feature_config ::Google::Cloud::Retail::V2::GetGenerativeQuestionsFeatureConfigRequest.new(catalog: catalog) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_generative_questions_feature_config({ catalog: catalog }, grpc_options) do |response, operation|
+      c.get_generative_questions_feature_config({ catalog: catalog }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_generative_questions_feature_config(::Google::Cloud::Retail::V2::GetGenerativeQuestionsFeatureConfigRequest.new(catalog: catalog), grpc_options) do |response, operation|
+      c.get_generative_questions_feature_config(::Google::Cloud::Retail::V2::GetGenerativeQuestionsFeatureConfigRequest.new(catalog: catalog), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -200,36 +200,36 @@ class ::Google::Cloud::Retail::V2::GenerativeQuestionService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, list_generative_question_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::GenerativeQuestionService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::GenerativeQuestionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_generative_question_configs({ parent: parent }) do |response, operation|
+      c.list_generative_question_configs({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_generative_question_configs parent: parent do |response, operation|
+      c.list_generative_question_configs parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_generative_question_configs ::Google::Cloud::Retail::V2::ListGenerativeQuestionConfigsRequest.new(parent: parent) do |response, operation|
+      c.list_generative_question_configs ::Google::Cloud::Retail::V2::ListGenerativeQuestionConfigsRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_generative_question_configs({ parent: parent }, grpc_options) do |response, operation|
+      c.list_generative_question_configs({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_generative_question_configs(::Google::Cloud::Retail::V2::ListGenerativeQuestionConfigsRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.list_generative_question_configs(::Google::Cloud::Retail::V2::ListGenerativeQuestionConfigsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -260,36 +260,36 @@ class ::Google::Cloud::Retail::V2::GenerativeQuestionService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, update_generative_question_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::GenerativeQuestionService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::GenerativeQuestionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_generative_question_config({ generative_question_config: generative_question_config, update_mask: update_mask }) do |response, operation|
+      c.update_generative_question_config({ generative_question_config: generative_question_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_generative_question_config generative_question_config: generative_question_config, update_mask: update_mask do |response, operation|
+      c.update_generative_question_config generative_question_config: generative_question_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_generative_question_config ::Google::Cloud::Retail::V2::UpdateGenerativeQuestionConfigRequest.new(generative_question_config: generative_question_config, update_mask: update_mask) do |response, operation|
+      c.update_generative_question_config ::Google::Cloud::Retail::V2::UpdateGenerativeQuestionConfigRequest.new(generative_question_config: generative_question_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_generative_question_config({ generative_question_config: generative_question_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_generative_question_config({ generative_question_config: generative_question_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_generative_question_config(::Google::Cloud::Retail::V2::UpdateGenerativeQuestionConfigRequest.new(generative_question_config: generative_question_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_generative_question_config(::Google::Cloud::Retail::V2::UpdateGenerativeQuestionConfigRequest.new(generative_question_config: generative_question_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -320,36 +320,36 @@ class ::Google::Cloud::Retail::V2::GenerativeQuestionService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, batch_update_generative_question_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::GenerativeQuestionService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::GenerativeQuestionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_update_generative_question_configs({ parent: parent, requests: requests }) do |response, operation|
+      c.batch_update_generative_question_configs({ parent: parent, requests: requests }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_update_generative_question_configs parent: parent, requests: requests do |response, operation|
+      c.batch_update_generative_question_configs parent: parent, requests: requests do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_update_generative_question_configs ::Google::Cloud::Retail::V2::BatchUpdateGenerativeQuestionConfigsRequest.new(parent: parent, requests: requests) do |response, operation|
+      c.batch_update_generative_question_configs ::Google::Cloud::Retail::V2::BatchUpdateGenerativeQuestionConfigsRequest.new(parent: parent, requests: requests) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_update_generative_question_configs({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+      c.batch_update_generative_question_configs({ parent: parent, requests: requests }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_update_generative_question_configs(::Google::Cloud::Retail::V2::BatchUpdateGenerativeQuestionConfigsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+      c.batch_update_generative_question_configs(::Google::Cloud::Retail::V2::BatchUpdateGenerativeQuestionConfigsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

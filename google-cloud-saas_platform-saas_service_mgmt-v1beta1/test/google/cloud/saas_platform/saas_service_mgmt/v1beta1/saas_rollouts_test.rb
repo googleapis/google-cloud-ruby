@@ -90,40 +90,40 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Cli
 
     Gapic::ServiceStub.stub :new, list_rollouts_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_rollouts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_rollouts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_rollouts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_rollouts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_rollouts ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_rollouts ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_rollouts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_rollouts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_rollouts(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_rollouts(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Cli
 
     Gapic::ServiceStub.stub :new, get_rollout_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_rollout({ name: name }) do |response, operation|
+      c.get_rollout({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_rollout name: name do |response, operation|
+      c.get_rollout name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_rollout ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetRolloutRequest.new(name: name) do |response, operation|
+      c.get_rollout ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetRolloutRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_rollout({ name: name }, grpc_options) do |response, operation|
+      c.get_rollout({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_rollout(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetRolloutRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_rollout(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetRolloutRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,36 +219,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Cli
 
     Gapic::ServiceStub.stub :new, create_rollout_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_rollout parent: parent, rollout_id: rollout_id, rollout: rollout, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.create_rollout parent: parent, rollout_id: rollout_id, rollout: rollout, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_rollout ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.create_rollout ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_rollout(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.create_rollout(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -283,36 +283,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Cli
 
     Gapic::ServiceStub.stub :new, update_rollout_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_rollout({ rollout: rollout, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
+      c.update_rollout({ rollout: rollout, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_rollout rollout: rollout, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
+      c.update_rollout rollout: rollout, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_rollout ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateRolloutRequest.new(rollout: rollout, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
+      c.update_rollout ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateRolloutRequest.new(rollout: rollout, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_rollout({ rollout: rollout, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_rollout({ rollout: rollout, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_rollout(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateRolloutRequest.new(rollout: rollout, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_rollout(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateRolloutRequest.new(rollout: rollout, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -347,36 +347,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Cli
 
     Gapic::ServiceStub.stub :new, delete_rollout_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_rollout({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.delete_rollout({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_rollout name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.delete_rollout name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_rollout ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteRolloutRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.delete_rollout ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteRolloutRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_rollout({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_rollout({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_rollout(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteRolloutRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_rollout(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteRolloutRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -413,40 +413,40 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Cli
 
     Gapic::ServiceStub.stub :new, list_rollout_kinds_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_rollout_kinds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_rollout_kinds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_rollout_kinds parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_rollout_kinds parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_rollout_kinds ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutKindsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_rollout_kinds ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutKindsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_rollout_kinds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_rollout_kinds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_rollout_kinds(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutKindsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_rollout_kinds(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutKindsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -476,36 +476,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Cli
 
     Gapic::ServiceStub.stub :new, get_rollout_kind_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_rollout_kind({ name: name }) do |response, operation|
+      c.get_rollout_kind({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_rollout_kind name: name do |response, operation|
+      c.get_rollout_kind name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_rollout_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetRolloutKindRequest.new(name: name) do |response, operation|
+      c.get_rollout_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetRolloutKindRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_rollout_kind({ name: name }, grpc_options) do |response, operation|
+      c.get_rollout_kind({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_rollout_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetRolloutKindRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_rollout_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetRolloutKindRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -542,36 +542,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Cli
 
     Gapic::ServiceStub.stub :new, create_rollout_kind_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_rollout_kind({ parent: parent, rollout_kind_id: rollout_kind_id, rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.create_rollout_kind({ parent: parent, rollout_kind_id: rollout_kind_id, rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_rollout_kind parent: parent, rollout_kind_id: rollout_kind_id, rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.create_rollout_kind parent: parent, rollout_kind_id: rollout_kind_id, rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_rollout_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateRolloutKindRequest.new(parent: parent, rollout_kind_id: rollout_kind_id, rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.create_rollout_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateRolloutKindRequest.new(parent: parent, rollout_kind_id: rollout_kind_id, rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_rollout_kind({ parent: parent, rollout_kind_id: rollout_kind_id, rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_rollout_kind({ parent: parent, rollout_kind_id: rollout_kind_id, rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_rollout_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateRolloutKindRequest.new(parent: parent, rollout_kind_id: rollout_kind_id, rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.create_rollout_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateRolloutKindRequest.new(parent: parent, rollout_kind_id: rollout_kind_id, rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -606,36 +606,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Cli
 
     Gapic::ServiceStub.stub :new, update_rollout_kind_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_rollout_kind({ rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
+      c.update_rollout_kind({ rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_rollout_kind rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
+      c.update_rollout_kind rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_rollout_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateRolloutKindRequest.new(rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
+      c.update_rollout_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateRolloutKindRequest.new(rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_rollout_kind({ rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_rollout_kind({ rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_rollout_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateRolloutKindRequest.new(rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_rollout_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateRolloutKindRequest.new(rollout_kind: rollout_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -670,36 +670,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Cli
 
     Gapic::ServiceStub.stub :new, delete_rollout_kind_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_rollout_kind({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.delete_rollout_kind({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_rollout_kind name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.delete_rollout_kind name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_rollout_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteRolloutKindRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.delete_rollout_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteRolloutKindRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_rollout_kind({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_rollout_kind({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_rollout_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteRolloutKindRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_rollout_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteRolloutKindRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

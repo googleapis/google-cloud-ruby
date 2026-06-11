@@ -98,36 +98,36 @@ class ::Google::Cloud::Retail::V2::CompletionService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, complete_query_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CompletionService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CompletionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.complete_query({ catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity }) do |response, operation|
+      c.complete_query({ catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.complete_query catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity do |response, operation|
+      c.complete_query catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.complete_query ::Google::Cloud::Retail::V2::CompleteQueryRequest.new(catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity) do |response, operation|
+      c.complete_query ::Google::Cloud::Retail::V2::CompleteQueryRequest.new(catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.complete_query({ catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity }, grpc_options) do |response, operation|
+      c.complete_query({ catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.complete_query(::Google::Cloud::Retail::V2::CompleteQueryRequest.new(catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity), grpc_options) do |response, operation|
+      c.complete_query(::Google::Cloud::Retail::V2::CompleteQueryRequest.new(catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -160,40 +160,40 @@ class ::Google::Cloud::Retail::V2::CompletionService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, import_completion_data_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CompletionService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CompletionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_completion_data({ parent: parent, input_config: input_config, notification_pubsub_topic: notification_pubsub_topic }) do |response, operation|
+      c.import_completion_data({ parent: parent, input_config: input_config, notification_pubsub_topic: notification_pubsub_topic }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_completion_data parent: parent, input_config: input_config, notification_pubsub_topic: notification_pubsub_topic do |response, operation|
+      c.import_completion_data parent: parent, input_config: input_config, notification_pubsub_topic: notification_pubsub_topic do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_completion_data ::Google::Cloud::Retail::V2::ImportCompletionDataRequest.new(parent: parent, input_config: input_config, notification_pubsub_topic: notification_pubsub_topic) do |response, operation|
+      c.import_completion_data ::Google::Cloud::Retail::V2::ImportCompletionDataRequest.new(parent: parent, input_config: input_config, notification_pubsub_topic: notification_pubsub_topic) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_completion_data({ parent: parent, input_config: input_config, notification_pubsub_topic: notification_pubsub_topic }, grpc_options) do |response, operation|
+      c.import_completion_data({ parent: parent, input_config: input_config, notification_pubsub_topic: notification_pubsub_topic }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_completion_data(::Google::Cloud::Retail::V2::ImportCompletionDataRequest.new(parent: parent, input_config: input_config, notification_pubsub_topic: notification_pubsub_topic), grpc_options) do |response, operation|
+      c.import_completion_data(::Google::Cloud::Retail::V2::ImportCompletionDataRequest.new(parent: parent, input_config: input_config, notification_pubsub_topic: notification_pubsub_topic), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

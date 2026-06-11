@@ -86,40 +86,40 @@ class ::Google::Cloud::Retail::V2::AnalyticsService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_analytics_metrics_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::AnalyticsService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::AnalyticsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_analytics_metrics({ catalog: catalog, output_config: output_config, filter: filter }) do |response, operation|
+      c.export_analytics_metrics({ catalog: catalog, output_config: output_config, filter: filter }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_analytics_metrics catalog: catalog, output_config: output_config, filter: filter do |response, operation|
+      c.export_analytics_metrics catalog: catalog, output_config: output_config, filter: filter do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_analytics_metrics ::Google::Cloud::Retail::V2::ExportAnalyticsMetricsRequest.new(catalog: catalog, output_config: output_config, filter: filter) do |response, operation|
+      c.export_analytics_metrics ::Google::Cloud::Retail::V2::ExportAnalyticsMetricsRequest.new(catalog: catalog, output_config: output_config, filter: filter) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_analytics_metrics({ catalog: catalog, output_config: output_config, filter: filter }, grpc_options) do |response, operation|
+      c.export_analytics_metrics({ catalog: catalog, output_config: output_config, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_analytics_metrics(::Google::Cloud::Retail::V2::ExportAnalyticsMetricsRequest.new(catalog: catalog, output_config: output_config, filter: filter), grpc_options) do |response, operation|
+      c.export_analytics_metrics(::Google::Cloud::Retail::V2::ExportAnalyticsMetricsRequest.new(catalog: catalog, output_config: output_config, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

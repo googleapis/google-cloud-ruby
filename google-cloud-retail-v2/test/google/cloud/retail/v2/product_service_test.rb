@@ -86,36 +86,36 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_product_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_product({ parent: parent, product: product, product_id: product_id }) do |response, operation|
+      c.create_product({ parent: parent, product: product, product_id: product_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_product parent: parent, product: product, product_id: product_id do |response, operation|
+      c.create_product parent: parent, product: product, product_id: product_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_product ::Google::Cloud::Retail::V2::CreateProductRequest.new(parent: parent, product: product, product_id: product_id) do |response, operation|
+      c.create_product ::Google::Cloud::Retail::V2::CreateProductRequest.new(parent: parent, product: product, product_id: product_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_product({ parent: parent, product: product, product_id: product_id }, grpc_options) do |response, operation|
+      c.create_product({ parent: parent, product: product, product_id: product_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_product(::Google::Cloud::Retail::V2::CreateProductRequest.new(parent: parent, product: product, product_id: product_id), grpc_options) do |response, operation|
+      c.create_product(::Google::Cloud::Retail::V2::CreateProductRequest.new(parent: parent, product: product, product_id: product_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_product_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_product({ name: name }) do |response, operation|
+      c.get_product({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_product name: name do |response, operation|
+      c.get_product name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_product ::Google::Cloud::Retail::V2::GetProductRequest.new(name: name) do |response, operation|
+      c.get_product ::Google::Cloud::Retail::V2::GetProductRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_product({ name: name }, grpc_options) do |response, operation|
+      c.get_product({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_product(::Google::Cloud::Retail::V2::GetProductRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_product(::Google::Cloud::Retail::V2::GetProductRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -210,40 +210,40 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_products_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask }) do |response, operation|
+      c.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_products parent: parent, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask do |response, operation|
+      c.list_products parent: parent, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_products ::Google::Cloud::Retail::V2::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask) do |response, operation|
+      c.list_products ::Google::Cloud::Retail::V2::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_products(::Google::Cloud::Retail::V2::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_products(::Google::Cloud::Retail::V2::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -277,36 +277,36 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_product_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_product({ product: product, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
+      c.update_product({ product: product, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_product product: product, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
+      c.update_product product: product, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_product ::Google::Cloud::Retail::V2::UpdateProductRequest.new(product: product, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
+      c.update_product ::Google::Cloud::Retail::V2::UpdateProductRequest.new(product: product, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_product({ product: product, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_product({ product: product, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_product(::Google::Cloud::Retail::V2::UpdateProductRequest.new(product: product, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_product(::Google::Cloud::Retail::V2::UpdateProductRequest.new(product: product, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,36 +335,36 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_product_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_product({ name: name }) do |response, operation|
+      c.delete_product({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_product name: name do |response, operation|
+      c.delete_product name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_product ::Google::Cloud::Retail::V2::DeleteProductRequest.new(name: name) do |response, operation|
+      c.delete_product ::Google::Cloud::Retail::V2::DeleteProductRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_product({ name: name }, grpc_options) do |response, operation|
+      c.delete_product({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_product(::Google::Cloud::Retail::V2::DeleteProductRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_product(::Google::Cloud::Retail::V2::DeleteProductRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -397,40 +397,40 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, purge_products_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.purge_products({ parent: parent, filter: filter, force: force }) do |response, operation|
+      c.purge_products({ parent: parent, filter: filter, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.purge_products parent: parent, filter: filter, force: force do |response, operation|
+      c.purge_products parent: parent, filter: filter, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.purge_products ::Google::Cloud::Retail::V2::PurgeProductsRequest.new(parent: parent, filter: filter, force: force) do |response, operation|
+      c.purge_products ::Google::Cloud::Retail::V2::PurgeProductsRequest.new(parent: parent, filter: filter, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.purge_products({ parent: parent, filter: filter, force: force }, grpc_options) do |response, operation|
+      c.purge_products({ parent: parent, filter: filter, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.purge_products(::Google::Cloud::Retail::V2::PurgeProductsRequest.new(parent: parent, filter: filter, force: force), grpc_options) do |response, operation|
+      c.purge_products(::Google::Cloud::Retail::V2::PurgeProductsRequest.new(parent: parent, filter: filter, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -472,40 +472,40 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, import_products_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_products({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config, update_mask: update_mask, reconciliation_mode: reconciliation_mode, notification_pubsub_topic: notification_pubsub_topic }) do |response, operation|
+      c.import_products({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config, update_mask: update_mask, reconciliation_mode: reconciliation_mode, notification_pubsub_topic: notification_pubsub_topic }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_products parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config, update_mask: update_mask, reconciliation_mode: reconciliation_mode, notification_pubsub_topic: notification_pubsub_topic do |response, operation|
+      c.import_products parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config, update_mask: update_mask, reconciliation_mode: reconciliation_mode, notification_pubsub_topic: notification_pubsub_topic do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_products ::Google::Cloud::Retail::V2::ImportProductsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config, update_mask: update_mask, reconciliation_mode: reconciliation_mode, notification_pubsub_topic: notification_pubsub_topic) do |response, operation|
+      c.import_products ::Google::Cloud::Retail::V2::ImportProductsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config, update_mask: update_mask, reconciliation_mode: reconciliation_mode, notification_pubsub_topic: notification_pubsub_topic) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_products({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config, update_mask: update_mask, reconciliation_mode: reconciliation_mode, notification_pubsub_topic: notification_pubsub_topic }, grpc_options) do |response, operation|
+      c.import_products({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config, update_mask: update_mask, reconciliation_mode: reconciliation_mode, notification_pubsub_topic: notification_pubsub_topic }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_products(::Google::Cloud::Retail::V2::ImportProductsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config, update_mask: update_mask, reconciliation_mode: reconciliation_mode, notification_pubsub_topic: notification_pubsub_topic), grpc_options) do |response, operation|
+      c.import_products(::Google::Cloud::Retail::V2::ImportProductsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config, update_mask: update_mask, reconciliation_mode: reconciliation_mode, notification_pubsub_topic: notification_pubsub_topic), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -541,40 +541,40 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, set_inventory_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_inventory({ inventory: inventory, set_mask: set_mask, set_time: set_time, allow_missing: allow_missing }) do |response, operation|
+      c.set_inventory({ inventory: inventory, set_mask: set_mask, set_time: set_time, allow_missing: allow_missing }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_inventory inventory: inventory, set_mask: set_mask, set_time: set_time, allow_missing: allow_missing do |response, operation|
+      c.set_inventory inventory: inventory, set_mask: set_mask, set_time: set_time, allow_missing: allow_missing do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_inventory ::Google::Cloud::Retail::V2::SetInventoryRequest.new(inventory: inventory, set_mask: set_mask, set_time: set_time, allow_missing: allow_missing) do |response, operation|
+      c.set_inventory ::Google::Cloud::Retail::V2::SetInventoryRequest.new(inventory: inventory, set_mask: set_mask, set_time: set_time, allow_missing: allow_missing) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_inventory({ inventory: inventory, set_mask: set_mask, set_time: set_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.set_inventory({ inventory: inventory, set_mask: set_mask, set_time: set_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_inventory(::Google::Cloud::Retail::V2::SetInventoryRequest.new(inventory: inventory, set_mask: set_mask, set_time: set_time, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.set_inventory(::Google::Cloud::Retail::V2::SetInventoryRequest.new(inventory: inventory, set_mask: set_mask, set_time: set_time, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -612,40 +612,40 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, add_fulfillment_places_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.add_fulfillment_places({ product: product, type: type, place_ids: place_ids, add_time: add_time, allow_missing: allow_missing }) do |response, operation|
+      c.add_fulfillment_places({ product: product, type: type, place_ids: place_ids, add_time: add_time, allow_missing: allow_missing }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.add_fulfillment_places product: product, type: type, place_ids: place_ids, add_time: add_time, allow_missing: allow_missing do |response, operation|
+      c.add_fulfillment_places product: product, type: type, place_ids: place_ids, add_time: add_time, allow_missing: allow_missing do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.add_fulfillment_places ::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest.new(product: product, type: type, place_ids: place_ids, add_time: add_time, allow_missing: allow_missing) do |response, operation|
+      c.add_fulfillment_places ::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest.new(product: product, type: type, place_ids: place_ids, add_time: add_time, allow_missing: allow_missing) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.add_fulfillment_places({ product: product, type: type, place_ids: place_ids, add_time: add_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.add_fulfillment_places({ product: product, type: type, place_ids: place_ids, add_time: add_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.add_fulfillment_places(::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest.new(product: product, type: type, place_ids: place_ids, add_time: add_time, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.add_fulfillment_places(::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest.new(product: product, type: type, place_ids: place_ids, add_time: add_time, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -683,40 +683,40 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, remove_fulfillment_places_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.remove_fulfillment_places({ product: product, type: type, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing }) do |response, operation|
+      c.remove_fulfillment_places({ product: product, type: type, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.remove_fulfillment_places product: product, type: type, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing do |response, operation|
+      c.remove_fulfillment_places product: product, type: type, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.remove_fulfillment_places ::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest.new(product: product, type: type, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing) do |response, operation|
+      c.remove_fulfillment_places ::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest.new(product: product, type: type, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.remove_fulfillment_places({ product: product, type: type, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.remove_fulfillment_places({ product: product, type: type, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.remove_fulfillment_places(::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest.new(product: product, type: type, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.remove_fulfillment_places(::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest.new(product: product, type: type, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -754,40 +754,40 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, add_local_inventories_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.add_local_inventories({ product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing }) do |response, operation|
+      c.add_local_inventories({ product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.add_local_inventories product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing do |response, operation|
+      c.add_local_inventories product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.add_local_inventories ::Google::Cloud::Retail::V2::AddLocalInventoriesRequest.new(product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing) do |response, operation|
+      c.add_local_inventories ::Google::Cloud::Retail::V2::AddLocalInventoriesRequest.new(product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.add_local_inventories({ product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.add_local_inventories({ product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.add_local_inventories(::Google::Cloud::Retail::V2::AddLocalInventoriesRequest.new(product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.add_local_inventories(::Google::Cloud::Retail::V2::AddLocalInventoriesRequest.new(product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -823,40 +823,40 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, remove_local_inventories_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.remove_local_inventories({ product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing }) do |response, operation|
+      c.remove_local_inventories({ product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.remove_local_inventories product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing do |response, operation|
+      c.remove_local_inventories product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.remove_local_inventories ::Google::Cloud::Retail::V2::RemoveLocalInventoriesRequest.new(product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing) do |response, operation|
+      c.remove_local_inventories ::Google::Cloud::Retail::V2::RemoveLocalInventoriesRequest.new(product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.remove_local_inventories({ product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.remove_local_inventories({ product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.remove_local_inventories(::Google::Cloud::Retail::V2::RemoveLocalInventoriesRequest.new(product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.remove_local_inventories(::Google::Cloud::Retail::V2::RemoveLocalInventoriesRequest.new(product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
