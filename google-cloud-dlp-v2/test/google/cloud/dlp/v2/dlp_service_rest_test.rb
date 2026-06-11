@@ -101,32 +101,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_inspect_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, inspect_content_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.inspect_content({ parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id }) do |_result, response|
+        c.inspect_content({ parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.inspect_content parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id do |_result, response|
+        c.inspect_content parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.inspect_content ::Google::Cloud::Dlp::V2::InspectContentRequest.new(parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id) do |_result, response|
+        c.inspect_content ::Google::Cloud::Dlp::V2::InspectContentRequest.new(parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.inspect_content({ parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id }, call_options) do |_result, response|
+        c.inspect_content({ parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.inspect_content(::Google::Cloud::Dlp::V2::InspectContentRequest.new(parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id), call_options) do |_result, response|
+        c.inspect_content(::Google::Cloud::Dlp::V2::InspectContentRequest.new(parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -162,32 +162,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_redact_image_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, redact_image_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template }) do |_result, response|
+        c.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.redact_image parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template do |_result, response|
+        c.redact_image parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.redact_image ::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template) do |_result, response|
+        c.redact_image ::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template }, call_options) do |_result, response|
+        c.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.redact_image(::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template), call_options) do |_result, response|
+        c.redact_image(::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -222,32 +222,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_deidentify_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, deidentify_content_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.deidentify_content({ parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id }) do |_result, response|
+        c.deidentify_content({ parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.deidentify_content parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id do |_result, response|
+        c.deidentify_content parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.deidentify_content ::Google::Cloud::Dlp::V2::DeidentifyContentRequest.new(parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id) do |_result, response|
+        c.deidentify_content ::Google::Cloud::Dlp::V2::DeidentifyContentRequest.new(parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.deidentify_content({ parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id }, call_options) do |_result, response|
+        c.deidentify_content({ parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.deidentify_content(::Google::Cloud::Dlp::V2::DeidentifyContentRequest.new(parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id), call_options) do |_result, response|
+        c.deidentify_content(::Google::Cloud::Dlp::V2::DeidentifyContentRequest.new(parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -282,32 +282,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_reidentify_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reidentify_content_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reidentify_content({ parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id }) do |_result, response|
+        c.reidentify_content({ parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reidentify_content parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id do |_result, response|
+        c.reidentify_content parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reidentify_content ::Google::Cloud::Dlp::V2::ReidentifyContentRequest.new(parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id) do |_result, response|
+        c.reidentify_content ::Google::Cloud::Dlp::V2::ReidentifyContentRequest.new(parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reidentify_content({ parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id }, call_options) do |_result, response|
+        c.reidentify_content({ parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reidentify_content(::Google::Cloud::Dlp::V2::ReidentifyContentRequest.new(parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id), call_options) do |_result, response|
+        c.reidentify_content(::Google::Cloud::Dlp::V2::ReidentifyContentRequest.new(parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -339,32 +339,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_info_types_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_info_types_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_info_types({ parent: parent, language_code: language_code, filter: filter, location_id: location_id }) do |_result, response|
+        c.list_info_types({ parent: parent, language_code: language_code, filter: filter, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_info_types parent: parent, language_code: language_code, filter: filter, location_id: location_id do |_result, response|
+        c.list_info_types parent: parent, language_code: language_code, filter: filter, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_info_types ::Google::Cloud::Dlp::V2::ListInfoTypesRequest.new(parent: parent, language_code: language_code, filter: filter, location_id: location_id) do |_result, response|
+        c.list_info_types ::Google::Cloud::Dlp::V2::ListInfoTypesRequest.new(parent: parent, language_code: language_code, filter: filter, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_info_types({ parent: parent, language_code: language_code, filter: filter, location_id: location_id }, call_options) do |_result, response|
+        c.list_info_types({ parent: parent, language_code: language_code, filter: filter, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_info_types(::Google::Cloud::Dlp::V2::ListInfoTypesRequest.new(parent: parent, language_code: language_code, filter: filter, location_id: location_id), call_options) do |_result, response|
+        c.list_info_types(::Google::Cloud::Dlp::V2::ListInfoTypesRequest.new(parent: parent, language_code: language_code, filter: filter, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -396,32 +396,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_create_inspect_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_inspect_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_inspect_template({ parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id }) do |_result, response|
+        c.create_inspect_template({ parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_inspect_template parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id do |_result, response|
+        c.create_inspect_template parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_inspect_template ::Google::Cloud::Dlp::V2::CreateInspectTemplateRequest.new(parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id) do |_result, response|
+        c.create_inspect_template ::Google::Cloud::Dlp::V2::CreateInspectTemplateRequest.new(parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_inspect_template({ parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id }, call_options) do |_result, response|
+        c.create_inspect_template({ parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_inspect_template(::Google::Cloud::Dlp::V2::CreateInspectTemplateRequest.new(parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id), call_options) do |_result, response|
+        c.create_inspect_template(::Google::Cloud::Dlp::V2::CreateInspectTemplateRequest.new(parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -452,32 +452,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_update_inspect_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_inspect_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_inspect_template({ name: name, inspect_template: inspect_template, update_mask: update_mask }) do |_result, response|
+        c.update_inspect_template({ name: name, inspect_template: inspect_template, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_inspect_template name: name, inspect_template: inspect_template, update_mask: update_mask do |_result, response|
+        c.update_inspect_template name: name, inspect_template: inspect_template, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_inspect_template ::Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest.new(name: name, inspect_template: inspect_template, update_mask: update_mask) do |_result, response|
+        c.update_inspect_template ::Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest.new(name: name, inspect_template: inspect_template, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_inspect_template({ name: name, inspect_template: inspect_template, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_inspect_template({ name: name, inspect_template: inspect_template, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_inspect_template(::Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest.new(name: name, inspect_template: inspect_template, update_mask: update_mask), call_options) do |_result, response|
+        c.update_inspect_template(::Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest.new(name: name, inspect_template: inspect_template, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -506,32 +506,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_inspect_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_inspect_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_inspect_template({ name: name }) do |_result, response|
+        c.get_inspect_template({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_inspect_template name: name do |_result, response|
+        c.get_inspect_template name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_inspect_template ::Google::Cloud::Dlp::V2::GetInspectTemplateRequest.new(name: name) do |_result, response|
+        c.get_inspect_template ::Google::Cloud::Dlp::V2::GetInspectTemplateRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_inspect_template({ name: name }, call_options) do |_result, response|
+        c.get_inspect_template({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_inspect_template(::Google::Cloud::Dlp::V2::GetInspectTemplateRequest.new(name: name), call_options) do |_result, response|
+        c.get_inspect_template(::Google::Cloud::Dlp::V2::GetInspectTemplateRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -564,32 +564,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_inspect_templates_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_inspect_templates_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_inspect_templates({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }) do |_result, response|
+        c.list_inspect_templates({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_inspect_templates parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id do |_result, response|
+        c.list_inspect_templates parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_inspect_templates ::Google::Cloud::Dlp::V2::ListInspectTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id) do |_result, response|
+        c.list_inspect_templates ::Google::Cloud::Dlp::V2::ListInspectTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_inspect_templates({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }, call_options) do |_result, response|
+        c.list_inspect_templates({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_inspect_templates(::Google::Cloud::Dlp::V2::ListInspectTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), call_options) do |_result, response|
+        c.list_inspect_templates(::Google::Cloud::Dlp::V2::ListInspectTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -618,32 +618,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_delete_inspect_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_inspect_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_inspect_template({ name: name }) do |_result, response|
+        c.delete_inspect_template({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_inspect_template name: name do |_result, response|
+        c.delete_inspect_template name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_inspect_template ::Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest.new(name: name) do |_result, response|
+        c.delete_inspect_template ::Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_inspect_template({ name: name }, call_options) do |_result, response|
+        c.delete_inspect_template({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_inspect_template(::Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest.new(name: name), call_options) do |_result, response|
+        c.delete_inspect_template(::Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -675,32 +675,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_create_deidentify_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_deidentify_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_deidentify_template({ parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id }) do |_result, response|
+        c.create_deidentify_template({ parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_deidentify_template parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id do |_result, response|
+        c.create_deidentify_template parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_deidentify_template ::Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest.new(parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id) do |_result, response|
+        c.create_deidentify_template ::Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest.new(parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_deidentify_template({ parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id }, call_options) do |_result, response|
+        c.create_deidentify_template({ parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_deidentify_template(::Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest.new(parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id), call_options) do |_result, response|
+        c.create_deidentify_template(::Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest.new(parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -731,32 +731,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_update_deidentify_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_deidentify_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_deidentify_template({ name: name, deidentify_template: deidentify_template, update_mask: update_mask }) do |_result, response|
+        c.update_deidentify_template({ name: name, deidentify_template: deidentify_template, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_deidentify_template name: name, deidentify_template: deidentify_template, update_mask: update_mask do |_result, response|
+        c.update_deidentify_template name: name, deidentify_template: deidentify_template, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_deidentify_template ::Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest.new(name: name, deidentify_template: deidentify_template, update_mask: update_mask) do |_result, response|
+        c.update_deidentify_template ::Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest.new(name: name, deidentify_template: deidentify_template, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_deidentify_template({ name: name, deidentify_template: deidentify_template, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_deidentify_template({ name: name, deidentify_template: deidentify_template, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_deidentify_template(::Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest.new(name: name, deidentify_template: deidentify_template, update_mask: update_mask), call_options) do |_result, response|
+        c.update_deidentify_template(::Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest.new(name: name, deidentify_template: deidentify_template, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -785,32 +785,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_deidentify_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_deidentify_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_deidentify_template({ name: name }) do |_result, response|
+        c.get_deidentify_template({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_deidentify_template name: name do |_result, response|
+        c.get_deidentify_template name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_deidentify_template ::Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest.new(name: name) do |_result, response|
+        c.get_deidentify_template ::Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_deidentify_template({ name: name }, call_options) do |_result, response|
+        c.get_deidentify_template({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_deidentify_template(::Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest.new(name: name), call_options) do |_result, response|
+        c.get_deidentify_template(::Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -843,32 +843,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_deidentify_templates_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_deidentify_templates_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_deidentify_templates({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }) do |_result, response|
+        c.list_deidentify_templates({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_deidentify_templates parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id do |_result, response|
+        c.list_deidentify_templates parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_deidentify_templates ::Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id) do |_result, response|
+        c.list_deidentify_templates ::Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_deidentify_templates({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }, call_options) do |_result, response|
+        c.list_deidentify_templates({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_deidentify_templates(::Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), call_options) do |_result, response|
+        c.list_deidentify_templates(::Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -897,32 +897,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_delete_deidentify_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_deidentify_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_deidentify_template({ name: name }) do |_result, response|
+        c.delete_deidentify_template({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_deidentify_template name: name do |_result, response|
+        c.delete_deidentify_template name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_deidentify_template ::Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest.new(name: name) do |_result, response|
+        c.delete_deidentify_template ::Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_deidentify_template({ name: name }, call_options) do |_result, response|
+        c.delete_deidentify_template({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_deidentify_template(::Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest.new(name: name), call_options) do |_result, response|
+        c.delete_deidentify_template(::Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -954,32 +954,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_create_job_trigger_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_job_trigger_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_job_trigger({ parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id }) do |_result, response|
+        c.create_job_trigger({ parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_job_trigger parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id do |_result, response|
+        c.create_job_trigger parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_job_trigger ::Google::Cloud::Dlp::V2::CreateJobTriggerRequest.new(parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id) do |_result, response|
+        c.create_job_trigger ::Google::Cloud::Dlp::V2::CreateJobTriggerRequest.new(parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_job_trigger({ parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id }, call_options) do |_result, response|
+        c.create_job_trigger({ parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_job_trigger(::Google::Cloud::Dlp::V2::CreateJobTriggerRequest.new(parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id), call_options) do |_result, response|
+        c.create_job_trigger(::Google::Cloud::Dlp::V2::CreateJobTriggerRequest.new(parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1010,32 +1010,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_update_job_trigger_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_job_trigger_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_job_trigger({ name: name, job_trigger: job_trigger, update_mask: update_mask }) do |_result, response|
+        c.update_job_trigger({ name: name, job_trigger: job_trigger, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_job_trigger name: name, job_trigger: job_trigger, update_mask: update_mask do |_result, response|
+        c.update_job_trigger name: name, job_trigger: job_trigger, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_job_trigger ::Google::Cloud::Dlp::V2::UpdateJobTriggerRequest.new(name: name, job_trigger: job_trigger, update_mask: update_mask) do |_result, response|
+        c.update_job_trigger ::Google::Cloud::Dlp::V2::UpdateJobTriggerRequest.new(name: name, job_trigger: job_trigger, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_job_trigger({ name: name, job_trigger: job_trigger, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_job_trigger({ name: name, job_trigger: job_trigger, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_job_trigger(::Google::Cloud::Dlp::V2::UpdateJobTriggerRequest.new(name: name, job_trigger: job_trigger, update_mask: update_mask), call_options) do |_result, response|
+        c.update_job_trigger(::Google::Cloud::Dlp::V2::UpdateJobTriggerRequest.new(name: name, job_trigger: job_trigger, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1065,32 +1065,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_hybrid_inspect_job_trigger_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, hybrid_inspect_job_trigger_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.hybrid_inspect_job_trigger({ name: name, hybrid_item: hybrid_item }) do |_result, response|
+        c.hybrid_inspect_job_trigger({ name: name, hybrid_item: hybrid_item }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.hybrid_inspect_job_trigger name: name, hybrid_item: hybrid_item do |_result, response|
+        c.hybrid_inspect_job_trigger name: name, hybrid_item: hybrid_item do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.hybrid_inspect_job_trigger ::Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest.new(name: name, hybrid_item: hybrid_item) do |_result, response|
+        c.hybrid_inspect_job_trigger ::Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest.new(name: name, hybrid_item: hybrid_item) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.hybrid_inspect_job_trigger({ name: name, hybrid_item: hybrid_item }, call_options) do |_result, response|
+        c.hybrid_inspect_job_trigger({ name: name, hybrid_item: hybrid_item }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.hybrid_inspect_job_trigger(::Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest.new(name: name, hybrid_item: hybrid_item), call_options) do |_result, response|
+        c.hybrid_inspect_job_trigger(::Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest.new(name: name, hybrid_item: hybrid_item), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1119,32 +1119,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_job_trigger_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_job_trigger_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_job_trigger({ name: name }) do |_result, response|
+        c.get_job_trigger({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_job_trigger name: name do |_result, response|
+        c.get_job_trigger name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_job_trigger ::Google::Cloud::Dlp::V2::GetJobTriggerRequest.new(name: name) do |_result, response|
+        c.get_job_trigger ::Google::Cloud::Dlp::V2::GetJobTriggerRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_job_trigger({ name: name }, call_options) do |_result, response|
+        c.get_job_trigger({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_job_trigger(::Google::Cloud::Dlp::V2::GetJobTriggerRequest.new(name: name), call_options) do |_result, response|
+        c.get_job_trigger(::Google::Cloud::Dlp::V2::GetJobTriggerRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1179,32 +1179,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_job_triggers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_job_triggers_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_job_triggers({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id }) do |_result, response|
+        c.list_job_triggers({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_job_triggers parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id do |_result, response|
+        c.list_job_triggers parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_job_triggers ::Google::Cloud::Dlp::V2::ListJobTriggersRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id) do |_result, response|
+        c.list_job_triggers ::Google::Cloud::Dlp::V2::ListJobTriggersRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_job_triggers({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id }, call_options) do |_result, response|
+        c.list_job_triggers({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_job_triggers(::Google::Cloud::Dlp::V2::ListJobTriggersRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id), call_options) do |_result, response|
+        c.list_job_triggers(::Google::Cloud::Dlp::V2::ListJobTriggersRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1233,32 +1233,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_delete_job_trigger_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_job_trigger_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_job_trigger({ name: name }) do |_result, response|
+        c.delete_job_trigger({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_job_trigger name: name do |_result, response|
+        c.delete_job_trigger name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_job_trigger ::Google::Cloud::Dlp::V2::DeleteJobTriggerRequest.new(name: name) do |_result, response|
+        c.delete_job_trigger ::Google::Cloud::Dlp::V2::DeleteJobTriggerRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_job_trigger({ name: name }, call_options) do |_result, response|
+        c.delete_job_trigger({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_job_trigger(::Google::Cloud::Dlp::V2::DeleteJobTriggerRequest.new(name: name), call_options) do |_result, response|
+        c.delete_job_trigger(::Google::Cloud::Dlp::V2::DeleteJobTriggerRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1287,32 +1287,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_activate_job_trigger_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, activate_job_trigger_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.activate_job_trigger({ name: name }) do |_result, response|
+        c.activate_job_trigger({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.activate_job_trigger name: name do |_result, response|
+        c.activate_job_trigger name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.activate_job_trigger ::Google::Cloud::Dlp::V2::ActivateJobTriggerRequest.new(name: name) do |_result, response|
+        c.activate_job_trigger ::Google::Cloud::Dlp::V2::ActivateJobTriggerRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.activate_job_trigger({ name: name }, call_options) do |_result, response|
+        c.activate_job_trigger({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.activate_job_trigger(::Google::Cloud::Dlp::V2::ActivateJobTriggerRequest.new(name: name), call_options) do |_result, response|
+        c.activate_job_trigger(::Google::Cloud::Dlp::V2::ActivateJobTriggerRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1343,32 +1343,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_create_discovery_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_discovery_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_discovery_config({ parent: parent, discovery_config: discovery_config, config_id: config_id }) do |_result, response|
+        c.create_discovery_config({ parent: parent, discovery_config: discovery_config, config_id: config_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_discovery_config parent: parent, discovery_config: discovery_config, config_id: config_id do |_result, response|
+        c.create_discovery_config parent: parent, discovery_config: discovery_config, config_id: config_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_discovery_config ::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest.new(parent: parent, discovery_config: discovery_config, config_id: config_id) do |_result, response|
+        c.create_discovery_config ::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest.new(parent: parent, discovery_config: discovery_config, config_id: config_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_discovery_config({ parent: parent, discovery_config: discovery_config, config_id: config_id }, call_options) do |_result, response|
+        c.create_discovery_config({ parent: parent, discovery_config: discovery_config, config_id: config_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_discovery_config(::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest.new(parent: parent, discovery_config: discovery_config, config_id: config_id), call_options) do |_result, response|
+        c.create_discovery_config(::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest.new(parent: parent, discovery_config: discovery_config, config_id: config_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1399,32 +1399,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_update_discovery_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_discovery_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_discovery_config({ name: name, discovery_config: discovery_config, update_mask: update_mask }) do |_result, response|
+        c.update_discovery_config({ name: name, discovery_config: discovery_config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_discovery_config name: name, discovery_config: discovery_config, update_mask: update_mask do |_result, response|
+        c.update_discovery_config name: name, discovery_config: discovery_config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_discovery_config ::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest.new(name: name, discovery_config: discovery_config, update_mask: update_mask) do |_result, response|
+        c.update_discovery_config ::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest.new(name: name, discovery_config: discovery_config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_discovery_config({ name: name, discovery_config: discovery_config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_discovery_config({ name: name, discovery_config: discovery_config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_discovery_config(::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest.new(name: name, discovery_config: discovery_config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_discovery_config(::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest.new(name: name, discovery_config: discovery_config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1453,32 +1453,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_discovery_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_discovery_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_discovery_config({ name: name }) do |_result, response|
+        c.get_discovery_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_discovery_config name: name do |_result, response|
+        c.get_discovery_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_discovery_config ::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest.new(name: name) do |_result, response|
+        c.get_discovery_config ::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_discovery_config({ name: name }, call_options) do |_result, response|
+        c.get_discovery_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_discovery_config(::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_discovery_config(::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1510,32 +1510,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_discovery_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_discovery_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_discovery_configs({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by }) do |_result, response|
+        c.list_discovery_configs({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_discovery_configs parent: parent, page_token: page_token, page_size: page_size, order_by: order_by do |_result, response|
+        c.list_discovery_configs parent: parent, page_token: page_token, page_size: page_size, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_discovery_configs ::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by) do |_result, response|
+        c.list_discovery_configs ::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_discovery_configs({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by }, call_options) do |_result, response|
+        c.list_discovery_configs({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_discovery_configs(::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by), call_options) do |_result, response|
+        c.list_discovery_configs(::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1564,32 +1564,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_delete_discovery_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_discovery_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_discovery_config({ name: name }) do |_result, response|
+        c.delete_discovery_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_discovery_config name: name do |_result, response|
+        c.delete_discovery_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_discovery_config ::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest.new(name: name) do |_result, response|
+        c.delete_discovery_config ::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_discovery_config({ name: name }, call_options) do |_result, response|
+        c.delete_discovery_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_discovery_config(::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_discovery_config(::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1621,32 +1621,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_create_dlp_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_dlp_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_dlp_job({ parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id }) do |_result, response|
+        c.create_dlp_job({ parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_dlp_job parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id do |_result, response|
+        c.create_dlp_job parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_dlp_job ::Google::Cloud::Dlp::V2::CreateDlpJobRequest.new(parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id) do |_result, response|
+        c.create_dlp_job ::Google::Cloud::Dlp::V2::CreateDlpJobRequest.new(parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_dlp_job({ parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id }, call_options) do |_result, response|
+        c.create_dlp_job({ parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_dlp_job(::Google::Cloud::Dlp::V2::CreateDlpJobRequest.new(parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id), call_options) do |_result, response|
+        c.create_dlp_job(::Google::Cloud::Dlp::V2::CreateDlpJobRequest.new(parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1681,32 +1681,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_dlp_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_dlp_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_dlp_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id }) do |_result, response|
+        c.list_dlp_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_dlp_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id do |_result, response|
+        c.list_dlp_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_dlp_jobs ::Google::Cloud::Dlp::V2::ListDlpJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id) do |_result, response|
+        c.list_dlp_jobs ::Google::Cloud::Dlp::V2::ListDlpJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_dlp_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id }, call_options) do |_result, response|
+        c.list_dlp_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_dlp_jobs(::Google::Cloud::Dlp::V2::ListDlpJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id), call_options) do |_result, response|
+        c.list_dlp_jobs(::Google::Cloud::Dlp::V2::ListDlpJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1735,32 +1735,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_dlp_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_dlp_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_dlp_job({ name: name }) do |_result, response|
+        c.get_dlp_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_dlp_job name: name do |_result, response|
+        c.get_dlp_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_dlp_job ::Google::Cloud::Dlp::V2::GetDlpJobRequest.new(name: name) do |_result, response|
+        c.get_dlp_job ::Google::Cloud::Dlp::V2::GetDlpJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_dlp_job({ name: name }, call_options) do |_result, response|
+        c.get_dlp_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_dlp_job(::Google::Cloud::Dlp::V2::GetDlpJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_dlp_job(::Google::Cloud::Dlp::V2::GetDlpJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1789,32 +1789,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_delete_dlp_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_dlp_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_dlp_job({ name: name }) do |_result, response|
+        c.delete_dlp_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_dlp_job name: name do |_result, response|
+        c.delete_dlp_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_dlp_job ::Google::Cloud::Dlp::V2::DeleteDlpJobRequest.new(name: name) do |_result, response|
+        c.delete_dlp_job ::Google::Cloud::Dlp::V2::DeleteDlpJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_dlp_job({ name: name }, call_options) do |_result, response|
+        c.delete_dlp_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_dlp_job(::Google::Cloud::Dlp::V2::DeleteDlpJobRequest.new(name: name), call_options) do |_result, response|
+        c.delete_dlp_job(::Google::Cloud::Dlp::V2::DeleteDlpJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1843,32 +1843,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_cancel_dlp_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_dlp_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_dlp_job({ name: name }) do |_result, response|
+        c.cancel_dlp_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_dlp_job name: name do |_result, response|
+        c.cancel_dlp_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_dlp_job ::Google::Cloud::Dlp::V2::CancelDlpJobRequest.new(name: name) do |_result, response|
+        c.cancel_dlp_job ::Google::Cloud::Dlp::V2::CancelDlpJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_dlp_job({ name: name }, call_options) do |_result, response|
+        c.cancel_dlp_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_dlp_job(::Google::Cloud::Dlp::V2::CancelDlpJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_dlp_job(::Google::Cloud::Dlp::V2::CancelDlpJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1900,32 +1900,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_create_stored_info_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_stored_info_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_stored_info_type({ parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id }) do |_result, response|
+        c.create_stored_info_type({ parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_stored_info_type parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id do |_result, response|
+        c.create_stored_info_type parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_stored_info_type ::Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest.new(parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id) do |_result, response|
+        c.create_stored_info_type ::Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest.new(parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_stored_info_type({ parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id }, call_options) do |_result, response|
+        c.create_stored_info_type({ parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_stored_info_type(::Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest.new(parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id), call_options) do |_result, response|
+        c.create_stored_info_type(::Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest.new(parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1956,32 +1956,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_update_stored_info_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_stored_info_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_stored_info_type({ name: name, config: config, update_mask: update_mask }) do |_result, response|
+        c.update_stored_info_type({ name: name, config: config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_stored_info_type name: name, config: config, update_mask: update_mask do |_result, response|
+        c.update_stored_info_type name: name, config: config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_stored_info_type ::Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest.new(name: name, config: config, update_mask: update_mask) do |_result, response|
+        c.update_stored_info_type ::Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest.new(name: name, config: config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_stored_info_type({ name: name, config: config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_stored_info_type({ name: name, config: config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_stored_info_type(::Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest.new(name: name, config: config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_stored_info_type(::Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest.new(name: name, config: config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2010,32 +2010,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_stored_info_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_stored_info_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_stored_info_type({ name: name }) do |_result, response|
+        c.get_stored_info_type({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_stored_info_type name: name do |_result, response|
+        c.get_stored_info_type name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_stored_info_type ::Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest.new(name: name) do |_result, response|
+        c.get_stored_info_type ::Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_stored_info_type({ name: name }, call_options) do |_result, response|
+        c.get_stored_info_type({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_stored_info_type(::Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest.new(name: name), call_options) do |_result, response|
+        c.get_stored_info_type(::Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2068,32 +2068,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_stored_info_types_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_stored_info_types_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_stored_info_types({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }) do |_result, response|
+        c.list_stored_info_types({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_stored_info_types parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id do |_result, response|
+        c.list_stored_info_types parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_stored_info_types ::Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id) do |_result, response|
+        c.list_stored_info_types ::Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_stored_info_types({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }, call_options) do |_result, response|
+        c.list_stored_info_types({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_stored_info_types(::Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), call_options) do |_result, response|
+        c.list_stored_info_types(::Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2122,32 +2122,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_delete_stored_info_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_stored_info_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_stored_info_type({ name: name }) do |_result, response|
+        c.delete_stored_info_type({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_stored_info_type name: name do |_result, response|
+        c.delete_stored_info_type name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_stored_info_type ::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest.new(name: name) do |_result, response|
+        c.delete_stored_info_type ::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_stored_info_type({ name: name }, call_options) do |_result, response|
+        c.delete_stored_info_type({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_stored_info_type(::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest.new(name: name), call_options) do |_result, response|
+        c.delete_stored_info_type(::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2180,32 +2180,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_project_data_profiles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_project_data_profiles_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_project_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_project_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_project_data_profiles parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter do |_result, response|
+        c.list_project_data_profiles parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_project_data_profiles ::Google::Cloud::Dlp::V2::ListProjectDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter) do |_result, response|
+        c.list_project_data_profiles ::Google::Cloud::Dlp::V2::ListProjectDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_project_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_project_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_project_data_profiles(::Google::Cloud::Dlp::V2::ListProjectDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_project_data_profiles(::Google::Cloud::Dlp::V2::ListProjectDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2238,32 +2238,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_table_data_profiles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_table_data_profiles_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_table_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_table_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_table_data_profiles parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter do |_result, response|
+        c.list_table_data_profiles parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_table_data_profiles ::Google::Cloud::Dlp::V2::ListTableDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter) do |_result, response|
+        c.list_table_data_profiles ::Google::Cloud::Dlp::V2::ListTableDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_table_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_table_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_table_data_profiles(::Google::Cloud::Dlp::V2::ListTableDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_table_data_profiles(::Google::Cloud::Dlp::V2::ListTableDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2296,32 +2296,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_column_data_profiles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_column_data_profiles_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_column_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_column_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_column_data_profiles parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter do |_result, response|
+        c.list_column_data_profiles parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_column_data_profiles ::Google::Cloud::Dlp::V2::ListColumnDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter) do |_result, response|
+        c.list_column_data_profiles ::Google::Cloud::Dlp::V2::ListColumnDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_column_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_column_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_column_data_profiles(::Google::Cloud::Dlp::V2::ListColumnDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_column_data_profiles(::Google::Cloud::Dlp::V2::ListColumnDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2350,32 +2350,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_project_data_profile_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_project_data_profile_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_project_data_profile({ name: name }) do |_result, response|
+        c.get_project_data_profile({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_project_data_profile name: name do |_result, response|
+        c.get_project_data_profile name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_project_data_profile ::Google::Cloud::Dlp::V2::GetProjectDataProfileRequest.new(name: name) do |_result, response|
+        c.get_project_data_profile ::Google::Cloud::Dlp::V2::GetProjectDataProfileRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_project_data_profile({ name: name }, call_options) do |_result, response|
+        c.get_project_data_profile({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_project_data_profile(::Google::Cloud::Dlp::V2::GetProjectDataProfileRequest.new(name: name), call_options) do |_result, response|
+        c.get_project_data_profile(::Google::Cloud::Dlp::V2::GetProjectDataProfileRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2408,32 +2408,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_file_store_data_profiles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_file_store_data_profiles_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_file_store_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_file_store_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_file_store_data_profiles parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter do |_result, response|
+        c.list_file_store_data_profiles parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_file_store_data_profiles ::Google::Cloud::Dlp::V2::ListFileStoreDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter) do |_result, response|
+        c.list_file_store_data_profiles ::Google::Cloud::Dlp::V2::ListFileStoreDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_file_store_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_file_store_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_file_store_data_profiles(::Google::Cloud::Dlp::V2::ListFileStoreDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_file_store_data_profiles(::Google::Cloud::Dlp::V2::ListFileStoreDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2462,32 +2462,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_file_store_data_profile_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_file_store_data_profile_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_file_store_data_profile({ name: name }) do |_result, response|
+        c.get_file_store_data_profile({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_file_store_data_profile name: name do |_result, response|
+        c.get_file_store_data_profile name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_file_store_data_profile ::Google::Cloud::Dlp::V2::GetFileStoreDataProfileRequest.new(name: name) do |_result, response|
+        c.get_file_store_data_profile ::Google::Cloud::Dlp::V2::GetFileStoreDataProfileRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_file_store_data_profile({ name: name }, call_options) do |_result, response|
+        c.get_file_store_data_profile({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_file_store_data_profile(::Google::Cloud::Dlp::V2::GetFileStoreDataProfileRequest.new(name: name), call_options) do |_result, response|
+        c.get_file_store_data_profile(::Google::Cloud::Dlp::V2::GetFileStoreDataProfileRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2516,32 +2516,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_delete_file_store_data_profile_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_file_store_data_profile_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_file_store_data_profile({ name: name }) do |_result, response|
+        c.delete_file_store_data_profile({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_file_store_data_profile name: name do |_result, response|
+        c.delete_file_store_data_profile name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_file_store_data_profile ::Google::Cloud::Dlp::V2::DeleteFileStoreDataProfileRequest.new(name: name) do |_result, response|
+        c.delete_file_store_data_profile ::Google::Cloud::Dlp::V2::DeleteFileStoreDataProfileRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_file_store_data_profile({ name: name }, call_options) do |_result, response|
+        c.delete_file_store_data_profile({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_file_store_data_profile(::Google::Cloud::Dlp::V2::DeleteFileStoreDataProfileRequest.new(name: name), call_options) do |_result, response|
+        c.delete_file_store_data_profile(::Google::Cloud::Dlp::V2::DeleteFileStoreDataProfileRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2570,32 +2570,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_table_data_profile_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_table_data_profile_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_table_data_profile({ name: name }) do |_result, response|
+        c.get_table_data_profile({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_table_data_profile name: name do |_result, response|
+        c.get_table_data_profile name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_table_data_profile ::Google::Cloud::Dlp::V2::GetTableDataProfileRequest.new(name: name) do |_result, response|
+        c.get_table_data_profile ::Google::Cloud::Dlp::V2::GetTableDataProfileRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_table_data_profile({ name: name }, call_options) do |_result, response|
+        c.get_table_data_profile({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_table_data_profile(::Google::Cloud::Dlp::V2::GetTableDataProfileRequest.new(name: name), call_options) do |_result, response|
+        c.get_table_data_profile(::Google::Cloud::Dlp::V2::GetTableDataProfileRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2624,32 +2624,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_column_data_profile_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_column_data_profile_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_column_data_profile({ name: name }) do |_result, response|
+        c.get_column_data_profile({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_column_data_profile name: name do |_result, response|
+        c.get_column_data_profile name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_column_data_profile ::Google::Cloud::Dlp::V2::GetColumnDataProfileRequest.new(name: name) do |_result, response|
+        c.get_column_data_profile ::Google::Cloud::Dlp::V2::GetColumnDataProfileRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_column_data_profile({ name: name }, call_options) do |_result, response|
+        c.get_column_data_profile({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_column_data_profile(::Google::Cloud::Dlp::V2::GetColumnDataProfileRequest.new(name: name), call_options) do |_result, response|
+        c.get_column_data_profile(::Google::Cloud::Dlp::V2::GetColumnDataProfileRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2678,32 +2678,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_delete_table_data_profile_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_table_data_profile_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_table_data_profile({ name: name }) do |_result, response|
+        c.delete_table_data_profile({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_table_data_profile name: name do |_result, response|
+        c.delete_table_data_profile name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_table_data_profile ::Google::Cloud::Dlp::V2::DeleteTableDataProfileRequest.new(name: name) do |_result, response|
+        c.delete_table_data_profile ::Google::Cloud::Dlp::V2::DeleteTableDataProfileRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_table_data_profile({ name: name }, call_options) do |_result, response|
+        c.delete_table_data_profile({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_table_data_profile(::Google::Cloud::Dlp::V2::DeleteTableDataProfileRequest.new(name: name), call_options) do |_result, response|
+        c.delete_table_data_profile(::Google::Cloud::Dlp::V2::DeleteTableDataProfileRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2733,32 +2733,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_hybrid_inspect_dlp_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, hybrid_inspect_dlp_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.hybrid_inspect_dlp_job({ name: name, hybrid_item: hybrid_item }) do |_result, response|
+        c.hybrid_inspect_dlp_job({ name: name, hybrid_item: hybrid_item }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.hybrid_inspect_dlp_job name: name, hybrid_item: hybrid_item do |_result, response|
+        c.hybrid_inspect_dlp_job name: name, hybrid_item: hybrid_item do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.hybrid_inspect_dlp_job ::Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest.new(name: name, hybrid_item: hybrid_item) do |_result, response|
+        c.hybrid_inspect_dlp_job ::Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest.new(name: name, hybrid_item: hybrid_item) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.hybrid_inspect_dlp_job({ name: name, hybrid_item: hybrid_item }, call_options) do |_result, response|
+        c.hybrid_inspect_dlp_job({ name: name, hybrid_item: hybrid_item }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.hybrid_inspect_dlp_job(::Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest.new(name: name, hybrid_item: hybrid_item), call_options) do |_result, response|
+        c.hybrid_inspect_dlp_job(::Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest.new(name: name, hybrid_item: hybrid_item), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2787,32 +2787,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_finish_dlp_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, finish_dlp_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.finish_dlp_job({ name: name }) do |_result, response|
+        c.finish_dlp_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.finish_dlp_job name: name do |_result, response|
+        c.finish_dlp_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.finish_dlp_job ::Google::Cloud::Dlp::V2::FinishDlpJobRequest.new(name: name) do |_result, response|
+        c.finish_dlp_job ::Google::Cloud::Dlp::V2::FinishDlpJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.finish_dlp_job({ name: name }, call_options) do |_result, response|
+        c.finish_dlp_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.finish_dlp_job(::Google::Cloud::Dlp::V2::FinishDlpJobRequest.new(name: name), call_options) do |_result, response|
+        c.finish_dlp_job(::Google::Cloud::Dlp::V2::FinishDlpJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2842,32 +2842,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_create_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_connection({ parent: parent, connection: connection }) do |_result, response|
+        c.create_connection({ parent: parent, connection: connection }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_connection parent: parent, connection: connection do |_result, response|
+        c.create_connection parent: parent, connection: connection do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_connection ::Google::Cloud::Dlp::V2::CreateConnectionRequest.new(parent: parent, connection: connection) do |_result, response|
+        c.create_connection ::Google::Cloud::Dlp::V2::CreateConnectionRequest.new(parent: parent, connection: connection) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_connection({ parent: parent, connection: connection }, call_options) do |_result, response|
+        c.create_connection({ parent: parent, connection: connection }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_connection(::Google::Cloud::Dlp::V2::CreateConnectionRequest.new(parent: parent, connection: connection), call_options) do |_result, response|
+        c.create_connection(::Google::Cloud::Dlp::V2::CreateConnectionRequest.new(parent: parent, connection: connection), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2896,32 +2896,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_connection({ name: name }) do |_result, response|
+        c.get_connection({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_connection name: name do |_result, response|
+        c.get_connection name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_connection ::Google::Cloud::Dlp::V2::GetConnectionRequest.new(name: name) do |_result, response|
+        c.get_connection ::Google::Cloud::Dlp::V2::GetConnectionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_connection({ name: name }, call_options) do |_result, response|
+        c.get_connection({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_connection(::Google::Cloud::Dlp::V2::GetConnectionRequest.new(name: name), call_options) do |_result, response|
+        c.get_connection(::Google::Cloud::Dlp::V2::GetConnectionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2953,32 +2953,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_connections_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_connections_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_connections ::Google::Cloud::Dlp::V2::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_connections ::Google::Cloud::Dlp::V2::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_connections(::Google::Cloud::Dlp::V2::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_connections(::Google::Cloud::Dlp::V2::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3010,32 +3010,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_search_connections_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_connections_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.search_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.search_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_connections ::Google::Cloud::Dlp::V2::SearchConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.search_connections ::Google::Cloud::Dlp::V2::SearchConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.search_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_connections(::Google::Cloud::Dlp::V2::SearchConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.search_connections(::Google::Cloud::Dlp::V2::SearchConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3064,32 +3064,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_delete_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_connection({ name: name }) do |_result, response|
+        c.delete_connection({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_connection name: name do |_result, response|
+        c.delete_connection name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_connection ::Google::Cloud::Dlp::V2::DeleteConnectionRequest.new(name: name) do |_result, response|
+        c.delete_connection ::Google::Cloud::Dlp::V2::DeleteConnectionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_connection({ name: name }, call_options) do |_result, response|
+        c.delete_connection({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_connection(::Google::Cloud::Dlp::V2::DeleteConnectionRequest.new(name: name), call_options) do |_result, response|
+        c.delete_connection(::Google::Cloud::Dlp::V2::DeleteConnectionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3120,32 +3120,32 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_update_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_connection({ name: name, connection: connection, update_mask: update_mask }) do |_result, response|
+        c.update_connection({ name: name, connection: connection, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_connection name: name, connection: connection, update_mask: update_mask do |_result, response|
+        c.update_connection name: name, connection: connection, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_connection ::Google::Cloud::Dlp::V2::UpdateConnectionRequest.new(name: name, connection: connection, update_mask: update_mask) do |_result, response|
+        c.update_connection ::Google::Cloud::Dlp::V2::UpdateConnectionRequest.new(name: name, connection: connection, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_connection({ name: name, connection: connection, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_connection({ name: name, connection: connection, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_connection(::Google::Cloud::Dlp::V2::UpdateConnectionRequest.new(name: name, connection: connection, update_mask: update_mask), call_options) do |_result, response|
+        c.update_connection(::Google::Cloud::Dlp::V2::UpdateConnectionRequest.new(name: name, connection: connection, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

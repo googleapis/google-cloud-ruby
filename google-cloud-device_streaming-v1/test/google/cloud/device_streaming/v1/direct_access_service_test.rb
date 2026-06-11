@@ -86,36 +86,36 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, create_device_session_client_stub do
       # Create client
-      client = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
+      c = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_device_session({ parent: parent, device_session: device_session, device_session_id: device_session_id }) do |response, operation|
+      c.create_device_session({ parent: parent, device_session: device_session, device_session_id: device_session_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_device_session parent: parent, device_session: device_session, device_session_id: device_session_id do |response, operation|
+      c.create_device_session parent: parent, device_session: device_session, device_session_id: device_session_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_device_session ::Google::Cloud::DeviceStreaming::V1::CreateDeviceSessionRequest.new(parent: parent, device_session: device_session, device_session_id: device_session_id) do |response, operation|
+      c.create_device_session ::Google::Cloud::DeviceStreaming::V1::CreateDeviceSessionRequest.new(parent: parent, device_session: device_session, device_session_id: device_session_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_device_session({ parent: parent, device_session: device_session, device_session_id: device_session_id }, grpc_options) do |response, operation|
+      c.create_device_session({ parent: parent, device_session: device_session, device_session_id: device_session_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_device_session(::Google::Cloud::DeviceStreaming::V1::CreateDeviceSessionRequest.new(parent: parent, device_session: device_session, device_session_id: device_session_id), grpc_options) do |response, operation|
+      c.create_device_session(::Google::Cloud::DeviceStreaming::V1::CreateDeviceSessionRequest.new(parent: parent, device_session: device_session, device_session_id: device_session_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -150,40 +150,40 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, list_device_sessions_client_stub do
       # Create client
-      client = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
+      c = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_device_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_device_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_device_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_device_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_device_sessions ::Google::Cloud::DeviceStreaming::V1::ListDeviceSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_device_sessions ::Google::Cloud::DeviceStreaming::V1::ListDeviceSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_device_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_device_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_device_sessions(::Google::Cloud::DeviceStreaming::V1::ListDeviceSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_device_sessions(::Google::Cloud::DeviceStreaming::V1::ListDeviceSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -213,36 +213,36 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, get_device_session_client_stub do
       # Create client
-      client = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
+      c = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_device_session({ name: name }) do |response, operation|
+      c.get_device_session({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_device_session name: name do |response, operation|
+      c.get_device_session name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_device_session ::Google::Cloud::DeviceStreaming::V1::GetDeviceSessionRequest.new(name: name) do |response, operation|
+      c.get_device_session ::Google::Cloud::DeviceStreaming::V1::GetDeviceSessionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_device_session({ name: name }, grpc_options) do |response, operation|
+      c.get_device_session({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_device_session(::Google::Cloud::DeviceStreaming::V1::GetDeviceSessionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_device_session(::Google::Cloud::DeviceStreaming::V1::GetDeviceSessionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -271,36 +271,36 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, cancel_device_session_client_stub do
       # Create client
-      client = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
+      c = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_device_session({ name: name }) do |response, operation|
+      c.cancel_device_session({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_device_session name: name do |response, operation|
+      c.cancel_device_session name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_device_session ::Google::Cloud::DeviceStreaming::V1::CancelDeviceSessionRequest.new(name: name) do |response, operation|
+      c.cancel_device_session ::Google::Cloud::DeviceStreaming::V1::CancelDeviceSessionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_device_session({ name: name }, grpc_options) do |response, operation|
+      c.cancel_device_session({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_device_session(::Google::Cloud::DeviceStreaming::V1::CancelDeviceSessionRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_device_session(::Google::Cloud::DeviceStreaming::V1::CancelDeviceSessionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,36 +331,36 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, update_device_session_client_stub do
       # Create client
-      client = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
+      c = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_device_session({ device_session: device_session, update_mask: update_mask }) do |response, operation|
+      c.update_device_session({ device_session: device_session, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_device_session device_session: device_session, update_mask: update_mask do |response, operation|
+      c.update_device_session device_session: device_session, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_device_session ::Google::Cloud::DeviceStreaming::V1::UpdateDeviceSessionRequest.new(device_session: device_session, update_mask: update_mask) do |response, operation|
+      c.update_device_session ::Google::Cloud::DeviceStreaming::V1::UpdateDeviceSessionRequest.new(device_session: device_session, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_device_session({ device_session: device_session, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_device_session({ device_session: device_session, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_device_session(::Google::Cloud::DeviceStreaming::V1::UpdateDeviceSessionRequest.new(device_session: device_session, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_device_session(::Google::Cloud::DeviceStreaming::V1::UpdateDeviceSessionRequest.new(device_session: device_session, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -389,7 +389,7 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, adb_connect_client_stub do
       # Create client
-      client = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
+      c = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -397,7 +397,7 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::ClientTest < Mi
       request_hash = { open: open }
       request_proto = ::Google::Cloud::DeviceStreaming::V1::AdbMessage.new open: open
       enum_input = [request_hash, request_proto].to_enum
-      client.adb_connect enum_input do |response, operation|
+      c.adb_connect enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DeviceStreaming::V1::DeviceMessage, r
@@ -409,7 +409,7 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::ClientTest < Mi
       request_hash = { open: open }
       request_proto = ::Google::Cloud::DeviceStreaming::V1::AdbMessage.new open: open
       stream_input = Gapic::StreamInput.new
-      client.adb_connect stream_input do |response, operation|
+      c.adb_connect stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DeviceStreaming::V1::DeviceMessage, r
@@ -424,7 +424,7 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::ClientTest < Mi
       request_hash = { open: open }
       request_proto = ::Google::Cloud::DeviceStreaming::V1::AdbMessage.new open: open
       enum_input = [request_hash, request_proto].to_enum
-      client.adb_connect enum_input, grpc_options do |response, operation|
+      c.adb_connect enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DeviceStreaming::V1::DeviceMessage, r
@@ -436,7 +436,7 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::ClientTest < Mi
       request_hash = { open: open }
       request_proto = ::Google::Cloud::DeviceStreaming::V1::AdbMessage.new open: open
       stream_input = Gapic::StreamInput.new
-      client.adb_connect stream_input, grpc_options do |response, operation|
+      c.adb_connect stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DeviceStreaming::V1::DeviceMessage, r

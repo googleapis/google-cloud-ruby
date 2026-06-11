@@ -91,40 +91,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::ClientTest 
 
     Gapic::ServiceStub.stub :new, train_custom_model_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.train_custom_model({ gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id }) do |response, operation|
+      c.train_custom_model({ gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.train_custom_model gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id do |response, operation|
+      c.train_custom_model gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.train_custom_model ::Google::Cloud::DiscoveryEngine::V1beta::TrainCustomModelRequest.new(gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id) do |response, operation|
+      c.train_custom_model ::Google::Cloud::DiscoveryEngine::V1beta::TrainCustomModelRequest.new(gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.train_custom_model({ gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id }, grpc_options) do |response, operation|
+      c.train_custom_model({ gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.train_custom_model(::Google::Cloud::DiscoveryEngine::V1beta::TrainCustomModelRequest.new(gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id), grpc_options) do |response, operation|
+      c.train_custom_model(::Google::Cloud::DiscoveryEngine::V1beta::TrainCustomModelRequest.new(gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -154,36 +154,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_custom_models_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_custom_models({ data_store: data_store }) do |response, operation|
+      c.list_custom_models({ data_store: data_store }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_custom_models data_store: data_store do |response, operation|
+      c.list_custom_models data_store: data_store do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_custom_models ::Google::Cloud::DiscoveryEngine::V1beta::ListCustomModelsRequest.new(data_store: data_store) do |response, operation|
+      c.list_custom_models ::Google::Cloud::DiscoveryEngine::V1beta::ListCustomModelsRequest.new(data_store: data_store) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_custom_models({ data_store: data_store }, grpc_options) do |response, operation|
+      c.list_custom_models({ data_store: data_store }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_custom_models(::Google::Cloud::DiscoveryEngine::V1beta::ListCustomModelsRequest.new(data_store: data_store), grpc_options) do |response, operation|
+      c.list_custom_models(::Google::Cloud::DiscoveryEngine::V1beta::ListCustomModelsRequest.new(data_store: data_store), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

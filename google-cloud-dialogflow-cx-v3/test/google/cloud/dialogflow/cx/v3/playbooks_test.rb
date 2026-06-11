@@ -84,36 +84,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_playbook_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_playbook({ parent: parent, playbook: playbook }) do |response, operation|
+      c.create_playbook({ parent: parent, playbook: playbook }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_playbook parent: parent, playbook: playbook do |response, operation|
+      c.create_playbook parent: parent, playbook: playbook do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_playbook ::Google::Cloud::Dialogflow::CX::V3::CreatePlaybookRequest.new(parent: parent, playbook: playbook) do |response, operation|
+      c.create_playbook ::Google::Cloud::Dialogflow::CX::V3::CreatePlaybookRequest.new(parent: parent, playbook: playbook) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_playbook({ parent: parent, playbook: playbook }, grpc_options) do |response, operation|
+      c.create_playbook({ parent: parent, playbook: playbook }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_playbook(::Google::Cloud::Dialogflow::CX::V3::CreatePlaybookRequest.new(parent: parent, playbook: playbook), grpc_options) do |response, operation|
+      c.create_playbook(::Google::Cloud::Dialogflow::CX::V3::CreatePlaybookRequest.new(parent: parent, playbook: playbook), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, delete_playbook_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_playbook({ name: name }) do |response, operation|
+      c.delete_playbook({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_playbook name: name do |response, operation|
+      c.delete_playbook name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_playbook ::Google::Cloud::Dialogflow::CX::V3::DeletePlaybookRequest.new(name: name) do |response, operation|
+      c.delete_playbook ::Google::Cloud::Dialogflow::CX::V3::DeletePlaybookRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_playbook({ name: name }, grpc_options) do |response, operation|
+      c.delete_playbook({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_playbook(::Google::Cloud::Dialogflow::CX::V3::DeletePlaybookRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_playbook(::Google::Cloud::Dialogflow::CX::V3::DeletePlaybookRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -204,40 +204,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_playbooks_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_playbooks({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_playbooks({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_playbooks parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_playbooks parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_playbooks ::Google::Cloud::Dialogflow::CX::V3::ListPlaybooksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_playbooks ::Google::Cloud::Dialogflow::CX::V3::ListPlaybooksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_playbooks({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_playbooks({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_playbooks(::Google::Cloud::Dialogflow::CX::V3::ListPlaybooksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_playbooks(::Google::Cloud::Dialogflow::CX::V3::ListPlaybooksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -267,36 +267,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_playbook_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_playbook({ name: name }) do |response, operation|
+      c.get_playbook({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_playbook name: name do |response, operation|
+      c.get_playbook name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_playbook ::Google::Cloud::Dialogflow::CX::V3::GetPlaybookRequest.new(name: name) do |response, operation|
+      c.get_playbook ::Google::Cloud::Dialogflow::CX::V3::GetPlaybookRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_playbook({ name: name }, grpc_options) do |response, operation|
+      c.get_playbook({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_playbook(::Google::Cloud::Dialogflow::CX::V3::GetPlaybookRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_playbook(::Google::Cloud::Dialogflow::CX::V3::GetPlaybookRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -329,40 +329,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, export_playbook_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_playbook({ name: name, playbook_uri: playbook_uri, data_format: data_format }) do |response, operation|
+      c.export_playbook({ name: name, playbook_uri: playbook_uri, data_format: data_format }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_playbook name: name, playbook_uri: playbook_uri, data_format: data_format do |response, operation|
+      c.export_playbook name: name, playbook_uri: playbook_uri, data_format: data_format do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_playbook ::Google::Cloud::Dialogflow::CX::V3::ExportPlaybookRequest.new(name: name, playbook_uri: playbook_uri, data_format: data_format) do |response, operation|
+      c.export_playbook ::Google::Cloud::Dialogflow::CX::V3::ExportPlaybookRequest.new(name: name, playbook_uri: playbook_uri, data_format: data_format) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_playbook({ name: name, playbook_uri: playbook_uri, data_format: data_format }, grpc_options) do |response, operation|
+      c.export_playbook({ name: name, playbook_uri: playbook_uri, data_format: data_format }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_playbook(::Google::Cloud::Dialogflow::CX::V3::ExportPlaybookRequest.new(name: name, playbook_uri: playbook_uri, data_format: data_format), grpc_options) do |response, operation|
+      c.export_playbook(::Google::Cloud::Dialogflow::CX::V3::ExportPlaybookRequest.new(name: name, playbook_uri: playbook_uri, data_format: data_format), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -397,40 +397,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, import_playbook_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_playbook({ parent: parent, playbook_uri: playbook_uri, import_strategy: import_strategy }) do |response, operation|
+      c.import_playbook({ parent: parent, playbook_uri: playbook_uri, import_strategy: import_strategy }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_playbook parent: parent, playbook_uri: playbook_uri, import_strategy: import_strategy do |response, operation|
+      c.import_playbook parent: parent, playbook_uri: playbook_uri, import_strategy: import_strategy do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_playbook ::Google::Cloud::Dialogflow::CX::V3::ImportPlaybookRequest.new(parent: parent, playbook_uri: playbook_uri, import_strategy: import_strategy) do |response, operation|
+      c.import_playbook ::Google::Cloud::Dialogflow::CX::V3::ImportPlaybookRequest.new(parent: parent, playbook_uri: playbook_uri, import_strategy: import_strategy) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_playbook({ parent: parent, playbook_uri: playbook_uri, import_strategy: import_strategy }, grpc_options) do |response, operation|
+      c.import_playbook({ parent: parent, playbook_uri: playbook_uri, import_strategy: import_strategy }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_playbook(::Google::Cloud::Dialogflow::CX::V3::ImportPlaybookRequest.new(parent: parent, playbook_uri: playbook_uri, import_strategy: import_strategy), grpc_options) do |response, operation|
+      c.import_playbook(::Google::Cloud::Dialogflow::CX::V3::ImportPlaybookRequest.new(parent: parent, playbook_uri: playbook_uri, import_strategy: import_strategy), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -462,36 +462,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_playbook_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_playbook({ playbook: playbook, update_mask: update_mask }) do |response, operation|
+      c.update_playbook({ playbook: playbook, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_playbook playbook: playbook, update_mask: update_mask do |response, operation|
+      c.update_playbook playbook: playbook, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_playbook ::Google::Cloud::Dialogflow::CX::V3::UpdatePlaybookRequest.new(playbook: playbook, update_mask: update_mask) do |response, operation|
+      c.update_playbook ::Google::Cloud::Dialogflow::CX::V3::UpdatePlaybookRequest.new(playbook: playbook, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_playbook({ playbook: playbook, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_playbook({ playbook: playbook, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_playbook(::Google::Cloud::Dialogflow::CX::V3::UpdatePlaybookRequest.new(playbook: playbook, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_playbook(::Google::Cloud::Dialogflow::CX::V3::UpdatePlaybookRequest.new(playbook: playbook, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -522,36 +522,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_playbook_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_playbook_version({ parent: parent, playbook_version: playbook_version }) do |response, operation|
+      c.create_playbook_version({ parent: parent, playbook_version: playbook_version }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_playbook_version parent: parent, playbook_version: playbook_version do |response, operation|
+      c.create_playbook_version parent: parent, playbook_version: playbook_version do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_playbook_version ::Google::Cloud::Dialogflow::CX::V3::CreatePlaybookVersionRequest.new(parent: parent, playbook_version: playbook_version) do |response, operation|
+      c.create_playbook_version ::Google::Cloud::Dialogflow::CX::V3::CreatePlaybookVersionRequest.new(parent: parent, playbook_version: playbook_version) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_playbook_version({ parent: parent, playbook_version: playbook_version }, grpc_options) do |response, operation|
+      c.create_playbook_version({ parent: parent, playbook_version: playbook_version }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_playbook_version(::Google::Cloud::Dialogflow::CX::V3::CreatePlaybookVersionRequest.new(parent: parent, playbook_version: playbook_version), grpc_options) do |response, operation|
+      c.create_playbook_version(::Google::Cloud::Dialogflow::CX::V3::CreatePlaybookVersionRequest.new(parent: parent, playbook_version: playbook_version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -580,36 +580,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_playbook_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_playbook_version({ name: name }) do |response, operation|
+      c.get_playbook_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_playbook_version name: name do |response, operation|
+      c.get_playbook_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_playbook_version ::Google::Cloud::Dialogflow::CX::V3::GetPlaybookVersionRequest.new(name: name) do |response, operation|
+      c.get_playbook_version ::Google::Cloud::Dialogflow::CX::V3::GetPlaybookVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_playbook_version({ name: name }, grpc_options) do |response, operation|
+      c.get_playbook_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_playbook_version(::Google::Cloud::Dialogflow::CX::V3::GetPlaybookVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_playbook_version(::Google::Cloud::Dialogflow::CX::V3::GetPlaybookVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -638,36 +638,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, restore_playbook_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restore_playbook_version({ name: name }) do |response, operation|
+      c.restore_playbook_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restore_playbook_version name: name do |response, operation|
+      c.restore_playbook_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restore_playbook_version ::Google::Cloud::Dialogflow::CX::V3::RestorePlaybookVersionRequest.new(name: name) do |response, operation|
+      c.restore_playbook_version ::Google::Cloud::Dialogflow::CX::V3::RestorePlaybookVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restore_playbook_version({ name: name }, grpc_options) do |response, operation|
+      c.restore_playbook_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restore_playbook_version(::Google::Cloud::Dialogflow::CX::V3::RestorePlaybookVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.restore_playbook_version(::Google::Cloud::Dialogflow::CX::V3::RestorePlaybookVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -700,40 +700,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_playbook_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_playbook_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_playbook_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_playbook_versions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_playbook_versions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_playbook_versions ::Google::Cloud::Dialogflow::CX::V3::ListPlaybookVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_playbook_versions ::Google::Cloud::Dialogflow::CX::V3::ListPlaybookVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_playbook_versions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_playbook_versions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_playbook_versions(::Google::Cloud::Dialogflow::CX::V3::ListPlaybookVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_playbook_versions(::Google::Cloud::Dialogflow::CX::V3::ListPlaybookVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -763,36 +763,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Playbooks::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, delete_playbook_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_playbook_version({ name: name }) do |response, operation|
+      c.delete_playbook_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_playbook_version name: name do |response, operation|
+      c.delete_playbook_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_playbook_version ::Google::Cloud::Dialogflow::CX::V3::DeletePlaybookVersionRequest.new(name: name) do |response, operation|
+      c.delete_playbook_version ::Google::Cloud::Dialogflow::CX::V3::DeletePlaybookVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_playbook_version({ name: name }, grpc_options) do |response, operation|
+      c.delete_playbook_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_playbook_version(::Google::Cloud::Dialogflow::CX::V3::DeletePlaybookVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_playbook_version(::Google::Cloud::Dialogflow::CX::V3::DeletePlaybookVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

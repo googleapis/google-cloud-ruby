@@ -101,32 +101,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_list_connection_profiles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_connection_profiles_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_connection_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_connection_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_connection_profiles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_connection_profiles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_connection_profiles ::Google::Cloud::Datastream::V1::ListConnectionProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_connection_profiles ::Google::Cloud::Datastream::V1::ListConnectionProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_connection_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_connection_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_connection_profiles(::Google::Cloud::Datastream::V1::ListConnectionProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_connection_profiles(::Google::Cloud::Datastream::V1::ListConnectionProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_get_connection_profile_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_connection_profile_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_connection_profile({ name: name }) do |_result, response|
+        c.get_connection_profile({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_connection_profile name: name do |_result, response|
+        c.get_connection_profile name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_connection_profile ::Google::Cloud::Datastream::V1::GetConnectionProfileRequest.new(name: name) do |_result, response|
+        c.get_connection_profile ::Google::Cloud::Datastream::V1::GetConnectionProfileRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_connection_profile({ name: name }, call_options) do |_result, response|
+        c.get_connection_profile({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_connection_profile(::Google::Cloud::Datastream::V1::GetConnectionProfileRequest.new(name: name), call_options) do |_result, response|
+        c.get_connection_profile(::Google::Cloud::Datastream::V1::GetConnectionProfileRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -214,32 +214,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_create_connection_profile_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_connection_profile_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_connection_profile({ parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force }) do |_result, response|
+        c.create_connection_profile({ parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_connection_profile parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force do |_result, response|
+        c.create_connection_profile parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_connection_profile ::Google::Cloud::Datastream::V1::CreateConnectionProfileRequest.new(parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force) do |_result, response|
+        c.create_connection_profile ::Google::Cloud::Datastream::V1::CreateConnectionProfileRequest.new(parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_connection_profile({ parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force }, call_options) do |_result, response|
+        c.create_connection_profile({ parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_connection_profile(::Google::Cloud::Datastream::V1::CreateConnectionProfileRequest.new(parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force), call_options) do |_result, response|
+        c.create_connection_profile(::Google::Cloud::Datastream::V1::CreateConnectionProfileRequest.new(parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -272,32 +272,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_update_connection_profile_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_connection_profile_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_connection_profile({ update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force }) do |_result, response|
+        c.update_connection_profile({ update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_connection_profile update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force do |_result, response|
+        c.update_connection_profile update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_connection_profile ::Google::Cloud::Datastream::V1::UpdateConnectionProfileRequest.new(update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force) do |_result, response|
+        c.update_connection_profile ::Google::Cloud::Datastream::V1::UpdateConnectionProfileRequest.new(update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_connection_profile({ update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force }, call_options) do |_result, response|
+        c.update_connection_profile({ update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_connection_profile(::Google::Cloud::Datastream::V1::UpdateConnectionProfileRequest.new(update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force), call_options) do |_result, response|
+        c.update_connection_profile(::Google::Cloud::Datastream::V1::UpdateConnectionProfileRequest.new(update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -327,32 +327,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_delete_connection_profile_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_connection_profile_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_connection_profile({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_connection_profile({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_connection_profile name: name, request_id: request_id do |_result, response|
+        c.delete_connection_profile name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_connection_profile ::Google::Cloud::Datastream::V1::DeleteConnectionProfileRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_connection_profile ::Google::Cloud::Datastream::V1::DeleteConnectionProfileRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_connection_profile({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_connection_profile({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_connection_profile(::Google::Cloud::Datastream::V1::DeleteConnectionProfileRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_connection_profile(::Google::Cloud::Datastream::V1::DeleteConnectionProfileRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -384,32 +384,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_discover_connection_profile_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, discover_connection_profile_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.discover_connection_profile({ parent: parent, connection_profile: connection_profile, full_hierarchy: full_hierarchy, oracle_rdbms: oracle_rdbms }) do |_result, response|
+        c.discover_connection_profile({ parent: parent, connection_profile: connection_profile, full_hierarchy: full_hierarchy, oracle_rdbms: oracle_rdbms }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.discover_connection_profile parent: parent, connection_profile: connection_profile, full_hierarchy: full_hierarchy, oracle_rdbms: oracle_rdbms do |_result, response|
+        c.discover_connection_profile parent: parent, connection_profile: connection_profile, full_hierarchy: full_hierarchy, oracle_rdbms: oracle_rdbms do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.discover_connection_profile ::Google::Cloud::Datastream::V1::DiscoverConnectionProfileRequest.new(parent: parent, connection_profile: connection_profile, full_hierarchy: full_hierarchy, oracle_rdbms: oracle_rdbms) do |_result, response|
+        c.discover_connection_profile ::Google::Cloud::Datastream::V1::DiscoverConnectionProfileRequest.new(parent: parent, connection_profile: connection_profile, full_hierarchy: full_hierarchy, oracle_rdbms: oracle_rdbms) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.discover_connection_profile({ parent: parent, connection_profile: connection_profile, full_hierarchy: full_hierarchy, oracle_rdbms: oracle_rdbms }, call_options) do |_result, response|
+        c.discover_connection_profile({ parent: parent, connection_profile: connection_profile, full_hierarchy: full_hierarchy, oracle_rdbms: oracle_rdbms }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.discover_connection_profile(::Google::Cloud::Datastream::V1::DiscoverConnectionProfileRequest.new(parent: parent, connection_profile: connection_profile, full_hierarchy: full_hierarchy, oracle_rdbms: oracle_rdbms), call_options) do |_result, response|
+        c.discover_connection_profile(::Google::Cloud::Datastream::V1::DiscoverConnectionProfileRequest.new(parent: parent, connection_profile: connection_profile, full_hierarchy: full_hierarchy, oracle_rdbms: oracle_rdbms), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -442,32 +442,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_list_streams_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_streams_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_streams({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_streams({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_streams parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_streams parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_streams ::Google::Cloud::Datastream::V1::ListStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_streams ::Google::Cloud::Datastream::V1::ListStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_streams({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_streams({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_streams(::Google::Cloud::Datastream::V1::ListStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_streams(::Google::Cloud::Datastream::V1::ListStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -496,32 +496,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_get_stream_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_stream_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_stream({ name: name }) do |_result, response|
+        c.get_stream({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_stream name: name do |_result, response|
+        c.get_stream name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_stream ::Google::Cloud::Datastream::V1::GetStreamRequest.new(name: name) do |_result, response|
+        c.get_stream ::Google::Cloud::Datastream::V1::GetStreamRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_stream({ name: name }, call_options) do |_result, response|
+        c.get_stream({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_stream(::Google::Cloud::Datastream::V1::GetStreamRequest.new(name: name), call_options) do |_result, response|
+        c.get_stream(::Google::Cloud::Datastream::V1::GetStreamRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -555,32 +555,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_create_stream_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_stream_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_stream({ parent: parent, stream_id: stream_id, stream: stream, request_id: request_id, validate_only: validate_only, force: force }) do |_result, response|
+        c.create_stream({ parent: parent, stream_id: stream_id, stream: stream, request_id: request_id, validate_only: validate_only, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_stream parent: parent, stream_id: stream_id, stream: stream, request_id: request_id, validate_only: validate_only, force: force do |_result, response|
+        c.create_stream parent: parent, stream_id: stream_id, stream: stream, request_id: request_id, validate_only: validate_only, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_stream ::Google::Cloud::Datastream::V1::CreateStreamRequest.new(parent: parent, stream_id: stream_id, stream: stream, request_id: request_id, validate_only: validate_only, force: force) do |_result, response|
+        c.create_stream ::Google::Cloud::Datastream::V1::CreateStreamRequest.new(parent: parent, stream_id: stream_id, stream: stream, request_id: request_id, validate_only: validate_only, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_stream({ parent: parent, stream_id: stream_id, stream: stream, request_id: request_id, validate_only: validate_only, force: force }, call_options) do |_result, response|
+        c.create_stream({ parent: parent, stream_id: stream_id, stream: stream, request_id: request_id, validate_only: validate_only, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_stream(::Google::Cloud::Datastream::V1::CreateStreamRequest.new(parent: parent, stream_id: stream_id, stream: stream, request_id: request_id, validate_only: validate_only, force: force), call_options) do |_result, response|
+        c.create_stream(::Google::Cloud::Datastream::V1::CreateStreamRequest.new(parent: parent, stream_id: stream_id, stream: stream, request_id: request_id, validate_only: validate_only, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -613,32 +613,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_update_stream_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_stream_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_stream({ update_mask: update_mask, stream: stream, request_id: request_id, validate_only: validate_only, force: force }) do |_result, response|
+        c.update_stream({ update_mask: update_mask, stream: stream, request_id: request_id, validate_only: validate_only, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_stream update_mask: update_mask, stream: stream, request_id: request_id, validate_only: validate_only, force: force do |_result, response|
+        c.update_stream update_mask: update_mask, stream: stream, request_id: request_id, validate_only: validate_only, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_stream ::Google::Cloud::Datastream::V1::UpdateStreamRequest.new(update_mask: update_mask, stream: stream, request_id: request_id, validate_only: validate_only, force: force) do |_result, response|
+        c.update_stream ::Google::Cloud::Datastream::V1::UpdateStreamRequest.new(update_mask: update_mask, stream: stream, request_id: request_id, validate_only: validate_only, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_stream({ update_mask: update_mask, stream: stream, request_id: request_id, validate_only: validate_only, force: force }, call_options) do |_result, response|
+        c.update_stream({ update_mask: update_mask, stream: stream, request_id: request_id, validate_only: validate_only, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_stream(::Google::Cloud::Datastream::V1::UpdateStreamRequest.new(update_mask: update_mask, stream: stream, request_id: request_id, validate_only: validate_only, force: force), call_options) do |_result, response|
+        c.update_stream(::Google::Cloud::Datastream::V1::UpdateStreamRequest.new(update_mask: update_mask, stream: stream, request_id: request_id, validate_only: validate_only, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -668,32 +668,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_delete_stream_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_stream_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_stream({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_stream({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_stream name: name, request_id: request_id do |_result, response|
+        c.delete_stream name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_stream ::Google::Cloud::Datastream::V1::DeleteStreamRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_stream ::Google::Cloud::Datastream::V1::DeleteStreamRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_stream({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_stream({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_stream(::Google::Cloud::Datastream::V1::DeleteStreamRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_stream(::Google::Cloud::Datastream::V1::DeleteStreamRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -724,32 +724,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_run_stream_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_stream_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_stream({ name: name, cdc_strategy: cdc_strategy, force: force }) do |_result, response|
+        c.run_stream({ name: name, cdc_strategy: cdc_strategy, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_stream name: name, cdc_strategy: cdc_strategy, force: force do |_result, response|
+        c.run_stream name: name, cdc_strategy: cdc_strategy, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_stream ::Google::Cloud::Datastream::V1::RunStreamRequest.new(name: name, cdc_strategy: cdc_strategy, force: force) do |_result, response|
+        c.run_stream ::Google::Cloud::Datastream::V1::RunStreamRequest.new(name: name, cdc_strategy: cdc_strategy, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_stream({ name: name, cdc_strategy: cdc_strategy, force: force }, call_options) do |_result, response|
+        c.run_stream({ name: name, cdc_strategy: cdc_strategy, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_stream(::Google::Cloud::Datastream::V1::RunStreamRequest.new(name: name, cdc_strategy: cdc_strategy, force: force), call_options) do |_result, response|
+        c.run_stream(::Google::Cloud::Datastream::V1::RunStreamRequest.new(name: name, cdc_strategy: cdc_strategy, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -778,32 +778,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_get_stream_object_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_stream_object_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_stream_object({ name: name }) do |_result, response|
+        c.get_stream_object({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_stream_object name: name do |_result, response|
+        c.get_stream_object name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_stream_object ::Google::Cloud::Datastream::V1::GetStreamObjectRequest.new(name: name) do |_result, response|
+        c.get_stream_object ::Google::Cloud::Datastream::V1::GetStreamObjectRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_stream_object({ name: name }, call_options) do |_result, response|
+        c.get_stream_object({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_stream_object(::Google::Cloud::Datastream::V1::GetStreamObjectRequest.new(name: name), call_options) do |_result, response|
+        c.get_stream_object(::Google::Cloud::Datastream::V1::GetStreamObjectRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -833,32 +833,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_lookup_stream_object_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, lookup_stream_object_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.lookup_stream_object({ parent: parent, source_object_identifier: source_object_identifier }) do |_result, response|
+        c.lookup_stream_object({ parent: parent, source_object_identifier: source_object_identifier }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lookup_stream_object parent: parent, source_object_identifier: source_object_identifier do |_result, response|
+        c.lookup_stream_object parent: parent, source_object_identifier: source_object_identifier do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lookup_stream_object ::Google::Cloud::Datastream::V1::LookupStreamObjectRequest.new(parent: parent, source_object_identifier: source_object_identifier) do |_result, response|
+        c.lookup_stream_object ::Google::Cloud::Datastream::V1::LookupStreamObjectRequest.new(parent: parent, source_object_identifier: source_object_identifier) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lookup_stream_object({ parent: parent, source_object_identifier: source_object_identifier }, call_options) do |_result, response|
+        c.lookup_stream_object({ parent: parent, source_object_identifier: source_object_identifier }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lookup_stream_object(::Google::Cloud::Datastream::V1::LookupStreamObjectRequest.new(parent: parent, source_object_identifier: source_object_identifier), call_options) do |_result, response|
+        c.lookup_stream_object(::Google::Cloud::Datastream::V1::LookupStreamObjectRequest.new(parent: parent, source_object_identifier: source_object_identifier), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -889,32 +889,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_list_stream_objects_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_stream_objects_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_stream_objects({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_stream_objects({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_stream_objects parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_stream_objects parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_stream_objects ::Google::Cloud::Datastream::V1::ListStreamObjectsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_stream_objects ::Google::Cloud::Datastream::V1::ListStreamObjectsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_stream_objects({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_stream_objects({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_stream_objects(::Google::Cloud::Datastream::V1::ListStreamObjectsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_stream_objects(::Google::Cloud::Datastream::V1::ListStreamObjectsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -943,32 +943,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_start_backfill_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_backfill_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_backfill_job({ object: object }) do |_result, response|
+        c.start_backfill_job({ object: object }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_backfill_job object: object do |_result, response|
+        c.start_backfill_job object: object do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_backfill_job ::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object) do |_result, response|
+        c.start_backfill_job ::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_backfill_job({ object: object }, call_options) do |_result, response|
+        c.start_backfill_job({ object: object }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_backfill_job(::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object), call_options) do |_result, response|
+        c.start_backfill_job(::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -997,32 +997,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_stop_backfill_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_backfill_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_backfill_job({ object: object }) do |_result, response|
+        c.stop_backfill_job({ object: object }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_backfill_job object: object do |_result, response|
+        c.stop_backfill_job object: object do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_backfill_job ::Google::Cloud::Datastream::V1::StopBackfillJobRequest.new(object: object) do |_result, response|
+        c.stop_backfill_job ::Google::Cloud::Datastream::V1::StopBackfillJobRequest.new(object: object) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_backfill_job({ object: object }, call_options) do |_result, response|
+        c.stop_backfill_job({ object: object }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_backfill_job(::Google::Cloud::Datastream::V1::StopBackfillJobRequest.new(object: object), call_options) do |_result, response|
+        c.stop_backfill_job(::Google::Cloud::Datastream::V1::StopBackfillJobRequest.new(object: object), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1053,32 +1053,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_fetch_static_ips_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_static_ips_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_static_ips({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.fetch_static_ips({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_static_ips name: name, page_size: page_size, page_token: page_token do |_result, response|
+        c.fetch_static_ips name: name, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_static_ips ::Google::Cloud::Datastream::V1::FetchStaticIpsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
+        c.fetch_static_ips ::Google::Cloud::Datastream::V1::FetchStaticIpsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_static_ips({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.fetch_static_ips({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_static_ips(::Google::Cloud::Datastream::V1::FetchStaticIpsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.fetch_static_ips(::Google::Cloud::Datastream::V1::FetchStaticIpsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1112,32 +1112,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_create_private_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_private_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only }) do |_result, response|
+        c.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_private_connection parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only do |_result, response|
+        c.create_private_connection parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_private_connection ::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only) do |_result, response|
+        c.create_private_connection ::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_private_connection(::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only), call_options) do |_result, response|
+        c.create_private_connection(::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1166,32 +1166,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_get_private_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_private_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_private_connection({ name: name }) do |_result, response|
+        c.get_private_connection({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_private_connection name: name do |_result, response|
+        c.get_private_connection name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_private_connection ::Google::Cloud::Datastream::V1::GetPrivateConnectionRequest.new(name: name) do |_result, response|
+        c.get_private_connection ::Google::Cloud::Datastream::V1::GetPrivateConnectionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_private_connection({ name: name }, call_options) do |_result, response|
+        c.get_private_connection({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_private_connection(::Google::Cloud::Datastream::V1::GetPrivateConnectionRequest.new(name: name), call_options) do |_result, response|
+        c.get_private_connection(::Google::Cloud::Datastream::V1::GetPrivateConnectionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1224,32 +1224,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_list_private_connections_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_private_connections_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_private_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_private_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_private_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_private_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_private_connections ::Google::Cloud::Datastream::V1::ListPrivateConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_private_connections ::Google::Cloud::Datastream::V1::ListPrivateConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_private_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_private_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_private_connections(::Google::Cloud::Datastream::V1::ListPrivateConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_private_connections(::Google::Cloud::Datastream::V1::ListPrivateConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1280,32 +1280,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_delete_private_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_private_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_private_connection({ name: name, request_id: request_id, force: force }) do |_result, response|
+        c.delete_private_connection({ name: name, request_id: request_id, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_private_connection name: name, request_id: request_id, force: force do |_result, response|
+        c.delete_private_connection name: name, request_id: request_id, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_private_connection ::Google::Cloud::Datastream::V1::DeletePrivateConnectionRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
+        c.delete_private_connection ::Google::Cloud::Datastream::V1::DeletePrivateConnectionRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_private_connection({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
+        c.delete_private_connection({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_private_connection(::Google::Cloud::Datastream::V1::DeletePrivateConnectionRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
+        c.delete_private_connection(::Google::Cloud::Datastream::V1::DeletePrivateConnectionRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1337,32 +1337,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_create_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_route_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_route({ parent: parent, route_id: route_id, route: route, request_id: request_id }) do |_result, response|
+        c.create_route({ parent: parent, route_id: route_id, route: route, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_route parent: parent, route_id: route_id, route: route, request_id: request_id do |_result, response|
+        c.create_route parent: parent, route_id: route_id, route: route, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_route ::Google::Cloud::Datastream::V1::CreateRouteRequest.new(parent: parent, route_id: route_id, route: route, request_id: request_id) do |_result, response|
+        c.create_route ::Google::Cloud::Datastream::V1::CreateRouteRequest.new(parent: parent, route_id: route_id, route: route, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_route({ parent: parent, route_id: route_id, route: route, request_id: request_id }, call_options) do |_result, response|
+        c.create_route({ parent: parent, route_id: route_id, route: route, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_route(::Google::Cloud::Datastream::V1::CreateRouteRequest.new(parent: parent, route_id: route_id, route: route, request_id: request_id), call_options) do |_result, response|
+        c.create_route(::Google::Cloud::Datastream::V1::CreateRouteRequest.new(parent: parent, route_id: route_id, route: route, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1391,32 +1391,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_get_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_route_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_route({ name: name }) do |_result, response|
+        c.get_route({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_route name: name do |_result, response|
+        c.get_route name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_route ::Google::Cloud::Datastream::V1::GetRouteRequest.new(name: name) do |_result, response|
+        c.get_route ::Google::Cloud::Datastream::V1::GetRouteRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_route({ name: name }, call_options) do |_result, response|
+        c.get_route({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_route(::Google::Cloud::Datastream::V1::GetRouteRequest.new(name: name), call_options) do |_result, response|
+        c.get_route(::Google::Cloud::Datastream::V1::GetRouteRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1449,32 +1449,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_list_routes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_routes_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_routes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_routes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_routes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_routes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_routes ::Google::Cloud::Datastream::V1::ListRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_routes ::Google::Cloud::Datastream::V1::ListRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_routes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_routes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_routes(::Google::Cloud::Datastream::V1::ListRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_routes(::Google::Cloud::Datastream::V1::ListRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1504,32 +1504,32 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_delete_route_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_route_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_route({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_route({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_route name: name, request_id: request_id do |_result, response|
+        c.delete_route name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_route ::Google::Cloud::Datastream::V1::DeleteRouteRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_route ::Google::Cloud::Datastream::V1::DeleteRouteRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_route({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_route({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_route(::Google::Cloud::Datastream::V1::DeleteRouteRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_route(::Google::Cloud::Datastream::V1::DeleteRouteRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

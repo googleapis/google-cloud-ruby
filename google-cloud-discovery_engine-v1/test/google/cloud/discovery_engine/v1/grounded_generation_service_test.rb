@@ -87,7 +87,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::ClientTes
 
     Gapic::ServiceStub.stub :new, stream_generate_grounded_content_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -95,7 +95,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::ClientTes
       request_hash = { location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels }
       request_proto = ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest.new location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels
       enum_input = [request_hash, request_proto].to_enum
-      client.stream_generate_grounded_content enum_input do |response, operation|
+      c.stream_generate_grounded_content enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse, r
@@ -107,7 +107,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::ClientTes
       request_hash = { location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels }
       request_proto = ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest.new location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels
       stream_input = Gapic::StreamInput.new
-      client.stream_generate_grounded_content stream_input do |response, operation|
+      c.stream_generate_grounded_content stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse, r
@@ -122,7 +122,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::ClientTes
       request_hash = { location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels }
       request_proto = ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest.new location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels
       enum_input = [request_hash, request_proto].to_enum
-      client.stream_generate_grounded_content enum_input, grpc_options do |response, operation|
+      c.stream_generate_grounded_content enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse, r
@@ -134,7 +134,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::ClientTes
       request_hash = { location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels }
       request_proto = ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest.new location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels
       stream_input = Gapic::StreamInput.new
-      client.stream_generate_grounded_content stream_input, grpc_options do |response, operation|
+      c.stream_generate_grounded_content stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse, r
@@ -190,36 +190,36 @@ class ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::ClientTes
 
     Gapic::ServiceStub.stub :new, generate_grounded_content_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_grounded_content({ location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels }) do |response, operation|
+      c.generate_grounded_content({ location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_grounded_content location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels do |response, operation|
+      c.generate_grounded_content location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_grounded_content ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest.new(location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels) do |response, operation|
+      c.generate_grounded_content ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest.new(location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_grounded_content({ location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels }, grpc_options) do |response, operation|
+      c.generate_grounded_content({ location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_grounded_content(::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest.new(location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels), grpc_options) do |response, operation|
+      c.generate_grounded_content(::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest.new(location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -256,36 +256,36 @@ class ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::ClientTes
 
     Gapic::ServiceStub.stub :new, check_grounding_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.check_grounding({ grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels }) do |response, operation|
+      c.check_grounding({ grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.check_grounding grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels do |response, operation|
+      c.check_grounding grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.check_grounding ::Google::Cloud::DiscoveryEngine::V1::CheckGroundingRequest.new(grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels) do |response, operation|
+      c.check_grounding ::Google::Cloud::DiscoveryEngine::V1::CheckGroundingRequest.new(grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.check_grounding({ grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels }, grpc_options) do |response, operation|
+      c.check_grounding({ grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.check_grounding(::Google::Cloud::DiscoveryEngine::V1::CheckGroundingRequest.new(grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels), grpc_options) do |response, operation|
+      c.check_grounding(::Google::Cloud::DiscoveryEngine::V1::CheckGroundingRequest.new(grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -82,36 +82,36 @@ class ::Google::Cloud::Dialogflow::V2::Fulfillments::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_fulfillment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Fulfillments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Fulfillments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_fulfillment({ name: name }) do |response, operation|
+      c.get_fulfillment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_fulfillment name: name do |response, operation|
+      c.get_fulfillment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_fulfillment ::Google::Cloud::Dialogflow::V2::GetFulfillmentRequest.new(name: name) do |response, operation|
+      c.get_fulfillment ::Google::Cloud::Dialogflow::V2::GetFulfillmentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_fulfillment({ name: name }, grpc_options) do |response, operation|
+      c.get_fulfillment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_fulfillment(::Google::Cloud::Dialogflow::V2::GetFulfillmentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_fulfillment(::Google::Cloud::Dialogflow::V2::GetFulfillmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::Dialogflow::V2::Fulfillments::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_fulfillment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Fulfillments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Fulfillments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_fulfillment({ fulfillment: fulfillment, update_mask: update_mask }) do |response, operation|
+      c.update_fulfillment({ fulfillment: fulfillment, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_fulfillment fulfillment: fulfillment, update_mask: update_mask do |response, operation|
+      c.update_fulfillment fulfillment: fulfillment, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_fulfillment ::Google::Cloud::Dialogflow::V2::UpdateFulfillmentRequest.new(fulfillment: fulfillment, update_mask: update_mask) do |response, operation|
+      c.update_fulfillment ::Google::Cloud::Dialogflow::V2::UpdateFulfillmentRequest.new(fulfillment: fulfillment, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_fulfillment({ fulfillment: fulfillment, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_fulfillment({ fulfillment: fulfillment, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_fulfillment(::Google::Cloud::Dialogflow::V2::UpdateFulfillmentRequest.new(fulfillment: fulfillment, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_fulfillment(::Google::Cloud::Dialogflow::V2::UpdateFulfillmentRequest.new(fulfillment: fulfillment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

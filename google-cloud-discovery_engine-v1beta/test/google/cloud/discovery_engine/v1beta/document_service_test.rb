@@ -82,36 +82,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, get_document_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_document({ name: name }) do |response, operation|
+      c.get_document({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_document name: name do |response, operation|
+      c.get_document name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_document ::Google::Cloud::DiscoveryEngine::V1beta::GetDocumentRequest.new(name: name) do |response, operation|
+      c.get_document ::Google::Cloud::DiscoveryEngine::V1beta::GetDocumentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_document({ name: name }, grpc_options) do |response, operation|
+      c.get_document({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_document(::Google::Cloud::DiscoveryEngine::V1beta::GetDocumentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_document(::Google::Cloud::DiscoveryEngine::V1beta::GetDocumentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,40 +144,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, list_documents_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_documents({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_documents({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_documents parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_documents parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_documents ::Google::Cloud::DiscoveryEngine::V1beta::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_documents ::Google::Cloud::DiscoveryEngine::V1beta::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_documents({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_documents({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_documents(::Google::Cloud::DiscoveryEngine::V1beta::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_documents(::Google::Cloud::DiscoveryEngine::V1beta::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -211,36 +211,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, create_document_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_document({ parent: parent, document: document, document_id: document_id }) do |response, operation|
+      c.create_document({ parent: parent, document: document, document_id: document_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_document parent: parent, document: document, document_id: document_id do |response, operation|
+      c.create_document parent: parent, document: document, document_id: document_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_document ::Google::Cloud::DiscoveryEngine::V1beta::CreateDocumentRequest.new(parent: parent, document: document, document_id: document_id) do |response, operation|
+      c.create_document ::Google::Cloud::DiscoveryEngine::V1beta::CreateDocumentRequest.new(parent: parent, document: document, document_id: document_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_document({ parent: parent, document: document, document_id: document_id }, grpc_options) do |response, operation|
+      c.create_document({ parent: parent, document: document, document_id: document_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_document(::Google::Cloud::DiscoveryEngine::V1beta::CreateDocumentRequest.new(parent: parent, document: document, document_id: document_id), grpc_options) do |response, operation|
+      c.create_document(::Google::Cloud::DiscoveryEngine::V1beta::CreateDocumentRequest.new(parent: parent, document: document, document_id: document_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -273,36 +273,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, update_document_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_document({ document: document, allow_missing: allow_missing, update_mask: update_mask }) do |response, operation|
+      c.update_document({ document: document, allow_missing: allow_missing, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_document document: document, allow_missing: allow_missing, update_mask: update_mask do |response, operation|
+      c.update_document document: document, allow_missing: allow_missing, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_document ::Google::Cloud::DiscoveryEngine::V1beta::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing, update_mask: update_mask) do |response, operation|
+      c.update_document ::Google::Cloud::DiscoveryEngine::V1beta::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_document({ document: document, allow_missing: allow_missing, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_document({ document: document, allow_missing: allow_missing, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_document(::Google::Cloud::DiscoveryEngine::V1beta::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_document(::Google::Cloud::DiscoveryEngine::V1beta::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,36 +331,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, delete_document_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_document({ name: name }) do |response, operation|
+      c.delete_document({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_document name: name do |response, operation|
+      c.delete_document name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_document ::Google::Cloud::DiscoveryEngine::V1beta::DeleteDocumentRequest.new(name: name) do |response, operation|
+      c.delete_document ::Google::Cloud::DiscoveryEngine::V1beta::DeleteDocumentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_document({ name: name }, grpc_options) do |response, operation|
+      c.delete_document({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_document(::Google::Cloud::DiscoveryEngine::V1beta::DeleteDocumentRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_document(::Google::Cloud::DiscoveryEngine::V1beta::DeleteDocumentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -402,40 +402,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, import_documents_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }) do |response, operation|
+      c.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_documents inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field do |response, operation|
+      c.import_documents inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_documents ::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field) do |response, operation|
+      c.import_documents ::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }, grpc_options) do |response, operation|
+      c.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_documents(::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field), grpc_options) do |response, operation|
+      c.import_documents(::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -474,40 +474,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, purge_documents_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }) do |response, operation|
+      c.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.purge_documents gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force do |response, operation|
+      c.purge_documents gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.purge_documents ::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force) do |response, operation|
+      c.purge_documents ::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }, grpc_options) do |response, operation|
+      c.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.purge_documents(::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force), grpc_options) do |response, operation|
+      c.purge_documents(::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -539,36 +539,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, batch_get_documents_metadata_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_get_documents_metadata({ parent: parent, matcher: matcher }) do |response, operation|
+      c.batch_get_documents_metadata({ parent: parent, matcher: matcher }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_get_documents_metadata parent: parent, matcher: matcher do |response, operation|
+      c.batch_get_documents_metadata parent: parent, matcher: matcher do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_get_documents_metadata ::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher) do |response, operation|
+      c.batch_get_documents_metadata ::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_get_documents_metadata({ parent: parent, matcher: matcher }, grpc_options) do |response, operation|
+      c.batch_get_documents_metadata({ parent: parent, matcher: matcher }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_get_documents_metadata(::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher), grpc_options) do |response, operation|
+      c.batch_get_documents_metadata(::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

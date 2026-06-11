@@ -88,40 +88,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, list_user_licenses_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_user_licenses parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_user_licenses parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_user_licenses ::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_user_licenses ::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_user_licenses(::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_user_licenses(::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -156,40 +156,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, batch_update_user_licenses_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_update_user_licenses({ inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses }) do |response, operation|
+      c.batch_update_user_licenses({ inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_update_user_licenses inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses do |response, operation|
+      c.batch_update_user_licenses inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_update_user_licenses ::Google::Cloud::DiscoveryEngine::V1::BatchUpdateUserLicensesRequest.new(inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses) do |response, operation|
+      c.batch_update_user_licenses ::Google::Cloud::DiscoveryEngine::V1::BatchUpdateUserLicensesRequest.new(inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_update_user_licenses({ inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses }, grpc_options) do |response, operation|
+      c.batch_update_user_licenses({ inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_update_user_licenses(::Google::Cloud::DiscoveryEngine::V1::BatchUpdateUserLicensesRequest.new(inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses), grpc_options) do |response, operation|
+      c.batch_update_user_licenses(::Google::Cloud::DiscoveryEngine::V1::BatchUpdateUserLicensesRequest.new(inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

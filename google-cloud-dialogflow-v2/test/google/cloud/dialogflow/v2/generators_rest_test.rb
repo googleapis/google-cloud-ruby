@@ -99,32 +99,32 @@ class ::Google::Cloud::Dialogflow::V2::Generators::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::V2::Generators::Rest::ServiceStub.stub :transcode_create_generator_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_generator_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Generators::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Generators::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_generator({ parent: parent, generator: generator, generator_id: generator_id }) do |_result, response|
+        c.create_generator({ parent: parent, generator: generator, generator_id: generator_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_generator parent: parent, generator: generator, generator_id: generator_id do |_result, response|
+        c.create_generator parent: parent, generator: generator, generator_id: generator_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_generator ::Google::Cloud::Dialogflow::V2::CreateGeneratorRequest.new(parent: parent, generator: generator, generator_id: generator_id) do |_result, response|
+        c.create_generator ::Google::Cloud::Dialogflow::V2::CreateGeneratorRequest.new(parent: parent, generator: generator, generator_id: generator_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_generator({ parent: parent, generator: generator, generator_id: generator_id }, call_options) do |_result, response|
+        c.create_generator({ parent: parent, generator: generator, generator_id: generator_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_generator(::Google::Cloud::Dialogflow::V2::CreateGeneratorRequest.new(parent: parent, generator: generator, generator_id: generator_id), call_options) do |_result, response|
+        c.create_generator(::Google::Cloud::Dialogflow::V2::CreateGeneratorRequest.new(parent: parent, generator: generator, generator_id: generator_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Dialogflow::V2::Generators::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::V2::Generators::Rest::ServiceStub.stub :transcode_get_generator_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_generator_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Generators::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Generators::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_generator({ name: name }) do |_result, response|
+        c.get_generator({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_generator name: name do |_result, response|
+        c.get_generator name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_generator ::Google::Cloud::Dialogflow::V2::GetGeneratorRequest.new(name: name) do |_result, response|
+        c.get_generator ::Google::Cloud::Dialogflow::V2::GetGeneratorRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_generator({ name: name }, call_options) do |_result, response|
+        c.get_generator({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_generator(::Google::Cloud::Dialogflow::V2::GetGeneratorRequest.new(name: name), call_options) do |_result, response|
+        c.get_generator(::Google::Cloud::Dialogflow::V2::GetGeneratorRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Dialogflow::V2::Generators::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::V2::Generators::Rest::ServiceStub.stub :transcode_list_generators_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_generators_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Generators::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Generators::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_generators({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_generators({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_generators parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_generators parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_generators ::Google::Cloud::Dialogflow::V2::ListGeneratorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_generators ::Google::Cloud::Dialogflow::V2::ListGeneratorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_generators({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_generators({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_generators(::Google::Cloud::Dialogflow::V2::ListGeneratorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_generators(::Google::Cloud::Dialogflow::V2::ListGeneratorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Dialogflow::V2::Generators::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::V2::Generators::Rest::ServiceStub.stub :transcode_delete_generator_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_generator_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Generators::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Generators::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_generator({ name: name }) do |_result, response|
+        c.delete_generator({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_generator name: name do |_result, response|
+        c.delete_generator name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_generator ::Google::Cloud::Dialogflow::V2::DeleteGeneratorRequest.new(name: name) do |_result, response|
+        c.delete_generator ::Google::Cloud::Dialogflow::V2::DeleteGeneratorRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_generator({ name: name }, call_options) do |_result, response|
+        c.delete_generator({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_generator(::Google::Cloud::Dialogflow::V2::DeleteGeneratorRequest.new(name: name), call_options) do |_result, response|
+        c.delete_generator(::Google::Cloud::Dialogflow::V2::DeleteGeneratorRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Dialogflow::V2::Generators::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::V2::Generators::Rest::ServiceStub.stub :transcode_update_generator_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_generator_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Generators::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Generators::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_generator({ generator: generator, update_mask: update_mask }) do |_result, response|
+        c.update_generator({ generator: generator, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_generator generator: generator, update_mask: update_mask do |_result, response|
+        c.update_generator generator: generator, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_generator ::Google::Cloud::Dialogflow::V2::UpdateGeneratorRequest.new(generator: generator, update_mask: update_mask) do |_result, response|
+        c.update_generator ::Google::Cloud::Dialogflow::V2::UpdateGeneratorRequest.new(generator: generator, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_generator({ generator: generator, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_generator({ generator: generator, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_generator(::Google::Cloud::Dialogflow::V2::UpdateGeneratorRequest.new(generator: generator, update_mask: update_mask), call_options) do |_result, response|
+        c.update_generator(::Google::Cloud::Dialogflow::V2::UpdateGeneratorRequest.new(generator: generator, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

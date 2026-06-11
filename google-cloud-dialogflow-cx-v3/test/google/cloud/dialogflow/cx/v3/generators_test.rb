@@ -88,40 +88,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Generators::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_generators_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Generators::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Generators::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_generators({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_generators({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_generators parent: parent, language_code: language_code, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_generators parent: parent, language_code: language_code, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_generators ::Google::Cloud::Dialogflow::CX::V3::ListGeneratorsRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_generators ::Google::Cloud::Dialogflow::CX::V3::ListGeneratorsRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_generators({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_generators({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_generators(::Google::Cloud::Dialogflow::CX::V3::ListGeneratorsRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_generators(::Google::Cloud::Dialogflow::CX::V3::ListGeneratorsRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Generators::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_generator_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Generators::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Generators::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_generator({ name: name, language_code: language_code }) do |response, operation|
+      c.get_generator({ name: name, language_code: language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_generator name: name, language_code: language_code do |response, operation|
+      c.get_generator name: name, language_code: language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_generator ::Google::Cloud::Dialogflow::CX::V3::GetGeneratorRequest.new(name: name, language_code: language_code) do |response, operation|
+      c.get_generator ::Google::Cloud::Dialogflow::CX::V3::GetGeneratorRequest.new(name: name, language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_generator({ name: name, language_code: language_code }, grpc_options) do |response, operation|
+      c.get_generator({ name: name, language_code: language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_generator(::Google::Cloud::Dialogflow::CX::V3::GetGeneratorRequest.new(name: name, language_code: language_code), grpc_options) do |response, operation|
+      c.get_generator(::Google::Cloud::Dialogflow::CX::V3::GetGeneratorRequest.new(name: name, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,36 +215,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Generators::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_generator_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Generators::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Generators::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_generator({ parent: parent, generator: generator, language_code: language_code }) do |response, operation|
+      c.create_generator({ parent: parent, generator: generator, language_code: language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_generator parent: parent, generator: generator, language_code: language_code do |response, operation|
+      c.create_generator parent: parent, generator: generator, language_code: language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_generator ::Google::Cloud::Dialogflow::CX::V3::CreateGeneratorRequest.new(parent: parent, generator: generator, language_code: language_code) do |response, operation|
+      c.create_generator ::Google::Cloud::Dialogflow::CX::V3::CreateGeneratorRequest.new(parent: parent, generator: generator, language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_generator({ parent: parent, generator: generator, language_code: language_code }, grpc_options) do |response, operation|
+      c.create_generator({ parent: parent, generator: generator, language_code: language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_generator(::Google::Cloud::Dialogflow::CX::V3::CreateGeneratorRequest.new(parent: parent, generator: generator, language_code: language_code), grpc_options) do |response, operation|
+      c.create_generator(::Google::Cloud::Dialogflow::CX::V3::CreateGeneratorRequest.new(parent: parent, generator: generator, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -277,36 +277,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Generators::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_generator_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Generators::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Generators::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_generator({ generator: generator, language_code: language_code, update_mask: update_mask }) do |response, operation|
+      c.update_generator({ generator: generator, language_code: language_code, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_generator generator: generator, language_code: language_code, update_mask: update_mask do |response, operation|
+      c.update_generator generator: generator, language_code: language_code, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_generator ::Google::Cloud::Dialogflow::CX::V3::UpdateGeneratorRequest.new(generator: generator, language_code: language_code, update_mask: update_mask) do |response, operation|
+      c.update_generator ::Google::Cloud::Dialogflow::CX::V3::UpdateGeneratorRequest.new(generator: generator, language_code: language_code, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_generator({ generator: generator, language_code: language_code, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_generator({ generator: generator, language_code: language_code, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_generator(::Google::Cloud::Dialogflow::CX::V3::UpdateGeneratorRequest.new(generator: generator, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_generator(::Google::Cloud::Dialogflow::CX::V3::UpdateGeneratorRequest.new(generator: generator, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -337,36 +337,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Generators::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_generator_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Generators::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Generators::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_generator({ name: name, force: force }) do |response, operation|
+      c.delete_generator({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_generator name: name, force: force do |response, operation|
+      c.delete_generator name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_generator ::Google::Cloud::Dialogflow::CX::V3::DeleteGeneratorRequest.new(name: name, force: force) do |response, operation|
+      c.delete_generator ::Google::Cloud::Dialogflow::CX::V3::DeleteGeneratorRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_generator({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_generator({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_generator(::Google::Cloud::Dialogflow::CX::V3::DeleteGeneratorRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_generator(::Google::Cloud::Dialogflow::CX::V3::DeleteGeneratorRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
