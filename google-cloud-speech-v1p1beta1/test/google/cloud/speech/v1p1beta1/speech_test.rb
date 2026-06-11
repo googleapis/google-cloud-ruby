@@ -84,36 +84,36 @@ class ::Google::Cloud::Speech::V1p1beta1::Speech::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, recognize_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1p1beta1::Speech::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1p1beta1::Speech::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.recognize({ config: config, audio: audio }) do |response, operation|
+      c.recognize({ config: config, audio: audio }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.recognize config: config, audio: audio do |response, operation|
+      c.recognize config: config, audio: audio do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.recognize ::Google::Cloud::Speech::V1p1beta1::RecognizeRequest.new(config: config, audio: audio) do |response, operation|
+      c.recognize ::Google::Cloud::Speech::V1p1beta1::RecognizeRequest.new(config: config, audio: audio) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.recognize({ config: config, audio: audio }, grpc_options) do |response, operation|
+      c.recognize({ config: config, audio: audio }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.recognize(::Google::Cloud::Speech::V1p1beta1::RecognizeRequest.new(config: config, audio: audio), grpc_options) do |response, operation|
+      c.recognize(::Google::Cloud::Speech::V1p1beta1::RecognizeRequest.new(config: config, audio: audio), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Cloud::Speech::V1p1beta1::Speech::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, long_running_recognize_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1p1beta1::Speech::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1p1beta1::Speech::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.long_running_recognize({ config: config, audio: audio, output_config: output_config }) do |response, operation|
+      c.long_running_recognize({ config: config, audio: audio, output_config: output_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.long_running_recognize config: config, audio: audio, output_config: output_config do |response, operation|
+      c.long_running_recognize config: config, audio: audio, output_config: output_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.long_running_recognize ::Google::Cloud::Speech::V1p1beta1::LongRunningRecognizeRequest.new(config: config, audio: audio, output_config: output_config) do |response, operation|
+      c.long_running_recognize ::Google::Cloud::Speech::V1p1beta1::LongRunningRecognizeRequest.new(config: config, audio: audio, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.long_running_recognize({ config: config, audio: audio, output_config: output_config }, grpc_options) do |response, operation|
+      c.long_running_recognize({ config: config, audio: audio, output_config: output_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.long_running_recognize(::Google::Cloud::Speech::V1p1beta1::LongRunningRecognizeRequest.new(config: config, audio: audio, output_config: output_config), grpc_options) do |response, operation|
+      c.long_running_recognize(::Google::Cloud::Speech::V1p1beta1::LongRunningRecognizeRequest.new(config: config, audio: audio, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -209,7 +209,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Speech::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, streaming_recognize_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1p1beta1::Speech::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1p1beta1::Speech::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -217,7 +217,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Speech::ClientTest < Minitest::Test
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeRequest.new streaming_config: streaming_config
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_recognize enum_input do |response, operation|
+      c.streaming_recognize enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse, r
@@ -229,7 +229,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Speech::ClientTest < Minitest::Test
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeRequest.new streaming_config: streaming_config
       stream_input = Gapic::StreamInput.new
-      client.streaming_recognize stream_input do |response, operation|
+      c.streaming_recognize stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse, r
@@ -244,7 +244,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Speech::ClientTest < Minitest::Test
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeRequest.new streaming_config: streaming_config
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_recognize enum_input, grpc_options do |response, operation|
+      c.streaming_recognize enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse, r
@@ -256,7 +256,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Speech::ClientTest < Minitest::Test
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeRequest.new streaming_config: streaming_config
       stream_input = Gapic::StreamInput.new
-      client.streaming_recognize stream_input, grpc_options do |response, operation|
+      c.streaming_recognize stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse, r

@@ -98,32 +98,32 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     ::Google::Cloud::Talent::V4beta1::JobService::Rest::ServiceStub.stub :transcode_create_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_job({ parent: parent, job: job }) do |_result, response|
+        c.create_job({ parent: parent, job: job }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_job parent: parent, job: job do |_result, response|
+        c.create_job parent: parent, job: job do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_job ::Google::Cloud::Talent::V4beta1::CreateJobRequest.new(parent: parent, job: job) do |_result, response|
+        c.create_job ::Google::Cloud::Talent::V4beta1::CreateJobRequest.new(parent: parent, job: job) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_job({ parent: parent, job: job }, call_options) do |_result, response|
+        c.create_job({ parent: parent, job: job }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_job(::Google::Cloud::Talent::V4beta1::CreateJobRequest.new(parent: parent, job: job), call_options) do |_result, response|
+        c.create_job(::Google::Cloud::Talent::V4beta1::CreateJobRequest.new(parent: parent, job: job), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     ::Google::Cloud::Talent::V4beta1::JobService::Rest::ServiceStub.stub :transcode_batch_create_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_create_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_create_jobs({ parent: parent, jobs: jobs }) do |_result, response|
+        c.batch_create_jobs({ parent: parent, jobs: jobs }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_create_jobs parent: parent, jobs: jobs do |_result, response|
+        c.batch_create_jobs parent: parent, jobs: jobs do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_create_jobs ::Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest.new(parent: parent, jobs: jobs) do |_result, response|
+        c.batch_create_jobs ::Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest.new(parent: parent, jobs: jobs) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_create_jobs({ parent: parent, jobs: jobs }, call_options) do |_result, response|
+        c.batch_create_jobs({ parent: parent, jobs: jobs }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_create_jobs(::Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest.new(parent: parent, jobs: jobs), call_options) do |_result, response|
+        c.batch_create_jobs(::Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest.new(parent: parent, jobs: jobs), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     ::Google::Cloud::Talent::V4beta1::JobService::Rest::ServiceStub.stub :transcode_get_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_job({ name: name }) do |_result, response|
+        c.get_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_job name: name do |_result, response|
+        c.get_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_job ::Google::Cloud::Talent::V4beta1::GetJobRequest.new(name: name) do |_result, response|
+        c.get_job ::Google::Cloud::Talent::V4beta1::GetJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_job({ name: name }, call_options) do |_result, response|
+        c.get_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_job(::Google::Cloud::Talent::V4beta1::GetJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_job(::Google::Cloud::Talent::V4beta1::GetJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     ::Google::Cloud::Talent::V4beta1::JobService::Rest::ServiceStub.stub :transcode_update_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_job({ job: job, update_mask: update_mask }) do |_result, response|
+        c.update_job({ job: job, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_job job: job, update_mask: update_mask do |_result, response|
+        c.update_job job: job, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_job ::Google::Cloud::Talent::V4beta1::UpdateJobRequest.new(job: job, update_mask: update_mask) do |_result, response|
+        c.update_job ::Google::Cloud::Talent::V4beta1::UpdateJobRequest.new(job: job, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_job({ job: job, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_job({ job: job, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_job(::Google::Cloud::Talent::V4beta1::UpdateJobRequest.new(job: job, update_mask: update_mask), call_options) do |_result, response|
+        c.update_job(::Google::Cloud::Talent::V4beta1::UpdateJobRequest.new(job: job, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     ::Google::Cloud::Talent::V4beta1::JobService::Rest::ServiceStub.stub :transcode_batch_update_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_update_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_update_jobs({ parent: parent, jobs: jobs, update_mask: update_mask }) do |_result, response|
+        c.batch_update_jobs({ parent: parent, jobs: jobs, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_update_jobs parent: parent, jobs: jobs, update_mask: update_mask do |_result, response|
+        c.batch_update_jobs parent: parent, jobs: jobs, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_update_jobs ::Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest.new(parent: parent, jobs: jobs, update_mask: update_mask) do |_result, response|
+        c.batch_update_jobs ::Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest.new(parent: parent, jobs: jobs, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_update_jobs({ parent: parent, jobs: jobs, update_mask: update_mask }, call_options) do |_result, response|
+        c.batch_update_jobs({ parent: parent, jobs: jobs, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_update_jobs(::Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest.new(parent: parent, jobs: jobs, update_mask: update_mask), call_options) do |_result, response|
+        c.batch_update_jobs(::Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest.new(parent: parent, jobs: jobs, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -372,32 +372,32 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     ::Google::Cloud::Talent::V4beta1::JobService::Rest::ServiceStub.stub :transcode_delete_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_job({ name: name }) do |_result, response|
+        c.delete_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_job name: name do |_result, response|
+        c.delete_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_job ::Google::Cloud::Talent::V4beta1::DeleteJobRequest.new(name: name) do |_result, response|
+        c.delete_job ::Google::Cloud::Talent::V4beta1::DeleteJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_job({ name: name }, call_options) do |_result, response|
+        c.delete_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_job(::Google::Cloud::Talent::V4beta1::DeleteJobRequest.new(name: name), call_options) do |_result, response|
+        c.delete_job(::Google::Cloud::Talent::V4beta1::DeleteJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -427,32 +427,32 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     ::Google::Cloud::Talent::V4beta1::JobService::Rest::ServiceStub.stub :transcode_batch_delete_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_delete_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_delete_jobs({ parent: parent, filter: filter }) do |_result, response|
+        c.batch_delete_jobs({ parent: parent, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_delete_jobs parent: parent, filter: filter do |_result, response|
+        c.batch_delete_jobs parent: parent, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_delete_jobs ::Google::Cloud::Talent::V4beta1::BatchDeleteJobsRequest.new(parent: parent, filter: filter) do |_result, response|
+        c.batch_delete_jobs ::Google::Cloud::Talent::V4beta1::BatchDeleteJobsRequest.new(parent: parent, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_delete_jobs({ parent: parent, filter: filter }, call_options) do |_result, response|
+        c.batch_delete_jobs({ parent: parent, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_delete_jobs(::Google::Cloud::Talent::V4beta1::BatchDeleteJobsRequest.new(parent: parent, filter: filter), call_options) do |_result, response|
+        c.batch_delete_jobs(::Google::Cloud::Talent::V4beta1::BatchDeleteJobsRequest.new(parent: parent, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -485,32 +485,32 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     ::Google::Cloud::Talent::V4beta1::JobService::Rest::ServiceStub.stub :transcode_list_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_jobs({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view }) do |_result, response|
+        c.list_jobs({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_jobs parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view do |_result, response|
+        c.list_jobs parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_jobs ::Google::Cloud::Talent::V4beta1::ListJobsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view) do |_result, response|
+        c.list_jobs ::Google::Cloud::Talent::V4beta1::ListJobsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_jobs({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view }, call_options) do |_result, response|
+        c.list_jobs({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_jobs(::Google::Cloud::Talent::V4beta1::ListJobsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view), call_options) do |_result, response|
+        c.list_jobs(::Google::Cloud::Talent::V4beta1::ListJobsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, job_view: job_view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -555,32 +555,32 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     ::Google::Cloud::Talent::V4beta1::JobService::Rest::ServiceStub.stub :transcode_search_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }) do |_result, response|
+        c.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_jobs parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold do |_result, response|
+        c.search_jobs parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_jobs ::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold) do |_result, response|
+        c.search_jobs ::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }, call_options) do |_result, response|
+        c.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_jobs(::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold), call_options) do |_result, response|
+        c.search_jobs(::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -625,32 +625,32 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     ::Google::Cloud::Talent::V4beta1::JobService::Rest::ServiceStub.stub :transcode_search_jobs_for_alert_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_jobs_for_alert_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }) do |_result, response|
+        c.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_jobs_for_alert parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold do |_result, response|
+        c.search_jobs_for_alert parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_jobs_for_alert ::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold) do |_result, response|
+        c.search_jobs_for_alert ::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }, call_options) do |_result, response|
+        c.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_jobs_for_alert(::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold), call_options) do |_result, response|
+        c.search_jobs_for_alert(::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

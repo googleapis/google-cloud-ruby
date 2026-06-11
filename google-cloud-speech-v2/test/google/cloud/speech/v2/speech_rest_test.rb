@@ -100,32 +100,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_create_recognizer_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_recognizer_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_recognizer({ recognizer: recognizer, validate_only: validate_only, recognizer_id: recognizer_id, parent: parent }) do |_result, response|
+        c.create_recognizer({ recognizer: recognizer, validate_only: validate_only, recognizer_id: recognizer_id, parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_recognizer recognizer: recognizer, validate_only: validate_only, recognizer_id: recognizer_id, parent: parent do |_result, response|
+        c.create_recognizer recognizer: recognizer, validate_only: validate_only, recognizer_id: recognizer_id, parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_recognizer ::Google::Cloud::Speech::V2::CreateRecognizerRequest.new(recognizer: recognizer, validate_only: validate_only, recognizer_id: recognizer_id, parent: parent) do |_result, response|
+        c.create_recognizer ::Google::Cloud::Speech::V2::CreateRecognizerRequest.new(recognizer: recognizer, validate_only: validate_only, recognizer_id: recognizer_id, parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_recognizer({ recognizer: recognizer, validate_only: validate_only, recognizer_id: recognizer_id, parent: parent }, call_options) do |_result, response|
+        c.create_recognizer({ recognizer: recognizer, validate_only: validate_only, recognizer_id: recognizer_id, parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_recognizer(::Google::Cloud::Speech::V2::CreateRecognizerRequest.new(recognizer: recognizer, validate_only: validate_only, recognizer_id: recognizer_id, parent: parent), call_options) do |_result, response|
+        c.create_recognizer(::Google::Cloud::Speech::V2::CreateRecognizerRequest.new(recognizer: recognizer, validate_only: validate_only, recognizer_id: recognizer_id, parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_list_recognizers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_recognizers_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_recognizers({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
+        c.list_recognizers({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_recognizers parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
+        c.list_recognizers parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_recognizers ::Google::Cloud::Speech::V2::ListRecognizersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
+        c.list_recognizers ::Google::Cloud::Speech::V2::ListRecognizersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_recognizers({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_recognizers({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_recognizers(::Google::Cloud::Speech::V2::ListRecognizersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_recognizers(::Google::Cloud::Speech::V2::ListRecognizersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_get_recognizer_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_recognizer_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_recognizer({ name: name }) do |_result, response|
+        c.get_recognizer({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_recognizer name: name do |_result, response|
+        c.get_recognizer name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_recognizer ::Google::Cloud::Speech::V2::GetRecognizerRequest.new(name: name) do |_result, response|
+        c.get_recognizer ::Google::Cloud::Speech::V2::GetRecognizerRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_recognizer({ name: name }, call_options) do |_result, response|
+        c.get_recognizer({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_recognizer(::Google::Cloud::Speech::V2::GetRecognizerRequest.new(name: name), call_options) do |_result, response|
+        c.get_recognizer(::Google::Cloud::Speech::V2::GetRecognizerRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_update_recognizer_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_recognizer_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_recognizer({ recognizer: recognizer, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_recognizer({ recognizer: recognizer, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_recognizer recognizer: recognizer, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_recognizer recognizer: recognizer, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_recognizer ::Google::Cloud::Speech::V2::UpdateRecognizerRequest.new(recognizer: recognizer, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_recognizer ::Google::Cloud::Speech::V2::UpdateRecognizerRequest.new(recognizer: recognizer, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_recognizer({ recognizer: recognizer, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_recognizer({ recognizer: recognizer, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_recognizer(::Google::Cloud::Speech::V2::UpdateRecognizerRequest.new(recognizer: recognizer, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_recognizer(::Google::Cloud::Speech::V2::UpdateRecognizerRequest.new(recognizer: recognizer, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -324,32 +324,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_delete_recognizer_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_recognizer_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_recognizer({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |_result, response|
+        c.delete_recognizer({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_recognizer name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |_result, response|
+        c.delete_recognizer name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_recognizer ::Google::Cloud::Speech::V2::DeleteRecognizerRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |_result, response|
+        c.delete_recognizer ::Google::Cloud::Speech::V2::DeleteRecognizerRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_recognizer({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, call_options) do |_result, response|
+        c.delete_recognizer({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_recognizer(::Google::Cloud::Speech::V2::DeleteRecognizerRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), call_options) do |_result, response|
+        c.delete_recognizer(::Google::Cloud::Speech::V2::DeleteRecognizerRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -380,32 +380,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_undelete_recognizer_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undelete_recognizer_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undelete_recognizer({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.undelete_recognizer({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undelete_recognizer name: name, validate_only: validate_only, etag: etag do |_result, response|
+        c.undelete_recognizer name: name, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undelete_recognizer ::Google::Cloud::Speech::V2::UndeleteRecognizerRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        c.undelete_recognizer ::Google::Cloud::Speech::V2::UndeleteRecognizerRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undelete_recognizer({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.undelete_recognizer({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undelete_recognizer(::Google::Cloud::Speech::V2::UndeleteRecognizerRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.undelete_recognizer(::Google::Cloud::Speech::V2::UndeleteRecognizerRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -437,32 +437,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_recognize_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, recognize_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.recognize({ recognizer: recognizer, config: config, config_mask: config_mask, content: content }) do |_result, response|
+        c.recognize({ recognizer: recognizer, config: config, config_mask: config_mask, content: content }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.recognize recognizer: recognizer, config: config, config_mask: config_mask, content: content do |_result, response|
+        c.recognize recognizer: recognizer, config: config, config_mask: config_mask, content: content do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.recognize ::Google::Cloud::Speech::V2::RecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, content: content) do |_result, response|
+        c.recognize ::Google::Cloud::Speech::V2::RecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, content: content) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.recognize({ recognizer: recognizer, config: config, config_mask: config_mask, content: content }, call_options) do |_result, response|
+        c.recognize({ recognizer: recognizer, config: config, config_mask: config_mask, content: content }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.recognize(::Google::Cloud::Speech::V2::RecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, content: content), call_options) do |_result, response|
+        c.recognize(::Google::Cloud::Speech::V2::RecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, content: content), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -496,32 +496,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_batch_recognize_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_recognize_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy }) do |_result, response|
+        c.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_recognize recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy do |_result, response|
+        c.batch_recognize recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_recognize ::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy) do |_result, response|
+        c.batch_recognize ::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy }, call_options) do |_result, response|
+        c.batch_recognize({ recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_recognize(::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy), call_options) do |_result, response|
+        c.batch_recognize(::Google::Cloud::Speech::V2::BatchRecognizeRequest.new(recognizer: recognizer, config: config, config_mask: config_mask, files: files, recognition_output_config: recognition_output_config, processing_strategy: processing_strategy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -550,32 +550,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_get_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_config({ name: name }) do |_result, response|
+        c.get_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_config name: name do |_result, response|
+        c.get_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_config ::Google::Cloud::Speech::V2::GetConfigRequest.new(name: name) do |_result, response|
+        c.get_config ::Google::Cloud::Speech::V2::GetConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_config({ name: name }, call_options) do |_result, response|
+        c.get_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_config(::Google::Cloud::Speech::V2::GetConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_config(::Google::Cloud::Speech::V2::GetConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -605,32 +605,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_update_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_config({ config: config, update_mask: update_mask }) do |_result, response|
+        c.update_config({ config: config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_config config: config, update_mask: update_mask do |_result, response|
+        c.update_config config: config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_config ::Google::Cloud::Speech::V2::UpdateConfigRequest.new(config: config, update_mask: update_mask) do |_result, response|
+        c.update_config ::Google::Cloud::Speech::V2::UpdateConfigRequest.new(config: config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_config({ config: config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_config({ config: config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_config(::Google::Cloud::Speech::V2::UpdateConfigRequest.new(config: config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_config(::Google::Cloud::Speech::V2::UpdateConfigRequest.new(config: config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -662,32 +662,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_create_custom_class_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_custom_class_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_custom_class({ custom_class: custom_class, validate_only: validate_only, custom_class_id: custom_class_id, parent: parent }) do |_result, response|
+        c.create_custom_class({ custom_class: custom_class, validate_only: validate_only, custom_class_id: custom_class_id, parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_custom_class custom_class: custom_class, validate_only: validate_only, custom_class_id: custom_class_id, parent: parent do |_result, response|
+        c.create_custom_class custom_class: custom_class, validate_only: validate_only, custom_class_id: custom_class_id, parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_custom_class ::Google::Cloud::Speech::V2::CreateCustomClassRequest.new(custom_class: custom_class, validate_only: validate_only, custom_class_id: custom_class_id, parent: parent) do |_result, response|
+        c.create_custom_class ::Google::Cloud::Speech::V2::CreateCustomClassRequest.new(custom_class: custom_class, validate_only: validate_only, custom_class_id: custom_class_id, parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_custom_class({ custom_class: custom_class, validate_only: validate_only, custom_class_id: custom_class_id, parent: parent }, call_options) do |_result, response|
+        c.create_custom_class({ custom_class: custom_class, validate_only: validate_only, custom_class_id: custom_class_id, parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_custom_class(::Google::Cloud::Speech::V2::CreateCustomClassRequest.new(custom_class: custom_class, validate_only: validate_only, custom_class_id: custom_class_id, parent: parent), call_options) do |_result, response|
+        c.create_custom_class(::Google::Cloud::Speech::V2::CreateCustomClassRequest.new(custom_class: custom_class, validate_only: validate_only, custom_class_id: custom_class_id, parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -719,32 +719,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_list_custom_classes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_custom_classes_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_custom_classes({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
+        c.list_custom_classes({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_custom_classes parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
+        c.list_custom_classes parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_custom_classes ::Google::Cloud::Speech::V2::ListCustomClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
+        c.list_custom_classes ::Google::Cloud::Speech::V2::ListCustomClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_custom_classes({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_custom_classes({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_custom_classes(::Google::Cloud::Speech::V2::ListCustomClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_custom_classes(::Google::Cloud::Speech::V2::ListCustomClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -773,32 +773,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_get_custom_class_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_custom_class_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_custom_class({ name: name }) do |_result, response|
+        c.get_custom_class({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_custom_class name: name do |_result, response|
+        c.get_custom_class name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_custom_class ::Google::Cloud::Speech::V2::GetCustomClassRequest.new(name: name) do |_result, response|
+        c.get_custom_class ::Google::Cloud::Speech::V2::GetCustomClassRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_custom_class({ name: name }, call_options) do |_result, response|
+        c.get_custom_class({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_custom_class(::Google::Cloud::Speech::V2::GetCustomClassRequest.new(name: name), call_options) do |_result, response|
+        c.get_custom_class(::Google::Cloud::Speech::V2::GetCustomClassRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -829,32 +829,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_update_custom_class_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_custom_class_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_custom_class({ custom_class: custom_class, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_custom_class({ custom_class: custom_class, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_custom_class custom_class: custom_class, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_custom_class custom_class: custom_class, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_custom_class ::Google::Cloud::Speech::V2::UpdateCustomClassRequest.new(custom_class: custom_class, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_custom_class ::Google::Cloud::Speech::V2::UpdateCustomClassRequest.new(custom_class: custom_class, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_custom_class({ custom_class: custom_class, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_custom_class({ custom_class: custom_class, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_custom_class(::Google::Cloud::Speech::V2::UpdateCustomClassRequest.new(custom_class: custom_class, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_custom_class(::Google::Cloud::Speech::V2::UpdateCustomClassRequest.new(custom_class: custom_class, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -886,32 +886,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_delete_custom_class_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_custom_class_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_custom_class({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |_result, response|
+        c.delete_custom_class({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_custom_class name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |_result, response|
+        c.delete_custom_class name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_custom_class ::Google::Cloud::Speech::V2::DeleteCustomClassRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |_result, response|
+        c.delete_custom_class ::Google::Cloud::Speech::V2::DeleteCustomClassRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_custom_class({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, call_options) do |_result, response|
+        c.delete_custom_class({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_custom_class(::Google::Cloud::Speech::V2::DeleteCustomClassRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), call_options) do |_result, response|
+        c.delete_custom_class(::Google::Cloud::Speech::V2::DeleteCustomClassRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -942,32 +942,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_undelete_custom_class_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undelete_custom_class_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undelete_custom_class({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.undelete_custom_class({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undelete_custom_class name: name, validate_only: validate_only, etag: etag do |_result, response|
+        c.undelete_custom_class name: name, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undelete_custom_class ::Google::Cloud::Speech::V2::UndeleteCustomClassRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        c.undelete_custom_class ::Google::Cloud::Speech::V2::UndeleteCustomClassRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undelete_custom_class({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.undelete_custom_class({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undelete_custom_class(::Google::Cloud::Speech::V2::UndeleteCustomClassRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.undelete_custom_class(::Google::Cloud::Speech::V2::UndeleteCustomClassRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -999,32 +999,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_create_phrase_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_phrase_set_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_phrase_set({ phrase_set: phrase_set, validate_only: validate_only, phrase_set_id: phrase_set_id, parent: parent }) do |_result, response|
+        c.create_phrase_set({ phrase_set: phrase_set, validate_only: validate_only, phrase_set_id: phrase_set_id, parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_phrase_set phrase_set: phrase_set, validate_only: validate_only, phrase_set_id: phrase_set_id, parent: parent do |_result, response|
+        c.create_phrase_set phrase_set: phrase_set, validate_only: validate_only, phrase_set_id: phrase_set_id, parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_phrase_set ::Google::Cloud::Speech::V2::CreatePhraseSetRequest.new(phrase_set: phrase_set, validate_only: validate_only, phrase_set_id: phrase_set_id, parent: parent) do |_result, response|
+        c.create_phrase_set ::Google::Cloud::Speech::V2::CreatePhraseSetRequest.new(phrase_set: phrase_set, validate_only: validate_only, phrase_set_id: phrase_set_id, parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_phrase_set({ phrase_set: phrase_set, validate_only: validate_only, phrase_set_id: phrase_set_id, parent: parent }, call_options) do |_result, response|
+        c.create_phrase_set({ phrase_set: phrase_set, validate_only: validate_only, phrase_set_id: phrase_set_id, parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_phrase_set(::Google::Cloud::Speech::V2::CreatePhraseSetRequest.new(phrase_set: phrase_set, validate_only: validate_only, phrase_set_id: phrase_set_id, parent: parent), call_options) do |_result, response|
+        c.create_phrase_set(::Google::Cloud::Speech::V2::CreatePhraseSetRequest.new(phrase_set: phrase_set, validate_only: validate_only, phrase_set_id: phrase_set_id, parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1056,32 +1056,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_list_phrase_sets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_phrase_sets_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_phrase_sets({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
+        c.list_phrase_sets({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_phrase_sets parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
+        c.list_phrase_sets parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_phrase_sets ::Google::Cloud::Speech::V2::ListPhraseSetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
+        c.list_phrase_sets ::Google::Cloud::Speech::V2::ListPhraseSetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_phrase_sets({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_phrase_sets({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_phrase_sets(::Google::Cloud::Speech::V2::ListPhraseSetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_phrase_sets(::Google::Cloud::Speech::V2::ListPhraseSetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1110,32 +1110,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_get_phrase_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_phrase_set_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_phrase_set({ name: name }) do |_result, response|
+        c.get_phrase_set({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_phrase_set name: name do |_result, response|
+        c.get_phrase_set name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_phrase_set ::Google::Cloud::Speech::V2::GetPhraseSetRequest.new(name: name) do |_result, response|
+        c.get_phrase_set ::Google::Cloud::Speech::V2::GetPhraseSetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_phrase_set({ name: name }, call_options) do |_result, response|
+        c.get_phrase_set({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_phrase_set(::Google::Cloud::Speech::V2::GetPhraseSetRequest.new(name: name), call_options) do |_result, response|
+        c.get_phrase_set(::Google::Cloud::Speech::V2::GetPhraseSetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1166,32 +1166,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_update_phrase_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_phrase_set_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_phrase_set({ phrase_set: phrase_set, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_phrase_set({ phrase_set: phrase_set, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_phrase_set phrase_set: phrase_set, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_phrase_set phrase_set: phrase_set, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_phrase_set ::Google::Cloud::Speech::V2::UpdatePhraseSetRequest.new(phrase_set: phrase_set, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_phrase_set ::Google::Cloud::Speech::V2::UpdatePhraseSetRequest.new(phrase_set: phrase_set, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_phrase_set({ phrase_set: phrase_set, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_phrase_set({ phrase_set: phrase_set, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_phrase_set(::Google::Cloud::Speech::V2::UpdatePhraseSetRequest.new(phrase_set: phrase_set, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_phrase_set(::Google::Cloud::Speech::V2::UpdatePhraseSetRequest.new(phrase_set: phrase_set, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1223,32 +1223,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_delete_phrase_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_phrase_set_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_phrase_set({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |_result, response|
+        c.delete_phrase_set({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_phrase_set name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |_result, response|
+        c.delete_phrase_set name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_phrase_set ::Google::Cloud::Speech::V2::DeletePhraseSetRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |_result, response|
+        c.delete_phrase_set ::Google::Cloud::Speech::V2::DeletePhraseSetRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_phrase_set({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, call_options) do |_result, response|
+        c.delete_phrase_set({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_phrase_set(::Google::Cloud::Speech::V2::DeletePhraseSetRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), call_options) do |_result, response|
+        c.delete_phrase_set(::Google::Cloud::Speech::V2::DeletePhraseSetRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1279,32 +1279,32 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.stub :transcode_undelete_phrase_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undelete_phrase_set_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V2::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undelete_phrase_set({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.undelete_phrase_set({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undelete_phrase_set name: name, validate_only: validate_only, etag: etag do |_result, response|
+        c.undelete_phrase_set name: name, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undelete_phrase_set ::Google::Cloud::Speech::V2::UndeletePhraseSetRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        c.undelete_phrase_set ::Google::Cloud::Speech::V2::UndeletePhraseSetRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undelete_phrase_set({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.undelete_phrase_set({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undelete_phrase_set(::Google::Cloud::Speech::V2::UndeletePhraseSetRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.undelete_phrase_set(::Google::Cloud::Speech::V2::UndeletePhraseSetRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

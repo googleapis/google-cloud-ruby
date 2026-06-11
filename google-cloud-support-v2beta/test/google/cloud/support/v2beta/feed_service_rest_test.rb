@@ -100,32 +100,32 @@ class ::Google::Cloud::Support::V2beta::FeedService::Rest::ClientTest < Minitest
     ::Google::Cloud::Support::V2beta::FeedService::Rest::ServiceStub.stub :transcode_show_feed_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, show_feed_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::FeedService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::FeedService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.show_feed({ parent: parent, order_by: order_by, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.show_feed({ parent: parent, order_by: order_by, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.show_feed parent: parent, order_by: order_by, page_size: page_size, page_token: page_token do |_result, response|
+        c.show_feed parent: parent, order_by: order_by, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.show_feed ::Google::Cloud::Support::V2beta::ShowFeedRequest.new(parent: parent, order_by: order_by, page_size: page_size, page_token: page_token) do |_result, response|
+        c.show_feed ::Google::Cloud::Support::V2beta::ShowFeedRequest.new(parent: parent, order_by: order_by, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.show_feed({ parent: parent, order_by: order_by, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.show_feed({ parent: parent, order_by: order_by, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.show_feed(::Google::Cloud::Support::V2beta::ShowFeedRequest.new(parent: parent, order_by: order_by, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.show_feed(::Google::Cloud::Support::V2beta::ShowFeedRequest.new(parent: parent, order_by: order_by, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
