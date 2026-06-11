@@ -1,0 +1,17 @@
+{
+    "api_id": "dataform.googleapis.com",
+    "api_shortname": "dataform",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-dataform-v1beta1/latest",
+    "distribution_name": "google-cloud-dataform-v1beta1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "dataform",
+    "name_pretty": "Dataform V1beta1 API",
+    "product_documentation": "https://cloud.google.com/dataform",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Dataform is a service for data analysts to develop, test, version control, and schedule complex SQL workflows for data transformation in BigQuery. Note that google-cloud-dataform-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-dataform instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/dataform",
+    "library_type": "GAPIC_AUTO"
+}
