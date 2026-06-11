@@ -86,36 +86,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, create_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id }) do |response, operation|
+      c.create_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_conversation parent: parent, conversation: conversation, conversation_id: conversation_id do |response, operation|
+      c.create_conversation parent: parent, conversation: conversation, conversation_id: conversation_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_conversation ::Google::Cloud::ContactCenterInsights::V1::CreateConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id) do |response, operation|
+      c.create_conversation ::Google::Cloud::ContactCenterInsights::V1::CreateConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id }, grpc_options) do |response, operation|
+      c.create_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_conversation(::Google::Cloud::ContactCenterInsights::V1::CreateConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id), grpc_options) do |response, operation|
+      c.create_conversation(::Google::Cloud::ContactCenterInsights::V1::CreateConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -152,40 +152,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, upload_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config }) do |response, operation|
+      c.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upload_conversation parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config do |response, operation|
+      c.upload_conversation parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upload_conversation ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config) do |response, operation|
+      c.upload_conversation ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config }, grpc_options) do |response, operation|
+      c.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upload_conversation(::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config), grpc_options) do |response, operation|
+      c.upload_conversation(::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config, speech_config: speech_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -217,36 +217,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, update_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_conversation({ conversation: conversation, update_mask: update_mask }) do |response, operation|
+      c.update_conversation({ conversation: conversation, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_conversation conversation: conversation, update_mask: update_mask do |response, operation|
+      c.update_conversation conversation: conversation, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_conversation ::Google::Cloud::ContactCenterInsights::V1::UpdateConversationRequest.new(conversation: conversation, update_mask: update_mask) do |response, operation|
+      c.update_conversation ::Google::Cloud::ContactCenterInsights::V1::UpdateConversationRequest.new(conversation: conversation, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_conversation({ conversation: conversation, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_conversation({ conversation: conversation, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_conversation(::Google::Cloud::ContactCenterInsights::V1::UpdateConversationRequest.new(conversation: conversation, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_conversation(::Google::Cloud::ContactCenterInsights::V1::UpdateConversationRequest.new(conversation: conversation, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -277,36 +277,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_conversation({ name: name, view: view }) do |response, operation|
+      c.get_conversation({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_conversation name: name, view: view do |response, operation|
+      c.get_conversation name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_conversation ::Google::Cloud::ContactCenterInsights::V1::GetConversationRequest.new(name: name, view: view) do |response, operation|
+      c.get_conversation ::Google::Cloud::ContactCenterInsights::V1::GetConversationRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_conversation({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_conversation({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_conversation(::Google::Cloud::ContactCenterInsights::V1::GetConversationRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_conversation(::Google::Cloud::ContactCenterInsights::V1::GetConversationRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -345,40 +345,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_conversations_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |response, operation|
+      c.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |response, operation|
+      c.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_conversations ::Google::Cloud::ContactCenterInsights::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |response, operation|
+      c.list_conversations ::Google::Cloud::ContactCenterInsights::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, grpc_options) do |response, operation|
+      c.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_conversations(::Google::Cloud::ContactCenterInsights::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), grpc_options) do |response, operation|
+      c.list_conversations(::Google::Cloud::ContactCenterInsights::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -410,36 +410,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, delete_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_conversation({ name: name, force: force }) do |response, operation|
+      c.delete_conversation({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_conversation name: name, force: force do |response, operation|
+      c.delete_conversation name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_conversation ::Google::Cloud::ContactCenterInsights::V1::DeleteConversationRequest.new(name: name, force: force) do |response, operation|
+      c.delete_conversation ::Google::Cloud::ContactCenterInsights::V1::DeleteConversationRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_conversation({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_conversation({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_conversation(::Google::Cloud::ContactCenterInsights::V1::DeleteConversationRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_conversation(::Google::Cloud::ContactCenterInsights::V1::DeleteConversationRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -470,40 +470,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, create_analysis_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_analysis({ parent: parent, analysis: analysis }) do |response, operation|
+      c.create_analysis({ parent: parent, analysis: analysis }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_analysis parent: parent, analysis: analysis do |response, operation|
+      c.create_analysis parent: parent, analysis: analysis do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_analysis ::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRequest.new(parent: parent, analysis: analysis) do |response, operation|
+      c.create_analysis ::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRequest.new(parent: parent, analysis: analysis) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_analysis({ parent: parent, analysis: analysis }, grpc_options) do |response, operation|
+      c.create_analysis({ parent: parent, analysis: analysis }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_analysis(::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRequest.new(parent: parent, analysis: analysis), grpc_options) do |response, operation|
+      c.create_analysis(::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRequest.new(parent: parent, analysis: analysis), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -533,36 +533,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_analysis_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_analysis({ name: name }) do |response, operation|
+      c.get_analysis({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_analysis name: name do |response, operation|
+      c.get_analysis name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_analysis ::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRequest.new(name: name) do |response, operation|
+      c.get_analysis ::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_analysis({ name: name }, grpc_options) do |response, operation|
+      c.get_analysis({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_analysis(::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_analysis(::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -597,40 +597,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_analyses_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_analyses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_analyses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_analyses parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_analyses parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_analyses ::Google::Cloud::ContactCenterInsights::V1::ListAnalysesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_analyses ::Google::Cloud::ContactCenterInsights::V1::ListAnalysesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_analyses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_analyses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_analyses(::Google::Cloud::ContactCenterInsights::V1::ListAnalysesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_analyses(::Google::Cloud::ContactCenterInsights::V1::ListAnalysesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -660,36 +660,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, delete_analysis_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_analysis({ name: name }) do |response, operation|
+      c.delete_analysis({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_analysis name: name do |response, operation|
+      c.delete_analysis name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_analysis ::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRequest.new(name: name) do |response, operation|
+      c.delete_analysis ::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_analysis({ name: name }, grpc_options) do |response, operation|
+      c.delete_analysis({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_analysis(::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_analysis(::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -724,40 +724,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, bulk_analyze_conversations_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.bulk_analyze_conversations({ parent: parent, filter: filter, analysis_percentage: analysis_percentage, annotator_selector: annotator_selector }) do |response, operation|
+      c.bulk_analyze_conversations({ parent: parent, filter: filter, analysis_percentage: analysis_percentage, annotator_selector: annotator_selector }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.bulk_analyze_conversations parent: parent, filter: filter, analysis_percentage: analysis_percentage, annotator_selector: annotator_selector do |response, operation|
+      c.bulk_analyze_conversations parent: parent, filter: filter, analysis_percentage: analysis_percentage, annotator_selector: annotator_selector do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.bulk_analyze_conversations ::Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest.new(parent: parent, filter: filter, analysis_percentage: analysis_percentage, annotator_selector: annotator_selector) do |response, operation|
+      c.bulk_analyze_conversations ::Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest.new(parent: parent, filter: filter, analysis_percentage: analysis_percentage, annotator_selector: annotator_selector) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.bulk_analyze_conversations({ parent: parent, filter: filter, analysis_percentage: analysis_percentage, annotator_selector: annotator_selector }, grpc_options) do |response, operation|
+      c.bulk_analyze_conversations({ parent: parent, filter: filter, analysis_percentage: analysis_percentage, annotator_selector: annotator_selector }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.bulk_analyze_conversations(::Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest.new(parent: parent, filter: filter, analysis_percentage: analysis_percentage, annotator_selector: annotator_selector), grpc_options) do |response, operation|
+      c.bulk_analyze_conversations(::Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest.new(parent: parent, filter: filter, analysis_percentage: analysis_percentage, annotator_selector: annotator_selector), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -793,40 +793,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, bulk_delete_conversations_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.bulk_delete_conversations({ parent: parent, filter: filter, max_delete_count: max_delete_count, force: force }) do |response, operation|
+      c.bulk_delete_conversations({ parent: parent, filter: filter, max_delete_count: max_delete_count, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.bulk_delete_conversations parent: parent, filter: filter, max_delete_count: max_delete_count, force: force do |response, operation|
+      c.bulk_delete_conversations parent: parent, filter: filter, max_delete_count: max_delete_count, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.bulk_delete_conversations ::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest.new(parent: parent, filter: filter, max_delete_count: max_delete_count, force: force) do |response, operation|
+      c.bulk_delete_conversations ::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest.new(parent: parent, filter: filter, max_delete_count: max_delete_count, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.bulk_delete_conversations({ parent: parent, filter: filter, max_delete_count: max_delete_count, force: force }, grpc_options) do |response, operation|
+      c.bulk_delete_conversations({ parent: parent, filter: filter, max_delete_count: max_delete_count, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.bulk_delete_conversations(::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest.new(parent: parent, filter: filter, max_delete_count: max_delete_count, force: force), grpc_options) do |response, operation|
+      c.bulk_delete_conversations(::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest.new(parent: parent, filter: filter, max_delete_count: max_delete_count, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -871,40 +871,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, ingest_conversations_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size }) do |response, operation|
+      c.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.ingest_conversations gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size do |response, operation|
+      c.ingest_conversations gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.ingest_conversations ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size) do |response, operation|
+      c.ingest_conversations ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size }, grpc_options) do |response, operation|
+      c.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.ingest_conversations(::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size), grpc_options) do |response, operation|
+      c.ingest_conversations(::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -943,40 +943,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, export_insights_data_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_insights_data({ big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition }) do |response, operation|
+      c.export_insights_data({ big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_insights_data big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition do |response, operation|
+      c.export_insights_data big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_insights_data ::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest.new(big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition) do |response, operation|
+      c.export_insights_data ::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest.new(big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_insights_data({ big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition }, grpc_options) do |response, operation|
+      c.export_insights_data({ big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_insights_data(::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest.new(big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition), grpc_options) do |response, operation|
+      c.export_insights_data(::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest.new(big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1008,40 +1008,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, create_issue_model_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_issue_model({ parent: parent, issue_model: issue_model }) do |response, operation|
+      c.create_issue_model({ parent: parent, issue_model: issue_model }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_issue_model parent: parent, issue_model: issue_model do |response, operation|
+      c.create_issue_model parent: parent, issue_model: issue_model do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_issue_model ::Google::Cloud::ContactCenterInsights::V1::CreateIssueModelRequest.new(parent: parent, issue_model: issue_model) do |response, operation|
+      c.create_issue_model ::Google::Cloud::ContactCenterInsights::V1::CreateIssueModelRequest.new(parent: parent, issue_model: issue_model) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_issue_model({ parent: parent, issue_model: issue_model }, grpc_options) do |response, operation|
+      c.create_issue_model({ parent: parent, issue_model: issue_model }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_issue_model(::Google::Cloud::ContactCenterInsights::V1::CreateIssueModelRequest.new(parent: parent, issue_model: issue_model), grpc_options) do |response, operation|
+      c.create_issue_model(::Google::Cloud::ContactCenterInsights::V1::CreateIssueModelRequest.new(parent: parent, issue_model: issue_model), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1073,36 +1073,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, update_issue_model_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_issue_model({ issue_model: issue_model, update_mask: update_mask }) do |response, operation|
+      c.update_issue_model({ issue_model: issue_model, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_issue_model issue_model: issue_model, update_mask: update_mask do |response, operation|
+      c.update_issue_model issue_model: issue_model, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_issue_model ::Google::Cloud::ContactCenterInsights::V1::UpdateIssueModelRequest.new(issue_model: issue_model, update_mask: update_mask) do |response, operation|
+      c.update_issue_model ::Google::Cloud::ContactCenterInsights::V1::UpdateIssueModelRequest.new(issue_model: issue_model, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_issue_model({ issue_model: issue_model, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_issue_model({ issue_model: issue_model, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_issue_model(::Google::Cloud::ContactCenterInsights::V1::UpdateIssueModelRequest.new(issue_model: issue_model, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_issue_model(::Google::Cloud::ContactCenterInsights::V1::UpdateIssueModelRequest.new(issue_model: issue_model, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1131,36 +1131,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_issue_model_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_issue_model({ name: name }) do |response, operation|
+      c.get_issue_model({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_issue_model name: name do |response, operation|
+      c.get_issue_model name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_issue_model ::Google::Cloud::ContactCenterInsights::V1::GetIssueModelRequest.new(name: name) do |response, operation|
+      c.get_issue_model ::Google::Cloud::ContactCenterInsights::V1::GetIssueModelRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_issue_model({ name: name }, grpc_options) do |response, operation|
+      c.get_issue_model({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_issue_model(::Google::Cloud::ContactCenterInsights::V1::GetIssueModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_issue_model(::Google::Cloud::ContactCenterInsights::V1::GetIssueModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1189,36 +1189,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_issue_models_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_issue_models({ parent: parent }) do |response, operation|
+      c.list_issue_models({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_issue_models parent: parent do |response, operation|
+      c.list_issue_models parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_issue_models ::Google::Cloud::ContactCenterInsights::V1::ListIssueModelsRequest.new(parent: parent) do |response, operation|
+      c.list_issue_models ::Google::Cloud::ContactCenterInsights::V1::ListIssueModelsRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_issue_models({ parent: parent }, grpc_options) do |response, operation|
+      c.list_issue_models({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_issue_models(::Google::Cloud::ContactCenterInsights::V1::ListIssueModelsRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.list_issue_models(::Google::Cloud::ContactCenterInsights::V1::ListIssueModelsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1247,40 +1247,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, delete_issue_model_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_issue_model({ name: name }) do |response, operation|
+      c.delete_issue_model({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_issue_model name: name do |response, operation|
+      c.delete_issue_model name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_issue_model ::Google::Cloud::ContactCenterInsights::V1::DeleteIssueModelRequest.new(name: name) do |response, operation|
+      c.delete_issue_model ::Google::Cloud::ContactCenterInsights::V1::DeleteIssueModelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_issue_model({ name: name }, grpc_options) do |response, operation|
+      c.delete_issue_model({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_issue_model(::Google::Cloud::ContactCenterInsights::V1::DeleteIssueModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_issue_model(::Google::Cloud::ContactCenterInsights::V1::DeleteIssueModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1310,40 +1310,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, deploy_issue_model_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.deploy_issue_model({ name: name }) do |response, operation|
+      c.deploy_issue_model({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.deploy_issue_model name: name do |response, operation|
+      c.deploy_issue_model name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.deploy_issue_model ::Google::Cloud::ContactCenterInsights::V1::DeployIssueModelRequest.new(name: name) do |response, operation|
+      c.deploy_issue_model ::Google::Cloud::ContactCenterInsights::V1::DeployIssueModelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.deploy_issue_model({ name: name }, grpc_options) do |response, operation|
+      c.deploy_issue_model({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.deploy_issue_model(::Google::Cloud::ContactCenterInsights::V1::DeployIssueModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.deploy_issue_model(::Google::Cloud::ContactCenterInsights::V1::DeployIssueModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1373,40 +1373,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, undeploy_issue_model_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undeploy_issue_model({ name: name }) do |response, operation|
+      c.undeploy_issue_model({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undeploy_issue_model name: name do |response, operation|
+      c.undeploy_issue_model name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undeploy_issue_model ::Google::Cloud::ContactCenterInsights::V1::UndeployIssueModelRequest.new(name: name) do |response, operation|
+      c.undeploy_issue_model ::Google::Cloud::ContactCenterInsights::V1::UndeployIssueModelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undeploy_issue_model({ name: name }, grpc_options) do |response, operation|
+      c.undeploy_issue_model({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undeploy_issue_model(::Google::Cloud::ContactCenterInsights::V1::UndeployIssueModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.undeploy_issue_model(::Google::Cloud::ContactCenterInsights::V1::UndeployIssueModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1439,40 +1439,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, export_issue_model_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_issue_model({ gcs_destination: gcs_destination, name: name }) do |response, operation|
+      c.export_issue_model({ gcs_destination: gcs_destination, name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_issue_model gcs_destination: gcs_destination, name: name do |response, operation|
+      c.export_issue_model gcs_destination: gcs_destination, name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_issue_model ::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest.new(gcs_destination: gcs_destination, name: name) do |response, operation|
+      c.export_issue_model ::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest.new(gcs_destination: gcs_destination, name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_issue_model({ gcs_destination: gcs_destination, name: name }, grpc_options) do |response, operation|
+      c.export_issue_model({ gcs_destination: gcs_destination, name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_issue_model(::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest.new(gcs_destination: gcs_destination, name: name), grpc_options) do |response, operation|
+      c.export_issue_model(::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest.new(gcs_destination: gcs_destination, name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1507,40 +1507,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, import_issue_model_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_issue_model({ gcs_source: gcs_source, parent: parent, create_new_model: create_new_model }) do |response, operation|
+      c.import_issue_model({ gcs_source: gcs_source, parent: parent, create_new_model: create_new_model }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_issue_model gcs_source: gcs_source, parent: parent, create_new_model: create_new_model do |response, operation|
+      c.import_issue_model gcs_source: gcs_source, parent: parent, create_new_model: create_new_model do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_issue_model ::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest.new(gcs_source: gcs_source, parent: parent, create_new_model: create_new_model) do |response, operation|
+      c.import_issue_model ::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest.new(gcs_source: gcs_source, parent: parent, create_new_model: create_new_model) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_issue_model({ gcs_source: gcs_source, parent: parent, create_new_model: create_new_model }, grpc_options) do |response, operation|
+      c.import_issue_model({ gcs_source: gcs_source, parent: parent, create_new_model: create_new_model }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_issue_model(::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest.new(gcs_source: gcs_source, parent: parent, create_new_model: create_new_model), grpc_options) do |response, operation|
+      c.import_issue_model(::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest.new(gcs_source: gcs_source, parent: parent, create_new_model: create_new_model), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1570,36 +1570,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_issue_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_issue({ name: name }) do |response, operation|
+      c.get_issue({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_issue name: name do |response, operation|
+      c.get_issue name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_issue ::Google::Cloud::ContactCenterInsights::V1::GetIssueRequest.new(name: name) do |response, operation|
+      c.get_issue ::Google::Cloud::ContactCenterInsights::V1::GetIssueRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_issue({ name: name }, grpc_options) do |response, operation|
+      c.get_issue({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_issue(::Google::Cloud::ContactCenterInsights::V1::GetIssueRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_issue(::Google::Cloud::ContactCenterInsights::V1::GetIssueRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1628,36 +1628,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_issues_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_issues({ parent: parent }) do |response, operation|
+      c.list_issues({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_issues parent: parent do |response, operation|
+      c.list_issues parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_issues ::Google::Cloud::ContactCenterInsights::V1::ListIssuesRequest.new(parent: parent) do |response, operation|
+      c.list_issues ::Google::Cloud::ContactCenterInsights::V1::ListIssuesRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_issues({ parent: parent }, grpc_options) do |response, operation|
+      c.list_issues({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_issues(::Google::Cloud::ContactCenterInsights::V1::ListIssuesRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.list_issues(::Google::Cloud::ContactCenterInsights::V1::ListIssuesRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1688,36 +1688,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, update_issue_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_issue({ issue: issue, update_mask: update_mask }) do |response, operation|
+      c.update_issue({ issue: issue, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_issue issue: issue, update_mask: update_mask do |response, operation|
+      c.update_issue issue: issue, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_issue ::Google::Cloud::ContactCenterInsights::V1::UpdateIssueRequest.new(issue: issue, update_mask: update_mask) do |response, operation|
+      c.update_issue ::Google::Cloud::ContactCenterInsights::V1::UpdateIssueRequest.new(issue: issue, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_issue({ issue: issue, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_issue({ issue: issue, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_issue(::Google::Cloud::ContactCenterInsights::V1::UpdateIssueRequest.new(issue: issue, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_issue(::Google::Cloud::ContactCenterInsights::V1::UpdateIssueRequest.new(issue: issue, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1746,36 +1746,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, delete_issue_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_issue({ name: name }) do |response, operation|
+      c.delete_issue({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_issue name: name do |response, operation|
+      c.delete_issue name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_issue ::Google::Cloud::ContactCenterInsights::V1::DeleteIssueRequest.new(name: name) do |response, operation|
+      c.delete_issue ::Google::Cloud::ContactCenterInsights::V1::DeleteIssueRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_issue({ name: name }, grpc_options) do |response, operation|
+      c.delete_issue({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_issue(::Google::Cloud::ContactCenterInsights::V1::DeleteIssueRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_issue(::Google::Cloud::ContactCenterInsights::V1::DeleteIssueRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1804,36 +1804,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, calculate_issue_model_stats_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.calculate_issue_model_stats({ issue_model: issue_model }) do |response, operation|
+      c.calculate_issue_model_stats({ issue_model: issue_model }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.calculate_issue_model_stats issue_model: issue_model do |response, operation|
+      c.calculate_issue_model_stats issue_model: issue_model do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.calculate_issue_model_stats ::Google::Cloud::ContactCenterInsights::V1::CalculateIssueModelStatsRequest.new(issue_model: issue_model) do |response, operation|
+      c.calculate_issue_model_stats ::Google::Cloud::ContactCenterInsights::V1::CalculateIssueModelStatsRequest.new(issue_model: issue_model) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.calculate_issue_model_stats({ issue_model: issue_model }, grpc_options) do |response, operation|
+      c.calculate_issue_model_stats({ issue_model: issue_model }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.calculate_issue_model_stats(::Google::Cloud::ContactCenterInsights::V1::CalculateIssueModelStatsRequest.new(issue_model: issue_model), grpc_options) do |response, operation|
+      c.calculate_issue_model_stats(::Google::Cloud::ContactCenterInsights::V1::CalculateIssueModelStatsRequest.new(issue_model: issue_model), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1864,36 +1864,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, create_phrase_matcher_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_phrase_matcher({ parent: parent, phrase_matcher: phrase_matcher }) do |response, operation|
+      c.create_phrase_matcher({ parent: parent, phrase_matcher: phrase_matcher }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_phrase_matcher parent: parent, phrase_matcher: phrase_matcher do |response, operation|
+      c.create_phrase_matcher parent: parent, phrase_matcher: phrase_matcher do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_phrase_matcher ::Google::Cloud::ContactCenterInsights::V1::CreatePhraseMatcherRequest.new(parent: parent, phrase_matcher: phrase_matcher) do |response, operation|
+      c.create_phrase_matcher ::Google::Cloud::ContactCenterInsights::V1::CreatePhraseMatcherRequest.new(parent: parent, phrase_matcher: phrase_matcher) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_phrase_matcher({ parent: parent, phrase_matcher: phrase_matcher }, grpc_options) do |response, operation|
+      c.create_phrase_matcher({ parent: parent, phrase_matcher: phrase_matcher }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_phrase_matcher(::Google::Cloud::ContactCenterInsights::V1::CreatePhraseMatcherRequest.new(parent: parent, phrase_matcher: phrase_matcher), grpc_options) do |response, operation|
+      c.create_phrase_matcher(::Google::Cloud::ContactCenterInsights::V1::CreatePhraseMatcherRequest.new(parent: parent, phrase_matcher: phrase_matcher), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1922,36 +1922,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_phrase_matcher_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_phrase_matcher({ name: name }) do |response, operation|
+      c.get_phrase_matcher({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_phrase_matcher name: name do |response, operation|
+      c.get_phrase_matcher name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_phrase_matcher ::Google::Cloud::ContactCenterInsights::V1::GetPhraseMatcherRequest.new(name: name) do |response, operation|
+      c.get_phrase_matcher ::Google::Cloud::ContactCenterInsights::V1::GetPhraseMatcherRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_phrase_matcher({ name: name }, grpc_options) do |response, operation|
+      c.get_phrase_matcher({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_phrase_matcher(::Google::Cloud::ContactCenterInsights::V1::GetPhraseMatcherRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_phrase_matcher(::Google::Cloud::ContactCenterInsights::V1::GetPhraseMatcherRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1986,40 +1986,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_phrase_matchers_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_phrase_matchers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_phrase_matchers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_phrase_matchers parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_phrase_matchers parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_phrase_matchers ::Google::Cloud::ContactCenterInsights::V1::ListPhraseMatchersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_phrase_matchers ::Google::Cloud::ContactCenterInsights::V1::ListPhraseMatchersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_phrase_matchers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_phrase_matchers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_phrase_matchers(::Google::Cloud::ContactCenterInsights::V1::ListPhraseMatchersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_phrase_matchers(::Google::Cloud::ContactCenterInsights::V1::ListPhraseMatchersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2049,36 +2049,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, delete_phrase_matcher_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_phrase_matcher({ name: name }) do |response, operation|
+      c.delete_phrase_matcher({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_phrase_matcher name: name do |response, operation|
+      c.delete_phrase_matcher name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_phrase_matcher ::Google::Cloud::ContactCenterInsights::V1::DeletePhraseMatcherRequest.new(name: name) do |response, operation|
+      c.delete_phrase_matcher ::Google::Cloud::ContactCenterInsights::V1::DeletePhraseMatcherRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_phrase_matcher({ name: name }, grpc_options) do |response, operation|
+      c.delete_phrase_matcher({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_phrase_matcher(::Google::Cloud::ContactCenterInsights::V1::DeletePhraseMatcherRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_phrase_matcher(::Google::Cloud::ContactCenterInsights::V1::DeletePhraseMatcherRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2109,36 +2109,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, update_phrase_matcher_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_phrase_matcher({ phrase_matcher: phrase_matcher, update_mask: update_mask }) do |response, operation|
+      c.update_phrase_matcher({ phrase_matcher: phrase_matcher, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_phrase_matcher phrase_matcher: phrase_matcher, update_mask: update_mask do |response, operation|
+      c.update_phrase_matcher phrase_matcher: phrase_matcher, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_phrase_matcher ::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest.new(phrase_matcher: phrase_matcher, update_mask: update_mask) do |response, operation|
+      c.update_phrase_matcher ::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest.new(phrase_matcher: phrase_matcher, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_phrase_matcher({ phrase_matcher: phrase_matcher, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_phrase_matcher({ phrase_matcher: phrase_matcher, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_phrase_matcher(::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest.new(phrase_matcher: phrase_matcher, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_phrase_matcher(::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest.new(phrase_matcher: phrase_matcher, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2169,36 +2169,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, calculate_stats_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.calculate_stats({ location: location, filter: filter }) do |response, operation|
+      c.calculate_stats({ location: location, filter: filter }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.calculate_stats location: location, filter: filter do |response, operation|
+      c.calculate_stats location: location, filter: filter do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.calculate_stats ::Google::Cloud::ContactCenterInsights::V1::CalculateStatsRequest.new(location: location, filter: filter) do |response, operation|
+      c.calculate_stats ::Google::Cloud::ContactCenterInsights::V1::CalculateStatsRequest.new(location: location, filter: filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.calculate_stats({ location: location, filter: filter }, grpc_options) do |response, operation|
+      c.calculate_stats({ location: location, filter: filter }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.calculate_stats(::Google::Cloud::ContactCenterInsights::V1::CalculateStatsRequest.new(location: location, filter: filter), grpc_options) do |response, operation|
+      c.calculate_stats(::Google::Cloud::ContactCenterInsights::V1::CalculateStatsRequest.new(location: location, filter: filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2227,36 +2227,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_settings_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_settings({ name: name }) do |response, operation|
+      c.get_settings({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_settings name: name do |response, operation|
+      c.get_settings name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_settings ::Google::Cloud::ContactCenterInsights::V1::GetSettingsRequest.new(name: name) do |response, operation|
+      c.get_settings ::Google::Cloud::ContactCenterInsights::V1::GetSettingsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_settings({ name: name }, grpc_options) do |response, operation|
+      c.get_settings({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_settings(::Google::Cloud::ContactCenterInsights::V1::GetSettingsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_settings(::Google::Cloud::ContactCenterInsights::V1::GetSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2287,36 +2287,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, update_settings_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_settings({ settings: settings, update_mask: update_mask }) do |response, operation|
+      c.update_settings({ settings: settings, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_settings settings: settings, update_mask: update_mask do |response, operation|
+      c.update_settings settings: settings, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_settings ::Google::Cloud::ContactCenterInsights::V1::UpdateSettingsRequest.new(settings: settings, update_mask: update_mask) do |response, operation|
+      c.update_settings ::Google::Cloud::ContactCenterInsights::V1::UpdateSettingsRequest.new(settings: settings, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_settings({ settings: settings, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_settings({ settings: settings, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_settings(::Google::Cloud::ContactCenterInsights::V1::UpdateSettingsRequest.new(settings: settings, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_settings(::Google::Cloud::ContactCenterInsights::V1::UpdateSettingsRequest.new(settings: settings, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2347,36 +2347,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, create_analysis_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_analysis_rule({ parent: parent, analysis_rule: analysis_rule }) do |response, operation|
+      c.create_analysis_rule({ parent: parent, analysis_rule: analysis_rule }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_analysis_rule parent: parent, analysis_rule: analysis_rule do |response, operation|
+      c.create_analysis_rule parent: parent, analysis_rule: analysis_rule do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest.new(parent: parent, analysis_rule: analysis_rule) do |response, operation|
+      c.create_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest.new(parent: parent, analysis_rule: analysis_rule) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_analysis_rule({ parent: parent, analysis_rule: analysis_rule }, grpc_options) do |response, operation|
+      c.create_analysis_rule({ parent: parent, analysis_rule: analysis_rule }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest.new(parent: parent, analysis_rule: analysis_rule), grpc_options) do |response, operation|
+      c.create_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest.new(parent: parent, analysis_rule: analysis_rule), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2405,36 +2405,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_analysis_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_analysis_rule({ name: name }) do |response, operation|
+      c.get_analysis_rule({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_analysis_rule name: name do |response, operation|
+      c.get_analysis_rule name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest.new(name: name) do |response, operation|
+      c.get_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_analysis_rule({ name: name }, grpc_options) do |response, operation|
+      c.get_analysis_rule({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2467,40 +2467,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_analysis_rules_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_analysis_rules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_analysis_rules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_analysis_rules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_analysis_rules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_analysis_rules ::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_analysis_rules ::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_analysis_rules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_analysis_rules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_analysis_rules(::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_analysis_rules(::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2532,36 +2532,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, update_analysis_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_analysis_rule({ analysis_rule: analysis_rule, update_mask: update_mask }) do |response, operation|
+      c.update_analysis_rule({ analysis_rule: analysis_rule, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_analysis_rule analysis_rule: analysis_rule, update_mask: update_mask do |response, operation|
+      c.update_analysis_rule analysis_rule: analysis_rule, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest.new(analysis_rule: analysis_rule, update_mask: update_mask) do |response, operation|
+      c.update_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest.new(analysis_rule: analysis_rule, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_analysis_rule({ analysis_rule: analysis_rule, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_analysis_rule({ analysis_rule: analysis_rule, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest.new(analysis_rule: analysis_rule, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest.new(analysis_rule: analysis_rule, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2590,36 +2590,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, delete_analysis_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_analysis_rule({ name: name }) do |response, operation|
+      c.delete_analysis_rule({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_analysis_rule name: name do |response, operation|
+      c.delete_analysis_rule name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest.new(name: name) do |response, operation|
+      c.delete_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_analysis_rule({ name: name }, grpc_options) do |response, operation|
+      c.delete_analysis_rule({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2648,36 +2648,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_encryption_spec_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_encryption_spec({ name: name }) do |response, operation|
+      c.get_encryption_spec({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_encryption_spec name: name do |response, operation|
+      c.get_encryption_spec name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_encryption_spec ::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest.new(name: name) do |response, operation|
+      c.get_encryption_spec ::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_encryption_spec({ name: name }, grpc_options) do |response, operation|
+      c.get_encryption_spec({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_encryption_spec(::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_encryption_spec(::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2706,40 +2706,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, initialize_encryption_spec_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.initialize_encryption_spec({ encryption_spec: encryption_spec }) do |response, operation|
+      c.initialize_encryption_spec({ encryption_spec: encryption_spec }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.initialize_encryption_spec encryption_spec: encryption_spec do |response, operation|
+      c.initialize_encryption_spec encryption_spec: encryption_spec do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.initialize_encryption_spec ::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest.new(encryption_spec: encryption_spec) do |response, operation|
+      c.initialize_encryption_spec ::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest.new(encryption_spec: encryption_spec) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.initialize_encryption_spec({ encryption_spec: encryption_spec }, grpc_options) do |response, operation|
+      c.initialize_encryption_spec({ encryption_spec: encryption_spec }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.initialize_encryption_spec(::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest.new(encryption_spec: encryption_spec), grpc_options) do |response, operation|
+      c.initialize_encryption_spec(::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest.new(encryption_spec: encryption_spec), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2771,36 +2771,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, create_view_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_view({ parent: parent, view: view }) do |response, operation|
+      c.create_view({ parent: parent, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_view parent: parent, view: view do |response, operation|
+      c.create_view parent: parent, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_view ::Google::Cloud::ContactCenterInsights::V1::CreateViewRequest.new(parent: parent, view: view) do |response, operation|
+      c.create_view ::Google::Cloud::ContactCenterInsights::V1::CreateViewRequest.new(parent: parent, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_view({ parent: parent, view: view }, grpc_options) do |response, operation|
+      c.create_view({ parent: parent, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_view(::Google::Cloud::ContactCenterInsights::V1::CreateViewRequest.new(parent: parent, view: view), grpc_options) do |response, operation|
+      c.create_view(::Google::Cloud::ContactCenterInsights::V1::CreateViewRequest.new(parent: parent, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2829,36 +2829,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_view_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_view({ name: name }) do |response, operation|
+      c.get_view({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_view name: name do |response, operation|
+      c.get_view name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_view ::Google::Cloud::ContactCenterInsights::V1::GetViewRequest.new(name: name) do |response, operation|
+      c.get_view ::Google::Cloud::ContactCenterInsights::V1::GetViewRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_view({ name: name }, grpc_options) do |response, operation|
+      c.get_view({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_view(::Google::Cloud::ContactCenterInsights::V1::GetViewRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_view(::Google::Cloud::ContactCenterInsights::V1::GetViewRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2891,40 +2891,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_views_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_views({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_views({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_views parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_views parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_views ::Google::Cloud::ContactCenterInsights::V1::ListViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_views ::Google::Cloud::ContactCenterInsights::V1::ListViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_views({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_views({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_views(::Google::Cloud::ContactCenterInsights::V1::ListViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_views(::Google::Cloud::ContactCenterInsights::V1::ListViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2956,36 +2956,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, update_view_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_view({ view: view, update_mask: update_mask }) do |response, operation|
+      c.update_view({ view: view, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_view view: view, update_mask: update_mask do |response, operation|
+      c.update_view view: view, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_view ::Google::Cloud::ContactCenterInsights::V1::UpdateViewRequest.new(view: view, update_mask: update_mask) do |response, operation|
+      c.update_view ::Google::Cloud::ContactCenterInsights::V1::UpdateViewRequest.new(view: view, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_view({ view: view, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_view({ view: view, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_view(::Google::Cloud::ContactCenterInsights::V1::UpdateViewRequest.new(view: view, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_view(::Google::Cloud::ContactCenterInsights::V1::UpdateViewRequest.new(view: view, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3014,36 +3014,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, delete_view_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_view({ name: name }) do |response, operation|
+      c.delete_view({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_view name: name do |response, operation|
+      c.delete_view name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_view ::Google::Cloud::ContactCenterInsights::V1::DeleteViewRequest.new(name: name) do |response, operation|
+      c.delete_view ::Google::Cloud::ContactCenterInsights::V1::DeleteViewRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_view({ name: name }, grpc_options) do |response, operation|
+      c.delete_view({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_view(::Google::Cloud::ContactCenterInsights::V1::DeleteViewRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_view(::Google::Cloud::ContactCenterInsights::V1::DeleteViewRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3080,40 +3080,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, query_metrics_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_metrics({ location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask }) do |response, operation|
+      c.query_metrics({ location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_metrics location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask do |response, operation|
+      c.query_metrics location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_metrics ::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest.new(location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask) do |response, operation|
+      c.query_metrics ::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest.new(location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_metrics({ location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask }, grpc_options) do |response, operation|
+      c.query_metrics({ location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_metrics(::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest.new(location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask), grpc_options) do |response, operation|
+      c.query_metrics(::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest.new(location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3147,36 +3147,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, create_qa_question_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_qa_question({ parent: parent, qa_question: qa_question, qa_question_id: qa_question_id }) do |response, operation|
+      c.create_qa_question({ parent: parent, qa_question: qa_question, qa_question_id: qa_question_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_qa_question parent: parent, qa_question: qa_question, qa_question_id: qa_question_id do |response, operation|
+      c.create_qa_question parent: parent, qa_question: qa_question, qa_question_id: qa_question_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_qa_question ::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest.new(parent: parent, qa_question: qa_question, qa_question_id: qa_question_id) do |response, operation|
+      c.create_qa_question ::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest.new(parent: parent, qa_question: qa_question, qa_question_id: qa_question_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_qa_question({ parent: parent, qa_question: qa_question, qa_question_id: qa_question_id }, grpc_options) do |response, operation|
+      c.create_qa_question({ parent: parent, qa_question: qa_question, qa_question_id: qa_question_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_qa_question(::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest.new(parent: parent, qa_question: qa_question, qa_question_id: qa_question_id), grpc_options) do |response, operation|
+      c.create_qa_question(::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest.new(parent: parent, qa_question: qa_question, qa_question_id: qa_question_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3205,36 +3205,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_qa_question_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_qa_question({ name: name }) do |response, operation|
+      c.get_qa_question({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_qa_question name: name do |response, operation|
+      c.get_qa_question name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_qa_question ::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest.new(name: name) do |response, operation|
+      c.get_qa_question ::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_qa_question({ name: name }, grpc_options) do |response, operation|
+      c.get_qa_question({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_qa_question(::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_qa_question(::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3265,36 +3265,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, update_qa_question_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_qa_question({ qa_question: qa_question, update_mask: update_mask }) do |response, operation|
+      c.update_qa_question({ qa_question: qa_question, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_qa_question qa_question: qa_question, update_mask: update_mask do |response, operation|
+      c.update_qa_question qa_question: qa_question, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_qa_question ::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest.new(qa_question: qa_question, update_mask: update_mask) do |response, operation|
+      c.update_qa_question ::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest.new(qa_question: qa_question, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_qa_question({ qa_question: qa_question, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_qa_question({ qa_question: qa_question, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_qa_question(::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest.new(qa_question: qa_question, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_qa_question(::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest.new(qa_question: qa_question, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3323,36 +3323,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, delete_qa_question_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_qa_question({ name: name }) do |response, operation|
+      c.delete_qa_question({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_qa_question name: name do |response, operation|
+      c.delete_qa_question name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_qa_question ::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest.new(name: name) do |response, operation|
+      c.delete_qa_question ::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_qa_question({ name: name }, grpc_options) do |response, operation|
+      c.delete_qa_question({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_qa_question(::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_qa_question(::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3385,40 +3385,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_qa_questions_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_qa_questions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_qa_questions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_qa_questions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_qa_questions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_qa_questions ::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_qa_questions ::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_qa_questions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_qa_questions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_qa_questions(::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_qa_questions(::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3452,36 +3452,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, create_qa_scorecard_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_qa_scorecard({ parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id }) do |response, operation|
+      c.create_qa_scorecard({ parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_qa_scorecard parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id do |response, operation|
+      c.create_qa_scorecard parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest.new(parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id) do |response, operation|
+      c.create_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest.new(parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_qa_scorecard({ parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id }, grpc_options) do |response, operation|
+      c.create_qa_scorecard({ parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest.new(parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id), grpc_options) do |response, operation|
+      c.create_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest.new(parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3510,36 +3510,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_qa_scorecard_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_qa_scorecard({ name: name }) do |response, operation|
+      c.get_qa_scorecard({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_qa_scorecard name: name do |response, operation|
+      c.get_qa_scorecard name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest.new(name: name) do |response, operation|
+      c.get_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_qa_scorecard({ name: name }, grpc_options) do |response, operation|
+      c.get_qa_scorecard({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3570,36 +3570,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, update_qa_scorecard_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_qa_scorecard({ qa_scorecard: qa_scorecard, update_mask: update_mask }) do |response, operation|
+      c.update_qa_scorecard({ qa_scorecard: qa_scorecard, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_qa_scorecard qa_scorecard: qa_scorecard, update_mask: update_mask do |response, operation|
+      c.update_qa_scorecard qa_scorecard: qa_scorecard, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest.new(qa_scorecard: qa_scorecard, update_mask: update_mask) do |response, operation|
+      c.update_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest.new(qa_scorecard: qa_scorecard, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_qa_scorecard({ qa_scorecard: qa_scorecard, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_qa_scorecard({ qa_scorecard: qa_scorecard, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest.new(qa_scorecard: qa_scorecard, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest.new(qa_scorecard: qa_scorecard, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3630,36 +3630,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, delete_qa_scorecard_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_qa_scorecard({ name: name, force: force }) do |response, operation|
+      c.delete_qa_scorecard({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_qa_scorecard name: name, force: force do |response, operation|
+      c.delete_qa_scorecard name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest.new(name: name, force: force) do |response, operation|
+      c.delete_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_qa_scorecard({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_qa_scorecard({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3692,40 +3692,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_qa_scorecards_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_qa_scorecards({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_qa_scorecards({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_qa_scorecards parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_qa_scorecards parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_qa_scorecards ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_qa_scorecards ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_qa_scorecards({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_qa_scorecards({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_qa_scorecards(::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_qa_scorecards(::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3759,36 +3759,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, create_qa_scorecard_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_qa_scorecard_revision({ parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id }) do |response, operation|
+      c.create_qa_scorecard_revision({ parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_qa_scorecard_revision parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id do |response, operation|
+      c.create_qa_scorecard_revision parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest.new(parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id) do |response, operation|
+      c.create_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest.new(parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_qa_scorecard_revision({ parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id }, grpc_options) do |response, operation|
+      c.create_qa_scorecard_revision({ parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest.new(parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id), grpc_options) do |response, operation|
+      c.create_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest.new(parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3817,36 +3817,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_qa_scorecard_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_qa_scorecard_revision({ name: name }) do |response, operation|
+      c.get_qa_scorecard_revision({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_qa_scorecard_revision name: name do |response, operation|
+      c.get_qa_scorecard_revision name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest.new(name: name) do |response, operation|
+      c.get_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_qa_scorecard_revision({ name: name }, grpc_options) do |response, operation|
+      c.get_qa_scorecard_revision({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3879,40 +3879,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, tune_qa_scorecard_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.tune_qa_scorecard_revision({ parent: parent, filter: filter, validate_only: validate_only }) do |response, operation|
+      c.tune_qa_scorecard_revision({ parent: parent, filter: filter, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.tune_qa_scorecard_revision parent: parent, filter: filter, validate_only: validate_only do |response, operation|
+      c.tune_qa_scorecard_revision parent: parent, filter: filter, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.tune_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest.new(parent: parent, filter: filter, validate_only: validate_only) do |response, operation|
+      c.tune_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest.new(parent: parent, filter: filter, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.tune_qa_scorecard_revision({ parent: parent, filter: filter, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.tune_qa_scorecard_revision({ parent: parent, filter: filter, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.tune_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest.new(parent: parent, filter: filter, validate_only: validate_only), grpc_options) do |response, operation|
+      c.tune_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest.new(parent: parent, filter: filter, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3942,36 +3942,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, deploy_qa_scorecard_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.deploy_qa_scorecard_revision({ name: name }) do |response, operation|
+      c.deploy_qa_scorecard_revision({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.deploy_qa_scorecard_revision name: name do |response, operation|
+      c.deploy_qa_scorecard_revision name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.deploy_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest.new(name: name) do |response, operation|
+      c.deploy_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.deploy_qa_scorecard_revision({ name: name }, grpc_options) do |response, operation|
+      c.deploy_qa_scorecard_revision({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.deploy_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest.new(name: name), grpc_options) do |response, operation|
+      c.deploy_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4000,36 +4000,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, undeploy_qa_scorecard_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undeploy_qa_scorecard_revision({ name: name }) do |response, operation|
+      c.undeploy_qa_scorecard_revision({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undeploy_qa_scorecard_revision name: name do |response, operation|
+      c.undeploy_qa_scorecard_revision name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undeploy_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest.new(name: name) do |response, operation|
+      c.undeploy_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undeploy_qa_scorecard_revision({ name: name }, grpc_options) do |response, operation|
+      c.undeploy_qa_scorecard_revision({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undeploy_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest.new(name: name), grpc_options) do |response, operation|
+      c.undeploy_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4060,36 +4060,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, delete_qa_scorecard_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_qa_scorecard_revision({ name: name, force: force }) do |response, operation|
+      c.delete_qa_scorecard_revision({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_qa_scorecard_revision name: name, force: force do |response, operation|
+      c.delete_qa_scorecard_revision name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest.new(name: name, force: force) do |response, operation|
+      c.delete_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_qa_scorecard_revision({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_qa_scorecard_revision({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4124,40 +4124,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_qa_scorecard_revisions_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_qa_scorecard_revisions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_qa_scorecard_revisions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_qa_scorecard_revisions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_qa_scorecard_revisions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_qa_scorecard_revisions ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_qa_scorecard_revisions ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_qa_scorecard_revisions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_qa_scorecard_revisions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_qa_scorecard_revisions(::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_qa_scorecard_revisions(::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -4191,36 +4191,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, create_feedback_label_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_feedback_label({ parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label }) do |response, operation|
+      c.create_feedback_label({ parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_feedback_label parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label do |response, operation|
+      c.create_feedback_label parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_feedback_label ::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest.new(parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label) do |response, operation|
+      c.create_feedback_label ::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest.new(parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_feedback_label({ parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label }, grpc_options) do |response, operation|
+      c.create_feedback_label({ parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_feedback_label(::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest.new(parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label), grpc_options) do |response, operation|
+      c.create_feedback_label(::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest.new(parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4255,40 +4255,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_feedback_labels_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_feedback_labels({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_feedback_labels({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_feedback_labels parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_feedback_labels parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_feedback_labels({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_feedback_labels({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -4318,36 +4318,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, get_feedback_label_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_feedback_label({ name: name }) do |response, operation|
+      c.get_feedback_label({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_feedback_label name: name do |response, operation|
+      c.get_feedback_label name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_feedback_label ::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest.new(name: name) do |response, operation|
+      c.get_feedback_label ::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_feedback_label({ name: name }, grpc_options) do |response, operation|
+      c.get_feedback_label({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_feedback_label(::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_feedback_label(::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4378,36 +4378,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, update_feedback_label_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_feedback_label({ feedback_label: feedback_label, update_mask: update_mask }) do |response, operation|
+      c.update_feedback_label({ feedback_label: feedback_label, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_feedback_label feedback_label: feedback_label, update_mask: update_mask do |response, operation|
+      c.update_feedback_label feedback_label: feedback_label, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_feedback_label ::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest.new(feedback_label: feedback_label, update_mask: update_mask) do |response, operation|
+      c.update_feedback_label ::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest.new(feedback_label: feedback_label, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_feedback_label({ feedback_label: feedback_label, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_feedback_label({ feedback_label: feedback_label, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_feedback_label(::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest.new(feedback_label: feedback_label, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_feedback_label(::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest.new(feedback_label: feedback_label, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4436,36 +4436,36 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, delete_feedback_label_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_feedback_label({ name: name }) do |response, operation|
+      c.delete_feedback_label({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_feedback_label name: name do |response, operation|
+      c.delete_feedback_label name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_feedback_label ::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest.new(name: name) do |response, operation|
+      c.delete_feedback_label ::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_feedback_label({ name: name }, grpc_options) do |response, operation|
+      c.delete_feedback_label({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_feedback_label(::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_feedback_label(::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4500,40 +4500,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, list_all_feedback_labels_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_all_feedback_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_all_feedback_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_all_feedback_labels parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_all_feedback_labels parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_all_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_all_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_all_feedback_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_all_feedback_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_all_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_all_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -4568,40 +4568,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, bulk_upload_feedback_labels_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.bulk_upload_feedback_labels({ gcs_source: gcs_source, parent: parent, validate_only: validate_only }) do |response, operation|
+      c.bulk_upload_feedback_labels({ gcs_source: gcs_source, parent: parent, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.bulk_upload_feedback_labels gcs_source: gcs_source, parent: parent, validate_only: validate_only do |response, operation|
+      c.bulk_upload_feedback_labels gcs_source: gcs_source, parent: parent, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.bulk_upload_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest.new(gcs_source: gcs_source, parent: parent, validate_only: validate_only) do |response, operation|
+      c.bulk_upload_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest.new(gcs_source: gcs_source, parent: parent, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.bulk_upload_feedback_labels({ gcs_source: gcs_source, parent: parent, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.bulk_upload_feedback_labels({ gcs_source: gcs_source, parent: parent, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.bulk_upload_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest.new(gcs_source: gcs_source, parent: parent, validate_only: validate_only), grpc_options) do |response, operation|
+      c.bulk_upload_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest.new(gcs_source: gcs_source, parent: parent, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -4644,40 +4644,40 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
     Gapic::ServiceStub.stub :new, bulk_download_feedback_labels_client_stub do
       # Create client
-      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+      c = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.bulk_download_feedback_labels({ gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id }) do |response, operation|
+      c.bulk_download_feedback_labels({ gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.bulk_download_feedback_labels gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id do |response, operation|
+      c.bulk_download_feedback_labels gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.bulk_download_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest.new(gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id) do |response, operation|
+      c.bulk_download_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest.new(gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.bulk_download_feedback_labels({ gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id }, grpc_options) do |response, operation|
+      c.bulk_download_feedback_labels({ gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.bulk_download_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest.new(gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id), grpc_options) do |response, operation|
+      c.bulk_download_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest.new(gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

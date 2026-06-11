@@ -100,32 +100,32 @@ class ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ClientTest < Minitest
     ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete({ project: project, region: region, request_id: request_id, snapshot: snapshot }) do |_result, response|
+        c.delete({ project: project, region: region, request_id: request_id, snapshot: snapshot }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete project: project, region: region, request_id: request_id, snapshot: snapshot do |_result, response|
+        c.delete project: project, region: region, request_id: request_id, snapshot: snapshot do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete ::Google::Cloud::Compute::V1::DeleteRegionSnapshotRequest.new(project: project, region: region, request_id: request_id, snapshot: snapshot) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteRegionSnapshotRequest.new(project: project, region: region, request_id: request_id, snapshot: snapshot) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete({ project: project, region: region, request_id: request_id, snapshot: snapshot }, call_options) do |_result, response|
+        c.delete({ project: project, region: region, request_id: request_id, snapshot: snapshot }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete(::Google::Cloud::Compute::V1::DeleteRegionSnapshotRequest.new(project: project, region: region, request_id: request_id, snapshot: snapshot), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteRegionSnapshotRequest.new(project: project, region: region, request_id: request_id, snapshot: snapshot), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ClientTest < Minitest
     ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ project: project, region: region, snapshot: snapshot }) do |_result, response|
+        c.get({ project: project, region: region, snapshot: snapshot }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get project: project, region: region, snapshot: snapshot do |_result, response|
+        c.get project: project, region: region, snapshot: snapshot do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetRegionSnapshotRequest.new(project: project, region: region, snapshot: snapshot) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetRegionSnapshotRequest.new(project: project, region: region, snapshot: snapshot) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ project: project, region: region, snapshot: snapshot }, call_options) do |_result, response|
+        c.get({ project: project, region: region, snapshot: snapshot }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetRegionSnapshotRequest.new(project: project, region: region, snapshot: snapshot), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetRegionSnapshotRequest.new(project: project, region: region, snapshot: snapshot), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ClientTest < Minitest
     ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }) do |_result, response|
+        c.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource do |_result, response|
+        c.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyRegionSnapshotRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource) do |_result, response|
+        c.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyRegionSnapshotRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }, call_options) do |_result, response|
+        c.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyRegionSnapshotRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource), call_options) do |_result, response|
+        c.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyRegionSnapshotRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -270,32 +270,32 @@ class ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ClientTest < Minitest
     ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert({ project: project, region: region, request_id: request_id, snapshot_resource: snapshot_resource }) do |_result, response|
+        c.insert({ project: project, region: region, request_id: request_id, snapshot_resource: snapshot_resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert project: project, region: region, request_id: request_id, snapshot_resource: snapshot_resource do |_result, response|
+        c.insert project: project, region: region, request_id: request_id, snapshot_resource: snapshot_resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert ::Google::Cloud::Compute::V1::InsertRegionSnapshotRequest.new(project: project, region: region, request_id: request_id, snapshot_resource: snapshot_resource) do |_result, response|
+        c.insert ::Google::Cloud::Compute::V1::InsertRegionSnapshotRequest.new(project: project, region: region, request_id: request_id, snapshot_resource: snapshot_resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert({ project: project, region: region, request_id: request_id, snapshot_resource: snapshot_resource }, call_options) do |_result, response|
+        c.insert({ project: project, region: region, request_id: request_id, snapshot_resource: snapshot_resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert(::Google::Cloud::Compute::V1::InsertRegionSnapshotRequest.new(project: project, region: region, request_id: request_id, snapshot_resource: snapshot_resource), call_options) do |_result, response|
+        c.insert(::Google::Cloud::Compute::V1::InsertRegionSnapshotRequest.new(project: project, region: region, request_id: request_id, snapshot_resource: snapshot_resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -330,32 +330,32 @@ class ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ClientTest < Minitest
     ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListRegionSnapshotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListRegionSnapshotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListRegionSnapshotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListRegionSnapshotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -387,32 +387,32 @@ class ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ClientTest < Minitest
     ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }) do |_result, response|
+        c.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_iam_policy project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource do |_result, response|
+        c.set_iam_policy project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyRegionSnapshotRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource) do |_result, response|
+        c.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyRegionSnapshotRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }, call_options) do |_result, response|
+        c.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyRegionSnapshotRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource), call_options) do |_result, response|
+        c.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyRegionSnapshotRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -445,32 +445,32 @@ class ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ClientTest < Minitest
     ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ServiceStub.stub :transcode_set_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_labels_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }) do |_result, response|
+        c.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_labels project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource do |_result, response|
+        c.set_labels project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_labels ::Google::Cloud::Compute::V1::SetLabelsRegionSnapshotRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource) do |_result, response|
+        c.set_labels ::Google::Cloud::Compute::V1::SetLabelsRegionSnapshotRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }, call_options) do |_result, response|
+        c.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_labels(::Google::Cloud::Compute::V1::SetLabelsRegionSnapshotRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource), call_options) do |_result, response|
+        c.set_labels(::Google::Cloud::Compute::V1::SetLabelsRegionSnapshotRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -502,32 +502,32 @@ class ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ClientTest < Minitest
     ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |_result, response|
+        c.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.test_iam_permissions project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |_result, response|
+        c.test_iam_permissions project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsRegionSnapshotRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |_result, response|
+        c.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsRegionSnapshotRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |_result, response|
+        c.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsRegionSnapshotRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |_result, response|
+        c.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsRegionSnapshotRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -560,32 +560,32 @@ class ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ClientTest < Minitest
     ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::ServiceStub.stub :transcode_update_kms_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_kms_key_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_kms_key({ project: project, region: region, region_snapshot_update_kms_key_request_resource: region_snapshot_update_kms_key_request_resource, request_id: request_id, snapshot: snapshot }) do |_result, response|
+        c.update_kms_key({ project: project, region: region, region_snapshot_update_kms_key_request_resource: region_snapshot_update_kms_key_request_resource, request_id: request_id, snapshot: snapshot }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_kms_key project: project, region: region, region_snapshot_update_kms_key_request_resource: region_snapshot_update_kms_key_request_resource, request_id: request_id, snapshot: snapshot do |_result, response|
+        c.update_kms_key project: project, region: region, region_snapshot_update_kms_key_request_resource: region_snapshot_update_kms_key_request_resource, request_id: request_id, snapshot: snapshot do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_kms_key ::Google::Cloud::Compute::V1::UpdateKmsKeyRegionSnapshotRequest.new(project: project, region: region, region_snapshot_update_kms_key_request_resource: region_snapshot_update_kms_key_request_resource, request_id: request_id, snapshot: snapshot) do |_result, response|
+        c.update_kms_key ::Google::Cloud::Compute::V1::UpdateKmsKeyRegionSnapshotRequest.new(project: project, region: region, region_snapshot_update_kms_key_request_resource: region_snapshot_update_kms_key_request_resource, request_id: request_id, snapshot: snapshot) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_kms_key({ project: project, region: region, region_snapshot_update_kms_key_request_resource: region_snapshot_update_kms_key_request_resource, request_id: request_id, snapshot: snapshot }, call_options) do |_result, response|
+        c.update_kms_key({ project: project, region: region, region_snapshot_update_kms_key_request_resource: region_snapshot_update_kms_key_request_resource, request_id: request_id, snapshot: snapshot }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_kms_key(::Google::Cloud::Compute::V1::UpdateKmsKeyRegionSnapshotRequest.new(project: project, region: region, region_snapshot_update_kms_key_request_resource: region_snapshot_update_kms_key_request_resource, request_id: request_id, snapshot: snapshot), call_options) do |_result, response|
+        c.update_kms_key(::Google::Cloud::Compute::V1::UpdateKmsKeyRegionSnapshotRequest.new(project: project, region: region, region_snapshot_update_kms_key_request_resource: region_snapshot_update_kms_key_request_resource, request_id: request_id, snapshot: snapshot), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
