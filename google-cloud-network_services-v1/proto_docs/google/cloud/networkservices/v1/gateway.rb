@@ -61,9 +61,14 @@ module Google
         #   @return [::Array<::Integer>]
         #     Required. One or more port numbers (1-65535), on which the Gateway will
         #     receive traffic. The proxy binds to the specified ports.
-        #     Gateways of type 'SECURE_WEB_GATEWAY' are limited to 1 port.
+        #     Gateways of type 'SECURE_WEB_GATEWAY' are limited to 5 ports.
         #     Gateways of type 'OPEN_MESH' listen on 0.0.0.0 for IPv4 and :: for IPv6 and
         #     support multiple ports.
+        # @!attribute [rw] all_ports
+        #   @return [::Boolean]
+        #     Optional. If true, the Gateway will listen on all ports. This is mutually
+        #     exclusive with the `ports` field. This field only applies to gateways of
+        #     type 'SECURE_WEB_GATEWAY'.
         # @!attribute [rw] scope
         #   @return [::String]
         #     Optional. Scope determines how configuration across multiple Gateway
@@ -121,6 +126,11 @@ module Google
         #     Optional. The routing mode of the Gateway.
         #     This field is configurable only for gateways of type SECURE_WEB_GATEWAY.
         #     This field is required for gateways of type SECURE_WEB_GATEWAY.
+        # @!attribute [rw] allow_global_access
+        #   @return [::Boolean]
+        #     Optional. If true, the gateway will allow traffic from clients outside of
+        #     the region where the gateway is located.
+        #     This field is configurable only for gateways of type SECURE_WEB_GATEWAY.
         class Gateway
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

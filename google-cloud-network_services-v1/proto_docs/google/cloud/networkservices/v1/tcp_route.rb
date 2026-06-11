@@ -26,7 +26,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the TcpRoute resource. It matches pattern
-        #     `projects/*/locations/global/tcpRoutes/tcp_route_name>`.
+        #     `projects/*/locations/*/tcpRoutes/tcp_route_name>`.
         # @!attribute [r] self_link
         #   @return [::String]
         #     Output only. Server-defined URL of this resource
@@ -51,7 +51,7 @@ module Google
         #     one of the routing rules to route the requests served by the mesh.
         #
         #     Each mesh reference should match the pattern:
-        #     `projects/*/locations/global/meshes/<mesh_name>`
+        #     `projects/*/locations/*/meshes/<mesh_name>`
         #
         #     The attached Mesh should be of a type SIDECAR
         # @!attribute [rw] gateways
@@ -60,7 +60,7 @@ module Google
         #     as one of the routing rules to route the requests served by the gateway.
         #
         #     Each gateway reference should match the pattern:
-        #     `projects/*/locations/global/gateways/<gateway_name>`
+        #     `projects/*/locations/*/gateways/<gateway_name>`
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Set of label tags associated with the TcpRoute resource.
@@ -167,7 +167,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project and location from which the TcpRoutes should be
-        #     listed, specified in the format `projects/*/locations/global`.
+        #     listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of TcpRoutes to return per call.
@@ -210,7 +210,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the TcpRoute to get. Must be in the format
-        #     `projects/*/locations/global/tcpRoutes/*`.
+        #     `projects/*/locations/*/tcpRoutes/*`.
         class GetTcpRouteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -220,7 +220,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource of the TcpRoute. Must be in the
-        #     format `projects/*/locations/global`.
+        #     format `projects/*/locations/*`.
         # @!attribute [rw] tcp_route_id
         #   @return [::String]
         #     Required. Short name of the TcpRoute resource to be created.
@@ -252,7 +252,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the TcpRoute to delete. Must be in the format
-        #     `projects/*/locations/global/tcpRoutes/*`.
+        #     `projects/*/locations/*/tcpRoutes/*`.
         class DeleteTcpRouteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
