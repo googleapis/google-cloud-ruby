@@ -1,5 +1,27 @@
 # Changelog
 
+### 0.15.0 (2026-06-11)
+
+#### Features
+
+* Add irb as explicit dependency for Ruby 4.0 compatibility 
+* publish client batch config schema 
+* publish new error reasons 
+* update gapic-common dependency to 1.3 and document retry jitter ([#32442](https://github.com/googleapis/google-cloud-ruby/issues/32442)) 
+* Update GCP Client Libraries in v1beta1 to support Folders, TeamFolders, and other relevant APIs 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Bug Fixes
+
+* rename client variable in tests 
+#### Documentation
+
+* fix documentation formatting 
+* list Ruby 3.2+ as supported versions in README 
+* update license year 
+* update SelectiveGapicGeneration usage doc 
+* update various comments 
+
 ### 0.14.1 (2025-10-27)
 
 #### Documentation
