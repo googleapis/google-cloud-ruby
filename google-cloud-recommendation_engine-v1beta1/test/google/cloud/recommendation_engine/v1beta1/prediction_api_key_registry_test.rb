@@ -84,36 +84,36 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
 
     Gapic::ServiceStub.stub :new, create_prediction_api_key_registration_client_stub do
       # Create client
-      client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new do |config|
+      c = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_prediction_api_key_registration({ parent: parent, prediction_api_key_registration: prediction_api_key_registration }) do |response, operation|
+      c.create_prediction_api_key_registration({ parent: parent, prediction_api_key_registration: prediction_api_key_registration }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_prediction_api_key_registration parent: parent, prediction_api_key_registration: prediction_api_key_registration do |response, operation|
+      c.create_prediction_api_key_registration parent: parent, prediction_api_key_registration: prediction_api_key_registration do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_prediction_api_key_registration ::Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new(parent: parent, prediction_api_key_registration: prediction_api_key_registration) do |response, operation|
+      c.create_prediction_api_key_registration ::Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new(parent: parent, prediction_api_key_registration: prediction_api_key_registration) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_prediction_api_key_registration({ parent: parent, prediction_api_key_registration: prediction_api_key_registration }, grpc_options) do |response, operation|
+      c.create_prediction_api_key_registration({ parent: parent, prediction_api_key_registration: prediction_api_key_registration }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_prediction_api_key_registration(::Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new(parent: parent, prediction_api_key_registration: prediction_api_key_registration), grpc_options) do |response, operation|
+      c.create_prediction_api_key_registration(::Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new(parent: parent, prediction_api_key_registration: prediction_api_key_registration), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
 
     Gapic::ServiceStub.stub :new, list_prediction_api_key_registrations_client_stub do
       # Create client
-      client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new do |config|
+      c = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_prediction_api_key_registrations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_prediction_api_key_registrations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_prediction_api_key_registrations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_prediction_api_key_registrations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_prediction_api_key_registrations ::Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_prediction_api_key_registrations ::Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_prediction_api_key_registrations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_prediction_api_key_registrations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_prediction_api_key_registrations(::Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_prediction_api_key_registrations(::Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -209,36 +209,36 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
 
     Gapic::ServiceStub.stub :new, delete_prediction_api_key_registration_client_stub do
       # Create client
-      client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new do |config|
+      c = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_prediction_api_key_registration({ name: name }) do |response, operation|
+      c.delete_prediction_api_key_registration({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_prediction_api_key_registration name: name do |response, operation|
+      c.delete_prediction_api_key_registration name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_prediction_api_key_registration ::Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new(name: name) do |response, operation|
+      c.delete_prediction_api_key_registration ::Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_prediction_api_key_registration({ name: name }, grpc_options) do |response, operation|
+      c.delete_prediction_api_key_registration({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_prediction_api_key_registration(::Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_prediction_api_key_registration(::Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

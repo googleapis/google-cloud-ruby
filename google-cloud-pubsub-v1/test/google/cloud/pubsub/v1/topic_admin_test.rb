@@ -102,36 +102,36 @@ class ::Google::Cloud::PubSub::V1::TopicAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_topic_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_topic({ name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs, message_retention_duration: message_retention_duration, state: state, ingestion_data_source_settings: ingestion_data_source_settings, message_transforms: message_transforms, tags: tags }) do |response, operation|
+      c.create_topic({ name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs, message_retention_duration: message_retention_duration, state: state, ingestion_data_source_settings: ingestion_data_source_settings, message_transforms: message_transforms, tags: tags }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_topic name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs, message_retention_duration: message_retention_duration, state: state, ingestion_data_source_settings: ingestion_data_source_settings, message_transforms: message_transforms, tags: tags do |response, operation|
+      c.create_topic name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs, message_retention_duration: message_retention_duration, state: state, ingestion_data_source_settings: ingestion_data_source_settings, message_transforms: message_transforms, tags: tags do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_topic ::Google::Cloud::PubSub::V1::Topic.new(name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs, message_retention_duration: message_retention_duration, state: state, ingestion_data_source_settings: ingestion_data_source_settings, message_transforms: message_transforms, tags: tags) do |response, operation|
+      c.create_topic ::Google::Cloud::PubSub::V1::Topic.new(name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs, message_retention_duration: message_retention_duration, state: state, ingestion_data_source_settings: ingestion_data_source_settings, message_transforms: message_transforms, tags: tags) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_topic({ name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs, message_retention_duration: message_retention_duration, state: state, ingestion_data_source_settings: ingestion_data_source_settings, message_transforms: message_transforms, tags: tags }, grpc_options) do |response, operation|
+      c.create_topic({ name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs, message_retention_duration: message_retention_duration, state: state, ingestion_data_source_settings: ingestion_data_source_settings, message_transforms: message_transforms, tags: tags }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_topic(::Google::Cloud::PubSub::V1::Topic.new(name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs, message_retention_duration: message_retention_duration, state: state, ingestion_data_source_settings: ingestion_data_source_settings, message_transforms: message_transforms, tags: tags), grpc_options) do |response, operation|
+      c.create_topic(::Google::Cloud::PubSub::V1::Topic.new(name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs, message_retention_duration: message_retention_duration, state: state, ingestion_data_source_settings: ingestion_data_source_settings, message_transforms: message_transforms, tags: tags), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -162,36 +162,36 @@ class ::Google::Cloud::PubSub::V1::TopicAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_topic_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_topic({ topic: topic, update_mask: update_mask }) do |response, operation|
+      c.update_topic({ topic: topic, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_topic topic: topic, update_mask: update_mask do |response, operation|
+      c.update_topic topic: topic, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_topic ::Google::Cloud::PubSub::V1::UpdateTopicRequest.new(topic: topic, update_mask: update_mask) do |response, operation|
+      c.update_topic ::Google::Cloud::PubSub::V1::UpdateTopicRequest.new(topic: topic, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_topic({ topic: topic, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_topic({ topic: topic, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_topic(::Google::Cloud::PubSub::V1::UpdateTopicRequest.new(topic: topic, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_topic(::Google::Cloud::PubSub::V1::UpdateTopicRequest.new(topic: topic, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -222,36 +222,36 @@ class ::Google::Cloud::PubSub::V1::TopicAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, publish_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.publish({ topic: topic, messages: messages }) do |response, operation|
+      c.publish({ topic: topic, messages: messages }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.publish topic: topic, messages: messages do |response, operation|
+      c.publish topic: topic, messages: messages do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.publish ::Google::Cloud::PubSub::V1::PublishRequest.new(topic: topic, messages: messages) do |response, operation|
+      c.publish ::Google::Cloud::PubSub::V1::PublishRequest.new(topic: topic, messages: messages) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.publish({ topic: topic, messages: messages }, grpc_options) do |response, operation|
+      c.publish({ topic: topic, messages: messages }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.publish(::Google::Cloud::PubSub::V1::PublishRequest.new(topic: topic, messages: messages), grpc_options) do |response, operation|
+      c.publish(::Google::Cloud::PubSub::V1::PublishRequest.new(topic: topic, messages: messages), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -280,36 +280,36 @@ class ::Google::Cloud::PubSub::V1::TopicAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_topic_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_topic({ topic: topic }) do |response, operation|
+      c.get_topic({ topic: topic }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_topic topic: topic do |response, operation|
+      c.get_topic topic: topic do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_topic ::Google::Cloud::PubSub::V1::GetTopicRequest.new(topic: topic) do |response, operation|
+      c.get_topic ::Google::Cloud::PubSub::V1::GetTopicRequest.new(topic: topic) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_topic({ topic: topic }, grpc_options) do |response, operation|
+      c.get_topic({ topic: topic }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_topic(::Google::Cloud::PubSub::V1::GetTopicRequest.new(topic: topic), grpc_options) do |response, operation|
+      c.get_topic(::Google::Cloud::PubSub::V1::GetTopicRequest.new(topic: topic), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -342,40 +342,40 @@ class ::Google::Cloud::PubSub::V1::TopicAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_topics_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_topics({ project: project, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_topics({ project: project, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_topics project: project, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_topics project: project, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_topics ::Google::Cloud::PubSub::V1::ListTopicsRequest.new(project: project, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_topics ::Google::Cloud::PubSub::V1::ListTopicsRequest.new(project: project, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_topics({ project: project, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_topics({ project: project, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_topics(::Google::Cloud::PubSub::V1::ListTopicsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_topics(::Google::Cloud::PubSub::V1::ListTopicsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -409,36 +409,36 @@ class ::Google::Cloud::PubSub::V1::TopicAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_topic_subscriptions_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_topic_subscriptions({ topic: topic, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_topic_subscriptions({ topic: topic, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_topic_subscriptions topic: topic, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_topic_subscriptions topic: topic, page_size: page_size, page_token: page_token do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_topic_subscriptions ::Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest.new(topic: topic, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_topic_subscriptions ::Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest.new(topic: topic, page_size: page_size, page_token: page_token) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_topic_subscriptions({ topic: topic, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_topic_subscriptions({ topic: topic, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_topic_subscriptions(::Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest.new(topic: topic, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_topic_subscriptions(::Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest.new(topic: topic, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -471,36 +471,36 @@ class ::Google::Cloud::PubSub::V1::TopicAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_topic_snapshots_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_topic_snapshots({ topic: topic, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_topic_snapshots({ topic: topic, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_topic_snapshots topic: topic, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_topic_snapshots topic: topic, page_size: page_size, page_token: page_token do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_topic_snapshots ::Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest.new(topic: topic, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_topic_snapshots ::Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest.new(topic: topic, page_size: page_size, page_token: page_token) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_topic_snapshots({ topic: topic, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_topic_snapshots({ topic: topic, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_topic_snapshots(::Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest.new(topic: topic, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_topic_snapshots(::Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest.new(topic: topic, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -529,36 +529,36 @@ class ::Google::Cloud::PubSub::V1::TopicAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_topic_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_topic({ topic: topic }) do |response, operation|
+      c.delete_topic({ topic: topic }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_topic topic: topic do |response, operation|
+      c.delete_topic topic: topic do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_topic ::Google::Cloud::PubSub::V1::DeleteTopicRequest.new(topic: topic) do |response, operation|
+      c.delete_topic ::Google::Cloud::PubSub::V1::DeleteTopicRequest.new(topic: topic) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_topic({ topic: topic }, grpc_options) do |response, operation|
+      c.delete_topic({ topic: topic }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_topic(::Google::Cloud::PubSub::V1::DeleteTopicRequest.new(topic: topic), grpc_options) do |response, operation|
+      c.delete_topic(::Google::Cloud::PubSub::V1::DeleteTopicRequest.new(topic: topic), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -587,36 +587,36 @@ class ::Google::Cloud::PubSub::V1::TopicAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, detach_subscription_client_stub do
       # Create client
-      client = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
+      c = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.detach_subscription({ subscription: subscription }) do |response, operation|
+      c.detach_subscription({ subscription: subscription }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.detach_subscription subscription: subscription do |response, operation|
+      c.detach_subscription subscription: subscription do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.detach_subscription ::Google::Cloud::PubSub::V1::DetachSubscriptionRequest.new(subscription: subscription) do |response, operation|
+      c.detach_subscription ::Google::Cloud::PubSub::V1::DetachSubscriptionRequest.new(subscription: subscription) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.detach_subscription({ subscription: subscription }, grpc_options) do |response, operation|
+      c.detach_subscription({ subscription: subscription }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.detach_subscription(::Google::Cloud::PubSub::V1::DetachSubscriptionRequest.new(subscription: subscription), grpc_options) do |response, operation|
+      c.detach_subscription(::Google::Cloud::PubSub::V1::DetachSubscriptionRequest.new(subscription: subscription), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

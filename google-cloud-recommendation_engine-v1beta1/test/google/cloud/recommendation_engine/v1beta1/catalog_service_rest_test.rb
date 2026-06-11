@@ -98,32 +98,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Clie
     ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::ServiceStub.stub :transcode_create_catalog_item_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_catalog_item_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_catalog_item({ parent: parent, catalog_item: catalog_item }) do |_result, response|
+        c.create_catalog_item({ parent: parent, catalog_item: catalog_item }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_catalog_item parent: parent, catalog_item: catalog_item do |_result, response|
+        c.create_catalog_item parent: parent, catalog_item: catalog_item do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_catalog_item ::Google::Cloud::RecommendationEngine::V1beta1::CreateCatalogItemRequest.new(parent: parent, catalog_item: catalog_item) do |_result, response|
+        c.create_catalog_item ::Google::Cloud::RecommendationEngine::V1beta1::CreateCatalogItemRequest.new(parent: parent, catalog_item: catalog_item) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_catalog_item({ parent: parent, catalog_item: catalog_item }, call_options) do |_result, response|
+        c.create_catalog_item({ parent: parent, catalog_item: catalog_item }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_catalog_item(::Google::Cloud::RecommendationEngine::V1beta1::CreateCatalogItemRequest.new(parent: parent, catalog_item: catalog_item), call_options) do |_result, response|
+        c.create_catalog_item(::Google::Cloud::RecommendationEngine::V1beta1::CreateCatalogItemRequest.new(parent: parent, catalog_item: catalog_item), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Clie
     ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::ServiceStub.stub :transcode_get_catalog_item_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_catalog_item_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_catalog_item({ name: name }) do |_result, response|
+        c.get_catalog_item({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_catalog_item name: name do |_result, response|
+        c.get_catalog_item name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_catalog_item ::Google::Cloud::RecommendationEngine::V1beta1::GetCatalogItemRequest.new(name: name) do |_result, response|
+        c.get_catalog_item ::Google::Cloud::RecommendationEngine::V1beta1::GetCatalogItemRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_catalog_item({ name: name }, call_options) do |_result, response|
+        c.get_catalog_item({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_catalog_item(::Google::Cloud::RecommendationEngine::V1beta1::GetCatalogItemRequest.new(name: name), call_options) do |_result, response|
+        c.get_catalog_item(::Google::Cloud::RecommendationEngine::V1beta1::GetCatalogItemRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Clie
     ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::ServiceStub.stub :transcode_list_catalog_items_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_catalog_items_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_catalog_items({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_catalog_items({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_catalog_items parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_catalog_items parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_catalog_items ::Google::Cloud::RecommendationEngine::V1beta1::ListCatalogItemsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_catalog_items ::Google::Cloud::RecommendationEngine::V1beta1::ListCatalogItemsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_catalog_items({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_catalog_items({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_catalog_items(::Google::Cloud::RecommendationEngine::V1beta1::ListCatalogItemsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_catalog_items(::Google::Cloud::RecommendationEngine::V1beta1::ListCatalogItemsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Clie
     ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::ServiceStub.stub :transcode_update_catalog_item_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_catalog_item_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_catalog_item({ name: name, catalog_item: catalog_item, update_mask: update_mask }) do |_result, response|
+        c.update_catalog_item({ name: name, catalog_item: catalog_item, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_catalog_item name: name, catalog_item: catalog_item, update_mask: update_mask do |_result, response|
+        c.update_catalog_item name: name, catalog_item: catalog_item, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_catalog_item ::Google::Cloud::RecommendationEngine::V1beta1::UpdateCatalogItemRequest.new(name: name, catalog_item: catalog_item, update_mask: update_mask) do |_result, response|
+        c.update_catalog_item ::Google::Cloud::RecommendationEngine::V1beta1::UpdateCatalogItemRequest.new(name: name, catalog_item: catalog_item, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_catalog_item({ name: name, catalog_item: catalog_item, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_catalog_item({ name: name, catalog_item: catalog_item, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_catalog_item(::Google::Cloud::RecommendationEngine::V1beta1::UpdateCatalogItemRequest.new(name: name, catalog_item: catalog_item, update_mask: update_mask), call_options) do |_result, response|
+        c.update_catalog_item(::Google::Cloud::RecommendationEngine::V1beta1::UpdateCatalogItemRequest.new(name: name, catalog_item: catalog_item, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Clie
     ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::ServiceStub.stub :transcode_delete_catalog_item_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_catalog_item_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_catalog_item({ name: name }) do |_result, response|
+        c.delete_catalog_item({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_catalog_item name: name do |_result, response|
+        c.delete_catalog_item name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_catalog_item ::Google::Cloud::RecommendationEngine::V1beta1::DeleteCatalogItemRequest.new(name: name) do |_result, response|
+        c.delete_catalog_item ::Google::Cloud::RecommendationEngine::V1beta1::DeleteCatalogItemRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_catalog_item({ name: name }, call_options) do |_result, response|
+        c.delete_catalog_item({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_catalog_item(::Google::Cloud::RecommendationEngine::V1beta1::DeleteCatalogItemRequest.new(name: name), call_options) do |_result, response|
+        c.delete_catalog_item(::Google::Cloud::RecommendationEngine::V1beta1::DeleteCatalogItemRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Clie
     ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::ServiceStub.stub :transcode_import_catalog_items_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_catalog_items_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_catalog_items({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config }) do |_result, response|
+        c.import_catalog_items({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_catalog_items parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config do |_result, response|
+        c.import_catalog_items parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_catalog_items ::Google::Cloud::RecommendationEngine::V1beta1::ImportCatalogItemsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config) do |_result, response|
+        c.import_catalog_items ::Google::Cloud::RecommendationEngine::V1beta1::ImportCatalogItemsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_catalog_items({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config }, call_options) do |_result, response|
+        c.import_catalog_items({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_catalog_items(::Google::Cloud::RecommendationEngine::V1beta1::ImportCatalogItemsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config), call_options) do |_result, response|
+        c.import_catalog_items(::Google::Cloud::RecommendationEngine::V1beta1::ImportCatalogItemsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
