@@ -99,32 +99,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_process_open_lineage_run_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, process_open_lineage_run_event_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.process_open_lineage_run_event({ parent: parent, open_lineage: open_lineage, request_id: request_id }) do |_result, response|
+        c.process_open_lineage_run_event({ parent: parent, open_lineage: open_lineage, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.process_open_lineage_run_event parent: parent, open_lineage: open_lineage, request_id: request_id do |_result, response|
+        c.process_open_lineage_run_event parent: parent, open_lineage: open_lineage, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.process_open_lineage_run_event ::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest.new(parent: parent, open_lineage: open_lineage, request_id: request_id) do |_result, response|
+        c.process_open_lineage_run_event ::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest.new(parent: parent, open_lineage: open_lineage, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.process_open_lineage_run_event({ parent: parent, open_lineage: open_lineage, request_id: request_id }, call_options) do |_result, response|
+        c.process_open_lineage_run_event({ parent: parent, open_lineage: open_lineage, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.process_open_lineage_run_event(::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest.new(parent: parent, open_lineage: open_lineage, request_id: request_id), call_options) do |_result, response|
+        c.process_open_lineage_run_event(::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest.new(parent: parent, open_lineage: open_lineage, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_create_process_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_process_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_process({ parent: parent, process: process, request_id: request_id }) do |_result, response|
+        c.create_process({ parent: parent, process: process, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_process parent: parent, process: process, request_id: request_id do |_result, response|
+        c.create_process parent: parent, process: process, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_process ::Google::Cloud::DataCatalog::Lineage::V1::CreateProcessRequest.new(parent: parent, process: process, request_id: request_id) do |_result, response|
+        c.create_process ::Google::Cloud::DataCatalog::Lineage::V1::CreateProcessRequest.new(parent: parent, process: process, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_process({ parent: parent, process: process, request_id: request_id }, call_options) do |_result, response|
+        c.create_process({ parent: parent, process: process, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_process(::Google::Cloud::DataCatalog::Lineage::V1::CreateProcessRequest.new(parent: parent, process: process, request_id: request_id), call_options) do |_result, response|
+        c.create_process(::Google::Cloud::DataCatalog::Lineage::V1::CreateProcessRequest.new(parent: parent, process: process, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_update_process_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_process_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id }) do |_result, response|
+        c.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_process process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id do |_result, response|
+        c.update_process process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_process ::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id) do |_result, response|
+        c.update_process ::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id }, call_options) do |_result, response|
+        c.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_process(::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id), call_options) do |_result, response|
+        c.update_process(::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_get_process_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_process_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_process({ name: name }) do |_result, response|
+        c.get_process({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_process name: name do |_result, response|
+        c.get_process name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_process ::Google::Cloud::DataCatalog::Lineage::V1::GetProcessRequest.new(name: name) do |_result, response|
+        c.get_process ::Google::Cloud::DataCatalog::Lineage::V1::GetProcessRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_process({ name: name }, call_options) do |_result, response|
+        c.get_process({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_process(::Google::Cloud::DataCatalog::Lineage::V1::GetProcessRequest.new(name: name), call_options) do |_result, response|
+        c.get_process(::Google::Cloud::DataCatalog::Lineage::V1::GetProcessRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_list_processes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_processes_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_processes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_processes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_processes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_processes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_processes ::Google::Cloud::DataCatalog::Lineage::V1::ListProcessesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_processes ::Google::Cloud::DataCatalog::Lineage::V1::ListProcessesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_processes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_processes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_processes(::Google::Cloud::DataCatalog::Lineage::V1::ListProcessesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_processes(::Google::Cloud::DataCatalog::Lineage::V1::ListProcessesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -377,32 +377,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_delete_process_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_process_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_process({ name: name, allow_missing: allow_missing }) do |_result, response|
+        c.delete_process({ name: name, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_process name: name, allow_missing: allow_missing do |_result, response|
+        c.delete_process name: name, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_process ::Google::Cloud::DataCatalog::Lineage::V1::DeleteProcessRequest.new(name: name, allow_missing: allow_missing) do |_result, response|
+        c.delete_process ::Google::Cloud::DataCatalog::Lineage::V1::DeleteProcessRequest.new(name: name, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_process({ name: name, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.delete_process({ name: name, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_process(::Google::Cloud::DataCatalog::Lineage::V1::DeleteProcessRequest.new(name: name, allow_missing: allow_missing), call_options) do |_result, response|
+        c.delete_process(::Google::Cloud::DataCatalog::Lineage::V1::DeleteProcessRequest.new(name: name, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -433,32 +433,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_create_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_run_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_run({ parent: parent, run: run, request_id: request_id }) do |_result, response|
+        c.create_run({ parent: parent, run: run, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_run parent: parent, run: run, request_id: request_id do |_result, response|
+        c.create_run parent: parent, run: run, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_run ::Google::Cloud::DataCatalog::Lineage::V1::CreateRunRequest.new(parent: parent, run: run, request_id: request_id) do |_result, response|
+        c.create_run ::Google::Cloud::DataCatalog::Lineage::V1::CreateRunRequest.new(parent: parent, run: run, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_run({ parent: parent, run: run, request_id: request_id }, call_options) do |_result, response|
+        c.create_run({ parent: parent, run: run, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_run(::Google::Cloud::DataCatalog::Lineage::V1::CreateRunRequest.new(parent: parent, run: run, request_id: request_id), call_options) do |_result, response|
+        c.create_run(::Google::Cloud::DataCatalog::Lineage::V1::CreateRunRequest.new(parent: parent, run: run, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -489,32 +489,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_update_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_run_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_run({ run: run, update_mask: update_mask, allow_missing: allow_missing }) do |_result, response|
+        c.update_run({ run: run, update_mask: update_mask, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_run run: run, update_mask: update_mask, allow_missing: allow_missing do |_result, response|
+        c.update_run run: run, update_mask: update_mask, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_run ::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask, allow_missing: allow_missing) do |_result, response|
+        c.update_run ::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_run({ run: run, update_mask: update_mask, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.update_run({ run: run, update_mask: update_mask, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_run(::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask, allow_missing: allow_missing), call_options) do |_result, response|
+        c.update_run(::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -543,32 +543,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_get_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_run_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_run({ name: name }) do |_result, response|
+        c.get_run({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_run name: name do |_result, response|
+        c.get_run name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_run ::Google::Cloud::DataCatalog::Lineage::V1::GetRunRequest.new(name: name) do |_result, response|
+        c.get_run ::Google::Cloud::DataCatalog::Lineage::V1::GetRunRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_run({ name: name }, call_options) do |_result, response|
+        c.get_run({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_run(::Google::Cloud::DataCatalog::Lineage::V1::GetRunRequest.new(name: name), call_options) do |_result, response|
+        c.get_run(::Google::Cloud::DataCatalog::Lineage::V1::GetRunRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -599,32 +599,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_list_runs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_runs_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_runs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_runs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_runs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_runs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_runs ::Google::Cloud::DataCatalog::Lineage::V1::ListRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_runs ::Google::Cloud::DataCatalog::Lineage::V1::ListRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_runs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_runs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_runs(::Google::Cloud::DataCatalog::Lineage::V1::ListRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_runs(::Google::Cloud::DataCatalog::Lineage::V1::ListRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -654,32 +654,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_delete_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_run_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_run({ name: name, allow_missing: allow_missing }) do |_result, response|
+        c.delete_run({ name: name, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_run name: name, allow_missing: allow_missing do |_result, response|
+        c.delete_run name: name, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_run ::Google::Cloud::DataCatalog::Lineage::V1::DeleteRunRequest.new(name: name, allow_missing: allow_missing) do |_result, response|
+        c.delete_run ::Google::Cloud::DataCatalog::Lineage::V1::DeleteRunRequest.new(name: name, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_run({ name: name, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.delete_run({ name: name, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_run(::Google::Cloud::DataCatalog::Lineage::V1::DeleteRunRequest.new(name: name, allow_missing: allow_missing), call_options) do |_result, response|
+        c.delete_run(::Google::Cloud::DataCatalog::Lineage::V1::DeleteRunRequest.new(name: name, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -710,32 +710,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_create_lineage_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_lineage_event_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_lineage_event({ parent: parent, lineage_event: lineage_event, request_id: request_id }) do |_result, response|
+        c.create_lineage_event({ parent: parent, lineage_event: lineage_event, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_lineage_event parent: parent, lineage_event: lineage_event, request_id: request_id do |_result, response|
+        c.create_lineage_event parent: parent, lineage_event: lineage_event, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_lineage_event ::Google::Cloud::DataCatalog::Lineage::V1::CreateLineageEventRequest.new(parent: parent, lineage_event: lineage_event, request_id: request_id) do |_result, response|
+        c.create_lineage_event ::Google::Cloud::DataCatalog::Lineage::V1::CreateLineageEventRequest.new(parent: parent, lineage_event: lineage_event, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_lineage_event({ parent: parent, lineage_event: lineage_event, request_id: request_id }, call_options) do |_result, response|
+        c.create_lineage_event({ parent: parent, lineage_event: lineage_event, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_lineage_event(::Google::Cloud::DataCatalog::Lineage::V1::CreateLineageEventRequest.new(parent: parent, lineage_event: lineage_event, request_id: request_id), call_options) do |_result, response|
+        c.create_lineage_event(::Google::Cloud::DataCatalog::Lineage::V1::CreateLineageEventRequest.new(parent: parent, lineage_event: lineage_event, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -764,32 +764,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_get_lineage_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_lineage_event_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_lineage_event({ name: name }) do |_result, response|
+        c.get_lineage_event({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_lineage_event name: name do |_result, response|
+        c.get_lineage_event name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_lineage_event ::Google::Cloud::DataCatalog::Lineage::V1::GetLineageEventRequest.new(name: name) do |_result, response|
+        c.get_lineage_event ::Google::Cloud::DataCatalog::Lineage::V1::GetLineageEventRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_lineage_event({ name: name }, call_options) do |_result, response|
+        c.get_lineage_event({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_lineage_event(::Google::Cloud::DataCatalog::Lineage::V1::GetLineageEventRequest.new(name: name), call_options) do |_result, response|
+        c.get_lineage_event(::Google::Cloud::DataCatalog::Lineage::V1::GetLineageEventRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -820,32 +820,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_list_lineage_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_lineage_events_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_lineage_events({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_lineage_events({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_lineage_events parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_lineage_events parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_lineage_events ::Google::Cloud::DataCatalog::Lineage::V1::ListLineageEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_lineage_events ::Google::Cloud::DataCatalog::Lineage::V1::ListLineageEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_lineage_events({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_lineage_events({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_lineage_events(::Google::Cloud::DataCatalog::Lineage::V1::ListLineageEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_lineage_events(::Google::Cloud::DataCatalog::Lineage::V1::ListLineageEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -875,32 +875,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_delete_lineage_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_lineage_event_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_lineage_event({ name: name, allow_missing: allow_missing }) do |_result, response|
+        c.delete_lineage_event({ name: name, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_lineage_event name: name, allow_missing: allow_missing do |_result, response|
+        c.delete_lineage_event name: name, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_lineage_event ::Google::Cloud::DataCatalog::Lineage::V1::DeleteLineageEventRequest.new(name: name, allow_missing: allow_missing) do |_result, response|
+        c.delete_lineage_event ::Google::Cloud::DataCatalog::Lineage::V1::DeleteLineageEventRequest.new(name: name, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_lineage_event({ name: name, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.delete_lineage_event({ name: name, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_lineage_event(::Google::Cloud::DataCatalog::Lineage::V1::DeleteLineageEventRequest.new(name: name, allow_missing: allow_missing), call_options) do |_result, response|
+        c.delete_lineage_event(::Google::Cloud::DataCatalog::Lineage::V1::DeleteLineageEventRequest.new(name: name, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -932,32 +932,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_search_links_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_links_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_links({ parent: parent, source: source, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.search_links({ parent: parent, source: source, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_links parent: parent, source: source, page_size: page_size, page_token: page_token do |_result, response|
+        c.search_links parent: parent, source: source, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_links ::Google::Cloud::DataCatalog::Lineage::V1::SearchLinksRequest.new(parent: parent, source: source, page_size: page_size, page_token: page_token) do |_result, response|
+        c.search_links ::Google::Cloud::DataCatalog::Lineage::V1::SearchLinksRequest.new(parent: parent, source: source, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_links({ parent: parent, source: source, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.search_links({ parent: parent, source: source, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_links(::Google::Cloud::DataCatalog::Lineage::V1::SearchLinksRequest.new(parent: parent, source: source, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.search_links(::Google::Cloud::DataCatalog::Lineage::V1::SearchLinksRequest.new(parent: parent, source: source, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -989,32 +989,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_batch_search_link_processes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_search_link_processes_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_search_link_processes({ parent: parent, links: links, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.batch_search_link_processes({ parent: parent, links: links, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_search_link_processes parent: parent, links: links, page_size: page_size, page_token: page_token do |_result, response|
+        c.batch_search_link_processes parent: parent, links: links, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_search_link_processes ::Google::Cloud::DataCatalog::Lineage::V1::BatchSearchLinkProcessesRequest.new(parent: parent, links: links, page_size: page_size, page_token: page_token) do |_result, response|
+        c.batch_search_link_processes ::Google::Cloud::DataCatalog::Lineage::V1::BatchSearchLinkProcessesRequest.new(parent: parent, links: links, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_search_link_processes({ parent: parent, links: links, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.batch_search_link_processes({ parent: parent, links: links, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_search_link_processes(::Google::Cloud::DataCatalog::Lineage::V1::BatchSearchLinkProcessesRequest.new(parent: parent, links: links, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.batch_search_link_processes(::Google::Cloud::DataCatalog::Lineage::V1::BatchSearchLinkProcessesRequest.new(parent: parent, links: links, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1048,32 +1048,32 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_search_lineage_streaming_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_lineage_streaming_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_lineage_streaming({ parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits }) do |_result, response|
+        c.search_lineage_streaming({ parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.search_lineage_streaming parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits do |_result, response|
+        c.search_lineage_streaming parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.search_lineage_streaming ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest.new(parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits) do |_result, response|
+        c.search_lineage_streaming ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest.new(parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.search_lineage_streaming({ parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits }, call_options) do |_result, response|
+        c.search_lineage_streaming({ parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.search_lineage_streaming(::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest.new(parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits), call_options) do |_result, response|
+        c.search_lineage_streaming(::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest.new(parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 

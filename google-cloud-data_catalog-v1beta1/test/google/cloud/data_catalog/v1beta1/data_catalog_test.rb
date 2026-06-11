@@ -90,40 +90,40 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, search_catalog_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
+      c.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_catalog scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
+      c.search_catalog scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_catalog ::Google::Cloud::DataCatalog::V1beta1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
+      c.search_catalog ::Google::Cloud::DataCatalog::V1beta1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
+      c.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_catalog(::Google::Cloud::DataCatalog::V1beta1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
+      c.search_catalog(::Google::Cloud::DataCatalog::V1beta1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -157,36 +157,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_entry_group_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group }) do |response, operation|
+      c.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_entry_group parent: parent, entry_group_id: entry_group_id, entry_group: entry_group do |response, operation|
+      c.create_entry_group parent: parent, entry_group_id: entry_group_id, entry_group: entry_group do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_entry_group ::Google::Cloud::DataCatalog::V1beta1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group) do |response, operation|
+      c.create_entry_group ::Google::Cloud::DataCatalog::V1beta1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group }, grpc_options) do |response, operation|
+      c.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_entry_group(::Google::Cloud::DataCatalog::V1beta1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group), grpc_options) do |response, operation|
+      c.create_entry_group(::Google::Cloud::DataCatalog::V1beta1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,36 +217,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_entry_group_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_entry_group({ entry_group: entry_group, update_mask: update_mask }) do |response, operation|
+      c.update_entry_group({ entry_group: entry_group, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_entry_group entry_group: entry_group, update_mask: update_mask do |response, operation|
+      c.update_entry_group entry_group: entry_group, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_entry_group ::Google::Cloud::DataCatalog::V1beta1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask) do |response, operation|
+      c.update_entry_group ::Google::Cloud::DataCatalog::V1beta1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_entry_group({ entry_group: entry_group, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_entry_group({ entry_group: entry_group, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_entry_group(::Google::Cloud::DataCatalog::V1beta1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_entry_group(::Google::Cloud::DataCatalog::V1beta1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -277,36 +277,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_entry_group_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_entry_group({ name: name, read_mask: read_mask }) do |response, operation|
+      c.get_entry_group({ name: name, read_mask: read_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_entry_group name: name, read_mask: read_mask do |response, operation|
+      c.get_entry_group name: name, read_mask: read_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_entry_group ::Google::Cloud::DataCatalog::V1beta1::GetEntryGroupRequest.new(name: name, read_mask: read_mask) do |response, operation|
+      c.get_entry_group ::Google::Cloud::DataCatalog::V1beta1::GetEntryGroupRequest.new(name: name, read_mask: read_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_entry_group({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.get_entry_group({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_entry_group(::Google::Cloud::DataCatalog::V1beta1::GetEntryGroupRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
+      c.get_entry_group(::Google::Cloud::DataCatalog::V1beta1::GetEntryGroupRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -337,36 +337,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_entry_group_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_entry_group({ name: name, force: force }) do |response, operation|
+      c.delete_entry_group({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_entry_group name: name, force: force do |response, operation|
+      c.delete_entry_group name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_entry_group ::Google::Cloud::DataCatalog::V1beta1::DeleteEntryGroupRequest.new(name: name, force: force) do |response, operation|
+      c.delete_entry_group ::Google::Cloud::DataCatalog::V1beta1::DeleteEntryGroupRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_entry_group({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_entry_group({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_entry_group(::Google::Cloud::DataCatalog::V1beta1::DeleteEntryGroupRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_entry_group(::Google::Cloud::DataCatalog::V1beta1::DeleteEntryGroupRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -399,40 +399,40 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_entry_groups_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_entry_groups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_entry_groups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_entry_groups ::Google::Cloud::DataCatalog::V1beta1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_entry_groups ::Google::Cloud::DataCatalog::V1beta1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_entry_groups(::Google::Cloud::DataCatalog::V1beta1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_entry_groups(::Google::Cloud::DataCatalog::V1beta1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -466,36 +466,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_entry({ parent: parent, entry_id: entry_id, entry: entry }) do |response, operation|
+      c.create_entry({ parent: parent, entry_id: entry_id, entry: entry }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_entry parent: parent, entry_id: entry_id, entry: entry do |response, operation|
+      c.create_entry parent: parent, entry_id: entry_id, entry: entry do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_entry ::Google::Cloud::DataCatalog::V1beta1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry) do |response, operation|
+      c.create_entry ::Google::Cloud::DataCatalog::V1beta1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_entry({ parent: parent, entry_id: entry_id, entry: entry }, grpc_options) do |response, operation|
+      c.create_entry({ parent: parent, entry_id: entry_id, entry: entry }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_entry(::Google::Cloud::DataCatalog::V1beta1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry), grpc_options) do |response, operation|
+      c.create_entry(::Google::Cloud::DataCatalog::V1beta1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -526,36 +526,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_entry({ entry: entry, update_mask: update_mask }) do |response, operation|
+      c.update_entry({ entry: entry, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_entry entry: entry, update_mask: update_mask do |response, operation|
+      c.update_entry entry: entry, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_entry ::Google::Cloud::DataCatalog::V1beta1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask) do |response, operation|
+      c.update_entry ::Google::Cloud::DataCatalog::V1beta1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_entry({ entry: entry, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_entry({ entry: entry, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_entry(::Google::Cloud::DataCatalog::V1beta1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_entry(::Google::Cloud::DataCatalog::V1beta1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -584,36 +584,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_entry({ name: name }) do |response, operation|
+      c.delete_entry({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_entry name: name do |response, operation|
+      c.delete_entry name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_entry ::Google::Cloud::DataCatalog::V1beta1::DeleteEntryRequest.new(name: name) do |response, operation|
+      c.delete_entry ::Google::Cloud::DataCatalog::V1beta1::DeleteEntryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_entry({ name: name }, grpc_options) do |response, operation|
+      c.delete_entry({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_entry(::Google::Cloud::DataCatalog::V1beta1::DeleteEntryRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_entry(::Google::Cloud::DataCatalog::V1beta1::DeleteEntryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -642,36 +642,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_entry({ name: name }) do |response, operation|
+      c.get_entry({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_entry name: name do |response, operation|
+      c.get_entry name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_entry ::Google::Cloud::DataCatalog::V1beta1::GetEntryRequest.new(name: name) do |response, operation|
+      c.get_entry ::Google::Cloud::DataCatalog::V1beta1::GetEntryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_entry({ name: name }, grpc_options) do |response, operation|
+      c.get_entry({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_entry(::Google::Cloud::DataCatalog::V1beta1::GetEntryRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_entry(::Google::Cloud::DataCatalog::V1beta1::GetEntryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -701,36 +701,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, lookup_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.lookup_entry({ linked_resource: linked_resource }) do |response, operation|
+      c.lookup_entry({ linked_resource: linked_resource }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.lookup_entry linked_resource: linked_resource do |response, operation|
+      c.lookup_entry linked_resource: linked_resource do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.lookup_entry ::Google::Cloud::DataCatalog::V1beta1::LookupEntryRequest.new(linked_resource: linked_resource) do |response, operation|
+      c.lookup_entry ::Google::Cloud::DataCatalog::V1beta1::LookupEntryRequest.new(linked_resource: linked_resource) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.lookup_entry({ linked_resource: linked_resource }, grpc_options) do |response, operation|
+      c.lookup_entry({ linked_resource: linked_resource }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.lookup_entry(::Google::Cloud::DataCatalog::V1beta1::LookupEntryRequest.new(linked_resource: linked_resource), grpc_options) do |response, operation|
+      c.lookup_entry(::Google::Cloud::DataCatalog::V1beta1::LookupEntryRequest.new(linked_resource: linked_resource), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -765,40 +765,40 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_entries_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_entries({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
+      c.list_entries({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_entries parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
+      c.list_entries parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_entries ::Google::Cloud::DataCatalog::V1beta1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
+      c.list_entries ::Google::Cloud::DataCatalog::V1beta1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_entries({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_entries({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_entries(::Google::Cloud::DataCatalog::V1beta1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_entries(::Google::Cloud::DataCatalog::V1beta1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -832,36 +832,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_tag_template_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tag_template({ parent: parent, tag_template_id: tag_template_id, tag_template: tag_template }) do |response, operation|
+      c.create_tag_template({ parent: parent, tag_template_id: tag_template_id, tag_template: tag_template }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tag_template parent: parent, tag_template_id: tag_template_id, tag_template: tag_template do |response, operation|
+      c.create_tag_template parent: parent, tag_template_id: tag_template_id, tag_template: tag_template do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tag_template ::Google::Cloud::DataCatalog::V1beta1::CreateTagTemplateRequest.new(parent: parent, tag_template_id: tag_template_id, tag_template: tag_template) do |response, operation|
+      c.create_tag_template ::Google::Cloud::DataCatalog::V1beta1::CreateTagTemplateRequest.new(parent: parent, tag_template_id: tag_template_id, tag_template: tag_template) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tag_template({ parent: parent, tag_template_id: tag_template_id, tag_template: tag_template }, grpc_options) do |response, operation|
+      c.create_tag_template({ parent: parent, tag_template_id: tag_template_id, tag_template: tag_template }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tag_template(::Google::Cloud::DataCatalog::V1beta1::CreateTagTemplateRequest.new(parent: parent, tag_template_id: tag_template_id, tag_template: tag_template), grpc_options) do |response, operation|
+      c.create_tag_template(::Google::Cloud::DataCatalog::V1beta1::CreateTagTemplateRequest.new(parent: parent, tag_template_id: tag_template_id, tag_template: tag_template), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -890,36 +890,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_tag_template_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tag_template({ name: name }) do |response, operation|
+      c.get_tag_template({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tag_template name: name do |response, operation|
+      c.get_tag_template name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tag_template ::Google::Cloud::DataCatalog::V1beta1::GetTagTemplateRequest.new(name: name) do |response, operation|
+      c.get_tag_template ::Google::Cloud::DataCatalog::V1beta1::GetTagTemplateRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tag_template({ name: name }, grpc_options) do |response, operation|
+      c.get_tag_template({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tag_template(::Google::Cloud::DataCatalog::V1beta1::GetTagTemplateRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tag_template(::Google::Cloud::DataCatalog::V1beta1::GetTagTemplateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -950,36 +950,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_tag_template_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tag_template({ tag_template: tag_template, update_mask: update_mask }) do |response, operation|
+      c.update_tag_template({ tag_template: tag_template, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tag_template tag_template: tag_template, update_mask: update_mask do |response, operation|
+      c.update_tag_template tag_template: tag_template, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tag_template ::Google::Cloud::DataCatalog::V1beta1::UpdateTagTemplateRequest.new(tag_template: tag_template, update_mask: update_mask) do |response, operation|
+      c.update_tag_template ::Google::Cloud::DataCatalog::V1beta1::UpdateTagTemplateRequest.new(tag_template: tag_template, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tag_template({ tag_template: tag_template, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_tag_template({ tag_template: tag_template, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tag_template(::Google::Cloud::DataCatalog::V1beta1::UpdateTagTemplateRequest.new(tag_template: tag_template, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_tag_template(::Google::Cloud::DataCatalog::V1beta1::UpdateTagTemplateRequest.new(tag_template: tag_template, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1010,36 +1010,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_tag_template_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tag_template({ name: name, force: force }) do |response, operation|
+      c.delete_tag_template({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tag_template name: name, force: force do |response, operation|
+      c.delete_tag_template name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tag_template ::Google::Cloud::DataCatalog::V1beta1::DeleteTagTemplateRequest.new(name: name, force: force) do |response, operation|
+      c.delete_tag_template ::Google::Cloud::DataCatalog::V1beta1::DeleteTagTemplateRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tag_template({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_tag_template({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tag_template(::Google::Cloud::DataCatalog::V1beta1::DeleteTagTemplateRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_tag_template(::Google::Cloud::DataCatalog::V1beta1::DeleteTagTemplateRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1072,36 +1072,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_tag_template_field_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tag_template_field({ parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field }) do |response, operation|
+      c.create_tag_template_field({ parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tag_template_field parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field do |response, operation|
+      c.create_tag_template_field parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tag_template_field ::Google::Cloud::DataCatalog::V1beta1::CreateTagTemplateFieldRequest.new(parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field) do |response, operation|
+      c.create_tag_template_field ::Google::Cloud::DataCatalog::V1beta1::CreateTagTemplateFieldRequest.new(parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tag_template_field({ parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field }, grpc_options) do |response, operation|
+      c.create_tag_template_field({ parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tag_template_field(::Google::Cloud::DataCatalog::V1beta1::CreateTagTemplateFieldRequest.new(parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field), grpc_options) do |response, operation|
+      c.create_tag_template_field(::Google::Cloud::DataCatalog::V1beta1::CreateTagTemplateFieldRequest.new(parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1134,36 +1134,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_tag_template_field_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tag_template_field({ name: name, tag_template_field: tag_template_field, update_mask: update_mask }) do |response, operation|
+      c.update_tag_template_field({ name: name, tag_template_field: tag_template_field, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tag_template_field name: name, tag_template_field: tag_template_field, update_mask: update_mask do |response, operation|
+      c.update_tag_template_field name: name, tag_template_field: tag_template_field, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tag_template_field ::Google::Cloud::DataCatalog::V1beta1::UpdateTagTemplateFieldRequest.new(name: name, tag_template_field: tag_template_field, update_mask: update_mask) do |response, operation|
+      c.update_tag_template_field ::Google::Cloud::DataCatalog::V1beta1::UpdateTagTemplateFieldRequest.new(name: name, tag_template_field: tag_template_field, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tag_template_field({ name: name, tag_template_field: tag_template_field, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_tag_template_field({ name: name, tag_template_field: tag_template_field, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tag_template_field(::Google::Cloud::DataCatalog::V1beta1::UpdateTagTemplateFieldRequest.new(name: name, tag_template_field: tag_template_field, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_tag_template_field(::Google::Cloud::DataCatalog::V1beta1::UpdateTagTemplateFieldRequest.new(name: name, tag_template_field: tag_template_field, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1194,36 +1194,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, rename_tag_template_field_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.rename_tag_template_field({ name: name, new_tag_template_field_id: new_tag_template_field_id }) do |response, operation|
+      c.rename_tag_template_field({ name: name, new_tag_template_field_id: new_tag_template_field_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rename_tag_template_field name: name, new_tag_template_field_id: new_tag_template_field_id do |response, operation|
+      c.rename_tag_template_field name: name, new_tag_template_field_id: new_tag_template_field_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rename_tag_template_field ::Google::Cloud::DataCatalog::V1beta1::RenameTagTemplateFieldRequest.new(name: name, new_tag_template_field_id: new_tag_template_field_id) do |response, operation|
+      c.rename_tag_template_field ::Google::Cloud::DataCatalog::V1beta1::RenameTagTemplateFieldRequest.new(name: name, new_tag_template_field_id: new_tag_template_field_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rename_tag_template_field({ name: name, new_tag_template_field_id: new_tag_template_field_id }, grpc_options) do |response, operation|
+      c.rename_tag_template_field({ name: name, new_tag_template_field_id: new_tag_template_field_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rename_tag_template_field(::Google::Cloud::DataCatalog::V1beta1::RenameTagTemplateFieldRequest.new(name: name, new_tag_template_field_id: new_tag_template_field_id), grpc_options) do |response, operation|
+      c.rename_tag_template_field(::Google::Cloud::DataCatalog::V1beta1::RenameTagTemplateFieldRequest.new(name: name, new_tag_template_field_id: new_tag_template_field_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1254,36 +1254,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, rename_tag_template_field_enum_value_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.rename_tag_template_field_enum_value({ name: name, new_enum_value_display_name: new_enum_value_display_name }) do |response, operation|
+      c.rename_tag_template_field_enum_value({ name: name, new_enum_value_display_name: new_enum_value_display_name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rename_tag_template_field_enum_value name: name, new_enum_value_display_name: new_enum_value_display_name do |response, operation|
+      c.rename_tag_template_field_enum_value name: name, new_enum_value_display_name: new_enum_value_display_name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rename_tag_template_field_enum_value ::Google::Cloud::DataCatalog::V1beta1::RenameTagTemplateFieldEnumValueRequest.new(name: name, new_enum_value_display_name: new_enum_value_display_name) do |response, operation|
+      c.rename_tag_template_field_enum_value ::Google::Cloud::DataCatalog::V1beta1::RenameTagTemplateFieldEnumValueRequest.new(name: name, new_enum_value_display_name: new_enum_value_display_name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rename_tag_template_field_enum_value({ name: name, new_enum_value_display_name: new_enum_value_display_name }, grpc_options) do |response, operation|
+      c.rename_tag_template_field_enum_value({ name: name, new_enum_value_display_name: new_enum_value_display_name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rename_tag_template_field_enum_value(::Google::Cloud::DataCatalog::V1beta1::RenameTagTemplateFieldEnumValueRequest.new(name: name, new_enum_value_display_name: new_enum_value_display_name), grpc_options) do |response, operation|
+      c.rename_tag_template_field_enum_value(::Google::Cloud::DataCatalog::V1beta1::RenameTagTemplateFieldEnumValueRequest.new(name: name, new_enum_value_display_name: new_enum_value_display_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1314,36 +1314,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_tag_template_field_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tag_template_field({ name: name, force: force }) do |response, operation|
+      c.delete_tag_template_field({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tag_template_field name: name, force: force do |response, operation|
+      c.delete_tag_template_field name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tag_template_field ::Google::Cloud::DataCatalog::V1beta1::DeleteTagTemplateFieldRequest.new(name: name, force: force) do |response, operation|
+      c.delete_tag_template_field ::Google::Cloud::DataCatalog::V1beta1::DeleteTagTemplateFieldRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tag_template_field({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_tag_template_field({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tag_template_field(::Google::Cloud::DataCatalog::V1beta1::DeleteTagTemplateFieldRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_tag_template_field(::Google::Cloud::DataCatalog::V1beta1::DeleteTagTemplateFieldRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1374,36 +1374,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_tag_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tag({ parent: parent, tag: tag }) do |response, operation|
+      c.create_tag({ parent: parent, tag: tag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tag parent: parent, tag: tag do |response, operation|
+      c.create_tag parent: parent, tag: tag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tag ::Google::Cloud::DataCatalog::V1beta1::CreateTagRequest.new(parent: parent, tag: tag) do |response, operation|
+      c.create_tag ::Google::Cloud::DataCatalog::V1beta1::CreateTagRequest.new(parent: parent, tag: tag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tag({ parent: parent, tag: tag }, grpc_options) do |response, operation|
+      c.create_tag({ parent: parent, tag: tag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tag(::Google::Cloud::DataCatalog::V1beta1::CreateTagRequest.new(parent: parent, tag: tag), grpc_options) do |response, operation|
+      c.create_tag(::Google::Cloud::DataCatalog::V1beta1::CreateTagRequest.new(parent: parent, tag: tag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1434,36 +1434,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_tag_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tag({ tag: tag, update_mask: update_mask }) do |response, operation|
+      c.update_tag({ tag: tag, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tag tag: tag, update_mask: update_mask do |response, operation|
+      c.update_tag tag: tag, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tag ::Google::Cloud::DataCatalog::V1beta1::UpdateTagRequest.new(tag: tag, update_mask: update_mask) do |response, operation|
+      c.update_tag ::Google::Cloud::DataCatalog::V1beta1::UpdateTagRequest.new(tag: tag, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tag({ tag: tag, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_tag({ tag: tag, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tag(::Google::Cloud::DataCatalog::V1beta1::UpdateTagRequest.new(tag: tag, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_tag(::Google::Cloud::DataCatalog::V1beta1::UpdateTagRequest.new(tag: tag, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1492,36 +1492,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_tag_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tag({ name: name }) do |response, operation|
+      c.delete_tag({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tag name: name do |response, operation|
+      c.delete_tag name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tag ::Google::Cloud::DataCatalog::V1beta1::DeleteTagRequest.new(name: name) do |response, operation|
+      c.delete_tag ::Google::Cloud::DataCatalog::V1beta1::DeleteTagRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tag({ name: name }, grpc_options) do |response, operation|
+      c.delete_tag({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tag(::Google::Cloud::DataCatalog::V1beta1::DeleteTagRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_tag(::Google::Cloud::DataCatalog::V1beta1::DeleteTagRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1554,40 +1554,40 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_tags_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tags({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_tags({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tags parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_tags parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tags ::Google::Cloud::DataCatalog::V1beta1::ListTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_tags ::Google::Cloud::DataCatalog::V1beta1::ListTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tags({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_tags({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tags(::Google::Cloud::DataCatalog::V1beta1::ListTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_tags(::Google::Cloud::DataCatalog::V1beta1::ListTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1621,36 +1621,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1681,36 +1681,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1741,36 +1741,36 @@ class ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

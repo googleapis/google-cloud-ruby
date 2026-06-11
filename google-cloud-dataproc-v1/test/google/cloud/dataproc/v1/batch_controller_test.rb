@@ -88,40 +88,40 @@ class ::Google::Cloud::Dataproc::V1::BatchController::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_batch_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataproc::V1::BatchController::Client.new do |config|
+      c = ::Google::Cloud::Dataproc::V1::BatchController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_batch({ parent: parent, batch: batch, batch_id: batch_id, request_id: request_id }) do |response, operation|
+      c.create_batch({ parent: parent, batch: batch, batch_id: batch_id, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_batch parent: parent, batch: batch, batch_id: batch_id, request_id: request_id do |response, operation|
+      c.create_batch parent: parent, batch: batch, batch_id: batch_id, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_batch ::Google::Cloud::Dataproc::V1::CreateBatchRequest.new(parent: parent, batch: batch, batch_id: batch_id, request_id: request_id) do |response, operation|
+      c.create_batch ::Google::Cloud::Dataproc::V1::CreateBatchRequest.new(parent: parent, batch: batch, batch_id: batch_id, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_batch({ parent: parent, batch: batch, batch_id: batch_id, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_batch({ parent: parent, batch: batch, batch_id: batch_id, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_batch(::Google::Cloud::Dataproc::V1::CreateBatchRequest.new(parent: parent, batch: batch, batch_id: batch_id, request_id: request_id), grpc_options) do |response, operation|
+      c.create_batch(::Google::Cloud::Dataproc::V1::CreateBatchRequest.new(parent: parent, batch: batch, batch_id: batch_id, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::Dataproc::V1::BatchController::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_batch_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataproc::V1::BatchController::Client.new do |config|
+      c = ::Google::Cloud::Dataproc::V1::BatchController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_batch({ name: name }) do |response, operation|
+      c.get_batch({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_batch name: name do |response, operation|
+      c.get_batch name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_batch ::Google::Cloud::Dataproc::V1::GetBatchRequest.new(name: name) do |response, operation|
+      c.get_batch ::Google::Cloud::Dataproc::V1::GetBatchRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_batch({ name: name }, grpc_options) do |response, operation|
+      c.get_batch({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_batch(::Google::Cloud::Dataproc::V1::GetBatchRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_batch(::Google::Cloud::Dataproc::V1::GetBatchRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::Dataproc::V1::BatchController::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_batches_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataproc::V1::BatchController::Client.new do |config|
+      c = ::Google::Cloud::Dataproc::V1::BatchController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_batches({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_batches({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_batches parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_batches parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_batches ::Google::Cloud::Dataproc::V1::ListBatchesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_batches ::Google::Cloud::Dataproc::V1::ListBatchesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_batches({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_batches({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_batches(::Google::Cloud::Dataproc::V1::ListBatchesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_batches(::Google::Cloud::Dataproc::V1::ListBatchesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -280,36 +280,36 @@ class ::Google::Cloud::Dataproc::V1::BatchController::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, delete_batch_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataproc::V1::BatchController::Client.new do |config|
+      c = ::Google::Cloud::Dataproc::V1::BatchController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_batch({ name: name }) do |response, operation|
+      c.delete_batch({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_batch name: name do |response, operation|
+      c.delete_batch name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_batch ::Google::Cloud::Dataproc::V1::DeleteBatchRequest.new(name: name) do |response, operation|
+      c.delete_batch ::Google::Cloud::Dataproc::V1::DeleteBatchRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_batch({ name: name }, grpc_options) do |response, operation|
+      c.delete_batch({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_batch(::Google::Cloud::Dataproc::V1::DeleteBatchRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_batch(::Google::Cloud::Dataproc::V1::DeleteBatchRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

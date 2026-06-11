@@ -86,40 +86,40 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, query_products_client_stub do
       # Create client
-      client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
+      c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_products({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.query_products({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_products parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.query_products parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_products ::Google::Cloud::DatabaseCenter::V1beta::QueryProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.query_products ::Google::Cloud::DatabaseCenter::V1beta::QueryProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_products({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.query_products({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_products(::Google::Cloud::DatabaseCenter::V1beta::QueryProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.query_products(::Google::Cloud::DatabaseCenter::V1beta::QueryProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,40 +162,40 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, aggregate_fleet_client_stub do
       # Create client
-      client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
+      c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.aggregate_fleet({ parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date }) do |response, operation|
+      c.aggregate_fleet({ parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.aggregate_fleet parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date do |response, operation|
+      c.aggregate_fleet parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.aggregate_fleet ::Google::Cloud::DatabaseCenter::V1beta::AggregateFleetRequest.new(parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date) do |response, operation|
+      c.aggregate_fleet ::Google::Cloud::DatabaseCenter::V1beta::AggregateFleetRequest.new(parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.aggregate_fleet({ parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date }, grpc_options) do |response, operation|
+      c.aggregate_fleet({ parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.aggregate_fleet(::Google::Cloud::DatabaseCenter::V1beta::AggregateFleetRequest.new(parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date), grpc_options) do |response, operation|
+      c.aggregate_fleet(::Google::Cloud::DatabaseCenter::V1beta::AggregateFleetRequest.new(parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -237,40 +237,40 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, query_database_resource_groups_client_stub do
       # Create client
-      client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
+      c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_database_resource_groups({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.query_database_resource_groups({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_database_resource_groups parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
+      c.query_database_resource_groups parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_database_resource_groups ::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
+      c.query_database_resource_groups ::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_database_resource_groups({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.query_database_resource_groups({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_database_resource_groups(::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.query_database_resource_groups(::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -307,36 +307,36 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, aggregate_issue_stats_client_stub do
       # Create client
-      client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
+      c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.aggregate_issue_stats({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date }) do |response, operation|
+      c.aggregate_issue_stats({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.aggregate_issue_stats parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date do |response, operation|
+      c.aggregate_issue_stats parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.aggregate_issue_stats ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date) do |response, operation|
+      c.aggregate_issue_stats ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.aggregate_issue_stats({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date }, grpc_options) do |response, operation|
+      c.aggregate_issue_stats({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.aggregate_issue_stats(::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date), grpc_options) do |response, operation|
+      c.aggregate_issue_stats(::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -373,40 +373,40 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, aggregate_query_stats_client_stub do
       # Create client
-      client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
+      c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.aggregate_query_stats({ parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.aggregate_query_stats({ parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.aggregate_query_stats parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.aggregate_query_stats parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.aggregate_query_stats ::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest.new(parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.aggregate_query_stats ::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest.new(parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.aggregate_query_stats({ parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.aggregate_query_stats({ parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.aggregate_query_stats(::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest.new(parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.aggregate_query_stats(::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest.new(parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -446,40 +446,40 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, query_issues_client_stub do
       # Create client
-      client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
+      c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_issues({ parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.query_issues({ parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_issues parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
+      c.query_issues parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_issues ::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest.new(parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
+      c.query_issues ::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest.new(parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_issues({ parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.query_issues({ parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_issues(::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest.new(parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.query_issues(::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest.new(parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

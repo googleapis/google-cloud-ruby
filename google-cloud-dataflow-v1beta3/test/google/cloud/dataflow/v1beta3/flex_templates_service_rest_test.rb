@@ -100,32 +100,32 @@ class ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Rest::ClientTest
     ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Rest::ServiceStub.stub :transcode_launch_flex_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, launch_flex_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.launch_flex_template({ project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only }) do |_result, response|
+        c.launch_flex_template({ project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.launch_flex_template project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only do |_result, response|
+        c.launch_flex_template project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.launch_flex_template ::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest.new(project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only) do |_result, response|
+        c.launch_flex_template ::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest.new(project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.launch_flex_template({ project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only }, call_options) do |_result, response|
+        c.launch_flex_template({ project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.launch_flex_template(::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest.new(project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only), call_options) do |_result, response|
+        c.launch_flex_template(::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest.new(project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

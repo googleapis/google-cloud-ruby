@@ -100,32 +100,32 @@ class ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::ClientTest < Min
     ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::ServiceStub.stub :transcode_create_node_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_node_group_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_node_group({ parent: parent, node_group: node_group, node_group_id: node_group_id, request_id: request_id }) do |_result, response|
+        c.create_node_group({ parent: parent, node_group: node_group, node_group_id: node_group_id, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_node_group parent: parent, node_group: node_group, node_group_id: node_group_id, request_id: request_id do |_result, response|
+        c.create_node_group parent: parent, node_group: node_group, node_group_id: node_group_id, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_node_group ::Google::Cloud::Dataproc::V1::CreateNodeGroupRequest.new(parent: parent, node_group: node_group, node_group_id: node_group_id, request_id: request_id) do |_result, response|
+        c.create_node_group ::Google::Cloud::Dataproc::V1::CreateNodeGroupRequest.new(parent: parent, node_group: node_group, node_group_id: node_group_id, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_node_group({ parent: parent, node_group: node_group, node_group_id: node_group_id, request_id: request_id }, call_options) do |_result, response|
+        c.create_node_group({ parent: parent, node_group: node_group, node_group_id: node_group_id, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_node_group(::Google::Cloud::Dataproc::V1::CreateNodeGroupRequest.new(parent: parent, node_group: node_group, node_group_id: node_group_id, request_id: request_id), call_options) do |_result, response|
+        c.create_node_group(::Google::Cloud::Dataproc::V1::CreateNodeGroupRequest.new(parent: parent, node_group: node_group, node_group_id: node_group_id, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::ClientTest < Min
     ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::ServiceStub.stub :transcode_resize_node_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resize_node_group_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resize_node_group({ name: name, size: size, request_id: request_id, graceful_decommission_timeout: graceful_decommission_timeout }) do |_result, response|
+        c.resize_node_group({ name: name, size: size, request_id: request_id, graceful_decommission_timeout: graceful_decommission_timeout }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resize_node_group name: name, size: size, request_id: request_id, graceful_decommission_timeout: graceful_decommission_timeout do |_result, response|
+        c.resize_node_group name: name, size: size, request_id: request_id, graceful_decommission_timeout: graceful_decommission_timeout do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resize_node_group ::Google::Cloud::Dataproc::V1::ResizeNodeGroupRequest.new(name: name, size: size, request_id: request_id, graceful_decommission_timeout: graceful_decommission_timeout) do |_result, response|
+        c.resize_node_group ::Google::Cloud::Dataproc::V1::ResizeNodeGroupRequest.new(name: name, size: size, request_id: request_id, graceful_decommission_timeout: graceful_decommission_timeout) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resize_node_group({ name: name, size: size, request_id: request_id, graceful_decommission_timeout: graceful_decommission_timeout }, call_options) do |_result, response|
+        c.resize_node_group({ name: name, size: size, request_id: request_id, graceful_decommission_timeout: graceful_decommission_timeout }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resize_node_group(::Google::Cloud::Dataproc::V1::ResizeNodeGroupRequest.new(name: name, size: size, request_id: request_id, graceful_decommission_timeout: graceful_decommission_timeout), call_options) do |_result, response|
+        c.resize_node_group(::Google::Cloud::Dataproc::V1::ResizeNodeGroupRequest.new(name: name, size: size, request_id: request_id, graceful_decommission_timeout: graceful_decommission_timeout), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::ClientTest < Min
     ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::ServiceStub.stub :transcode_get_node_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_node_group_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_node_group({ name: name }) do |_result, response|
+        c.get_node_group({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_node_group name: name do |_result, response|
+        c.get_node_group name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_node_group ::Google::Cloud::Dataproc::V1::GetNodeGroupRequest.new(name: name) do |_result, response|
+        c.get_node_group ::Google::Cloud::Dataproc::V1::GetNodeGroupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_node_group({ name: name }, call_options) do |_result, response|
+        c.get_node_group({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_node_group(::Google::Cloud::Dataproc::V1::GetNodeGroupRequest.new(name: name), call_options) do |_result, response|
+        c.get_node_group(::Google::Cloud::Dataproc::V1::GetNodeGroupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

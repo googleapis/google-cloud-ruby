@@ -86,36 +86,36 @@ class ::Google::Cloud::Dataflow::V1beta3::Snapshots::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new do |config|
+      c = ::Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_snapshot({ project_id: project_id, snapshot_id: snapshot_id, location: location }) do |response, operation|
+      c.get_snapshot({ project_id: project_id, snapshot_id: snapshot_id, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_snapshot project_id: project_id, snapshot_id: snapshot_id, location: location do |response, operation|
+      c.get_snapshot project_id: project_id, snapshot_id: snapshot_id, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_snapshot ::Google::Cloud::Dataflow::V1beta3::GetSnapshotRequest.new(project_id: project_id, snapshot_id: snapshot_id, location: location) do |response, operation|
+      c.get_snapshot ::Google::Cloud::Dataflow::V1beta3::GetSnapshotRequest.new(project_id: project_id, snapshot_id: snapshot_id, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_snapshot({ project_id: project_id, snapshot_id: snapshot_id, location: location }, grpc_options) do |response, operation|
+      c.get_snapshot({ project_id: project_id, snapshot_id: snapshot_id, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_snapshot(::Google::Cloud::Dataflow::V1beta3::GetSnapshotRequest.new(project_id: project_id, snapshot_id: snapshot_id, location: location), grpc_options) do |response, operation|
+      c.get_snapshot(::Google::Cloud::Dataflow::V1beta3::GetSnapshotRequest.new(project_id: project_id, snapshot_id: snapshot_id, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,36 +148,36 @@ class ::Google::Cloud::Dataflow::V1beta3::Snapshots::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new do |config|
+      c = ::Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_snapshot({ project_id: project_id, snapshot_id: snapshot_id, location: location }) do |response, operation|
+      c.delete_snapshot({ project_id: project_id, snapshot_id: snapshot_id, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_snapshot project_id: project_id, snapshot_id: snapshot_id, location: location do |response, operation|
+      c.delete_snapshot project_id: project_id, snapshot_id: snapshot_id, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_snapshot ::Google::Cloud::Dataflow::V1beta3::DeleteSnapshotRequest.new(project_id: project_id, snapshot_id: snapshot_id, location: location) do |response, operation|
+      c.delete_snapshot ::Google::Cloud::Dataflow::V1beta3::DeleteSnapshotRequest.new(project_id: project_id, snapshot_id: snapshot_id, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_snapshot({ project_id: project_id, snapshot_id: snapshot_id, location: location }, grpc_options) do |response, operation|
+      c.delete_snapshot({ project_id: project_id, snapshot_id: snapshot_id, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_snapshot(::Google::Cloud::Dataflow::V1beta3::DeleteSnapshotRequest.new(project_id: project_id, snapshot_id: snapshot_id, location: location), grpc_options) do |response, operation|
+      c.delete_snapshot(::Google::Cloud::Dataflow::V1beta3::DeleteSnapshotRequest.new(project_id: project_id, snapshot_id: snapshot_id, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -210,36 +210,36 @@ class ::Google::Cloud::Dataflow::V1beta3::Snapshots::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_snapshots_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new do |config|
+      c = ::Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_snapshots({ project_id: project_id, job_id: job_id, location: location }) do |response, operation|
+      c.list_snapshots({ project_id: project_id, job_id: job_id, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_snapshots project_id: project_id, job_id: job_id, location: location do |response, operation|
+      c.list_snapshots project_id: project_id, job_id: job_id, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_snapshots ::Google::Cloud::Dataflow::V1beta3::ListSnapshotsRequest.new(project_id: project_id, job_id: job_id, location: location) do |response, operation|
+      c.list_snapshots ::Google::Cloud::Dataflow::V1beta3::ListSnapshotsRequest.new(project_id: project_id, job_id: job_id, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_snapshots({ project_id: project_id, job_id: job_id, location: location }, grpc_options) do |response, operation|
+      c.list_snapshots({ project_id: project_id, job_id: job_id, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_snapshots(::Google::Cloud::Dataflow::V1beta3::ListSnapshotsRequest.new(project_id: project_id, job_id: job_id, location: location), grpc_options) do |response, operation|
+      c.list_snapshots(::Google::Cloud::Dataflow::V1beta3::ListSnapshotsRequest.new(project_id: project_id, job_id: job_id, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

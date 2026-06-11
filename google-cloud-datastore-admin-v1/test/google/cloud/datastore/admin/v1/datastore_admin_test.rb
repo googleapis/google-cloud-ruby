@@ -88,40 +88,40 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, export_entities_client_stub do
       # Create client
-      client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
+      c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_entities({ project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix }) do |response, operation|
+      c.export_entities({ project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_entities project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix do |response, operation|
+      c.export_entities project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_entities ::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new(project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix) do |response, operation|
+      c.export_entities ::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new(project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_entities({ project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix }, grpc_options) do |response, operation|
+      c.export_entities({ project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_entities(::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new(project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix), grpc_options) do |response, operation|
+      c.export_entities(::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new(project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -157,40 +157,40 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, import_entities_client_stub do
       # Create client
-      client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
+      c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_entities({ project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter }) do |response, operation|
+      c.import_entities({ project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_entities project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter do |response, operation|
+      c.import_entities project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_entities ::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new(project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter) do |response, operation|
+      c.import_entities ::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new(project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_entities({ project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter }, grpc_options) do |response, operation|
+      c.import_entities({ project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_entities(::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new(project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter), grpc_options) do |response, operation|
+      c.import_entities(::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new(project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -222,40 +222,40 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_index_client_stub do
       # Create client
-      client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
+      c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_index({ project_id: project_id, index: index }) do |response, operation|
+      c.create_index({ project_id: project_id, index: index }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_index project_id: project_id, index: index do |response, operation|
+      c.create_index project_id: project_id, index: index do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_index ::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new(project_id: project_id, index: index) do |response, operation|
+      c.create_index ::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new(project_id: project_id, index: index) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_index({ project_id: project_id, index: index }, grpc_options) do |response, operation|
+      c.create_index({ project_id: project_id, index: index }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_index(::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new(project_id: project_id, index: index), grpc_options) do |response, operation|
+      c.create_index(::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new(project_id: project_id, index: index), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -287,40 +287,40 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_index_client_stub do
       # Create client
-      client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
+      c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_index({ project_id: project_id, index_id: index_id }) do |response, operation|
+      c.delete_index({ project_id: project_id, index_id: index_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_index project_id: project_id, index_id: index_id do |response, operation|
+      c.delete_index project_id: project_id, index_id: index_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_index ::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new(project_id: project_id, index_id: index_id) do |response, operation|
+      c.delete_index ::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new(project_id: project_id, index_id: index_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_index({ project_id: project_id, index_id: index_id }, grpc_options) do |response, operation|
+      c.delete_index({ project_id: project_id, index_id: index_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_index(::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new(project_id: project_id, index_id: index_id), grpc_options) do |response, operation|
+      c.delete_index(::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new(project_id: project_id, index_id: index_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -352,36 +352,36 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_index_client_stub do
       # Create client
-      client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
+      c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_index({ project_id: project_id, index_id: index_id }) do |response, operation|
+      c.get_index({ project_id: project_id, index_id: index_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_index project_id: project_id, index_id: index_id do |response, operation|
+      c.get_index project_id: project_id, index_id: index_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_index ::Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new(project_id: project_id, index_id: index_id) do |response, operation|
+      c.get_index ::Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new(project_id: project_id, index_id: index_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_index({ project_id: project_id, index_id: index_id }, grpc_options) do |response, operation|
+      c.get_index({ project_id: project_id, index_id: index_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_index(::Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new(project_id: project_id, index_id: index_id), grpc_options) do |response, operation|
+      c.get_index(::Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new(project_id: project_id, index_id: index_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -416,40 +416,40 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_indexes_client_stub do
       # Create client
-      client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
+      c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_indexes({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_indexes({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_indexes project_id: project_id, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_indexes project_id: project_id, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_indexes ::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_indexes ::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_indexes({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_indexes({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_indexes(::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_indexes(::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
