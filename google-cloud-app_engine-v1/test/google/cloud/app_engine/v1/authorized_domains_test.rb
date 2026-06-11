@@ -86,40 +86,40 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedDomains::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_authorized_domains_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::AuthorizedDomains::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::AuthorizedDomains::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_authorized_domains({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_authorized_domains({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_authorized_domains parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_authorized_domains parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_authorized_domains ::Google::Cloud::AppEngine::V1::ListAuthorizedDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_authorized_domains ::Google::Cloud::AppEngine::V1::ListAuthorizedDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_authorized_domains({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_authorized_domains({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_authorized_domains(::Google::Cloud::AppEngine::V1::ListAuthorizedDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_authorized_domains(::Google::Cloud::AppEngine::V1::ListAuthorizedDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

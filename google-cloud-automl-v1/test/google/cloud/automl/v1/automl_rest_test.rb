@@ -98,32 +98,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_create_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_dataset({ parent: parent, dataset: dataset }) do |_result, response|
+        c.create_dataset({ parent: parent, dataset: dataset }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_dataset parent: parent, dataset: dataset do |_result, response|
+        c.create_dataset parent: parent, dataset: dataset do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_dataset ::Google::Cloud::AutoML::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |_result, response|
+        c.create_dataset ::Google::Cloud::AutoML::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_dataset({ parent: parent, dataset: dataset }, call_options) do |_result, response|
+        c.create_dataset({ parent: parent, dataset: dataset }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_dataset(::Google::Cloud::AutoML::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset), call_options) do |_result, response|
+        c.create_dataset(::Google::Cloud::AutoML::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_get_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_dataset({ name: name }) do |_result, response|
+        c.get_dataset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_dataset name: name do |_result, response|
+        c.get_dataset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_dataset ::Google::Cloud::AutoML::V1::GetDatasetRequest.new(name: name) do |_result, response|
+        c.get_dataset ::Google::Cloud::AutoML::V1::GetDatasetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_dataset({ name: name }, call_options) do |_result, response|
+        c.get_dataset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_dataset(::Google::Cloud::AutoML::V1::GetDatasetRequest.new(name: name), call_options) do |_result, response|
+        c.get_dataset(::Google::Cloud::AutoML::V1::GetDatasetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_list_datasets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_datasets_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_datasets parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_datasets parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_datasets ::Google::Cloud::AutoML::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_datasets ::Google::Cloud::AutoML::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_datasets(::Google::Cloud::AutoML::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_datasets(::Google::Cloud::AutoML::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_update_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_dataset({ dataset: dataset, update_mask: update_mask }) do |_result, response|
+        c.update_dataset({ dataset: dataset, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_dataset dataset: dataset, update_mask: update_mask do |_result, response|
+        c.update_dataset dataset: dataset, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_dataset ::Google::Cloud::AutoML::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask) do |_result, response|
+        c.update_dataset ::Google::Cloud::AutoML::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_dataset({ dataset: dataset, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_dataset({ dataset: dataset, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_dataset(::Google::Cloud::AutoML::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), call_options) do |_result, response|
+        c.update_dataset(::Google::Cloud::AutoML::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_delete_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_dataset({ name: name }) do |_result, response|
+        c.delete_dataset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_dataset name: name do |_result, response|
+        c.delete_dataset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_dataset ::Google::Cloud::AutoML::V1::DeleteDatasetRequest.new(name: name) do |_result, response|
+        c.delete_dataset ::Google::Cloud::AutoML::V1::DeleteDatasetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_dataset({ name: name }, call_options) do |_result, response|
+        c.delete_dataset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_dataset(::Google::Cloud::AutoML::V1::DeleteDatasetRequest.new(name: name), call_options) do |_result, response|
+        c.delete_dataset(::Google::Cloud::AutoML::V1::DeleteDatasetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -373,32 +373,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_import_data_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_data_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_data({ name: name, input_config: input_config }) do |_result, response|
+        c.import_data({ name: name, input_config: input_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_data name: name, input_config: input_config do |_result, response|
+        c.import_data name: name, input_config: input_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_data ::Google::Cloud::AutoML::V1::ImportDataRequest.new(name: name, input_config: input_config) do |_result, response|
+        c.import_data ::Google::Cloud::AutoML::V1::ImportDataRequest.new(name: name, input_config: input_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_data({ name: name, input_config: input_config }, call_options) do |_result, response|
+        c.import_data({ name: name, input_config: input_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_data(::Google::Cloud::AutoML::V1::ImportDataRequest.new(name: name, input_config: input_config), call_options) do |_result, response|
+        c.import_data(::Google::Cloud::AutoML::V1::ImportDataRequest.new(name: name, input_config: input_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_export_data_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_data_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_data({ name: name, output_config: output_config }) do |_result, response|
+        c.export_data({ name: name, output_config: output_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_data name: name, output_config: output_config do |_result, response|
+        c.export_data name: name, output_config: output_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_data ::Google::Cloud::AutoML::V1::ExportDataRequest.new(name: name, output_config: output_config) do |_result, response|
+        c.export_data ::Google::Cloud::AutoML::V1::ExportDataRequest.new(name: name, output_config: output_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_data({ name: name, output_config: output_config }, call_options) do |_result, response|
+        c.export_data({ name: name, output_config: output_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_data(::Google::Cloud::AutoML::V1::ExportDataRequest.new(name: name, output_config: output_config), call_options) do |_result, response|
+        c.export_data(::Google::Cloud::AutoML::V1::ExportDataRequest.new(name: name, output_config: output_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -482,32 +482,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_get_annotation_spec_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_annotation_spec_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_annotation_spec({ name: name }) do |_result, response|
+        c.get_annotation_spec({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_annotation_spec name: name do |_result, response|
+        c.get_annotation_spec name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_annotation_spec ::Google::Cloud::AutoML::V1::GetAnnotationSpecRequest.new(name: name) do |_result, response|
+        c.get_annotation_spec ::Google::Cloud::AutoML::V1::GetAnnotationSpecRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_annotation_spec({ name: name }, call_options) do |_result, response|
+        c.get_annotation_spec({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_annotation_spec(::Google::Cloud::AutoML::V1::GetAnnotationSpecRequest.new(name: name), call_options) do |_result, response|
+        c.get_annotation_spec(::Google::Cloud::AutoML::V1::GetAnnotationSpecRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -537,32 +537,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_create_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_model({ parent: parent, model: model }) do |_result, response|
+        c.create_model({ parent: parent, model: model }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_model parent: parent, model: model do |_result, response|
+        c.create_model parent: parent, model: model do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_model ::Google::Cloud::AutoML::V1::CreateModelRequest.new(parent: parent, model: model) do |_result, response|
+        c.create_model ::Google::Cloud::AutoML::V1::CreateModelRequest.new(parent: parent, model: model) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_model({ parent: parent, model: model }, call_options) do |_result, response|
+        c.create_model({ parent: parent, model: model }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_model(::Google::Cloud::AutoML::V1::CreateModelRequest.new(parent: parent, model: model), call_options) do |_result, response|
+        c.create_model(::Google::Cloud::AutoML::V1::CreateModelRequest.new(parent: parent, model: model), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -591,32 +591,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_get_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_model({ name: name }) do |_result, response|
+        c.get_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_model name: name do |_result, response|
+        c.get_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_model ::Google::Cloud::AutoML::V1::GetModelRequest.new(name: name) do |_result, response|
+        c.get_model ::Google::Cloud::AutoML::V1::GetModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_model({ name: name }, call_options) do |_result, response|
+        c.get_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_model(::Google::Cloud::AutoML::V1::GetModelRequest.new(name: name), call_options) do |_result, response|
+        c.get_model(::Google::Cloud::AutoML::V1::GetModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -648,32 +648,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_list_models_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_models_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_models parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_models parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_models ::Google::Cloud::AutoML::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_models ::Google::Cloud::AutoML::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_models(::Google::Cloud::AutoML::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_models(::Google::Cloud::AutoML::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -702,32 +702,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_delete_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_model({ name: name }) do |_result, response|
+        c.delete_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_model name: name do |_result, response|
+        c.delete_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_model ::Google::Cloud::AutoML::V1::DeleteModelRequest.new(name: name) do |_result, response|
+        c.delete_model ::Google::Cloud::AutoML::V1::DeleteModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_model({ name: name }, call_options) do |_result, response|
+        c.delete_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_model(::Google::Cloud::AutoML::V1::DeleteModelRequest.new(name: name), call_options) do |_result, response|
+        c.delete_model(::Google::Cloud::AutoML::V1::DeleteModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -757,32 +757,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_update_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_model({ model: model, update_mask: update_mask }) do |_result, response|
+        c.update_model({ model: model, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_model model: model, update_mask: update_mask do |_result, response|
+        c.update_model model: model, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_model ::Google::Cloud::AutoML::V1::UpdateModelRequest.new(model: model, update_mask: update_mask) do |_result, response|
+        c.update_model ::Google::Cloud::AutoML::V1::UpdateModelRequest.new(model: model, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_model({ model: model, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_model({ model: model, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_model(::Google::Cloud::AutoML::V1::UpdateModelRequest.new(model: model, update_mask: update_mask), call_options) do |_result, response|
+        c.update_model(::Google::Cloud::AutoML::V1::UpdateModelRequest.new(model: model, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -812,32 +812,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_deploy_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, deploy_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.deploy_model({ image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name }) do |_result, response|
+        c.deploy_model({ image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.deploy_model image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name do |_result, response|
+        c.deploy_model image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.deploy_model ::Google::Cloud::AutoML::V1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name) do |_result, response|
+        c.deploy_model ::Google::Cloud::AutoML::V1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.deploy_model({ image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name }, call_options) do |_result, response|
+        c.deploy_model({ image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.deploy_model(::Google::Cloud::AutoML::V1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name), call_options) do |_result, response|
+        c.deploy_model(::Google::Cloud::AutoML::V1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -866,32 +866,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_undeploy_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undeploy_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undeploy_model({ name: name }) do |_result, response|
+        c.undeploy_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undeploy_model name: name do |_result, response|
+        c.undeploy_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undeploy_model ::Google::Cloud::AutoML::V1::UndeployModelRequest.new(name: name) do |_result, response|
+        c.undeploy_model ::Google::Cloud::AutoML::V1::UndeployModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undeploy_model({ name: name }, call_options) do |_result, response|
+        c.undeploy_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undeploy_model(::Google::Cloud::AutoML::V1::UndeployModelRequest.new(name: name), call_options) do |_result, response|
+        c.undeploy_model(::Google::Cloud::AutoML::V1::UndeployModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -921,32 +921,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_export_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_model({ name: name, output_config: output_config }) do |_result, response|
+        c.export_model({ name: name, output_config: output_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_model name: name, output_config: output_config do |_result, response|
+        c.export_model name: name, output_config: output_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_model ::Google::Cloud::AutoML::V1::ExportModelRequest.new(name: name, output_config: output_config) do |_result, response|
+        c.export_model ::Google::Cloud::AutoML::V1::ExportModelRequest.new(name: name, output_config: output_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_model({ name: name, output_config: output_config }, call_options) do |_result, response|
+        c.export_model({ name: name, output_config: output_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_model(::Google::Cloud::AutoML::V1::ExportModelRequest.new(name: name, output_config: output_config), call_options) do |_result, response|
+        c.export_model(::Google::Cloud::AutoML::V1::ExportModelRequest.new(name: name, output_config: output_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -975,32 +975,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_get_model_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_model_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_model_evaluation({ name: name }) do |_result, response|
+        c.get_model_evaluation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_model_evaluation name: name do |_result, response|
+        c.get_model_evaluation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_model_evaluation ::Google::Cloud::AutoML::V1::GetModelEvaluationRequest.new(name: name) do |_result, response|
+        c.get_model_evaluation ::Google::Cloud::AutoML::V1::GetModelEvaluationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_model_evaluation({ name: name }, call_options) do |_result, response|
+        c.get_model_evaluation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_model_evaluation(::Google::Cloud::AutoML::V1::GetModelEvaluationRequest.new(name: name), call_options) do |_result, response|
+        c.get_model_evaluation(::Google::Cloud::AutoML::V1::GetModelEvaluationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1032,32 +1032,32 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AutoML::V1::AutoML::Rest::ServiceStub.stub :transcode_list_model_evaluations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_model_evaluations_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_model_evaluations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_model_evaluations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_model_evaluations ::Google::Cloud::AutoML::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_model_evaluations ::Google::Cloud::AutoML::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_model_evaluations(::Google::Cloud::AutoML::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_model_evaluations(::Google::Cloud::AutoML::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

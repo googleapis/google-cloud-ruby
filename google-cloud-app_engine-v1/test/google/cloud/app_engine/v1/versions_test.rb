@@ -88,40 +88,40 @@ class ::Google::Cloud::AppEngine::V1::Versions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Versions::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Versions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_versions({ parent: parent, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_versions({ parent: parent, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_versions parent: parent, view: view, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_versions parent: parent, view: view, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_versions ::Google::Cloud::AppEngine::V1::ListVersionsRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_versions ::Google::Cloud::AppEngine::V1::ListVersionsRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_versions({ parent: parent, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_versions({ parent: parent, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_versions(::Google::Cloud::AppEngine::V1::ListVersionsRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_versions(::Google::Cloud::AppEngine::V1::ListVersionsRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::AppEngine::V1::Versions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_version_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Versions::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Versions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_version({ name: name, view: view }) do |response, operation|
+      c.get_version({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_version name: name, view: view do |response, operation|
+      c.get_version name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_version ::Google::Cloud::AppEngine::V1::GetVersionRequest.new(name: name, view: view) do |response, operation|
+      c.get_version ::Google::Cloud::AppEngine::V1::GetVersionRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_version({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_version({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_version(::Google::Cloud::AppEngine::V1::GetVersionRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_version(::Google::Cloud::AppEngine::V1::GetVersionRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,40 +213,40 @@ class ::Google::Cloud::AppEngine::V1::Versions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_version_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Versions::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Versions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_version({ parent: parent, version: version }) do |response, operation|
+      c.create_version({ parent: parent, version: version }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_version parent: parent, version: version do |response, operation|
+      c.create_version parent: parent, version: version do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_version ::Google::Cloud::AppEngine::V1::CreateVersionRequest.new(parent: parent, version: version) do |response, operation|
+      c.create_version ::Google::Cloud::AppEngine::V1::CreateVersionRequest.new(parent: parent, version: version) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_version({ parent: parent, version: version }, grpc_options) do |response, operation|
+      c.create_version({ parent: parent, version: version }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_version(::Google::Cloud::AppEngine::V1::CreateVersionRequest.new(parent: parent, version: version), grpc_options) do |response, operation|
+      c.create_version(::Google::Cloud::AppEngine::V1::CreateVersionRequest.new(parent: parent, version: version), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::AppEngine::V1::Versions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_version_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Versions::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Versions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_version({ name: name, version: version, update_mask: update_mask }) do |response, operation|
+      c.update_version({ name: name, version: version, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_version name: name, version: version, update_mask: update_mask do |response, operation|
+      c.update_version name: name, version: version, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_version ::Google::Cloud::AppEngine::V1::UpdateVersionRequest.new(name: name, version: version, update_mask: update_mask) do |response, operation|
+      c.update_version ::Google::Cloud::AppEngine::V1::UpdateVersionRequest.new(name: name, version: version, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_version({ name: name, version: version, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_version({ name: name, version: version, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_version(::Google::Cloud::AppEngine::V1::UpdateVersionRequest.new(name: name, version: version, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_version(::Google::Cloud::AppEngine::V1::UpdateVersionRequest.new(name: name, version: version, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -343,40 +343,40 @@ class ::Google::Cloud::AppEngine::V1::Versions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_version_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Versions::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Versions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_version({ name: name }) do |response, operation|
+      c.delete_version({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_version name: name do |response, operation|
+      c.delete_version name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_version ::Google::Cloud::AppEngine::V1::DeleteVersionRequest.new(name: name) do |response, operation|
+      c.delete_version ::Google::Cloud::AppEngine::V1::DeleteVersionRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_version({ name: name }, grpc_options) do |response, operation|
+      c.delete_version({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_version(::Google::Cloud::AppEngine::V1::DeleteVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_version(::Google::Cloud::AppEngine::V1::DeleteVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

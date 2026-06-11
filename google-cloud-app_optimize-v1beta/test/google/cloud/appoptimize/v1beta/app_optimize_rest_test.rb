@@ -99,32 +99,32 @@ class ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::ClientTest < Mini
     ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::ServiceStub.stub :transcode_create_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_report_client_stub do
         # Create client
-        client = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::Client.new do |config|
+        c = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_report({ parent: parent, report_id: report_id, report: report }) do |_result, response|
+        c.create_report({ parent: parent, report_id: report_id, report: report }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_report parent: parent, report_id: report_id, report: report do |_result, response|
+        c.create_report parent: parent, report_id: report_id, report: report do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_report ::Google::Cloud::Appoptimize::V1beta::CreateReportRequest.new(parent: parent, report_id: report_id, report: report) do |_result, response|
+        c.create_report ::Google::Cloud::Appoptimize::V1beta::CreateReportRequest.new(parent: parent, report_id: report_id, report: report) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_report({ parent: parent, report_id: report_id, report: report }, call_options) do |_result, response|
+        c.create_report({ parent: parent, report_id: report_id, report: report }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_report(::Google::Cloud::Appoptimize::V1beta::CreateReportRequest.new(parent: parent, report_id: report_id, report: report), call_options) do |_result, response|
+        c.create_report(::Google::Cloud::Appoptimize::V1beta::CreateReportRequest.new(parent: parent, report_id: report_id, report: report), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::ClientTest < Mini
     ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::ServiceStub.stub :transcode_get_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_report_client_stub do
         # Create client
-        client = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::Client.new do |config|
+        c = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_report({ name: name }) do |_result, response|
+        c.get_report({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_report name: name do |_result, response|
+        c.get_report name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_report ::Google::Cloud::Appoptimize::V1beta::GetReportRequest.new(name: name) do |_result, response|
+        c.get_report ::Google::Cloud::Appoptimize::V1beta::GetReportRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_report({ name: name }, call_options) do |_result, response|
+        c.get_report({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_report(::Google::Cloud::Appoptimize::V1beta::GetReportRequest.new(name: name), call_options) do |_result, response|
+        c.get_report(::Google::Cloud::Appoptimize::V1beta::GetReportRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::ClientTest < Mini
     ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::ServiceStub.stub :transcode_list_reports_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_reports_client_stub do
         # Create client
-        client = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::Client.new do |config|
+        c = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_reports({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_reports({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_reports parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_reports parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_reports ::Google::Cloud::Appoptimize::V1beta::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_reports ::Google::Cloud::Appoptimize::V1beta::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_reports({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_reports({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_reports(::Google::Cloud::Appoptimize::V1beta::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_reports(::Google::Cloud::Appoptimize::V1beta::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::ClientTest < Mini
     ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::ServiceStub.stub :transcode_delete_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_report_client_stub do
         # Create client
-        client = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::Client.new do |config|
+        c = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_report({ name: name, allow_missing: allow_missing }) do |_result, response|
+        c.delete_report({ name: name, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_report name: name, allow_missing: allow_missing do |_result, response|
+        c.delete_report name: name, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_report ::Google::Cloud::Appoptimize::V1beta::DeleteReportRequest.new(name: name, allow_missing: allow_missing) do |_result, response|
+        c.delete_report ::Google::Cloud::Appoptimize::V1beta::DeleteReportRequest.new(name: name, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_report({ name: name, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.delete_report({ name: name, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_report(::Google::Cloud::Appoptimize::V1beta::DeleteReportRequest.new(name: name, allow_missing: allow_missing), call_options) do |_result, response|
+        c.delete_report(::Google::Cloud::Appoptimize::V1beta::DeleteReportRequest.new(name: name, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::ClientTest < Mini
     ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::ServiceStub.stub :transcode_read_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, read_report_client_stub do
         # Create client
-        client = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::Client.new do |config|
+        c = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.read_report({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.read_report({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.read_report name: name, page_size: page_size, page_token: page_token do |_result, response|
+        c.read_report name: name, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.read_report ::Google::Cloud::Appoptimize::V1beta::ReadReportRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
+        c.read_report ::Google::Cloud::Appoptimize::V1beta::ReadReportRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.read_report({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.read_report({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.read_report(::Google::Cloud::Appoptimize::V1beta::ReadReportRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.read_report(::Google::Cloud::Appoptimize::V1beta::ReadReportRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

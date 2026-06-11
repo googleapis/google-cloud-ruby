@@ -86,40 +86,40 @@ class ::Google::Cloud::AppEngine::V1::Services::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_services_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Services::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Services::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_services({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_services({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_services parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_services parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_services ::Google::Cloud::AppEngine::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_services ::Google::Cloud::AppEngine::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_services({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_services({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_services(::Google::Cloud::AppEngine::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_services(::Google::Cloud::AppEngine::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::AppEngine::V1::Services::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_service_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Services::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Services::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_service({ name: name }) do |response, operation|
+      c.get_service({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_service name: name do |response, operation|
+      c.get_service name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_service ::Google::Cloud::AppEngine::V1::GetServiceRequest.new(name: name) do |response, operation|
+      c.get_service ::Google::Cloud::AppEngine::V1::GetServiceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_service({ name: name }, grpc_options) do |response, operation|
+      c.get_service({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_service(::Google::Cloud::AppEngine::V1::GetServiceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_service(::Google::Cloud::AppEngine::V1::GetServiceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,40 +213,40 @@ class ::Google::Cloud::AppEngine::V1::Services::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_service_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Services::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Services::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_service({ name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic }) do |response, operation|
+      c.update_service({ name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_service name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic do |response, operation|
+      c.update_service name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_service ::Google::Cloud::AppEngine::V1::UpdateServiceRequest.new(name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic) do |response, operation|
+      c.update_service ::Google::Cloud::AppEngine::V1::UpdateServiceRequest.new(name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_service({ name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic }, grpc_options) do |response, operation|
+      c.update_service({ name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_service(::Google::Cloud::AppEngine::V1::UpdateServiceRequest.new(name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic), grpc_options) do |response, operation|
+      c.update_service(::Google::Cloud::AppEngine::V1::UpdateServiceRequest.new(name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -276,40 +276,40 @@ class ::Google::Cloud::AppEngine::V1::Services::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_service_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Services::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Services::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_service({ name: name }) do |response, operation|
+      c.delete_service({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_service name: name do |response, operation|
+      c.delete_service name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_service ::Google::Cloud::AppEngine::V1::DeleteServiceRequest.new(name: name) do |response, operation|
+      c.delete_service ::Google::Cloud::AppEngine::V1::DeleteServiceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_service({ name: name }, grpc_options) do |response, operation|
+      c.delete_service({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_service(::Google::Cloud::AppEngine::V1::DeleteServiceRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_service(::Google::Cloud::AppEngine::V1::DeleteServiceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
