@@ -1,5 +1,13 @@
 # Changelog
 
+### 2.10.0 (2026-06-11)
+
+#### Features
+
+* add DataProductService to manage data products and underlying data assets 
+* update gapic-common dependency to 1.3 and document retry jitter ([#32846](https://github.com/googleapis/google-cloud-ruby/issues/32846)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+
 ### 2.9.0 (2025-11-12)
 
 #### Features
