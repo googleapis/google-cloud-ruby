@@ -539,6 +539,71 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request to get group chat spaces based on user resources.
+        # @!attribute [rw] users
+        #   @return [::Array<::String>]
+        #     Optional. Resource names of all human users in group chat with the calling
+        #     user. Chat apps can't be included in the request.
+        #
+        #     The maximum number of users that can be specified in a single request is
+        #     `49`.
+        #
+        #     Format: `users/{user}`, where `{user}` is either the `id` for the
+        #     [person](https://developers.google.com/people/api/rest/v1/people) from the
+        #     People API, or the `id` for the
+        #     [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users)
+        #     in the Directory API. For example, to find all group chats with the calling
+        #     user and two other users, with People API profile IDs `123456789` and
+        #     `987654321`, you can use `users/123456789` and `users/987654321`.
+        #     You can also use the email as an alias for `{user}`. For example,
+        #     `users/example@gmail.com` where `example@gmail.com` is the email of the
+        #     Google Chat user.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of spaces to return. The service might return
+        #     fewer than this value.
+        #
+        #     If unspecified, at most 10 spaces are returned.
+        #
+        #     The maximum value is 30. If you use a value more than 30, it's
+        #     automatically changed to 30.
+        #
+        #     Negative values return an `INVALID_ARGUMENT` error.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous call to find group chats.
+        #     Provide this parameter to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided should match the call that
+        #     provided the token. Passing different values may lead to unexpected
+        #     results.
+        # @!attribute [rw] space_view
+        #   @return [::Google::Apps::Chat::V1::SpaceView]
+        #     Requested space view type. If unset, defaults to
+        #     `SPACE_VIEW_RESOURCE_NAME_ONLY`. Requests that specify
+        #     `SPACE_VIEW_EXPANDED` must include scopes that allow reading space data,
+        #     for example,
+        #     https://www.googleapis.com/auth/chat.spaces or
+        #     https://www.googleapis.com/auth/chat.spaces.readonly.
+        class FindGroupChatsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A response containing group chat spaces with exactly the calling user and the
+        # requested users.
+        # @!attribute [rw] spaces
+        #   @return [::Array<::Google::Apps::Chat::V1::Space>]
+        #     List of spaces in the requested (or first) page.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that you can send as `pageToken` to retrieve the next page of
+        #     results. If empty, there are no subsequent pages.
+        class FindGroupChatsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request to update a single space.
         # @!attribute [rw] space
         #   @return [::Google::Apps::Chat::V1::Space]
@@ -819,6 +884,27 @@ module Google
         class CompleteImportSpaceResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A view that specifies which fields should be populated on the
+        # [`Space`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces)
+        # resource.
+        # To ensure compatibility with future releases, we recommend that your code
+        # account for additional values.
+        module SpaceView
+          # The default / unset value.
+          SPACE_VIEW_UNSPECIFIED = 0
+
+          # Populates only the Space resource name.
+          SPACE_VIEW_RESOURCE_NAME_ONLY = 3
+
+          # Populates Space resource fields.  Note: the `permissionSettings` field
+          # will not be populated.
+          # Requests that specify SPACE_VIEW_EXPANDED must include scopes that allow
+          # reading space data, for example,
+          # https://www.googleapis.com/auth/chat.spaces or
+          # https://www.googleapis.com/auth/chat.spaces.readonly.
+          SPACE_VIEW_EXPANDED = 4
         end
       end
     end
