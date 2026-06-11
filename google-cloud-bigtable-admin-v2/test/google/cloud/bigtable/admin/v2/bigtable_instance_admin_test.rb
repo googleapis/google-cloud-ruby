@@ -88,40 +88,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, clusters: clusters }) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, clusters: clusters }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance parent: parent, instance_id: instance_id, instance: instance, clusters: clusters do |response, operation|
+      c.create_instance parent: parent, instance_id: instance_id, instance: instance, clusters: clusters do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance ::Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, clusters: clusters) do |response, operation|
+      c.create_instance ::Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, clusters: clusters) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, clusters: clusters }, grpc_options) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, clusters: clusters }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance(::Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, clusters: clusters), grpc_options) do |response, operation|
+      c.create_instance(::Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, clusters: clusters), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name }) do |response, operation|
+      c.get_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name do |response, operation|
+      c.get_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::Bigtable::Admin::V2::GetInstanceRequest.new(name: name) do |response, operation|
+      c.get_instance ::Google::Cloud::Bigtable::Admin::V2::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::Bigtable::Admin::V2::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::Bigtable::Admin::V2::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,36 +211,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_token: page_token }) do |response, operation|
+      c.list_instances({ parent: parent, page_token: page_token }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_token: page_token do |response, operation|
+      c.list_instances parent: parent, page_token: page_token do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::Bigtable::Admin::V2::ListInstancesRequest.new(parent: parent, page_token: page_token) do |response, operation|
+      c.list_instances ::Google::Cloud::Bigtable::Admin::V2::ListInstancesRequest.new(parent: parent, page_token: page_token) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_instances({ parent: parent, page_token: page_token }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::Bigtable::Admin::V2::ListInstancesRequest.new(parent: parent, page_token: page_token), grpc_options) do |response, operation|
+      c.list_instances(::Google::Cloud::Bigtable::Admin::V2::ListInstancesRequest.new(parent: parent, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -289,36 +289,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_instance({ name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags }) do |response, operation|
+      c.update_instance({ name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags do |response, operation|
+      c.update_instance name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance ::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags) do |response, operation|
+      c.update_instance ::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance({ name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags }, grpc_options) do |response, operation|
+      c.update_instance({ name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance(::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags), grpc_options) do |response, operation|
+      c.update_instance(::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -349,40 +349,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, partial_update_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.partial_update_instance({ instance: instance, update_mask: update_mask }) do |response, operation|
+      c.partial_update_instance({ instance: instance, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.partial_update_instance instance: instance, update_mask: update_mask do |response, operation|
+      c.partial_update_instance instance: instance, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.partial_update_instance ::Google::Cloud::Bigtable::Admin::V2::PartialUpdateInstanceRequest.new(instance: instance, update_mask: update_mask) do |response, operation|
+      c.partial_update_instance ::Google::Cloud::Bigtable::Admin::V2::PartialUpdateInstanceRequest.new(instance: instance, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.partial_update_instance({ instance: instance, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.partial_update_instance({ instance: instance, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.partial_update_instance(::Google::Cloud::Bigtable::Admin::V2::PartialUpdateInstanceRequest.new(instance: instance, update_mask: update_mask), grpc_options) do |response, operation|
+      c.partial_update_instance(::Google::Cloud::Bigtable::Admin::V2::PartialUpdateInstanceRequest.new(instance: instance, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -412,36 +412,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance({ name: name }) do |response, operation|
+      c.delete_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance name: name do |response, operation|
+      c.delete_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance ::Google::Cloud::Bigtable::Admin::V2::DeleteInstanceRequest.new(name: name) do |response, operation|
+      c.delete_instance ::Google::Cloud::Bigtable::Admin::V2::DeleteInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance({ name: name }, grpc_options) do |response, operation|
+      c.delete_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance(::Google::Cloud::Bigtable::Admin::V2::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_instance(::Google::Cloud::Bigtable::Admin::V2::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -474,40 +474,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster }) do |response, operation|
+      c.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_cluster parent: parent, cluster_id: cluster_id, cluster: cluster do |response, operation|
+      c.create_cluster parent: parent, cluster_id: cluster_id, cluster: cluster do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_cluster ::Google::Cloud::Bigtable::Admin::V2::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster) do |response, operation|
+      c.create_cluster ::Google::Cloud::Bigtable::Admin::V2::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster }, grpc_options) do |response, operation|
+      c.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_cluster(::Google::Cloud::Bigtable::Admin::V2::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster), grpc_options) do |response, operation|
+      c.create_cluster(::Google::Cloud::Bigtable::Admin::V2::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -537,36 +537,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_cluster({ name: name }) do |response, operation|
+      c.get_cluster({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_cluster name: name do |response, operation|
+      c.get_cluster name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_cluster ::Google::Cloud::Bigtable::Admin::V2::GetClusterRequest.new(name: name) do |response, operation|
+      c.get_cluster ::Google::Cloud::Bigtable::Admin::V2::GetClusterRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_cluster({ name: name }, grpc_options) do |response, operation|
+      c.get_cluster({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_cluster(::Google::Cloud::Bigtable::Admin::V2::GetClusterRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_cluster(::Google::Cloud::Bigtable::Admin::V2::GetClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -597,36 +597,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_clusters_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_clusters({ parent: parent, page_token: page_token }) do |response, operation|
+      c.list_clusters({ parent: parent, page_token: page_token }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_clusters parent: parent, page_token: page_token do |response, operation|
+      c.list_clusters parent: parent, page_token: page_token do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_clusters ::Google::Cloud::Bigtable::Admin::V2::ListClustersRequest.new(parent: parent, page_token: page_token) do |response, operation|
+      c.list_clusters ::Google::Cloud::Bigtable::Admin::V2::ListClustersRequest.new(parent: parent, page_token: page_token) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_clusters({ parent: parent, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_clusters({ parent: parent, page_token: page_token }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_clusters(::Google::Cloud::Bigtable::Admin::V2::ListClustersRequest.new(parent: parent, page_token: page_token), grpc_options) do |response, operation|
+      c.list_clusters(::Google::Cloud::Bigtable::Admin::V2::ListClustersRequest.new(parent: parent, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -670,40 +670,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config }) do |response, operation|
+      c.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_cluster name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config do |response, operation|
+      c.update_cluster name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_cluster ::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config) do |response, operation|
+      c.update_cluster ::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config }, grpc_options) do |response, operation|
+      c.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_cluster(::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config), grpc_options) do |response, operation|
+      c.update_cluster(::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -735,40 +735,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, partial_update_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.partial_update_cluster({ cluster: cluster, update_mask: update_mask }) do |response, operation|
+      c.partial_update_cluster({ cluster: cluster, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.partial_update_cluster cluster: cluster, update_mask: update_mask do |response, operation|
+      c.partial_update_cluster cluster: cluster, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.partial_update_cluster ::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest.new(cluster: cluster, update_mask: update_mask) do |response, operation|
+      c.partial_update_cluster ::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest.new(cluster: cluster, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.partial_update_cluster({ cluster: cluster, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.partial_update_cluster({ cluster: cluster, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.partial_update_cluster(::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest.new(cluster: cluster, update_mask: update_mask), grpc_options) do |response, operation|
+      c.partial_update_cluster(::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest.new(cluster: cluster, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -798,36 +798,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_cluster({ name: name }) do |response, operation|
+      c.delete_cluster({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_cluster name: name do |response, operation|
+      c.delete_cluster name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_cluster ::Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest.new(name: name) do |response, operation|
+      c.delete_cluster ::Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_cluster({ name: name }, grpc_options) do |response, operation|
+      c.delete_cluster({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_cluster(::Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_cluster(::Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -862,36 +862,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_app_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_app_profile({ parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings }) do |response, operation|
+      c.create_app_profile({ parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_app_profile parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings do |response, operation|
+      c.create_app_profile parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_app_profile ::Google::Cloud::Bigtable::Admin::V2::CreateAppProfileRequest.new(parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings) do |response, operation|
+      c.create_app_profile ::Google::Cloud::Bigtable::Admin::V2::CreateAppProfileRequest.new(parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_app_profile({ parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings }, grpc_options) do |response, operation|
+      c.create_app_profile({ parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_app_profile(::Google::Cloud::Bigtable::Admin::V2::CreateAppProfileRequest.new(parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings), grpc_options) do |response, operation|
+      c.create_app_profile(::Google::Cloud::Bigtable::Admin::V2::CreateAppProfileRequest.new(parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -920,36 +920,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_app_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_app_profile({ name: name }) do |response, operation|
+      c.get_app_profile({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_app_profile name: name do |response, operation|
+      c.get_app_profile name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_app_profile ::Google::Cloud::Bigtable::Admin::V2::GetAppProfileRequest.new(name: name) do |response, operation|
+      c.get_app_profile ::Google::Cloud::Bigtable::Admin::V2::GetAppProfileRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_app_profile({ name: name }, grpc_options) do |response, operation|
+      c.get_app_profile({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_app_profile(::Google::Cloud::Bigtable::Admin::V2::GetAppProfileRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_app_profile(::Google::Cloud::Bigtable::Admin::V2::GetAppProfileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -982,40 +982,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_app_profiles_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_app_profiles({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_app_profiles({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_app_profiles parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_app_profiles parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_app_profiles ::Google::Cloud::Bigtable::Admin::V2::ListAppProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_app_profiles ::Google::Cloud::Bigtable::Admin::V2::ListAppProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_app_profiles({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_app_profiles({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_app_profiles(::Google::Cloud::Bigtable::Admin::V2::ListAppProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_app_profiles(::Google::Cloud::Bigtable::Admin::V2::ListAppProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1049,40 +1049,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_app_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_app_profile({ app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings }) do |response, operation|
+      c.update_app_profile({ app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_app_profile app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings do |response, operation|
+      c.update_app_profile app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_app_profile ::Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileRequest.new(app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings) do |response, operation|
+      c.update_app_profile ::Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileRequest.new(app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_app_profile({ app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings }, grpc_options) do |response, operation|
+      c.update_app_profile({ app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_app_profile(::Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileRequest.new(app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings), grpc_options) do |response, operation|
+      c.update_app_profile(::Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileRequest.new(app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1114,36 +1114,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_app_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_app_profile({ name: name, ignore_warnings: ignore_warnings }) do |response, operation|
+      c.delete_app_profile({ name: name, ignore_warnings: ignore_warnings }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_app_profile name: name, ignore_warnings: ignore_warnings do |response, operation|
+      c.delete_app_profile name: name, ignore_warnings: ignore_warnings do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_app_profile ::Google::Cloud::Bigtable::Admin::V2::DeleteAppProfileRequest.new(name: name, ignore_warnings: ignore_warnings) do |response, operation|
+      c.delete_app_profile ::Google::Cloud::Bigtable::Admin::V2::DeleteAppProfileRequest.new(name: name, ignore_warnings: ignore_warnings) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_app_profile({ name: name, ignore_warnings: ignore_warnings }, grpc_options) do |response, operation|
+      c.delete_app_profile({ name: name, ignore_warnings: ignore_warnings }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_app_profile(::Google::Cloud::Bigtable::Admin::V2::DeleteAppProfileRequest.new(name: name, ignore_warnings: ignore_warnings), grpc_options) do |response, operation|
+      c.delete_app_profile(::Google::Cloud::Bigtable::Admin::V2::DeleteAppProfileRequest.new(name: name, ignore_warnings: ignore_warnings), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1174,36 +1174,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1236,36 +1236,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1296,36 +1296,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1362,40 +1362,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_hot_tablets_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_hot_tablets({ parent: parent, start_time: start_time, end_time: end_time, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_hot_tablets({ parent: parent, start_time: start_time, end_time: end_time, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_hot_tablets parent: parent, start_time: start_time, end_time: end_time, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_hot_tablets parent: parent, start_time: start_time, end_time: end_time, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_hot_tablets ::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsRequest.new(parent: parent, start_time: start_time, end_time: end_time, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_hot_tablets ::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsRequest.new(parent: parent, start_time: start_time, end_time: end_time, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_hot_tablets({ parent: parent, start_time: start_time, end_time: end_time, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_hot_tablets({ parent: parent, start_time: start_time, end_time: end_time, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_hot_tablets(::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsRequest.new(parent: parent, start_time: start_time, end_time: end_time, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_hot_tablets(::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsRequest.new(parent: parent, start_time: start_time, end_time: end_time, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1429,40 +1429,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_logical_view_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_logical_view({ parent: parent, logical_view_id: logical_view_id, logical_view: logical_view }) do |response, operation|
+      c.create_logical_view({ parent: parent, logical_view_id: logical_view_id, logical_view: logical_view }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_logical_view parent: parent, logical_view_id: logical_view_id, logical_view: logical_view do |response, operation|
+      c.create_logical_view parent: parent, logical_view_id: logical_view_id, logical_view: logical_view do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_logical_view ::Google::Cloud::Bigtable::Admin::V2::CreateLogicalViewRequest.new(parent: parent, logical_view_id: logical_view_id, logical_view: logical_view) do |response, operation|
+      c.create_logical_view ::Google::Cloud::Bigtable::Admin::V2::CreateLogicalViewRequest.new(parent: parent, logical_view_id: logical_view_id, logical_view: logical_view) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_logical_view({ parent: parent, logical_view_id: logical_view_id, logical_view: logical_view }, grpc_options) do |response, operation|
+      c.create_logical_view({ parent: parent, logical_view_id: logical_view_id, logical_view: logical_view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_logical_view(::Google::Cloud::Bigtable::Admin::V2::CreateLogicalViewRequest.new(parent: parent, logical_view_id: logical_view_id, logical_view: logical_view), grpc_options) do |response, operation|
+      c.create_logical_view(::Google::Cloud::Bigtable::Admin::V2::CreateLogicalViewRequest.new(parent: parent, logical_view_id: logical_view_id, logical_view: logical_view), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1492,36 +1492,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_logical_view_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_logical_view({ name: name }) do |response, operation|
+      c.get_logical_view({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_logical_view name: name do |response, operation|
+      c.get_logical_view name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_logical_view ::Google::Cloud::Bigtable::Admin::V2::GetLogicalViewRequest.new(name: name) do |response, operation|
+      c.get_logical_view ::Google::Cloud::Bigtable::Admin::V2::GetLogicalViewRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_logical_view({ name: name }, grpc_options) do |response, operation|
+      c.get_logical_view({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_logical_view(::Google::Cloud::Bigtable::Admin::V2::GetLogicalViewRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_logical_view(::Google::Cloud::Bigtable::Admin::V2::GetLogicalViewRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1554,40 +1554,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_logical_views_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_logical_views({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_logical_views({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_logical_views parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_logical_views parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_logical_views ::Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_logical_views ::Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_logical_views({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_logical_views({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_logical_views(::Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_logical_views(::Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1619,40 +1619,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_logical_view_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_logical_view({ logical_view: logical_view, update_mask: update_mask }) do |response, operation|
+      c.update_logical_view({ logical_view: logical_view, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_logical_view logical_view: logical_view, update_mask: update_mask do |response, operation|
+      c.update_logical_view logical_view: logical_view, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_logical_view ::Google::Cloud::Bigtable::Admin::V2::UpdateLogicalViewRequest.new(logical_view: logical_view, update_mask: update_mask) do |response, operation|
+      c.update_logical_view ::Google::Cloud::Bigtable::Admin::V2::UpdateLogicalViewRequest.new(logical_view: logical_view, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_logical_view({ logical_view: logical_view, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_logical_view({ logical_view: logical_view, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_logical_view(::Google::Cloud::Bigtable::Admin::V2::UpdateLogicalViewRequest.new(logical_view: logical_view, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_logical_view(::Google::Cloud::Bigtable::Admin::V2::UpdateLogicalViewRequest.new(logical_view: logical_view, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1684,36 +1684,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_logical_view_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_logical_view({ name: name, etag: etag }) do |response, operation|
+      c.delete_logical_view({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_logical_view name: name, etag: etag do |response, operation|
+      c.delete_logical_view name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_logical_view ::Google::Cloud::Bigtable::Admin::V2::DeleteLogicalViewRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_logical_view ::Google::Cloud::Bigtable::Admin::V2::DeleteLogicalViewRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_logical_view({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_logical_view({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_logical_view(::Google::Cloud::Bigtable::Admin::V2::DeleteLogicalViewRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_logical_view(::Google::Cloud::Bigtable::Admin::V2::DeleteLogicalViewRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1746,40 +1746,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_materialized_view_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_materialized_view({ parent: parent, materialized_view_id: materialized_view_id, materialized_view: materialized_view }) do |response, operation|
+      c.create_materialized_view({ parent: parent, materialized_view_id: materialized_view_id, materialized_view: materialized_view }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_materialized_view parent: parent, materialized_view_id: materialized_view_id, materialized_view: materialized_view do |response, operation|
+      c.create_materialized_view parent: parent, materialized_view_id: materialized_view_id, materialized_view: materialized_view do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_materialized_view ::Google::Cloud::Bigtable::Admin::V2::CreateMaterializedViewRequest.new(parent: parent, materialized_view_id: materialized_view_id, materialized_view: materialized_view) do |response, operation|
+      c.create_materialized_view ::Google::Cloud::Bigtable::Admin::V2::CreateMaterializedViewRequest.new(parent: parent, materialized_view_id: materialized_view_id, materialized_view: materialized_view) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_materialized_view({ parent: parent, materialized_view_id: materialized_view_id, materialized_view: materialized_view }, grpc_options) do |response, operation|
+      c.create_materialized_view({ parent: parent, materialized_view_id: materialized_view_id, materialized_view: materialized_view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_materialized_view(::Google::Cloud::Bigtable::Admin::V2::CreateMaterializedViewRequest.new(parent: parent, materialized_view_id: materialized_view_id, materialized_view: materialized_view), grpc_options) do |response, operation|
+      c.create_materialized_view(::Google::Cloud::Bigtable::Admin::V2::CreateMaterializedViewRequest.new(parent: parent, materialized_view_id: materialized_view_id, materialized_view: materialized_view), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1809,36 +1809,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_materialized_view_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_materialized_view({ name: name }) do |response, operation|
+      c.get_materialized_view({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_materialized_view name: name do |response, operation|
+      c.get_materialized_view name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_materialized_view ::Google::Cloud::Bigtable::Admin::V2::GetMaterializedViewRequest.new(name: name) do |response, operation|
+      c.get_materialized_view ::Google::Cloud::Bigtable::Admin::V2::GetMaterializedViewRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_materialized_view({ name: name }, grpc_options) do |response, operation|
+      c.get_materialized_view({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_materialized_view(::Google::Cloud::Bigtable::Admin::V2::GetMaterializedViewRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_materialized_view(::Google::Cloud::Bigtable::Admin::V2::GetMaterializedViewRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1871,40 +1871,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_materialized_views_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_materialized_views({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_materialized_views({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_materialized_views parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_materialized_views parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_materialized_views ::Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_materialized_views ::Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_materialized_views({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_materialized_views({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_materialized_views(::Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_materialized_views(::Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1936,40 +1936,40 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_materialized_view_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_materialized_view({ materialized_view: materialized_view, update_mask: update_mask }) do |response, operation|
+      c.update_materialized_view({ materialized_view: materialized_view, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_materialized_view materialized_view: materialized_view, update_mask: update_mask do |response, operation|
+      c.update_materialized_view materialized_view: materialized_view, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_materialized_view ::Google::Cloud::Bigtable::Admin::V2::UpdateMaterializedViewRequest.new(materialized_view: materialized_view, update_mask: update_mask) do |response, operation|
+      c.update_materialized_view ::Google::Cloud::Bigtable::Admin::V2::UpdateMaterializedViewRequest.new(materialized_view: materialized_view, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_materialized_view({ materialized_view: materialized_view, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_materialized_view({ materialized_view: materialized_view, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_materialized_view(::Google::Cloud::Bigtable::Admin::V2::UpdateMaterializedViewRequest.new(materialized_view: materialized_view, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_materialized_view(::Google::Cloud::Bigtable::Admin::V2::UpdateMaterializedViewRequest.new(materialized_view: materialized_view, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2001,36 +2001,36 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_materialized_view_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_materialized_view({ name: name, etag: etag }) do |response, operation|
+      c.delete_materialized_view({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_materialized_view name: name, etag: etag do |response, operation|
+      c.delete_materialized_view name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_materialized_view ::Google::Cloud::Bigtable::Admin::V2::DeleteMaterializedViewRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_materialized_view ::Google::Cloud::Bigtable::Admin::V2::DeleteMaterializedViewRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_materialized_view({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_materialized_view({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_materialized_view(::Google::Cloud::Bigtable::Admin::V2::DeleteMaterializedViewRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_materialized_view(::Google::Cloud::Bigtable::Admin::V2::DeleteMaterializedViewRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
