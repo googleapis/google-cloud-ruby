@@ -82,36 +82,36 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
 
     Gapic::ServiceStub.stub :new, get_workload_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workload({ name: name }) do |response, operation|
+      c.get_workload({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workload name: name do |response, operation|
+      c.get_workload name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workload ::Google::Cloud::CloudControlsPartner::V1beta::GetWorkloadRequest.new(name: name) do |response, operation|
+      c.get_workload ::Google::Cloud::CloudControlsPartner::V1beta::GetWorkloadRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workload({ name: name }, grpc_options) do |response, operation|
+      c.get_workload({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workload(::Google::Cloud::CloudControlsPartner::V1beta::GetWorkloadRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workload(::Google::Cloud::CloudControlsPartner::V1beta::GetWorkloadRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,40 +148,40 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
 
     Gapic::ServiceStub.stub :new, list_workloads_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workloads parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_workloads parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workloads ::Google::Cloud::CloudControlsPartner::V1beta::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_workloads ::Google::Cloud::CloudControlsPartner::V1beta::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workloads(::Google::Cloud::CloudControlsPartner::V1beta::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_workloads(::Google::Cloud::CloudControlsPartner::V1beta::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -211,36 +211,36 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
 
     Gapic::ServiceStub.stub :new, get_customer_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_customer({ name: name }) do |response, operation|
+      c.get_customer({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_customer name: name do |response, operation|
+      c.get_customer name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_customer ::Google::Cloud::CloudControlsPartner::V1beta::GetCustomerRequest.new(name: name) do |response, operation|
+      c.get_customer ::Google::Cloud::CloudControlsPartner::V1beta::GetCustomerRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_customer({ name: name }, grpc_options) do |response, operation|
+      c.get_customer({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_customer(::Google::Cloud::CloudControlsPartner::V1beta::GetCustomerRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_customer(::Google::Cloud::CloudControlsPartner::V1beta::GetCustomerRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -277,40 +277,40 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
 
     Gapic::ServiceStub.stub :new, list_customers_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_customers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_customers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_customers parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_customers parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_customers ::Google::Cloud::CloudControlsPartner::V1beta::ListCustomersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_customers ::Google::Cloud::CloudControlsPartner::V1beta::ListCustomersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_customers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_customers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_customers(::Google::Cloud::CloudControlsPartner::V1beta::ListCustomersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_customers(::Google::Cloud::CloudControlsPartner::V1beta::ListCustomersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -340,36 +340,36 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
 
     Gapic::ServiceStub.stub :new, get_ekm_connections_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_ekm_connections({ name: name }) do |response, operation|
+      c.get_ekm_connections({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_ekm_connections name: name do |response, operation|
+      c.get_ekm_connections name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_ekm_connections ::Google::Cloud::CloudControlsPartner::V1beta::GetEkmConnectionsRequest.new(name: name) do |response, operation|
+      c.get_ekm_connections ::Google::Cloud::CloudControlsPartner::V1beta::GetEkmConnectionsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_ekm_connections({ name: name }, grpc_options) do |response, operation|
+      c.get_ekm_connections({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_ekm_connections(::Google::Cloud::CloudControlsPartner::V1beta::GetEkmConnectionsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_ekm_connections(::Google::Cloud::CloudControlsPartner::V1beta::GetEkmConnectionsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -398,36 +398,36 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
 
     Gapic::ServiceStub.stub :new, get_partner_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_partner_permissions({ name: name }) do |response, operation|
+      c.get_partner_permissions({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_partner_permissions name: name do |response, operation|
+      c.get_partner_permissions name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_partner_permissions ::Google::Cloud::CloudControlsPartner::V1beta::GetPartnerPermissionsRequest.new(name: name) do |response, operation|
+      c.get_partner_permissions ::Google::Cloud::CloudControlsPartner::V1beta::GetPartnerPermissionsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_partner_permissions({ name: name }, grpc_options) do |response, operation|
+      c.get_partner_permissions({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_partner_permissions(::Google::Cloud::CloudControlsPartner::V1beta::GetPartnerPermissionsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_partner_permissions(::Google::Cloud::CloudControlsPartner::V1beta::GetPartnerPermissionsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -464,40 +464,40 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
 
     Gapic::ServiceStub.stub :new, list_access_approval_requests_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_access_approval_requests({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_access_approval_requests({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_access_approval_requests parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_access_approval_requests parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_access_approval_requests ::Google::Cloud::CloudControlsPartner::V1beta::ListAccessApprovalRequestsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_access_approval_requests ::Google::Cloud::CloudControlsPartner::V1beta::ListAccessApprovalRequestsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_access_approval_requests({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_access_approval_requests({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_access_approval_requests(::Google::Cloud::CloudControlsPartner::V1beta::ListAccessApprovalRequestsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_access_approval_requests(::Google::Cloud::CloudControlsPartner::V1beta::ListAccessApprovalRequestsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -527,36 +527,36 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
 
     Gapic::ServiceStub.stub :new, get_partner_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_partner({ name: name }) do |response, operation|
+      c.get_partner({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_partner name: name do |response, operation|
+      c.get_partner name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_partner ::Google::Cloud::CloudControlsPartner::V1beta::GetPartnerRequest.new(name: name) do |response, operation|
+      c.get_partner ::Google::Cloud::CloudControlsPartner::V1beta::GetPartnerRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_partner({ name: name }, grpc_options) do |response, operation|
+      c.get_partner({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_partner(::Google::Cloud::CloudControlsPartner::V1beta::GetPartnerRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_partner(::Google::Cloud::CloudControlsPartner::V1beta::GetPartnerRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -589,36 +589,36 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
 
     Gapic::ServiceStub.stub :new, create_customer_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_customer({ parent: parent, customer: customer, customer_id: customer_id }) do |response, operation|
+      c.create_customer({ parent: parent, customer: customer, customer_id: customer_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_customer parent: parent, customer: customer, customer_id: customer_id do |response, operation|
+      c.create_customer parent: parent, customer: customer, customer_id: customer_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_customer ::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest.new(parent: parent, customer: customer, customer_id: customer_id) do |response, operation|
+      c.create_customer ::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest.new(parent: parent, customer: customer, customer_id: customer_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_customer({ parent: parent, customer: customer, customer_id: customer_id }, grpc_options) do |response, operation|
+      c.create_customer({ parent: parent, customer: customer, customer_id: customer_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_customer(::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest.new(parent: parent, customer: customer, customer_id: customer_id), grpc_options) do |response, operation|
+      c.create_customer(::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest.new(parent: parent, customer: customer, customer_id: customer_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -649,36 +649,36 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
 
     Gapic::ServiceStub.stub :new, update_customer_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_customer({ customer: customer, update_mask: update_mask }) do |response, operation|
+      c.update_customer({ customer: customer, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_customer customer: customer, update_mask: update_mask do |response, operation|
+      c.update_customer customer: customer, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_customer ::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest.new(customer: customer, update_mask: update_mask) do |response, operation|
+      c.update_customer ::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest.new(customer: customer, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_customer({ customer: customer, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_customer({ customer: customer, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_customer(::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest.new(customer: customer, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_customer(::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest.new(customer: customer, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -707,36 +707,36 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
 
     Gapic::ServiceStub.stub :new, delete_customer_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+      c = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_customer({ name: name }) do |response, operation|
+      c.delete_customer({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_customer name: name do |response, operation|
+      c.delete_customer name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_customer ::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest.new(name: name) do |response, operation|
+      c.delete_customer ::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_customer({ name: name }, grpc_options) do |response, operation|
+      c.delete_customer({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_customer(::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_customer(::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

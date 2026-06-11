@@ -98,32 +98,32 @@ class ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::ClientTest < M
     ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::ServiceStub.stub :transcode_get_reference_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_reference_list_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_reference_list({ name: name, view: view }) do |_result, response|
+        c.get_reference_list({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_reference_list name: name, view: view do |_result, response|
+        c.get_reference_list name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_reference_list ::Google::Cloud::Chronicle::V1::GetReferenceListRequest.new(name: name, view: view) do |_result, response|
+        c.get_reference_list ::Google::Cloud::Chronicle::V1::GetReferenceListRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_reference_list({ name: name, view: view }, call_options) do |_result, response|
+        c.get_reference_list({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_reference_list(::Google::Cloud::Chronicle::V1::GetReferenceListRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_reference_list(::Google::Cloud::Chronicle::V1::GetReferenceListRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::ClientTest < M
     ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::ServiceStub.stub :transcode_list_reference_lists_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_reference_lists_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_reference_lists({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |_result, response|
+        c.list_reference_lists({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_reference_lists parent: parent, page_size: page_size, page_token: page_token, view: view do |_result, response|
+        c.list_reference_lists parent: parent, page_size: page_size, page_token: page_token, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_reference_lists ::Google::Cloud::Chronicle::V1::ListReferenceListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |_result, response|
+        c.list_reference_lists ::Google::Cloud::Chronicle::V1::ListReferenceListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_reference_lists({ parent: parent, page_size: page_size, page_token: page_token, view: view }, call_options) do |_result, response|
+        c.list_reference_lists({ parent: parent, page_size: page_size, page_token: page_token, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_reference_lists(::Google::Cloud::Chronicle::V1::ListReferenceListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), call_options) do |_result, response|
+        c.list_reference_lists(::Google::Cloud::Chronicle::V1::ListReferenceListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::ClientTest < M
     ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::ServiceStub.stub :transcode_create_reference_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_reference_list_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_reference_list({ parent: parent, reference_list: reference_list, reference_list_id: reference_list_id }) do |_result, response|
+        c.create_reference_list({ parent: parent, reference_list: reference_list, reference_list_id: reference_list_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_reference_list parent: parent, reference_list: reference_list, reference_list_id: reference_list_id do |_result, response|
+        c.create_reference_list parent: parent, reference_list: reference_list, reference_list_id: reference_list_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_reference_list ::Google::Cloud::Chronicle::V1::CreateReferenceListRequest.new(parent: parent, reference_list: reference_list, reference_list_id: reference_list_id) do |_result, response|
+        c.create_reference_list ::Google::Cloud::Chronicle::V1::CreateReferenceListRequest.new(parent: parent, reference_list: reference_list, reference_list_id: reference_list_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_reference_list({ parent: parent, reference_list: reference_list, reference_list_id: reference_list_id }, call_options) do |_result, response|
+        c.create_reference_list({ parent: parent, reference_list: reference_list, reference_list_id: reference_list_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_reference_list(::Google::Cloud::Chronicle::V1::CreateReferenceListRequest.new(parent: parent, reference_list: reference_list, reference_list_id: reference_list_id), call_options) do |_result, response|
+        c.create_reference_list(::Google::Cloud::Chronicle::V1::CreateReferenceListRequest.new(parent: parent, reference_list: reference_list, reference_list_id: reference_list_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::ClientTest < M
     ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::ServiceStub.stub :transcode_update_reference_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_reference_list_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_reference_list({ reference_list: reference_list, update_mask: update_mask }) do |_result, response|
+        c.update_reference_list({ reference_list: reference_list, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_reference_list reference_list: reference_list, update_mask: update_mask do |_result, response|
+        c.update_reference_list reference_list: reference_list, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_reference_list ::Google::Cloud::Chronicle::V1::UpdateReferenceListRequest.new(reference_list: reference_list, update_mask: update_mask) do |_result, response|
+        c.update_reference_list ::Google::Cloud::Chronicle::V1::UpdateReferenceListRequest.new(reference_list: reference_list, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_reference_list({ reference_list: reference_list, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_reference_list({ reference_list: reference_list, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_reference_list(::Google::Cloud::Chronicle::V1::UpdateReferenceListRequest.new(reference_list: reference_list, update_mask: update_mask), call_options) do |_result, response|
+        c.update_reference_list(::Google::Cloud::Chronicle::V1::UpdateReferenceListRequest.new(reference_list: reference_list, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

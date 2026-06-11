@@ -88,36 +88,36 @@ class ::Google::Cloud::Ces::V1::WidgetService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, generate_chat_token_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1::WidgetService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1::WidgetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_chat_token({ name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled }) do |response, operation|
+      c.generate_chat_token({ name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_chat_token name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled do |response, operation|
+      c.generate_chat_token name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_chat_token ::Google::Cloud::Ces::V1::GenerateChatTokenRequest.new(name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled) do |response, operation|
+      c.generate_chat_token ::Google::Cloud::Ces::V1::GenerateChatTokenRequest.new(name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_chat_token({ name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled }, grpc_options) do |response, operation|
+      c.generate_chat_token({ name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_chat_token(::Google::Cloud::Ces::V1::GenerateChatTokenRequest.new(name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled), grpc_options) do |response, operation|
+      c.generate_chat_token(::Google::Cloud::Ces::V1::GenerateChatTokenRequest.new(name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

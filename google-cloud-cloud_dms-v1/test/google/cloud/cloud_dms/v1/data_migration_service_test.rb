@@ -90,40 +90,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_migration_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_migration_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_migration_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_migration_jobs ::Google::Cloud::CloudDMS::V1::ListMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_migration_jobs ::Google::Cloud::CloudDMS::V1::ListMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_migration_jobs(::Google::Cloud::CloudDMS::V1::ListMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_migration_jobs(::Google::Cloud::CloudDMS::V1::ListMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_migration_job_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_migration_job({ name: name }) do |response, operation|
+      c.get_migration_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_migration_job name: name do |response, operation|
+      c.get_migration_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_migration_job ::Google::Cloud::CloudDMS::V1::GetMigrationJobRequest.new(name: name) do |response, operation|
+      c.get_migration_job ::Google::Cloud::CloudDMS::V1::GetMigrationJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_migration_job({ name: name }, grpc_options) do |response, operation|
+      c.get_migration_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_migration_job(::Google::Cloud::CloudDMS::V1::GetMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_migration_job(::Google::Cloud::CloudDMS::V1::GetMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_migration_job_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_migration_job({ parent: parent, migration_job_id: migration_job_id, migration_job: migration_job, request_id: request_id }) do |response, operation|
+      c.create_migration_job({ parent: parent, migration_job_id: migration_job_id, migration_job: migration_job, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_migration_job parent: parent, migration_job_id: migration_job_id, migration_job: migration_job, request_id: request_id do |response, operation|
+      c.create_migration_job parent: parent, migration_job_id: migration_job_id, migration_job: migration_job, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_migration_job ::Google::Cloud::CloudDMS::V1::CreateMigrationJobRequest.new(parent: parent, migration_job_id: migration_job_id, migration_job: migration_job, request_id: request_id) do |response, operation|
+      c.create_migration_job ::Google::Cloud::CloudDMS::V1::CreateMigrationJobRequest.new(parent: parent, migration_job_id: migration_job_id, migration_job: migration_job, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_migration_job({ parent: parent, migration_job_id: migration_job_id, migration_job: migration_job, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_migration_job({ parent: parent, migration_job_id: migration_job_id, migration_job: migration_job, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_migration_job(::Google::Cloud::CloudDMS::V1::CreateMigrationJobRequest.new(parent: parent, migration_job_id: migration_job_id, migration_job: migration_job, request_id: request_id), grpc_options) do |response, operation|
+      c.create_migration_job(::Google::Cloud::CloudDMS::V1::CreateMigrationJobRequest.new(parent: parent, migration_job_id: migration_job_id, migration_job: migration_job, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_migration_job_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_migration_job({ update_mask: update_mask, migration_job: migration_job, request_id: request_id }) do |response, operation|
+      c.update_migration_job({ update_mask: update_mask, migration_job: migration_job, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_migration_job update_mask: update_mask, migration_job: migration_job, request_id: request_id do |response, operation|
+      c.update_migration_job update_mask: update_mask, migration_job: migration_job, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_migration_job ::Google::Cloud::CloudDMS::V1::UpdateMigrationJobRequest.new(update_mask: update_mask, migration_job: migration_job, request_id: request_id) do |response, operation|
+      c.update_migration_job ::Google::Cloud::CloudDMS::V1::UpdateMigrationJobRequest.new(update_mask: update_mask, migration_job: migration_job, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_migration_job({ update_mask: update_mask, migration_job: migration_job, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_migration_job({ update_mask: update_mask, migration_job: migration_job, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_migration_job(::Google::Cloud::CloudDMS::V1::UpdateMigrationJobRequest.new(update_mask: update_mask, migration_job: migration_job, request_id: request_id), grpc_options) do |response, operation|
+      c.update_migration_job(::Google::Cloud::CloudDMS::V1::UpdateMigrationJobRequest.new(update_mask: update_mask, migration_job: migration_job, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -351,40 +351,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_migration_job_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_migration_job({ name: name, request_id: request_id, force: force }) do |response, operation|
+      c.delete_migration_job({ name: name, request_id: request_id, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_migration_job name: name, request_id: request_id, force: force do |response, operation|
+      c.delete_migration_job name: name, request_id: request_id, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_migration_job ::Google::Cloud::CloudDMS::V1::DeleteMigrationJobRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
+      c.delete_migration_job ::Google::Cloud::CloudDMS::V1::DeleteMigrationJobRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_migration_job({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
+      c.delete_migration_job({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_migration_job(::Google::Cloud::CloudDMS::V1::DeleteMigrationJobRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
+      c.delete_migration_job(::Google::Cloud::CloudDMS::V1::DeleteMigrationJobRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -416,40 +416,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, start_migration_job_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.start_migration_job({ name: name, skip_validation: skip_validation }) do |response, operation|
+      c.start_migration_job({ name: name, skip_validation: skip_validation }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.start_migration_job name: name, skip_validation: skip_validation do |response, operation|
+      c.start_migration_job name: name, skip_validation: skip_validation do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.start_migration_job ::Google::Cloud::CloudDMS::V1::StartMigrationJobRequest.new(name: name, skip_validation: skip_validation) do |response, operation|
+      c.start_migration_job ::Google::Cloud::CloudDMS::V1::StartMigrationJobRequest.new(name: name, skip_validation: skip_validation) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.start_migration_job({ name: name, skip_validation: skip_validation }, grpc_options) do |response, operation|
+      c.start_migration_job({ name: name, skip_validation: skip_validation }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.start_migration_job(::Google::Cloud::CloudDMS::V1::StartMigrationJobRequest.new(name: name, skip_validation: skip_validation), grpc_options) do |response, operation|
+      c.start_migration_job(::Google::Cloud::CloudDMS::V1::StartMigrationJobRequest.new(name: name, skip_validation: skip_validation), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -479,40 +479,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, stop_migration_job_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stop_migration_job({ name: name }) do |response, operation|
+      c.stop_migration_job({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.stop_migration_job name: name do |response, operation|
+      c.stop_migration_job name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.stop_migration_job ::Google::Cloud::CloudDMS::V1::StopMigrationJobRequest.new(name: name) do |response, operation|
+      c.stop_migration_job ::Google::Cloud::CloudDMS::V1::StopMigrationJobRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.stop_migration_job({ name: name }, grpc_options) do |response, operation|
+      c.stop_migration_job({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.stop_migration_job(::Google::Cloud::CloudDMS::V1::StopMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.stop_migration_job(::Google::Cloud::CloudDMS::V1::StopMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -542,40 +542,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, resume_migration_job_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.resume_migration_job({ name: name }) do |response, operation|
+      c.resume_migration_job({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.resume_migration_job name: name do |response, operation|
+      c.resume_migration_job name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.resume_migration_job ::Google::Cloud::CloudDMS::V1::ResumeMigrationJobRequest.new(name: name) do |response, operation|
+      c.resume_migration_job ::Google::Cloud::CloudDMS::V1::ResumeMigrationJobRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.resume_migration_job({ name: name }, grpc_options) do |response, operation|
+      c.resume_migration_job({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.resume_migration_job(::Google::Cloud::CloudDMS::V1::ResumeMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.resume_migration_job(::Google::Cloud::CloudDMS::V1::ResumeMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -605,40 +605,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, promote_migration_job_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.promote_migration_job({ name: name }) do |response, operation|
+      c.promote_migration_job({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.promote_migration_job name: name do |response, operation|
+      c.promote_migration_job name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.promote_migration_job ::Google::Cloud::CloudDMS::V1::PromoteMigrationJobRequest.new(name: name) do |response, operation|
+      c.promote_migration_job ::Google::Cloud::CloudDMS::V1::PromoteMigrationJobRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.promote_migration_job({ name: name }, grpc_options) do |response, operation|
+      c.promote_migration_job({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.promote_migration_job(::Google::Cloud::CloudDMS::V1::PromoteMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.promote_migration_job(::Google::Cloud::CloudDMS::V1::PromoteMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -672,40 +672,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, verify_migration_job_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.verify_migration_job({ name: name, update_mask: update_mask, migration_job: migration_job }) do |response, operation|
+      c.verify_migration_job({ name: name, update_mask: update_mask, migration_job: migration_job }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.verify_migration_job name: name, update_mask: update_mask, migration_job: migration_job do |response, operation|
+      c.verify_migration_job name: name, update_mask: update_mask, migration_job: migration_job do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.verify_migration_job ::Google::Cloud::CloudDMS::V1::VerifyMigrationJobRequest.new(name: name, update_mask: update_mask, migration_job: migration_job) do |response, operation|
+      c.verify_migration_job ::Google::Cloud::CloudDMS::V1::VerifyMigrationJobRequest.new(name: name, update_mask: update_mask, migration_job: migration_job) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.verify_migration_job({ name: name, update_mask: update_mask, migration_job: migration_job }, grpc_options) do |response, operation|
+      c.verify_migration_job({ name: name, update_mask: update_mask, migration_job: migration_job }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.verify_migration_job(::Google::Cloud::CloudDMS::V1::VerifyMigrationJobRequest.new(name: name, update_mask: update_mask, migration_job: migration_job), grpc_options) do |response, operation|
+      c.verify_migration_job(::Google::Cloud::CloudDMS::V1::VerifyMigrationJobRequest.new(name: name, update_mask: update_mask, migration_job: migration_job), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -737,40 +737,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, restart_migration_job_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restart_migration_job({ name: name, skip_validation: skip_validation }) do |response, operation|
+      c.restart_migration_job({ name: name, skip_validation: skip_validation }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restart_migration_job name: name, skip_validation: skip_validation do |response, operation|
+      c.restart_migration_job name: name, skip_validation: skip_validation do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restart_migration_job ::Google::Cloud::CloudDMS::V1::RestartMigrationJobRequest.new(name: name, skip_validation: skip_validation) do |response, operation|
+      c.restart_migration_job ::Google::Cloud::CloudDMS::V1::RestartMigrationJobRequest.new(name: name, skip_validation: skip_validation) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restart_migration_job({ name: name, skip_validation: skip_validation }, grpc_options) do |response, operation|
+      c.restart_migration_job({ name: name, skip_validation: skip_validation }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restart_migration_job(::Google::Cloud::CloudDMS::V1::RestartMigrationJobRequest.new(name: name, skip_validation: skip_validation), grpc_options) do |response, operation|
+      c.restart_migration_job(::Google::Cloud::CloudDMS::V1::RestartMigrationJobRequest.new(name: name, skip_validation: skip_validation), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -807,36 +807,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, generate_ssh_script_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_ssh_script({ migration_job: migration_job, vm: vm, vm_creation_config: vm_creation_config, vm_port: vm_port }) do |response, operation|
+      c.generate_ssh_script({ migration_job: migration_job, vm: vm, vm_creation_config: vm_creation_config, vm_port: vm_port }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_ssh_script migration_job: migration_job, vm: vm, vm_creation_config: vm_creation_config, vm_port: vm_port do |response, operation|
+      c.generate_ssh_script migration_job: migration_job, vm: vm, vm_creation_config: vm_creation_config, vm_port: vm_port do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_ssh_script ::Google::Cloud::CloudDMS::V1::GenerateSshScriptRequest.new(migration_job: migration_job, vm: vm, vm_creation_config: vm_creation_config, vm_port: vm_port) do |response, operation|
+      c.generate_ssh_script ::Google::Cloud::CloudDMS::V1::GenerateSshScriptRequest.new(migration_job: migration_job, vm: vm, vm_creation_config: vm_creation_config, vm_port: vm_port) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_ssh_script({ migration_job: migration_job, vm: vm, vm_creation_config: vm_creation_config, vm_port: vm_port }, grpc_options) do |response, operation|
+      c.generate_ssh_script({ migration_job: migration_job, vm: vm, vm_creation_config: vm_creation_config, vm_port: vm_port }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_ssh_script(::Google::Cloud::CloudDMS::V1::GenerateSshScriptRequest.new(migration_job: migration_job, vm: vm, vm_creation_config: vm_creation_config, vm_port: vm_port), grpc_options) do |response, operation|
+      c.generate_ssh_script(::Google::Cloud::CloudDMS::V1::GenerateSshScriptRequest.new(migration_job: migration_job, vm: vm, vm_creation_config: vm_creation_config, vm_port: vm_port), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -873,36 +873,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, generate_tcp_proxy_script_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_tcp_proxy_script({ migration_job: migration_job, vm_name: vm_name, vm_machine_type: vm_machine_type, vm_zone: vm_zone, vm_subnet: vm_subnet }) do |response, operation|
+      c.generate_tcp_proxy_script({ migration_job: migration_job, vm_name: vm_name, vm_machine_type: vm_machine_type, vm_zone: vm_zone, vm_subnet: vm_subnet }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_tcp_proxy_script migration_job: migration_job, vm_name: vm_name, vm_machine_type: vm_machine_type, vm_zone: vm_zone, vm_subnet: vm_subnet do |response, operation|
+      c.generate_tcp_proxy_script migration_job: migration_job, vm_name: vm_name, vm_machine_type: vm_machine_type, vm_zone: vm_zone, vm_subnet: vm_subnet do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_tcp_proxy_script ::Google::Cloud::CloudDMS::V1::GenerateTcpProxyScriptRequest.new(migration_job: migration_job, vm_name: vm_name, vm_machine_type: vm_machine_type, vm_zone: vm_zone, vm_subnet: vm_subnet) do |response, operation|
+      c.generate_tcp_proxy_script ::Google::Cloud::CloudDMS::V1::GenerateTcpProxyScriptRequest.new(migration_job: migration_job, vm_name: vm_name, vm_machine_type: vm_machine_type, vm_zone: vm_zone, vm_subnet: vm_subnet) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_tcp_proxy_script({ migration_job: migration_job, vm_name: vm_name, vm_machine_type: vm_machine_type, vm_zone: vm_zone, vm_subnet: vm_subnet }, grpc_options) do |response, operation|
+      c.generate_tcp_proxy_script({ migration_job: migration_job, vm_name: vm_name, vm_machine_type: vm_machine_type, vm_zone: vm_zone, vm_subnet: vm_subnet }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_tcp_proxy_script(::Google::Cloud::CloudDMS::V1::GenerateTcpProxyScriptRequest.new(migration_job: migration_job, vm_name: vm_name, vm_machine_type: vm_machine_type, vm_zone: vm_zone, vm_subnet: vm_subnet), grpc_options) do |response, operation|
+      c.generate_tcp_proxy_script(::Google::Cloud::CloudDMS::V1::GenerateTcpProxyScriptRequest.new(migration_job: migration_job, vm_name: vm_name, vm_machine_type: vm_machine_type, vm_zone: vm_zone, vm_subnet: vm_subnet), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -939,40 +939,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_connection_profiles_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_connection_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_connection_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_connection_profiles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_connection_profiles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_connection_profiles ::Google::Cloud::CloudDMS::V1::ListConnectionProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_connection_profiles ::Google::Cloud::CloudDMS::V1::ListConnectionProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_connection_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_connection_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_connection_profiles(::Google::Cloud::CloudDMS::V1::ListConnectionProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_connection_profiles(::Google::Cloud::CloudDMS::V1::ListConnectionProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1002,36 +1002,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_connection_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_connection_profile({ name: name }) do |response, operation|
+      c.get_connection_profile({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_connection_profile name: name do |response, operation|
+      c.get_connection_profile name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_connection_profile ::Google::Cloud::CloudDMS::V1::GetConnectionProfileRequest.new(name: name) do |response, operation|
+      c.get_connection_profile ::Google::Cloud::CloudDMS::V1::GetConnectionProfileRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_connection_profile({ name: name }, grpc_options) do |response, operation|
+      c.get_connection_profile({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_connection_profile(::Google::Cloud::CloudDMS::V1::GetConnectionProfileRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_connection_profile(::Google::Cloud::CloudDMS::V1::GetConnectionProfileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1070,40 +1070,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_connection_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_connection_profile({ parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation }) do |response, operation|
+      c.create_connection_profile({ parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_connection_profile parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation do |response, operation|
+      c.create_connection_profile parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_connection_profile ::Google::Cloud::CloudDMS::V1::CreateConnectionProfileRequest.new(parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation) do |response, operation|
+      c.create_connection_profile ::Google::Cloud::CloudDMS::V1::CreateConnectionProfileRequest.new(parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_connection_profile({ parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation }, grpc_options) do |response, operation|
+      c.create_connection_profile({ parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_connection_profile(::Google::Cloud::CloudDMS::V1::CreateConnectionProfileRequest.new(parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation), grpc_options) do |response, operation|
+      c.create_connection_profile(::Google::Cloud::CloudDMS::V1::CreateConnectionProfileRequest.new(parent: parent, connection_profile_id: connection_profile_id, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1141,40 +1141,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_connection_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_connection_profile({ update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation }) do |response, operation|
+      c.update_connection_profile({ update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_connection_profile update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation do |response, operation|
+      c.update_connection_profile update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_connection_profile ::Google::Cloud::CloudDMS::V1::UpdateConnectionProfileRequest.new(update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation) do |response, operation|
+      c.update_connection_profile ::Google::Cloud::CloudDMS::V1::UpdateConnectionProfileRequest.new(update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_connection_profile({ update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation }, grpc_options) do |response, operation|
+      c.update_connection_profile({ update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_connection_profile(::Google::Cloud::CloudDMS::V1::UpdateConnectionProfileRequest.new(update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation), grpc_options) do |response, operation|
+      c.update_connection_profile(::Google::Cloud::CloudDMS::V1::UpdateConnectionProfileRequest.new(update_mask: update_mask, connection_profile: connection_profile, request_id: request_id, validate_only: validate_only, skip_validation: skip_validation), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1208,40 +1208,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_connection_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_connection_profile({ name: name, request_id: request_id, force: force }) do |response, operation|
+      c.delete_connection_profile({ name: name, request_id: request_id, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_connection_profile name: name, request_id: request_id, force: force do |response, operation|
+      c.delete_connection_profile name: name, request_id: request_id, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_connection_profile ::Google::Cloud::CloudDMS::V1::DeleteConnectionProfileRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
+      c.delete_connection_profile ::Google::Cloud::CloudDMS::V1::DeleteConnectionProfileRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_connection_profile({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
+      c.delete_connection_profile({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_connection_profile(::Google::Cloud::CloudDMS::V1::DeleteConnectionProfileRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
+      c.delete_connection_profile(::Google::Cloud::CloudDMS::V1::DeleteConnectionProfileRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1279,40 +1279,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_private_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, skip_validation: skip_validation }) do |response, operation|
+      c.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, skip_validation: skip_validation }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_private_connection parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, skip_validation: skip_validation do |response, operation|
+      c.create_private_connection parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, skip_validation: skip_validation do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_private_connection ::Google::Cloud::CloudDMS::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, skip_validation: skip_validation) do |response, operation|
+      c.create_private_connection ::Google::Cloud::CloudDMS::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, skip_validation: skip_validation) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, skip_validation: skip_validation }, grpc_options) do |response, operation|
+      c.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, skip_validation: skip_validation }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_private_connection(::Google::Cloud::CloudDMS::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, skip_validation: skip_validation), grpc_options) do |response, operation|
+      c.create_private_connection(::Google::Cloud::CloudDMS::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, skip_validation: skip_validation), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1342,36 +1342,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_private_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_private_connection({ name: name }) do |response, operation|
+      c.get_private_connection({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_private_connection name: name do |response, operation|
+      c.get_private_connection name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_private_connection ::Google::Cloud::CloudDMS::V1::GetPrivateConnectionRequest.new(name: name) do |response, operation|
+      c.get_private_connection ::Google::Cloud::CloudDMS::V1::GetPrivateConnectionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_private_connection({ name: name }, grpc_options) do |response, operation|
+      c.get_private_connection({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_private_connection(::Google::Cloud::CloudDMS::V1::GetPrivateConnectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_private_connection(::Google::Cloud::CloudDMS::V1::GetPrivateConnectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1408,40 +1408,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_private_connections_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_private_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_private_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_private_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_private_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_private_connections ::Google::Cloud::CloudDMS::V1::ListPrivateConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_private_connections ::Google::Cloud::CloudDMS::V1::ListPrivateConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_private_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_private_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_private_connections(::Google::Cloud::CloudDMS::V1::ListPrivateConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_private_connections(::Google::Cloud::CloudDMS::V1::ListPrivateConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1473,40 +1473,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_private_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_private_connection({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_private_connection({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_private_connection name: name, request_id: request_id do |response, operation|
+      c.delete_private_connection name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_private_connection ::Google::Cloud::CloudDMS::V1::DeletePrivateConnectionRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_private_connection ::Google::Cloud::CloudDMS::V1::DeletePrivateConnectionRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_private_connection({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_private_connection({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_private_connection(::Google::Cloud::CloudDMS::V1::DeletePrivateConnectionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_private_connection(::Google::Cloud::CloudDMS::V1::DeletePrivateConnectionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1536,36 +1536,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_conversion_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_conversion_workspace({ name: name }) do |response, operation|
+      c.get_conversion_workspace({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_conversion_workspace name: name do |response, operation|
+      c.get_conversion_workspace name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_conversion_workspace ::Google::Cloud::CloudDMS::V1::GetConversionWorkspaceRequest.new(name: name) do |response, operation|
+      c.get_conversion_workspace ::Google::Cloud::CloudDMS::V1::GetConversionWorkspaceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_conversion_workspace({ name: name }, grpc_options) do |response, operation|
+      c.get_conversion_workspace({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_conversion_workspace(::Google::Cloud::CloudDMS::V1::GetConversionWorkspaceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_conversion_workspace(::Google::Cloud::CloudDMS::V1::GetConversionWorkspaceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1600,40 +1600,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_conversion_workspaces_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_conversion_workspaces({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_conversion_workspaces({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_conversion_workspaces parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_conversion_workspaces parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_conversion_workspaces ::Google::Cloud::CloudDMS::V1::ListConversionWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_conversion_workspaces ::Google::Cloud::CloudDMS::V1::ListConversionWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_conversion_workspaces({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_conversion_workspaces({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_conversion_workspaces(::Google::Cloud::CloudDMS::V1::ListConversionWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_conversion_workspaces(::Google::Cloud::CloudDMS::V1::ListConversionWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1669,40 +1669,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_conversion_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_conversion_workspace({ parent: parent, conversion_workspace_id: conversion_workspace_id, conversion_workspace: conversion_workspace, request_id: request_id }) do |response, operation|
+      c.create_conversion_workspace({ parent: parent, conversion_workspace_id: conversion_workspace_id, conversion_workspace: conversion_workspace, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_conversion_workspace parent: parent, conversion_workspace_id: conversion_workspace_id, conversion_workspace: conversion_workspace, request_id: request_id do |response, operation|
+      c.create_conversion_workspace parent: parent, conversion_workspace_id: conversion_workspace_id, conversion_workspace: conversion_workspace, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_conversion_workspace ::Google::Cloud::CloudDMS::V1::CreateConversionWorkspaceRequest.new(parent: parent, conversion_workspace_id: conversion_workspace_id, conversion_workspace: conversion_workspace, request_id: request_id) do |response, operation|
+      c.create_conversion_workspace ::Google::Cloud::CloudDMS::V1::CreateConversionWorkspaceRequest.new(parent: parent, conversion_workspace_id: conversion_workspace_id, conversion_workspace: conversion_workspace, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_conversion_workspace({ parent: parent, conversion_workspace_id: conversion_workspace_id, conversion_workspace: conversion_workspace, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_conversion_workspace({ parent: parent, conversion_workspace_id: conversion_workspace_id, conversion_workspace: conversion_workspace, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_conversion_workspace(::Google::Cloud::CloudDMS::V1::CreateConversionWorkspaceRequest.new(parent: parent, conversion_workspace_id: conversion_workspace_id, conversion_workspace: conversion_workspace, request_id: request_id), grpc_options) do |response, operation|
+      c.create_conversion_workspace(::Google::Cloud::CloudDMS::V1::CreateConversionWorkspaceRequest.new(parent: parent, conversion_workspace_id: conversion_workspace_id, conversion_workspace: conversion_workspace, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1736,40 +1736,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_conversion_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_conversion_workspace({ update_mask: update_mask, conversion_workspace: conversion_workspace, request_id: request_id }) do |response, operation|
+      c.update_conversion_workspace({ update_mask: update_mask, conversion_workspace: conversion_workspace, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_conversion_workspace update_mask: update_mask, conversion_workspace: conversion_workspace, request_id: request_id do |response, operation|
+      c.update_conversion_workspace update_mask: update_mask, conversion_workspace: conversion_workspace, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_conversion_workspace ::Google::Cloud::CloudDMS::V1::UpdateConversionWorkspaceRequest.new(update_mask: update_mask, conversion_workspace: conversion_workspace, request_id: request_id) do |response, operation|
+      c.update_conversion_workspace ::Google::Cloud::CloudDMS::V1::UpdateConversionWorkspaceRequest.new(update_mask: update_mask, conversion_workspace: conversion_workspace, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_conversion_workspace({ update_mask: update_mask, conversion_workspace: conversion_workspace, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_conversion_workspace({ update_mask: update_mask, conversion_workspace: conversion_workspace, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_conversion_workspace(::Google::Cloud::CloudDMS::V1::UpdateConversionWorkspaceRequest.new(update_mask: update_mask, conversion_workspace: conversion_workspace, request_id: request_id), grpc_options) do |response, operation|
+      c.update_conversion_workspace(::Google::Cloud::CloudDMS::V1::UpdateConversionWorkspaceRequest.new(update_mask: update_mask, conversion_workspace: conversion_workspace, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1803,40 +1803,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_conversion_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_conversion_workspace({ name: name, request_id: request_id, force: force }) do |response, operation|
+      c.delete_conversion_workspace({ name: name, request_id: request_id, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_conversion_workspace name: name, request_id: request_id, force: force do |response, operation|
+      c.delete_conversion_workspace name: name, request_id: request_id, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_conversion_workspace ::Google::Cloud::CloudDMS::V1::DeleteConversionWorkspaceRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
+      c.delete_conversion_workspace ::Google::Cloud::CloudDMS::V1::DeleteConversionWorkspaceRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_conversion_workspace({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
+      c.delete_conversion_workspace({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_conversion_workspace(::Google::Cloud::CloudDMS::V1::DeleteConversionWorkspaceRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
+      c.delete_conversion_workspace(::Google::Cloud::CloudDMS::V1::DeleteConversionWorkspaceRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1872,36 +1872,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_mapping_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_mapping_rule({ parent: parent, mapping_rule_id: mapping_rule_id, mapping_rule: mapping_rule, request_id: request_id }) do |response, operation|
+      c.create_mapping_rule({ parent: parent, mapping_rule_id: mapping_rule_id, mapping_rule: mapping_rule, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_mapping_rule parent: parent, mapping_rule_id: mapping_rule_id, mapping_rule: mapping_rule, request_id: request_id do |response, operation|
+      c.create_mapping_rule parent: parent, mapping_rule_id: mapping_rule_id, mapping_rule: mapping_rule, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_mapping_rule ::Google::Cloud::CloudDMS::V1::CreateMappingRuleRequest.new(parent: parent, mapping_rule_id: mapping_rule_id, mapping_rule: mapping_rule, request_id: request_id) do |response, operation|
+      c.create_mapping_rule ::Google::Cloud::CloudDMS::V1::CreateMappingRuleRequest.new(parent: parent, mapping_rule_id: mapping_rule_id, mapping_rule: mapping_rule, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_mapping_rule({ parent: parent, mapping_rule_id: mapping_rule_id, mapping_rule: mapping_rule, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_mapping_rule({ parent: parent, mapping_rule_id: mapping_rule_id, mapping_rule: mapping_rule, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_mapping_rule(::Google::Cloud::CloudDMS::V1::CreateMappingRuleRequest.new(parent: parent, mapping_rule_id: mapping_rule_id, mapping_rule: mapping_rule, request_id: request_id), grpc_options) do |response, operation|
+      c.create_mapping_rule(::Google::Cloud::CloudDMS::V1::CreateMappingRuleRequest.new(parent: parent, mapping_rule_id: mapping_rule_id, mapping_rule: mapping_rule, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1932,36 +1932,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_mapping_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_mapping_rule({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_mapping_rule({ name: name, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_mapping_rule name: name, request_id: request_id do |response, operation|
+      c.delete_mapping_rule name: name, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_mapping_rule ::Google::Cloud::CloudDMS::V1::DeleteMappingRuleRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_mapping_rule ::Google::Cloud::CloudDMS::V1::DeleteMappingRuleRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_mapping_rule({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_mapping_rule({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_mapping_rule(::Google::Cloud::CloudDMS::V1::DeleteMappingRuleRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_mapping_rule(::Google::Cloud::CloudDMS::V1::DeleteMappingRuleRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1994,40 +1994,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_mapping_rules_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_mapping_rules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_mapping_rules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_mapping_rules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_mapping_rules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_mapping_rules ::Google::Cloud::CloudDMS::V1::ListMappingRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_mapping_rules ::Google::Cloud::CloudDMS::V1::ListMappingRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_mapping_rules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_mapping_rules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_mapping_rules(::Google::Cloud::CloudDMS::V1::ListMappingRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_mapping_rules(::Google::Cloud::CloudDMS::V1::ListMappingRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2057,36 +2057,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_mapping_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_mapping_rule({ name: name }) do |response, operation|
+      c.get_mapping_rule({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_mapping_rule name: name do |response, operation|
+      c.get_mapping_rule name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_mapping_rule ::Google::Cloud::CloudDMS::V1::GetMappingRuleRequest.new(name: name) do |response, operation|
+      c.get_mapping_rule ::Google::Cloud::CloudDMS::V1::GetMappingRuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_mapping_rule({ name: name }, grpc_options) do |response, operation|
+      c.get_mapping_rule({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_mapping_rule(::Google::Cloud::CloudDMS::V1::GetMappingRuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_mapping_rule(::Google::Cloud::CloudDMS::V1::GetMappingRuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2120,40 +2120,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, seed_conversion_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.seed_conversion_workspace({ name: name, auto_commit: auto_commit, source_connection_profile: source_connection_profile }) do |response, operation|
+      c.seed_conversion_workspace({ name: name, auto_commit: auto_commit, source_connection_profile: source_connection_profile }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.seed_conversion_workspace name: name, auto_commit: auto_commit, source_connection_profile: source_connection_profile do |response, operation|
+      c.seed_conversion_workspace name: name, auto_commit: auto_commit, source_connection_profile: source_connection_profile do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.seed_conversion_workspace ::Google::Cloud::CloudDMS::V1::SeedConversionWorkspaceRequest.new(name: name, auto_commit: auto_commit, source_connection_profile: source_connection_profile) do |response, operation|
+      c.seed_conversion_workspace ::Google::Cloud::CloudDMS::V1::SeedConversionWorkspaceRequest.new(name: name, auto_commit: auto_commit, source_connection_profile: source_connection_profile) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.seed_conversion_workspace({ name: name, auto_commit: auto_commit, source_connection_profile: source_connection_profile }, grpc_options) do |response, operation|
+      c.seed_conversion_workspace({ name: name, auto_commit: auto_commit, source_connection_profile: source_connection_profile }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.seed_conversion_workspace(::Google::Cloud::CloudDMS::V1::SeedConversionWorkspaceRequest.new(name: name, auto_commit: auto_commit, source_connection_profile: source_connection_profile), grpc_options) do |response, operation|
+      c.seed_conversion_workspace(::Google::Cloud::CloudDMS::V1::SeedConversionWorkspaceRequest.new(name: name, auto_commit: auto_commit, source_connection_profile: source_connection_profile), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2189,40 +2189,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, import_mapping_rules_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_mapping_rules({ parent: parent, rules_format: rules_format, rules_files: rules_files, auto_commit: auto_commit }) do |response, operation|
+      c.import_mapping_rules({ parent: parent, rules_format: rules_format, rules_files: rules_files, auto_commit: auto_commit }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_mapping_rules parent: parent, rules_format: rules_format, rules_files: rules_files, auto_commit: auto_commit do |response, operation|
+      c.import_mapping_rules parent: parent, rules_format: rules_format, rules_files: rules_files, auto_commit: auto_commit do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_mapping_rules ::Google::Cloud::CloudDMS::V1::ImportMappingRulesRequest.new(parent: parent, rules_format: rules_format, rules_files: rules_files, auto_commit: auto_commit) do |response, operation|
+      c.import_mapping_rules ::Google::Cloud::CloudDMS::V1::ImportMappingRulesRequest.new(parent: parent, rules_format: rules_format, rules_files: rules_files, auto_commit: auto_commit) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_mapping_rules({ parent: parent, rules_format: rules_format, rules_files: rules_files, auto_commit: auto_commit }, grpc_options) do |response, operation|
+      c.import_mapping_rules({ parent: parent, rules_format: rules_format, rules_files: rules_files, auto_commit: auto_commit }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_mapping_rules(::Google::Cloud::CloudDMS::V1::ImportMappingRulesRequest.new(parent: parent, rules_format: rules_format, rules_files: rules_files, auto_commit: auto_commit), grpc_options) do |response, operation|
+      c.import_mapping_rules(::Google::Cloud::CloudDMS::V1::ImportMappingRulesRequest.new(parent: parent, rules_format: rules_format, rules_files: rules_files, auto_commit: auto_commit), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2258,40 +2258,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, convert_conversion_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.convert_conversion_workspace({ name: name, auto_commit: auto_commit, filter: filter, convert_full_path: convert_full_path }) do |response, operation|
+      c.convert_conversion_workspace({ name: name, auto_commit: auto_commit, filter: filter, convert_full_path: convert_full_path }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.convert_conversion_workspace name: name, auto_commit: auto_commit, filter: filter, convert_full_path: convert_full_path do |response, operation|
+      c.convert_conversion_workspace name: name, auto_commit: auto_commit, filter: filter, convert_full_path: convert_full_path do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.convert_conversion_workspace ::Google::Cloud::CloudDMS::V1::ConvertConversionWorkspaceRequest.new(name: name, auto_commit: auto_commit, filter: filter, convert_full_path: convert_full_path) do |response, operation|
+      c.convert_conversion_workspace ::Google::Cloud::CloudDMS::V1::ConvertConversionWorkspaceRequest.new(name: name, auto_commit: auto_commit, filter: filter, convert_full_path: convert_full_path) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.convert_conversion_workspace({ name: name, auto_commit: auto_commit, filter: filter, convert_full_path: convert_full_path }, grpc_options) do |response, operation|
+      c.convert_conversion_workspace({ name: name, auto_commit: auto_commit, filter: filter, convert_full_path: convert_full_path }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.convert_conversion_workspace(::Google::Cloud::CloudDMS::V1::ConvertConversionWorkspaceRequest.new(name: name, auto_commit: auto_commit, filter: filter, convert_full_path: convert_full_path), grpc_options) do |response, operation|
+      c.convert_conversion_workspace(::Google::Cloud::CloudDMS::V1::ConvertConversionWorkspaceRequest.new(name: name, auto_commit: auto_commit, filter: filter, convert_full_path: convert_full_path), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2323,40 +2323,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, commit_conversion_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.commit_conversion_workspace({ name: name, commit_name: commit_name }) do |response, operation|
+      c.commit_conversion_workspace({ name: name, commit_name: commit_name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.commit_conversion_workspace name: name, commit_name: commit_name do |response, operation|
+      c.commit_conversion_workspace name: name, commit_name: commit_name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.commit_conversion_workspace ::Google::Cloud::CloudDMS::V1::CommitConversionWorkspaceRequest.new(name: name, commit_name: commit_name) do |response, operation|
+      c.commit_conversion_workspace ::Google::Cloud::CloudDMS::V1::CommitConversionWorkspaceRequest.new(name: name, commit_name: commit_name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.commit_conversion_workspace({ name: name, commit_name: commit_name }, grpc_options) do |response, operation|
+      c.commit_conversion_workspace({ name: name, commit_name: commit_name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.commit_conversion_workspace(::Google::Cloud::CloudDMS::V1::CommitConversionWorkspaceRequest.new(name: name, commit_name: commit_name), grpc_options) do |response, operation|
+      c.commit_conversion_workspace(::Google::Cloud::CloudDMS::V1::CommitConversionWorkspaceRequest.new(name: name, commit_name: commit_name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2386,40 +2386,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, rollback_conversion_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.rollback_conversion_workspace({ name: name }) do |response, operation|
+      c.rollback_conversion_workspace({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rollback_conversion_workspace name: name do |response, operation|
+      c.rollback_conversion_workspace name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rollback_conversion_workspace ::Google::Cloud::CloudDMS::V1::RollbackConversionWorkspaceRequest.new(name: name) do |response, operation|
+      c.rollback_conversion_workspace ::Google::Cloud::CloudDMS::V1::RollbackConversionWorkspaceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rollback_conversion_workspace({ name: name }, grpc_options) do |response, operation|
+      c.rollback_conversion_workspace({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rollback_conversion_workspace(::Google::Cloud::CloudDMS::V1::RollbackConversionWorkspaceRequest.new(name: name), grpc_options) do |response, operation|
+      c.rollback_conversion_workspace(::Google::Cloud::CloudDMS::V1::RollbackConversionWorkspaceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2458,40 +2458,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, apply_conversion_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.apply_conversion_workspace({ name: name, filter: filter, dry_run: dry_run, auto_commit: auto_commit, connection_profile: connection_profile }) do |response, operation|
+      c.apply_conversion_workspace({ name: name, filter: filter, dry_run: dry_run, auto_commit: auto_commit, connection_profile: connection_profile }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.apply_conversion_workspace name: name, filter: filter, dry_run: dry_run, auto_commit: auto_commit, connection_profile: connection_profile do |response, operation|
+      c.apply_conversion_workspace name: name, filter: filter, dry_run: dry_run, auto_commit: auto_commit, connection_profile: connection_profile do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.apply_conversion_workspace ::Google::Cloud::CloudDMS::V1::ApplyConversionWorkspaceRequest.new(name: name, filter: filter, dry_run: dry_run, auto_commit: auto_commit, connection_profile: connection_profile) do |response, operation|
+      c.apply_conversion_workspace ::Google::Cloud::CloudDMS::V1::ApplyConversionWorkspaceRequest.new(name: name, filter: filter, dry_run: dry_run, auto_commit: auto_commit, connection_profile: connection_profile) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.apply_conversion_workspace({ name: name, filter: filter, dry_run: dry_run, auto_commit: auto_commit, connection_profile: connection_profile }, grpc_options) do |response, operation|
+      c.apply_conversion_workspace({ name: name, filter: filter, dry_run: dry_run, auto_commit: auto_commit, connection_profile: connection_profile }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.apply_conversion_workspace(::Google::Cloud::CloudDMS::V1::ApplyConversionWorkspaceRequest.new(name: name, filter: filter, dry_run: dry_run, auto_commit: auto_commit, connection_profile: connection_profile), grpc_options) do |response, operation|
+      c.apply_conversion_workspace(::Google::Cloud::CloudDMS::V1::ApplyConversionWorkspaceRequest.new(name: name, filter: filter, dry_run: dry_run, auto_commit: auto_commit, connection_profile: connection_profile), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2535,40 +2535,40 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, describe_database_entities_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.describe_database_entities({ conversion_workspace: conversion_workspace, page_size: page_size, page_token: page_token, tree: tree, uncommitted: uncommitted, commit_id: commit_id, filter: filter, view: view }) do |response, operation|
+      c.describe_database_entities({ conversion_workspace: conversion_workspace, page_size: page_size, page_token: page_token, tree: tree, uncommitted: uncommitted, commit_id: commit_id, filter: filter, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.describe_database_entities conversion_workspace: conversion_workspace, page_size: page_size, page_token: page_token, tree: tree, uncommitted: uncommitted, commit_id: commit_id, filter: filter, view: view do |response, operation|
+      c.describe_database_entities conversion_workspace: conversion_workspace, page_size: page_size, page_token: page_token, tree: tree, uncommitted: uncommitted, commit_id: commit_id, filter: filter, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.describe_database_entities ::Google::Cloud::CloudDMS::V1::DescribeDatabaseEntitiesRequest.new(conversion_workspace: conversion_workspace, page_size: page_size, page_token: page_token, tree: tree, uncommitted: uncommitted, commit_id: commit_id, filter: filter, view: view) do |response, operation|
+      c.describe_database_entities ::Google::Cloud::CloudDMS::V1::DescribeDatabaseEntitiesRequest.new(conversion_workspace: conversion_workspace, page_size: page_size, page_token: page_token, tree: tree, uncommitted: uncommitted, commit_id: commit_id, filter: filter, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.describe_database_entities({ conversion_workspace: conversion_workspace, page_size: page_size, page_token: page_token, tree: tree, uncommitted: uncommitted, commit_id: commit_id, filter: filter, view: view }, grpc_options) do |response, operation|
+      c.describe_database_entities({ conversion_workspace: conversion_workspace, page_size: page_size, page_token: page_token, tree: tree, uncommitted: uncommitted, commit_id: commit_id, filter: filter, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.describe_database_entities(::Google::Cloud::CloudDMS::V1::DescribeDatabaseEntitiesRequest.new(conversion_workspace: conversion_workspace, page_size: page_size, page_token: page_token, tree: tree, uncommitted: uncommitted, commit_id: commit_id, filter: filter, view: view), grpc_options) do |response, operation|
+      c.describe_database_entities(::Google::Cloud::CloudDMS::V1::DescribeDatabaseEntitiesRequest.new(conversion_workspace: conversion_workspace, page_size: page_size, page_token: page_token, tree: tree, uncommitted: uncommitted, commit_id: commit_id, filter: filter, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2604,36 +2604,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, search_background_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_background_jobs({ conversion_workspace: conversion_workspace, return_most_recent_per_job_type: return_most_recent_per_job_type, max_size: max_size, completed_until_time: completed_until_time }) do |response, operation|
+      c.search_background_jobs({ conversion_workspace: conversion_workspace, return_most_recent_per_job_type: return_most_recent_per_job_type, max_size: max_size, completed_until_time: completed_until_time }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_background_jobs conversion_workspace: conversion_workspace, return_most_recent_per_job_type: return_most_recent_per_job_type, max_size: max_size, completed_until_time: completed_until_time do |response, operation|
+      c.search_background_jobs conversion_workspace: conversion_workspace, return_most_recent_per_job_type: return_most_recent_per_job_type, max_size: max_size, completed_until_time: completed_until_time do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_background_jobs ::Google::Cloud::CloudDMS::V1::SearchBackgroundJobsRequest.new(conversion_workspace: conversion_workspace, return_most_recent_per_job_type: return_most_recent_per_job_type, max_size: max_size, completed_until_time: completed_until_time) do |response, operation|
+      c.search_background_jobs ::Google::Cloud::CloudDMS::V1::SearchBackgroundJobsRequest.new(conversion_workspace: conversion_workspace, return_most_recent_per_job_type: return_most_recent_per_job_type, max_size: max_size, completed_until_time: completed_until_time) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_background_jobs({ conversion_workspace: conversion_workspace, return_most_recent_per_job_type: return_most_recent_per_job_type, max_size: max_size, completed_until_time: completed_until_time }, grpc_options) do |response, operation|
+      c.search_background_jobs({ conversion_workspace: conversion_workspace, return_most_recent_per_job_type: return_most_recent_per_job_type, max_size: max_size, completed_until_time: completed_until_time }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_background_jobs(::Google::Cloud::CloudDMS::V1::SearchBackgroundJobsRequest.new(conversion_workspace: conversion_workspace, return_most_recent_per_job_type: return_most_recent_per_job_type, max_size: max_size, completed_until_time: completed_until_time), grpc_options) do |response, operation|
+      c.search_background_jobs(::Google::Cloud::CloudDMS::V1::SearchBackgroundJobsRequest.new(conversion_workspace: conversion_workspace, return_most_recent_per_job_type: return_most_recent_per_job_type, max_size: max_size, completed_until_time: completed_until_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2664,36 +2664,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, describe_conversion_workspace_revisions_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.describe_conversion_workspace_revisions({ conversion_workspace: conversion_workspace, commit_id: commit_id }) do |response, operation|
+      c.describe_conversion_workspace_revisions({ conversion_workspace: conversion_workspace, commit_id: commit_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.describe_conversion_workspace_revisions conversion_workspace: conversion_workspace, commit_id: commit_id do |response, operation|
+      c.describe_conversion_workspace_revisions conversion_workspace: conversion_workspace, commit_id: commit_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.describe_conversion_workspace_revisions ::Google::Cloud::CloudDMS::V1::DescribeConversionWorkspaceRevisionsRequest.new(conversion_workspace: conversion_workspace, commit_id: commit_id) do |response, operation|
+      c.describe_conversion_workspace_revisions ::Google::Cloud::CloudDMS::V1::DescribeConversionWorkspaceRevisionsRequest.new(conversion_workspace: conversion_workspace, commit_id: commit_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.describe_conversion_workspace_revisions({ conversion_workspace: conversion_workspace, commit_id: commit_id }, grpc_options) do |response, operation|
+      c.describe_conversion_workspace_revisions({ conversion_workspace: conversion_workspace, commit_id: commit_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.describe_conversion_workspace_revisions(::Google::Cloud::CloudDMS::V1::DescribeConversionWorkspaceRevisionsRequest.new(conversion_workspace: conversion_workspace, commit_id: commit_id), grpc_options) do |response, operation|
+      c.describe_conversion_workspace_revisions(::Google::Cloud::CloudDMS::V1::DescribeConversionWorkspaceRevisionsRequest.new(conversion_workspace: conversion_workspace, commit_id: commit_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2726,36 +2726,36 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, fetch_static_ips_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+      c = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_static_ips({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.fetch_static_ips({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_static_ips name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.fetch_static_ips name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_static_ips ::Google::Cloud::CloudDMS::V1::FetchStaticIpsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.fetch_static_ips ::Google::Cloud::CloudDMS::V1::FetchStaticIpsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_static_ips({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.fetch_static_ips({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_static_ips(::Google::Cloud::CloudDMS::V1::FetchStaticIpsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.fetch_static_ips(::Google::Cloud::CloudDMS::V1::FetchStaticIpsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

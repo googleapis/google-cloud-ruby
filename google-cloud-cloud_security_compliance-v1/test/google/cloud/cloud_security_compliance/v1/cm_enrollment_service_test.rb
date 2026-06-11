@@ -84,36 +84,36 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::ClientT
 
     Gapic::ServiceStub.stub :new, update_cm_enrollment_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client.new do |config|
+      c = ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_cm_enrollment({ cm_enrollment: cm_enrollment, update_mask: update_mask }) do |response, operation|
+      c.update_cm_enrollment({ cm_enrollment: cm_enrollment, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_cm_enrollment cm_enrollment: cm_enrollment, update_mask: update_mask do |response, operation|
+      c.update_cm_enrollment cm_enrollment: cm_enrollment, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_cm_enrollment ::Google::Cloud::CloudSecurityCompliance::V1::UpdateCmEnrollmentRequest.new(cm_enrollment: cm_enrollment, update_mask: update_mask) do |response, operation|
+      c.update_cm_enrollment ::Google::Cloud::CloudSecurityCompliance::V1::UpdateCmEnrollmentRequest.new(cm_enrollment: cm_enrollment, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_cm_enrollment({ cm_enrollment: cm_enrollment, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_cm_enrollment({ cm_enrollment: cm_enrollment, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_cm_enrollment(::Google::Cloud::CloudSecurityCompliance::V1::UpdateCmEnrollmentRequest.new(cm_enrollment: cm_enrollment, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_cm_enrollment(::Google::Cloud::CloudSecurityCompliance::V1::UpdateCmEnrollmentRequest.new(cm_enrollment: cm_enrollment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::ClientT
 
     Gapic::ServiceStub.stub :new, calculate_effective_cm_enrollment_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client.new do |config|
+      c = ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.calculate_effective_cm_enrollment({ name: name }) do |response, operation|
+      c.calculate_effective_cm_enrollment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.calculate_effective_cm_enrollment name: name do |response, operation|
+      c.calculate_effective_cm_enrollment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.calculate_effective_cm_enrollment ::Google::Cloud::CloudSecurityCompliance::V1::CalculateEffectiveCmEnrollmentRequest.new(name: name) do |response, operation|
+      c.calculate_effective_cm_enrollment ::Google::Cloud::CloudSecurityCompliance::V1::CalculateEffectiveCmEnrollmentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.calculate_effective_cm_enrollment({ name: name }, grpc_options) do |response, operation|
+      c.calculate_effective_cm_enrollment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.calculate_effective_cm_enrollment(::Google::Cloud::CloudSecurityCompliance::V1::CalculateEffectiveCmEnrollmentRequest.new(name: name), grpc_options) do |response, operation|
+      c.calculate_effective_cm_enrollment(::Google::Cloud::CloudSecurityCompliance::V1::CalculateEffectiveCmEnrollmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

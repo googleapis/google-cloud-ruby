@@ -82,36 +82,36 @@ class ::Google::Cloud::Chronicle::V1::EntityService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_watchlist_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::EntityService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::EntityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_watchlist({ name: name }) do |response, operation|
+      c.get_watchlist({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_watchlist name: name do |response, operation|
+      c.get_watchlist name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_watchlist ::Google::Cloud::Chronicle::V1::GetWatchlistRequest.new(name: name) do |response, operation|
+      c.get_watchlist ::Google::Cloud::Chronicle::V1::GetWatchlistRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_watchlist({ name: name }, grpc_options) do |response, operation|
+      c.get_watchlist({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_watchlist(::Google::Cloud::Chronicle::V1::GetWatchlistRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_watchlist(::Google::Cloud::Chronicle::V1::GetWatchlistRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Cloud::Chronicle::V1::EntityService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_watchlists_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::EntityService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::EntityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_watchlists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_watchlists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_watchlists parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_watchlists parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_watchlists ::Google::Cloud::Chronicle::V1::ListWatchlistsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_watchlists ::Google::Cloud::Chronicle::V1::ListWatchlistsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_watchlists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_watchlists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_watchlists(::Google::Cloud::Chronicle::V1::ListWatchlistsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_watchlists(::Google::Cloud::Chronicle::V1::ListWatchlistsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -213,36 +213,36 @@ class ::Google::Cloud::Chronicle::V1::EntityService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_watchlist_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::EntityService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::EntityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_watchlist({ parent: parent, watchlist_id: watchlist_id, watchlist: watchlist }) do |response, operation|
+      c.create_watchlist({ parent: parent, watchlist_id: watchlist_id, watchlist: watchlist }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_watchlist parent: parent, watchlist_id: watchlist_id, watchlist: watchlist do |response, operation|
+      c.create_watchlist parent: parent, watchlist_id: watchlist_id, watchlist: watchlist do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_watchlist ::Google::Cloud::Chronicle::V1::CreateWatchlistRequest.new(parent: parent, watchlist_id: watchlist_id, watchlist: watchlist) do |response, operation|
+      c.create_watchlist ::Google::Cloud::Chronicle::V1::CreateWatchlistRequest.new(parent: parent, watchlist_id: watchlist_id, watchlist: watchlist) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_watchlist({ parent: parent, watchlist_id: watchlist_id, watchlist: watchlist }, grpc_options) do |response, operation|
+      c.create_watchlist({ parent: parent, watchlist_id: watchlist_id, watchlist: watchlist }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_watchlist(::Google::Cloud::Chronicle::V1::CreateWatchlistRequest.new(parent: parent, watchlist_id: watchlist_id, watchlist: watchlist), grpc_options) do |response, operation|
+      c.create_watchlist(::Google::Cloud::Chronicle::V1::CreateWatchlistRequest.new(parent: parent, watchlist_id: watchlist_id, watchlist: watchlist), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -273,36 +273,36 @@ class ::Google::Cloud::Chronicle::V1::EntityService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_watchlist_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::EntityService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::EntityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_watchlist({ watchlist: watchlist, update_mask: update_mask }) do |response, operation|
+      c.update_watchlist({ watchlist: watchlist, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_watchlist watchlist: watchlist, update_mask: update_mask do |response, operation|
+      c.update_watchlist watchlist: watchlist, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_watchlist ::Google::Cloud::Chronicle::V1::UpdateWatchlistRequest.new(watchlist: watchlist, update_mask: update_mask) do |response, operation|
+      c.update_watchlist ::Google::Cloud::Chronicle::V1::UpdateWatchlistRequest.new(watchlist: watchlist, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_watchlist({ watchlist: watchlist, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_watchlist({ watchlist: watchlist, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_watchlist(::Google::Cloud::Chronicle::V1::UpdateWatchlistRequest.new(watchlist: watchlist, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_watchlist(::Google::Cloud::Chronicle::V1::UpdateWatchlistRequest.new(watchlist: watchlist, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -333,36 +333,36 @@ class ::Google::Cloud::Chronicle::V1::EntityService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_watchlist_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::EntityService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::EntityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_watchlist({ name: name, force: force }) do |response, operation|
+      c.delete_watchlist({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_watchlist name: name, force: force do |response, operation|
+      c.delete_watchlist name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_watchlist ::Google::Cloud::Chronicle::V1::DeleteWatchlistRequest.new(name: name, force: force) do |response, operation|
+      c.delete_watchlist ::Google::Cloud::Chronicle::V1::DeleteWatchlistRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_watchlist({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_watchlist({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_watchlist(::Google::Cloud::Chronicle::V1::DeleteWatchlistRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_watchlist(::Google::Cloud::Chronicle::V1::DeleteWatchlistRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

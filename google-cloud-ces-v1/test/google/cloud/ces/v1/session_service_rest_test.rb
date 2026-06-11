@@ -98,32 +98,32 @@ class ::Google::Cloud::Ces::V1::SessionService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Ces::V1::SessionService::Rest::ServiceStub.stub :transcode_run_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_session_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::SessionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::SessionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_session({ config: config, inputs: inputs }) do |_result, response|
+        c.run_session({ config: config, inputs: inputs }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_session config: config, inputs: inputs do |_result, response|
+        c.run_session config: config, inputs: inputs do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_session ::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs) do |_result, response|
+        c.run_session ::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_session({ config: config, inputs: inputs }, call_options) do |_result, response|
+        c.run_session({ config: config, inputs: inputs }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_session(::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs), call_options) do |_result, response|
+        c.run_session(::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Ces::V1::SessionService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Ces::V1::SessionService::Rest::ServiceStub.stub :transcode_stream_run_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stream_run_session_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::SessionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::SessionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stream_run_session({ config: config, inputs: inputs }) do |_result, response|
+        c.stream_run_session({ config: config, inputs: inputs }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.stream_run_session config: config, inputs: inputs do |_result, response|
+        c.stream_run_session config: config, inputs: inputs do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.stream_run_session ::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs) do |_result, response|
+        c.stream_run_session ::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.stream_run_session({ config: config, inputs: inputs }, call_options) do |_result, response|
+        c.stream_run_session({ config: config, inputs: inputs }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.stream_run_session(::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs), call_options) do |_result, response|
+        c.stream_run_session(::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 

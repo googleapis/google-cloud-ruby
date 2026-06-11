@@ -99,32 +99,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
     ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ServiceStub.stub :transcode_list_frameworks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_frameworks_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_frameworks({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_frameworks({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_frameworks parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_frameworks parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_frameworks ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_frameworks ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_frameworks({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_frameworks({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_frameworks(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworksRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_frameworks(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworksRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
     ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ServiceStub.stub :transcode_get_framework_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_framework_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_framework({ name: name, major_revision_id: major_revision_id }) do |_result, response|
+        c.get_framework({ name: name, major_revision_id: major_revision_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_framework name: name, major_revision_id: major_revision_id do |_result, response|
+        c.get_framework name: name, major_revision_id: major_revision_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_framework ::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkRequest.new(name: name, major_revision_id: major_revision_id) do |_result, response|
+        c.get_framework ::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkRequest.new(name: name, major_revision_id: major_revision_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_framework({ name: name, major_revision_id: major_revision_id }, call_options) do |_result, response|
+        c.get_framework({ name: name, major_revision_id: major_revision_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_framework(::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkRequest.new(name: name, major_revision_id: major_revision_id), call_options) do |_result, response|
+        c.get_framework(::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkRequest.new(name: name, major_revision_id: major_revision_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
     ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ServiceStub.stub :transcode_create_framework_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_framework_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_framework({ parent: parent, framework_id: framework_id, framework: framework }) do |_result, response|
+        c.create_framework({ parent: parent, framework_id: framework_id, framework: framework }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_framework parent: parent, framework_id: framework_id, framework: framework do |_result, response|
+        c.create_framework parent: parent, framework_id: framework_id, framework: framework do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_framework ::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkRequest.new(parent: parent, framework_id: framework_id, framework: framework) do |_result, response|
+        c.create_framework ::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkRequest.new(parent: parent, framework_id: framework_id, framework: framework) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_framework({ parent: parent, framework_id: framework_id, framework: framework }, call_options) do |_result, response|
+        c.create_framework({ parent: parent, framework_id: framework_id, framework: framework }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_framework(::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkRequest.new(parent: parent, framework_id: framework_id, framework: framework), call_options) do |_result, response|
+        c.create_framework(::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkRequest.new(parent: parent, framework_id: framework_id, framework: framework), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
     ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ServiceStub.stub :transcode_update_framework_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_framework_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_framework({ update_mask: update_mask, framework: framework, major_revision_id: major_revision_id }) do |_result, response|
+        c.update_framework({ update_mask: update_mask, framework: framework, major_revision_id: major_revision_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_framework update_mask: update_mask, framework: framework, major_revision_id: major_revision_id do |_result, response|
+        c.update_framework update_mask: update_mask, framework: framework, major_revision_id: major_revision_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_framework ::Google::Cloud::CloudSecurityCompliance::V1::UpdateFrameworkRequest.new(update_mask: update_mask, framework: framework, major_revision_id: major_revision_id) do |_result, response|
+        c.update_framework ::Google::Cloud::CloudSecurityCompliance::V1::UpdateFrameworkRequest.new(update_mask: update_mask, framework: framework, major_revision_id: major_revision_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_framework({ update_mask: update_mask, framework: framework, major_revision_id: major_revision_id }, call_options) do |_result, response|
+        c.update_framework({ update_mask: update_mask, framework: framework, major_revision_id: major_revision_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_framework(::Google::Cloud::CloudSecurityCompliance::V1::UpdateFrameworkRequest.new(update_mask: update_mask, framework: framework, major_revision_id: major_revision_id), call_options) do |_result, response|
+        c.update_framework(::Google::Cloud::CloudSecurityCompliance::V1::UpdateFrameworkRequest.new(update_mask: update_mask, framework: framework, major_revision_id: major_revision_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
     ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ServiceStub.stub :transcode_delete_framework_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_framework_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_framework({ name: name }) do |_result, response|
+        c.delete_framework({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_framework name: name do |_result, response|
+        c.delete_framework name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_framework ::Google::Cloud::CloudSecurityCompliance::V1::DeleteFrameworkRequest.new(name: name) do |_result, response|
+        c.delete_framework ::Google::Cloud::CloudSecurityCompliance::V1::DeleteFrameworkRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_framework({ name: name }, call_options) do |_result, response|
+        c.delete_framework({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_framework(::Google::Cloud::CloudSecurityCompliance::V1::DeleteFrameworkRequest.new(name: name), call_options) do |_result, response|
+        c.delete_framework(::Google::Cloud::CloudSecurityCompliance::V1::DeleteFrameworkRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
     ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ServiceStub.stub :transcode_list_cloud_controls_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_cloud_controls_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_cloud_controls({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_cloud_controls({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_cloud_controls parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_cloud_controls parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_cloud_controls ::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_cloud_controls ::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_cloud_controls({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_cloud_controls({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_cloud_controls(::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_cloud_controls(::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
     ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ServiceStub.stub :transcode_get_cloud_control_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_cloud_control_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_cloud_control({ name: name, major_revision_id: major_revision_id }) do |_result, response|
+        c.get_cloud_control({ name: name, major_revision_id: major_revision_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_cloud_control name: name, major_revision_id: major_revision_id do |_result, response|
+        c.get_cloud_control name: name, major_revision_id: major_revision_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name, major_revision_id: major_revision_id) do |_result, response|
+        c.get_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name, major_revision_id: major_revision_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_cloud_control({ name: name, major_revision_id: major_revision_id }, call_options) do |_result, response|
+        c.get_cloud_control({ name: name, major_revision_id: major_revision_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name, major_revision_id: major_revision_id), call_options) do |_result, response|
+        c.get_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name, major_revision_id: major_revision_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -487,32 +487,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
     ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ServiceStub.stub :transcode_create_cloud_control_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_cloud_control_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_cloud_control({ parent: parent, cloud_control_id: cloud_control_id, cloud_control: cloud_control }) do |_result, response|
+        c.create_cloud_control({ parent: parent, cloud_control_id: cloud_control_id, cloud_control: cloud_control }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_cloud_control parent: parent, cloud_control_id: cloud_control_id, cloud_control: cloud_control do |_result, response|
+        c.create_cloud_control parent: parent, cloud_control_id: cloud_control_id, cloud_control: cloud_control do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::CreateCloudControlRequest.new(parent: parent, cloud_control_id: cloud_control_id, cloud_control: cloud_control) do |_result, response|
+        c.create_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::CreateCloudControlRequest.new(parent: parent, cloud_control_id: cloud_control_id, cloud_control: cloud_control) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_cloud_control({ parent: parent, cloud_control_id: cloud_control_id, cloud_control: cloud_control }, call_options) do |_result, response|
+        c.create_cloud_control({ parent: parent, cloud_control_id: cloud_control_id, cloud_control: cloud_control }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::CreateCloudControlRequest.new(parent: parent, cloud_control_id: cloud_control_id, cloud_control: cloud_control), call_options) do |_result, response|
+        c.create_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::CreateCloudControlRequest.new(parent: parent, cloud_control_id: cloud_control_id, cloud_control: cloud_control), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -542,32 +542,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
     ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ServiceStub.stub :transcode_update_cloud_control_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_cloud_control_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_cloud_control({ update_mask: update_mask, cloud_control: cloud_control }) do |_result, response|
+        c.update_cloud_control({ update_mask: update_mask, cloud_control: cloud_control }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_cloud_control update_mask: update_mask, cloud_control: cloud_control do |_result, response|
+        c.update_cloud_control update_mask: update_mask, cloud_control: cloud_control do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::UpdateCloudControlRequest.new(update_mask: update_mask, cloud_control: cloud_control) do |_result, response|
+        c.update_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::UpdateCloudControlRequest.new(update_mask: update_mask, cloud_control: cloud_control) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_cloud_control({ update_mask: update_mask, cloud_control: cloud_control }, call_options) do |_result, response|
+        c.update_cloud_control({ update_mask: update_mask, cloud_control: cloud_control }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::UpdateCloudControlRequest.new(update_mask: update_mask, cloud_control: cloud_control), call_options) do |_result, response|
+        c.update_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::UpdateCloudControlRequest.new(update_mask: update_mask, cloud_control: cloud_control), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -596,32 +596,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
     ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ServiceStub.stub :transcode_delete_cloud_control_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_cloud_control_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_cloud_control({ name: name }) do |_result, response|
+        c.delete_cloud_control({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_cloud_control name: name do |_result, response|
+        c.delete_cloud_control name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::DeleteCloudControlRequest.new(name: name) do |_result, response|
+        c.delete_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::DeleteCloudControlRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_cloud_control({ name: name }, call_options) do |_result, response|
+        c.delete_cloud_control({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::DeleteCloudControlRequest.new(name: name), call_options) do |_result, response|
+        c.delete_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::DeleteCloudControlRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

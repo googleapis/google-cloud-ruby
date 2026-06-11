@@ -100,32 +100,32 @@ class ::Google::Cloud::Ces::V1beta::WidgetService::Rest::ClientTest < Minitest::
     ::Google::Cloud::Ces::V1beta::WidgetService::Rest::ServiceStub.stub :transcode_generate_chat_token_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_chat_token_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1beta::WidgetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1beta::WidgetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_chat_token({ name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled }) do |_result, response|
+        c.generate_chat_token({ name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_chat_token name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled do |_result, response|
+        c.generate_chat_token name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_chat_token ::Google::Cloud::Ces::V1beta::GenerateChatTokenRequest.new(name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled) do |_result, response|
+        c.generate_chat_token ::Google::Cloud::Ces::V1beta::GenerateChatTokenRequest.new(name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_chat_token({ name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled }, call_options) do |_result, response|
+        c.generate_chat_token({ name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_chat_token(::Google::Cloud::Ces::V1beta::GenerateChatTokenRequest.new(name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled), call_options) do |_result, response|
+        c.generate_chat_token(::Google::Cloud::Ces::V1beta::GenerateChatTokenRequest.new(name: name, deployment: deployment, recaptcha_token: recaptcha_token, live_handoff_enabled: live_handoff_enabled), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

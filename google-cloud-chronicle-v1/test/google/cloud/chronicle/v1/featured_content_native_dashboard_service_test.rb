@@ -82,36 +82,36 @@ class ::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Cli
 
     Gapic::ServiceStub.stub :new, get_featured_content_native_dashboard_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_featured_content_native_dashboard({ name: name }) do |response, operation|
+      c.get_featured_content_native_dashboard({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_featured_content_native_dashboard name: name do |response, operation|
+      c.get_featured_content_native_dashboard name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_featured_content_native_dashboard ::Google::Cloud::Chronicle::V1::GetFeaturedContentNativeDashboardRequest.new(name: name) do |response, operation|
+      c.get_featured_content_native_dashboard ::Google::Cloud::Chronicle::V1::GetFeaturedContentNativeDashboardRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_featured_content_native_dashboard({ name: name }, grpc_options) do |response, operation|
+      c.get_featured_content_native_dashboard({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_featured_content_native_dashboard(::Google::Cloud::Chronicle::V1::GetFeaturedContentNativeDashboardRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_featured_content_native_dashboard(::Google::Cloud::Chronicle::V1::GetFeaturedContentNativeDashboardRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Cli
 
     Gapic::ServiceStub.stub :new, list_featured_content_native_dashboards_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_featured_content_native_dashboards({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_featured_content_native_dashboards({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_featured_content_native_dashboards parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_featured_content_native_dashboards parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_featured_content_native_dashboards ::Google::Cloud::Chronicle::V1::ListFeaturedContentNativeDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_featured_content_native_dashboards ::Google::Cloud::Chronicle::V1::ListFeaturedContentNativeDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_featured_content_native_dashboards({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_featured_content_native_dashboards({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_featured_content_native_dashboards(::Google::Cloud::Chronicle::V1::ListFeaturedContentNativeDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_featured_content_native_dashboards(::Google::Cloud::Chronicle::V1::ListFeaturedContentNativeDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -211,36 +211,36 @@ class ::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Cli
 
     Gapic::ServiceStub.stub :new, install_featured_content_native_dashboard_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.install_featured_content_native_dashboard({ name: name, featured_content_native_dashboard: featured_content_native_dashboard }) do |response, operation|
+      c.install_featured_content_native_dashboard({ name: name, featured_content_native_dashboard: featured_content_native_dashboard }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.install_featured_content_native_dashboard name: name, featured_content_native_dashboard: featured_content_native_dashboard do |response, operation|
+      c.install_featured_content_native_dashboard name: name, featured_content_native_dashboard: featured_content_native_dashboard do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.install_featured_content_native_dashboard ::Google::Cloud::Chronicle::V1::InstallFeaturedContentNativeDashboardRequest.new(name: name, featured_content_native_dashboard: featured_content_native_dashboard) do |response, operation|
+      c.install_featured_content_native_dashboard ::Google::Cloud::Chronicle::V1::InstallFeaturedContentNativeDashboardRequest.new(name: name, featured_content_native_dashboard: featured_content_native_dashboard) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.install_featured_content_native_dashboard({ name: name, featured_content_native_dashboard: featured_content_native_dashboard }, grpc_options) do |response, operation|
+      c.install_featured_content_native_dashboard({ name: name, featured_content_native_dashboard: featured_content_native_dashboard }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.install_featured_content_native_dashboard(::Google::Cloud::Chronicle::V1::InstallFeaturedContentNativeDashboardRequest.new(name: name, featured_content_native_dashboard: featured_content_native_dashboard), grpc_options) do |response, operation|
+      c.install_featured_content_native_dashboard(::Google::Cloud::Chronicle::V1::InstallFeaturedContentNativeDashboardRequest.new(name: name, featured_content_native_dashboard: featured_content_native_dashboard), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

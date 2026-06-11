@@ -98,32 +98,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Rest::C
     ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Rest::ServiceStub.stub :transcode_update_cm_enrollment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_cm_enrollment_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_cm_enrollment({ cm_enrollment: cm_enrollment, update_mask: update_mask }) do |_result, response|
+        c.update_cm_enrollment({ cm_enrollment: cm_enrollment, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_cm_enrollment cm_enrollment: cm_enrollment, update_mask: update_mask do |_result, response|
+        c.update_cm_enrollment cm_enrollment: cm_enrollment, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_cm_enrollment ::Google::Cloud::CloudSecurityCompliance::V1::UpdateCmEnrollmentRequest.new(cm_enrollment: cm_enrollment, update_mask: update_mask) do |_result, response|
+        c.update_cm_enrollment ::Google::Cloud::CloudSecurityCompliance::V1::UpdateCmEnrollmentRequest.new(cm_enrollment: cm_enrollment, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_cm_enrollment({ cm_enrollment: cm_enrollment, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_cm_enrollment({ cm_enrollment: cm_enrollment, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_cm_enrollment(::Google::Cloud::CloudSecurityCompliance::V1::UpdateCmEnrollmentRequest.new(cm_enrollment: cm_enrollment, update_mask: update_mask), call_options) do |_result, response|
+        c.update_cm_enrollment(::Google::Cloud::CloudSecurityCompliance::V1::UpdateCmEnrollmentRequest.new(cm_enrollment: cm_enrollment, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Rest::C
     ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Rest::ServiceStub.stub :transcode_calculate_effective_cm_enrollment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, calculate_effective_cm_enrollment_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.calculate_effective_cm_enrollment({ name: name }) do |_result, response|
+        c.calculate_effective_cm_enrollment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.calculate_effective_cm_enrollment name: name do |_result, response|
+        c.calculate_effective_cm_enrollment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.calculate_effective_cm_enrollment ::Google::Cloud::CloudSecurityCompliance::V1::CalculateEffectiveCmEnrollmentRequest.new(name: name) do |_result, response|
+        c.calculate_effective_cm_enrollment ::Google::Cloud::CloudSecurityCompliance::V1::CalculateEffectiveCmEnrollmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.calculate_effective_cm_enrollment({ name: name }, call_options) do |_result, response|
+        c.calculate_effective_cm_enrollment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.calculate_effective_cm_enrollment(::Google::Cloud::CloudSecurityCompliance::V1::CalculateEffectiveCmEnrollmentRequest.new(name: name), call_options) do |_result, response|
+        c.calculate_effective_cm_enrollment(::Google::Cloud::CloudSecurityCompliance::V1::CalculateEffectiveCmEnrollmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
