@@ -98,32 +98,32 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::ServiceStub.stub :transcode_create_contact_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_contact_client_stub do
         # Create client
-        client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_contact({ parent: parent, contact: contact }) do |_result, response|
+        c.create_contact({ parent: parent, contact: contact }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_contact parent: parent, contact: contact do |_result, response|
+        c.create_contact parent: parent, contact: contact do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_contact ::Google::Cloud::EssentialContacts::V1::CreateContactRequest.new(parent: parent, contact: contact) do |_result, response|
+        c.create_contact ::Google::Cloud::EssentialContacts::V1::CreateContactRequest.new(parent: parent, contact: contact) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_contact({ parent: parent, contact: contact }, call_options) do |_result, response|
+        c.create_contact({ parent: parent, contact: contact }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_contact(::Google::Cloud::EssentialContacts::V1::CreateContactRequest.new(parent: parent, contact: contact), call_options) do |_result, response|
+        c.create_contact(::Google::Cloud::EssentialContacts::V1::CreateContactRequest.new(parent: parent, contact: contact), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::ServiceStub.stub :transcode_update_contact_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_contact_client_stub do
         # Create client
-        client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_contact({ contact: contact, update_mask: update_mask }) do |_result, response|
+        c.update_contact({ contact: contact, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_contact contact: contact, update_mask: update_mask do |_result, response|
+        c.update_contact contact: contact, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_contact ::Google::Cloud::EssentialContacts::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask) do |_result, response|
+        c.update_contact ::Google::Cloud::EssentialContacts::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_contact({ contact: contact, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_contact({ contact: contact, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_contact(::Google::Cloud::EssentialContacts::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask), call_options) do |_result, response|
+        c.update_contact(::Google::Cloud::EssentialContacts::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::ServiceStub.stub :transcode_list_contacts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_contacts_client_stub do
         # Create client
-        client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_contacts({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_contacts({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_contacts parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_contacts parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_contacts ::Google::Cloud::EssentialContacts::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_contacts ::Google::Cloud::EssentialContacts::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_contacts({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_contacts({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_contacts(::Google::Cloud::EssentialContacts::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_contacts(::Google::Cloud::EssentialContacts::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::ServiceStub.stub :transcode_get_contact_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_contact_client_stub do
         # Create client
-        client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_contact({ name: name }) do |_result, response|
+        c.get_contact({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_contact name: name do |_result, response|
+        c.get_contact name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_contact ::Google::Cloud::EssentialContacts::V1::GetContactRequest.new(name: name) do |_result, response|
+        c.get_contact ::Google::Cloud::EssentialContacts::V1::GetContactRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_contact({ name: name }, call_options) do |_result, response|
+        c.get_contact({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_contact(::Google::Cloud::EssentialContacts::V1::GetContactRequest.new(name: name), call_options) do |_result, response|
+        c.get_contact(::Google::Cloud::EssentialContacts::V1::GetContactRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::ServiceStub.stub :transcode_delete_contact_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_contact_client_stub do
         # Create client
-        client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_contact({ name: name }) do |_result, response|
+        c.delete_contact({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_contact name: name do |_result, response|
+        c.delete_contact name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_contact ::Google::Cloud::EssentialContacts::V1::DeleteContactRequest.new(name: name) do |_result, response|
+        c.delete_contact ::Google::Cloud::EssentialContacts::V1::DeleteContactRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_contact({ name: name }, call_options) do |_result, response|
+        c.delete_contact({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_contact(::Google::Cloud::EssentialContacts::V1::DeleteContactRequest.new(name: name), call_options) do |_result, response|
+        c.delete_contact(::Google::Cloud::EssentialContacts::V1::DeleteContactRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::ServiceStub.stub :transcode_compute_contacts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, compute_contacts_client_stub do
         # Create client
-        client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.compute_contacts({ parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.compute_contacts({ parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.compute_contacts parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token do |_result, response|
+        c.compute_contacts parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.compute_contacts ::Google::Cloud::EssentialContacts::V1::ComputeContactsRequest.new(parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token) do |_result, response|
+        c.compute_contacts ::Google::Cloud::EssentialContacts::V1::ComputeContactsRequest.new(parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.compute_contacts({ parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.compute_contacts({ parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.compute_contacts(::Google::Cloud::EssentialContacts::V1::ComputeContactsRequest.new(parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.compute_contacts(::Google::Cloud::EssentialContacts::V1::ComputeContactsRequest.new(parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -430,32 +430,32 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::ServiceStub.stub :transcode_send_test_message_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, send_test_message_client_stub do
         # Create client
-        client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.send_test_message({ contacts: contacts, resource: resource, notification_category: notification_category }) do |_result, response|
+        c.send_test_message({ contacts: contacts, resource: resource, notification_category: notification_category }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.send_test_message contacts: contacts, resource: resource, notification_category: notification_category do |_result, response|
+        c.send_test_message contacts: contacts, resource: resource, notification_category: notification_category do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.send_test_message ::Google::Cloud::EssentialContacts::V1::SendTestMessageRequest.new(contacts: contacts, resource: resource, notification_category: notification_category) do |_result, response|
+        c.send_test_message ::Google::Cloud::EssentialContacts::V1::SendTestMessageRequest.new(contacts: contacts, resource: resource, notification_category: notification_category) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.send_test_message({ contacts: contacts, resource: resource, notification_category: notification_category }, call_options) do |_result, response|
+        c.send_test_message({ contacts: contacts, resource: resource, notification_category: notification_category }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.send_test_message(::Google::Cloud::EssentialContacts::V1::SendTestMessageRequest.new(contacts: contacts, resource: resource, notification_category: notification_category), call_options) do |_result, response|
+        c.send_test_message(::Google::Cloud::EssentialContacts::V1::SendTestMessageRequest.new(contacts: contacts, resource: resource, notification_category: notification_category), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
