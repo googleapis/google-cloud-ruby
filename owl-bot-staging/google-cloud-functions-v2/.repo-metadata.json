@@ -1,0 +1,18 @@
+{
+    "api_id": "cloudfunctions.googleapis.com",
+    "api_shortname": "cloudfunctions",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-functions-v2/latest",
+    "distribution_name": "google-cloud-functions-v2",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudfunctions",
+    "name_pretty": "Cloud Functions V2 API",
+    "product_documentation": "https://cloud.google.com/functions",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Cloud Functions API manages lightweight user-provided functions executed in response to events. Note that google-cloud-functions-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-functions instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "FUNCTIONS",
+    "ruby-cloud-product-url": "https://cloud.google.com/functions",
+    "library_type": "GAPIC_AUTO"
+}
