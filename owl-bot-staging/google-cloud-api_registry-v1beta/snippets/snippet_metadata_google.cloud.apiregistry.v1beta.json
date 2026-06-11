@@ -1,0 +1,175 @@
+{
+  "client_library": {
+    "name": "google-cloud-api_registry-v1beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.apiregistry.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "cloudapiregistry_v1beta_generated_CloudApiRegistry_GetMcpServer_sync",
+      "title": "Snippet for the get_mcp_server call in the CloudApiRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client#get_mcp_server.",
+      "file": "cloud_api_registry/get_mcp_server.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_mcp_server",
+        "full_name": "::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client#get_mcp_server",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiRegistry::V1beta::GetMcpServerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiRegistry::V1beta::McpServer",
+        "client": {
+          "short_name": "CloudApiRegistry::Client",
+          "full_name": "::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetMcpServer",
+          "full_name": "google.cloud.apiregistry.v1beta.CloudApiRegistry.GetMcpServer",
+          "service": {
+            "short_name": "CloudApiRegistry",
+            "full_name": "google.cloud.apiregistry.v1beta.CloudApiRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudapiregistry_v1beta_generated_CloudApiRegistry_ListMcpServers_sync",
+      "title": "Snippet for the list_mcp_servers call in the CloudApiRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client#list_mcp_servers.",
+      "file": "cloud_api_registry/list_mcp_servers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_mcp_servers",
+        "full_name": "::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client#list_mcp_servers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiRegistry::V1beta::ListMcpServersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiRegistry::V1beta::ListMcpServersResponse",
+        "client": {
+          "short_name": "CloudApiRegistry::Client",
+          "full_name": "::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListMcpServers",
+          "full_name": "google.cloud.apiregistry.v1beta.CloudApiRegistry.ListMcpServers",
+          "service": {
+            "short_name": "CloudApiRegistry",
+            "full_name": "google.cloud.apiregistry.v1beta.CloudApiRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudapiregistry_v1beta_generated_CloudApiRegistry_GetMcpTool_sync",
+      "title": "Snippet for the get_mcp_tool call in the CloudApiRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client#get_mcp_tool.",
+      "file": "cloud_api_registry/get_mcp_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_mcp_tool",
+        "full_name": "::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client#get_mcp_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiRegistry::V1beta::GetMcpToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiRegistry::V1beta::McpTool",
+        "client": {
+          "short_name": "CloudApiRegistry::Client",
+          "full_name": "::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetMcpTool",
+          "full_name": "google.cloud.apiregistry.v1beta.CloudApiRegistry.GetMcpTool",
+          "service": {
+            "short_name": "CloudApiRegistry",
+            "full_name": "google.cloud.apiregistry.v1beta.CloudApiRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudapiregistry_v1beta_generated_CloudApiRegistry_ListMcpTools_sync",
+      "title": "Snippet for the list_mcp_tools call in the CloudApiRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client#list_mcp_tools.",
+      "file": "cloud_api_registry/list_mcp_tools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_mcp_tools",
+        "full_name": "::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client#list_mcp_tools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiRegistry::V1beta::ListMcpToolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiRegistry::V1beta::ListMcpToolsResponse",
+        "client": {
+          "short_name": "CloudApiRegistry::Client",
+          "full_name": "::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListMcpTools",
+          "full_name": "google.cloud.apiregistry.v1beta.CloudApiRegistry.ListMcpTools",
+          "service": {
+            "short_name": "CloudApiRegistry",
+            "full_name": "google.cloud.apiregistry.v1beta.CloudApiRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
