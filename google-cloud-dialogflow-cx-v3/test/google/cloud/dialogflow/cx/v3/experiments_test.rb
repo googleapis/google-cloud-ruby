@@ -86,40 +86,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Experiments::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_experiments_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_experiments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_experiments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_experiments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_experiments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_experiments ::Google::Cloud::Dialogflow::CX::V3::ListExperimentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_experiments ::Google::Cloud::Dialogflow::CX::V3::ListExperimentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_experiments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_experiments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_experiments(::Google::Cloud::Dialogflow::CX::V3::ListExperimentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_experiments(::Google::Cloud::Dialogflow::CX::V3::ListExperimentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Experiments::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_experiment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_experiment({ name: name }) do |response, operation|
+      c.get_experiment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_experiment name: name do |response, operation|
+      c.get_experiment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_experiment ::Google::Cloud::Dialogflow::CX::V3::GetExperimentRequest.new(name: name) do |response, operation|
+      c.get_experiment ::Google::Cloud::Dialogflow::CX::V3::GetExperimentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_experiment({ name: name }, grpc_options) do |response, operation|
+      c.get_experiment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_experiment(::Google::Cloud::Dialogflow::CX::V3::GetExperimentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_experiment(::Google::Cloud::Dialogflow::CX::V3::GetExperimentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,36 +209,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Experiments::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_experiment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_experiment({ parent: parent, experiment: experiment }) do |response, operation|
+      c.create_experiment({ parent: parent, experiment: experiment }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_experiment parent: parent, experiment: experiment do |response, operation|
+      c.create_experiment parent: parent, experiment: experiment do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_experiment ::Google::Cloud::Dialogflow::CX::V3::CreateExperimentRequest.new(parent: parent, experiment: experiment) do |response, operation|
+      c.create_experiment ::Google::Cloud::Dialogflow::CX::V3::CreateExperimentRequest.new(parent: parent, experiment: experiment) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_experiment({ parent: parent, experiment: experiment }, grpc_options) do |response, operation|
+      c.create_experiment({ parent: parent, experiment: experiment }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_experiment(::Google::Cloud::Dialogflow::CX::V3::CreateExperimentRequest.new(parent: parent, experiment: experiment), grpc_options) do |response, operation|
+      c.create_experiment(::Google::Cloud::Dialogflow::CX::V3::CreateExperimentRequest.new(parent: parent, experiment: experiment), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -269,36 +269,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Experiments::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_experiment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_experiment({ experiment: experiment, update_mask: update_mask }) do |response, operation|
+      c.update_experiment({ experiment: experiment, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_experiment experiment: experiment, update_mask: update_mask do |response, operation|
+      c.update_experiment experiment: experiment, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_experiment ::Google::Cloud::Dialogflow::CX::V3::UpdateExperimentRequest.new(experiment: experiment, update_mask: update_mask) do |response, operation|
+      c.update_experiment ::Google::Cloud::Dialogflow::CX::V3::UpdateExperimentRequest.new(experiment: experiment, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_experiment({ experiment: experiment, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_experiment({ experiment: experiment, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_experiment(::Google::Cloud::Dialogflow::CX::V3::UpdateExperimentRequest.new(experiment: experiment, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_experiment(::Google::Cloud::Dialogflow::CX::V3::UpdateExperimentRequest.new(experiment: experiment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -327,36 +327,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Experiments::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_experiment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_experiment({ name: name }) do |response, operation|
+      c.delete_experiment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_experiment name: name do |response, operation|
+      c.delete_experiment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_experiment ::Google::Cloud::Dialogflow::CX::V3::DeleteExperimentRequest.new(name: name) do |response, operation|
+      c.delete_experiment ::Google::Cloud::Dialogflow::CX::V3::DeleteExperimentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_experiment({ name: name }, grpc_options) do |response, operation|
+      c.delete_experiment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_experiment(::Google::Cloud::Dialogflow::CX::V3::DeleteExperimentRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_experiment(::Google::Cloud::Dialogflow::CX::V3::DeleteExperimentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -385,36 +385,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Experiments::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, start_experiment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.start_experiment({ name: name }) do |response, operation|
+      c.start_experiment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.start_experiment name: name do |response, operation|
+      c.start_experiment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.start_experiment ::Google::Cloud::Dialogflow::CX::V3::StartExperimentRequest.new(name: name) do |response, operation|
+      c.start_experiment ::Google::Cloud::Dialogflow::CX::V3::StartExperimentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.start_experiment({ name: name }, grpc_options) do |response, operation|
+      c.start_experiment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.start_experiment(::Google::Cloud::Dialogflow::CX::V3::StartExperimentRequest.new(name: name), grpc_options) do |response, operation|
+      c.start_experiment(::Google::Cloud::Dialogflow::CX::V3::StartExperimentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -443,36 +443,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Experiments::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, stop_experiment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stop_experiment({ name: name }) do |response, operation|
+      c.stop_experiment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.stop_experiment name: name do |response, operation|
+      c.stop_experiment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.stop_experiment ::Google::Cloud::Dialogflow::CX::V3::StopExperimentRequest.new(name: name) do |response, operation|
+      c.stop_experiment ::Google::Cloud::Dialogflow::CX::V3::StopExperimentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.stop_experiment({ name: name }, grpc_options) do |response, operation|
+      c.stop_experiment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.stop_experiment(::Google::Cloud::Dialogflow::CX::V3::StopExperimentRequest.new(name: name), grpc_options) do |response, operation|
+      c.stop_experiment(::Google::Cloud::Dialogflow::CX::V3::StopExperimentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

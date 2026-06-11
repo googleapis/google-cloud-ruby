@@ -86,40 +86,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Deployments::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_deployments_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Deployments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Deployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_deployments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_deployments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_deployments ::Google::Cloud::Dialogflow::CX::V3::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_deployments ::Google::Cloud::Dialogflow::CX::V3::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_deployments(::Google::Cloud::Dialogflow::CX::V3::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_deployments(::Google::Cloud::Dialogflow::CX::V3::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Deployments::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Deployments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Deployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_deployment({ name: name }) do |response, operation|
+      c.get_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_deployment name: name do |response, operation|
+      c.get_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_deployment ::Google::Cloud::Dialogflow::CX::V3::GetDeploymentRequest.new(name: name) do |response, operation|
+      c.get_deployment ::Google::Cloud::Dialogflow::CX::V3::GetDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_deployment({ name: name }, grpc_options) do |response, operation|
+      c.get_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_deployment(::Google::Cloud::Dialogflow::CX::V3::GetDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_deployment(::Google::Cloud::Dialogflow::CX::V3::GetDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

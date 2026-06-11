@@ -94,36 +94,36 @@ class ::Google::Cloud::DiscoveryEngine::V1::RankService::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, rank_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::RankService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::RankService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.rank({ ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels }) do |response, operation|
+      c.rank({ ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rank ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels do |response, operation|
+      c.rank ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rank ::Google::Cloud::DiscoveryEngine::V1::RankRequest.new(ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels) do |response, operation|
+      c.rank ::Google::Cloud::DiscoveryEngine::V1::RankRequest.new(ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rank({ ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels }, grpc_options) do |response, operation|
+      c.rank({ ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rank(::Google::Cloud::DiscoveryEngine::V1::RankRequest.new(ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels), grpc_options) do |response, operation|
+      c.rank(::Google::Cloud::DiscoveryEngine::V1::RankRequest.new(ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

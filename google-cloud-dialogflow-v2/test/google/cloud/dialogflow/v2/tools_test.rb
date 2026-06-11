@@ -86,36 +86,36 @@ class ::Google::Cloud::Dialogflow::V2::Tools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_tool_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Tools::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Tools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tool({ parent: parent, tool: tool, tool_id: tool_id }) do |response, operation|
+      c.create_tool({ parent: parent, tool: tool, tool_id: tool_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tool parent: parent, tool: tool, tool_id: tool_id do |response, operation|
+      c.create_tool parent: parent, tool: tool, tool_id: tool_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tool ::Google::Cloud::Dialogflow::V2::CreateToolRequest.new(parent: parent, tool: tool, tool_id: tool_id) do |response, operation|
+      c.create_tool ::Google::Cloud::Dialogflow::V2::CreateToolRequest.new(parent: parent, tool: tool, tool_id: tool_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tool({ parent: parent, tool: tool, tool_id: tool_id }, grpc_options) do |response, operation|
+      c.create_tool({ parent: parent, tool: tool, tool_id: tool_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tool(::Google::Cloud::Dialogflow::V2::CreateToolRequest.new(parent: parent, tool: tool, tool_id: tool_id), grpc_options) do |response, operation|
+      c.create_tool(::Google::Cloud::Dialogflow::V2::CreateToolRequest.new(parent: parent, tool: tool, tool_id: tool_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::Dialogflow::V2::Tools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_tool_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Tools::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Tools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tool({ name: name }) do |response, operation|
+      c.get_tool({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tool name: name do |response, operation|
+      c.get_tool name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tool ::Google::Cloud::Dialogflow::V2::GetToolRequest.new(name: name) do |response, operation|
+      c.get_tool ::Google::Cloud::Dialogflow::V2::GetToolRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tool({ name: name }, grpc_options) do |response, operation|
+      c.get_tool({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tool(::Google::Cloud::Dialogflow::V2::GetToolRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tool(::Google::Cloud::Dialogflow::V2::GetToolRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -206,40 +206,40 @@ class ::Google::Cloud::Dialogflow::V2::Tools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_tools_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Tools::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Tools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tools({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_tools({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tools parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_tools parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tools ::Google::Cloud::Dialogflow::V2::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_tools ::Google::Cloud::Dialogflow::V2::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tools({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_tools({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tools(::Google::Cloud::Dialogflow::V2::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_tools(::Google::Cloud::Dialogflow::V2::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -269,36 +269,36 @@ class ::Google::Cloud::Dialogflow::V2::Tools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_tool_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Tools::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Tools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tool({ name: name }) do |response, operation|
+      c.delete_tool({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tool name: name do |response, operation|
+      c.delete_tool name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tool ::Google::Cloud::Dialogflow::V2::DeleteToolRequest.new(name: name) do |response, operation|
+      c.delete_tool ::Google::Cloud::Dialogflow::V2::DeleteToolRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tool({ name: name }, grpc_options) do |response, operation|
+      c.delete_tool({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tool(::Google::Cloud::Dialogflow::V2::DeleteToolRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_tool(::Google::Cloud::Dialogflow::V2::DeleteToolRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -329,36 +329,36 @@ class ::Google::Cloud::Dialogflow::V2::Tools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_tool_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Tools::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Tools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tool({ tool: tool, update_mask: update_mask }) do |response, operation|
+      c.update_tool({ tool: tool, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tool tool: tool, update_mask: update_mask do |response, operation|
+      c.update_tool tool: tool, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tool ::Google::Cloud::Dialogflow::V2::UpdateToolRequest.new(tool: tool, update_mask: update_mask) do |response, operation|
+      c.update_tool ::Google::Cloud::Dialogflow::V2::UpdateToolRequest.new(tool: tool, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tool({ tool: tool, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_tool({ tool: tool, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tool(::Google::Cloud::Dialogflow::V2::UpdateToolRequest.new(tool: tool, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_tool(::Google::Cloud::Dialogflow::V2::UpdateToolRequest.new(tool: tool, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -99,32 +99,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::ClientTest < M
     ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::ServiceStub.stub :transcode_create_control_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_control_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_control({ parent: parent, control: control, control_id: control_id }) do |_result, response|
+        c.create_control({ parent: parent, control: control, control_id: control_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_control parent: parent, control: control, control_id: control_id do |_result, response|
+        c.create_control parent: parent, control: control, control_id: control_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_control ::Google::Cloud::DiscoveryEngine::V1::CreateControlRequest.new(parent: parent, control: control, control_id: control_id) do |_result, response|
+        c.create_control ::Google::Cloud::DiscoveryEngine::V1::CreateControlRequest.new(parent: parent, control: control, control_id: control_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_control({ parent: parent, control: control, control_id: control_id }, call_options) do |_result, response|
+        c.create_control({ parent: parent, control: control, control_id: control_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_control(::Google::Cloud::DiscoveryEngine::V1::CreateControlRequest.new(parent: parent, control: control, control_id: control_id), call_options) do |_result, response|
+        c.create_control(::Google::Cloud::DiscoveryEngine::V1::CreateControlRequest.new(parent: parent, control: control, control_id: control_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::ClientTest < M
     ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::ServiceStub.stub :transcode_delete_control_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_control_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_control({ name: name }) do |_result, response|
+        c.delete_control({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_control name: name do |_result, response|
+        c.delete_control name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_control ::Google::Cloud::DiscoveryEngine::V1::DeleteControlRequest.new(name: name) do |_result, response|
+        c.delete_control ::Google::Cloud::DiscoveryEngine::V1::DeleteControlRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_control({ name: name }, call_options) do |_result, response|
+        c.delete_control({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_control(::Google::Cloud::DiscoveryEngine::V1::DeleteControlRequest.new(name: name), call_options) do |_result, response|
+        c.delete_control(::Google::Cloud::DiscoveryEngine::V1::DeleteControlRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::ClientTest < M
     ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::ServiceStub.stub :transcode_update_control_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_control_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_control({ control: control, update_mask: update_mask }) do |_result, response|
+        c.update_control({ control: control, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_control control: control, update_mask: update_mask do |_result, response|
+        c.update_control control: control, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_control ::Google::Cloud::DiscoveryEngine::V1::UpdateControlRequest.new(control: control, update_mask: update_mask) do |_result, response|
+        c.update_control ::Google::Cloud::DiscoveryEngine::V1::UpdateControlRequest.new(control: control, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_control({ control: control, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_control({ control: control, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_control(::Google::Cloud::DiscoveryEngine::V1::UpdateControlRequest.new(control: control, update_mask: update_mask), call_options) do |_result, response|
+        c.update_control(::Google::Cloud::DiscoveryEngine::V1::UpdateControlRequest.new(control: control, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::ClientTest < M
     ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::ServiceStub.stub :transcode_get_control_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_control_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_control({ name: name }) do |_result, response|
+        c.get_control({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_control name: name do |_result, response|
+        c.get_control name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_control ::Google::Cloud::DiscoveryEngine::V1::GetControlRequest.new(name: name) do |_result, response|
+        c.get_control ::Google::Cloud::DiscoveryEngine::V1::GetControlRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_control({ name: name }, call_options) do |_result, response|
+        c.get_control({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_control(::Google::Cloud::DiscoveryEngine::V1::GetControlRequest.new(name: name), call_options) do |_result, response|
+        c.get_control(::Google::Cloud::DiscoveryEngine::V1::GetControlRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::ClientTest < M
     ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::ServiceStub.stub :transcode_list_controls_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_controls_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::ControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_controls({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_controls({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_controls parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_controls parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_controls ::Google::Cloud::DiscoveryEngine::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_controls ::Google::Cloud::DiscoveryEngine::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_controls({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_controls({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_controls(::Google::Cloud::DiscoveryEngine::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_controls(::Google::Cloud::DiscoveryEngine::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

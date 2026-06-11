@@ -97,32 +97,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ClientTes
     ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ServiceStub.stub :transcode_get_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_document_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_document({ name: name }) do |_result, response|
+        c.get_document({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_document name: name do |_result, response|
+        c.get_document name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_document ::Google::Cloud::DiscoveryEngine::V1beta::GetDocumentRequest.new(name: name) do |_result, response|
+        c.get_document ::Google::Cloud::DiscoveryEngine::V1beta::GetDocumentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_document({ name: name }, call_options) do |_result, response|
+        c.get_document({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_document(::Google::Cloud::DiscoveryEngine::V1beta::GetDocumentRequest.new(name: name), call_options) do |_result, response|
+        c.get_document(::Google::Cloud::DiscoveryEngine::V1beta::GetDocumentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ClientTes
     ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ServiceStub.stub :transcode_list_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_documents_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_documents({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_documents({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_documents parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_documents parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_documents ::Google::Cloud::DiscoveryEngine::V1beta::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_documents ::Google::Cloud::DiscoveryEngine::V1beta::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_documents({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_documents({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_documents(::Google::Cloud::DiscoveryEngine::V1beta::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_documents(::Google::Cloud::DiscoveryEngine::V1beta::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ClientTes
     ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ServiceStub.stub :transcode_create_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_document_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_document({ parent: parent, document: document, document_id: document_id }) do |_result, response|
+        c.create_document({ parent: parent, document: document, document_id: document_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_document parent: parent, document: document, document_id: document_id do |_result, response|
+        c.create_document parent: parent, document: document, document_id: document_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_document ::Google::Cloud::DiscoveryEngine::V1beta::CreateDocumentRequest.new(parent: parent, document: document, document_id: document_id) do |_result, response|
+        c.create_document ::Google::Cloud::DiscoveryEngine::V1beta::CreateDocumentRequest.new(parent: parent, document: document, document_id: document_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_document({ parent: parent, document: document, document_id: document_id }, call_options) do |_result, response|
+        c.create_document({ parent: parent, document: document, document_id: document_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_document(::Google::Cloud::DiscoveryEngine::V1beta::CreateDocumentRequest.new(parent: parent, document: document, document_id: document_id), call_options) do |_result, response|
+        c.create_document(::Google::Cloud::DiscoveryEngine::V1beta::CreateDocumentRequest.new(parent: parent, document: document, document_id: document_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ClientTes
     ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ServiceStub.stub :transcode_update_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_document_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_document({ document: document, allow_missing: allow_missing, update_mask: update_mask }) do |_result, response|
+        c.update_document({ document: document, allow_missing: allow_missing, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_document document: document, allow_missing: allow_missing, update_mask: update_mask do |_result, response|
+        c.update_document document: document, allow_missing: allow_missing, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_document ::Google::Cloud::DiscoveryEngine::V1beta::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing, update_mask: update_mask) do |_result, response|
+        c.update_document ::Google::Cloud::DiscoveryEngine::V1beta::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_document({ document: document, allow_missing: allow_missing, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_document({ document: document, allow_missing: allow_missing, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_document(::Google::Cloud::DiscoveryEngine::V1beta::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing, update_mask: update_mask), call_options) do |_result, response|
+        c.update_document(::Google::Cloud::DiscoveryEngine::V1beta::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ClientTes
     ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ServiceStub.stub :transcode_delete_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_document_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_document({ name: name }) do |_result, response|
+        c.delete_document({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_document name: name do |_result, response|
+        c.delete_document name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_document ::Google::Cloud::DiscoveryEngine::V1beta::DeleteDocumentRequest.new(name: name) do |_result, response|
+        c.delete_document ::Google::Cloud::DiscoveryEngine::V1beta::DeleteDocumentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_document({ name: name }, call_options) do |_result, response|
+        c.delete_document({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_document(::Google::Cloud::DiscoveryEngine::V1beta::DeleteDocumentRequest.new(name: name), call_options) do |_result, response|
+        c.delete_document(::Google::Cloud::DiscoveryEngine::V1beta::DeleteDocumentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ClientTes
     ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ServiceStub.stub :transcode_import_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_documents_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }) do |_result, response|
+        c.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_documents inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field do |_result, response|
+        c.import_documents inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_documents ::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field) do |_result, response|
+        c.import_documents ::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }, call_options) do |_result, response|
+        c.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_documents(::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field), call_options) do |_result, response|
+        c.import_documents(::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -437,32 +437,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ClientTes
     ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ServiceStub.stub :transcode_purge_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, purge_documents_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }) do |_result, response|
+        c.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.purge_documents gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force do |_result, response|
+        c.purge_documents gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.purge_documents ::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force) do |_result, response|
+        c.purge_documents ::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }, call_options) do |_result, response|
+        c.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.purge_documents(::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force), call_options) do |_result, response|
+        c.purge_documents(::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -492,32 +492,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ClientTes
     ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ServiceStub.stub :transcode_batch_get_documents_metadata_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_get_documents_metadata_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_get_documents_metadata({ parent: parent, matcher: matcher }) do |_result, response|
+        c.batch_get_documents_metadata({ parent: parent, matcher: matcher }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_get_documents_metadata parent: parent, matcher: matcher do |_result, response|
+        c.batch_get_documents_metadata parent: parent, matcher: matcher do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_get_documents_metadata ::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher) do |_result, response|
+        c.batch_get_documents_metadata ::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_get_documents_metadata({ parent: parent, matcher: matcher }, call_options) do |_result, response|
+        c.batch_get_documents_metadata({ parent: parent, matcher: matcher }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_get_documents_metadata(::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher), call_options) do |_result, response|
+        c.batch_get_documents_metadata(::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

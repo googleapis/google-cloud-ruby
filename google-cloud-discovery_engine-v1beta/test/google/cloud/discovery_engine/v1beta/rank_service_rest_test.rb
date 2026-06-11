@@ -103,32 +103,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::RankService::Rest::ClientTest < 
     ::Google::Cloud::DiscoveryEngine::V1beta::RankService::Rest::ServiceStub.stub :transcode_rank_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rank_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::RankService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::RankService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rank({ ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels }) do |_result, response|
+        c.rank({ ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rank ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels do |_result, response|
+        c.rank ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rank ::Google::Cloud::DiscoveryEngine::V1beta::RankRequest.new(ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels) do |_result, response|
+        c.rank ::Google::Cloud::DiscoveryEngine::V1beta::RankRequest.new(ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rank({ ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels }, call_options) do |_result, response|
+        c.rank({ ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rank(::Google::Cloud::DiscoveryEngine::V1beta::RankRequest.new(ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels), call_options) do |_result, response|
+        c.rank(::Google::Cloud::DiscoveryEngine::V1beta::RankRequest.new(ranking_config: ranking_config, model: model, top_n: top_n, query: query, records: records, ignore_record_details_in_response: ignore_record_details_in_response, user_labels: user_labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

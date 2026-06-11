@@ -98,32 +98,32 @@ class ::Google::Cloud::Dialogflow::V2::Participants::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Participants::Rest::ServiceStub.stub :transcode_create_participant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_participant_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_participant({ parent: parent, participant: participant }) do |_result, response|
+        c.create_participant({ parent: parent, participant: participant }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_participant parent: parent, participant: participant do |_result, response|
+        c.create_participant parent: parent, participant: participant do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_participant ::Google::Cloud::Dialogflow::V2::CreateParticipantRequest.new(parent: parent, participant: participant) do |_result, response|
+        c.create_participant ::Google::Cloud::Dialogflow::V2::CreateParticipantRequest.new(parent: parent, participant: participant) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_participant({ parent: parent, participant: participant }, call_options) do |_result, response|
+        c.create_participant({ parent: parent, participant: participant }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_participant(::Google::Cloud::Dialogflow::V2::CreateParticipantRequest.new(parent: parent, participant: participant), call_options) do |_result, response|
+        c.create_participant(::Google::Cloud::Dialogflow::V2::CreateParticipantRequest.new(parent: parent, participant: participant), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Dialogflow::V2::Participants::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Participants::Rest::ServiceStub.stub :transcode_get_participant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_participant_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_participant({ name: name }) do |_result, response|
+        c.get_participant({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_participant name: name do |_result, response|
+        c.get_participant name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_participant ::Google::Cloud::Dialogflow::V2::GetParticipantRequest.new(name: name) do |_result, response|
+        c.get_participant ::Google::Cloud::Dialogflow::V2::GetParticipantRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_participant({ name: name }, call_options) do |_result, response|
+        c.get_participant({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_participant(::Google::Cloud::Dialogflow::V2::GetParticipantRequest.new(name: name), call_options) do |_result, response|
+        c.get_participant(::Google::Cloud::Dialogflow::V2::GetParticipantRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Dialogflow::V2::Participants::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Participants::Rest::ServiceStub.stub :transcode_list_participants_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_participants_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_participants({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_participants({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_participants parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_participants parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_participants ::Google::Cloud::Dialogflow::V2::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_participants ::Google::Cloud::Dialogflow::V2::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_participants({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_participants({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_participants(::Google::Cloud::Dialogflow::V2::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_participants(::Google::Cloud::Dialogflow::V2::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Dialogflow::V2::Participants::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Participants::Rest::ServiceStub.stub :transcode_update_participant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_participant_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_participant({ participant: participant, update_mask: update_mask }) do |_result, response|
+        c.update_participant({ participant: participant, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_participant participant: participant, update_mask: update_mask do |_result, response|
+        c.update_participant participant: participant, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_participant ::Google::Cloud::Dialogflow::V2::UpdateParticipantRequest.new(participant: participant, update_mask: update_mask) do |_result, response|
+        c.update_participant ::Google::Cloud::Dialogflow::V2::UpdateParticipantRequest.new(participant: participant, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_participant({ participant: participant, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_participant({ participant: participant, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_participant(::Google::Cloud::Dialogflow::V2::UpdateParticipantRequest.new(participant: participant, update_mask: update_mask), call_options) do |_result, response|
+        c.update_participant(::Google::Cloud::Dialogflow::V2::UpdateParticipantRequest.new(participant: participant, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::Dialogflow::V2::Participants::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Participants::Rest::ServiceStub.stub :transcode_analyze_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_content_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id }) do |_result, response|
+        c.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_content participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id do |_result, response|
+        c.analyze_content participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_content ::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id) do |_result, response|
+        c.analyze_content ::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id }, call_options) do |_result, response|
+        c.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_content(::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id), call_options) do |_result, response|
+        c.analyze_content(::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -380,32 +380,32 @@ class ::Google::Cloud::Dialogflow::V2::Participants::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Participants::Rest::ServiceStub.stub :transcode_suggest_articles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, suggest_articles_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.suggest_articles({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }) do |_result, response|
+        c.suggest_articles({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.suggest_articles parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params do |_result, response|
+        c.suggest_articles parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.suggest_articles ::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params) do |_result, response|
+        c.suggest_articles ::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.suggest_articles({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }, call_options) do |_result, response|
+        c.suggest_articles({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.suggest_articles(::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params), call_options) do |_result, response|
+        c.suggest_articles(::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -437,32 +437,32 @@ class ::Google::Cloud::Dialogflow::V2::Participants::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Participants::Rest::ServiceStub.stub :transcode_suggest_faq_answers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, suggest_faq_answers_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.suggest_faq_answers({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }) do |_result, response|
+        c.suggest_faq_answers({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.suggest_faq_answers parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params do |_result, response|
+        c.suggest_faq_answers parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.suggest_faq_answers ::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params) do |_result, response|
+        c.suggest_faq_answers ::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.suggest_faq_answers({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }, call_options) do |_result, response|
+        c.suggest_faq_answers({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.suggest_faq_answers(::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params), call_options) do |_result, response|
+        c.suggest_faq_answers(::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -494,32 +494,32 @@ class ::Google::Cloud::Dialogflow::V2::Participants::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Participants::Rest::ServiceStub.stub :transcode_suggest_smart_replies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, suggest_smart_replies_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.suggest_smart_replies({ parent: parent, current_text_input: current_text_input, latest_message: latest_message, context_size: context_size }) do |_result, response|
+        c.suggest_smart_replies({ parent: parent, current_text_input: current_text_input, latest_message: latest_message, context_size: context_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.suggest_smart_replies parent: parent, current_text_input: current_text_input, latest_message: latest_message, context_size: context_size do |_result, response|
+        c.suggest_smart_replies parent: parent, current_text_input: current_text_input, latest_message: latest_message, context_size: context_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.suggest_smart_replies ::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest.new(parent: parent, current_text_input: current_text_input, latest_message: latest_message, context_size: context_size) do |_result, response|
+        c.suggest_smart_replies ::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest.new(parent: parent, current_text_input: current_text_input, latest_message: latest_message, context_size: context_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.suggest_smart_replies({ parent: parent, current_text_input: current_text_input, latest_message: latest_message, context_size: context_size }, call_options) do |_result, response|
+        c.suggest_smart_replies({ parent: parent, current_text_input: current_text_input, latest_message: latest_message, context_size: context_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.suggest_smart_replies(::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest.new(parent: parent, current_text_input: current_text_input, latest_message: latest_message, context_size: context_size), call_options) do |_result, response|
+        c.suggest_smart_replies(::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest.new(parent: parent, current_text_input: current_text_input, latest_message: latest_message, context_size: context_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -551,32 +551,32 @@ class ::Google::Cloud::Dialogflow::V2::Participants::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Participants::Rest::ServiceStub.stub :transcode_suggest_knowledge_assist_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, suggest_knowledge_assist_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.suggest_knowledge_assist({ parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query }) do |_result, response|
+        c.suggest_knowledge_assist({ parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.suggest_knowledge_assist parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query do |_result, response|
+        c.suggest_knowledge_assist parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.suggest_knowledge_assist ::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query) do |_result, response|
+        c.suggest_knowledge_assist ::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.suggest_knowledge_assist({ parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query }, call_options) do |_result, response|
+        c.suggest_knowledge_assist({ parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.suggest_knowledge_assist(::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query), call_options) do |_result, response|
+        c.suggest_knowledge_assist(::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

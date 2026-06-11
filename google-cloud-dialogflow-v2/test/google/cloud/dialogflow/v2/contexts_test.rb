@@ -86,40 +86,40 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_contexts_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_contexts({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_contexts({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_contexts parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_contexts parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_contexts ::Google::Cloud::Dialogflow::V2::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_contexts ::Google::Cloud::Dialogflow::V2::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_contexts({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_contexts({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_contexts(::Google::Cloud::Dialogflow::V2::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_contexts(::Google::Cloud::Dialogflow::V2::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_context_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_context({ name: name }) do |response, operation|
+      c.get_context({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_context name: name do |response, operation|
+      c.get_context name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_context ::Google::Cloud::Dialogflow::V2::GetContextRequest.new(name: name) do |response, operation|
+      c.get_context ::Google::Cloud::Dialogflow::V2::GetContextRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_context({ name: name }, grpc_options) do |response, operation|
+      c.get_context({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_context(::Google::Cloud::Dialogflow::V2::GetContextRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_context(::Google::Cloud::Dialogflow::V2::GetContextRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,36 +209,36 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_context_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_context({ parent: parent, context: context }) do |response, operation|
+      c.create_context({ parent: parent, context: context }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_context parent: parent, context: context do |response, operation|
+      c.create_context parent: parent, context: context do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_context ::Google::Cloud::Dialogflow::V2::CreateContextRequest.new(parent: parent, context: context) do |response, operation|
+      c.create_context ::Google::Cloud::Dialogflow::V2::CreateContextRequest.new(parent: parent, context: context) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_context({ parent: parent, context: context }, grpc_options) do |response, operation|
+      c.create_context({ parent: parent, context: context }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_context(::Google::Cloud::Dialogflow::V2::CreateContextRequest.new(parent: parent, context: context), grpc_options) do |response, operation|
+      c.create_context(::Google::Cloud::Dialogflow::V2::CreateContextRequest.new(parent: parent, context: context), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -269,36 +269,36 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_context_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_context({ context: context, update_mask: update_mask }) do |response, operation|
+      c.update_context({ context: context, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_context context: context, update_mask: update_mask do |response, operation|
+      c.update_context context: context, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_context ::Google::Cloud::Dialogflow::V2::UpdateContextRequest.new(context: context, update_mask: update_mask) do |response, operation|
+      c.update_context ::Google::Cloud::Dialogflow::V2::UpdateContextRequest.new(context: context, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_context({ context: context, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_context({ context: context, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_context(::Google::Cloud::Dialogflow::V2::UpdateContextRequest.new(context: context, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_context(::Google::Cloud::Dialogflow::V2::UpdateContextRequest.new(context: context, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -327,36 +327,36 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_context_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_context({ name: name }) do |response, operation|
+      c.delete_context({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_context name: name do |response, operation|
+      c.delete_context name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_context ::Google::Cloud::Dialogflow::V2::DeleteContextRequest.new(name: name) do |response, operation|
+      c.delete_context ::Google::Cloud::Dialogflow::V2::DeleteContextRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_context({ name: name }, grpc_options) do |response, operation|
+      c.delete_context({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_context(::Google::Cloud::Dialogflow::V2::DeleteContextRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_context(::Google::Cloud::Dialogflow::V2::DeleteContextRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -385,36 +385,36 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_all_contexts_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_all_contexts({ parent: parent }) do |response, operation|
+      c.delete_all_contexts({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_all_contexts parent: parent do |response, operation|
+      c.delete_all_contexts parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_all_contexts ::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new(parent: parent) do |response, operation|
+      c.delete_all_contexts ::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_all_contexts({ parent: parent }, grpc_options) do |response, operation|
+      c.delete_all_contexts({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_all_contexts(::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.delete_all_contexts(::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

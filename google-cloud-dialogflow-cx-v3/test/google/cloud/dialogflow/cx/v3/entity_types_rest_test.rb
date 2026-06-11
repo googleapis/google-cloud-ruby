@@ -98,32 +98,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ClientTest < Minit
     ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ServiceStub.stub :transcode_get_entity_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_entity_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_entity_type({ name: name, language_code: language_code }) do |_result, response|
+        c.get_entity_type({ name: name, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_entity_type name: name, language_code: language_code do |_result, response|
+        c.get_entity_type name: name, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_entity_type ::Google::Cloud::Dialogflow::CX::V3::GetEntityTypeRequest.new(name: name, language_code: language_code) do |_result, response|
+        c.get_entity_type ::Google::Cloud::Dialogflow::CX::V3::GetEntityTypeRequest.new(name: name, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_entity_type({ name: name, language_code: language_code }, call_options) do |_result, response|
+        c.get_entity_type({ name: name, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_entity_type(::Google::Cloud::Dialogflow::CX::V3::GetEntityTypeRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
+        c.get_entity_type(::Google::Cloud::Dialogflow::CX::V3::GetEntityTypeRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ClientTest < Minit
     ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ServiceStub.stub :transcode_create_entity_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_entity_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_entity_type({ parent: parent, entity_type: entity_type, language_code: language_code }) do |_result, response|
+        c.create_entity_type({ parent: parent, entity_type: entity_type, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_entity_type parent: parent, entity_type: entity_type, language_code: language_code do |_result, response|
+        c.create_entity_type parent: parent, entity_type: entity_type, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_entity_type ::Google::Cloud::Dialogflow::CX::V3::CreateEntityTypeRequest.new(parent: parent, entity_type: entity_type, language_code: language_code) do |_result, response|
+        c.create_entity_type ::Google::Cloud::Dialogflow::CX::V3::CreateEntityTypeRequest.new(parent: parent, entity_type: entity_type, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_entity_type({ parent: parent, entity_type: entity_type, language_code: language_code }, call_options) do |_result, response|
+        c.create_entity_type({ parent: parent, entity_type: entity_type, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_entity_type(::Google::Cloud::Dialogflow::CX::V3::CreateEntityTypeRequest.new(parent: parent, entity_type: entity_type, language_code: language_code), call_options) do |_result, response|
+        c.create_entity_type(::Google::Cloud::Dialogflow::CX::V3::CreateEntityTypeRequest.new(parent: parent, entity_type: entity_type, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ClientTest < Minit
     ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ServiceStub.stub :transcode_update_entity_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_entity_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_entity_type({ entity_type: entity_type, language_code: language_code, update_mask: update_mask }) do |_result, response|
+        c.update_entity_type({ entity_type: entity_type, language_code: language_code, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_entity_type entity_type: entity_type, language_code: language_code, update_mask: update_mask do |_result, response|
+        c.update_entity_type entity_type: entity_type, language_code: language_code, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_entity_type ::Google::Cloud::Dialogflow::CX::V3::UpdateEntityTypeRequest.new(entity_type: entity_type, language_code: language_code, update_mask: update_mask) do |_result, response|
+        c.update_entity_type ::Google::Cloud::Dialogflow::CX::V3::UpdateEntityTypeRequest.new(entity_type: entity_type, language_code: language_code, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_entity_type({ entity_type: entity_type, language_code: language_code, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_entity_type({ entity_type: entity_type, language_code: language_code, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_entity_type(::Google::Cloud::Dialogflow::CX::V3::UpdateEntityTypeRequest.new(entity_type: entity_type, language_code: language_code, update_mask: update_mask), call_options) do |_result, response|
+        c.update_entity_type(::Google::Cloud::Dialogflow::CX::V3::UpdateEntityTypeRequest.new(entity_type: entity_type, language_code: language_code, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ClientTest < Minit
     ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ServiceStub.stub :transcode_delete_entity_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_entity_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_entity_type({ name: name, force: force }) do |_result, response|
+        c.delete_entity_type({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_entity_type name: name, force: force do |_result, response|
+        c.delete_entity_type name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_entity_type ::Google::Cloud::Dialogflow::CX::V3::DeleteEntityTypeRequest.new(name: name, force: force) do |_result, response|
+        c.delete_entity_type ::Google::Cloud::Dialogflow::CX::V3::DeleteEntityTypeRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_entity_type({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_entity_type({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_entity_type(::Google::Cloud::Dialogflow::CX::V3::DeleteEntityTypeRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_entity_type(::Google::Cloud::Dialogflow::CX::V3::DeleteEntityTypeRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ClientTest < Minit
     ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ServiceStub.stub :transcode_list_entity_types_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_entity_types_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_entity_types parent: parent, language_code: language_code, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_entity_types parent: parent, language_code: language_code, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_entity_types ::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_entity_types ::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_entity_types(::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_entity_types(::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -380,32 +380,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ClientTest < Minit
     ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ServiceStub.stub :transcode_export_entity_types_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_entity_types_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_entity_types({ parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code }) do |_result, response|
+        c.export_entity_types({ parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_entity_types parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code do |_result, response|
+        c.export_entity_types parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_entity_types ::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest.new(parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code) do |_result, response|
+        c.export_entity_types ::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest.new(parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_entity_types({ parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code }, call_options) do |_result, response|
+        c.export_entity_types({ parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_entity_types(::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest.new(parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code), call_options) do |_result, response|
+        c.export_entity_types(::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest.new(parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -437,32 +437,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ClientTest < Minit
     ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ServiceStub.stub :transcode_import_entity_types_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_entity_types_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_entity_types({ parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type }) do |_result, response|
+        c.import_entity_types({ parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_entity_types parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type do |_result, response|
+        c.import_entity_types parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_entity_types ::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest.new(parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type) do |_result, response|
+        c.import_entity_types ::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest.new(parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_entity_types({ parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type }, call_options) do |_result, response|
+        c.import_entity_types({ parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_entity_types(::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest.new(parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type), call_options) do |_result, response|
+        c.import_entity_types(::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest.new(parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

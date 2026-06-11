@@ -84,36 +84,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::ClientTest
 
     Gapic::ServiceStub.stub :new, update_serving_config_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_serving_config({ serving_config: serving_config, update_mask: update_mask }) do |response, operation|
+      c.update_serving_config({ serving_config: serving_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_serving_config serving_config: serving_config, update_mask: update_mask do |response, operation|
+      c.update_serving_config serving_config: serving_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_serving_config ::Google::Cloud::DiscoveryEngine::V1beta::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask) do |response, operation|
+      c.update_serving_config ::Google::Cloud::DiscoveryEngine::V1beta::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_serving_config({ serving_config: serving_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_serving_config({ serving_config: serving_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_serving_config(::Google::Cloud::DiscoveryEngine::V1beta::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_serving_config(::Google::Cloud::DiscoveryEngine::V1beta::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::ClientTest
 
     Gapic::ServiceStub.stub :new, get_serving_config_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_serving_config({ name: name }) do |response, operation|
+      c.get_serving_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_serving_config name: name do |response, operation|
+      c.get_serving_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_serving_config ::Google::Cloud::DiscoveryEngine::V1beta::GetServingConfigRequest.new(name: name) do |response, operation|
+      c.get_serving_config ::Google::Cloud::DiscoveryEngine::V1beta::GetServingConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_serving_config({ name: name }, grpc_options) do |response, operation|
+      c.get_serving_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_serving_config(::Google::Cloud::DiscoveryEngine::V1beta::GetServingConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_serving_config(::Google::Cloud::DiscoveryEngine::V1beta::GetServingConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -204,40 +204,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::ClientTest
 
     Gapic::ServiceStub.stub :new, list_serving_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_serving_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_serving_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_serving_configs ::Google::Cloud::DiscoveryEngine::V1beta::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_serving_configs ::Google::Cloud::DiscoveryEngine::V1beta::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_serving_configs(::Google::Cloud::DiscoveryEngine::V1beta::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_serving_configs(::Google::Cloud::DiscoveryEngine::V1beta::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

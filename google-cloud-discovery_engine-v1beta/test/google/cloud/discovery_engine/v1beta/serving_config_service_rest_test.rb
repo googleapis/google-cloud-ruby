@@ -98,32 +98,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Clie
     ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::ServiceStub.stub :transcode_update_serving_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_serving_config_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_serving_config({ serving_config: serving_config, update_mask: update_mask }) do |_result, response|
+        c.update_serving_config({ serving_config: serving_config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_serving_config serving_config: serving_config, update_mask: update_mask do |_result, response|
+        c.update_serving_config serving_config: serving_config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_serving_config ::Google::Cloud::DiscoveryEngine::V1beta::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask) do |_result, response|
+        c.update_serving_config ::Google::Cloud::DiscoveryEngine::V1beta::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_serving_config({ serving_config: serving_config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_serving_config({ serving_config: serving_config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_serving_config(::Google::Cloud::DiscoveryEngine::V1beta::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_serving_config(::Google::Cloud::DiscoveryEngine::V1beta::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Clie
     ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::ServiceStub.stub :transcode_get_serving_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_serving_config_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_serving_config({ name: name }) do |_result, response|
+        c.get_serving_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_serving_config name: name do |_result, response|
+        c.get_serving_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_serving_config ::Google::Cloud::DiscoveryEngine::V1beta::GetServingConfigRequest.new(name: name) do |_result, response|
+        c.get_serving_config ::Google::Cloud::DiscoveryEngine::V1beta::GetServingConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_serving_config({ name: name }, call_options) do |_result, response|
+        c.get_serving_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_serving_config(::Google::Cloud::DiscoveryEngine::V1beta::GetServingConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_serving_config(::Google::Cloud::DiscoveryEngine::V1beta::GetServingConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Clie
     ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::ServiceStub.stub :transcode_list_serving_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_serving_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_serving_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_serving_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_serving_configs ::Google::Cloud::DiscoveryEngine::V1beta::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_serving_configs ::Google::Cloud::DiscoveryEngine::V1beta::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_serving_configs(::Google::Cloud::DiscoveryEngine::V1beta::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_serving_configs(::Google::Cloud::DiscoveryEngine::V1beta::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -88,40 +88,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::ClientTest < M
 
     Gapic::ServiceStub.stub :new, list_transition_route_groups_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_transition_route_groups({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }) do |response, operation|
+      c.list_transition_route_groups({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_transition_route_groups parent: parent, page_size: page_size, page_token: page_token, language_code: language_code do |response, operation|
+      c.list_transition_route_groups parent: parent, page_size: page_size, page_token: page_token, language_code: language_code do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_transition_route_groups ::Google::Cloud::Dialogflow::CX::V3::ListTransitionRouteGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code) do |response, operation|
+      c.list_transition_route_groups ::Google::Cloud::Dialogflow::CX::V3::ListTransitionRouteGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_transition_route_groups({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }, grpc_options) do |response, operation|
+      c.list_transition_route_groups({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_transition_route_groups(::Google::Cloud::Dialogflow::CX::V3::ListTransitionRouteGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options) do |response, operation|
+      c.list_transition_route_groups(::Google::Cloud::Dialogflow::CX::V3::ListTransitionRouteGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::ClientTest < M
 
     Gapic::ServiceStub.stub :new, get_transition_route_group_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_transition_route_group({ name: name, language_code: language_code }) do |response, operation|
+      c.get_transition_route_group({ name: name, language_code: language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_transition_route_group name: name, language_code: language_code do |response, operation|
+      c.get_transition_route_group name: name, language_code: language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_transition_route_group ::Google::Cloud::Dialogflow::CX::V3::GetTransitionRouteGroupRequest.new(name: name, language_code: language_code) do |response, operation|
+      c.get_transition_route_group ::Google::Cloud::Dialogflow::CX::V3::GetTransitionRouteGroupRequest.new(name: name, language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_transition_route_group({ name: name, language_code: language_code }, grpc_options) do |response, operation|
+      c.get_transition_route_group({ name: name, language_code: language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_transition_route_group(::Google::Cloud::Dialogflow::CX::V3::GetTransitionRouteGroupRequest.new(name: name, language_code: language_code), grpc_options) do |response, operation|
+      c.get_transition_route_group(::Google::Cloud::Dialogflow::CX::V3::GetTransitionRouteGroupRequest.new(name: name, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,36 +215,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::ClientTest < M
 
     Gapic::ServiceStub.stub :new, create_transition_route_group_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_transition_route_group({ parent: parent, transition_route_group: transition_route_group, language_code: language_code }) do |response, operation|
+      c.create_transition_route_group({ parent: parent, transition_route_group: transition_route_group, language_code: language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_transition_route_group parent: parent, transition_route_group: transition_route_group, language_code: language_code do |response, operation|
+      c.create_transition_route_group parent: parent, transition_route_group: transition_route_group, language_code: language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_transition_route_group ::Google::Cloud::Dialogflow::CX::V3::CreateTransitionRouteGroupRequest.new(parent: parent, transition_route_group: transition_route_group, language_code: language_code) do |response, operation|
+      c.create_transition_route_group ::Google::Cloud::Dialogflow::CX::V3::CreateTransitionRouteGroupRequest.new(parent: parent, transition_route_group: transition_route_group, language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_transition_route_group({ parent: parent, transition_route_group: transition_route_group, language_code: language_code }, grpc_options) do |response, operation|
+      c.create_transition_route_group({ parent: parent, transition_route_group: transition_route_group, language_code: language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_transition_route_group(::Google::Cloud::Dialogflow::CX::V3::CreateTransitionRouteGroupRequest.new(parent: parent, transition_route_group: transition_route_group, language_code: language_code), grpc_options) do |response, operation|
+      c.create_transition_route_group(::Google::Cloud::Dialogflow::CX::V3::CreateTransitionRouteGroupRequest.new(parent: parent, transition_route_group: transition_route_group, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -277,36 +277,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::ClientTest < M
 
     Gapic::ServiceStub.stub :new, update_transition_route_group_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_transition_route_group({ transition_route_group: transition_route_group, update_mask: update_mask, language_code: language_code }) do |response, operation|
+      c.update_transition_route_group({ transition_route_group: transition_route_group, update_mask: update_mask, language_code: language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_transition_route_group transition_route_group: transition_route_group, update_mask: update_mask, language_code: language_code do |response, operation|
+      c.update_transition_route_group transition_route_group: transition_route_group, update_mask: update_mask, language_code: language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_transition_route_group ::Google::Cloud::Dialogflow::CX::V3::UpdateTransitionRouteGroupRequest.new(transition_route_group: transition_route_group, update_mask: update_mask, language_code: language_code) do |response, operation|
+      c.update_transition_route_group ::Google::Cloud::Dialogflow::CX::V3::UpdateTransitionRouteGroupRequest.new(transition_route_group: transition_route_group, update_mask: update_mask, language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_transition_route_group({ transition_route_group: transition_route_group, update_mask: update_mask, language_code: language_code }, grpc_options) do |response, operation|
+      c.update_transition_route_group({ transition_route_group: transition_route_group, update_mask: update_mask, language_code: language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_transition_route_group(::Google::Cloud::Dialogflow::CX::V3::UpdateTransitionRouteGroupRequest.new(transition_route_group: transition_route_group, update_mask: update_mask, language_code: language_code), grpc_options) do |response, operation|
+      c.update_transition_route_group(::Google::Cloud::Dialogflow::CX::V3::UpdateTransitionRouteGroupRequest.new(transition_route_group: transition_route_group, update_mask: update_mask, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -337,36 +337,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::ClientTest < M
 
     Gapic::ServiceStub.stub :new, delete_transition_route_group_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_transition_route_group({ name: name, force: force }) do |response, operation|
+      c.delete_transition_route_group({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_transition_route_group name: name, force: force do |response, operation|
+      c.delete_transition_route_group name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_transition_route_group ::Google::Cloud::Dialogflow::CX::V3::DeleteTransitionRouteGroupRequest.new(name: name, force: force) do |response, operation|
+      c.delete_transition_route_group ::Google::Cloud::Dialogflow::CX::V3::DeleteTransitionRouteGroupRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_transition_route_group({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_transition_route_group({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_transition_route_group(::Google::Cloud::Dialogflow::CX::V3::DeleteTransitionRouteGroupRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_transition_route_group(::Google::Cloud::Dialogflow::CX::V3::DeleteTransitionRouteGroupRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

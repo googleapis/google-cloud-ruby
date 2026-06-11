@@ -99,32 +99,32 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::ClientTes
     ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::ServiceStub.stub :transcode_create_device_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_device_session_client_stub do
         # Create client
-        client = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_device_session({ parent: parent, device_session: device_session, device_session_id: device_session_id }) do |_result, response|
+        c.create_device_session({ parent: parent, device_session: device_session, device_session_id: device_session_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_device_session parent: parent, device_session: device_session, device_session_id: device_session_id do |_result, response|
+        c.create_device_session parent: parent, device_session: device_session, device_session_id: device_session_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_device_session ::Google::Cloud::DeviceStreaming::V1::CreateDeviceSessionRequest.new(parent: parent, device_session: device_session, device_session_id: device_session_id) do |_result, response|
+        c.create_device_session ::Google::Cloud::DeviceStreaming::V1::CreateDeviceSessionRequest.new(parent: parent, device_session: device_session, device_session_id: device_session_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_device_session({ parent: parent, device_session: device_session, device_session_id: device_session_id }, call_options) do |_result, response|
+        c.create_device_session({ parent: parent, device_session: device_session, device_session_id: device_session_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_device_session(::Google::Cloud::DeviceStreaming::V1::CreateDeviceSessionRequest.new(parent: parent, device_session: device_session, device_session_id: device_session_id), call_options) do |_result, response|
+        c.create_device_session(::Google::Cloud::DeviceStreaming::V1::CreateDeviceSessionRequest.new(parent: parent, device_session: device_session, device_session_id: device_session_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::ClientTes
     ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::ServiceStub.stub :transcode_list_device_sessions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_device_sessions_client_stub do
         # Create client
-        client = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_device_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_device_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_device_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_device_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_device_sessions ::Google::Cloud::DeviceStreaming::V1::ListDeviceSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_device_sessions ::Google::Cloud::DeviceStreaming::V1::ListDeviceSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_device_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_device_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_device_sessions(::Google::Cloud::DeviceStreaming::V1::ListDeviceSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_device_sessions(::Google::Cloud::DeviceStreaming::V1::ListDeviceSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::ClientTes
     ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::ServiceStub.stub :transcode_get_device_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_device_session_client_stub do
         # Create client
-        client = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_device_session({ name: name }) do |_result, response|
+        c.get_device_session({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_device_session name: name do |_result, response|
+        c.get_device_session name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_device_session ::Google::Cloud::DeviceStreaming::V1::GetDeviceSessionRequest.new(name: name) do |_result, response|
+        c.get_device_session ::Google::Cloud::DeviceStreaming::V1::GetDeviceSessionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_device_session({ name: name }, call_options) do |_result, response|
+        c.get_device_session({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_device_session(::Google::Cloud::DeviceStreaming::V1::GetDeviceSessionRequest.new(name: name), call_options) do |_result, response|
+        c.get_device_session(::Google::Cloud::DeviceStreaming::V1::GetDeviceSessionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::ClientTes
     ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::ServiceStub.stub :transcode_cancel_device_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_device_session_client_stub do
         # Create client
-        client = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_device_session({ name: name }) do |_result, response|
+        c.cancel_device_session({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_device_session name: name do |_result, response|
+        c.cancel_device_session name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_device_session ::Google::Cloud::DeviceStreaming::V1::CancelDeviceSessionRequest.new(name: name) do |_result, response|
+        c.cancel_device_session ::Google::Cloud::DeviceStreaming::V1::CancelDeviceSessionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_device_session({ name: name }, call_options) do |_result, response|
+        c.cancel_device_session({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_device_session(::Google::Cloud::DeviceStreaming::V1::CancelDeviceSessionRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_device_session(::Google::Cloud::DeviceStreaming::V1::CancelDeviceSessionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::ClientTes
     ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::ServiceStub.stub :transcode_update_device_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_device_session_client_stub do
         # Create client
-        client = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_device_session({ device_session: device_session, update_mask: update_mask }) do |_result, response|
+        c.update_device_session({ device_session: device_session, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_device_session device_session: device_session, update_mask: update_mask do |_result, response|
+        c.update_device_session device_session: device_session, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_device_session ::Google::Cloud::DeviceStreaming::V1::UpdateDeviceSessionRequest.new(device_session: device_session, update_mask: update_mask) do |_result, response|
+        c.update_device_session ::Google::Cloud::DeviceStreaming::V1::UpdateDeviceSessionRequest.new(device_session: device_session, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_device_session({ device_session: device_session, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_device_session({ device_session: device_session, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_device_session(::Google::Cloud::DeviceStreaming::V1::UpdateDeviceSessionRequest.new(device_session: device_session, update_mask: update_mask), call_options) do |_result, response|
+        c.update_device_session(::Google::Cloud::DeviceStreaming::V1::UpdateDeviceSessionRequest.new(device_session: device_session, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

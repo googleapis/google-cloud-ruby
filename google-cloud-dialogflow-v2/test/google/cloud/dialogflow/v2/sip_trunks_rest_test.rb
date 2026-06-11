@@ -98,32 +98,32 @@ class ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::ServiceStub.stub :transcode_create_sip_trunk_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_sip_trunk_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_sip_trunk({ parent: parent, sip_trunk: sip_trunk }) do |_result, response|
+        c.create_sip_trunk({ parent: parent, sip_trunk: sip_trunk }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_sip_trunk parent: parent, sip_trunk: sip_trunk do |_result, response|
+        c.create_sip_trunk parent: parent, sip_trunk: sip_trunk do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_sip_trunk ::Google::Cloud::Dialogflow::V2::CreateSipTrunkRequest.new(parent: parent, sip_trunk: sip_trunk) do |_result, response|
+        c.create_sip_trunk ::Google::Cloud::Dialogflow::V2::CreateSipTrunkRequest.new(parent: parent, sip_trunk: sip_trunk) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_sip_trunk({ parent: parent, sip_trunk: sip_trunk }, call_options) do |_result, response|
+        c.create_sip_trunk({ parent: parent, sip_trunk: sip_trunk }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_sip_trunk(::Google::Cloud::Dialogflow::V2::CreateSipTrunkRequest.new(parent: parent, sip_trunk: sip_trunk), call_options) do |_result, response|
+        c.create_sip_trunk(::Google::Cloud::Dialogflow::V2::CreateSipTrunkRequest.new(parent: parent, sip_trunk: sip_trunk), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::ServiceStub.stub :transcode_delete_sip_trunk_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_sip_trunk_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_sip_trunk({ name: name }) do |_result, response|
+        c.delete_sip_trunk({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_sip_trunk name: name do |_result, response|
+        c.delete_sip_trunk name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_sip_trunk ::Google::Cloud::Dialogflow::V2::DeleteSipTrunkRequest.new(name: name) do |_result, response|
+        c.delete_sip_trunk ::Google::Cloud::Dialogflow::V2::DeleteSipTrunkRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_sip_trunk({ name: name }, call_options) do |_result, response|
+        c.delete_sip_trunk({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_sip_trunk(::Google::Cloud::Dialogflow::V2::DeleteSipTrunkRequest.new(name: name), call_options) do |_result, response|
+        c.delete_sip_trunk(::Google::Cloud::Dialogflow::V2::DeleteSipTrunkRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::ServiceStub.stub :transcode_list_sip_trunks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_sip_trunks_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_sip_trunks({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_sip_trunks({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_sip_trunks parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_sip_trunks parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_sip_trunks ::Google::Cloud::Dialogflow::V2::ListSipTrunksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_sip_trunks ::Google::Cloud::Dialogflow::V2::ListSipTrunksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_sip_trunks({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_sip_trunks({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_sip_trunks(::Google::Cloud::Dialogflow::V2::ListSipTrunksRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_sip_trunks(::Google::Cloud::Dialogflow::V2::ListSipTrunksRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::ServiceStub.stub :transcode_get_sip_trunk_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_sip_trunk_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_sip_trunk({ name: name }) do |_result, response|
+        c.get_sip_trunk({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_sip_trunk name: name do |_result, response|
+        c.get_sip_trunk name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_sip_trunk ::Google::Cloud::Dialogflow::V2::GetSipTrunkRequest.new(name: name) do |_result, response|
+        c.get_sip_trunk ::Google::Cloud::Dialogflow::V2::GetSipTrunkRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_sip_trunk({ name: name }, call_options) do |_result, response|
+        c.get_sip_trunk({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_sip_trunk(::Google::Cloud::Dialogflow::V2::GetSipTrunkRequest.new(name: name), call_options) do |_result, response|
+        c.get_sip_trunk(::Google::Cloud::Dialogflow::V2::GetSipTrunkRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::ServiceStub.stub :transcode_update_sip_trunk_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_sip_trunk_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::SipTrunks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_sip_trunk({ sip_trunk: sip_trunk, update_mask: update_mask }) do |_result, response|
+        c.update_sip_trunk({ sip_trunk: sip_trunk, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_sip_trunk sip_trunk: sip_trunk, update_mask: update_mask do |_result, response|
+        c.update_sip_trunk sip_trunk: sip_trunk, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_sip_trunk ::Google::Cloud::Dialogflow::V2::UpdateSipTrunkRequest.new(sip_trunk: sip_trunk, update_mask: update_mask) do |_result, response|
+        c.update_sip_trunk ::Google::Cloud::Dialogflow::V2::UpdateSipTrunkRequest.new(sip_trunk: sip_trunk, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_sip_trunk({ sip_trunk: sip_trunk, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_sip_trunk({ sip_trunk: sip_trunk, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_sip_trunk(::Google::Cloud::Dialogflow::V2::UpdateSipTrunkRequest.new(sip_trunk: sip_trunk, update_mask: update_mask), call_options) do |_result, response|
+        c.update_sip_trunk(::Google::Cloud::Dialogflow::V2::UpdateSipTrunkRequest.new(sip_trunk: sip_trunk, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
