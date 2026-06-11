@@ -98,7 +98,7 @@ module Google
 
                 default_config.rpcs.batch_get_documents.timeout = 300.0
                 default_config.rpcs.batch_get_documents.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                 }
 
                 default_config.rpcs.begin_transaction.timeout = 60.0
@@ -118,22 +118,22 @@ module Google
 
                 default_config.rpcs.run_query.timeout = 300.0
                 default_config.rpcs.run_query.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                 }
 
                 default_config.rpcs.execute_pipeline.timeout = 300.0
                 default_config.rpcs.execute_pipeline.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13]
                 }
 
                 default_config.rpcs.run_aggregation_query.timeout = 300.0
                 default_config.rpcs.run_aggregation_query.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                 }
 
                 default_config.rpcs.partition_query.timeout = 300.0
                 default_config.rpcs.partition_query.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                 }
 
                 default_config.rpcs.write.timeout = 86_400.0
@@ -1254,7 +1254,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_pipeline(database: nil, structured_pipeline: nil, transaction: nil, new_transaction: nil, read_time: nil)
+            # @overload execute_pipeline(database: nil, structured_pipeline: nil, transaction: nil, new_transaction: nil, read_time: nil, auto_commit_transaction: nil)
             #   Pass arguments to `execute_pipeline` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1285,6 +1285,10 @@ module Google
             #     minute timestamp within the past 7 days.
             #
             #     Note: The following parameters are mutually exclusive: `read_time`, `transaction`, `new_transaction`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param auto_commit_transaction [::Boolean]
+            #     Optional. Automatically commits the transaction after the pipeline has been
+            #     executed. Only permitted in combination with `transaction` or
+            #     `new_transaction`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::ExecutePipelineResponse>]
@@ -1812,6 +1816,9 @@ module Google
             #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
             #     For example:
             #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+            #
+            #     Use `projects/{project_id}/databases/{database_id}/documents` to list
+            #     top-level collections.
             #   @param page_size [::Integer]
             #     The maximum number of results to return.
             #   @param page_token [::String]
@@ -2191,6 +2198,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -2274,6 +2282,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #
