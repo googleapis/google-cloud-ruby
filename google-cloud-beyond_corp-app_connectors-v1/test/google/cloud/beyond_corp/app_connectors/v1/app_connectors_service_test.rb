@@ -90,40 +90,40 @@ class ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Clie
 
     Gapic::ServiceStub.stub :new, list_app_connectors_client_stub do
       # Create client
-      client = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
+      c = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_app_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_app_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_app_connectors parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_app_connectors parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_app_connectors ::Google::Cloud::BeyondCorp::AppConnectors::V1::ListAppConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_app_connectors ::Google::Cloud::BeyondCorp::AppConnectors::V1::ListAppConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_app_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_app_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_app_connectors(::Google::Cloud::BeyondCorp::AppConnectors::V1::ListAppConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_app_connectors(::Google::Cloud::BeyondCorp::AppConnectors::V1::ListAppConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Clie
 
     Gapic::ServiceStub.stub :new, get_app_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
+      c = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_app_connector({ name: name }) do |response, operation|
+      c.get_app_connector({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_app_connector name: name do |response, operation|
+      c.get_app_connector name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_app_connector ::Google::Cloud::BeyondCorp::AppConnectors::V1::GetAppConnectorRequest.new(name: name) do |response, operation|
+      c.get_app_connector ::Google::Cloud::BeyondCorp::AppConnectors::V1::GetAppConnectorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_app_connector({ name: name }, grpc_options) do |response, operation|
+      c.get_app_connector({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_app_connector(::Google::Cloud::BeyondCorp::AppConnectors::V1::GetAppConnectorRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_app_connector(::Google::Cloud::BeyondCorp::AppConnectors::V1::GetAppConnectorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,40 +219,40 @@ class ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Clie
 
     Gapic::ServiceStub.stub :new, create_app_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
+      c = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_app_connector({ parent: parent, app_connector_id: app_connector_id, app_connector: app_connector, request_id: request_id, validate_only: validate_only }) do |response, operation|
+      c.create_app_connector({ parent: parent, app_connector_id: app_connector_id, app_connector: app_connector, request_id: request_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_app_connector parent: parent, app_connector_id: app_connector_id, app_connector: app_connector, request_id: request_id, validate_only: validate_only do |response, operation|
+      c.create_app_connector parent: parent, app_connector_id: app_connector_id, app_connector: app_connector, request_id: request_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_app_connector ::Google::Cloud::BeyondCorp::AppConnectors::V1::CreateAppConnectorRequest.new(parent: parent, app_connector_id: app_connector_id, app_connector: app_connector, request_id: request_id, validate_only: validate_only) do |response, operation|
+      c.create_app_connector ::Google::Cloud::BeyondCorp::AppConnectors::V1::CreateAppConnectorRequest.new(parent: parent, app_connector_id: app_connector_id, app_connector: app_connector, request_id: request_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_app_connector({ parent: parent, app_connector_id: app_connector_id, app_connector: app_connector, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_app_connector({ parent: parent, app_connector_id: app_connector_id, app_connector: app_connector, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_app_connector(::Google::Cloud::BeyondCorp::AppConnectors::V1::CreateAppConnectorRequest.new(parent: parent, app_connector_id: app_connector_id, app_connector: app_connector, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_app_connector(::Google::Cloud::BeyondCorp::AppConnectors::V1::CreateAppConnectorRequest.new(parent: parent, app_connector_id: app_connector_id, app_connector: app_connector, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -288,40 +288,40 @@ class ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Clie
 
     Gapic::ServiceStub.stub :new, update_app_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
+      c = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_app_connector({ update_mask: update_mask, app_connector: app_connector, request_id: request_id, validate_only: validate_only }) do |response, operation|
+      c.update_app_connector({ update_mask: update_mask, app_connector: app_connector, request_id: request_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_app_connector update_mask: update_mask, app_connector: app_connector, request_id: request_id, validate_only: validate_only do |response, operation|
+      c.update_app_connector update_mask: update_mask, app_connector: app_connector, request_id: request_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_app_connector ::Google::Cloud::BeyondCorp::AppConnectors::V1::UpdateAppConnectorRequest.new(update_mask: update_mask, app_connector: app_connector, request_id: request_id, validate_only: validate_only) do |response, operation|
+      c.update_app_connector ::Google::Cloud::BeyondCorp::AppConnectors::V1::UpdateAppConnectorRequest.new(update_mask: update_mask, app_connector: app_connector, request_id: request_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_app_connector({ update_mask: update_mask, app_connector: app_connector, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_app_connector({ update_mask: update_mask, app_connector: app_connector, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_app_connector(::Google::Cloud::BeyondCorp::AppConnectors::V1::UpdateAppConnectorRequest.new(update_mask: update_mask, app_connector: app_connector, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_app_connector(::Google::Cloud::BeyondCorp::AppConnectors::V1::UpdateAppConnectorRequest.new(update_mask: update_mask, app_connector: app_connector, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -355,40 +355,40 @@ class ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Clie
 
     Gapic::ServiceStub.stub :new, delete_app_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
+      c = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_app_connector({ name: name, request_id: request_id, validate_only: validate_only }) do |response, operation|
+      c.delete_app_connector({ name: name, request_id: request_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_app_connector name: name, request_id: request_id, validate_only: validate_only do |response, operation|
+      c.delete_app_connector name: name, request_id: request_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_app_connector ::Google::Cloud::BeyondCorp::AppConnectors::V1::DeleteAppConnectorRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |response, operation|
+      c.delete_app_connector ::Google::Cloud::BeyondCorp::AppConnectors::V1::DeleteAppConnectorRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_app_connector({ name: name, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.delete_app_connector({ name: name, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_app_connector(::Google::Cloud::BeyondCorp::AppConnectors::V1::DeleteAppConnectorRequest.new(name: name, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.delete_app_connector(::Google::Cloud::BeyondCorp::AppConnectors::V1::DeleteAppConnectorRequest.new(name: name, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -424,40 +424,40 @@ class ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Clie
 
     Gapic::ServiceStub.stub :new, report_status_client_stub do
       # Create client
-      client = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
+      c = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.report_status({ app_connector: app_connector, resource_info: resource_info, request_id: request_id, validate_only: validate_only }) do |response, operation|
+      c.report_status({ app_connector: app_connector, resource_info: resource_info, request_id: request_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.report_status app_connector: app_connector, resource_info: resource_info, request_id: request_id, validate_only: validate_only do |response, operation|
+      c.report_status app_connector: app_connector, resource_info: resource_info, request_id: request_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.report_status ::Google::Cloud::BeyondCorp::AppConnectors::V1::ReportStatusRequest.new(app_connector: app_connector, resource_info: resource_info, request_id: request_id, validate_only: validate_only) do |response, operation|
+      c.report_status ::Google::Cloud::BeyondCorp::AppConnectors::V1::ReportStatusRequest.new(app_connector: app_connector, resource_info: resource_info, request_id: request_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.report_status({ app_connector: app_connector, resource_info: resource_info, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.report_status({ app_connector: app_connector, resource_info: resource_info, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.report_status(::Google::Cloud::BeyondCorp::AppConnectors::V1::ReportStatusRequest.new(app_connector: app_connector, resource_info: resource_info, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.report_status(::Google::Cloud::BeyondCorp::AppConnectors::V1::ReportStatusRequest.new(app_connector: app_connector, resource_info: resource_info, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

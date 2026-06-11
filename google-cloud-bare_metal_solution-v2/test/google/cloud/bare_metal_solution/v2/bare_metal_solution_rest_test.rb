@@ -100,32 +100,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instances ::Google::Cloud::BareMetalSolution::V2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_instances ::Google::Cloud::BareMetalSolution::V2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instances(::Google::Cloud::BareMetalSolution::V2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_instances(::Google::Cloud::BareMetalSolution::V2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_get_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance({ name: name }) do |_result, response|
+        c.get_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance name: name do |_result, response|
+        c.get_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance ::Google::Cloud::BareMetalSolution::V2::GetInstanceRequest.new(name: name) do |_result, response|
+        c.get_instance ::Google::Cloud::BareMetalSolution::V2::GetInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance({ name: name }, call_options) do |_result, response|
+        c.get_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance(::Google::Cloud::BareMetalSolution::V2::GetInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance(::Google::Cloud::BareMetalSolution::V2::GetInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_update_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_instance({ instance: instance, update_mask: update_mask }) do |_result, response|
+        c.update_instance({ instance: instance, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_instance instance: instance, update_mask: update_mask do |_result, response|
+        c.update_instance instance: instance, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_instance ::Google::Cloud::BareMetalSolution::V2::UpdateInstanceRequest.new(instance: instance, update_mask: update_mask) do |_result, response|
+        c.update_instance ::Google::Cloud::BareMetalSolution::V2::UpdateInstanceRequest.new(instance: instance, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_instance({ instance: instance, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_instance({ instance: instance, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_instance(::Google::Cloud::BareMetalSolution::V2::UpdateInstanceRequest.new(instance: instance, update_mask: update_mask), call_options) do |_result, response|
+        c.update_instance(::Google::Cloud::BareMetalSolution::V2::UpdateInstanceRequest.new(instance: instance, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_rename_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rename_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rename_instance({ name: name, new_instance_id: new_instance_id }) do |_result, response|
+        c.rename_instance({ name: name, new_instance_id: new_instance_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rename_instance name: name, new_instance_id: new_instance_id do |_result, response|
+        c.rename_instance name: name, new_instance_id: new_instance_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rename_instance ::Google::Cloud::BareMetalSolution::V2::RenameInstanceRequest.new(name: name, new_instance_id: new_instance_id) do |_result, response|
+        c.rename_instance ::Google::Cloud::BareMetalSolution::V2::RenameInstanceRequest.new(name: name, new_instance_id: new_instance_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rename_instance({ name: name, new_instance_id: new_instance_id }, call_options) do |_result, response|
+        c.rename_instance({ name: name, new_instance_id: new_instance_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rename_instance(::Google::Cloud::BareMetalSolution::V2::RenameInstanceRequest.new(name: name, new_instance_id: new_instance_id), call_options) do |_result, response|
+        c.rename_instance(::Google::Cloud::BareMetalSolution::V2::RenameInstanceRequest.new(name: name, new_instance_id: new_instance_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_reset_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reset_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reset_instance({ name: name }) do |_result, response|
+        c.reset_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reset_instance name: name do |_result, response|
+        c.reset_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reset_instance ::Google::Cloud::BareMetalSolution::V2::ResetInstanceRequest.new(name: name) do |_result, response|
+        c.reset_instance ::Google::Cloud::BareMetalSolution::V2::ResetInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reset_instance({ name: name }, call_options) do |_result, response|
+        c.reset_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reset_instance(::Google::Cloud::BareMetalSolution::V2::ResetInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.reset_instance(::Google::Cloud::BareMetalSolution::V2::ResetInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -372,32 +372,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_start_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_instance({ name: name }) do |_result, response|
+        c.start_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_instance name: name do |_result, response|
+        c.start_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_instance ::Google::Cloud::BareMetalSolution::V2::StartInstanceRequest.new(name: name) do |_result, response|
+        c.start_instance ::Google::Cloud::BareMetalSolution::V2::StartInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_instance({ name: name }, call_options) do |_result, response|
+        c.start_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_instance(::Google::Cloud::BareMetalSolution::V2::StartInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.start_instance(::Google::Cloud::BareMetalSolution::V2::StartInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -426,32 +426,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_stop_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_instance({ name: name }) do |_result, response|
+        c.stop_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_instance name: name do |_result, response|
+        c.stop_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_instance ::Google::Cloud::BareMetalSolution::V2::StopInstanceRequest.new(name: name) do |_result, response|
+        c.stop_instance ::Google::Cloud::BareMetalSolution::V2::StopInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_instance({ name: name }, call_options) do |_result, response|
+        c.stop_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_instance(::Google::Cloud::BareMetalSolution::V2::StopInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.stop_instance(::Google::Cloud::BareMetalSolution::V2::StopInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -480,32 +480,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_enable_interactive_serial_console_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, enable_interactive_serial_console_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.enable_interactive_serial_console({ name: name }) do |_result, response|
+        c.enable_interactive_serial_console({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.enable_interactive_serial_console name: name do |_result, response|
+        c.enable_interactive_serial_console name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.enable_interactive_serial_console ::Google::Cloud::BareMetalSolution::V2::EnableInteractiveSerialConsoleRequest.new(name: name) do |_result, response|
+        c.enable_interactive_serial_console ::Google::Cloud::BareMetalSolution::V2::EnableInteractiveSerialConsoleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.enable_interactive_serial_console({ name: name }, call_options) do |_result, response|
+        c.enable_interactive_serial_console({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.enable_interactive_serial_console(::Google::Cloud::BareMetalSolution::V2::EnableInteractiveSerialConsoleRequest.new(name: name), call_options) do |_result, response|
+        c.enable_interactive_serial_console(::Google::Cloud::BareMetalSolution::V2::EnableInteractiveSerialConsoleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -534,32 +534,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_disable_interactive_serial_console_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, disable_interactive_serial_console_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.disable_interactive_serial_console({ name: name }) do |_result, response|
+        c.disable_interactive_serial_console({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.disable_interactive_serial_console name: name do |_result, response|
+        c.disable_interactive_serial_console name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.disable_interactive_serial_console ::Google::Cloud::BareMetalSolution::V2::DisableInteractiveSerialConsoleRequest.new(name: name) do |_result, response|
+        c.disable_interactive_serial_console ::Google::Cloud::BareMetalSolution::V2::DisableInteractiveSerialConsoleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.disable_interactive_serial_console({ name: name }, call_options) do |_result, response|
+        c.disable_interactive_serial_console({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.disable_interactive_serial_console(::Google::Cloud::BareMetalSolution::V2::DisableInteractiveSerialConsoleRequest.new(name: name), call_options) do |_result, response|
+        c.disable_interactive_serial_console(::Google::Cloud::BareMetalSolution::V2::DisableInteractiveSerialConsoleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -590,32 +590,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_detach_lun_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, detach_lun_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.detach_lun({ instance: instance, lun: lun, skip_reboot: skip_reboot }) do |_result, response|
+        c.detach_lun({ instance: instance, lun: lun, skip_reboot: skip_reboot }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.detach_lun instance: instance, lun: lun, skip_reboot: skip_reboot do |_result, response|
+        c.detach_lun instance: instance, lun: lun, skip_reboot: skip_reboot do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.detach_lun ::Google::Cloud::BareMetalSolution::V2::DetachLunRequest.new(instance: instance, lun: lun, skip_reboot: skip_reboot) do |_result, response|
+        c.detach_lun ::Google::Cloud::BareMetalSolution::V2::DetachLunRequest.new(instance: instance, lun: lun, skip_reboot: skip_reboot) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.detach_lun({ instance: instance, lun: lun, skip_reboot: skip_reboot }, call_options) do |_result, response|
+        c.detach_lun({ instance: instance, lun: lun, skip_reboot: skip_reboot }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.detach_lun(::Google::Cloud::BareMetalSolution::V2::DetachLunRequest.new(instance: instance, lun: lun, skip_reboot: skip_reboot), call_options) do |_result, response|
+        c.detach_lun(::Google::Cloud::BareMetalSolution::V2::DetachLunRequest.new(instance: instance, lun: lun, skip_reboot: skip_reboot), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -646,32 +646,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_list_ssh_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_ssh_keys_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_ssh_keys({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_ssh_keys({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_ssh_keys parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_ssh_keys parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_ssh_keys ::Google::Cloud::BareMetalSolution::V2::ListSSHKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_ssh_keys ::Google::Cloud::BareMetalSolution::V2::ListSSHKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_ssh_keys({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_ssh_keys({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_ssh_keys(::Google::Cloud::BareMetalSolution::V2::ListSSHKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_ssh_keys(::Google::Cloud::BareMetalSolution::V2::ListSSHKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -702,32 +702,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_create_ssh_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_ssh_key_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_ssh_key({ parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id }) do |_result, response|
+        c.create_ssh_key({ parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_ssh_key parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id do |_result, response|
+        c.create_ssh_key parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_ssh_key ::Google::Cloud::BareMetalSolution::V2::CreateSSHKeyRequest.new(parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id) do |_result, response|
+        c.create_ssh_key ::Google::Cloud::BareMetalSolution::V2::CreateSSHKeyRequest.new(parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_ssh_key({ parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id }, call_options) do |_result, response|
+        c.create_ssh_key({ parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_ssh_key(::Google::Cloud::BareMetalSolution::V2::CreateSSHKeyRequest.new(parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id), call_options) do |_result, response|
+        c.create_ssh_key(::Google::Cloud::BareMetalSolution::V2::CreateSSHKeyRequest.new(parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -756,32 +756,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_delete_ssh_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_ssh_key_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_ssh_key({ name: name }) do |_result, response|
+        c.delete_ssh_key({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_ssh_key name: name do |_result, response|
+        c.delete_ssh_key name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_ssh_key ::Google::Cloud::BareMetalSolution::V2::DeleteSSHKeyRequest.new(name: name) do |_result, response|
+        c.delete_ssh_key ::Google::Cloud::BareMetalSolution::V2::DeleteSSHKeyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_ssh_key({ name: name }, call_options) do |_result, response|
+        c.delete_ssh_key({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_ssh_key(::Google::Cloud::BareMetalSolution::V2::DeleteSSHKeyRequest.new(name: name), call_options) do |_result, response|
+        c.delete_ssh_key(::Google::Cloud::BareMetalSolution::V2::DeleteSSHKeyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -813,32 +813,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_list_volumes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_volumes_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_volumes parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_volumes parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_volumes ::Google::Cloud::BareMetalSolution::V2::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_volumes ::Google::Cloud::BareMetalSolution::V2::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_volumes(::Google::Cloud::BareMetalSolution::V2::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_volumes(::Google::Cloud::BareMetalSolution::V2::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -867,32 +867,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_get_volume_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_volume_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_volume({ name: name }) do |_result, response|
+        c.get_volume({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_volume name: name do |_result, response|
+        c.get_volume name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_volume ::Google::Cloud::BareMetalSolution::V2::GetVolumeRequest.new(name: name) do |_result, response|
+        c.get_volume ::Google::Cloud::BareMetalSolution::V2::GetVolumeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_volume({ name: name }, call_options) do |_result, response|
+        c.get_volume({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_volume(::Google::Cloud::BareMetalSolution::V2::GetVolumeRequest.new(name: name), call_options) do |_result, response|
+        c.get_volume(::Google::Cloud::BareMetalSolution::V2::GetVolumeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -922,32 +922,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_update_volume_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_volume_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_volume({ volume: volume, update_mask: update_mask }) do |_result, response|
+        c.update_volume({ volume: volume, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_volume volume: volume, update_mask: update_mask do |_result, response|
+        c.update_volume volume: volume, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_volume ::Google::Cloud::BareMetalSolution::V2::UpdateVolumeRequest.new(volume: volume, update_mask: update_mask) do |_result, response|
+        c.update_volume ::Google::Cloud::BareMetalSolution::V2::UpdateVolumeRequest.new(volume: volume, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_volume({ volume: volume, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_volume({ volume: volume, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_volume(::Google::Cloud::BareMetalSolution::V2::UpdateVolumeRequest.new(volume: volume, update_mask: update_mask), call_options) do |_result, response|
+        c.update_volume(::Google::Cloud::BareMetalSolution::V2::UpdateVolumeRequest.new(volume: volume, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -977,32 +977,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_rename_volume_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rename_volume_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rename_volume({ name: name, new_volume_id: new_volume_id }) do |_result, response|
+        c.rename_volume({ name: name, new_volume_id: new_volume_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rename_volume name: name, new_volume_id: new_volume_id do |_result, response|
+        c.rename_volume name: name, new_volume_id: new_volume_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rename_volume ::Google::Cloud::BareMetalSolution::V2::RenameVolumeRequest.new(name: name, new_volume_id: new_volume_id) do |_result, response|
+        c.rename_volume ::Google::Cloud::BareMetalSolution::V2::RenameVolumeRequest.new(name: name, new_volume_id: new_volume_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rename_volume({ name: name, new_volume_id: new_volume_id }, call_options) do |_result, response|
+        c.rename_volume({ name: name, new_volume_id: new_volume_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rename_volume(::Google::Cloud::BareMetalSolution::V2::RenameVolumeRequest.new(name: name, new_volume_id: new_volume_id), call_options) do |_result, response|
+        c.rename_volume(::Google::Cloud::BareMetalSolution::V2::RenameVolumeRequest.new(name: name, new_volume_id: new_volume_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1031,32 +1031,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_evict_volume_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, evict_volume_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.evict_volume({ name: name }) do |_result, response|
+        c.evict_volume({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.evict_volume name: name do |_result, response|
+        c.evict_volume name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.evict_volume ::Google::Cloud::BareMetalSolution::V2::EvictVolumeRequest.new(name: name) do |_result, response|
+        c.evict_volume ::Google::Cloud::BareMetalSolution::V2::EvictVolumeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.evict_volume({ name: name }, call_options) do |_result, response|
+        c.evict_volume({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.evict_volume(::Google::Cloud::BareMetalSolution::V2::EvictVolumeRequest.new(name: name), call_options) do |_result, response|
+        c.evict_volume(::Google::Cloud::BareMetalSolution::V2::EvictVolumeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1086,32 +1086,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_resize_volume_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resize_volume_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resize_volume({ volume: volume, size_gib: size_gib }) do |_result, response|
+        c.resize_volume({ volume: volume, size_gib: size_gib }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resize_volume volume: volume, size_gib: size_gib do |_result, response|
+        c.resize_volume volume: volume, size_gib: size_gib do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resize_volume ::Google::Cloud::BareMetalSolution::V2::ResizeVolumeRequest.new(volume: volume, size_gib: size_gib) do |_result, response|
+        c.resize_volume ::Google::Cloud::BareMetalSolution::V2::ResizeVolumeRequest.new(volume: volume, size_gib: size_gib) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resize_volume({ volume: volume, size_gib: size_gib }, call_options) do |_result, response|
+        c.resize_volume({ volume: volume, size_gib: size_gib }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resize_volume(::Google::Cloud::BareMetalSolution::V2::ResizeVolumeRequest.new(volume: volume, size_gib: size_gib), call_options) do |_result, response|
+        c.resize_volume(::Google::Cloud::BareMetalSolution::V2::ResizeVolumeRequest.new(volume: volume, size_gib: size_gib), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1143,32 +1143,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_list_networks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_networks_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_networks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_networks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_networks parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_networks parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_networks ::Google::Cloud::BareMetalSolution::V2::ListNetworksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_networks ::Google::Cloud::BareMetalSolution::V2::ListNetworksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_networks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_networks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_networks(::Google::Cloud::BareMetalSolution::V2::ListNetworksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_networks(::Google::Cloud::BareMetalSolution::V2::ListNetworksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1197,32 +1197,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_list_network_usage_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_network_usage_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_network_usage({ location: location }) do |_result, response|
+        c.list_network_usage({ location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_network_usage location: location do |_result, response|
+        c.list_network_usage location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_network_usage ::Google::Cloud::BareMetalSolution::V2::ListNetworkUsageRequest.new(location: location) do |_result, response|
+        c.list_network_usage ::Google::Cloud::BareMetalSolution::V2::ListNetworkUsageRequest.new(location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_network_usage({ location: location }, call_options) do |_result, response|
+        c.list_network_usage({ location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_network_usage(::Google::Cloud::BareMetalSolution::V2::ListNetworkUsageRequest.new(location: location), call_options) do |_result, response|
+        c.list_network_usage(::Google::Cloud::BareMetalSolution::V2::ListNetworkUsageRequest.new(location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1251,32 +1251,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_get_network_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_network_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_network({ name: name }) do |_result, response|
+        c.get_network({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_network name: name do |_result, response|
+        c.get_network name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_network ::Google::Cloud::BareMetalSolution::V2::GetNetworkRequest.new(name: name) do |_result, response|
+        c.get_network ::Google::Cloud::BareMetalSolution::V2::GetNetworkRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_network({ name: name }, call_options) do |_result, response|
+        c.get_network({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_network(::Google::Cloud::BareMetalSolution::V2::GetNetworkRequest.new(name: name), call_options) do |_result, response|
+        c.get_network(::Google::Cloud::BareMetalSolution::V2::GetNetworkRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1306,32 +1306,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_update_network_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_network_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_network({ network: network, update_mask: update_mask }) do |_result, response|
+        c.update_network({ network: network, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_network network: network, update_mask: update_mask do |_result, response|
+        c.update_network network: network, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_network ::Google::Cloud::BareMetalSolution::V2::UpdateNetworkRequest.new(network: network, update_mask: update_mask) do |_result, response|
+        c.update_network ::Google::Cloud::BareMetalSolution::V2::UpdateNetworkRequest.new(network: network, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_network({ network: network, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_network({ network: network, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_network(::Google::Cloud::BareMetalSolution::V2::UpdateNetworkRequest.new(network: network, update_mask: update_mask), call_options) do |_result, response|
+        c.update_network(::Google::Cloud::BareMetalSolution::V2::UpdateNetworkRequest.new(network: network, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1361,32 +1361,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_create_volume_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_volume_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_volume_snapshot({ parent: parent, volume_snapshot: volume_snapshot }) do |_result, response|
+        c.create_volume_snapshot({ parent: parent, volume_snapshot: volume_snapshot }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_volume_snapshot parent: parent, volume_snapshot: volume_snapshot do |_result, response|
+        c.create_volume_snapshot parent: parent, volume_snapshot: volume_snapshot do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::CreateVolumeSnapshotRequest.new(parent: parent, volume_snapshot: volume_snapshot) do |_result, response|
+        c.create_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::CreateVolumeSnapshotRequest.new(parent: parent, volume_snapshot: volume_snapshot) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_volume_snapshot({ parent: parent, volume_snapshot: volume_snapshot }, call_options) do |_result, response|
+        c.create_volume_snapshot({ parent: parent, volume_snapshot: volume_snapshot }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::CreateVolumeSnapshotRequest.new(parent: parent, volume_snapshot: volume_snapshot), call_options) do |_result, response|
+        c.create_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::CreateVolumeSnapshotRequest.new(parent: parent, volume_snapshot: volume_snapshot), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1415,32 +1415,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_restore_volume_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_volume_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_volume_snapshot({ volume_snapshot: volume_snapshot }) do |_result, response|
+        c.restore_volume_snapshot({ volume_snapshot: volume_snapshot }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_volume_snapshot volume_snapshot: volume_snapshot do |_result, response|
+        c.restore_volume_snapshot volume_snapshot: volume_snapshot do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::RestoreVolumeSnapshotRequest.new(volume_snapshot: volume_snapshot) do |_result, response|
+        c.restore_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::RestoreVolumeSnapshotRequest.new(volume_snapshot: volume_snapshot) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_volume_snapshot({ volume_snapshot: volume_snapshot }, call_options) do |_result, response|
+        c.restore_volume_snapshot({ volume_snapshot: volume_snapshot }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::RestoreVolumeSnapshotRequest.new(volume_snapshot: volume_snapshot), call_options) do |_result, response|
+        c.restore_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::RestoreVolumeSnapshotRequest.new(volume_snapshot: volume_snapshot), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1469,32 +1469,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_delete_volume_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_volume_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_volume_snapshot({ name: name }) do |_result, response|
+        c.delete_volume_snapshot({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_volume_snapshot name: name do |_result, response|
+        c.delete_volume_snapshot name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::DeleteVolumeSnapshotRequest.new(name: name) do |_result, response|
+        c.delete_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::DeleteVolumeSnapshotRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_volume_snapshot({ name: name }, call_options) do |_result, response|
+        c.delete_volume_snapshot({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::DeleteVolumeSnapshotRequest.new(name: name), call_options) do |_result, response|
+        c.delete_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::DeleteVolumeSnapshotRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1523,32 +1523,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_get_volume_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_volume_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_volume_snapshot({ name: name }) do |_result, response|
+        c.get_volume_snapshot({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_volume_snapshot name: name do |_result, response|
+        c.get_volume_snapshot name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::GetVolumeSnapshotRequest.new(name: name) do |_result, response|
+        c.get_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::GetVolumeSnapshotRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_volume_snapshot({ name: name }, call_options) do |_result, response|
+        c.get_volume_snapshot({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::GetVolumeSnapshotRequest.new(name: name), call_options) do |_result, response|
+        c.get_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::GetVolumeSnapshotRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1579,32 +1579,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_list_volume_snapshots_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_volume_snapshots_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_volume_snapshots({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_volume_snapshots({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_volume_snapshots parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_volume_snapshots parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_volume_snapshots ::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_volume_snapshots ::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_volume_snapshots({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_volume_snapshots({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_volume_snapshots(::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_volume_snapshots(::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1633,32 +1633,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_get_lun_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_lun_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_lun({ name: name }) do |_result, response|
+        c.get_lun({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_lun name: name do |_result, response|
+        c.get_lun name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_lun ::Google::Cloud::BareMetalSolution::V2::GetLunRequest.new(name: name) do |_result, response|
+        c.get_lun ::Google::Cloud::BareMetalSolution::V2::GetLunRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_lun({ name: name }, call_options) do |_result, response|
+        c.get_lun({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_lun(::Google::Cloud::BareMetalSolution::V2::GetLunRequest.new(name: name), call_options) do |_result, response|
+        c.get_lun(::Google::Cloud::BareMetalSolution::V2::GetLunRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1689,32 +1689,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_list_luns_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_luns_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_luns({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_luns({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_luns parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_luns parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_luns ::Google::Cloud::BareMetalSolution::V2::ListLunsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_luns ::Google::Cloud::BareMetalSolution::V2::ListLunsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_luns({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_luns({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_luns(::Google::Cloud::BareMetalSolution::V2::ListLunsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_luns(::Google::Cloud::BareMetalSolution::V2::ListLunsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1743,32 +1743,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_evict_lun_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, evict_lun_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.evict_lun({ name: name }) do |_result, response|
+        c.evict_lun({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.evict_lun name: name do |_result, response|
+        c.evict_lun name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.evict_lun ::Google::Cloud::BareMetalSolution::V2::EvictLunRequest.new(name: name) do |_result, response|
+        c.evict_lun ::Google::Cloud::BareMetalSolution::V2::EvictLunRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.evict_lun({ name: name }, call_options) do |_result, response|
+        c.evict_lun({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.evict_lun(::Google::Cloud::BareMetalSolution::V2::EvictLunRequest.new(name: name), call_options) do |_result, response|
+        c.evict_lun(::Google::Cloud::BareMetalSolution::V2::EvictLunRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1797,32 +1797,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_get_nfs_share_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_nfs_share_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_nfs_share({ name: name }) do |_result, response|
+        c.get_nfs_share({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_nfs_share name: name do |_result, response|
+        c.get_nfs_share name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_nfs_share ::Google::Cloud::BareMetalSolution::V2::GetNfsShareRequest.new(name: name) do |_result, response|
+        c.get_nfs_share ::Google::Cloud::BareMetalSolution::V2::GetNfsShareRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_nfs_share({ name: name }, call_options) do |_result, response|
+        c.get_nfs_share({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_nfs_share(::Google::Cloud::BareMetalSolution::V2::GetNfsShareRequest.new(name: name), call_options) do |_result, response|
+        c.get_nfs_share(::Google::Cloud::BareMetalSolution::V2::GetNfsShareRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1854,32 +1854,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_list_nfs_shares_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_nfs_shares_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_nfs_shares({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_nfs_shares({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_nfs_shares parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_nfs_shares parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_nfs_shares ::Google::Cloud::BareMetalSolution::V2::ListNfsSharesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_nfs_shares ::Google::Cloud::BareMetalSolution::V2::ListNfsSharesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_nfs_shares({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_nfs_shares({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_nfs_shares(::Google::Cloud::BareMetalSolution::V2::ListNfsSharesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_nfs_shares(::Google::Cloud::BareMetalSolution::V2::ListNfsSharesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1909,32 +1909,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_update_nfs_share_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_nfs_share_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_nfs_share({ nfs_share: nfs_share, update_mask: update_mask }) do |_result, response|
+        c.update_nfs_share({ nfs_share: nfs_share, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_nfs_share nfs_share: nfs_share, update_mask: update_mask do |_result, response|
+        c.update_nfs_share nfs_share: nfs_share, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_nfs_share ::Google::Cloud::BareMetalSolution::V2::UpdateNfsShareRequest.new(nfs_share: nfs_share, update_mask: update_mask) do |_result, response|
+        c.update_nfs_share ::Google::Cloud::BareMetalSolution::V2::UpdateNfsShareRequest.new(nfs_share: nfs_share, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_nfs_share({ nfs_share: nfs_share, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_nfs_share({ nfs_share: nfs_share, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_nfs_share(::Google::Cloud::BareMetalSolution::V2::UpdateNfsShareRequest.new(nfs_share: nfs_share, update_mask: update_mask), call_options) do |_result, response|
+        c.update_nfs_share(::Google::Cloud::BareMetalSolution::V2::UpdateNfsShareRequest.new(nfs_share: nfs_share, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1964,32 +1964,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_create_nfs_share_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_nfs_share_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_nfs_share({ parent: parent, nfs_share: nfs_share }) do |_result, response|
+        c.create_nfs_share({ parent: parent, nfs_share: nfs_share }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_nfs_share parent: parent, nfs_share: nfs_share do |_result, response|
+        c.create_nfs_share parent: parent, nfs_share: nfs_share do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_nfs_share ::Google::Cloud::BareMetalSolution::V2::CreateNfsShareRequest.new(parent: parent, nfs_share: nfs_share) do |_result, response|
+        c.create_nfs_share ::Google::Cloud::BareMetalSolution::V2::CreateNfsShareRequest.new(parent: parent, nfs_share: nfs_share) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_nfs_share({ parent: parent, nfs_share: nfs_share }, call_options) do |_result, response|
+        c.create_nfs_share({ parent: parent, nfs_share: nfs_share }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_nfs_share(::Google::Cloud::BareMetalSolution::V2::CreateNfsShareRequest.new(parent: parent, nfs_share: nfs_share), call_options) do |_result, response|
+        c.create_nfs_share(::Google::Cloud::BareMetalSolution::V2::CreateNfsShareRequest.new(parent: parent, nfs_share: nfs_share), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2019,32 +2019,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_rename_nfs_share_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rename_nfs_share_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rename_nfs_share({ name: name, new_nfsshare_id: new_nfsshare_id }) do |_result, response|
+        c.rename_nfs_share({ name: name, new_nfsshare_id: new_nfsshare_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rename_nfs_share name: name, new_nfsshare_id: new_nfsshare_id do |_result, response|
+        c.rename_nfs_share name: name, new_nfsshare_id: new_nfsshare_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rename_nfs_share ::Google::Cloud::BareMetalSolution::V2::RenameNfsShareRequest.new(name: name, new_nfsshare_id: new_nfsshare_id) do |_result, response|
+        c.rename_nfs_share ::Google::Cloud::BareMetalSolution::V2::RenameNfsShareRequest.new(name: name, new_nfsshare_id: new_nfsshare_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rename_nfs_share({ name: name, new_nfsshare_id: new_nfsshare_id }, call_options) do |_result, response|
+        c.rename_nfs_share({ name: name, new_nfsshare_id: new_nfsshare_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rename_nfs_share(::Google::Cloud::BareMetalSolution::V2::RenameNfsShareRequest.new(name: name, new_nfsshare_id: new_nfsshare_id), call_options) do |_result, response|
+        c.rename_nfs_share(::Google::Cloud::BareMetalSolution::V2::RenameNfsShareRequest.new(name: name, new_nfsshare_id: new_nfsshare_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2073,32 +2073,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_delete_nfs_share_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_nfs_share_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_nfs_share({ name: name }) do |_result, response|
+        c.delete_nfs_share({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_nfs_share name: name do |_result, response|
+        c.delete_nfs_share name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_nfs_share ::Google::Cloud::BareMetalSolution::V2::DeleteNfsShareRequest.new(name: name) do |_result, response|
+        c.delete_nfs_share ::Google::Cloud::BareMetalSolution::V2::DeleteNfsShareRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_nfs_share({ name: name }, call_options) do |_result, response|
+        c.delete_nfs_share({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_nfs_share(::Google::Cloud::BareMetalSolution::V2::DeleteNfsShareRequest.new(name: name), call_options) do |_result, response|
+        c.delete_nfs_share(::Google::Cloud::BareMetalSolution::V2::DeleteNfsShareRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2129,32 +2129,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_list_provisioning_quotas_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_provisioning_quotas_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_provisioning_quotas({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_provisioning_quotas({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_provisioning_quotas parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_provisioning_quotas parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_provisioning_quotas ::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_provisioning_quotas ::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_provisioning_quotas({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_provisioning_quotas({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_provisioning_quotas(::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_provisioning_quotas(::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2185,32 +2185,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_submit_provisioning_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, submit_provisioning_config_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.submit_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }) do |_result, response|
+        c.submit_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.submit_provisioning_config parent: parent, provisioning_config: provisioning_config, email: email do |_result, response|
+        c.submit_provisioning_config parent: parent, provisioning_config: provisioning_config, email: email do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.submit_provisioning_config ::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email) do |_result, response|
+        c.submit_provisioning_config ::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.submit_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }, call_options) do |_result, response|
+        c.submit_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.submit_provisioning_config(::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email), call_options) do |_result, response|
+        c.submit_provisioning_config(::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2239,32 +2239,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_get_provisioning_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_provisioning_config_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_provisioning_config({ name: name }) do |_result, response|
+        c.get_provisioning_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_provisioning_config name: name do |_result, response|
+        c.get_provisioning_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_provisioning_config ::Google::Cloud::BareMetalSolution::V2::GetProvisioningConfigRequest.new(name: name) do |_result, response|
+        c.get_provisioning_config ::Google::Cloud::BareMetalSolution::V2::GetProvisioningConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_provisioning_config({ name: name }, call_options) do |_result, response|
+        c.get_provisioning_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_provisioning_config(::Google::Cloud::BareMetalSolution::V2::GetProvisioningConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_provisioning_config(::Google::Cloud::BareMetalSolution::V2::GetProvisioningConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2295,32 +2295,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_create_provisioning_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_provisioning_config_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }) do |_result, response|
+        c.create_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_provisioning_config parent: parent, provisioning_config: provisioning_config, email: email do |_result, response|
+        c.create_provisioning_config parent: parent, provisioning_config: provisioning_config, email: email do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_provisioning_config ::Google::Cloud::BareMetalSolution::V2::CreateProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email) do |_result, response|
+        c.create_provisioning_config ::Google::Cloud::BareMetalSolution::V2::CreateProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }, call_options) do |_result, response|
+        c.create_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_provisioning_config(::Google::Cloud::BareMetalSolution::V2::CreateProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email), call_options) do |_result, response|
+        c.create_provisioning_config(::Google::Cloud::BareMetalSolution::V2::CreateProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2351,32 +2351,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_update_provisioning_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_provisioning_config_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_provisioning_config({ provisioning_config: provisioning_config, update_mask: update_mask, email: email }) do |_result, response|
+        c.update_provisioning_config({ provisioning_config: provisioning_config, update_mask: update_mask, email: email }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_provisioning_config provisioning_config: provisioning_config, update_mask: update_mask, email: email do |_result, response|
+        c.update_provisioning_config provisioning_config: provisioning_config, update_mask: update_mask, email: email do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_provisioning_config ::Google::Cloud::BareMetalSolution::V2::UpdateProvisioningConfigRequest.new(provisioning_config: provisioning_config, update_mask: update_mask, email: email) do |_result, response|
+        c.update_provisioning_config ::Google::Cloud::BareMetalSolution::V2::UpdateProvisioningConfigRequest.new(provisioning_config: provisioning_config, update_mask: update_mask, email: email) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_provisioning_config({ provisioning_config: provisioning_config, update_mask: update_mask, email: email }, call_options) do |_result, response|
+        c.update_provisioning_config({ provisioning_config: provisioning_config, update_mask: update_mask, email: email }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_provisioning_config(::Google::Cloud::BareMetalSolution::V2::UpdateProvisioningConfigRequest.new(provisioning_config: provisioning_config, update_mask: update_mask, email: email), call_options) do |_result, response|
+        c.update_provisioning_config(::Google::Cloud::BareMetalSolution::V2::UpdateProvisioningConfigRequest.new(provisioning_config: provisioning_config, update_mask: update_mask, email: email), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2406,32 +2406,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_rename_network_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rename_network_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rename_network({ name: name, new_network_id: new_network_id }) do |_result, response|
+        c.rename_network({ name: name, new_network_id: new_network_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rename_network name: name, new_network_id: new_network_id do |_result, response|
+        c.rename_network name: name, new_network_id: new_network_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rename_network ::Google::Cloud::BareMetalSolution::V2::RenameNetworkRequest.new(name: name, new_network_id: new_network_id) do |_result, response|
+        c.rename_network ::Google::Cloud::BareMetalSolution::V2::RenameNetworkRequest.new(name: name, new_network_id: new_network_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rename_network({ name: name, new_network_id: new_network_id }, call_options) do |_result, response|
+        c.rename_network({ name: name, new_network_id: new_network_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rename_network(::Google::Cloud::BareMetalSolution::V2::RenameNetworkRequest.new(name: name, new_network_id: new_network_id), call_options) do |_result, response|
+        c.rename_network(::Google::Cloud::BareMetalSolution::V2::RenameNetworkRequest.new(name: name, new_network_id: new_network_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2462,32 +2462,32 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ClientTes
     ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.stub :transcode_list_os_images_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_os_images_client_stub do
         # Create client
-        client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
+        c = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_os_images({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_os_images({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_os_images parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_os_images parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_os_images ::Google::Cloud::BareMetalSolution::V2::ListOSImagesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_os_images ::Google::Cloud::BareMetalSolution::V2::ListOSImagesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_os_images({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_os_images({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_os_images(::Google::Cloud::BareMetalSolution::V2::ListOSImagesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_os_images(::Google::Cloud::BareMetalSolution::V2::ListOSImagesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
