@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::ClientTest < Mi
     ::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::ServiceStub.stub :transcode_get_bandwidth_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_bandwidth_group_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_bandwidth_group({ name: name }) do |_result, response|
+        c.get_bandwidth_group({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_bandwidth_group name: name do |_result, response|
+        c.get_bandwidth_group name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_bandwidth_group ::Google::Ads::AdManager::V1::GetBandwidthGroupRequest.new(name: name) do |_result, response|
+        c.get_bandwidth_group ::Google::Ads::AdManager::V1::GetBandwidthGroupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_bandwidth_group({ name: name }, call_options) do |_result, response|
+        c.get_bandwidth_group({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_bandwidth_group(::Google::Ads::AdManager::V1::GetBandwidthGroupRequest.new(name: name), call_options) do |_result, response|
+        c.get_bandwidth_group(::Google::Ads::AdManager::V1::GetBandwidthGroupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::ClientTest < Mi
     ::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::ServiceStub.stub :transcode_list_bandwidth_groups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_bandwidth_groups_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_bandwidth_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_bandwidth_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_bandwidth_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_bandwidth_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_bandwidth_groups ::Google::Ads::AdManager::V1::ListBandwidthGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_bandwidth_groups ::Google::Ads::AdManager::V1::ListBandwidthGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_bandwidth_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_bandwidth_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_bandwidth_groups(::Google::Ads::AdManager::V1::ListBandwidthGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_bandwidth_groups(::Google::Ads::AdManager::V1::ListBandwidthGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

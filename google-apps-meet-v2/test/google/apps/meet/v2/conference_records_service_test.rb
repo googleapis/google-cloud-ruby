@@ -82,36 +82,36 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_conference_record_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_conference_record({ name: name }) do |response, operation|
+      c.get_conference_record({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_conference_record name: name do |response, operation|
+      c.get_conference_record name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_conference_record ::Google::Apps::Meet::V2::GetConferenceRecordRequest.new(name: name) do |response, operation|
+      c.get_conference_record ::Google::Apps::Meet::V2::GetConferenceRecordRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_conference_record({ name: name }, grpc_options) do |response, operation|
+      c.get_conference_record({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_conference_record(::Google::Apps::Meet::V2::GetConferenceRecordRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_conference_record(::Google::Apps::Meet::V2::GetConferenceRecordRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,40 +144,40 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_conference_records_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_conference_records({ page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_conference_records({ page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_conference_records page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_conference_records page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_conference_records ::Google::Apps::Meet::V2::ListConferenceRecordsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_conference_records ::Google::Apps::Meet::V2::ListConferenceRecordsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_conference_records({ page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_conference_records({ page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_conference_records(::Google::Apps::Meet::V2::ListConferenceRecordsRequest.new(page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_conference_records(::Google::Apps::Meet::V2::ListConferenceRecordsRequest.new(page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -207,36 +207,36 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_participant_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_participant({ name: name }) do |response, operation|
+      c.get_participant({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_participant name: name do |response, operation|
+      c.get_participant name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_participant ::Google::Apps::Meet::V2::GetParticipantRequest.new(name: name) do |response, operation|
+      c.get_participant ::Google::Apps::Meet::V2::GetParticipantRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_participant({ name: name }, grpc_options) do |response, operation|
+      c.get_participant({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_participant(::Google::Apps::Meet::V2::GetParticipantRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_participant(::Google::Apps::Meet::V2::GetParticipantRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -271,40 +271,40 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_participants_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_participants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_participants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_participants parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_participants parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_participants ::Google::Apps::Meet::V2::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_participants ::Google::Apps::Meet::V2::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_participants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_participants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_participants(::Google::Apps::Meet::V2::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_participants(::Google::Apps::Meet::V2::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -334,36 +334,36 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_participant_session_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_participant_session({ name: name }) do |response, operation|
+      c.get_participant_session({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_participant_session name: name do |response, operation|
+      c.get_participant_session name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_participant_session ::Google::Apps::Meet::V2::GetParticipantSessionRequest.new(name: name) do |response, operation|
+      c.get_participant_session ::Google::Apps::Meet::V2::GetParticipantSessionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_participant_session({ name: name }, grpc_options) do |response, operation|
+      c.get_participant_session({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_participant_session(::Google::Apps::Meet::V2::GetParticipantSessionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_participant_session(::Google::Apps::Meet::V2::GetParticipantSessionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -398,40 +398,40 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_participant_sessions_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_participant_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_participant_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_participant_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_participant_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_participant_sessions ::Google::Apps::Meet::V2::ListParticipantSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_participant_sessions ::Google::Apps::Meet::V2::ListParticipantSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_participant_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_participant_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_participant_sessions(::Google::Apps::Meet::V2::ListParticipantSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_participant_sessions(::Google::Apps::Meet::V2::ListParticipantSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -461,36 +461,36 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_recording_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_recording({ name: name }) do |response, operation|
+      c.get_recording({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_recording name: name do |response, operation|
+      c.get_recording name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_recording ::Google::Apps::Meet::V2::GetRecordingRequest.new(name: name) do |response, operation|
+      c.get_recording ::Google::Apps::Meet::V2::GetRecordingRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_recording({ name: name }, grpc_options) do |response, operation|
+      c.get_recording({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_recording(::Google::Apps::Meet::V2::GetRecordingRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_recording(::Google::Apps::Meet::V2::GetRecordingRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -523,40 +523,40 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_recordings_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_recordings({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_recordings({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_recordings parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_recordings parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_recordings ::Google::Apps::Meet::V2::ListRecordingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_recordings ::Google::Apps::Meet::V2::ListRecordingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_recordings({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_recordings({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_recordings(::Google::Apps::Meet::V2::ListRecordingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_recordings(::Google::Apps::Meet::V2::ListRecordingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -586,36 +586,36 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_transcript_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_transcript({ name: name }) do |response, operation|
+      c.get_transcript({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_transcript name: name do |response, operation|
+      c.get_transcript name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_transcript ::Google::Apps::Meet::V2::GetTranscriptRequest.new(name: name) do |response, operation|
+      c.get_transcript ::Google::Apps::Meet::V2::GetTranscriptRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_transcript({ name: name }, grpc_options) do |response, operation|
+      c.get_transcript({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_transcript(::Google::Apps::Meet::V2::GetTranscriptRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_transcript(::Google::Apps::Meet::V2::GetTranscriptRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -648,40 +648,40 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_transcripts_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_transcripts({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_transcripts({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_transcripts parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_transcripts parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_transcripts ::Google::Apps::Meet::V2::ListTranscriptsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_transcripts ::Google::Apps::Meet::V2::ListTranscriptsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_transcripts({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_transcripts({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_transcripts(::Google::Apps::Meet::V2::ListTranscriptsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_transcripts(::Google::Apps::Meet::V2::ListTranscriptsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -711,36 +711,36 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_transcript_entry_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_transcript_entry({ name: name }) do |response, operation|
+      c.get_transcript_entry({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_transcript_entry name: name do |response, operation|
+      c.get_transcript_entry name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_transcript_entry ::Google::Apps::Meet::V2::GetTranscriptEntryRequest.new(name: name) do |response, operation|
+      c.get_transcript_entry ::Google::Apps::Meet::V2::GetTranscriptEntryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_transcript_entry({ name: name }, grpc_options) do |response, operation|
+      c.get_transcript_entry({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_transcript_entry(::Google::Apps::Meet::V2::GetTranscriptEntryRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_transcript_entry(::Google::Apps::Meet::V2::GetTranscriptEntryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -773,40 +773,40 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_transcript_entries_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_transcript_entries({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_transcript_entries({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_transcript_entries parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_transcript_entries parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_transcript_entries ::Google::Apps::Meet::V2::ListTranscriptEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_transcript_entries ::Google::Apps::Meet::V2::ListTranscriptEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_transcript_entries({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_transcript_entries({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_transcript_entries(::Google::Apps::Meet::V2::ListTranscriptEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_transcript_entries(::Google::Apps::Meet::V2::ListTranscriptEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

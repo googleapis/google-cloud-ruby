@@ -82,36 +82,36 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_table_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_table({ name: name }) do |response, operation|
+      c.get_table({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_table name: name do |response, operation|
+      c.get_table name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_table ::Google::Area120::Tables::V1alpha1::GetTableRequest.new(name: name) do |response, operation|
+      c.get_table ::Google::Area120::Tables::V1alpha1::GetTableRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_table({ name: name }, grpc_options) do |response, operation|
+      c.get_table({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_table(::Google::Area120::Tables::V1alpha1::GetTableRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_table(::Google::Area120::Tables::V1alpha1::GetTableRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,40 +142,40 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_tables_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tables({ page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_tables({ page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tables page_size: page_size, page_token: page_token do |response, operation|
+      c.list_tables page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tables ::Google::Area120::Tables::V1alpha1::ListTablesRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_tables ::Google::Area120::Tables::V1alpha1::ListTablesRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tables({ page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_tables({ page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tables(::Google::Area120::Tables::V1alpha1::ListTablesRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_tables(::Google::Area120::Tables::V1alpha1::ListTablesRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -205,36 +205,36 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_workspace_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workspace({ name: name }) do |response, operation|
+      c.get_workspace({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workspace name: name do |response, operation|
+      c.get_workspace name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workspace ::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name) do |response, operation|
+      c.get_workspace ::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workspace({ name: name }, grpc_options) do |response, operation|
+      c.get_workspace({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workspace(::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workspace(::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -265,40 +265,40 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_workspaces_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workspaces({ page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_workspaces({ page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workspaces page_size: page_size, page_token: page_token do |response, operation|
+      c.list_workspaces page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workspaces ::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_workspaces ::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workspaces({ page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_workspaces({ page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workspaces(::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_workspaces(::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -330,36 +330,36 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_row_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_row({ name: name, view: view }) do |response, operation|
+      c.get_row({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_row name: name, view: view do |response, operation|
+      c.get_row name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_row ::Google::Area120::Tables::V1alpha1::GetRowRequest.new(name: name, view: view) do |response, operation|
+      c.get_row ::Google::Area120::Tables::V1alpha1::GetRowRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_row({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_row({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_row(::Google::Area120::Tables::V1alpha1::GetRowRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_row(::Google::Area120::Tables::V1alpha1::GetRowRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -396,40 +396,40 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_rows_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }) do |response, operation|
+      c.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_rows parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter do |response, operation|
+      c.list_rows parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_rows ::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter) do |response, operation|
+      c.list_rows ::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }, grpc_options) do |response, operation|
+      c.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_rows(::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter), grpc_options) do |response, operation|
+      c.list_rows(::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -463,36 +463,36 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_row_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_row({ parent: parent, row: row, view: view }) do |response, operation|
+      c.create_row({ parent: parent, row: row, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_row parent: parent, row: row, view: view do |response, operation|
+      c.create_row parent: parent, row: row, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_row ::Google::Area120::Tables::V1alpha1::CreateRowRequest.new(parent: parent, row: row, view: view) do |response, operation|
+      c.create_row ::Google::Area120::Tables::V1alpha1::CreateRowRequest.new(parent: parent, row: row, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_row({ parent: parent, row: row, view: view }, grpc_options) do |response, operation|
+      c.create_row({ parent: parent, row: row, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_row(::Google::Area120::Tables::V1alpha1::CreateRowRequest.new(parent: parent, row: row, view: view), grpc_options) do |response, operation|
+      c.create_row(::Google::Area120::Tables::V1alpha1::CreateRowRequest.new(parent: parent, row: row, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -523,36 +523,36 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, batch_create_rows_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_rows({ parent: parent, requests: requests }) do |response, operation|
+      c.batch_create_rows({ parent: parent, requests: requests }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_rows parent: parent, requests: requests do |response, operation|
+      c.batch_create_rows parent: parent, requests: requests do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_rows ::Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new(parent: parent, requests: requests) do |response, operation|
+      c.batch_create_rows ::Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new(parent: parent, requests: requests) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_rows({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+      c.batch_create_rows({ parent: parent, requests: requests }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_rows(::Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+      c.batch_create_rows(::Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -585,36 +585,36 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_row_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_row({ row: row, update_mask: update_mask, view: view }) do |response, operation|
+      c.update_row({ row: row, update_mask: update_mask, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_row row: row, update_mask: update_mask, view: view do |response, operation|
+      c.update_row row: row, update_mask: update_mask, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_row ::Google::Area120::Tables::V1alpha1::UpdateRowRequest.new(row: row, update_mask: update_mask, view: view) do |response, operation|
+      c.update_row ::Google::Area120::Tables::V1alpha1::UpdateRowRequest.new(row: row, update_mask: update_mask, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_row({ row: row, update_mask: update_mask, view: view }, grpc_options) do |response, operation|
+      c.update_row({ row: row, update_mask: update_mask, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_row(::Google::Area120::Tables::V1alpha1::UpdateRowRequest.new(row: row, update_mask: update_mask, view: view), grpc_options) do |response, operation|
+      c.update_row(::Google::Area120::Tables::V1alpha1::UpdateRowRequest.new(row: row, update_mask: update_mask, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -645,36 +645,36 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, batch_update_rows_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_update_rows({ parent: parent, requests: requests }) do |response, operation|
+      c.batch_update_rows({ parent: parent, requests: requests }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_update_rows parent: parent, requests: requests do |response, operation|
+      c.batch_update_rows parent: parent, requests: requests do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_update_rows ::Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new(parent: parent, requests: requests) do |response, operation|
+      c.batch_update_rows ::Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new(parent: parent, requests: requests) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_update_rows({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+      c.batch_update_rows({ parent: parent, requests: requests }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_update_rows(::Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+      c.batch_update_rows(::Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -703,36 +703,36 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_row_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_row({ name: name }) do |response, operation|
+      c.delete_row({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_row name: name do |response, operation|
+      c.delete_row name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_row ::Google::Area120::Tables::V1alpha1::DeleteRowRequest.new(name: name) do |response, operation|
+      c.delete_row ::Google::Area120::Tables::V1alpha1::DeleteRowRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_row({ name: name }, grpc_options) do |response, operation|
+      c.delete_row({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_row(::Google::Area120::Tables::V1alpha1::DeleteRowRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_row(::Google::Area120::Tables::V1alpha1::DeleteRowRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -763,36 +763,36 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, batch_delete_rows_client_stub do
       # Create client
-      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+      c = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_delete_rows({ parent: parent, names: names }) do |response, operation|
+      c.batch_delete_rows({ parent: parent, names: names }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_delete_rows parent: parent, names: names do |response, operation|
+      c.batch_delete_rows parent: parent, names: names do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_delete_rows ::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names) do |response, operation|
+      c.batch_delete_rows ::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_delete_rows({ parent: parent, names: names }, grpc_options) do |response, operation|
+      c.batch_delete_rows({ parent: parent, names: names }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_delete_rows(::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
+      c.batch_delete_rows(::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

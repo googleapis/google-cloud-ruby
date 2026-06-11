@@ -82,36 +82,36 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
 
     Gapic::ServiceStub.stub :new, get_organization_client_stub do
       # Create client
-      client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_organization({ name: name }) do |response, operation|
+      c.get_organization({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_organization name: name do |response, operation|
+      c.get_organization name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_organization ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetOrganizationRequest.new(name: name) do |response, operation|
+      c.get_organization ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetOrganizationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_organization({ name: name }, grpc_options) do |response, operation|
+      c.get_organization({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_organization(::Google::Ads::MarketingPlatform::Admin::V1alpha::GetOrganizationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_organization(::Google::Ads::MarketingPlatform::Admin::V1alpha::GetOrganizationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,40 +142,40 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
 
     Gapic::ServiceStub.stub :new, list_organizations_client_stub do
       # Create client
-      client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_organizations({ page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_organizations({ page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_organizations page_size: page_size, page_token: page_token do |response, operation|
+      c.list_organizations page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_organizations ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_organizations ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_organizations({ page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_organizations({ page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_organizations(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_organizations(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -207,36 +207,36 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
 
     Gapic::ServiceStub.stub :new, find_sales_partner_managed_clients_client_stub do
       # Create client
-      client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.find_sales_partner_managed_clients({ organization: organization, is_active: is_active }) do |response, operation|
+      c.find_sales_partner_managed_clients({ organization: organization, is_active: is_active }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.find_sales_partner_managed_clients organization: organization, is_active: is_active do |response, operation|
+      c.find_sales_partner_managed_clients organization: organization, is_active: is_active do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.find_sales_partner_managed_clients ::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest.new(organization: organization, is_active: is_active) do |response, operation|
+      c.find_sales_partner_managed_clients ::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest.new(organization: organization, is_active: is_active) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.find_sales_partner_managed_clients({ organization: organization, is_active: is_active }, grpc_options) do |response, operation|
+      c.find_sales_partner_managed_clients({ organization: organization, is_active: is_active }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.find_sales_partner_managed_clients(::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest.new(organization: organization, is_active: is_active), grpc_options) do |response, operation|
+      c.find_sales_partner_managed_clients(::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest.new(organization: organization, is_active: is_active), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -269,40 +269,40 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
 
     Gapic::ServiceStub.stub :new, list_analytics_account_links_client_stub do
       # Create client
-      client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_analytics_account_links({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_analytics_account_links({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_analytics_account_links parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_analytics_account_links parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_analytics_account_links ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_analytics_account_links ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_analytics_account_links({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_analytics_account_links({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_analytics_account_links(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_analytics_account_links(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -334,36 +334,36 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
 
     Gapic::ServiceStub.stub :new, create_analytics_account_link_client_stub do
       # Create client
-      client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_analytics_account_link({ parent: parent, analytics_account_link: analytics_account_link }) do |response, operation|
+      c.create_analytics_account_link({ parent: parent, analytics_account_link: analytics_account_link }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_analytics_account_link parent: parent, analytics_account_link: analytics_account_link do |response, operation|
+      c.create_analytics_account_link parent: parent, analytics_account_link: analytics_account_link do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_analytics_account_link ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAnalyticsAccountLinkRequest.new(parent: parent, analytics_account_link: analytics_account_link) do |response, operation|
+      c.create_analytics_account_link ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAnalyticsAccountLinkRequest.new(parent: parent, analytics_account_link: analytics_account_link) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_analytics_account_link({ parent: parent, analytics_account_link: analytics_account_link }, grpc_options) do |response, operation|
+      c.create_analytics_account_link({ parent: parent, analytics_account_link: analytics_account_link }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_analytics_account_link(::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAnalyticsAccountLinkRequest.new(parent: parent, analytics_account_link: analytics_account_link), grpc_options) do |response, operation|
+      c.create_analytics_account_link(::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAnalyticsAccountLinkRequest.new(parent: parent, analytics_account_link: analytics_account_link), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -392,36 +392,36 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
 
     Gapic::ServiceStub.stub :new, delete_analytics_account_link_client_stub do
       # Create client
-      client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_analytics_account_link({ name: name }) do |response, operation|
+      c.delete_analytics_account_link({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_analytics_account_link name: name do |response, operation|
+      c.delete_analytics_account_link name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_analytics_account_link ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteAnalyticsAccountLinkRequest.new(name: name) do |response, operation|
+      c.delete_analytics_account_link ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteAnalyticsAccountLinkRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_analytics_account_link({ name: name }, grpc_options) do |response, operation|
+      c.delete_analytics_account_link({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_analytics_account_link(::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteAnalyticsAccountLinkRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_analytics_account_link(::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteAnalyticsAccountLinkRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -454,36 +454,36 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
 
     Gapic::ServiceStub.stub :new, set_property_service_level_client_stub do
       # Create client
-      client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_property_service_level({ analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level }) do |response, operation|
+      c.set_property_service_level({ analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_property_service_level analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level do |response, operation|
+      c.set_property_service_level analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_property_service_level ::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelRequest.new(analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level) do |response, operation|
+      c.set_property_service_level ::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelRequest.new(analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_property_service_level({ analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level }, grpc_options) do |response, operation|
+      c.set_property_service_level({ analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_property_service_level(::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelRequest.new(analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level), grpc_options) do |response, operation|
+      c.set_property_service_level(::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelRequest.new(analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -514,36 +514,36 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
 
     Gapic::ServiceStub.stub :new, report_property_usage_client_stub do
       # Create client
-      client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.report_property_usage({ organization: organization, month: month }) do |response, operation|
+      c.report_property_usage({ organization: organization, month: month }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.report_property_usage organization: organization, month: month do |response, operation|
+      c.report_property_usage organization: organization, month: month do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.report_property_usage ::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest.new(organization: organization, month: month) do |response, operation|
+      c.report_property_usage ::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest.new(organization: organization, month: month) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.report_property_usage({ organization: organization, month: month }, grpc_options) do |response, operation|
+      c.report_property_usage({ organization: organization, month: month }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.report_property_usage(::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest.new(organization: organization, month: month), grpc_options) do |response, operation|
+      c.report_property_usage(::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest.new(organization: organization, month: month), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

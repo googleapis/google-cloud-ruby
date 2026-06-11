@@ -98,32 +98,32 @@ class ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::ClientTest < Min
     ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::ServiceStub.stub :transcode_create_partner_link_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_partner_link_client_stub do
         # Create client
-        client = ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::Client.new do |config|
+        c = ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_partner_link({ parent: parent, partner_link: partner_link }) do |_result, response|
+        c.create_partner_link({ parent: parent, partner_link: partner_link }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_partner_link parent: parent, partner_link: partner_link do |_result, response|
+        c.create_partner_link parent: parent, partner_link: partner_link do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_partner_link ::Google::Ads::DataManager::V1::CreatePartnerLinkRequest.new(parent: parent, partner_link: partner_link) do |_result, response|
+        c.create_partner_link ::Google::Ads::DataManager::V1::CreatePartnerLinkRequest.new(parent: parent, partner_link: partner_link) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_partner_link({ parent: parent, partner_link: partner_link }, call_options) do |_result, response|
+        c.create_partner_link({ parent: parent, partner_link: partner_link }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_partner_link(::Google::Ads::DataManager::V1::CreatePartnerLinkRequest.new(parent: parent, partner_link: partner_link), call_options) do |_result, response|
+        c.create_partner_link(::Google::Ads::DataManager::V1::CreatePartnerLinkRequest.new(parent: parent, partner_link: partner_link), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::ClientTest < Min
     ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::ServiceStub.stub :transcode_delete_partner_link_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_partner_link_client_stub do
         # Create client
-        client = ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::Client.new do |config|
+        c = ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_partner_link({ name: name }) do |_result, response|
+        c.delete_partner_link({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_partner_link name: name do |_result, response|
+        c.delete_partner_link name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_partner_link ::Google::Ads::DataManager::V1::DeletePartnerLinkRequest.new(name: name) do |_result, response|
+        c.delete_partner_link ::Google::Ads::DataManager::V1::DeletePartnerLinkRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_partner_link({ name: name }, call_options) do |_result, response|
+        c.delete_partner_link({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_partner_link(::Google::Ads::DataManager::V1::DeletePartnerLinkRequest.new(name: name), call_options) do |_result, response|
+        c.delete_partner_link(::Google::Ads::DataManager::V1::DeletePartnerLinkRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::ClientTest < Min
     ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::ServiceStub.stub :transcode_search_partner_links_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_partner_links_client_stub do
         # Create client
-        client = ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::Client.new do |config|
+        c = ::Google::Ads::DataManager::V1::PartnerLinkService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_partner_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.search_partner_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_partner_links parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.search_partner_links parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_partner_links ::Google::Ads::DataManager::V1::SearchPartnerLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.search_partner_links ::Google::Ads::DataManager::V1::SearchPartnerLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_partner_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.search_partner_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_partner_links(::Google::Ads::DataManager::V1::SearchPartnerLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.search_partner_links(::Google::Ads::DataManager::V1::SearchPartnerLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

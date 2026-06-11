@@ -98,32 +98,32 @@ class ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Cli
     ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::ServiceStub.stub :transcode_create_subscription_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_subscription_client_stub do
         # Create client
-        client = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_subscription({ subscription: subscription, validate_only: validate_only }) do |_result, response|
+        c.create_subscription({ subscription: subscription, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_subscription subscription: subscription, validate_only: validate_only do |_result, response|
+        c.create_subscription subscription: subscription, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_subscription ::Google::Apps::Events::Subscriptions::V1::CreateSubscriptionRequest.new(subscription: subscription, validate_only: validate_only) do |_result, response|
+        c.create_subscription ::Google::Apps::Events::Subscriptions::V1::CreateSubscriptionRequest.new(subscription: subscription, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_subscription({ subscription: subscription, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_subscription({ subscription: subscription, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_subscription(::Google::Apps::Events::Subscriptions::V1::CreateSubscriptionRequest.new(subscription: subscription, validate_only: validate_only), call_options) do |_result, response|
+        c.create_subscription(::Google::Apps::Events::Subscriptions::V1::CreateSubscriptionRequest.new(subscription: subscription, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Cli
     ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::ServiceStub.stub :transcode_delete_subscription_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_subscription_client_stub do
         # Create client
-        client = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_subscription({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |_result, response|
+        c.delete_subscription({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_subscription name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |_result, response|
+        c.delete_subscription name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_subscription ::Google::Apps::Events::Subscriptions::V1::DeleteSubscriptionRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |_result, response|
+        c.delete_subscription ::Google::Apps::Events::Subscriptions::V1::DeleteSubscriptionRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_subscription({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, call_options) do |_result, response|
+        c.delete_subscription({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_subscription(::Google::Apps::Events::Subscriptions::V1::DeleteSubscriptionRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), call_options) do |_result, response|
+        c.delete_subscription(::Google::Apps::Events::Subscriptions::V1::DeleteSubscriptionRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Cli
     ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::ServiceStub.stub :transcode_get_subscription_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_subscription_client_stub do
         # Create client
-        client = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_subscription({ name: name }) do |_result, response|
+        c.get_subscription({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_subscription name: name do |_result, response|
+        c.get_subscription name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_subscription ::Google::Apps::Events::Subscriptions::V1::GetSubscriptionRequest.new(name: name) do |_result, response|
+        c.get_subscription ::Google::Apps::Events::Subscriptions::V1::GetSubscriptionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_subscription({ name: name }, call_options) do |_result, response|
+        c.get_subscription({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_subscription(::Google::Apps::Events::Subscriptions::V1::GetSubscriptionRequest.new(name: name), call_options) do |_result, response|
+        c.get_subscription(::Google::Apps::Events::Subscriptions::V1::GetSubscriptionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Cli
     ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::ServiceStub.stub :transcode_list_subscriptions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_subscriptions_client_stub do
         # Create client
-        client = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_subscriptions({ page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_subscriptions({ page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_subscriptions page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_subscriptions page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_subscriptions ::Google::Apps::Events::Subscriptions::V1::ListSubscriptionsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_subscriptions ::Google::Apps::Events::Subscriptions::V1::ListSubscriptionsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_subscriptions({ page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_subscriptions({ page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_subscriptions(::Google::Apps::Events::Subscriptions::V1::ListSubscriptionsRequest.new(page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_subscriptions(::Google::Apps::Events::Subscriptions::V1::ListSubscriptionsRequest.new(page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Cli
     ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::ServiceStub.stub :transcode_update_subscription_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_subscription_client_stub do
         # Create client
-        client = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_subscription({ subscription: subscription, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_subscription({ subscription: subscription, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_subscription subscription: subscription, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_subscription subscription: subscription, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_subscription ::Google::Apps::Events::Subscriptions::V1::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_subscription ::Google::Apps::Events::Subscriptions::V1::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_subscription({ subscription: subscription, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_subscription({ subscription: subscription, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_subscription(::Google::Apps::Events::Subscriptions::V1::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_subscription(::Google::Apps::Events::Subscriptions::V1::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Cli
     ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::ServiceStub.stub :transcode_reactivate_subscription_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reactivate_subscription_client_stub do
         # Create client
-        client = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reactivate_subscription({ name: name }) do |_result, response|
+        c.reactivate_subscription({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reactivate_subscription name: name do |_result, response|
+        c.reactivate_subscription name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reactivate_subscription ::Google::Apps::Events::Subscriptions::V1::ReactivateSubscriptionRequest.new(name: name) do |_result, response|
+        c.reactivate_subscription ::Google::Apps::Events::Subscriptions::V1::ReactivateSubscriptionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reactivate_subscription({ name: name }, call_options) do |_result, response|
+        c.reactivate_subscription({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reactivate_subscription(::Google::Apps::Events::Subscriptions::V1::ReactivateSubscriptionRequest.new(name: name), call_options) do |_result, response|
+        c.reactivate_subscription(::Google::Apps::Events::Subscriptions::V1::ReactivateSubscriptionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

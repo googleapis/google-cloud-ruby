@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::OrderService::Rest::ClientTest < Minitest::T
     ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_get_order_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_order_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_order({ name: name }) do |_result, response|
+        c.get_order({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_order name: name do |_result, response|
+        c.get_order name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_order ::Google::Ads::AdManager::V1::GetOrderRequest.new(name: name) do |_result, response|
+        c.get_order ::Google::Ads::AdManager::V1::GetOrderRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_order({ name: name }, call_options) do |_result, response|
+        c.get_order({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_order(::Google::Ads::AdManager::V1::GetOrderRequest.new(name: name), call_options) do |_result, response|
+        c.get_order(::Google::Ads::AdManager::V1::GetOrderRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::OrderService::Rest::ClientTest < Minitest::T
     ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_list_orders_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_orders_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_orders parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_orders parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_orders ::Google::Ads::AdManager::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_orders ::Google::Ads::AdManager::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_orders(::Google::Ads::AdManager::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_orders(::Google::Ads::AdManager::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

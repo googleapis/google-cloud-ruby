@@ -97,32 +97,32 @@ class ::Google::Apps::Meet::V2::SpacesService::Rest::ClientTest < Minitest::Test
     ::Google::Apps::Meet::V2::SpacesService::Rest::ServiceStub.stub :transcode_create_space_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_space_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2::SpacesService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2::SpacesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_space({ space: space }) do |_result, response|
+        c.create_space({ space: space }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_space space: space do |_result, response|
+        c.create_space space: space do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_space ::Google::Apps::Meet::V2::CreateSpaceRequest.new(space: space) do |_result, response|
+        c.create_space ::Google::Apps::Meet::V2::CreateSpaceRequest.new(space: space) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_space({ space: space }, call_options) do |_result, response|
+        c.create_space({ space: space }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_space(::Google::Apps::Meet::V2::CreateSpaceRequest.new(space: space), call_options) do |_result, response|
+        c.create_space(::Google::Apps::Meet::V2::CreateSpaceRequest.new(space: space), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -151,32 +151,32 @@ class ::Google::Apps::Meet::V2::SpacesService::Rest::ClientTest < Minitest::Test
     ::Google::Apps::Meet::V2::SpacesService::Rest::ServiceStub.stub :transcode_get_space_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_space_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2::SpacesService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2::SpacesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_space({ name: name }) do |_result, response|
+        c.get_space({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_space name: name do |_result, response|
+        c.get_space name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_space ::Google::Apps::Meet::V2::GetSpaceRequest.new(name: name) do |_result, response|
+        c.get_space ::Google::Apps::Meet::V2::GetSpaceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_space({ name: name }, call_options) do |_result, response|
+        c.get_space({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_space(::Google::Apps::Meet::V2::GetSpaceRequest.new(name: name), call_options) do |_result, response|
+        c.get_space(::Google::Apps::Meet::V2::GetSpaceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,32 +206,32 @@ class ::Google::Apps::Meet::V2::SpacesService::Rest::ClientTest < Minitest::Test
     ::Google::Apps::Meet::V2::SpacesService::Rest::ServiceStub.stub :transcode_update_space_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_space_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2::SpacesService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2::SpacesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_space({ space: space, update_mask: update_mask }) do |_result, response|
+        c.update_space({ space: space, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_space space: space, update_mask: update_mask do |_result, response|
+        c.update_space space: space, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_space ::Google::Apps::Meet::V2::UpdateSpaceRequest.new(space: space, update_mask: update_mask) do |_result, response|
+        c.update_space ::Google::Apps::Meet::V2::UpdateSpaceRequest.new(space: space, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_space({ space: space, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_space({ space: space, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_space(::Google::Apps::Meet::V2::UpdateSpaceRequest.new(space: space, update_mask: update_mask), call_options) do |_result, response|
+        c.update_space(::Google::Apps::Meet::V2::UpdateSpaceRequest.new(space: space, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -260,32 +260,32 @@ class ::Google::Apps::Meet::V2::SpacesService::Rest::ClientTest < Minitest::Test
     ::Google::Apps::Meet::V2::SpacesService::Rest::ServiceStub.stub :transcode_end_active_conference_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, end_active_conference_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2::SpacesService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2::SpacesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.end_active_conference({ name: name }) do |_result, response|
+        c.end_active_conference({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.end_active_conference name: name do |_result, response|
+        c.end_active_conference name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.end_active_conference ::Google::Apps::Meet::V2::EndActiveConferenceRequest.new(name: name) do |_result, response|
+        c.end_active_conference ::Google::Apps::Meet::V2::EndActiveConferenceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.end_active_conference({ name: name }, call_options) do |_result, response|
+        c.end_active_conference({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.end_active_conference(::Google::Apps::Meet::V2::EndActiveConferenceRequest.new(name: name), call_options) do |_result, response|
+        c.end_active_conference(::Google::Apps::Meet::V2::EndActiveConferenceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

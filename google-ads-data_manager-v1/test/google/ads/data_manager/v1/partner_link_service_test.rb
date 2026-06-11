@@ -84,36 +84,36 @@ class ::Google::Ads::DataManager::V1::PartnerLinkService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_partner_link_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::PartnerLinkService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::PartnerLinkService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_partner_link({ parent: parent, partner_link: partner_link }) do |response, operation|
+      c.create_partner_link({ parent: parent, partner_link: partner_link }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_partner_link parent: parent, partner_link: partner_link do |response, operation|
+      c.create_partner_link parent: parent, partner_link: partner_link do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_partner_link ::Google::Ads::DataManager::V1::CreatePartnerLinkRequest.new(parent: parent, partner_link: partner_link) do |response, operation|
+      c.create_partner_link ::Google::Ads::DataManager::V1::CreatePartnerLinkRequest.new(parent: parent, partner_link: partner_link) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_partner_link({ parent: parent, partner_link: partner_link }, grpc_options) do |response, operation|
+      c.create_partner_link({ parent: parent, partner_link: partner_link }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_partner_link(::Google::Ads::DataManager::V1::CreatePartnerLinkRequest.new(parent: parent, partner_link: partner_link), grpc_options) do |response, operation|
+      c.create_partner_link(::Google::Ads::DataManager::V1::CreatePartnerLinkRequest.new(parent: parent, partner_link: partner_link), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Ads::DataManager::V1::PartnerLinkService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_partner_link_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::PartnerLinkService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::PartnerLinkService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_partner_link({ name: name }) do |response, operation|
+      c.delete_partner_link({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_partner_link name: name do |response, operation|
+      c.delete_partner_link name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_partner_link ::Google::Ads::DataManager::V1::DeletePartnerLinkRequest.new(name: name) do |response, operation|
+      c.delete_partner_link ::Google::Ads::DataManager::V1::DeletePartnerLinkRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_partner_link({ name: name }, grpc_options) do |response, operation|
+      c.delete_partner_link({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_partner_link(::Google::Ads::DataManager::V1::DeletePartnerLinkRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_partner_link(::Google::Ads::DataManager::V1::DeletePartnerLinkRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -206,40 +206,40 @@ class ::Google::Ads::DataManager::V1::PartnerLinkService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, search_partner_links_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::PartnerLinkService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::PartnerLinkService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_partner_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.search_partner_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_partner_links parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.search_partner_links parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_partner_links ::Google::Ads::DataManager::V1::SearchPartnerLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.search_partner_links ::Google::Ads::DataManager::V1::SearchPartnerLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_partner_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.search_partner_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_partner_links(::Google::Ads::DataManager::V1::SearchPartnerLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.search_partner_links(::Google::Ads::DataManager::V1::SearchPartnerLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
