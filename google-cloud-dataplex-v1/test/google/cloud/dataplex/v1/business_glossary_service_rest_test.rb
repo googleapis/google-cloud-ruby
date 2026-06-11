@@ -100,32 +100,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_create_glossary_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_glossary_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_glossary({ parent: parent, glossary_id: glossary_id, glossary: glossary, validate_only: validate_only }) do |_result, response|
+        c.create_glossary({ parent: parent, glossary_id: glossary_id, glossary: glossary, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_glossary parent: parent, glossary_id: glossary_id, glossary: glossary, validate_only: validate_only do |_result, response|
+        c.create_glossary parent: parent, glossary_id: glossary_id, glossary: glossary, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_glossary ::Google::Cloud::Dataplex::V1::CreateGlossaryRequest.new(parent: parent, glossary_id: glossary_id, glossary: glossary, validate_only: validate_only) do |_result, response|
+        c.create_glossary ::Google::Cloud::Dataplex::V1::CreateGlossaryRequest.new(parent: parent, glossary_id: glossary_id, glossary: glossary, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_glossary({ parent: parent, glossary_id: glossary_id, glossary: glossary, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_glossary({ parent: parent, glossary_id: glossary_id, glossary: glossary, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_glossary(::Google::Cloud::Dataplex::V1::CreateGlossaryRequest.new(parent: parent, glossary_id: glossary_id, glossary: glossary, validate_only: validate_only), call_options) do |_result, response|
+        c.create_glossary(::Google::Cloud::Dataplex::V1::CreateGlossaryRequest.new(parent: parent, glossary_id: glossary_id, glossary: glossary, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_update_glossary_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_glossary_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_glossary({ glossary: glossary, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_glossary({ glossary: glossary, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_glossary glossary: glossary, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_glossary glossary: glossary, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_glossary ::Google::Cloud::Dataplex::V1::UpdateGlossaryRequest.new(glossary: glossary, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_glossary ::Google::Cloud::Dataplex::V1::UpdateGlossaryRequest.new(glossary: glossary, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_glossary({ glossary: glossary, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_glossary({ glossary: glossary, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_glossary(::Google::Cloud::Dataplex::V1::UpdateGlossaryRequest.new(glossary: glossary, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_glossary(::Google::Cloud::Dataplex::V1::UpdateGlossaryRequest.new(glossary: glossary, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_delete_glossary_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_glossary_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_glossary({ name: name, etag: etag }) do |_result, response|
+        c.delete_glossary({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_glossary name: name, etag: etag do |_result, response|
+        c.delete_glossary name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_glossary ::Google::Cloud::Dataplex::V1::DeleteGlossaryRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_glossary ::Google::Cloud::Dataplex::V1::DeleteGlossaryRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_glossary({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_glossary({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_glossary(::Google::Cloud::Dataplex::V1::DeleteGlossaryRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_glossary(::Google::Cloud::Dataplex::V1::DeleteGlossaryRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_get_glossary_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_glossary_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_glossary({ name: name }) do |_result, response|
+        c.get_glossary({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_glossary name: name do |_result, response|
+        c.get_glossary name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_glossary ::Google::Cloud::Dataplex::V1::GetGlossaryRequest.new(name: name) do |_result, response|
+        c.get_glossary ::Google::Cloud::Dataplex::V1::GetGlossaryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_glossary({ name: name }, call_options) do |_result, response|
+        c.get_glossary({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_glossary(::Google::Cloud::Dataplex::V1::GetGlossaryRequest.new(name: name), call_options) do |_result, response|
+        c.get_glossary(::Google::Cloud::Dataplex::V1::GetGlossaryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_list_glossaries_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_glossaries_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_glossaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_glossaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_glossaries parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_glossaries parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_glossaries ::Google::Cloud::Dataplex::V1::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_glossaries ::Google::Cloud::Dataplex::V1::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_glossaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_glossaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_glossaries(::Google::Cloud::Dataplex::V1::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_glossaries(::Google::Cloud::Dataplex::V1::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_create_glossary_category_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_glossary_category_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_glossary_category({ parent: parent, category_id: category_id, category: category }) do |_result, response|
+        c.create_glossary_category({ parent: parent, category_id: category_id, category: category }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_glossary_category parent: parent, category_id: category_id, category: category do |_result, response|
+        c.create_glossary_category parent: parent, category_id: category_id, category: category do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_glossary_category ::Google::Cloud::Dataplex::V1::CreateGlossaryCategoryRequest.new(parent: parent, category_id: category_id, category: category) do |_result, response|
+        c.create_glossary_category ::Google::Cloud::Dataplex::V1::CreateGlossaryCategoryRequest.new(parent: parent, category_id: category_id, category: category) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_glossary_category({ parent: parent, category_id: category_id, category: category }, call_options) do |_result, response|
+        c.create_glossary_category({ parent: parent, category_id: category_id, category: category }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_glossary_category(::Google::Cloud::Dataplex::V1::CreateGlossaryCategoryRequest.new(parent: parent, category_id: category_id, category: category), call_options) do |_result, response|
+        c.create_glossary_category(::Google::Cloud::Dataplex::V1::CreateGlossaryCategoryRequest.new(parent: parent, category_id: category_id, category: category), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -434,32 +434,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_update_glossary_category_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_glossary_category_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_glossary_category({ category: category, update_mask: update_mask }) do |_result, response|
+        c.update_glossary_category({ category: category, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_glossary_category category: category, update_mask: update_mask do |_result, response|
+        c.update_glossary_category category: category, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_glossary_category ::Google::Cloud::Dataplex::V1::UpdateGlossaryCategoryRequest.new(category: category, update_mask: update_mask) do |_result, response|
+        c.update_glossary_category ::Google::Cloud::Dataplex::V1::UpdateGlossaryCategoryRequest.new(category: category, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_glossary_category({ category: category, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_glossary_category({ category: category, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_glossary_category(::Google::Cloud::Dataplex::V1::UpdateGlossaryCategoryRequest.new(category: category, update_mask: update_mask), call_options) do |_result, response|
+        c.update_glossary_category(::Google::Cloud::Dataplex::V1::UpdateGlossaryCategoryRequest.new(category: category, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -488,32 +488,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_delete_glossary_category_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_glossary_category_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_glossary_category({ name: name }) do |_result, response|
+        c.delete_glossary_category({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_glossary_category name: name do |_result, response|
+        c.delete_glossary_category name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_glossary_category ::Google::Cloud::Dataplex::V1::DeleteGlossaryCategoryRequest.new(name: name) do |_result, response|
+        c.delete_glossary_category ::Google::Cloud::Dataplex::V1::DeleteGlossaryCategoryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_glossary_category({ name: name }, call_options) do |_result, response|
+        c.delete_glossary_category({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_glossary_category(::Google::Cloud::Dataplex::V1::DeleteGlossaryCategoryRequest.new(name: name), call_options) do |_result, response|
+        c.delete_glossary_category(::Google::Cloud::Dataplex::V1::DeleteGlossaryCategoryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -542,32 +542,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_get_glossary_category_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_glossary_category_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_glossary_category({ name: name }) do |_result, response|
+        c.get_glossary_category({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_glossary_category name: name do |_result, response|
+        c.get_glossary_category name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_glossary_category ::Google::Cloud::Dataplex::V1::GetGlossaryCategoryRequest.new(name: name) do |_result, response|
+        c.get_glossary_category ::Google::Cloud::Dataplex::V1::GetGlossaryCategoryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_glossary_category({ name: name }, call_options) do |_result, response|
+        c.get_glossary_category({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_glossary_category(::Google::Cloud::Dataplex::V1::GetGlossaryCategoryRequest.new(name: name), call_options) do |_result, response|
+        c.get_glossary_category(::Google::Cloud::Dataplex::V1::GetGlossaryCategoryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -600,32 +600,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_list_glossary_categories_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_glossary_categories_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_glossary_categories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_glossary_categories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_glossary_categories parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_glossary_categories parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_glossary_categories ::Google::Cloud::Dataplex::V1::ListGlossaryCategoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_glossary_categories ::Google::Cloud::Dataplex::V1::ListGlossaryCategoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_glossary_categories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_glossary_categories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_glossary_categories(::Google::Cloud::Dataplex::V1::ListGlossaryCategoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_glossary_categories(::Google::Cloud::Dataplex::V1::ListGlossaryCategoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -656,32 +656,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_create_glossary_term_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_glossary_term_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_glossary_term({ parent: parent, term_id: term_id, term: term }) do |_result, response|
+        c.create_glossary_term({ parent: parent, term_id: term_id, term: term }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_glossary_term parent: parent, term_id: term_id, term: term do |_result, response|
+        c.create_glossary_term parent: parent, term_id: term_id, term: term do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_glossary_term ::Google::Cloud::Dataplex::V1::CreateGlossaryTermRequest.new(parent: parent, term_id: term_id, term: term) do |_result, response|
+        c.create_glossary_term ::Google::Cloud::Dataplex::V1::CreateGlossaryTermRequest.new(parent: parent, term_id: term_id, term: term) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_glossary_term({ parent: parent, term_id: term_id, term: term }, call_options) do |_result, response|
+        c.create_glossary_term({ parent: parent, term_id: term_id, term: term }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_glossary_term(::Google::Cloud::Dataplex::V1::CreateGlossaryTermRequest.new(parent: parent, term_id: term_id, term: term), call_options) do |_result, response|
+        c.create_glossary_term(::Google::Cloud::Dataplex::V1::CreateGlossaryTermRequest.new(parent: parent, term_id: term_id, term: term), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -711,32 +711,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_update_glossary_term_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_glossary_term_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_glossary_term({ term: term, update_mask: update_mask }) do |_result, response|
+        c.update_glossary_term({ term: term, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_glossary_term term: term, update_mask: update_mask do |_result, response|
+        c.update_glossary_term term: term, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_glossary_term ::Google::Cloud::Dataplex::V1::UpdateGlossaryTermRequest.new(term: term, update_mask: update_mask) do |_result, response|
+        c.update_glossary_term ::Google::Cloud::Dataplex::V1::UpdateGlossaryTermRequest.new(term: term, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_glossary_term({ term: term, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_glossary_term({ term: term, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_glossary_term(::Google::Cloud::Dataplex::V1::UpdateGlossaryTermRequest.new(term: term, update_mask: update_mask), call_options) do |_result, response|
+        c.update_glossary_term(::Google::Cloud::Dataplex::V1::UpdateGlossaryTermRequest.new(term: term, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -765,32 +765,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_delete_glossary_term_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_glossary_term_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_glossary_term({ name: name }) do |_result, response|
+        c.delete_glossary_term({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_glossary_term name: name do |_result, response|
+        c.delete_glossary_term name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_glossary_term ::Google::Cloud::Dataplex::V1::DeleteGlossaryTermRequest.new(name: name) do |_result, response|
+        c.delete_glossary_term ::Google::Cloud::Dataplex::V1::DeleteGlossaryTermRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_glossary_term({ name: name }, call_options) do |_result, response|
+        c.delete_glossary_term({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_glossary_term(::Google::Cloud::Dataplex::V1::DeleteGlossaryTermRequest.new(name: name), call_options) do |_result, response|
+        c.delete_glossary_term(::Google::Cloud::Dataplex::V1::DeleteGlossaryTermRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -819,32 +819,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_get_glossary_term_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_glossary_term_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_glossary_term({ name: name }) do |_result, response|
+        c.get_glossary_term({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_glossary_term name: name do |_result, response|
+        c.get_glossary_term name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_glossary_term ::Google::Cloud::Dataplex::V1::GetGlossaryTermRequest.new(name: name) do |_result, response|
+        c.get_glossary_term ::Google::Cloud::Dataplex::V1::GetGlossaryTermRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_glossary_term({ name: name }, call_options) do |_result, response|
+        c.get_glossary_term({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_glossary_term(::Google::Cloud::Dataplex::V1::GetGlossaryTermRequest.new(name: name), call_options) do |_result, response|
+        c.get_glossary_term(::Google::Cloud::Dataplex::V1::GetGlossaryTermRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -877,32 +877,32 @@ class ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ClientTest <
     ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::ServiceStub.stub :transcode_list_glossary_terms_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_glossary_terms_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_glossary_terms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_glossary_terms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_glossary_terms parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_glossary_terms parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_glossary_terms ::Google::Cloud::Dataplex::V1::ListGlossaryTermsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_glossary_terms ::Google::Cloud::Dataplex::V1::ListGlossaryTermsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_glossary_terms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_glossary_terms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_glossary_terms(::Google::Cloud::Dataplex::V1::ListGlossaryTermsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_glossary_terms(::Google::Cloud::Dataplex::V1::ListGlossaryTermsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

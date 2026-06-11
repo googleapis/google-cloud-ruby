@@ -88,40 +88,40 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_data_scan_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_data_scan({ parent: parent, data_scan: data_scan, data_scan_id: data_scan_id, validate_only: validate_only }) do |response, operation|
+      c.create_data_scan({ parent: parent, data_scan: data_scan, data_scan_id: data_scan_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_scan parent: parent, data_scan: data_scan, data_scan_id: data_scan_id, validate_only: validate_only do |response, operation|
+      c.create_data_scan parent: parent, data_scan: data_scan, data_scan_id: data_scan_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_scan ::Google::Cloud::Dataplex::V1::CreateDataScanRequest.new(parent: parent, data_scan: data_scan, data_scan_id: data_scan_id, validate_only: validate_only) do |response, operation|
+      c.create_data_scan ::Google::Cloud::Dataplex::V1::CreateDataScanRequest.new(parent: parent, data_scan: data_scan, data_scan_id: data_scan_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_scan({ parent: parent, data_scan: data_scan, data_scan_id: data_scan_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_data_scan({ parent: parent, data_scan: data_scan, data_scan_id: data_scan_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_scan(::Google::Cloud::Dataplex::V1::CreateDataScanRequest.new(parent: parent, data_scan: data_scan, data_scan_id: data_scan_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_data_scan(::Google::Cloud::Dataplex::V1::CreateDataScanRequest.new(parent: parent, data_scan: data_scan, data_scan_id: data_scan_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -155,40 +155,40 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_data_scan_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_data_scan({ data_scan: data_scan, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
+      c.update_data_scan({ data_scan: data_scan, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_data_scan data_scan: data_scan, update_mask: update_mask, validate_only: validate_only do |response, operation|
+      c.update_data_scan data_scan: data_scan, update_mask: update_mask, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_data_scan ::Google::Cloud::Dataplex::V1::UpdateDataScanRequest.new(data_scan: data_scan, update_mask: update_mask, validate_only: validate_only) do |response, operation|
+      c.update_data_scan ::Google::Cloud::Dataplex::V1::UpdateDataScanRequest.new(data_scan: data_scan, update_mask: update_mask, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_data_scan({ data_scan: data_scan, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_data_scan({ data_scan: data_scan, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_data_scan(::Google::Cloud::Dataplex::V1::UpdateDataScanRequest.new(data_scan: data_scan, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_data_scan(::Google::Cloud::Dataplex::V1::UpdateDataScanRequest.new(data_scan: data_scan, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -220,40 +220,40 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, delete_data_scan_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_data_scan({ name: name, force: force }) do |response, operation|
+      c.delete_data_scan({ name: name, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_data_scan name: name, force: force do |response, operation|
+      c.delete_data_scan name: name, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_data_scan ::Google::Cloud::Dataplex::V1::DeleteDataScanRequest.new(name: name, force: force) do |response, operation|
+      c.delete_data_scan ::Google::Cloud::Dataplex::V1::DeleteDataScanRequest.new(name: name, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_data_scan({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_data_scan({ name: name, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_data_scan(::Google::Cloud::Dataplex::V1::DeleteDataScanRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_data_scan(::Google::Cloud::Dataplex::V1::DeleteDataScanRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -285,36 +285,36 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_data_scan_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_scan({ name: name, view: view }) do |response, operation|
+      c.get_data_scan({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_scan name: name, view: view do |response, operation|
+      c.get_data_scan name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_scan ::Google::Cloud::Dataplex::V1::GetDataScanRequest.new(name: name, view: view) do |response, operation|
+      c.get_data_scan ::Google::Cloud::Dataplex::V1::GetDataScanRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_scan({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_data_scan({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_scan(::Google::Cloud::Dataplex::V1::GetDataScanRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_data_scan(::Google::Cloud::Dataplex::V1::GetDataScanRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -351,40 +351,40 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_data_scans_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_scans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_data_scans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_scans parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_data_scans parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_scans ::Google::Cloud::Dataplex::V1::ListDataScansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_data_scans ::Google::Cloud::Dataplex::V1::ListDataScansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_scans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_data_scans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_scans(::Google::Cloud::Dataplex::V1::ListDataScansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_data_scans(::Google::Cloud::Dataplex::V1::ListDataScansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -414,36 +414,36 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, run_data_scan_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.run_data_scan({ name: name }) do |response, operation|
+      c.run_data_scan({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_data_scan name: name do |response, operation|
+      c.run_data_scan name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_data_scan ::Google::Cloud::Dataplex::V1::RunDataScanRequest.new(name: name) do |response, operation|
+      c.run_data_scan ::Google::Cloud::Dataplex::V1::RunDataScanRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_data_scan({ name: name }, grpc_options) do |response, operation|
+      c.run_data_scan({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_data_scan(::Google::Cloud::Dataplex::V1::RunDataScanRequest.new(name: name), grpc_options) do |response, operation|
+      c.run_data_scan(::Google::Cloud::Dataplex::V1::RunDataScanRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -474,36 +474,36 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_data_scan_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_scan_job({ name: name, view: view }) do |response, operation|
+      c.get_data_scan_job({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_scan_job name: name, view: view do |response, operation|
+      c.get_data_scan_job name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_scan_job ::Google::Cloud::Dataplex::V1::GetDataScanJobRequest.new(name: name, view: view) do |response, operation|
+      c.get_data_scan_job ::Google::Cloud::Dataplex::V1::GetDataScanJobRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_scan_job({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_data_scan_job({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_scan_job(::Google::Cloud::Dataplex::V1::GetDataScanJobRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_data_scan_job(::Google::Cloud::Dataplex::V1::GetDataScanJobRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -538,40 +538,40 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_data_scan_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_scan_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_data_scan_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_scan_jobs ::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_data_scan_jobs ::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_scan_jobs(::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_data_scan_jobs(::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -601,36 +601,36 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, cancel_data_scan_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_data_scan_job({ name: name }) do |response, operation|
+      c.cancel_data_scan_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_data_scan_job name: name do |response, operation|
+      c.cancel_data_scan_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_data_scan_job ::Google::Cloud::Dataplex::V1::CancelDataScanJobRequest.new(name: name) do |response, operation|
+      c.cancel_data_scan_job ::Google::Cloud::Dataplex::V1::CancelDataScanJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_data_scan_job({ name: name }, grpc_options) do |response, operation|
+      c.cancel_data_scan_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_data_scan_job(::Google::Cloud::Dataplex::V1::CancelDataScanJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_data_scan_job(::Google::Cloud::Dataplex::V1::CancelDataScanJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -659,36 +659,36 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, generate_data_quality_rules_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_data_quality_rules({ name: name }) do |response, operation|
+      c.generate_data_quality_rules({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_data_quality_rules name: name do |response, operation|
+      c.generate_data_quality_rules name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_data_quality_rules ::Google::Cloud::Dataplex::V1::GenerateDataQualityRulesRequest.new(name: name) do |response, operation|
+      c.generate_data_quality_rules ::Google::Cloud::Dataplex::V1::GenerateDataQualityRulesRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_data_quality_rules({ name: name }, grpc_options) do |response, operation|
+      c.generate_data_quality_rules({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_data_quality_rules(::Google::Cloud::Dataplex::V1::GenerateDataQualityRulesRequest.new(name: name), grpc_options) do |response, operation|
+      c.generate_data_quality_rules(::Google::Cloud::Dataplex::V1::GenerateDataQualityRulesRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
