@@ -99,32 +99,32 @@ class ::Google::Cloud::ServiceControl::V1::ServiceController::Rest::ClientTest <
     ::Google::Cloud::ServiceControl::V1::ServiceController::Rest::ServiceStub.stub :transcode_check_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, check_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceControl::V1::ServiceController::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceControl::V1::ServiceController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.check({ service_name: service_name, operation: operation, service_config_id: service_config_id }) do |_result, response|
+        c.check({ service_name: service_name, operation: operation, service_config_id: service_config_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.check service_name: service_name, operation: operation, service_config_id: service_config_id do |_result, response|
+        c.check service_name: service_name, operation: operation, service_config_id: service_config_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.check ::Google::Cloud::ServiceControl::V1::CheckRequest.new(service_name: service_name, operation: operation, service_config_id: service_config_id) do |_result, response|
+        c.check ::Google::Cloud::ServiceControl::V1::CheckRequest.new(service_name: service_name, operation: operation, service_config_id: service_config_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.check({ service_name: service_name, operation: operation, service_config_id: service_config_id }, call_options) do |_result, response|
+        c.check({ service_name: service_name, operation: operation, service_config_id: service_config_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.check(::Google::Cloud::ServiceControl::V1::CheckRequest.new(service_name: service_name, operation: operation, service_config_id: service_config_id), call_options) do |_result, response|
+        c.check(::Google::Cloud::ServiceControl::V1::CheckRequest.new(service_name: service_name, operation: operation, service_config_id: service_config_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::ServiceControl::V1::ServiceController::Rest::ClientTest <
     ::Google::Cloud::ServiceControl::V1::ServiceController::Rest::ServiceStub.stub :transcode_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, report_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceControl::V1::ServiceController::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceControl::V1::ServiceController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.report({ service_name: service_name, operations: operations, service_config_id: service_config_id }) do |_result, response|
+        c.report({ service_name: service_name, operations: operations, service_config_id: service_config_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.report service_name: service_name, operations: operations, service_config_id: service_config_id do |_result, response|
+        c.report service_name: service_name, operations: operations, service_config_id: service_config_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.report ::Google::Cloud::ServiceControl::V1::ReportRequest.new(service_name: service_name, operations: operations, service_config_id: service_config_id) do |_result, response|
+        c.report ::Google::Cloud::ServiceControl::V1::ReportRequest.new(service_name: service_name, operations: operations, service_config_id: service_config_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.report({ service_name: service_name, operations: operations, service_config_id: service_config_id }, call_options) do |_result, response|
+        c.report({ service_name: service_name, operations: operations, service_config_id: service_config_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.report(::Google::Cloud::ServiceControl::V1::ReportRequest.new(service_name: service_name, operations: operations, service_config_id: service_config_id), call_options) do |_result, response|
+        c.report(::Google::Cloud::ServiceControl::V1::ReportRequest.new(service_name: service_name, operations: operations, service_config_id: service_config_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
