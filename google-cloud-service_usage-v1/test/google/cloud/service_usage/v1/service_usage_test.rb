@@ -82,40 +82,40 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, enable_service_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
+      c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.enable_service({ name: name }) do |response, operation|
+      c.enable_service({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.enable_service name: name do |response, operation|
+      c.enable_service name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.enable_service ::Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new(name: name) do |response, operation|
+      c.enable_service ::Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.enable_service({ name: name }, grpc_options) do |response, operation|
+      c.enable_service({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.enable_service(::Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new(name: name), grpc_options) do |response, operation|
+      c.enable_service(::Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,40 +149,40 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, disable_service_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
+      c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.disable_service({ name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage }) do |response, operation|
+      c.disable_service({ name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.disable_service name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage do |response, operation|
+      c.disable_service name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.disable_service ::Google::Cloud::ServiceUsage::V1::DisableServiceRequest.new(name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage) do |response, operation|
+      c.disable_service ::Google::Cloud::ServiceUsage::V1::DisableServiceRequest.new(name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.disable_service({ name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage }, grpc_options) do |response, operation|
+      c.disable_service({ name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.disable_service(::Google::Cloud::ServiceUsage::V1::DisableServiceRequest.new(name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage), grpc_options) do |response, operation|
+      c.disable_service(::Google::Cloud::ServiceUsage::V1::DisableServiceRequest.new(name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -212,36 +212,36 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_service_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
+      c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_service({ name: name }) do |response, operation|
+      c.get_service({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_service name: name do |response, operation|
+      c.get_service name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_service ::Google::Cloud::ServiceUsage::V1::GetServiceRequest.new(name: name) do |response, operation|
+      c.get_service ::Google::Cloud::ServiceUsage::V1::GetServiceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_service({ name: name }, grpc_options) do |response, operation|
+      c.get_service({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_service(::Google::Cloud::ServiceUsage::V1::GetServiceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_service(::Google::Cloud::ServiceUsage::V1::GetServiceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -276,40 +276,40 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_services_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
+      c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_services parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_services parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_services ::Google::Cloud::ServiceUsage::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_services ::Google::Cloud::ServiceUsage::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_services(::Google::Cloud::ServiceUsage::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_services(::Google::Cloud::ServiceUsage::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -341,40 +341,40 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, batch_enable_services_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
+      c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_enable_services({ parent: parent, service_ids: service_ids }) do |response, operation|
+      c.batch_enable_services({ parent: parent, service_ids: service_ids }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_enable_services parent: parent, service_ids: service_ids do |response, operation|
+      c.batch_enable_services parent: parent, service_ids: service_ids do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_enable_services ::Google::Cloud::ServiceUsage::V1::BatchEnableServicesRequest.new(parent: parent, service_ids: service_ids) do |response, operation|
+      c.batch_enable_services ::Google::Cloud::ServiceUsage::V1::BatchEnableServicesRequest.new(parent: parent, service_ids: service_ids) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_enable_services({ parent: parent, service_ids: service_ids }, grpc_options) do |response, operation|
+      c.batch_enable_services({ parent: parent, service_ids: service_ids }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_enable_services(::Google::Cloud::ServiceUsage::V1::BatchEnableServicesRequest.new(parent: parent, service_ids: service_ids), grpc_options) do |response, operation|
+      c.batch_enable_services(::Google::Cloud::ServiceUsage::V1::BatchEnableServicesRequest.new(parent: parent, service_ids: service_ids), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -406,36 +406,36 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, batch_get_services_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
+      c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_get_services({ parent: parent, names: names }) do |response, operation|
+      c.batch_get_services({ parent: parent, names: names }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_get_services parent: parent, names: names do |response, operation|
+      c.batch_get_services parent: parent, names: names do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_get_services ::Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest.new(parent: parent, names: names) do |response, operation|
+      c.batch_get_services ::Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest.new(parent: parent, names: names) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_get_services({ parent: parent, names: names }, grpc_options) do |response, operation|
+      c.batch_get_services({ parent: parent, names: names }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_get_services(::Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
+      c.batch_get_services(::Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
