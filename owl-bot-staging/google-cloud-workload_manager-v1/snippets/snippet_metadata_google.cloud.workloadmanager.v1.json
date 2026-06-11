@@ -1,0 +1,495 @@
+{
+  "client_library": {
+    "name": "google-cloud-workload_manager-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.workloadmanager.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_ListEvaluations_sync",
+      "title": "Snippet for the list_evaluations call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#list_evaluations.",
+      "file": "workload_manager/list_evaluations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_evaluations",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#list_evaluations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::ListEvaluationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WorkloadManager::V1::ListEvaluationsResponse",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "ListEvaluations",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.ListEvaluations",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_GetEvaluation_sync",
+      "title": "Snippet for the get_evaluation call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#get_evaluation.",
+      "file": "workload_manager/get_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_evaluation",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#get_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::GetEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WorkloadManager::V1::Evaluation",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "GetEvaluation",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.GetEvaluation",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_CreateEvaluation_sync",
+      "title": "Snippet for the create_evaluation call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#create_evaluation.",
+      "file": "workload_manager/create_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_evaluation",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#create_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::CreateEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "CreateEvaluation",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.CreateEvaluation",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_UpdateEvaluation_sync",
+      "title": "Snippet for the update_evaluation call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#update_evaluation.",
+      "file": "workload_manager/update_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_evaluation",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#update_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::UpdateEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateEvaluation",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.UpdateEvaluation",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_DeleteEvaluation_sync",
+      "title": "Snippet for the delete_evaluation call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#delete_evaluation.",
+      "file": "workload_manager/delete_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_evaluation",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#delete_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::DeleteEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteEvaluation",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.DeleteEvaluation",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_ListExecutions_sync",
+      "title": "Snippet for the list_executions call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#list_executions.",
+      "file": "workload_manager/list_executions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_executions",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#list_executions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::ListExecutionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WorkloadManager::V1::ListExecutionsResponse",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "ListExecutions",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.ListExecutions",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_GetExecution_sync",
+      "title": "Snippet for the get_execution call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#get_execution.",
+      "file": "workload_manager/get_execution.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_execution",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#get_execution",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::GetExecutionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WorkloadManager::V1::Execution",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "GetExecution",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.GetExecution",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_RunEvaluation_sync",
+      "title": "Snippet for the run_evaluation call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#run_evaluation.",
+      "file": "workload_manager/run_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_evaluation",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#run_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::RunEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "RunEvaluation",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.RunEvaluation",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_DeleteExecution_sync",
+      "title": "Snippet for the delete_execution call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#delete_execution.",
+      "file": "workload_manager/delete_execution.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_execution",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#delete_execution",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::DeleteExecutionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteExecution",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.DeleteExecution",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_ListExecutionResults_sync",
+      "title": "Snippet for the list_execution_results call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#list_execution_results.",
+      "file": "workload_manager/list_execution_results.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_execution_results",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#list_execution_results",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::ListExecutionResultsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WorkloadManager::V1::ListExecutionResultsResponse",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "ListExecutionResults",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.ListExecutionResults",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_ListRules_sync",
+      "title": "Snippet for the list_rules call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#list_rules.",
+      "file": "workload_manager/list_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_rules",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#list_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::ListRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WorkloadManager::V1::ListRulesResponse",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "ListRules",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.ListRules",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workloadmanager_v1_generated_WorkloadManager_ListScannedResources_sync",
+      "title": "Snippet for the list_scanned_resources call in the WorkloadManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#list_scanned_resources.",
+      "file": "workload_manager/list_scanned_resources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_scanned_resources",
+        "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client#list_scanned_resources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadManager::V1::ListScannedResourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WorkloadManager::V1::ListScannedResourcesResponse",
+        "client": {
+          "short_name": "WorkloadManager::Client",
+          "full_name": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client"
+        },
+        "method": {
+          "short_name": "ListScannedResources",
+          "full_name": "google.cloud.workloadmanager.v1.WorkloadManager.ListScannedResources",
+          "service": {
+            "short_name": "WorkloadManager",
+            "full_name": "google.cloud.workloadmanager.v1.WorkloadManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

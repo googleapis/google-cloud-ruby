@@ -1,0 +1,78 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.workloadmanager.v1",
+  "libraryPackage": "::Google::Cloud::WorkloadManager::V1",
+  "services": {
+    "WorkloadManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::WorkloadManager::V1::WorkloadManager::Client",
+          "rpcs": {
+            "ListEvaluations": {
+              "methods": [
+                "list_evaluations"
+              ]
+            },
+            "GetEvaluation": {
+              "methods": [
+                "get_evaluation"
+              ]
+            },
+            "CreateEvaluation": {
+              "methods": [
+                "create_evaluation"
+              ]
+            },
+            "UpdateEvaluation": {
+              "methods": [
+                "update_evaluation"
+              ]
+            },
+            "DeleteEvaluation": {
+              "methods": [
+                "delete_evaluation"
+              ]
+            },
+            "ListExecutions": {
+              "methods": [
+                "list_executions"
+              ]
+            },
+            "GetExecution": {
+              "methods": [
+                "get_execution"
+              ]
+            },
+            "RunEvaluation": {
+              "methods": [
+                "run_evaluation"
+              ]
+            },
+            "DeleteExecution": {
+              "methods": [
+                "delete_execution"
+              ]
+            },
+            "ListExecutionResults": {
+              "methods": [
+                "list_execution_results"
+              ]
+            },
+            "ListRules": {
+              "methods": [
+                "list_rules"
+              ]
+            },
+            "ListScannedResources": {
+              "methods": [
+                "list_scanned_resources"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
