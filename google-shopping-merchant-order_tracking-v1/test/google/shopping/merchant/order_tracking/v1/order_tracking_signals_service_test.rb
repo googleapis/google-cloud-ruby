@@ -86,36 +86,36 @@ class ::Google::Shopping::Merchant::OrderTracking::V1::OrderTrackingSignalsServi
 
     Gapic::ServiceStub.stub :new, create_order_tracking_signal_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::OrderTracking::V1::OrderTrackingSignalsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::OrderTracking::V1::OrderTrackingSignalsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_order_tracking_signal({ parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal }) do |response, operation|
+      c.create_order_tracking_signal({ parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_order_tracking_signal parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal do |response, operation|
+      c.create_order_tracking_signal parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_order_tracking_signal ::Google::Shopping::Merchant::OrderTracking::V1::CreateOrderTrackingSignalRequest.new(parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal) do |response, operation|
+      c.create_order_tracking_signal ::Google::Shopping::Merchant::OrderTracking::V1::CreateOrderTrackingSignalRequest.new(parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_order_tracking_signal({ parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal }, grpc_options) do |response, operation|
+      c.create_order_tracking_signal({ parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_order_tracking_signal(::Google::Shopping::Merchant::OrderTracking::V1::CreateOrderTrackingSignalRequest.new(parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal), grpc_options) do |response, operation|
+      c.create_order_tracking_signal(::Google::Shopping::Merchant::OrderTracking::V1::CreateOrderTrackingSignalRequest.new(parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

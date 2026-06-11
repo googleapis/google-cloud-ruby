@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantStateService::Client
 
     Gapic::ServiceStub.stub :new, get_lfp_merchant_state_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantStateService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantStateService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_lfp_merchant_state({ name: name }) do |response, operation|
+      c.get_lfp_merchant_state({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_lfp_merchant_state name: name do |response, operation|
+      c.get_lfp_merchant_state name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_lfp_merchant_state ::Google::Shopping::Merchant::Lfp::V1beta::GetLfpMerchantStateRequest.new(name: name) do |response, operation|
+      c.get_lfp_merchant_state ::Google::Shopping::Merchant::Lfp::V1beta::GetLfpMerchantStateRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_lfp_merchant_state({ name: name }, grpc_options) do |response, operation|
+      c.get_lfp_merchant_state({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_lfp_merchant_state(::Google::Shopping::Merchant::Lfp::V1beta::GetLfpMerchantStateRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_lfp_merchant_state(::Google::Shopping::Merchant::Lfp::V1beta::GetLfpMerchantStateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

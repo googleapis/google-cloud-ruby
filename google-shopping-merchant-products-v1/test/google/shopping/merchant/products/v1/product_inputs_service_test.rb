@@ -86,36 +86,36 @@ class ::Google::Shopping::Merchant::Products::V1::ProductInputsService::ClientTe
 
     Gapic::ServiceStub.stub :new, insert_product_input_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Products::V1::ProductInputsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Products::V1::ProductInputsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.insert_product_input({ parent: parent, product_input: product_input, data_source: data_source }) do |response, operation|
+      c.insert_product_input({ parent: parent, product_input: product_input, data_source: data_source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.insert_product_input parent: parent, product_input: product_input, data_source: data_source do |response, operation|
+      c.insert_product_input parent: parent, product_input: product_input, data_source: data_source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.insert_product_input ::Google::Shopping::Merchant::Products::V1::InsertProductInputRequest.new(parent: parent, product_input: product_input, data_source: data_source) do |response, operation|
+      c.insert_product_input ::Google::Shopping::Merchant::Products::V1::InsertProductInputRequest.new(parent: parent, product_input: product_input, data_source: data_source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.insert_product_input({ parent: parent, product_input: product_input, data_source: data_source }, grpc_options) do |response, operation|
+      c.insert_product_input({ parent: parent, product_input: product_input, data_source: data_source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.insert_product_input(::Google::Shopping::Merchant::Products::V1::InsertProductInputRequest.new(parent: parent, product_input: product_input, data_source: data_source), grpc_options) do |response, operation|
+      c.insert_product_input(::Google::Shopping::Merchant::Products::V1::InsertProductInputRequest.new(parent: parent, product_input: product_input, data_source: data_source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,36 +148,36 @@ class ::Google::Shopping::Merchant::Products::V1::ProductInputsService::ClientTe
 
     Gapic::ServiceStub.stub :new, update_product_input_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Products::V1::ProductInputsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Products::V1::ProductInputsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }) do |response, operation|
+      c.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_product_input product_input: product_input, update_mask: update_mask, data_source: data_source do |response, operation|
+      c.update_product_input product_input: product_input, update_mask: update_mask, data_source: data_source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_product_input ::Google::Shopping::Merchant::Products::V1::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source) do |response, operation|
+      c.update_product_input ::Google::Shopping::Merchant::Products::V1::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }, grpc_options) do |response, operation|
+      c.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_product_input(::Google::Shopping::Merchant::Products::V1::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source), grpc_options) do |response, operation|
+      c.update_product_input(::Google::Shopping::Merchant::Products::V1::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -208,36 +208,36 @@ class ::Google::Shopping::Merchant::Products::V1::ProductInputsService::ClientTe
 
     Gapic::ServiceStub.stub :new, delete_product_input_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Products::V1::ProductInputsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Products::V1::ProductInputsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_product_input({ name: name, data_source: data_source }) do |response, operation|
+      c.delete_product_input({ name: name, data_source: data_source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_product_input name: name, data_source: data_source do |response, operation|
+      c.delete_product_input name: name, data_source: data_source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_product_input ::Google::Shopping::Merchant::Products::V1::DeleteProductInputRequest.new(name: name, data_source: data_source) do |response, operation|
+      c.delete_product_input ::Google::Shopping::Merchant::Products::V1::DeleteProductInputRequest.new(name: name, data_source: data_source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_product_input({ name: name, data_source: data_source }, grpc_options) do |response, operation|
+      c.delete_product_input({ name: name, data_source: data_source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_product_input(::Google::Shopping::Merchant::Products::V1::DeleteProductInputRequest.new(name: name, data_source: data_source), grpc_options) do |response, operation|
+      c.delete_product_input(::Google::Shopping::Merchant::Products::V1::DeleteProductInputRequest.new(name: name, data_source: data_source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

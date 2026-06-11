@@ -99,32 +99,32 @@ class ::Google::Shopping::Merchant::OrderTracking::V1beta::OrderTrackingSignalsS
     ::Google::Shopping::Merchant::OrderTracking::V1beta::OrderTrackingSignalsService::Rest::ServiceStub.stub :transcode_create_order_tracking_signal_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_order_tracking_signal_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::OrderTracking::V1beta::OrderTrackingSignalsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::OrderTracking::V1beta::OrderTrackingSignalsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_order_tracking_signal({ parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal }) do |_result, response|
+        c.create_order_tracking_signal({ parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_order_tracking_signal parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal do |_result, response|
+        c.create_order_tracking_signal parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_order_tracking_signal ::Google::Shopping::Merchant::OrderTracking::V1beta::CreateOrderTrackingSignalRequest.new(parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal) do |_result, response|
+        c.create_order_tracking_signal ::Google::Shopping::Merchant::OrderTracking::V1beta::CreateOrderTrackingSignalRequest.new(parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_order_tracking_signal({ parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal }, call_options) do |_result, response|
+        c.create_order_tracking_signal({ parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_order_tracking_signal(::Google::Shopping::Merchant::OrderTracking::V1beta::CreateOrderTrackingSignalRequest.new(parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal), call_options) do |_result, response|
+        c.create_order_tracking_signal(::Google::Shopping::Merchant::OrderTracking::V1beta::CreateOrderTrackingSignalRequest.new(parent: parent, order_tracking_signal_id: order_tracking_signal_id, order_tracking_signal: order_tracking_signal), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

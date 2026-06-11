@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::DataSources::V1::FileUploadsService::Rest::C
     ::Google::Shopping::Merchant::DataSources::V1::FileUploadsService::Rest::ServiceStub.stub :transcode_get_file_upload_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_file_upload_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::DataSources::V1::FileUploadsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::DataSources::V1::FileUploadsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_file_upload({ name: name }) do |_result, response|
+        c.get_file_upload({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_file_upload name: name do |_result, response|
+        c.get_file_upload name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_file_upload ::Google::Shopping::Merchant::DataSources::V1::GetFileUploadRequest.new(name: name) do |_result, response|
+        c.get_file_upload ::Google::Shopping::Merchant::DataSources::V1::GetFileUploadRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_file_upload({ name: name }, call_options) do |_result, response|
+        c.get_file_upload({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_file_upload(::Google::Shopping::Merchant::DataSources::V1::GetFileUploadRequest.new(name: name), call_options) do |_result, response|
+        c.get_file_upload(::Google::Shopping::Merchant::DataSources::V1::GetFileUploadRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
