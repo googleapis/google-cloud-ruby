@@ -21,7 +21,7 @@ module Google
   module Cloud
     module DocumentAI
       module V1beta3
-        VERSION = "0.48.1"
+        VERSION = "0.49.0"
       end
     end
   end
