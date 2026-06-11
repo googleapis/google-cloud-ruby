@@ -96,36 +96,36 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, execute_patch_job_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout }) do |response, operation|
+      c.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.execute_patch_job parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout do |response, operation|
+      c.execute_patch_job parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.execute_patch_job ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout) do |response, operation|
+      c.execute_patch_job ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout }, grpc_options) do |response, operation|
+      c.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.execute_patch_job(::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout), grpc_options) do |response, operation|
+      c.execute_patch_job(::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -154,36 +154,36 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_patch_job_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_patch_job({ name: name }) do |response, operation|
+      c.get_patch_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_patch_job name: name do |response, operation|
+      c.get_patch_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_patch_job ::Google::Cloud::OsConfig::V1::GetPatchJobRequest.new(name: name) do |response, operation|
+      c.get_patch_job ::Google::Cloud::OsConfig::V1::GetPatchJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_patch_job({ name: name }, grpc_options) do |response, operation|
+      c.get_patch_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_patch_job(::Google::Cloud::OsConfig::V1::GetPatchJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_patch_job(::Google::Cloud::OsConfig::V1::GetPatchJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -212,36 +212,36 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, cancel_patch_job_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_patch_job({ name: name }) do |response, operation|
+      c.cancel_patch_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_patch_job name: name do |response, operation|
+      c.cancel_patch_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_patch_job ::Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new(name: name) do |response, operation|
+      c.cancel_patch_job ::Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_patch_job({ name: name }, grpc_options) do |response, operation|
+      c.cancel_patch_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_patch_job(::Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_patch_job(::Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -276,40 +276,40 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_patch_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_patch_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_patch_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_patch_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_patch_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_patch_jobs ::Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_patch_jobs ::Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_patch_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_patch_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_patch_jobs(::Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_patch_jobs(::Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -345,40 +345,40 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_patch_job_instance_details_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_patch_job_instance_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_patch_job_instance_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_patch_job_instance_details parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_patch_job_instance_details parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_patch_job_instance_details ::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_patch_job_instance_details ::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_patch_job_instance_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_patch_job_instance_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_patch_job_instance_details(::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_patch_job_instance_details(::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -412,36 +412,36 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_patch_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_patch_deployment({ parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment }) do |response, operation|
+      c.create_patch_deployment({ parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_patch_deployment parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment do |response, operation|
+      c.create_patch_deployment parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_patch_deployment ::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new(parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment) do |response, operation|
+      c.create_patch_deployment ::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new(parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_patch_deployment({ parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment }, grpc_options) do |response, operation|
+      c.create_patch_deployment({ parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_patch_deployment(::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new(parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment), grpc_options) do |response, operation|
+      c.create_patch_deployment(::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new(parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -470,36 +470,36 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_patch_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_patch_deployment({ name: name }) do |response, operation|
+      c.get_patch_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_patch_deployment name: name do |response, operation|
+      c.get_patch_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_patch_deployment ::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new(name: name) do |response, operation|
+      c.get_patch_deployment ::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_patch_deployment({ name: name }, grpc_options) do |response, operation|
+      c.get_patch_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_patch_deployment(::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_patch_deployment(::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -532,40 +532,40 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_patch_deployments_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_patch_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_patch_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_patch_deployments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_patch_deployments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_patch_deployments ::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_patch_deployments ::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_patch_deployments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_patch_deployments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_patch_deployments(::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_patch_deployments(::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -595,36 +595,36 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, delete_patch_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_patch_deployment({ name: name }) do |response, operation|
+      c.delete_patch_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_patch_deployment name: name do |response, operation|
+      c.delete_patch_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_patch_deployment ::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new(name: name) do |response, operation|
+      c.delete_patch_deployment ::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_patch_deployment({ name: name }, grpc_options) do |response, operation|
+      c.delete_patch_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_patch_deployment(::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_patch_deployment(::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -655,36 +655,36 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_patch_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_patch_deployment({ patch_deployment: patch_deployment, update_mask: update_mask }) do |response, operation|
+      c.update_patch_deployment({ patch_deployment: patch_deployment, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_patch_deployment patch_deployment: patch_deployment, update_mask: update_mask do |response, operation|
+      c.update_patch_deployment patch_deployment: patch_deployment, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_patch_deployment ::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest.new(patch_deployment: patch_deployment, update_mask: update_mask) do |response, operation|
+      c.update_patch_deployment ::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest.new(patch_deployment: patch_deployment, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_patch_deployment({ patch_deployment: patch_deployment, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_patch_deployment({ patch_deployment: patch_deployment, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_patch_deployment(::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest.new(patch_deployment: patch_deployment, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_patch_deployment(::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest.new(patch_deployment: patch_deployment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -713,36 +713,36 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, pause_patch_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.pause_patch_deployment({ name: name }) do |response, operation|
+      c.pause_patch_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.pause_patch_deployment name: name do |response, operation|
+      c.pause_patch_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.pause_patch_deployment ::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new(name: name) do |response, operation|
+      c.pause_patch_deployment ::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.pause_patch_deployment({ name: name }, grpc_options) do |response, operation|
+      c.pause_patch_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.pause_patch_deployment(::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.pause_patch_deployment(::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -771,36 +771,36 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, resume_patch_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+      c = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.resume_patch_deployment({ name: name }) do |response, operation|
+      c.resume_patch_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.resume_patch_deployment name: name do |response, operation|
+      c.resume_patch_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.resume_patch_deployment ::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest.new(name: name) do |response, operation|
+      c.resume_patch_deployment ::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.resume_patch_deployment({ name: name }, grpc_options) do |response, operation|
+      c.resume_patch_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.resume_patch_deployment(::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.resume_patch_deployment(::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

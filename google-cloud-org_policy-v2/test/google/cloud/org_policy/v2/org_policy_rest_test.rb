@@ -99,32 +99,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_list_constraints_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_constraints_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_constraints({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_constraints({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_constraints parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_constraints parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_constraints ::Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_constraints ::Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_constraints({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_constraints({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_constraints(::Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_constraints(::Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_list_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_policies ::Google::Cloud::OrgPolicy::V2::ListPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_policies ::Google::Cloud::OrgPolicy::V2::ListPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_policies(::Google::Cloud::OrgPolicy::V2::ListPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_policies(::Google::Cloud::OrgPolicy::V2::ListPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_get_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_policy({ name: name }) do |_result, response|
+        c.get_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_policy name: name do |_result, response|
+        c.get_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_policy ::Google::Cloud::OrgPolicy::V2::GetPolicyRequest.new(name: name) do |_result, response|
+        c.get_policy ::Google::Cloud::OrgPolicy::V2::GetPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_policy({ name: name }, call_options) do |_result, response|
+        c.get_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_policy(::Google::Cloud::OrgPolicy::V2::GetPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_policy(::Google::Cloud::OrgPolicy::V2::GetPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_get_effective_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_effective_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_effective_policy({ name: name }) do |_result, response|
+        c.get_effective_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_effective_policy name: name do |_result, response|
+        c.get_effective_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_effective_policy ::Google::Cloud::OrgPolicy::V2::GetEffectivePolicyRequest.new(name: name) do |_result, response|
+        c.get_effective_policy ::Google::Cloud::OrgPolicy::V2::GetEffectivePolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_effective_policy({ name: name }, call_options) do |_result, response|
+        c.get_effective_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_effective_policy(::Google::Cloud::OrgPolicy::V2::GetEffectivePolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_effective_policy(::Google::Cloud::OrgPolicy::V2::GetEffectivePolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_create_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_policy({ parent: parent, policy: policy }) do |_result, response|
+        c.create_policy({ parent: parent, policy: policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_policy parent: parent, policy: policy do |_result, response|
+        c.create_policy parent: parent, policy: policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_policy ::Google::Cloud::OrgPolicy::V2::CreatePolicyRequest.new(parent: parent, policy: policy) do |_result, response|
+        c.create_policy ::Google::Cloud::OrgPolicy::V2::CreatePolicyRequest.new(parent: parent, policy: policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_policy({ parent: parent, policy: policy }, call_options) do |_result, response|
+        c.create_policy({ parent: parent, policy: policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_policy(::Google::Cloud::OrgPolicy::V2::CreatePolicyRequest.new(parent: parent, policy: policy), call_options) do |_result, response|
+        c.create_policy(::Google::Cloud::OrgPolicy::V2::CreatePolicyRequest.new(parent: parent, policy: policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -373,32 +373,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_update_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_policy({ policy: policy, update_mask: update_mask }) do |_result, response|
+        c.update_policy({ policy: policy, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_policy policy: policy, update_mask: update_mask do |_result, response|
+        c.update_policy policy: policy, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_policy ::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new(policy: policy, update_mask: update_mask) do |_result, response|
+        c.update_policy ::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new(policy: policy, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_policy({ policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_policy({ policy: policy, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_policy(::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new(policy: policy, update_mask: update_mask), call_options) do |_result, response|
+        c.update_policy(::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new(policy: policy, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_delete_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_policy({ name: name, etag: etag }) do |_result, response|
+        c.delete_policy({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_policy name: name, etag: etag do |_result, response|
+        c.delete_policy name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_policy ::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_policy ::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_policy({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_policy({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_policy(::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_policy(::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -483,32 +483,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_create_custom_constraint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_custom_constraint_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_custom_constraint({ parent: parent, custom_constraint: custom_constraint }) do |_result, response|
+        c.create_custom_constraint({ parent: parent, custom_constraint: custom_constraint }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_custom_constraint parent: parent, custom_constraint: custom_constraint do |_result, response|
+        c.create_custom_constraint parent: parent, custom_constraint: custom_constraint do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_custom_constraint ::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest.new(parent: parent, custom_constraint: custom_constraint) do |_result, response|
+        c.create_custom_constraint ::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest.new(parent: parent, custom_constraint: custom_constraint) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_custom_constraint({ parent: parent, custom_constraint: custom_constraint }, call_options) do |_result, response|
+        c.create_custom_constraint({ parent: parent, custom_constraint: custom_constraint }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_custom_constraint(::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest.new(parent: parent, custom_constraint: custom_constraint), call_options) do |_result, response|
+        c.create_custom_constraint(::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest.new(parent: parent, custom_constraint: custom_constraint), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -537,32 +537,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_update_custom_constraint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_custom_constraint_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_custom_constraint({ custom_constraint: custom_constraint }) do |_result, response|
+        c.update_custom_constraint({ custom_constraint: custom_constraint }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_custom_constraint custom_constraint: custom_constraint do |_result, response|
+        c.update_custom_constraint custom_constraint: custom_constraint do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_custom_constraint ::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest.new(custom_constraint: custom_constraint) do |_result, response|
+        c.update_custom_constraint ::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest.new(custom_constraint: custom_constraint) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_custom_constraint({ custom_constraint: custom_constraint }, call_options) do |_result, response|
+        c.update_custom_constraint({ custom_constraint: custom_constraint }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_custom_constraint(::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest.new(custom_constraint: custom_constraint), call_options) do |_result, response|
+        c.update_custom_constraint(::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest.new(custom_constraint: custom_constraint), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -591,32 +591,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_get_custom_constraint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_custom_constraint_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_custom_constraint({ name: name }) do |_result, response|
+        c.get_custom_constraint({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_custom_constraint name: name do |_result, response|
+        c.get_custom_constraint name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_custom_constraint ::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest.new(name: name) do |_result, response|
+        c.get_custom_constraint ::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_custom_constraint({ name: name }, call_options) do |_result, response|
+        c.get_custom_constraint({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_custom_constraint(::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest.new(name: name), call_options) do |_result, response|
+        c.get_custom_constraint(::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -647,32 +647,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_list_custom_constraints_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_custom_constraints_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_custom_constraints({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_custom_constraints({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_custom_constraints parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_custom_constraints parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_custom_constraints ::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_custom_constraints ::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_custom_constraints({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_custom_constraints({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_custom_constraints(::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_custom_constraints(::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -701,32 +701,32 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_delete_custom_constraint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_custom_constraint_client_stub do
         # Create client
-        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+        c = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_custom_constraint({ name: name }) do |_result, response|
+        c.delete_custom_constraint({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_custom_constraint name: name do |_result, response|
+        c.delete_custom_constraint name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_custom_constraint ::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest.new(name: name) do |_result, response|
+        c.delete_custom_constraint ::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_custom_constraint({ name: name }, call_options) do |_result, response|
+        c.delete_custom_constraint({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_custom_constraint(::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest.new(name: name), call_options) do |_result, response|
+        c.delete_custom_constraint(::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

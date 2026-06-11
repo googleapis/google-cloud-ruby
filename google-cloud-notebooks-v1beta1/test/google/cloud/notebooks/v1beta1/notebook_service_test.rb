@@ -86,40 +86,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_instances parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::Notebooks::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_instances ::Google::Cloud::Notebooks::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::Notebooks::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_instances(::Google::Cloud::Notebooks::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name }) do |response, operation|
+      c.get_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name do |response, operation|
+      c.get_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::Notebooks::V1beta1::GetInstanceRequest.new(name: name) do |response, operation|
+      c.get_instance ::Google::Cloud::Notebooks::V1beta1::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::Notebooks::V1beta1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::Notebooks::V1beta1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,40 +211,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance parent: parent, instance_id: instance_id, instance: instance do |response, operation|
+      c.create_instance parent: parent, instance_id: instance_id, instance: instance do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance ::Google::Cloud::Notebooks::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |response, operation|
+      c.create_instance ::Google::Cloud::Notebooks::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, grpc_options) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance(::Google::Cloud::Notebooks::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options) do |response, operation|
+      c.create_instance(::Google::Cloud::Notebooks::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -276,40 +276,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, register_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.register_instance({ parent: parent, instance_id: instance_id }) do |response, operation|
+      c.register_instance({ parent: parent, instance_id: instance_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.register_instance parent: parent, instance_id: instance_id do |response, operation|
+      c.register_instance parent: parent, instance_id: instance_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.register_instance ::Google::Cloud::Notebooks::V1beta1::RegisterInstanceRequest.new(parent: parent, instance_id: instance_id) do |response, operation|
+      c.register_instance ::Google::Cloud::Notebooks::V1beta1::RegisterInstanceRequest.new(parent: parent, instance_id: instance_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.register_instance({ parent: parent, instance_id: instance_id }, grpc_options) do |response, operation|
+      c.register_instance({ parent: parent, instance_id: instance_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.register_instance(::Google::Cloud::Notebooks::V1beta1::RegisterInstanceRequest.new(parent: parent, instance_id: instance_id), grpc_options) do |response, operation|
+      c.register_instance(::Google::Cloud::Notebooks::V1beta1::RegisterInstanceRequest.new(parent: parent, instance_id: instance_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -343,40 +343,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, set_instance_accelerator_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_instance_accelerator({ name: name, type: type, core_count: core_count }) do |response, operation|
+      c.set_instance_accelerator({ name: name, type: type, core_count: core_count }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_instance_accelerator name: name, type: type, core_count: core_count do |response, operation|
+      c.set_instance_accelerator name: name, type: type, core_count: core_count do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_instance_accelerator ::Google::Cloud::Notebooks::V1beta1::SetInstanceAcceleratorRequest.new(name: name, type: type, core_count: core_count) do |response, operation|
+      c.set_instance_accelerator ::Google::Cloud::Notebooks::V1beta1::SetInstanceAcceleratorRequest.new(name: name, type: type, core_count: core_count) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_instance_accelerator({ name: name, type: type, core_count: core_count }, grpc_options) do |response, operation|
+      c.set_instance_accelerator({ name: name, type: type, core_count: core_count }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_instance_accelerator(::Google::Cloud::Notebooks::V1beta1::SetInstanceAcceleratorRequest.new(name: name, type: type, core_count: core_count), grpc_options) do |response, operation|
+      c.set_instance_accelerator(::Google::Cloud::Notebooks::V1beta1::SetInstanceAcceleratorRequest.new(name: name, type: type, core_count: core_count), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -408,40 +408,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, set_instance_machine_type_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_instance_machine_type({ name: name, machine_type: machine_type }) do |response, operation|
+      c.set_instance_machine_type({ name: name, machine_type: machine_type }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_instance_machine_type name: name, machine_type: machine_type do |response, operation|
+      c.set_instance_machine_type name: name, machine_type: machine_type do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_instance_machine_type ::Google::Cloud::Notebooks::V1beta1::SetInstanceMachineTypeRequest.new(name: name, machine_type: machine_type) do |response, operation|
+      c.set_instance_machine_type ::Google::Cloud::Notebooks::V1beta1::SetInstanceMachineTypeRequest.new(name: name, machine_type: machine_type) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_instance_machine_type({ name: name, machine_type: machine_type }, grpc_options) do |response, operation|
+      c.set_instance_machine_type({ name: name, machine_type: machine_type }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_instance_machine_type(::Google::Cloud::Notebooks::V1beta1::SetInstanceMachineTypeRequest.new(name: name, machine_type: machine_type), grpc_options) do |response, operation|
+      c.set_instance_machine_type(::Google::Cloud::Notebooks::V1beta1::SetInstanceMachineTypeRequest.new(name: name, machine_type: machine_type), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -473,40 +473,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, set_instance_labels_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_instance_labels({ name: name, labels: labels }) do |response, operation|
+      c.set_instance_labels({ name: name, labels: labels }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_instance_labels name: name, labels: labels do |response, operation|
+      c.set_instance_labels name: name, labels: labels do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_instance_labels ::Google::Cloud::Notebooks::V1beta1::SetInstanceLabelsRequest.new(name: name, labels: labels) do |response, operation|
+      c.set_instance_labels ::Google::Cloud::Notebooks::V1beta1::SetInstanceLabelsRequest.new(name: name, labels: labels) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_instance_labels({ name: name, labels: labels }, grpc_options) do |response, operation|
+      c.set_instance_labels({ name: name, labels: labels }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_instance_labels(::Google::Cloud::Notebooks::V1beta1::SetInstanceLabelsRequest.new(name: name, labels: labels), grpc_options) do |response, operation|
+      c.set_instance_labels(::Google::Cloud::Notebooks::V1beta1::SetInstanceLabelsRequest.new(name: name, labels: labels), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -536,40 +536,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance({ name: name }) do |response, operation|
+      c.delete_instance({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance name: name do |response, operation|
+      c.delete_instance name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance ::Google::Cloud::Notebooks::V1beta1::DeleteInstanceRequest.new(name: name) do |response, operation|
+      c.delete_instance ::Google::Cloud::Notebooks::V1beta1::DeleteInstanceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance({ name: name }, grpc_options) do |response, operation|
+      c.delete_instance({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance(::Google::Cloud::Notebooks::V1beta1::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_instance(::Google::Cloud::Notebooks::V1beta1::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -599,40 +599,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, start_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.start_instance({ name: name }) do |response, operation|
+      c.start_instance({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.start_instance name: name do |response, operation|
+      c.start_instance name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.start_instance ::Google::Cloud::Notebooks::V1beta1::StartInstanceRequest.new(name: name) do |response, operation|
+      c.start_instance ::Google::Cloud::Notebooks::V1beta1::StartInstanceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.start_instance({ name: name }, grpc_options) do |response, operation|
+      c.start_instance({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.start_instance(::Google::Cloud::Notebooks::V1beta1::StartInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.start_instance(::Google::Cloud::Notebooks::V1beta1::StartInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -662,40 +662,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, stop_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stop_instance({ name: name }) do |response, operation|
+      c.stop_instance({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.stop_instance name: name do |response, operation|
+      c.stop_instance name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.stop_instance ::Google::Cloud::Notebooks::V1beta1::StopInstanceRequest.new(name: name) do |response, operation|
+      c.stop_instance ::Google::Cloud::Notebooks::V1beta1::StopInstanceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.stop_instance({ name: name }, grpc_options) do |response, operation|
+      c.stop_instance({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.stop_instance(::Google::Cloud::Notebooks::V1beta1::StopInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.stop_instance(::Google::Cloud::Notebooks::V1beta1::StopInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -725,40 +725,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, reset_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reset_instance({ name: name }) do |response, operation|
+      c.reset_instance({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reset_instance name: name do |response, operation|
+      c.reset_instance name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reset_instance ::Google::Cloud::Notebooks::V1beta1::ResetInstanceRequest.new(name: name) do |response, operation|
+      c.reset_instance ::Google::Cloud::Notebooks::V1beta1::ResetInstanceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reset_instance({ name: name }, grpc_options) do |response, operation|
+      c.reset_instance({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reset_instance(::Google::Cloud::Notebooks::V1beta1::ResetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.reset_instance(::Google::Cloud::Notebooks::V1beta1::ResetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -792,40 +792,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, report_instance_info_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.report_instance_info({ name: name, vm_id: vm_id, metadata: metadata }) do |response, operation|
+      c.report_instance_info({ name: name, vm_id: vm_id, metadata: metadata }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.report_instance_info name: name, vm_id: vm_id, metadata: metadata do |response, operation|
+      c.report_instance_info name: name, vm_id: vm_id, metadata: metadata do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.report_instance_info ::Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest.new(name: name, vm_id: vm_id, metadata: metadata) do |response, operation|
+      c.report_instance_info ::Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest.new(name: name, vm_id: vm_id, metadata: metadata) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.report_instance_info({ name: name, vm_id: vm_id, metadata: metadata }, grpc_options) do |response, operation|
+      c.report_instance_info({ name: name, vm_id: vm_id, metadata: metadata }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.report_instance_info(::Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest.new(name: name, vm_id: vm_id, metadata: metadata), grpc_options) do |response, operation|
+      c.report_instance_info(::Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest.new(name: name, vm_id: vm_id, metadata: metadata), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -855,36 +855,36 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, is_instance_upgradeable_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.is_instance_upgradeable({ notebook_instance: notebook_instance }) do |response, operation|
+      c.is_instance_upgradeable({ notebook_instance: notebook_instance }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.is_instance_upgradeable notebook_instance: notebook_instance do |response, operation|
+      c.is_instance_upgradeable notebook_instance: notebook_instance do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.is_instance_upgradeable ::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance) do |response, operation|
+      c.is_instance_upgradeable ::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.is_instance_upgradeable({ notebook_instance: notebook_instance }, grpc_options) do |response, operation|
+      c.is_instance_upgradeable({ notebook_instance: notebook_instance }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.is_instance_upgradeable(::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance), grpc_options) do |response, operation|
+      c.is_instance_upgradeable(::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -913,40 +913,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, upgrade_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.upgrade_instance({ name: name }) do |response, operation|
+      c.upgrade_instance({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upgrade_instance name: name do |response, operation|
+      c.upgrade_instance name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upgrade_instance ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest.new(name: name) do |response, operation|
+      c.upgrade_instance ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upgrade_instance({ name: name }, grpc_options) do |response, operation|
+      c.upgrade_instance({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upgrade_instance(::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.upgrade_instance(::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -978,40 +978,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, upgrade_instance_internal_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.upgrade_instance_internal({ name: name, vm_id: vm_id }) do |response, operation|
+      c.upgrade_instance_internal({ name: name, vm_id: vm_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upgrade_instance_internal name: name, vm_id: vm_id do |response, operation|
+      c.upgrade_instance_internal name: name, vm_id: vm_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upgrade_instance_internal ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id) do |response, operation|
+      c.upgrade_instance_internal ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upgrade_instance_internal({ name: name, vm_id: vm_id }, grpc_options) do |response, operation|
+      c.upgrade_instance_internal({ name: name, vm_id: vm_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upgrade_instance_internal(::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id), grpc_options) do |response, operation|
+      c.upgrade_instance_internal(::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1045,40 +1045,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, list_environments_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_environments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_environments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_environments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_environments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_environments ::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_environments ::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_environments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_environments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_environments(::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_environments(::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1108,36 +1108,36 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, get_environment_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_environment({ name: name }) do |response, operation|
+      c.get_environment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_environment name: name do |response, operation|
+      c.get_environment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_environment ::Google::Cloud::Notebooks::V1beta1::GetEnvironmentRequest.new(name: name) do |response, operation|
+      c.get_environment ::Google::Cloud::Notebooks::V1beta1::GetEnvironmentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_environment({ name: name }, grpc_options) do |response, operation|
+      c.get_environment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_environment(::Google::Cloud::Notebooks::V1beta1::GetEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_environment(::Google::Cloud::Notebooks::V1beta1::GetEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1170,40 +1170,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, create_environment_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_environment({ parent: parent, environment_id: environment_id, environment: environment }) do |response, operation|
+      c.create_environment({ parent: parent, environment_id: environment_id, environment: environment }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_environment parent: parent, environment_id: environment_id, environment: environment do |response, operation|
+      c.create_environment parent: parent, environment_id: environment_id, environment: environment do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_environment ::Google::Cloud::Notebooks::V1beta1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment) do |response, operation|
+      c.create_environment ::Google::Cloud::Notebooks::V1beta1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_environment({ parent: parent, environment_id: environment_id, environment: environment }, grpc_options) do |response, operation|
+      c.create_environment({ parent: parent, environment_id: environment_id, environment: environment }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_environment(::Google::Cloud::Notebooks::V1beta1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment), grpc_options) do |response, operation|
+      c.create_environment(::Google::Cloud::Notebooks::V1beta1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1233,40 +1233,40 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, delete_environment_client_stub do
       # Create client
-      client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_environment({ name: name }) do |response, operation|
+      c.delete_environment({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_environment name: name do |response, operation|
+      c.delete_environment name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_environment ::Google::Cloud::Notebooks::V1beta1::DeleteEnvironmentRequest.new(name: name) do |response, operation|
+      c.delete_environment ::Google::Cloud::Notebooks::V1beta1::DeleteEnvironmentRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_environment({ name: name }, grpc_options) do |response, operation|
+      c.delete_environment({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_environment(::Google::Cloud::Notebooks::V1beta1::DeleteEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_environment(::Google::Cloud::Notebooks::V1beta1::DeleteEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
