@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.shopping.merchant.promotions.v1beta",
+  "libraryPackage": "::Google::Shopping::Merchant::Promotions::V1beta",
+  "services": {
+    "PromotionsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Promotions::V1beta::PromotionsService::Client",
+          "rpcs": {
+            "InsertPromotion": {
+              "methods": [
+                "insert_promotion"
+              ]
+            },
+            "GetPromotion": {
+              "methods": [
+                "get_promotion"
+              ]
+            },
+            "ListPromotions": {
+              "methods": [
+                "list_promotions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
