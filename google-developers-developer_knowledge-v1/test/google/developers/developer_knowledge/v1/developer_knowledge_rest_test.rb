@@ -100,32 +100,32 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Cl
     ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::ServiceStub.stub :transcode_search_document_chunks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_document_chunks_client_stub do
         # Create client
-        client = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Client.new do |config|
+        c = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_document_chunks({ query: query, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.search_document_chunks({ query: query, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_document_chunks query: query, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.search_document_chunks query: query, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_document_chunks ::Google::Developers::DeveloperKnowledge::V1::SearchDocumentChunksRequest.new(query: query, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.search_document_chunks ::Google::Developers::DeveloperKnowledge::V1::SearchDocumentChunksRequest.new(query: query, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_document_chunks({ query: query, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.search_document_chunks({ query: query, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_document_chunks(::Google::Developers::DeveloperKnowledge::V1::SearchDocumentChunksRequest.new(query: query, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.search_document_chunks(::Google::Developers::DeveloperKnowledge::V1::SearchDocumentChunksRequest.new(query: query, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Cl
     ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::ServiceStub.stub :transcode_get_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_document_client_stub do
         # Create client
-        client = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Client.new do |config|
+        c = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_document({ name: name, view: view }) do |_result, response|
+        c.get_document({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_document name: name, view: view do |_result, response|
+        c.get_document name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_document ::Google::Developers::DeveloperKnowledge::V1::GetDocumentRequest.new(name: name, view: view) do |_result, response|
+        c.get_document ::Google::Developers::DeveloperKnowledge::V1::GetDocumentRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_document({ name: name, view: view }, call_options) do |_result, response|
+        c.get_document({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_document(::Google::Developers::DeveloperKnowledge::V1::GetDocumentRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_document(::Google::Developers::DeveloperKnowledge::V1::GetDocumentRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Cl
     ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::ServiceStub.stub :transcode_batch_get_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_get_documents_client_stub do
         # Create client
-        client = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Client.new do |config|
+        c = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_get_documents({ names: names, view: view }) do |_result, response|
+        c.batch_get_documents({ names: names, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_get_documents names: names, view: view do |_result, response|
+        c.batch_get_documents names: names, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_get_documents ::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsRequest.new(names: names, view: view) do |_result, response|
+        c.batch_get_documents ::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsRequest.new(names: names, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_get_documents({ names: names, view: view }, call_options) do |_result, response|
+        c.batch_get_documents({ names: names, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_get_documents(::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsRequest.new(names: names, view: view), call_options) do |_result, response|
+        c.batch_get_documents(::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsRequest.new(names: names, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

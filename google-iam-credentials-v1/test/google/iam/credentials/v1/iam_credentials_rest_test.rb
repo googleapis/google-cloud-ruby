@@ -100,32 +100,32 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::Rest::ClientTest < Minites
     ::Google::Iam::Credentials::V1::IAMCredentials::Rest::ServiceStub.stub :transcode_generate_access_token_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_access_token_client_stub do
         # Create client
-        client = ::Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new do |config|
+        c = ::Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_access_token({ name: name, delegates: delegates, scope: scope, lifetime: lifetime }) do |_result, response|
+        c.generate_access_token({ name: name, delegates: delegates, scope: scope, lifetime: lifetime }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_access_token name: name, delegates: delegates, scope: scope, lifetime: lifetime do |_result, response|
+        c.generate_access_token name: name, delegates: delegates, scope: scope, lifetime: lifetime do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_access_token ::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new(name: name, delegates: delegates, scope: scope, lifetime: lifetime) do |_result, response|
+        c.generate_access_token ::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new(name: name, delegates: delegates, scope: scope, lifetime: lifetime) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_access_token({ name: name, delegates: delegates, scope: scope, lifetime: lifetime }, call_options) do |_result, response|
+        c.generate_access_token({ name: name, delegates: delegates, scope: scope, lifetime: lifetime }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_access_token(::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new(name: name, delegates: delegates, scope: scope, lifetime: lifetime), call_options) do |_result, response|
+        c.generate_access_token(::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new(name: name, delegates: delegates, scope: scope, lifetime: lifetime), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::Rest::ClientTest < Minites
     ::Google::Iam::Credentials::V1::IAMCredentials::Rest::ServiceStub.stub :transcode_generate_id_token_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_id_token_client_stub do
         # Create client
-        client = ::Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new do |config|
+        c = ::Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_id_token({ name: name, delegates: delegates, audience: audience, include_email: include_email }) do |_result, response|
+        c.generate_id_token({ name: name, delegates: delegates, audience: audience, include_email: include_email }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_id_token name: name, delegates: delegates, audience: audience, include_email: include_email do |_result, response|
+        c.generate_id_token name: name, delegates: delegates, audience: audience, include_email: include_email do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_id_token ::Google::Iam::Credentials::V1::GenerateIdTokenRequest.new(name: name, delegates: delegates, audience: audience, include_email: include_email) do |_result, response|
+        c.generate_id_token ::Google::Iam::Credentials::V1::GenerateIdTokenRequest.new(name: name, delegates: delegates, audience: audience, include_email: include_email) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_id_token({ name: name, delegates: delegates, audience: audience, include_email: include_email }, call_options) do |_result, response|
+        c.generate_id_token({ name: name, delegates: delegates, audience: audience, include_email: include_email }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_id_token(::Google::Iam::Credentials::V1::GenerateIdTokenRequest.new(name: name, delegates: delegates, audience: audience, include_email: include_email), call_options) do |_result, response|
+        c.generate_id_token(::Google::Iam::Credentials::V1::GenerateIdTokenRequest.new(name: name, delegates: delegates, audience: audience, include_email: include_email), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::Rest::ClientTest < Minites
     ::Google::Iam::Credentials::V1::IAMCredentials::Rest::ServiceStub.stub :transcode_sign_blob_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, sign_blob_client_stub do
         # Create client
-        client = ::Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new do |config|
+        c = ::Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.sign_blob({ name: name, delegates: delegates, payload: payload }) do |_result, response|
+        c.sign_blob({ name: name, delegates: delegates, payload: payload }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.sign_blob name: name, delegates: delegates, payload: payload do |_result, response|
+        c.sign_blob name: name, delegates: delegates, payload: payload do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.sign_blob ::Google::Iam::Credentials::V1::SignBlobRequest.new(name: name, delegates: delegates, payload: payload) do |_result, response|
+        c.sign_blob ::Google::Iam::Credentials::V1::SignBlobRequest.new(name: name, delegates: delegates, payload: payload) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.sign_blob({ name: name, delegates: delegates, payload: payload }, call_options) do |_result, response|
+        c.sign_blob({ name: name, delegates: delegates, payload: payload }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.sign_blob(::Google::Iam::Credentials::V1::SignBlobRequest.new(name: name, delegates: delegates, payload: payload), call_options) do |_result, response|
+        c.sign_blob(::Google::Iam::Credentials::V1::SignBlobRequest.new(name: name, delegates: delegates, payload: payload), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -269,32 +269,32 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::Rest::ClientTest < Minites
     ::Google::Iam::Credentials::V1::IAMCredentials::Rest::ServiceStub.stub :transcode_sign_jwt_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, sign_jwt_client_stub do
         # Create client
-        client = ::Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new do |config|
+        c = ::Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.sign_jwt({ name: name, delegates: delegates, payload: payload }) do |_result, response|
+        c.sign_jwt({ name: name, delegates: delegates, payload: payload }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.sign_jwt name: name, delegates: delegates, payload: payload do |_result, response|
+        c.sign_jwt name: name, delegates: delegates, payload: payload do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.sign_jwt ::Google::Iam::Credentials::V1::SignJwtRequest.new(name: name, delegates: delegates, payload: payload) do |_result, response|
+        c.sign_jwt ::Google::Iam::Credentials::V1::SignJwtRequest.new(name: name, delegates: delegates, payload: payload) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.sign_jwt({ name: name, delegates: delegates, payload: payload }, call_options) do |_result, response|
+        c.sign_jwt({ name: name, delegates: delegates, payload: payload }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.sign_jwt(::Google::Iam::Credentials::V1::SignJwtRequest.new(name: name, delegates: delegates, payload: payload), call_options) do |_result, response|
+        c.sign_jwt(::Google::Iam::Credentials::V1::SignJwtRequest.new(name: name, delegates: delegates, payload: payload), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
