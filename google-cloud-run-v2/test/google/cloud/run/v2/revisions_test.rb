@@ -82,36 +82,36 @@ class ::Google::Cloud::Run::V2::Revisions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::Revisions::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::Revisions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_revision({ name: name }) do |response, operation|
+      c.get_revision({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_revision name: name do |response, operation|
+      c.get_revision name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_revision ::Google::Cloud::Run::V2::GetRevisionRequest.new(name: name) do |response, operation|
+      c.get_revision ::Google::Cloud::Run::V2::GetRevisionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_revision({ name: name }, grpc_options) do |response, operation|
+      c.get_revision({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_revision(::Google::Cloud::Run::V2::GetRevisionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_revision(::Google::Cloud::Run::V2::GetRevisionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Cloud::Run::V2::Revisions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_revisions_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::Revisions::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::Revisions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_revisions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
+      c.list_revisions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_revisions parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
+      c.list_revisions parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_revisions ::Google::Cloud::Run::V2::ListRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
+      c.list_revisions ::Google::Cloud::Run::V2::ListRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_revisions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_revisions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_revisions(::Google::Cloud::Run::V2::ListRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_revisions(::Google::Cloud::Run::V2::ListRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -213,40 +213,40 @@ class ::Google::Cloud::Run::V2::Revisions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_revision_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::Revisions::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::Revisions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_revision({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
+      c.delete_revision({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_revision name: name, validate_only: validate_only, etag: etag do |response, operation|
+      c.delete_revision name: name, validate_only: validate_only, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_revision ::Google::Cloud::Run::V2::DeleteRevisionRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
+      c.delete_revision ::Google::Cloud::Run::V2::DeleteRevisionRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_revision({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      c.delete_revision({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_revision(::Google::Cloud::Run::V2::DeleteRevisionRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      c.delete_revision(::Google::Cloud::Run::V2::DeleteRevisionRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

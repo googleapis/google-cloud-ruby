@@ -102,36 +102,36 @@ class ::Google::Cloud::Run::V2::Builds::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, submit_build_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::Builds::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::Builds::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.submit_build({ parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client }) do |response, operation|
+      c.submit_build({ parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.submit_build parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client do |response, operation|
+      c.submit_build parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.submit_build ::Google::Cloud::Run::V2::SubmitBuildRequest.new(parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client) do |response, operation|
+      c.submit_build ::Google::Cloud::Run::V2::SubmitBuildRequest.new(parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.submit_build({ parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client }, grpc_options) do |response, operation|
+      c.submit_build({ parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.submit_build(::Google::Cloud::Run::V2::SubmitBuildRequest.new(parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client), grpc_options) do |response, operation|
+      c.submit_build(::Google::Cloud::Run::V2::SubmitBuildRequest.new(parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

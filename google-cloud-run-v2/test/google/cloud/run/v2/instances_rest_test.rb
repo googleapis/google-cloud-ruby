@@ -100,32 +100,32 @@ class ::Google::Cloud::Run::V2::Instances::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Instances::Rest::ServiceStub.stub :transcode_create_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_instance({ parent: parent, instance: instance, instance_id: instance_id, validate_only: validate_only }) do |_result, response|
+        c.create_instance({ parent: parent, instance: instance, instance_id: instance_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_instance parent: parent, instance: instance, instance_id: instance_id, validate_only: validate_only do |_result, response|
+        c.create_instance parent: parent, instance: instance, instance_id: instance_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_instance ::Google::Cloud::Run::V2::CreateInstanceRequest.new(parent: parent, instance: instance, instance_id: instance_id, validate_only: validate_only) do |_result, response|
+        c.create_instance ::Google::Cloud::Run::V2::CreateInstanceRequest.new(parent: parent, instance: instance, instance_id: instance_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_instance({ parent: parent, instance: instance, instance_id: instance_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_instance({ parent: parent, instance: instance, instance_id: instance_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_instance(::Google::Cloud::Run::V2::CreateInstanceRequest.new(parent: parent, instance: instance, instance_id: instance_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_instance(::Google::Cloud::Run::V2::CreateInstanceRequest.new(parent: parent, instance: instance, instance_id: instance_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Run::V2::Instances::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Instances::Rest::ServiceStub.stub :transcode_delete_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_instance({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.delete_instance({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_instance name: name, validate_only: validate_only, etag: etag do |_result, response|
+        c.delete_instance name: name, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_instance ::Google::Cloud::Run::V2::DeleteInstanceRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        c.delete_instance ::Google::Cloud::Run::V2::DeleteInstanceRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_instance({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.delete_instance({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_instance(::Google::Cloud::Run::V2::DeleteInstanceRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.delete_instance(::Google::Cloud::Run::V2::DeleteInstanceRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Run::V2::Instances::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Instances::Rest::ServiceStub.stub :transcode_get_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance({ name: name }) do |_result, response|
+        c.get_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance name: name do |_result, response|
+        c.get_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance ::Google::Cloud::Run::V2::GetInstanceRequest.new(name: name) do |_result, response|
+        c.get_instance ::Google::Cloud::Run::V2::GetInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance({ name: name }, call_options) do |_result, response|
+        c.get_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance(::Google::Cloud::Run::V2::GetInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance(::Google::Cloud::Run::V2::GetInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::Run::V2::Instances::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Instances::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instances parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
+        c.list_instances parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instances ::Google::Cloud::Run::V2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
+        c.list_instances ::Google::Cloud::Run::V2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instances(::Google::Cloud::Run::V2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_instances(::Google::Cloud::Run::V2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::Run::V2::Instances::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Instances::Rest::ServiceStub.stub :transcode_stop_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_instance({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.stop_instance({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_instance name: name, validate_only: validate_only, etag: etag do |_result, response|
+        c.stop_instance name: name, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_instance ::Google::Cloud::Run::V2::StopInstanceRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        c.stop_instance ::Google::Cloud::Run::V2::StopInstanceRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_instance({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.stop_instance({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_instance(::Google::Cloud::Run::V2::StopInstanceRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.stop_instance(::Google::Cloud::Run::V2::StopInstanceRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::Run::V2::Instances::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Instances::Rest::ServiceStub.stub :transcode_start_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_instance({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.start_instance({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_instance name: name, validate_only: validate_only, etag: etag do |_result, response|
+        c.start_instance name: name, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_instance ::Google::Cloud::Run::V2::StartInstanceRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        c.start_instance ::Google::Cloud::Run::V2::StartInstanceRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_instance({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.start_instance({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_instance(::Google::Cloud::Run::V2::StartInstanceRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.start_instance(::Google::Cloud::Run::V2::StartInstanceRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -97,32 +97,32 @@ class ::Google::Cloud::Run::V2::Executions::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Executions::Rest::ServiceStub.stub :transcode_get_execution_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_execution_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Executions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Executions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_execution({ name: name }) do |_result, response|
+        c.get_execution({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_execution name: name do |_result, response|
+        c.get_execution name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_execution ::Google::Cloud::Run::V2::GetExecutionRequest.new(name: name) do |_result, response|
+        c.get_execution ::Google::Cloud::Run::V2::GetExecutionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_execution({ name: name }, call_options) do |_result, response|
+        c.get_execution({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_execution(::Google::Cloud::Run::V2::GetExecutionRequest.new(name: name), call_options) do |_result, response|
+        c.get_execution(::Google::Cloud::Run::V2::GetExecutionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Run::V2::Executions::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Executions::Rest::ServiceStub.stub :transcode_list_executions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_executions_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Executions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Executions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
+        c.list_executions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_executions parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
+        c.list_executions parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_executions ::Google::Cloud::Run::V2::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
+        c.list_executions ::Google::Cloud::Run::V2::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_executions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_executions(::Google::Cloud::Run::V2::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_executions(::Google::Cloud::Run::V2::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Run::V2::Executions::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Executions::Rest::ServiceStub.stub :transcode_delete_execution_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_execution_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Executions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Executions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_execution({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.delete_execution({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_execution name: name, validate_only: validate_only, etag: etag do |_result, response|
+        c.delete_execution name: name, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_execution ::Google::Cloud::Run::V2::DeleteExecutionRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        c.delete_execution ::Google::Cloud::Run::V2::DeleteExecutionRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_execution({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.delete_execution({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_execution(::Google::Cloud::Run::V2::DeleteExecutionRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.delete_execution(::Google::Cloud::Run::V2::DeleteExecutionRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::Run::V2::Executions::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Executions::Rest::ServiceStub.stub :transcode_cancel_execution_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_execution_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Executions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Executions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_execution({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.cancel_execution({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_execution name: name, validate_only: validate_only, etag: etag do |_result, response|
+        c.cancel_execution name: name, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_execution ::Google::Cloud::Run::V2::CancelExecutionRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        c.cancel_execution ::Google::Cloud::Run::V2::CancelExecutionRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_execution({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.cancel_execution({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_execution(::Google::Cloud::Run::V2::CancelExecutionRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.cancel_execution(::Google::Cloud::Run::V2::CancelExecutionRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
