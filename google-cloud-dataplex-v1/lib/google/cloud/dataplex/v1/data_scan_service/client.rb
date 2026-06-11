@@ -257,7 +257,8 @@ module Google
             #   @param data_scan [::Google::Cloud::Dataplex::V1::DataScan, ::Hash]
             #     Required. DataScan resource.
             #   @param data_scan_id [::String]
-            #     Required. DataScan identifier.
+            #     Optional. DataScan identifier. If not provided, a unique ID will be
+            #     generated with the prefix "data-scan-".
             #
             #     * Must contain only lowercase letters, numbers and hyphens.
             #     * Must start with a letter.
@@ -1044,6 +1045,94 @@ module Google
             end
 
             ##
+            # Cancels a running/pending DataScan job.
+            #
+            # @overload cancel_data_scan_job(request, options = nil)
+            #   Pass arguments to `cancel_data_scan_job` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::CancelDataScanJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::CancelDataScanJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload cancel_data_scan_job(name: nil)
+            #   Pass arguments to `cancel_data_scan_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the DataScanJob:
+            #     `projects/{project_id_or_number}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
+            #     where `project_id_or_number` refers to a *project_id* or *project_number*
+            #     and `location_id` refers to a Google Cloud region.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataplex::V1::CancelDataScanJobResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataplex::V1::CancelDataScanJobResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::DataScanService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::CancelDataScanJobRequest.new
+            #
+            #   # Call the cancel_data_scan_job method.
+            #   result = client.cancel_data_scan_job request
+            #
+            #   # The returned object is of type Google::Cloud::Dataplex::V1::CancelDataScanJobResponse.
+            #   p result
+            #
+            def cancel_data_scan_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::CancelDataScanJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.cancel_data_scan_job.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.cancel_data_scan_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.cancel_data_scan_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_scan_service_stub.call_rpc :cancel_data_scan_job, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Generates recommended data quality rules based on the results of a data
             # profiling scan.
             #
@@ -1232,6 +1321,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -1315,6 +1405,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #
@@ -1360,6 +1451,11 @@ module Google
                 #
                 attr_reader :list_data_scan_jobs
                 ##
+                # RPC-specific configuration for `cancel_data_scan_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :cancel_data_scan_job
+                ##
                 # RPC-specific configuration for `generate_data_quality_rules`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1383,6 +1479,8 @@ module Google
                   @get_data_scan_job = ::Gapic::Config::Method.new get_data_scan_job_config
                   list_data_scan_jobs_config = parent_rpcs.list_data_scan_jobs if parent_rpcs.respond_to? :list_data_scan_jobs
                   @list_data_scan_jobs = ::Gapic::Config::Method.new list_data_scan_jobs_config
+                  cancel_data_scan_job_config = parent_rpcs.cancel_data_scan_job if parent_rpcs.respond_to? :cancel_data_scan_job
+                  @cancel_data_scan_job = ::Gapic::Config::Method.new cancel_data_scan_job_config
                   generate_data_quality_rules_config = parent_rpcs.generate_data_quality_rules if parent_rpcs.respond_to? :generate_data_quality_rules
                   @generate_data_quality_rules = ::Gapic::Config::Method.new generate_data_quality_rules_config
 
