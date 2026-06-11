@@ -98,32 +98,32 @@ class ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::ServiceStub.stub :transcode_update_autokey_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_autokey_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_autokey_config({ autokey_config: autokey_config, update_mask: update_mask }) do |_result, response|
+        c.update_autokey_config({ autokey_config: autokey_config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_autokey_config autokey_config: autokey_config, update_mask: update_mask do |_result, response|
+        c.update_autokey_config autokey_config: autokey_config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_autokey_config ::Google::Cloud::Kms::V1::UpdateAutokeyConfigRequest.new(autokey_config: autokey_config, update_mask: update_mask) do |_result, response|
+        c.update_autokey_config ::Google::Cloud::Kms::V1::UpdateAutokeyConfigRequest.new(autokey_config: autokey_config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_autokey_config({ autokey_config: autokey_config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_autokey_config({ autokey_config: autokey_config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_autokey_config(::Google::Cloud::Kms::V1::UpdateAutokeyConfigRequest.new(autokey_config: autokey_config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_autokey_config(::Google::Cloud::Kms::V1::UpdateAutokeyConfigRequest.new(autokey_config: autokey_config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::ServiceStub.stub :transcode_get_autokey_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_autokey_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_autokey_config({ name: name }) do |_result, response|
+        c.get_autokey_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_autokey_config name: name do |_result, response|
+        c.get_autokey_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_autokey_config ::Google::Cloud::Kms::V1::GetAutokeyConfigRequest.new(name: name) do |_result, response|
+        c.get_autokey_config ::Google::Cloud::Kms::V1::GetAutokeyConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_autokey_config({ name: name }, call_options) do |_result, response|
+        c.get_autokey_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_autokey_config(::Google::Cloud::Kms::V1::GetAutokeyConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_autokey_config(::Google::Cloud::Kms::V1::GetAutokeyConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,32 +206,32 @@ class ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::ServiceStub.stub :transcode_show_effective_autokey_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, show_effective_autokey_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::AutokeyAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.show_effective_autokey_config({ parent: parent }) do |_result, response|
+        c.show_effective_autokey_config({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.show_effective_autokey_config parent: parent do |_result, response|
+        c.show_effective_autokey_config parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.show_effective_autokey_config ::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigRequest.new(parent: parent) do |_result, response|
+        c.show_effective_autokey_config ::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.show_effective_autokey_config({ parent: parent }, call_options) do |_result, response|
+        c.show_effective_autokey_config({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.show_effective_autokey_config(::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigRequest.new(parent: parent), call_options) do |_result, response|
+        c.show_effective_autokey_config(::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

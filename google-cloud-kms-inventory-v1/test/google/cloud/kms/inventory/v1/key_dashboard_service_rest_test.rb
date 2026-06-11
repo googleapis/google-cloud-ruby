@@ -99,32 +99,32 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Rest::ClientTest
     ::Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Rest::ServiceStub.stub :transcode_list_crypto_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_crypto_keys_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_crypto_keys parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_crypto_keys parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_crypto_keys ::Google::Cloud::Kms::Inventory::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_crypto_keys ::Google::Cloud::Kms::Inventory::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_crypto_keys(::Google::Cloud::Kms::Inventory::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_crypto_keys(::Google::Cloud::Kms::Inventory::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

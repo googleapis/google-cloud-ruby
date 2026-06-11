@@ -98,32 +98,32 @@ class ::Google::Cloud::Language::V1::LanguageService::Rest::ClientTest < Minites
     ::Google::Cloud::Language::V1::LanguageService::Rest::ServiceStub.stub :transcode_analyze_sentiment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_sentiment_client_stub do
         # Create client
-        client = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_sentiment({ document: document, encoding_type: encoding_type }) do |_result, response|
+        c.analyze_sentiment({ document: document, encoding_type: encoding_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_sentiment document: document, encoding_type: encoding_type do |_result, response|
+        c.analyze_sentiment document: document, encoding_type: encoding_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_sentiment ::Google::Cloud::Language::V1::AnalyzeSentimentRequest.new(document: document, encoding_type: encoding_type) do |_result, response|
+        c.analyze_sentiment ::Google::Cloud::Language::V1::AnalyzeSentimentRequest.new(document: document, encoding_type: encoding_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_sentiment({ document: document, encoding_type: encoding_type }, call_options) do |_result, response|
+        c.analyze_sentiment({ document: document, encoding_type: encoding_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_sentiment(::Google::Cloud::Language::V1::AnalyzeSentimentRequest.new(document: document, encoding_type: encoding_type), call_options) do |_result, response|
+        c.analyze_sentiment(::Google::Cloud::Language::V1::AnalyzeSentimentRequest.new(document: document, encoding_type: encoding_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Language::V1::LanguageService::Rest::ClientTest < Minites
     ::Google::Cloud::Language::V1::LanguageService::Rest::ServiceStub.stub :transcode_analyze_entities_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_entities_client_stub do
         # Create client
-        client = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_entities({ document: document, encoding_type: encoding_type }) do |_result, response|
+        c.analyze_entities({ document: document, encoding_type: encoding_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_entities document: document, encoding_type: encoding_type do |_result, response|
+        c.analyze_entities document: document, encoding_type: encoding_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_entities ::Google::Cloud::Language::V1::AnalyzeEntitiesRequest.new(document: document, encoding_type: encoding_type) do |_result, response|
+        c.analyze_entities ::Google::Cloud::Language::V1::AnalyzeEntitiesRequest.new(document: document, encoding_type: encoding_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_entities({ document: document, encoding_type: encoding_type }, call_options) do |_result, response|
+        c.analyze_entities({ document: document, encoding_type: encoding_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_entities(::Google::Cloud::Language::V1::AnalyzeEntitiesRequest.new(document: document, encoding_type: encoding_type), call_options) do |_result, response|
+        c.analyze_entities(::Google::Cloud::Language::V1::AnalyzeEntitiesRequest.new(document: document, encoding_type: encoding_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Language::V1::LanguageService::Rest::ClientTest < Minites
     ::Google::Cloud::Language::V1::LanguageService::Rest::ServiceStub.stub :transcode_analyze_entity_sentiment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_entity_sentiment_client_stub do
         # Create client
-        client = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_entity_sentiment({ document: document, encoding_type: encoding_type }) do |_result, response|
+        c.analyze_entity_sentiment({ document: document, encoding_type: encoding_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_entity_sentiment document: document, encoding_type: encoding_type do |_result, response|
+        c.analyze_entity_sentiment document: document, encoding_type: encoding_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_entity_sentiment ::Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest.new(document: document, encoding_type: encoding_type) do |_result, response|
+        c.analyze_entity_sentiment ::Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest.new(document: document, encoding_type: encoding_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_entity_sentiment({ document: document, encoding_type: encoding_type }, call_options) do |_result, response|
+        c.analyze_entity_sentiment({ document: document, encoding_type: encoding_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_entity_sentiment(::Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest.new(document: document, encoding_type: encoding_type), call_options) do |_result, response|
+        c.analyze_entity_sentiment(::Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest.new(document: document, encoding_type: encoding_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Language::V1::LanguageService::Rest::ClientTest < Minites
     ::Google::Cloud::Language::V1::LanguageService::Rest::ServiceStub.stub :transcode_analyze_syntax_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_syntax_client_stub do
         # Create client
-        client = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_syntax({ document: document, encoding_type: encoding_type }) do |_result, response|
+        c.analyze_syntax({ document: document, encoding_type: encoding_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_syntax document: document, encoding_type: encoding_type do |_result, response|
+        c.analyze_syntax document: document, encoding_type: encoding_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_syntax ::Google::Cloud::Language::V1::AnalyzeSyntaxRequest.new(document: document, encoding_type: encoding_type) do |_result, response|
+        c.analyze_syntax ::Google::Cloud::Language::V1::AnalyzeSyntaxRequest.new(document: document, encoding_type: encoding_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_syntax({ document: document, encoding_type: encoding_type }, call_options) do |_result, response|
+        c.analyze_syntax({ document: document, encoding_type: encoding_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_syntax(::Google::Cloud::Language::V1::AnalyzeSyntaxRequest.new(document: document, encoding_type: encoding_type), call_options) do |_result, response|
+        c.analyze_syntax(::Google::Cloud::Language::V1::AnalyzeSyntaxRequest.new(document: document, encoding_type: encoding_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Language::V1::LanguageService::Rest::ClientTest < Minites
     ::Google::Cloud::Language::V1::LanguageService::Rest::ServiceStub.stub :transcode_classify_text_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, classify_text_client_stub do
         # Create client
-        client = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.classify_text({ document: document, classification_model_options: classification_model_options }) do |_result, response|
+        c.classify_text({ document: document, classification_model_options: classification_model_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.classify_text document: document, classification_model_options: classification_model_options do |_result, response|
+        c.classify_text document: document, classification_model_options: classification_model_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.classify_text ::Google::Cloud::Language::V1::ClassifyTextRequest.new(document: document, classification_model_options: classification_model_options) do |_result, response|
+        c.classify_text ::Google::Cloud::Language::V1::ClassifyTextRequest.new(document: document, classification_model_options: classification_model_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.classify_text({ document: document, classification_model_options: classification_model_options }, call_options) do |_result, response|
+        c.classify_text({ document: document, classification_model_options: classification_model_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.classify_text(::Google::Cloud::Language::V1::ClassifyTextRequest.new(document: document, classification_model_options: classification_model_options), call_options) do |_result, response|
+        c.classify_text(::Google::Cloud::Language::V1::ClassifyTextRequest.new(document: document, classification_model_options: classification_model_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -372,32 +372,32 @@ class ::Google::Cloud::Language::V1::LanguageService::Rest::ClientTest < Minites
     ::Google::Cloud::Language::V1::LanguageService::Rest::ServiceStub.stub :transcode_moderate_text_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, moderate_text_client_stub do
         # Create client
-        client = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.moderate_text({ document: document }) do |_result, response|
+        c.moderate_text({ document: document }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.moderate_text document: document do |_result, response|
+        c.moderate_text document: document do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.moderate_text ::Google::Cloud::Language::V1::ModerateTextRequest.new(document: document) do |_result, response|
+        c.moderate_text ::Google::Cloud::Language::V1::ModerateTextRequest.new(document: document) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.moderate_text({ document: document }, call_options) do |_result, response|
+        c.moderate_text({ document: document }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.moderate_text(::Google::Cloud::Language::V1::ModerateTextRequest.new(document: document), call_options) do |_result, response|
+        c.moderate_text(::Google::Cloud::Language::V1::ModerateTextRequest.new(document: document), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::Language::V1::LanguageService::Rest::ClientTest < Minites
     ::Google::Cloud::Language::V1::LanguageService::Rest::ServiceStub.stub :transcode_annotate_text_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, annotate_text_client_stub do
         # Create client
-        client = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.annotate_text({ document: document, features: features, encoding_type: encoding_type }) do |_result, response|
+        c.annotate_text({ document: document, features: features, encoding_type: encoding_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.annotate_text document: document, features: features, encoding_type: encoding_type do |_result, response|
+        c.annotate_text document: document, features: features, encoding_type: encoding_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.annotate_text ::Google::Cloud::Language::V1::AnnotateTextRequest.new(document: document, features: features, encoding_type: encoding_type) do |_result, response|
+        c.annotate_text ::Google::Cloud::Language::V1::AnnotateTextRequest.new(document: document, features: features, encoding_type: encoding_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.annotate_text({ document: document, features: features, encoding_type: encoding_type }, call_options) do |_result, response|
+        c.annotate_text({ document: document, features: features, encoding_type: encoding_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.annotate_text(::Google::Cloud::Language::V1::AnnotateTextRequest.new(document: document, features: features, encoding_type: encoding_type), call_options) do |_result, response|
+        c.annotate_text(::Google::Cloud::Language::V1::AnnotateTextRequest.new(document: document, features: features, encoding_type: encoding_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

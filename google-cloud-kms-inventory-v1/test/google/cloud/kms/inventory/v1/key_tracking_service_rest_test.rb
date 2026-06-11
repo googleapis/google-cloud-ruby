@@ -98,32 +98,32 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::ClientTest 
     ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::ServiceStub.stub :transcode_get_protected_resources_summary_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_protected_resources_summary_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_protected_resources_summary({ name: name, fallback_scope: fallback_scope }) do |_result, response|
+        c.get_protected_resources_summary({ name: name, fallback_scope: fallback_scope }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_protected_resources_summary name: name, fallback_scope: fallback_scope do |_result, response|
+        c.get_protected_resources_summary name: name, fallback_scope: fallback_scope do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_protected_resources_summary ::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name, fallback_scope: fallback_scope) do |_result, response|
+        c.get_protected_resources_summary ::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name, fallback_scope: fallback_scope) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_protected_resources_summary({ name: name, fallback_scope: fallback_scope }, call_options) do |_result, response|
+        c.get_protected_resources_summary({ name: name, fallback_scope: fallback_scope }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_protected_resources_summary(::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name, fallback_scope: fallback_scope), call_options) do |_result, response|
+        c.get_protected_resources_summary(::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name, fallback_scope: fallback_scope), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::ClientTest 
     ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::ServiceStub.stub :transcode_search_protected_resources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_protected_resources_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_protected_resources({ scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types }) do |_result, response|
+        c.search_protected_resources({ scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_protected_resources scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types do |_result, response|
+        c.search_protected_resources scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_protected_resources ::Google::Cloud::Kms::Inventory::V1::SearchProtectedResourcesRequest.new(scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types) do |_result, response|
+        c.search_protected_resources ::Google::Cloud::Kms::Inventory::V1::SearchProtectedResourcesRequest.new(scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_protected_resources({ scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types }, call_options) do |_result, response|
+        c.search_protected_resources({ scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_protected_resources(::Google::Cloud::Kms::Inventory::V1::SearchProtectedResourcesRequest.new(scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types), call_options) do |_result, response|
+        c.search_protected_resources(::Google::Cloud::Kms::Inventory::V1::SearchProtectedResourcesRequest.new(scope: scope, crypto_key: crypto_key, page_size: page_size, page_token: page_token, resource_types: resource_types), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

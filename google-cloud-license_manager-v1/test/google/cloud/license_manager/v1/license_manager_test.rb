@@ -90,40 +90,40 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_configurations_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_configurations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_configurations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_configurations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_configurations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_configurations ::Google::Cloud::LicenseManager::V1::ListConfigurationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_configurations ::Google::Cloud::LicenseManager::V1::ListConfigurationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_configurations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_configurations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_configurations(::Google::Cloud::LicenseManager::V1::ListConfigurationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_configurations(::Google::Cloud::LicenseManager::V1::ListConfigurationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_configuration_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_configuration({ name: name }) do |response, operation|
+      c.get_configuration({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_configuration name: name do |response, operation|
+      c.get_configuration name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_configuration ::Google::Cloud::LicenseManager::V1::GetConfigurationRequest.new(name: name) do |response, operation|
+      c.get_configuration ::Google::Cloud::LicenseManager::V1::GetConfigurationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_configuration({ name: name }, grpc_options) do |response, operation|
+      c.get_configuration({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_configuration(::Google::Cloud::LicenseManager::V1::GetConfigurationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_configuration(::Google::Cloud::LicenseManager::V1::GetConfigurationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_configuration_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_configuration({ parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id }) do |response, operation|
+      c.create_configuration({ parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_configuration parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id do |response, operation|
+      c.create_configuration parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_configuration ::Google::Cloud::LicenseManager::V1::CreateConfigurationRequest.new(parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id) do |response, operation|
+      c.create_configuration ::Google::Cloud::LicenseManager::V1::CreateConfigurationRequest.new(parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_configuration({ parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_configuration({ parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_configuration(::Google::Cloud::LicenseManager::V1::CreateConfigurationRequest.new(parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id), grpc_options) do |response, operation|
+      c.create_configuration(::Google::Cloud::LicenseManager::V1::CreateConfigurationRequest.new(parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_configuration_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_configuration({ update_mask: update_mask, configuration: configuration, request_id: request_id }) do |response, operation|
+      c.update_configuration({ update_mask: update_mask, configuration: configuration, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_configuration update_mask: update_mask, configuration: configuration, request_id: request_id do |response, operation|
+      c.update_configuration update_mask: update_mask, configuration: configuration, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_configuration ::Google::Cloud::LicenseManager::V1::UpdateConfigurationRequest.new(update_mask: update_mask, configuration: configuration, request_id: request_id) do |response, operation|
+      c.update_configuration ::Google::Cloud::LicenseManager::V1::UpdateConfigurationRequest.new(update_mask: update_mask, configuration: configuration, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_configuration({ update_mask: update_mask, configuration: configuration, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_configuration({ update_mask: update_mask, configuration: configuration, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_configuration(::Google::Cloud::LicenseManager::V1::UpdateConfigurationRequest.new(update_mask: update_mask, configuration: configuration, request_id: request_id), grpc_options) do |response, operation|
+      c.update_configuration(::Google::Cloud::LicenseManager::V1::UpdateConfigurationRequest.new(update_mask: update_mask, configuration: configuration, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_configuration_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_configuration({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_configuration({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_configuration name: name, request_id: request_id do |response, operation|
+      c.delete_configuration name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_configuration ::Google::Cloud::LicenseManager::V1::DeleteConfigurationRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_configuration ::Google::Cloud::LicenseManager::V1::DeleteConfigurationRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_configuration({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_configuration({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_configuration(::Google::Cloud::LicenseManager::V1::DeleteConfigurationRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_configuration(::Google::Cloud::LicenseManager::V1::DeleteConfigurationRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -420,40 +420,40 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::LicenseManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_instances ::Google::Cloud::LicenseManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::LicenseManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_instances(::Google::Cloud::LicenseManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -483,36 +483,36 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name }) do |response, operation|
+      c.get_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name do |response, operation|
+      c.get_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::LicenseManager::V1::GetInstanceRequest.new(name: name) do |response, operation|
+      c.get_instance ::Google::Cloud::LicenseManager::V1::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::LicenseManager::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::LicenseManager::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -543,40 +543,40 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, deactivate_configuration_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.deactivate_configuration({ name: name, request_id: request_id }) do |response, operation|
+      c.deactivate_configuration({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.deactivate_configuration name: name, request_id: request_id do |response, operation|
+      c.deactivate_configuration name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.deactivate_configuration ::Google::Cloud::LicenseManager::V1::DeactivateConfigurationRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.deactivate_configuration ::Google::Cloud::LicenseManager::V1::DeactivateConfigurationRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.deactivate_configuration({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.deactivate_configuration({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.deactivate_configuration(::Google::Cloud::LicenseManager::V1::DeactivateConfigurationRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.deactivate_configuration(::Google::Cloud::LicenseManager::V1::DeactivateConfigurationRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -608,40 +608,40 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, reactivate_configuration_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reactivate_configuration({ name: name, request_id: request_id }) do |response, operation|
+      c.reactivate_configuration({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reactivate_configuration name: name, request_id: request_id do |response, operation|
+      c.reactivate_configuration name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reactivate_configuration ::Google::Cloud::LicenseManager::V1::ReactivateConfigurationRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.reactivate_configuration ::Google::Cloud::LicenseManager::V1::ReactivateConfigurationRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reactivate_configuration({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.reactivate_configuration({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reactivate_configuration(::Google::Cloud::LicenseManager::V1::ReactivateConfigurationRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.reactivate_configuration(::Google::Cloud::LicenseManager::V1::ReactivateConfigurationRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -675,36 +675,36 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, query_configuration_license_usage_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_configuration_license_usage({ name: name, start_time: start_time, end_time: end_time }) do |response, operation|
+      c.query_configuration_license_usage({ name: name, start_time: start_time, end_time: end_time }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_configuration_license_usage name: name, start_time: start_time, end_time: end_time do |response, operation|
+      c.query_configuration_license_usage name: name, start_time: start_time, end_time: end_time do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_configuration_license_usage ::Google::Cloud::LicenseManager::V1::QueryConfigurationLicenseUsageRequest.new(name: name, start_time: start_time, end_time: end_time) do |response, operation|
+      c.query_configuration_license_usage ::Google::Cloud::LicenseManager::V1::QueryConfigurationLicenseUsageRequest.new(name: name, start_time: start_time, end_time: end_time) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_configuration_license_usage({ name: name, start_time: start_time, end_time: end_time }, grpc_options) do |response, operation|
+      c.query_configuration_license_usage({ name: name, start_time: start_time, end_time: end_time }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_configuration_license_usage(::Google::Cloud::LicenseManager::V1::QueryConfigurationLicenseUsageRequest.new(name: name, start_time: start_time, end_time: end_time), grpc_options) do |response, operation|
+      c.query_configuration_license_usage(::Google::Cloud::LicenseManager::V1::QueryConfigurationLicenseUsageRequest.new(name: name, start_time: start_time, end_time: end_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -745,40 +745,40 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, aggregate_usage_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.aggregate_usage({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time }) do |response, operation|
+      c.aggregate_usage({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.aggregate_usage name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time do |response, operation|
+      c.aggregate_usage name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.aggregate_usage ::Google::Cloud::LicenseManager::V1::AggregateUsageRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time) do |response, operation|
+      c.aggregate_usage ::Google::Cloud::LicenseManager::V1::AggregateUsageRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.aggregate_usage({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time }, grpc_options) do |response, operation|
+      c.aggregate_usage({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.aggregate_usage(::Google::Cloud::LicenseManager::V1::AggregateUsageRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time), grpc_options) do |response, operation|
+      c.aggregate_usage(::Google::Cloud::LicenseManager::V1::AggregateUsageRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -816,40 +816,40 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_products_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_products parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_products parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_products ::Google::Cloud::LicenseManager::V1::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_products ::Google::Cloud::LicenseManager::V1::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_products(::Google::Cloud::LicenseManager::V1::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_products(::Google::Cloud::LicenseManager::V1::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -879,36 +879,36 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_product_client_stub do
       # Create client
-      client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
+      c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_product({ name: name }) do |response, operation|
+      c.get_product({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_product name: name do |response, operation|
+      c.get_product name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_product ::Google::Cloud::LicenseManager::V1::GetProductRequest.new(name: name) do |response, operation|
+      c.get_product ::Google::Cloud::LicenseManager::V1::GetProductRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_product({ name: name }, grpc_options) do |response, operation|
+      c.get_product({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_product(::Google::Cloud::LicenseManager::V1::GetProductRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_product(::Google::Cloud::LicenseManager::V1::GetProductRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

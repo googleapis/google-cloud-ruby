@@ -90,40 +90,40 @@ class ::Google::Cloud::Kms::V1::EkmService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_ekm_connections_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_ekm_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_ekm_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_ekm_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_ekm_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_ekm_connections ::Google::Cloud::Kms::V1::ListEkmConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_ekm_connections ::Google::Cloud::Kms::V1::ListEkmConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_ekm_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_ekm_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_ekm_connections(::Google::Cloud::Kms::V1::ListEkmConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_ekm_connections(::Google::Cloud::Kms::V1::ListEkmConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Kms::V1::EkmService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_ekm_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_ekm_connection({ name: name }) do |response, operation|
+      c.get_ekm_connection({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_ekm_connection name: name do |response, operation|
+      c.get_ekm_connection name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_ekm_connection ::Google::Cloud::Kms::V1::GetEkmConnectionRequest.new(name: name) do |response, operation|
+      c.get_ekm_connection ::Google::Cloud::Kms::V1::GetEkmConnectionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_ekm_connection({ name: name }, grpc_options) do |response, operation|
+      c.get_ekm_connection({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_ekm_connection(::Google::Cloud::Kms::V1::GetEkmConnectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_ekm_connection(::Google::Cloud::Kms::V1::GetEkmConnectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,36 +215,36 @@ class ::Google::Cloud::Kms::V1::EkmService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_ekm_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_ekm_connection({ parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection }) do |response, operation|
+      c.create_ekm_connection({ parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_ekm_connection parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection do |response, operation|
+      c.create_ekm_connection parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_ekm_connection ::Google::Cloud::Kms::V1::CreateEkmConnectionRequest.new(parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection) do |response, operation|
+      c.create_ekm_connection ::Google::Cloud::Kms::V1::CreateEkmConnectionRequest.new(parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_ekm_connection({ parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection }, grpc_options) do |response, operation|
+      c.create_ekm_connection({ parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_ekm_connection(::Google::Cloud::Kms::V1::CreateEkmConnectionRequest.new(parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection), grpc_options) do |response, operation|
+      c.create_ekm_connection(::Google::Cloud::Kms::V1::CreateEkmConnectionRequest.new(parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -275,36 +275,36 @@ class ::Google::Cloud::Kms::V1::EkmService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_ekm_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_ekm_connection({ ekm_connection: ekm_connection, update_mask: update_mask }) do |response, operation|
+      c.update_ekm_connection({ ekm_connection: ekm_connection, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_ekm_connection ekm_connection: ekm_connection, update_mask: update_mask do |response, operation|
+      c.update_ekm_connection ekm_connection: ekm_connection, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_ekm_connection ::Google::Cloud::Kms::V1::UpdateEkmConnectionRequest.new(ekm_connection: ekm_connection, update_mask: update_mask) do |response, operation|
+      c.update_ekm_connection ::Google::Cloud::Kms::V1::UpdateEkmConnectionRequest.new(ekm_connection: ekm_connection, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_ekm_connection({ ekm_connection: ekm_connection, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_ekm_connection({ ekm_connection: ekm_connection, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_ekm_connection(::Google::Cloud::Kms::V1::UpdateEkmConnectionRequest.new(ekm_connection: ekm_connection, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_ekm_connection(::Google::Cloud::Kms::V1::UpdateEkmConnectionRequest.new(ekm_connection: ekm_connection, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -333,36 +333,36 @@ class ::Google::Cloud::Kms::V1::EkmService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_ekm_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_ekm_config({ name: name }) do |response, operation|
+      c.get_ekm_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_ekm_config name: name do |response, operation|
+      c.get_ekm_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_ekm_config ::Google::Cloud::Kms::V1::GetEkmConfigRequest.new(name: name) do |response, operation|
+      c.get_ekm_config ::Google::Cloud::Kms::V1::GetEkmConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_ekm_config({ name: name }, grpc_options) do |response, operation|
+      c.get_ekm_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_ekm_config(::Google::Cloud::Kms::V1::GetEkmConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_ekm_config(::Google::Cloud::Kms::V1::GetEkmConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -393,36 +393,36 @@ class ::Google::Cloud::Kms::V1::EkmService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_ekm_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_ekm_config({ ekm_config: ekm_config, update_mask: update_mask }) do |response, operation|
+      c.update_ekm_config({ ekm_config: ekm_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_ekm_config ekm_config: ekm_config, update_mask: update_mask do |response, operation|
+      c.update_ekm_config ekm_config: ekm_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_ekm_config ::Google::Cloud::Kms::V1::UpdateEkmConfigRequest.new(ekm_config: ekm_config, update_mask: update_mask) do |response, operation|
+      c.update_ekm_config ::Google::Cloud::Kms::V1::UpdateEkmConfigRequest.new(ekm_config: ekm_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_ekm_config({ ekm_config: ekm_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_ekm_config({ ekm_config: ekm_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_ekm_config(::Google::Cloud::Kms::V1::UpdateEkmConfigRequest.new(ekm_config: ekm_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_ekm_config(::Google::Cloud::Kms::V1::UpdateEkmConfigRequest.new(ekm_config: ekm_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -451,36 +451,36 @@ class ::Google::Cloud::Kms::V1::EkmService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, verify_connectivity_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::EkmService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.verify_connectivity({ name: name }) do |response, operation|
+      c.verify_connectivity({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.verify_connectivity name: name do |response, operation|
+      c.verify_connectivity name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.verify_connectivity ::Google::Cloud::Kms::V1::VerifyConnectivityRequest.new(name: name) do |response, operation|
+      c.verify_connectivity ::Google::Cloud::Kms::V1::VerifyConnectivityRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.verify_connectivity({ name: name }, grpc_options) do |response, operation|
+      c.verify_connectivity({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.verify_connectivity(::Google::Cloud::Kms::V1::VerifyConnectivityRequest.new(name: name), grpc_options) do |response, operation|
+      c.verify_connectivity(::Google::Cloud::Kms::V1::VerifyConnectivityRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

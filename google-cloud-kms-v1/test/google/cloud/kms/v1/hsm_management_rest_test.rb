@@ -102,32 +102,32 @@ class ::Google::Cloud::Kms::V1::HsmManagement::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::HsmManagement::Rest::ServiceStub.stub :transcode_list_single_tenant_hsm_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_single_tenant_hsm_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_single_tenant_hsm_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |_result, response|
+        c.list_single_tenant_hsm_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_single_tenant_hsm_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |_result, response|
+        c.list_single_tenant_hsm_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_single_tenant_hsm_instances ::Google::Cloud::Kms::V1::ListSingleTenantHsmInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |_result, response|
+        c.list_single_tenant_hsm_instances ::Google::Cloud::Kms::V1::ListSingleTenantHsmInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_single_tenant_hsm_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_single_tenant_hsm_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_single_tenant_hsm_instances(::Google::Cloud::Kms::V1::ListSingleTenantHsmInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_single_tenant_hsm_instances(::Google::Cloud::Kms::V1::ListSingleTenantHsmInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Kms::V1::HsmManagement::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::HsmManagement::Rest::ServiceStub.stub :transcode_get_single_tenant_hsm_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_single_tenant_hsm_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_single_tenant_hsm_instance({ name: name }) do |_result, response|
+        c.get_single_tenant_hsm_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_single_tenant_hsm_instance name: name do |_result, response|
+        c.get_single_tenant_hsm_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_single_tenant_hsm_instance ::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceRequest.new(name: name) do |_result, response|
+        c.get_single_tenant_hsm_instance ::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_single_tenant_hsm_instance({ name: name }, call_options) do |_result, response|
+        c.get_single_tenant_hsm_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_single_tenant_hsm_instance(::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.get_single_tenant_hsm_instance(::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Kms::V1::HsmManagement::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::HsmManagement::Rest::ServiceStub.stub :transcode_create_single_tenant_hsm_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_single_tenant_hsm_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_single_tenant_hsm_instance({ parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance }) do |_result, response|
+        c.create_single_tenant_hsm_instance({ parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_single_tenant_hsm_instance parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance do |_result, response|
+        c.create_single_tenant_hsm_instance parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_single_tenant_hsm_instance ::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceRequest.new(parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance) do |_result, response|
+        c.create_single_tenant_hsm_instance ::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceRequest.new(parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_single_tenant_hsm_instance({ parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance }, call_options) do |_result, response|
+        c.create_single_tenant_hsm_instance({ parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_single_tenant_hsm_instance(::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceRequest.new(parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance), call_options) do |_result, response|
+        c.create_single_tenant_hsm_instance(::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceRequest.new(parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::Kms::V1::HsmManagement::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::HsmManagement::Rest::ServiceStub.stub :transcode_create_single_tenant_hsm_instance_proposal_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_single_tenant_hsm_instance_proposal_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_single_tenant_hsm_instance_proposal({ parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal }) do |_result, response|
+        c.create_single_tenant_hsm_instance_proposal({ parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_single_tenant_hsm_instance_proposal parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal do |_result, response|
+        c.create_single_tenant_hsm_instance_proposal parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceProposalRequest.new(parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal) do |_result, response|
+        c.create_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceProposalRequest.new(parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_single_tenant_hsm_instance_proposal({ parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal }, call_options) do |_result, response|
+        c.create_single_tenant_hsm_instance_proposal({ parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceProposalRequest.new(parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal), call_options) do |_result, response|
+        c.create_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceProposalRequest.new(parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::Kms::V1::HsmManagement::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::HsmManagement::Rest::ServiceStub.stub :transcode_approve_single_tenant_hsm_instance_proposal_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, approve_single_tenant_hsm_instance_proposal_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.approve_single_tenant_hsm_instance_proposal({ name: name, quorum_reply: quorum_reply }) do |_result, response|
+        c.approve_single_tenant_hsm_instance_proposal({ name: name, quorum_reply: quorum_reply }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.approve_single_tenant_hsm_instance_proposal name: name, quorum_reply: quorum_reply do |_result, response|
+        c.approve_single_tenant_hsm_instance_proposal name: name, quorum_reply: quorum_reply do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.approve_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::ApproveSingleTenantHsmInstanceProposalRequest.new(name: name, quorum_reply: quorum_reply) do |_result, response|
+        c.approve_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::ApproveSingleTenantHsmInstanceProposalRequest.new(name: name, quorum_reply: quorum_reply) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.approve_single_tenant_hsm_instance_proposal({ name: name, quorum_reply: quorum_reply }, call_options) do |_result, response|
+        c.approve_single_tenant_hsm_instance_proposal({ name: name, quorum_reply: quorum_reply }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.approve_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::ApproveSingleTenantHsmInstanceProposalRequest.new(name: name, quorum_reply: quorum_reply), call_options) do |_result, response|
+        c.approve_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::ApproveSingleTenantHsmInstanceProposalRequest.new(name: name, quorum_reply: quorum_reply), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -377,32 +377,32 @@ class ::Google::Cloud::Kms::V1::HsmManagement::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::HsmManagement::Rest::ServiceStub.stub :transcode_execute_single_tenant_hsm_instance_proposal_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, execute_single_tenant_hsm_instance_proposal_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.execute_single_tenant_hsm_instance_proposal({ name: name }) do |_result, response|
+        c.execute_single_tenant_hsm_instance_proposal({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.execute_single_tenant_hsm_instance_proposal name: name do |_result, response|
+        c.execute_single_tenant_hsm_instance_proposal name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.execute_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::ExecuteSingleTenantHsmInstanceProposalRequest.new(name: name) do |_result, response|
+        c.execute_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::ExecuteSingleTenantHsmInstanceProposalRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.execute_single_tenant_hsm_instance_proposal({ name: name }, call_options) do |_result, response|
+        c.execute_single_tenant_hsm_instance_proposal({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.execute_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::ExecuteSingleTenantHsmInstanceProposalRequest.new(name: name), call_options) do |_result, response|
+        c.execute_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::ExecuteSingleTenantHsmInstanceProposalRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Cloud::Kms::V1::HsmManagement::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::HsmManagement::Rest::ServiceStub.stub :transcode_get_single_tenant_hsm_instance_proposal_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_single_tenant_hsm_instance_proposal_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_single_tenant_hsm_instance_proposal({ name: name }) do |_result, response|
+        c.get_single_tenant_hsm_instance_proposal({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_single_tenant_hsm_instance_proposal name: name do |_result, response|
+        c.get_single_tenant_hsm_instance_proposal name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceProposalRequest.new(name: name) do |_result, response|
+        c.get_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceProposalRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_single_tenant_hsm_instance_proposal({ name: name }, call_options) do |_result, response|
+        c.get_single_tenant_hsm_instance_proposal({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceProposalRequest.new(name: name), call_options) do |_result, response|
+        c.get_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceProposalRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -490,32 +490,32 @@ class ::Google::Cloud::Kms::V1::HsmManagement::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::HsmManagement::Rest::ServiceStub.stub :transcode_list_single_tenant_hsm_instance_proposals_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_single_tenant_hsm_instance_proposals_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_single_tenant_hsm_instance_proposals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |_result, response|
+        c.list_single_tenant_hsm_instance_proposals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_single_tenant_hsm_instance_proposals parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |_result, response|
+        c.list_single_tenant_hsm_instance_proposals parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_single_tenant_hsm_instance_proposals ::Google::Cloud::Kms::V1::ListSingleTenantHsmInstanceProposalsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |_result, response|
+        c.list_single_tenant_hsm_instance_proposals ::Google::Cloud::Kms::V1::ListSingleTenantHsmInstanceProposalsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_single_tenant_hsm_instance_proposals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_single_tenant_hsm_instance_proposals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_single_tenant_hsm_instance_proposals(::Google::Cloud::Kms::V1::ListSingleTenantHsmInstanceProposalsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_single_tenant_hsm_instance_proposals(::Google::Cloud::Kms::V1::ListSingleTenantHsmInstanceProposalsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -544,32 +544,32 @@ class ::Google::Cloud::Kms::V1::HsmManagement::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::HsmManagement::Rest::ServiceStub.stub :transcode_delete_single_tenant_hsm_instance_proposal_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_single_tenant_hsm_instance_proposal_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::HsmManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_single_tenant_hsm_instance_proposal({ name: name }) do |_result, response|
+        c.delete_single_tenant_hsm_instance_proposal({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_single_tenant_hsm_instance_proposal name: name do |_result, response|
+        c.delete_single_tenant_hsm_instance_proposal name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::DeleteSingleTenantHsmInstanceProposalRequest.new(name: name) do |_result, response|
+        c.delete_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::DeleteSingleTenantHsmInstanceProposalRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_single_tenant_hsm_instance_proposal({ name: name }, call_options) do |_result, response|
+        c.delete_single_tenant_hsm_instance_proposal({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::DeleteSingleTenantHsmInstanceProposalRequest.new(name: name), call_options) do |_result, response|
+        c.delete_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::DeleteSingleTenantHsmInstanceProposalRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

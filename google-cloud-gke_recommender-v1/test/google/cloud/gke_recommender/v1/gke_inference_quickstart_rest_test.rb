@@ -98,32 +98,32 @@ class ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ClientT
     ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ServiceStub.stub :transcode_fetch_models_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_models_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_models({ page_size: page_size, page_token: page_token }) do |_result, response|
+        c.fetch_models({ page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_models page_size: page_size, page_token: page_token do |_result, response|
+        c.fetch_models page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_models ::Google::Cloud::GkeRecommender::V1::FetchModelsRequest.new(page_size: page_size, page_token: page_token) do |_result, response|
+        c.fetch_models ::Google::Cloud::GkeRecommender::V1::FetchModelsRequest.new(page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_models({ page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.fetch_models({ page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_models(::Google::Cloud::GkeRecommender::V1::FetchModelsRequest.new(page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.fetch_models(::Google::Cloud::GkeRecommender::V1::FetchModelsRequest.new(page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ClientT
     ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ServiceStub.stub :transcode_fetch_model_servers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_model_servers_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_model_servers({ model: model, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.fetch_model_servers({ model: model, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_model_servers model: model, page_size: page_size, page_token: page_token do |_result, response|
+        c.fetch_model_servers model: model, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_model_servers ::Google::Cloud::GkeRecommender::V1::FetchModelServersRequest.new(model: model, page_size: page_size, page_token: page_token) do |_result, response|
+        c.fetch_model_servers ::Google::Cloud::GkeRecommender::V1::FetchModelServersRequest.new(model: model, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_model_servers({ model: model, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.fetch_model_servers({ model: model, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_model_servers(::Google::Cloud::GkeRecommender::V1::FetchModelServersRequest.new(model: model, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.fetch_model_servers(::Google::Cloud::GkeRecommender::V1::FetchModelServersRequest.new(model: model, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ClientT
     ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ServiceStub.stub :transcode_fetch_model_server_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_model_server_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_model_server_versions({ model: model, model_server: model_server, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.fetch_model_server_versions({ model: model, model_server: model_server, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_model_server_versions model: model, model_server: model_server, page_size: page_size, page_token: page_token do |_result, response|
+        c.fetch_model_server_versions model: model, model_server: model_server, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_model_server_versions ::Google::Cloud::GkeRecommender::V1::FetchModelServerVersionsRequest.new(model: model, model_server: model_server, page_size: page_size, page_token: page_token) do |_result, response|
+        c.fetch_model_server_versions ::Google::Cloud::GkeRecommender::V1::FetchModelServerVersionsRequest.new(model: model, model_server: model_server, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_model_server_versions({ model: model, model_server: model_server, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.fetch_model_server_versions({ model: model, model_server: model_server, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_model_server_versions(::Google::Cloud::GkeRecommender::V1::FetchModelServerVersionsRequest.new(model: model, model_server: model_server, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.fetch_model_server_versions(::Google::Cloud::GkeRecommender::V1::FetchModelServerVersionsRequest.new(model: model, model_server: model_server, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -270,32 +270,32 @@ class ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ClientT
     ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ServiceStub.stub :transcode_fetch_profiles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_profiles_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_profiles({ model: model, model_server: model_server, model_server_version: model_server_version, performance_requirements: performance_requirements, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.fetch_profiles({ model: model, model_server: model_server, model_server_version: model_server_version, performance_requirements: performance_requirements, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_profiles model: model, model_server: model_server, model_server_version: model_server_version, performance_requirements: performance_requirements, page_size: page_size, page_token: page_token do |_result, response|
+        c.fetch_profiles model: model, model_server: model_server, model_server_version: model_server_version, performance_requirements: performance_requirements, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_profiles ::Google::Cloud::GkeRecommender::V1::FetchProfilesRequest.new(model: model, model_server: model_server, model_server_version: model_server_version, performance_requirements: performance_requirements, page_size: page_size, page_token: page_token) do |_result, response|
+        c.fetch_profiles ::Google::Cloud::GkeRecommender::V1::FetchProfilesRequest.new(model: model, model_server: model_server, model_server_version: model_server_version, performance_requirements: performance_requirements, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_profiles({ model: model, model_server: model_server, model_server_version: model_server_version, performance_requirements: performance_requirements, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.fetch_profiles({ model: model, model_server: model_server, model_server_version: model_server_version, performance_requirements: performance_requirements, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_profiles(::Google::Cloud::GkeRecommender::V1::FetchProfilesRequest.new(model: model, model_server: model_server, model_server_version: model_server_version, performance_requirements: performance_requirements, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.fetch_profiles(::Google::Cloud::GkeRecommender::V1::FetchProfilesRequest.new(model: model, model_server: model_server, model_server_version: model_server_version, performance_requirements: performance_requirements, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -328,32 +328,32 @@ class ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ClientT
     ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ServiceStub.stub :transcode_generate_optimized_manifest_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_optimized_manifest_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_optimized_manifest({ model_server_info: model_server_info, accelerator_type: accelerator_type, kubernetes_namespace: kubernetes_namespace, performance_requirements: performance_requirements, storage_config: storage_config }) do |_result, response|
+        c.generate_optimized_manifest({ model_server_info: model_server_info, accelerator_type: accelerator_type, kubernetes_namespace: kubernetes_namespace, performance_requirements: performance_requirements, storage_config: storage_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_optimized_manifest model_server_info: model_server_info, accelerator_type: accelerator_type, kubernetes_namespace: kubernetes_namespace, performance_requirements: performance_requirements, storage_config: storage_config do |_result, response|
+        c.generate_optimized_manifest model_server_info: model_server_info, accelerator_type: accelerator_type, kubernetes_namespace: kubernetes_namespace, performance_requirements: performance_requirements, storage_config: storage_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_optimized_manifest ::Google::Cloud::GkeRecommender::V1::GenerateOptimizedManifestRequest.new(model_server_info: model_server_info, accelerator_type: accelerator_type, kubernetes_namespace: kubernetes_namespace, performance_requirements: performance_requirements, storage_config: storage_config) do |_result, response|
+        c.generate_optimized_manifest ::Google::Cloud::GkeRecommender::V1::GenerateOptimizedManifestRequest.new(model_server_info: model_server_info, accelerator_type: accelerator_type, kubernetes_namespace: kubernetes_namespace, performance_requirements: performance_requirements, storage_config: storage_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_optimized_manifest({ model_server_info: model_server_info, accelerator_type: accelerator_type, kubernetes_namespace: kubernetes_namespace, performance_requirements: performance_requirements, storage_config: storage_config }, call_options) do |_result, response|
+        c.generate_optimized_manifest({ model_server_info: model_server_info, accelerator_type: accelerator_type, kubernetes_namespace: kubernetes_namespace, performance_requirements: performance_requirements, storage_config: storage_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_optimized_manifest(::Google::Cloud::GkeRecommender::V1::GenerateOptimizedManifestRequest.new(model_server_info: model_server_info, accelerator_type: accelerator_type, kubernetes_namespace: kubernetes_namespace, performance_requirements: performance_requirements, storage_config: storage_config), call_options) do |_result, response|
+        c.generate_optimized_manifest(::Google::Cloud::GkeRecommender::V1::GenerateOptimizedManifestRequest.new(model_server_info: model_server_info, accelerator_type: accelerator_type, kubernetes_namespace: kubernetes_namespace, performance_requirements: performance_requirements, storage_config: storage_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -384,32 +384,32 @@ class ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ClientT
     ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::ServiceStub.stub :transcode_fetch_benchmarking_data_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_benchmarking_data_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_benchmarking_data({ model_server_info: model_server_info, instance_type: instance_type, pricing_model: pricing_model }) do |_result, response|
+        c.fetch_benchmarking_data({ model_server_info: model_server_info, instance_type: instance_type, pricing_model: pricing_model }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_benchmarking_data model_server_info: model_server_info, instance_type: instance_type, pricing_model: pricing_model do |_result, response|
+        c.fetch_benchmarking_data model_server_info: model_server_info, instance_type: instance_type, pricing_model: pricing_model do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_benchmarking_data ::Google::Cloud::GkeRecommender::V1::FetchBenchmarkingDataRequest.new(model_server_info: model_server_info, instance_type: instance_type, pricing_model: pricing_model) do |_result, response|
+        c.fetch_benchmarking_data ::Google::Cloud::GkeRecommender::V1::FetchBenchmarkingDataRequest.new(model_server_info: model_server_info, instance_type: instance_type, pricing_model: pricing_model) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_benchmarking_data({ model_server_info: model_server_info, instance_type: instance_type, pricing_model: pricing_model }, call_options) do |_result, response|
+        c.fetch_benchmarking_data({ model_server_info: model_server_info, instance_type: instance_type, pricing_model: pricing_model }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_benchmarking_data(::Google::Cloud::GkeRecommender::V1::FetchBenchmarkingDataRequest.new(model_server_info: model_server_info, instance_type: instance_type, pricing_model: pricing_model), call_options) do |_result, response|
+        c.fetch_benchmarking_data(::Google::Cloud::GkeRecommender::V1::FetchBenchmarkingDataRequest.new(model_server_info: model_server_info, instance_type: instance_type, pricing_model: pricing_model), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

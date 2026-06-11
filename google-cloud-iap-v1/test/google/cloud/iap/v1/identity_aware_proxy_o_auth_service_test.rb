@@ -82,36 +82,36 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, list_brands_client_stub do
       # Create client
-      client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
+      c = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_brands({ parent: parent }) do |response, operation|
+      c.list_brands({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_brands parent: parent do |response, operation|
+      c.list_brands parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_brands ::Google::Cloud::Iap::V1::ListBrandsRequest.new(parent: parent) do |response, operation|
+      c.list_brands ::Google::Cloud::Iap::V1::ListBrandsRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_brands({ parent: parent }, grpc_options) do |response, operation|
+      c.list_brands({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_brands(::Google::Cloud::Iap::V1::ListBrandsRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.list_brands(::Google::Cloud::Iap::V1::ListBrandsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, create_brand_client_stub do
       # Create client
-      client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
+      c = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_brand({ parent: parent, brand: brand }) do |response, operation|
+      c.create_brand({ parent: parent, brand: brand }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_brand parent: parent, brand: brand do |response, operation|
+      c.create_brand parent: parent, brand: brand do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_brand ::Google::Cloud::Iap::V1::CreateBrandRequest.new(parent: parent, brand: brand) do |response, operation|
+      c.create_brand ::Google::Cloud::Iap::V1::CreateBrandRequest.new(parent: parent, brand: brand) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_brand({ parent: parent, brand: brand }, grpc_options) do |response, operation|
+      c.create_brand({ parent: parent, brand: brand }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_brand(::Google::Cloud::Iap::V1::CreateBrandRequest.new(parent: parent, brand: brand), grpc_options) do |response, operation|
+      c.create_brand(::Google::Cloud::Iap::V1::CreateBrandRequest.new(parent: parent, brand: brand), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -200,36 +200,36 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, get_brand_client_stub do
       # Create client
-      client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
+      c = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_brand({ name: name }) do |response, operation|
+      c.get_brand({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_brand name: name do |response, operation|
+      c.get_brand name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_brand ::Google::Cloud::Iap::V1::GetBrandRequest.new(name: name) do |response, operation|
+      c.get_brand ::Google::Cloud::Iap::V1::GetBrandRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_brand({ name: name }, grpc_options) do |response, operation|
+      c.get_brand({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_brand(::Google::Cloud::Iap::V1::GetBrandRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_brand(::Google::Cloud::Iap::V1::GetBrandRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -260,36 +260,36 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, create_identity_aware_proxy_client_client_stub do
       # Create client
-      client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
+      c = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_identity_aware_proxy_client({ parent: parent, identity_aware_proxy_client: identity_aware_proxy_client }) do |response, operation|
+      c.create_identity_aware_proxy_client({ parent: parent, identity_aware_proxy_client: identity_aware_proxy_client }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_identity_aware_proxy_client parent: parent, identity_aware_proxy_client: identity_aware_proxy_client do |response, operation|
+      c.create_identity_aware_proxy_client parent: parent, identity_aware_proxy_client: identity_aware_proxy_client do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_identity_aware_proxy_client ::Google::Cloud::Iap::V1::CreateIdentityAwareProxyClientRequest.new(parent: parent, identity_aware_proxy_client: identity_aware_proxy_client) do |response, operation|
+      c.create_identity_aware_proxy_client ::Google::Cloud::Iap::V1::CreateIdentityAwareProxyClientRequest.new(parent: parent, identity_aware_proxy_client: identity_aware_proxy_client) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_identity_aware_proxy_client({ parent: parent, identity_aware_proxy_client: identity_aware_proxy_client }, grpc_options) do |response, operation|
+      c.create_identity_aware_proxy_client({ parent: parent, identity_aware_proxy_client: identity_aware_proxy_client }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_identity_aware_proxy_client(::Google::Cloud::Iap::V1::CreateIdentityAwareProxyClientRequest.new(parent: parent, identity_aware_proxy_client: identity_aware_proxy_client), grpc_options) do |response, operation|
+      c.create_identity_aware_proxy_client(::Google::Cloud::Iap::V1::CreateIdentityAwareProxyClientRequest.new(parent: parent, identity_aware_proxy_client: identity_aware_proxy_client), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -322,40 +322,40 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, list_identity_aware_proxy_clients_client_stub do
       # Create client
-      client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
+      c = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_identity_aware_proxy_clients({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_identity_aware_proxy_clients({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_identity_aware_proxy_clients parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_identity_aware_proxy_clients parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_identity_aware_proxy_clients ::Google::Cloud::Iap::V1::ListIdentityAwareProxyClientsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_identity_aware_proxy_clients ::Google::Cloud::Iap::V1::ListIdentityAwareProxyClientsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_identity_aware_proxy_clients({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_identity_aware_proxy_clients({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_identity_aware_proxy_clients(::Google::Cloud::Iap::V1::ListIdentityAwareProxyClientsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_identity_aware_proxy_clients(::Google::Cloud::Iap::V1::ListIdentityAwareProxyClientsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -385,36 +385,36 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, get_identity_aware_proxy_client_client_stub do
       # Create client
-      client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
+      c = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_identity_aware_proxy_client({ name: name }) do |response, operation|
+      c.get_identity_aware_proxy_client({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_identity_aware_proxy_client name: name do |response, operation|
+      c.get_identity_aware_proxy_client name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_identity_aware_proxy_client ::Google::Cloud::Iap::V1::GetIdentityAwareProxyClientRequest.new(name: name) do |response, operation|
+      c.get_identity_aware_proxy_client ::Google::Cloud::Iap::V1::GetIdentityAwareProxyClientRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_identity_aware_proxy_client({ name: name }, grpc_options) do |response, operation|
+      c.get_identity_aware_proxy_client({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_identity_aware_proxy_client(::Google::Cloud::Iap::V1::GetIdentityAwareProxyClientRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_identity_aware_proxy_client(::Google::Cloud::Iap::V1::GetIdentityAwareProxyClientRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -443,36 +443,36 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, reset_identity_aware_proxy_client_secret_client_stub do
       # Create client
-      client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
+      c = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reset_identity_aware_proxy_client_secret({ name: name }) do |response, operation|
+      c.reset_identity_aware_proxy_client_secret({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reset_identity_aware_proxy_client_secret name: name do |response, operation|
+      c.reset_identity_aware_proxy_client_secret name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reset_identity_aware_proxy_client_secret ::Google::Cloud::Iap::V1::ResetIdentityAwareProxyClientSecretRequest.new(name: name) do |response, operation|
+      c.reset_identity_aware_proxy_client_secret ::Google::Cloud::Iap::V1::ResetIdentityAwareProxyClientSecretRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reset_identity_aware_proxy_client_secret({ name: name }, grpc_options) do |response, operation|
+      c.reset_identity_aware_proxy_client_secret({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reset_identity_aware_proxy_client_secret(::Google::Cloud::Iap::V1::ResetIdentityAwareProxyClientSecretRequest.new(name: name), grpc_options) do |response, operation|
+      c.reset_identity_aware_proxy_client_secret(::Google::Cloud::Iap::V1::ResetIdentityAwareProxyClientSecretRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -501,36 +501,36 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, delete_identity_aware_proxy_client_client_stub do
       # Create client
-      client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
+      c = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_identity_aware_proxy_client({ name: name }) do |response, operation|
+      c.delete_identity_aware_proxy_client({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_identity_aware_proxy_client name: name do |response, operation|
+      c.delete_identity_aware_proxy_client name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_identity_aware_proxy_client ::Google::Cloud::Iap::V1::DeleteIdentityAwareProxyClientRequest.new(name: name) do |response, operation|
+      c.delete_identity_aware_proxy_client ::Google::Cloud::Iap::V1::DeleteIdentityAwareProxyClientRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_identity_aware_proxy_client({ name: name }, grpc_options) do |response, operation|
+      c.delete_identity_aware_proxy_client({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_identity_aware_proxy_client(::Google::Cloud::Iap::V1::DeleteIdentityAwareProxyClientRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_identity_aware_proxy_client(::Google::Cloud::Iap::V1::DeleteIdentityAwareProxyClientRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
