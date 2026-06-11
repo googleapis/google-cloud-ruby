@@ -101,32 +101,32 @@ class ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::ClientTest <
     ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::ServiceStub.stub :transcode_summarize_maintenances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, summarize_maintenances_client_stub do
         # Create client
-        client = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::Client.new do |config|
+        c = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.summarize_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.summarize_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.summarize_maintenances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.summarize_maintenances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.summarize_maintenances ::Google::Cloud::Maintenance::Api::V1beta::SummarizeMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.summarize_maintenances ::Google::Cloud::Maintenance::Api::V1beta::SummarizeMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.summarize_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.summarize_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.summarize_maintenances(::Google::Cloud::Maintenance::Api::V1beta::SummarizeMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.summarize_maintenances(::Google::Cloud::Maintenance::Api::V1beta::SummarizeMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -159,32 +159,32 @@ class ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::ClientTest <
     ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::ServiceStub.stub :transcode_list_resource_maintenances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_resource_maintenances_client_stub do
         # Create client
-        client = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::Client.new do |config|
+        c = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_resource_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_resource_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_resource_maintenances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_resource_maintenances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_resource_maintenances ::Google::Cloud::Maintenance::Api::V1beta::ListResourceMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_resource_maintenances ::Google::Cloud::Maintenance::Api::V1beta::ListResourceMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_resource_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_resource_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_resource_maintenances(::Google::Cloud::Maintenance::Api::V1beta::ListResourceMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_resource_maintenances(::Google::Cloud::Maintenance::Api::V1beta::ListResourceMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::ClientTest <
     ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::ServiceStub.stub :transcode_get_resource_maintenance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_resource_maintenance_client_stub do
         # Create client
-        client = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::Client.new do |config|
+        c = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_resource_maintenance({ name: name }) do |_result, response|
+        c.get_resource_maintenance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_resource_maintenance name: name do |_result, response|
+        c.get_resource_maintenance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_resource_maintenance ::Google::Cloud::Maintenance::Api::V1beta::GetResourceMaintenanceRequest.new(name: name) do |_result, response|
+        c.get_resource_maintenance ::Google::Cloud::Maintenance::Api::V1beta::GetResourceMaintenanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_resource_maintenance({ name: name }, call_options) do |_result, response|
+        c.get_resource_maintenance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_resource_maintenance(::Google::Cloud::Maintenance::Api::V1beta::GetResourceMaintenanceRequest.new(name: name), call_options) do |_result, response|
+        c.get_resource_maintenance(::Google::Cloud::Maintenance::Api::V1beta::GetResourceMaintenanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

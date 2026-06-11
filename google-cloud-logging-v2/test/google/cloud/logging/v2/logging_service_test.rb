@@ -82,36 +82,36 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_log_client_stub do
       # Create client
-      client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
+      c = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_log({ log_name: log_name }) do |response, operation|
+      c.delete_log({ log_name: log_name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_log log_name: log_name do |response, operation|
+      c.delete_log log_name: log_name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_log ::Google::Cloud::Logging::V2::DeleteLogRequest.new(log_name: log_name) do |response, operation|
+      c.delete_log ::Google::Cloud::Logging::V2::DeleteLogRequest.new(log_name: log_name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_log({ log_name: log_name }, grpc_options) do |response, operation|
+      c.delete_log({ log_name: log_name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_log(::Google::Cloud::Logging::V2::DeleteLogRequest.new(log_name: log_name), grpc_options) do |response, operation|
+      c.delete_log(::Google::Cloud::Logging::V2::DeleteLogRequest.new(log_name: log_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -150,36 +150,36 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, write_log_entries_client_stub do
       # Create client
-      client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
+      c = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.write_log_entries({ log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run }) do |response, operation|
+      c.write_log_entries({ log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.write_log_entries log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run do |response, operation|
+      c.write_log_entries log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.write_log_entries ::Google::Cloud::Logging::V2::WriteLogEntriesRequest.new(log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run) do |response, operation|
+      c.write_log_entries ::Google::Cloud::Logging::V2::WriteLogEntriesRequest.new(log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.write_log_entries({ log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run }, grpc_options) do |response, operation|
+      c.write_log_entries({ log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.write_log_entries(::Google::Cloud::Logging::V2::WriteLogEntriesRequest.new(log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run), grpc_options) do |response, operation|
+      c.write_log_entries(::Google::Cloud::Logging::V2::WriteLogEntriesRequest.new(log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -216,40 +216,40 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_log_entries_client_stub do
       # Create client
-      client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
+      c = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_log_entries({ resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_log_entries({ resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_log_entries resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_log_entries resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_log_entries ::Google::Cloud::Logging::V2::ListLogEntriesRequest.new(resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_log_entries ::Google::Cloud::Logging::V2::ListLogEntriesRequest.new(resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_log_entries({ resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_log_entries({ resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_log_entries(::Google::Cloud::Logging::V2::ListLogEntriesRequest.new(resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_log_entries(::Google::Cloud::Logging::V2::ListLogEntriesRequest.new(resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -281,40 +281,40 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_monitored_resource_descriptors_client_stub do
       # Create client
-      client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
+      c = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_monitored_resource_descriptors({ page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_monitored_resource_descriptors({ page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_monitored_resource_descriptors page_size: page_size, page_token: page_token do |response, operation|
+      c.list_monitored_resource_descriptors page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_monitored_resource_descriptors ::Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_monitored_resource_descriptors ::Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_monitored_resource_descriptors({ page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_monitored_resource_descriptors({ page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_monitored_resource_descriptors(::Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_monitored_resource_descriptors(::Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -350,36 +350,36 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_logs_client_stub do
       # Create client
-      client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
+      c = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_logs({ parent: parent, resource_names: resource_names, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_logs({ parent: parent, resource_names: resource_names, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_logs parent: parent, resource_names: resource_names, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_logs parent: parent, resource_names: resource_names, page_size: page_size, page_token: page_token do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_logs ::Google::Cloud::Logging::V2::ListLogsRequest.new(parent: parent, resource_names: resource_names, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_logs ::Google::Cloud::Logging::V2::ListLogsRequest.new(parent: parent, resource_names: resource_names, page_size: page_size, page_token: page_token) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_logs({ parent: parent, resource_names: resource_names, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_logs({ parent: parent, resource_names: resource_names, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_logs(::Google::Cloud::Logging::V2::ListLogsRequest.new(parent: parent, resource_names: resource_names, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_logs(::Google::Cloud::Logging::V2::ListLogsRequest.new(parent: parent, resource_names: resource_names, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -410,7 +410,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, tail_log_entries_client_stub do
       # Create client
-      client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
+      c = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -418,7 +418,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       request_hash = { resource_names: resource_names, filter: filter, buffer_window: buffer_window }
       request_proto = ::Google::Cloud::Logging::V2::TailLogEntriesRequest.new resource_names: resource_names, filter: filter, buffer_window: buffer_window
       enum_input = [request_hash, request_proto].to_enum
-      client.tail_log_entries enum_input do |response, operation|
+      c.tail_log_entries enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Logging::V2::TailLogEntriesResponse, r
@@ -430,7 +430,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       request_hash = { resource_names: resource_names, filter: filter, buffer_window: buffer_window }
       request_proto = ::Google::Cloud::Logging::V2::TailLogEntriesRequest.new resource_names: resource_names, filter: filter, buffer_window: buffer_window
       stream_input = Gapic::StreamInput.new
-      client.tail_log_entries stream_input do |response, operation|
+      c.tail_log_entries stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Logging::V2::TailLogEntriesResponse, r
@@ -445,7 +445,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       request_hash = { resource_names: resource_names, filter: filter, buffer_window: buffer_window }
       request_proto = ::Google::Cloud::Logging::V2::TailLogEntriesRequest.new resource_names: resource_names, filter: filter, buffer_window: buffer_window
       enum_input = [request_hash, request_proto].to_enum
-      client.tail_log_entries enum_input, grpc_options do |response, operation|
+      c.tail_log_entries enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Logging::V2::TailLogEntriesResponse, r
@@ -457,7 +457,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       request_hash = { resource_names: resource_names, filter: filter, buffer_window: buffer_window }
       request_proto = ::Google::Cloud::Logging::V2::TailLogEntriesRequest.new resource_names: resource_names, filter: filter, buffer_window: buffer_window
       stream_input = Gapic::StreamInput.new
-      client.tail_log_entries stream_input, grpc_options do |response, operation|
+      c.tail_log_entries stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Logging::V2::TailLogEntriesResponse, r

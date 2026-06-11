@@ -97,32 +97,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_get_schema_registry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_schema_registry_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_schema_registry({ name: name }) do |_result, response|
+        c.get_schema_registry({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_schema_registry name: name do |_result, response|
+        c.get_schema_registry name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_schema_registry ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRegistryRequest.new(name: name) do |_result, response|
+        c.get_schema_registry ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRegistryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_schema_registry({ name: name }, call_options) do |_result, response|
+        c.get_schema_registry({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_schema_registry(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRegistryRequest.new(name: name), call_options) do |_result, response|
+        c.get_schema_registry(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRegistryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -151,32 +151,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_list_schema_registries_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_schema_registries_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_schema_registries({ parent: parent }) do |_result, response|
+        c.list_schema_registries({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_schema_registries parent: parent do |_result, response|
+        c.list_schema_registries parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_schema_registries ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaRegistriesRequest.new(parent: parent) do |_result, response|
+        c.list_schema_registries ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaRegistriesRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_schema_registries({ parent: parent }, call_options) do |_result, response|
+        c.list_schema_registries({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_schema_registries(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaRegistriesRequest.new(parent: parent), call_options) do |_result, response|
+        c.list_schema_registries(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaRegistriesRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_create_schema_registry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_schema_registry_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_schema_registry({ parent: parent, schema_registry_id: schema_registry_id, schema_registry: schema_registry }) do |_result, response|
+        c.create_schema_registry({ parent: parent, schema_registry_id: schema_registry_id, schema_registry: schema_registry }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_schema_registry parent: parent, schema_registry_id: schema_registry_id, schema_registry: schema_registry do |_result, response|
+        c.create_schema_registry parent: parent, schema_registry_id: schema_registry_id, schema_registry: schema_registry do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_schema_registry ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CreateSchemaRegistryRequest.new(parent: parent, schema_registry_id: schema_registry_id, schema_registry: schema_registry) do |_result, response|
+        c.create_schema_registry ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CreateSchemaRegistryRequest.new(parent: parent, schema_registry_id: schema_registry_id, schema_registry: schema_registry) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_schema_registry({ parent: parent, schema_registry_id: schema_registry_id, schema_registry: schema_registry }, call_options) do |_result, response|
+        c.create_schema_registry({ parent: parent, schema_registry_id: schema_registry_id, schema_registry: schema_registry }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_schema_registry(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CreateSchemaRegistryRequest.new(parent: parent, schema_registry_id: schema_registry_id, schema_registry: schema_registry), call_options) do |_result, response|
+        c.create_schema_registry(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CreateSchemaRegistryRequest.new(parent: parent, schema_registry_id: schema_registry_id, schema_registry: schema_registry), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_delete_schema_registry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_schema_registry_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_schema_registry({ name: name }) do |_result, response|
+        c.delete_schema_registry({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_schema_registry name: name do |_result, response|
+        c.delete_schema_registry name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_schema_registry ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaRegistryRequest.new(name: name) do |_result, response|
+        c.delete_schema_registry ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaRegistryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_schema_registry({ name: name }, call_options) do |_result, response|
+        c.delete_schema_registry({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_schema_registry(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaRegistryRequest.new(name: name), call_options) do |_result, response|
+        c.delete_schema_registry(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaRegistryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -315,32 +315,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_get_context_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_context_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_context({ name: name }) do |_result, response|
+        c.get_context({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_context name: name do |_result, response|
+        c.get_context name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_context ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetContextRequest.new(name: name) do |_result, response|
+        c.get_context ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetContextRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_context({ name: name }, call_options) do |_result, response|
+        c.get_context({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_context(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetContextRequest.new(name: name), call_options) do |_result, response|
+        c.get_context(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetContextRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -369,32 +369,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_list_contexts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_contexts_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_contexts({ parent: parent }) do |_result, response|
+        c.list_contexts({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_contexts parent: parent do |_result, response|
+        c.list_contexts parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_contexts ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListContextsRequest.new(parent: parent) do |_result, response|
+        c.list_contexts ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListContextsRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_contexts({ parent: parent }, call_options) do |_result, response|
+        c.list_contexts({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_contexts(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListContextsRequest.new(parent: parent), call_options) do |_result, response|
+        c.list_contexts(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListContextsRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -424,32 +424,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_get_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_schema({ name: name, subject: subject }) do |_result, response|
+        c.get_schema({ name: name, subject: subject }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_schema name: name, subject: subject do |_result, response|
+        c.get_schema name: name, subject: subject do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_schema ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRequest.new(name: name, subject: subject) do |_result, response|
+        c.get_schema ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRequest.new(name: name, subject: subject) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_schema({ name: name, subject: subject }, call_options) do |_result, response|
+        c.get_schema({ name: name, subject: subject }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_schema(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRequest.new(name: name, subject: subject), call_options) do |_result, response|
+        c.get_schema(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRequest.new(name: name, subject: subject), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -479,32 +479,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_get_raw_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_raw_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_raw_schema({ name: name, subject: subject }) do |_result, response|
+        c.get_raw_schema({ name: name, subject: subject }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_raw_schema name: name, subject: subject do |_result, response|
+        c.get_raw_schema name: name, subject: subject do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_raw_schema ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRequest.new(name: name, subject: subject) do |_result, response|
+        c.get_raw_schema ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRequest.new(name: name, subject: subject) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_raw_schema({ name: name, subject: subject }, call_options) do |_result, response|
+        c.get_raw_schema({ name: name, subject: subject }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_raw_schema(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRequest.new(name: name, subject: subject), call_options) do |_result, response|
+        c.get_raw_schema(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRequest.new(name: name, subject: subject), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -535,32 +535,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_list_schema_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_schema_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_schema_versions({ parent: parent, subject: subject, deleted: deleted }) do |_result, response|
+        c.list_schema_versions({ parent: parent, subject: subject, deleted: deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_schema_versions parent: parent, subject: subject, deleted: deleted do |_result, response|
+        c.list_schema_versions parent: parent, subject: subject, deleted: deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_schema_versions ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaVersionsRequest.new(parent: parent, subject: subject, deleted: deleted) do |_result, response|
+        c.list_schema_versions ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaVersionsRequest.new(parent: parent, subject: subject, deleted: deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_schema_versions({ parent: parent, subject: subject, deleted: deleted }, call_options) do |_result, response|
+        c.list_schema_versions({ parent: parent, subject: subject, deleted: deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_schema_versions(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaVersionsRequest.new(parent: parent, subject: subject, deleted: deleted), call_options) do |_result, response|
+        c.list_schema_versions(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaVersionsRequest.new(parent: parent, subject: subject, deleted: deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -589,32 +589,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_list_schema_types_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_schema_types_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_schema_types({ parent: parent }) do |_result, response|
+        c.list_schema_types({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_schema_types parent: parent do |_result, response|
+        c.list_schema_types parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_schema_types ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaTypesRequest.new(parent: parent) do |_result, response|
+        c.list_schema_types ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaTypesRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_schema_types({ parent: parent }, call_options) do |_result, response|
+        c.list_schema_types({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_schema_types(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaTypesRequest.new(parent: parent), call_options) do |_result, response|
+        c.list_schema_types(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaTypesRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -645,32 +645,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_list_subjects_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_subjects_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_subjects({ parent: parent, subject_prefix: subject_prefix, deleted: deleted }) do |_result, response|
+        c.list_subjects({ parent: parent, subject_prefix: subject_prefix, deleted: deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_subjects parent: parent, subject_prefix: subject_prefix, deleted: deleted do |_result, response|
+        c.list_subjects parent: parent, subject_prefix: subject_prefix, deleted: deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_subjects ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSubjectsRequest.new(parent: parent, subject_prefix: subject_prefix, deleted: deleted) do |_result, response|
+        c.list_subjects ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSubjectsRequest.new(parent: parent, subject_prefix: subject_prefix, deleted: deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_subjects({ parent: parent, subject_prefix: subject_prefix, deleted: deleted }, call_options) do |_result, response|
+        c.list_subjects({ parent: parent, subject_prefix: subject_prefix, deleted: deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_subjects(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSubjectsRequest.new(parent: parent, subject_prefix: subject_prefix, deleted: deleted), call_options) do |_result, response|
+        c.list_subjects(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSubjectsRequest.new(parent: parent, subject_prefix: subject_prefix, deleted: deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -701,32 +701,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_list_subjects_by_schema_id_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_subjects_by_schema_id_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_subjects_by_schema_id({ parent: parent, subject: subject, deleted: deleted }) do |_result, response|
+        c.list_subjects_by_schema_id({ parent: parent, subject: subject, deleted: deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_subjects_by_schema_id parent: parent, subject: subject, deleted: deleted do |_result, response|
+        c.list_subjects_by_schema_id parent: parent, subject: subject, deleted: deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_subjects_by_schema_id ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSubjectsBySchemaIdRequest.new(parent: parent, subject: subject, deleted: deleted) do |_result, response|
+        c.list_subjects_by_schema_id ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSubjectsBySchemaIdRequest.new(parent: parent, subject: subject, deleted: deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_subjects_by_schema_id({ parent: parent, subject: subject, deleted: deleted }, call_options) do |_result, response|
+        c.list_subjects_by_schema_id({ parent: parent, subject: subject, deleted: deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_subjects_by_schema_id(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSubjectsBySchemaIdRequest.new(parent: parent, subject: subject, deleted: deleted), call_options) do |_result, response|
+        c.list_subjects_by_schema_id(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSubjectsBySchemaIdRequest.new(parent: parent, subject: subject, deleted: deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -756,32 +756,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_delete_subject_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_subject_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_subject({ name: name, permanent: permanent }) do |_result, response|
+        c.delete_subject({ name: name, permanent: permanent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_subject name: name, permanent: permanent do |_result, response|
+        c.delete_subject name: name, permanent: permanent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_subject ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSubjectRequest.new(name: name, permanent: permanent) do |_result, response|
+        c.delete_subject ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSubjectRequest.new(name: name, permanent: permanent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_subject({ name: name, permanent: permanent }, call_options) do |_result, response|
+        c.delete_subject({ name: name, permanent: permanent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_subject(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSubjectRequest.new(name: name, permanent: permanent), call_options) do |_result, response|
+        c.delete_subject(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSubjectRequest.new(name: name, permanent: permanent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -815,32 +815,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_lookup_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, lookup_version_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.lookup_version({ parent: parent, schema_type: schema_type, schema: schema, references: references, normalize: normalize, deleted: deleted }) do |_result, response|
+        c.lookup_version({ parent: parent, schema_type: schema_type, schema: schema, references: references, normalize: normalize, deleted: deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lookup_version parent: parent, schema_type: schema_type, schema: schema, references: references, normalize: normalize, deleted: deleted do |_result, response|
+        c.lookup_version parent: parent, schema_type: schema_type, schema: schema, references: references, normalize: normalize, deleted: deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lookup_version ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::LookupVersionRequest.new(parent: parent, schema_type: schema_type, schema: schema, references: references, normalize: normalize, deleted: deleted) do |_result, response|
+        c.lookup_version ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::LookupVersionRequest.new(parent: parent, schema_type: schema_type, schema: schema, references: references, normalize: normalize, deleted: deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lookup_version({ parent: parent, schema_type: schema_type, schema: schema, references: references, normalize: normalize, deleted: deleted }, call_options) do |_result, response|
+        c.lookup_version({ parent: parent, schema_type: schema_type, schema: schema, references: references, normalize: normalize, deleted: deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lookup_version(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::LookupVersionRequest.new(parent: parent, schema_type: schema_type, schema: schema, references: references, normalize: normalize, deleted: deleted), call_options) do |_result, response|
+        c.lookup_version(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::LookupVersionRequest.new(parent: parent, schema_type: schema_type, schema: schema, references: references, normalize: normalize, deleted: deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -870,32 +870,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_get_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_version_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_version({ name: name, deleted: deleted }) do |_result, response|
+        c.get_version({ name: name, deleted: deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_version name: name, deleted: deleted do |_result, response|
+        c.get_version name: name, deleted: deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_version ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetVersionRequest.new(name: name, deleted: deleted) do |_result, response|
+        c.get_version ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetVersionRequest.new(name: name, deleted: deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_version({ name: name, deleted: deleted }, call_options) do |_result, response|
+        c.get_version({ name: name, deleted: deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_version(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetVersionRequest.new(name: name, deleted: deleted), call_options) do |_result, response|
+        c.get_version(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetVersionRequest.new(name: name, deleted: deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -925,32 +925,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_get_raw_schema_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_raw_schema_version_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_raw_schema_version({ name: name, deleted: deleted }) do |_result, response|
+        c.get_raw_schema_version({ name: name, deleted: deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_raw_schema_version name: name, deleted: deleted do |_result, response|
+        c.get_raw_schema_version name: name, deleted: deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_raw_schema_version ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetVersionRequest.new(name: name, deleted: deleted) do |_result, response|
+        c.get_raw_schema_version ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetVersionRequest.new(name: name, deleted: deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_raw_schema_version({ name: name, deleted: deleted }, call_options) do |_result, response|
+        c.get_raw_schema_version({ name: name, deleted: deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_raw_schema_version(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetVersionRequest.new(name: name, deleted: deleted), call_options) do |_result, response|
+        c.get_raw_schema_version(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetVersionRequest.new(name: name, deleted: deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -980,32 +980,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_list_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_versions({ parent: parent, deleted: deleted }) do |_result, response|
+        c.list_versions({ parent: parent, deleted: deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_versions parent: parent, deleted: deleted do |_result, response|
+        c.list_versions parent: parent, deleted: deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_versions ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListVersionsRequest.new(parent: parent, deleted: deleted) do |_result, response|
+        c.list_versions ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListVersionsRequest.new(parent: parent, deleted: deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_versions({ parent: parent, deleted: deleted }, call_options) do |_result, response|
+        c.list_versions({ parent: parent, deleted: deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_versions(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListVersionsRequest.new(parent: parent, deleted: deleted), call_options) do |_result, response|
+        c.list_versions(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListVersionsRequest.new(parent: parent, deleted: deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1040,32 +1040,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_create_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_version_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_version({ parent: parent, version: version, id: id, schema_type: schema_type, schema: schema, references: references, normalize: normalize }) do |_result, response|
+        c.create_version({ parent: parent, version: version, id: id, schema_type: schema_type, schema: schema, references: references, normalize: normalize }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_version parent: parent, version: version, id: id, schema_type: schema_type, schema: schema, references: references, normalize: normalize do |_result, response|
+        c.create_version parent: parent, version: version, id: id, schema_type: schema_type, schema: schema, references: references, normalize: normalize do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_version ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CreateVersionRequest.new(parent: parent, version: version, id: id, schema_type: schema_type, schema: schema, references: references, normalize: normalize) do |_result, response|
+        c.create_version ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CreateVersionRequest.new(parent: parent, version: version, id: id, schema_type: schema_type, schema: schema, references: references, normalize: normalize) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_version({ parent: parent, version: version, id: id, schema_type: schema_type, schema: schema, references: references, normalize: normalize }, call_options) do |_result, response|
+        c.create_version({ parent: parent, version: version, id: id, schema_type: schema_type, schema: schema, references: references, normalize: normalize }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_version(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CreateVersionRequest.new(parent: parent, version: version, id: id, schema_type: schema_type, schema: schema, references: references, normalize: normalize), call_options) do |_result, response|
+        c.create_version(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CreateVersionRequest.new(parent: parent, version: version, id: id, schema_type: schema_type, schema: schema, references: references, normalize: normalize), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1095,32 +1095,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_delete_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_version_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_version({ name: name, permanent: permanent }) do |_result, response|
+        c.delete_version({ name: name, permanent: permanent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_version name: name, permanent: permanent do |_result, response|
+        c.delete_version name: name, permanent: permanent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_version ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteVersionRequest.new(name: name, permanent: permanent) do |_result, response|
+        c.delete_version ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteVersionRequest.new(name: name, permanent: permanent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_version({ name: name, permanent: permanent }, call_options) do |_result, response|
+        c.delete_version({ name: name, permanent: permanent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_version(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteVersionRequest.new(name: name, permanent: permanent), call_options) do |_result, response|
+        c.delete_version(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteVersionRequest.new(name: name, permanent: permanent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1149,32 +1149,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_list_referenced_schemas_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_referenced_schemas_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_referenced_schemas({ parent: parent }) do |_result, response|
+        c.list_referenced_schemas({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_referenced_schemas parent: parent do |_result, response|
+        c.list_referenced_schemas parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_referenced_schemas ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListReferencedSchemasRequest.new(parent: parent) do |_result, response|
+        c.list_referenced_schemas ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListReferencedSchemasRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_referenced_schemas({ parent: parent }, call_options) do |_result, response|
+        c.list_referenced_schemas({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_referenced_schemas(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListReferencedSchemasRequest.new(parent: parent), call_options) do |_result, response|
+        c.list_referenced_schemas(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListReferencedSchemasRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1207,32 +1207,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_check_compatibility_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, check_compatibility_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.check_compatibility({ name: name, schema_type: schema_type, schema: schema, references: references, verbose: verbose }) do |_result, response|
+        c.check_compatibility({ name: name, schema_type: schema_type, schema: schema, references: references, verbose: verbose }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.check_compatibility name: name, schema_type: schema_type, schema: schema, references: references, verbose: verbose do |_result, response|
+        c.check_compatibility name: name, schema_type: schema_type, schema: schema, references: references, verbose: verbose do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.check_compatibility ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CheckCompatibilityRequest.new(name: name, schema_type: schema_type, schema: schema, references: references, verbose: verbose) do |_result, response|
+        c.check_compatibility ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CheckCompatibilityRequest.new(name: name, schema_type: schema_type, schema: schema, references: references, verbose: verbose) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.check_compatibility({ name: name, schema_type: schema_type, schema: schema, references: references, verbose: verbose }, call_options) do |_result, response|
+        c.check_compatibility({ name: name, schema_type: schema_type, schema: schema, references: references, verbose: verbose }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.check_compatibility(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CheckCompatibilityRequest.new(name: name, schema_type: schema_type, schema: schema, references: references, verbose: verbose), call_options) do |_result, response|
+        c.check_compatibility(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CheckCompatibilityRequest.new(name: name, schema_type: schema_type, schema: schema, references: references, verbose: verbose), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1262,32 +1262,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_get_schema_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_schema_config_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_schema_config({ name: name, default_to_global: default_to_global }) do |_result, response|
+        c.get_schema_config({ name: name, default_to_global: default_to_global }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_schema_config name: name, default_to_global: default_to_global do |_result, response|
+        c.get_schema_config name: name, default_to_global: default_to_global do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_schema_config ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaConfigRequest.new(name: name, default_to_global: default_to_global) do |_result, response|
+        c.get_schema_config ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaConfigRequest.new(name: name, default_to_global: default_to_global) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_schema_config({ name: name, default_to_global: default_to_global }, call_options) do |_result, response|
+        c.get_schema_config({ name: name, default_to_global: default_to_global }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_schema_config(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaConfigRequest.new(name: name, default_to_global: default_to_global), call_options) do |_result, response|
+        c.get_schema_config(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaConfigRequest.new(name: name, default_to_global: default_to_global), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1318,32 +1318,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_update_schema_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_schema_config_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_schema_config({ name: name, compatibility: compatibility, normalize: normalize }) do |_result, response|
+        c.update_schema_config({ name: name, compatibility: compatibility, normalize: normalize }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_schema_config name: name, compatibility: compatibility, normalize: normalize do |_result, response|
+        c.update_schema_config name: name, compatibility: compatibility, normalize: normalize do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_schema_config ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::UpdateSchemaConfigRequest.new(name: name, compatibility: compatibility, normalize: normalize) do |_result, response|
+        c.update_schema_config ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::UpdateSchemaConfigRequest.new(name: name, compatibility: compatibility, normalize: normalize) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_schema_config({ name: name, compatibility: compatibility, normalize: normalize }, call_options) do |_result, response|
+        c.update_schema_config({ name: name, compatibility: compatibility, normalize: normalize }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_schema_config(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::UpdateSchemaConfigRequest.new(name: name, compatibility: compatibility, normalize: normalize), call_options) do |_result, response|
+        c.update_schema_config(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::UpdateSchemaConfigRequest.new(name: name, compatibility: compatibility, normalize: normalize), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1372,32 +1372,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_delete_schema_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_schema_config_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_schema_config({ name: name }) do |_result, response|
+        c.delete_schema_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_schema_config name: name do |_result, response|
+        c.delete_schema_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_schema_config ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaConfigRequest.new(name: name) do |_result, response|
+        c.delete_schema_config ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_schema_config({ name: name }, call_options) do |_result, response|
+        c.delete_schema_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_schema_config(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_schema_config(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1426,32 +1426,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_get_schema_mode_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_schema_mode_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_schema_mode({ name: name }) do |_result, response|
+        c.get_schema_mode({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_schema_mode name: name do |_result, response|
+        c.get_schema_mode name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_schema_mode ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaModeRequest.new(name: name) do |_result, response|
+        c.get_schema_mode ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaModeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_schema_mode({ name: name }, call_options) do |_result, response|
+        c.get_schema_mode({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_schema_mode(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaModeRequest.new(name: name), call_options) do |_result, response|
+        c.get_schema_mode(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaModeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1481,32 +1481,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_update_schema_mode_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_schema_mode_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_schema_mode({ name: name, mode: mode }) do |_result, response|
+        c.update_schema_mode({ name: name, mode: mode }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_schema_mode name: name, mode: mode do |_result, response|
+        c.update_schema_mode name: name, mode: mode do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_schema_mode ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::UpdateSchemaModeRequest.new(name: name, mode: mode) do |_result, response|
+        c.update_schema_mode ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::UpdateSchemaModeRequest.new(name: name, mode: mode) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_schema_mode({ name: name, mode: mode }, call_options) do |_result, response|
+        c.update_schema_mode({ name: name, mode: mode }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_schema_mode(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::UpdateSchemaModeRequest.new(name: name, mode: mode), call_options) do |_result, response|
+        c.update_schema_mode(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::UpdateSchemaModeRequest.new(name: name, mode: mode), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1535,32 +1535,32 @@ class ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::
     ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::ServiceStub.stub :transcode_delete_schema_mode_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_schema_mode_client_stub do
         # Create client
-        client = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_schema_mode({ name: name }) do |_result, response|
+        c.delete_schema_mode({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_schema_mode name: name do |_result, response|
+        c.delete_schema_mode name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_schema_mode ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaModeRequest.new(name: name) do |_result, response|
+        c.delete_schema_mode ::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaModeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_schema_mode({ name: name }, call_options) do |_result, response|
+        c.delete_schema_mode({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_schema_mode(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaModeRequest.new(name: name), call_options) do |_result, response|
+        c.delete_schema_mode(::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaModeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

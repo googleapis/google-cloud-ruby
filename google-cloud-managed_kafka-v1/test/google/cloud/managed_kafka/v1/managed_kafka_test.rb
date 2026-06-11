@@ -90,40 +90,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_clusters_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_clusters ::Google::Cloud::ManagedKafka::V1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_clusters ::Google::Cloud::ManagedKafka::V1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_clusters(::Google::Cloud::ManagedKafka::V1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_clusters(::Google::Cloud::ManagedKafka::V1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_cluster({ name: name }) do |response, operation|
+      c.get_cluster({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_cluster name: name do |response, operation|
+      c.get_cluster name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_cluster ::Google::Cloud::ManagedKafka::V1::GetClusterRequest.new(name: name) do |response, operation|
+      c.get_cluster ::Google::Cloud::ManagedKafka::V1::GetClusterRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_cluster({ name: name }, grpc_options) do |response, operation|
+      c.get_cluster({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_cluster(::Google::Cloud::ManagedKafka::V1::GetClusterRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_cluster(::Google::Cloud::ManagedKafka::V1::GetClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }) do |response, operation|
+      c.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_cluster parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id do |response, operation|
+      c.create_cluster parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_cluster ::Google::Cloud::ManagedKafka::V1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id) do |response, operation|
+      c.create_cluster ::Google::Cloud::ManagedKafka::V1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_cluster(::Google::Cloud::ManagedKafka::V1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
+      c.create_cluster(::Google::Cloud::ManagedKafka::V1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id }) do |response, operation|
+      c.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_cluster update_mask: update_mask, cluster: cluster, request_id: request_id do |response, operation|
+      c.update_cluster update_mask: update_mask, cluster: cluster, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_cluster ::Google::Cloud::ManagedKafka::V1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id) do |response, operation|
+      c.update_cluster ::Google::Cloud::ManagedKafka::V1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_cluster(::Google::Cloud::ManagedKafka::V1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
+      c.update_cluster(::Google::Cloud::ManagedKafka::V1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_cluster({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_cluster({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_cluster name: name, request_id: request_id do |response, operation|
+      c.delete_cluster name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_cluster ::Google::Cloud::ManagedKafka::V1::DeleteClusterRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_cluster ::Google::Cloud::ManagedKafka::V1::DeleteClusterRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_cluster({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_cluster({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_cluster(::Google::Cloud::ManagedKafka::V1::DeleteClusterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_cluster(::Google::Cloud::ManagedKafka::V1::DeleteClusterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -416,40 +416,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_topics_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_topics({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_topics({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_topics parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_topics parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_topics ::Google::Cloud::ManagedKafka::V1::ListTopicsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_topics ::Google::Cloud::ManagedKafka::V1::ListTopicsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_topics({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_topics({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_topics(::Google::Cloud::ManagedKafka::V1::ListTopicsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_topics(::Google::Cloud::ManagedKafka::V1::ListTopicsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -479,36 +479,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_topic_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_topic({ name: name }) do |response, operation|
+      c.get_topic({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_topic name: name do |response, operation|
+      c.get_topic name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_topic ::Google::Cloud::ManagedKafka::V1::GetTopicRequest.new(name: name) do |response, operation|
+      c.get_topic ::Google::Cloud::ManagedKafka::V1::GetTopicRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_topic({ name: name }, grpc_options) do |response, operation|
+      c.get_topic({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_topic(::Google::Cloud::ManagedKafka::V1::GetTopicRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_topic(::Google::Cloud::ManagedKafka::V1::GetTopicRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -541,36 +541,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_topic_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_topic({ parent: parent, topic_id: topic_id, topic: topic }) do |response, operation|
+      c.create_topic({ parent: parent, topic_id: topic_id, topic: topic }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_topic parent: parent, topic_id: topic_id, topic: topic do |response, operation|
+      c.create_topic parent: parent, topic_id: topic_id, topic: topic do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_topic ::Google::Cloud::ManagedKafka::V1::CreateTopicRequest.new(parent: parent, topic_id: topic_id, topic: topic) do |response, operation|
+      c.create_topic ::Google::Cloud::ManagedKafka::V1::CreateTopicRequest.new(parent: parent, topic_id: topic_id, topic: topic) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_topic({ parent: parent, topic_id: topic_id, topic: topic }, grpc_options) do |response, operation|
+      c.create_topic({ parent: parent, topic_id: topic_id, topic: topic }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_topic(::Google::Cloud::ManagedKafka::V1::CreateTopicRequest.new(parent: parent, topic_id: topic_id, topic: topic), grpc_options) do |response, operation|
+      c.create_topic(::Google::Cloud::ManagedKafka::V1::CreateTopicRequest.new(parent: parent, topic_id: topic_id, topic: topic), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -601,36 +601,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_topic_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_topic({ update_mask: update_mask, topic: topic }) do |response, operation|
+      c.update_topic({ update_mask: update_mask, topic: topic }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_topic update_mask: update_mask, topic: topic do |response, operation|
+      c.update_topic update_mask: update_mask, topic: topic do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_topic ::Google::Cloud::ManagedKafka::V1::UpdateTopicRequest.new(update_mask: update_mask, topic: topic) do |response, operation|
+      c.update_topic ::Google::Cloud::ManagedKafka::V1::UpdateTopicRequest.new(update_mask: update_mask, topic: topic) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_topic({ update_mask: update_mask, topic: topic }, grpc_options) do |response, operation|
+      c.update_topic({ update_mask: update_mask, topic: topic }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_topic(::Google::Cloud::ManagedKafka::V1::UpdateTopicRequest.new(update_mask: update_mask, topic: topic), grpc_options) do |response, operation|
+      c.update_topic(::Google::Cloud::ManagedKafka::V1::UpdateTopicRequest.new(update_mask: update_mask, topic: topic), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -659,36 +659,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_topic_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_topic({ name: name }) do |response, operation|
+      c.delete_topic({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_topic name: name do |response, operation|
+      c.delete_topic name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_topic ::Google::Cloud::ManagedKafka::V1::DeleteTopicRequest.new(name: name) do |response, operation|
+      c.delete_topic ::Google::Cloud::ManagedKafka::V1::DeleteTopicRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_topic({ name: name }, grpc_options) do |response, operation|
+      c.delete_topic({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_topic(::Google::Cloud::ManagedKafka::V1::DeleteTopicRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_topic(::Google::Cloud::ManagedKafka::V1::DeleteTopicRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -721,40 +721,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_consumer_groups_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_consumer_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_consumer_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_consumer_groups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_consumer_groups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_consumer_groups ::Google::Cloud::ManagedKafka::V1::ListConsumerGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_consumer_groups ::Google::Cloud::ManagedKafka::V1::ListConsumerGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_consumer_groups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_consumer_groups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_consumer_groups(::Google::Cloud::ManagedKafka::V1::ListConsumerGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_consumer_groups(::Google::Cloud::ManagedKafka::V1::ListConsumerGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -784,36 +784,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_consumer_group_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_consumer_group({ name: name }) do |response, operation|
+      c.get_consumer_group({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_consumer_group name: name do |response, operation|
+      c.get_consumer_group name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_consumer_group ::Google::Cloud::ManagedKafka::V1::GetConsumerGroupRequest.new(name: name) do |response, operation|
+      c.get_consumer_group ::Google::Cloud::ManagedKafka::V1::GetConsumerGroupRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_consumer_group({ name: name }, grpc_options) do |response, operation|
+      c.get_consumer_group({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_consumer_group(::Google::Cloud::ManagedKafka::V1::GetConsumerGroupRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_consumer_group(::Google::Cloud::ManagedKafka::V1::GetConsumerGroupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -844,36 +844,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_consumer_group_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_consumer_group({ update_mask: update_mask, consumer_group: consumer_group }) do |response, operation|
+      c.update_consumer_group({ update_mask: update_mask, consumer_group: consumer_group }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_consumer_group update_mask: update_mask, consumer_group: consumer_group do |response, operation|
+      c.update_consumer_group update_mask: update_mask, consumer_group: consumer_group do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_consumer_group ::Google::Cloud::ManagedKafka::V1::UpdateConsumerGroupRequest.new(update_mask: update_mask, consumer_group: consumer_group) do |response, operation|
+      c.update_consumer_group ::Google::Cloud::ManagedKafka::V1::UpdateConsumerGroupRequest.new(update_mask: update_mask, consumer_group: consumer_group) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_consumer_group({ update_mask: update_mask, consumer_group: consumer_group }, grpc_options) do |response, operation|
+      c.update_consumer_group({ update_mask: update_mask, consumer_group: consumer_group }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_consumer_group(::Google::Cloud::ManagedKafka::V1::UpdateConsumerGroupRequest.new(update_mask: update_mask, consumer_group: consumer_group), grpc_options) do |response, operation|
+      c.update_consumer_group(::Google::Cloud::ManagedKafka::V1::UpdateConsumerGroupRequest.new(update_mask: update_mask, consumer_group: consumer_group), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -902,36 +902,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_consumer_group_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_consumer_group({ name: name }) do |response, operation|
+      c.delete_consumer_group({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_consumer_group name: name do |response, operation|
+      c.delete_consumer_group name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_consumer_group ::Google::Cloud::ManagedKafka::V1::DeleteConsumerGroupRequest.new(name: name) do |response, operation|
+      c.delete_consumer_group ::Google::Cloud::ManagedKafka::V1::DeleteConsumerGroupRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_consumer_group({ name: name }, grpc_options) do |response, operation|
+      c.delete_consumer_group({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_consumer_group(::Google::Cloud::ManagedKafka::V1::DeleteConsumerGroupRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_consumer_group(::Google::Cloud::ManagedKafka::V1::DeleteConsumerGroupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -964,40 +964,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_acls_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_acls({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_acls({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_acls parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_acls parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_acls ::Google::Cloud::ManagedKafka::V1::ListAclsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_acls ::Google::Cloud::ManagedKafka::V1::ListAclsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_acls({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_acls({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_acls(::Google::Cloud::ManagedKafka::V1::ListAclsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_acls(::Google::Cloud::ManagedKafka::V1::ListAclsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1027,36 +1027,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_acl_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_acl({ name: name }) do |response, operation|
+      c.get_acl({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_acl name: name do |response, operation|
+      c.get_acl name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_acl ::Google::Cloud::ManagedKafka::V1::GetAclRequest.new(name: name) do |response, operation|
+      c.get_acl ::Google::Cloud::ManagedKafka::V1::GetAclRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_acl({ name: name }, grpc_options) do |response, operation|
+      c.get_acl({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_acl(::Google::Cloud::ManagedKafka::V1::GetAclRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_acl(::Google::Cloud::ManagedKafka::V1::GetAclRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1089,36 +1089,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_acl_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_acl({ parent: parent, acl_id: acl_id, acl: acl }) do |response, operation|
+      c.create_acl({ parent: parent, acl_id: acl_id, acl: acl }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_acl parent: parent, acl_id: acl_id, acl: acl do |response, operation|
+      c.create_acl parent: parent, acl_id: acl_id, acl: acl do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_acl ::Google::Cloud::ManagedKafka::V1::CreateAclRequest.new(parent: parent, acl_id: acl_id, acl: acl) do |response, operation|
+      c.create_acl ::Google::Cloud::ManagedKafka::V1::CreateAclRequest.new(parent: parent, acl_id: acl_id, acl: acl) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_acl({ parent: parent, acl_id: acl_id, acl: acl }, grpc_options) do |response, operation|
+      c.create_acl({ parent: parent, acl_id: acl_id, acl: acl }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_acl(::Google::Cloud::ManagedKafka::V1::CreateAclRequest.new(parent: parent, acl_id: acl_id, acl: acl), grpc_options) do |response, operation|
+      c.create_acl(::Google::Cloud::ManagedKafka::V1::CreateAclRequest.new(parent: parent, acl_id: acl_id, acl: acl), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1149,36 +1149,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_acl_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_acl({ acl: acl, update_mask: update_mask }) do |response, operation|
+      c.update_acl({ acl: acl, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_acl acl: acl, update_mask: update_mask do |response, operation|
+      c.update_acl acl: acl, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_acl ::Google::Cloud::ManagedKafka::V1::UpdateAclRequest.new(acl: acl, update_mask: update_mask) do |response, operation|
+      c.update_acl ::Google::Cloud::ManagedKafka::V1::UpdateAclRequest.new(acl: acl, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_acl({ acl: acl, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_acl({ acl: acl, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_acl(::Google::Cloud::ManagedKafka::V1::UpdateAclRequest.new(acl: acl, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_acl(::Google::Cloud::ManagedKafka::V1::UpdateAclRequest.new(acl: acl, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1207,36 +1207,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_acl_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_acl({ name: name }) do |response, operation|
+      c.delete_acl({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_acl name: name do |response, operation|
+      c.delete_acl name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_acl ::Google::Cloud::ManagedKafka::V1::DeleteAclRequest.new(name: name) do |response, operation|
+      c.delete_acl ::Google::Cloud::ManagedKafka::V1::DeleteAclRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_acl({ name: name }, grpc_options) do |response, operation|
+      c.delete_acl({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_acl(::Google::Cloud::ManagedKafka::V1::DeleteAclRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_acl(::Google::Cloud::ManagedKafka::V1::DeleteAclRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1267,36 +1267,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, add_acl_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.add_acl_entry({ acl: acl, acl_entry: acl_entry }) do |response, operation|
+      c.add_acl_entry({ acl: acl, acl_entry: acl_entry }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.add_acl_entry acl: acl, acl_entry: acl_entry do |response, operation|
+      c.add_acl_entry acl: acl, acl_entry: acl_entry do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.add_acl_entry ::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest.new(acl: acl, acl_entry: acl_entry) do |response, operation|
+      c.add_acl_entry ::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest.new(acl: acl, acl_entry: acl_entry) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.add_acl_entry({ acl: acl, acl_entry: acl_entry }, grpc_options) do |response, operation|
+      c.add_acl_entry({ acl: acl, acl_entry: acl_entry }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.add_acl_entry(::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest.new(acl: acl, acl_entry: acl_entry), grpc_options) do |response, operation|
+      c.add_acl_entry(::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest.new(acl: acl, acl_entry: acl_entry), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1327,36 +1327,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, remove_acl_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.remove_acl_entry({ acl: acl, acl_entry: acl_entry }) do |response, operation|
+      c.remove_acl_entry({ acl: acl, acl_entry: acl_entry }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.remove_acl_entry acl: acl, acl_entry: acl_entry do |response, operation|
+      c.remove_acl_entry acl: acl, acl_entry: acl_entry do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.remove_acl_entry ::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest.new(acl: acl, acl_entry: acl_entry) do |response, operation|
+      c.remove_acl_entry ::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest.new(acl: acl, acl_entry: acl_entry) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.remove_acl_entry({ acl: acl, acl_entry: acl_entry }, grpc_options) do |response, operation|
+      c.remove_acl_entry({ acl: acl, acl_entry: acl_entry }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.remove_acl_entry(::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest.new(acl: acl, acl_entry: acl_entry), grpc_options) do |response, operation|
+      c.remove_acl_entry(::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest.new(acl: acl, acl_entry: acl_entry), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -90,40 +90,40 @@ class ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, summarize_maintenances_client_stub do
       # Create client
-      client = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Client.new do |config|
+      c = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.summarize_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.summarize_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.summarize_maintenances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.summarize_maintenances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.summarize_maintenances ::Google::Cloud::Maintenance::Api::V1beta::SummarizeMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.summarize_maintenances ::Google::Cloud::Maintenance::Api::V1beta::SummarizeMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.summarize_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.summarize_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.summarize_maintenances(::Google::Cloud::Maintenance::Api::V1beta::SummarizeMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.summarize_maintenances(::Google::Cloud::Maintenance::Api::V1beta::SummarizeMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -161,40 +161,40 @@ class ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, list_resource_maintenances_client_stub do
       # Create client
-      client = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Client.new do |config|
+      c = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_resource_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_resource_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_resource_maintenances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_resource_maintenances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_resource_maintenances ::Google::Cloud::Maintenance::Api::V1beta::ListResourceMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_resource_maintenances ::Google::Cloud::Maintenance::Api::V1beta::ListResourceMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_resource_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_resource_maintenances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_resource_maintenances(::Google::Cloud::Maintenance::Api::V1beta::ListResourceMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_resource_maintenances(::Google::Cloud::Maintenance::Api::V1beta::ListResourceMaintenancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -224,36 +224,36 @@ class ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, get_resource_maintenance_client_stub do
       # Create client
-      client = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Client.new do |config|
+      c = ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_resource_maintenance({ name: name }) do |response, operation|
+      c.get_resource_maintenance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_resource_maintenance name: name do |response, operation|
+      c.get_resource_maintenance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_resource_maintenance ::Google::Cloud::Maintenance::Api::V1beta::GetResourceMaintenanceRequest.new(name: name) do |response, operation|
+      c.get_resource_maintenance ::Google::Cloud::Maintenance::Api::V1beta::GetResourceMaintenanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_resource_maintenance({ name: name }, grpc_options) do |response, operation|
+      c.get_resource_maintenance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_resource_maintenance(::Google::Cloud::Maintenance::Api::V1beta::GetResourceMaintenanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_resource_maintenance(::Google::Cloud::Maintenance::Api::V1beta::GetResourceMaintenanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

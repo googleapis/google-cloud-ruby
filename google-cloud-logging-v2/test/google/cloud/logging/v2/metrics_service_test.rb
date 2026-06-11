@@ -86,40 +86,40 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_log_metrics_client_stub do
       # Create client
-      client = ::Google::Cloud::Logging::V2::MetricsService::Client.new do |config|
+      c = ::Google::Cloud::Logging::V2::MetricsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_log_metrics({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_log_metrics({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_log_metrics parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_log_metrics parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_log_metrics ::Google::Cloud::Logging::V2::ListLogMetricsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_log_metrics ::Google::Cloud::Logging::V2::ListLogMetricsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_log_metrics({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_log_metrics({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_log_metrics(::Google::Cloud::Logging::V2::ListLogMetricsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_log_metrics(::Google::Cloud::Logging::V2::ListLogMetricsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_log_metric_client_stub do
       # Create client
-      client = ::Google::Cloud::Logging::V2::MetricsService::Client.new do |config|
+      c = ::Google::Cloud::Logging::V2::MetricsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_log_metric({ metric_name: metric_name }) do |response, operation|
+      c.get_log_metric({ metric_name: metric_name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_log_metric metric_name: metric_name do |response, operation|
+      c.get_log_metric metric_name: metric_name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_log_metric ::Google::Cloud::Logging::V2::GetLogMetricRequest.new(metric_name: metric_name) do |response, operation|
+      c.get_log_metric ::Google::Cloud::Logging::V2::GetLogMetricRequest.new(metric_name: metric_name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_log_metric({ metric_name: metric_name }, grpc_options) do |response, operation|
+      c.get_log_metric({ metric_name: metric_name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_log_metric(::Google::Cloud::Logging::V2::GetLogMetricRequest.new(metric_name: metric_name), grpc_options) do |response, operation|
+      c.get_log_metric(::Google::Cloud::Logging::V2::GetLogMetricRequest.new(metric_name: metric_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,36 +209,36 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_log_metric_client_stub do
       # Create client
-      client = ::Google::Cloud::Logging::V2::MetricsService::Client.new do |config|
+      c = ::Google::Cloud::Logging::V2::MetricsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_log_metric({ parent: parent, metric: metric }) do |response, operation|
+      c.create_log_metric({ parent: parent, metric: metric }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_log_metric parent: parent, metric: metric do |response, operation|
+      c.create_log_metric parent: parent, metric: metric do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_log_metric ::Google::Cloud::Logging::V2::CreateLogMetricRequest.new(parent: parent, metric: metric) do |response, operation|
+      c.create_log_metric ::Google::Cloud::Logging::V2::CreateLogMetricRequest.new(parent: parent, metric: metric) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_log_metric({ parent: parent, metric: metric }, grpc_options) do |response, operation|
+      c.create_log_metric({ parent: parent, metric: metric }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_log_metric(::Google::Cloud::Logging::V2::CreateLogMetricRequest.new(parent: parent, metric: metric), grpc_options) do |response, operation|
+      c.create_log_metric(::Google::Cloud::Logging::V2::CreateLogMetricRequest.new(parent: parent, metric: metric), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -269,36 +269,36 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_log_metric_client_stub do
       # Create client
-      client = ::Google::Cloud::Logging::V2::MetricsService::Client.new do |config|
+      c = ::Google::Cloud::Logging::V2::MetricsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_log_metric({ metric_name: metric_name, metric: metric }) do |response, operation|
+      c.update_log_metric({ metric_name: metric_name, metric: metric }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_log_metric metric_name: metric_name, metric: metric do |response, operation|
+      c.update_log_metric metric_name: metric_name, metric: metric do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_log_metric ::Google::Cloud::Logging::V2::UpdateLogMetricRequest.new(metric_name: metric_name, metric: metric) do |response, operation|
+      c.update_log_metric ::Google::Cloud::Logging::V2::UpdateLogMetricRequest.new(metric_name: metric_name, metric: metric) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_log_metric({ metric_name: metric_name, metric: metric }, grpc_options) do |response, operation|
+      c.update_log_metric({ metric_name: metric_name, metric: metric }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_log_metric(::Google::Cloud::Logging::V2::UpdateLogMetricRequest.new(metric_name: metric_name, metric: metric), grpc_options) do |response, operation|
+      c.update_log_metric(::Google::Cloud::Logging::V2::UpdateLogMetricRequest.new(metric_name: metric_name, metric: metric), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -327,36 +327,36 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_log_metric_client_stub do
       # Create client
-      client = ::Google::Cloud::Logging::V2::MetricsService::Client.new do |config|
+      c = ::Google::Cloud::Logging::V2::MetricsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_log_metric({ metric_name: metric_name }) do |response, operation|
+      c.delete_log_metric({ metric_name: metric_name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_log_metric metric_name: metric_name do |response, operation|
+      c.delete_log_metric metric_name: metric_name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_log_metric ::Google::Cloud::Logging::V2::DeleteLogMetricRequest.new(metric_name: metric_name) do |response, operation|
+      c.delete_log_metric ::Google::Cloud::Logging::V2::DeleteLogMetricRequest.new(metric_name: metric_name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_log_metric({ metric_name: metric_name }, grpc_options) do |response, operation|
+      c.delete_log_metric({ metric_name: metric_name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_log_metric(::Google::Cloud::Logging::V2::DeleteLogMetricRequest.new(metric_name: metric_name), grpc_options) do |response, operation|
+      c.delete_log_metric(::Google::Cloud::Logging::V2::DeleteLogMetricRequest.new(metric_name: metric_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
