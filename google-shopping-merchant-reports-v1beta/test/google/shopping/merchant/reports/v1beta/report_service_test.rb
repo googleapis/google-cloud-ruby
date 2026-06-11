@@ -88,40 +88,40 @@ class ::Google::Shopping::Merchant::Reports::V1beta::ReportService::ClientTest <
 
     Gapic::ServiceStub.stub :new, search_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Reports::V1beta::ReportService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Reports::V1beta::ReportService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search parent: parent, query: query, page_size: page_size, page_token: page_token do |response, operation|
+      c.search parent: parent, query: query, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search ::Google::Shopping::Merchant::Reports::V1beta::SearchRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search ::Google::Shopping::Merchant::Reports::V1beta::SearchRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search({ parent: parent, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search({ parent: parent, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search(::Google::Shopping::Merchant::Reports::V1beta::SearchRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search(::Google::Shopping::Merchant::Reports::V1beta::SearchRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
