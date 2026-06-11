@@ -100,32 +100,32 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ClientTest < Minite
     ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ServiceStub.stub :transcode_create_vehicle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_vehicle_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_vehicle({ header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle }) do |_result, response|
+        c.create_vehicle({ header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_vehicle header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle do |_result, response|
+        c.create_vehicle header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_vehicle ::Google::Maps::FleetEngine::V1::CreateVehicleRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle) do |_result, response|
+        c.create_vehicle ::Google::Maps::FleetEngine::V1::CreateVehicleRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_vehicle({ header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle }, call_options) do |_result, response|
+        c.create_vehicle({ header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_vehicle(::Google::Maps::FleetEngine::V1::CreateVehicleRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle), call_options) do |_result, response|
+        c.create_vehicle(::Google::Maps::FleetEngine::V1::CreateVehicleRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ClientTest < Minite
     ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ServiceStub.stub :transcode_get_vehicle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_vehicle_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_vehicle({ header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version }) do |_result, response|
+        c.get_vehicle({ header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_vehicle header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version do |_result, response|
+        c.get_vehicle header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_vehicle ::Google::Maps::FleetEngine::V1::GetVehicleRequest.new(header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version) do |_result, response|
+        c.get_vehicle ::Google::Maps::FleetEngine::V1::GetVehicleRequest.new(header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_vehicle({ header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version }, call_options) do |_result, response|
+        c.get_vehicle({ header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_vehicle(::Google::Maps::FleetEngine::V1::GetVehicleRequest.new(header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version), call_options) do |_result, response|
+        c.get_vehicle(::Google::Maps::FleetEngine::V1::GetVehicleRequest.new(header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ClientTest < Minite
     ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ServiceStub.stub :transcode_delete_vehicle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_vehicle_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_vehicle({ header: header, name: name }) do |_result, response|
+        c.delete_vehicle({ header: header, name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_vehicle header: header, name: name do |_result, response|
+        c.delete_vehicle header: header, name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_vehicle ::Google::Maps::FleetEngine::V1::DeleteVehicleRequest.new(header: header, name: name) do |_result, response|
+        c.delete_vehicle ::Google::Maps::FleetEngine::V1::DeleteVehicleRequest.new(header: header, name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_vehicle({ header: header, name: name }, call_options) do |_result, response|
+        c.delete_vehicle({ header: header, name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_vehicle(::Google::Maps::FleetEngine::V1::DeleteVehicleRequest.new(header: header, name: name), call_options) do |_result, response|
+        c.delete_vehicle(::Google::Maps::FleetEngine::V1::DeleteVehicleRequest.new(header: header, name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -269,32 +269,32 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ClientTest < Minite
     ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ServiceStub.stub :transcode_update_vehicle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_vehicle_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_vehicle({ header: header, name: name, vehicle: vehicle, update_mask: update_mask }) do |_result, response|
+        c.update_vehicle({ header: header, name: name, vehicle: vehicle, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_vehicle header: header, name: name, vehicle: vehicle, update_mask: update_mask do |_result, response|
+        c.update_vehicle header: header, name: name, vehicle: vehicle, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_vehicle ::Google::Maps::FleetEngine::V1::UpdateVehicleRequest.new(header: header, name: name, vehicle: vehicle, update_mask: update_mask) do |_result, response|
+        c.update_vehicle ::Google::Maps::FleetEngine::V1::UpdateVehicleRequest.new(header: header, name: name, vehicle: vehicle, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_vehicle({ header: header, name: name, vehicle: vehicle, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_vehicle({ header: header, name: name, vehicle: vehicle, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_vehicle(::Google::Maps::FleetEngine::V1::UpdateVehicleRequest.new(header: header, name: name, vehicle: vehicle, update_mask: update_mask), call_options) do |_result, response|
+        c.update_vehicle(::Google::Maps::FleetEngine::V1::UpdateVehicleRequest.new(header: header, name: name, vehicle: vehicle, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -325,32 +325,32 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ClientTest < Minite
     ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ServiceStub.stub :transcode_update_vehicle_attributes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_vehicle_attributes_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_vehicle_attributes({ header: header, name: name, attributes: attributes }) do |_result, response|
+        c.update_vehicle_attributes({ header: header, name: name, attributes: attributes }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_vehicle_attributes header: header, name: name, attributes: attributes do |_result, response|
+        c.update_vehicle_attributes header: header, name: name, attributes: attributes do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_vehicle_attributes ::Google::Maps::FleetEngine::V1::UpdateVehicleAttributesRequest.new(header: header, name: name, attributes: attributes) do |_result, response|
+        c.update_vehicle_attributes ::Google::Maps::FleetEngine::V1::UpdateVehicleAttributesRequest.new(header: header, name: name, attributes: attributes) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_vehicle_attributes({ header: header, name: name, attributes: attributes }, call_options) do |_result, response|
+        c.update_vehicle_attributes({ header: header, name: name, attributes: attributes }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_vehicle_attributes(::Google::Maps::FleetEngine::V1::UpdateVehicleAttributesRequest.new(header: header, name: name, attributes: attributes), call_options) do |_result, response|
+        c.update_vehicle_attributes(::Google::Maps::FleetEngine::V1::UpdateVehicleAttributesRequest.new(header: header, name: name, attributes: attributes), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -393,32 +393,32 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ClientTest < Minite
     ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ServiceStub.stub :transcode_list_vehicles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_vehicles_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport }) do |_result, response|
+        c.list_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_vehicles header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport do |_result, response|
+        c.list_vehicles header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_vehicles ::Google::Maps::FleetEngine::V1::ListVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport) do |_result, response|
+        c.list_vehicles ::Google::Maps::FleetEngine::V1::ListVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport }, call_options) do |_result, response|
+        c.list_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_vehicles(::Google::Maps::FleetEngine::V1::ListVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport), call_options) do |_result, response|
+        c.list_vehicles(::Google::Maps::FleetEngine::V1::ListVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -464,32 +464,32 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ClientTest < Minite
     ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ServiceStub.stub :transcode_search_vehicles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_vehicles_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_vehicles({ header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter }) do |_result, response|
+        c.search_vehicles({ header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_vehicles header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter do |_result, response|
+        c.search_vehicles header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_vehicles ::Google::Maps::FleetEngine::V1::SearchVehiclesRequest.new(header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter) do |_result, response|
+        c.search_vehicles ::Google::Maps::FleetEngine::V1::SearchVehiclesRequest.new(header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_vehicles({ header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter }, call_options) do |_result, response|
+        c.search_vehicles({ header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_vehicles(::Google::Maps::FleetEngine::V1::SearchVehiclesRequest.new(header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter), call_options) do |_result, response|
+        c.search_vehicles(::Google::Maps::FleetEngine::V1::SearchVehiclesRequest.new(header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

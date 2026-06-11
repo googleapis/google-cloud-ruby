@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Clien
 
     Gapic::ServiceStub.stub :new, get_checkout_settings_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_checkout_settings({ name: name }) do |response, operation|
+      c.get_checkout_settings({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_checkout_settings name: name do |response, operation|
+      c.get_checkout_settings name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_checkout_settings ::Google::Shopping::Merchant::Accounts::V1::GetCheckoutSettingsRequest.new(name: name) do |response, operation|
+      c.get_checkout_settings ::Google::Shopping::Merchant::Accounts::V1::GetCheckoutSettingsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_checkout_settings({ name: name }, grpc_options) do |response, operation|
+      c.get_checkout_settings({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_checkout_settings(::Google::Shopping::Merchant::Accounts::V1::GetCheckoutSettingsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_checkout_settings(::Google::Shopping::Merchant::Accounts::V1::GetCheckoutSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Clien
 
     Gapic::ServiceStub.stub :new, create_checkout_settings_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_checkout_settings({ parent: parent, checkout_settings: checkout_settings }) do |response, operation|
+      c.create_checkout_settings({ parent: parent, checkout_settings: checkout_settings }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_checkout_settings parent: parent, checkout_settings: checkout_settings do |response, operation|
+      c.create_checkout_settings parent: parent, checkout_settings: checkout_settings do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_checkout_settings ::Google::Shopping::Merchant::Accounts::V1::CreateCheckoutSettingsRequest.new(parent: parent, checkout_settings: checkout_settings) do |response, operation|
+      c.create_checkout_settings ::Google::Shopping::Merchant::Accounts::V1::CreateCheckoutSettingsRequest.new(parent: parent, checkout_settings: checkout_settings) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_checkout_settings({ parent: parent, checkout_settings: checkout_settings }, grpc_options) do |response, operation|
+      c.create_checkout_settings({ parent: parent, checkout_settings: checkout_settings }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_checkout_settings(::Google::Shopping::Merchant::Accounts::V1::CreateCheckoutSettingsRequest.new(parent: parent, checkout_settings: checkout_settings), grpc_options) do |response, operation|
+      c.create_checkout_settings(::Google::Shopping::Merchant::Accounts::V1::CreateCheckoutSettingsRequest.new(parent: parent, checkout_settings: checkout_settings), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -202,36 +202,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Clien
 
     Gapic::ServiceStub.stub :new, update_checkout_settings_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_checkout_settings({ checkout_settings: checkout_settings, update_mask: update_mask }) do |response, operation|
+      c.update_checkout_settings({ checkout_settings: checkout_settings, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_checkout_settings checkout_settings: checkout_settings, update_mask: update_mask do |response, operation|
+      c.update_checkout_settings checkout_settings: checkout_settings, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_checkout_settings ::Google::Shopping::Merchant::Accounts::V1::UpdateCheckoutSettingsRequest.new(checkout_settings: checkout_settings, update_mask: update_mask) do |response, operation|
+      c.update_checkout_settings ::Google::Shopping::Merchant::Accounts::V1::UpdateCheckoutSettingsRequest.new(checkout_settings: checkout_settings, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_checkout_settings({ checkout_settings: checkout_settings, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_checkout_settings({ checkout_settings: checkout_settings, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_checkout_settings(::Google::Shopping::Merchant::Accounts::V1::UpdateCheckoutSettingsRequest.new(checkout_settings: checkout_settings, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_checkout_settings(::Google::Shopping::Merchant::Accounts::V1::UpdateCheckoutSettingsRequest.new(checkout_settings: checkout_settings, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -260,36 +260,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Clien
 
     Gapic::ServiceStub.stub :new, delete_checkout_settings_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_checkout_settings({ name: name }) do |response, operation|
+      c.delete_checkout_settings({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_checkout_settings name: name do |response, operation|
+      c.delete_checkout_settings name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_checkout_settings ::Google::Shopping::Merchant::Accounts::V1::DeleteCheckoutSettingsRequest.new(name: name) do |response, operation|
+      c.delete_checkout_settings ::Google::Shopping::Merchant::Accounts::V1::DeleteCheckoutSettingsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_checkout_settings({ name: name }, grpc_options) do |response, operation|
+      c.delete_checkout_settings({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_checkout_settings(::Google::Shopping::Merchant::Accounts::V1::DeleteCheckoutSettingsRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_checkout_settings(::Google::Shopping::Merchant::Accounts::V1::DeleteCheckoutSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

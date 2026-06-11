@@ -100,32 +100,32 @@ class ::Google::Iam::V3::PolicyBindings::Rest::ClientTest < Minitest::Test
     ::Google::Iam::V3::PolicyBindings::Rest::ServiceStub.stub :transcode_create_policy_binding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_policy_binding_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_policy_binding({ parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only }) do |_result, response|
+        c.create_policy_binding({ parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_policy_binding parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only do |_result, response|
+        c.create_policy_binding parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_policy_binding ::Google::Iam::V3::CreatePolicyBindingRequest.new(parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only) do |_result, response|
+        c.create_policy_binding ::Google::Iam::V3::CreatePolicyBindingRequest.new(parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_policy_binding({ parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_policy_binding({ parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_policy_binding(::Google::Iam::V3::CreatePolicyBindingRequest.new(parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only), call_options) do |_result, response|
+        c.create_policy_binding(::Google::Iam::V3::CreatePolicyBindingRequest.new(parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Iam::V3::PolicyBindings::Rest::ClientTest < Minitest::Test
     ::Google::Iam::V3::PolicyBindings::Rest::ServiceStub.stub :transcode_get_policy_binding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_policy_binding_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_policy_binding({ name: name }) do |_result, response|
+        c.get_policy_binding({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_policy_binding name: name do |_result, response|
+        c.get_policy_binding name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_policy_binding ::Google::Iam::V3::GetPolicyBindingRequest.new(name: name) do |_result, response|
+        c.get_policy_binding ::Google::Iam::V3::GetPolicyBindingRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_policy_binding({ name: name }, call_options) do |_result, response|
+        c.get_policy_binding({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_policy_binding(::Google::Iam::V3::GetPolicyBindingRequest.new(name: name), call_options) do |_result, response|
+        c.get_policy_binding(::Google::Iam::V3::GetPolicyBindingRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Iam::V3::PolicyBindings::Rest::ClientTest < Minitest::Test
     ::Google::Iam::V3::PolicyBindings::Rest::ServiceStub.stub :transcode_update_policy_binding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_policy_binding_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_policy_binding({ policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask }) do |_result, response|
+        c.update_policy_binding({ policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_policy_binding policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask do |_result, response|
+        c.update_policy_binding policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_policy_binding ::Google::Iam::V3::UpdatePolicyBindingRequest.new(policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask) do |_result, response|
+        c.update_policy_binding ::Google::Iam::V3::UpdatePolicyBindingRequest.new(policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_policy_binding({ policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_policy_binding({ policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_policy_binding(::Google::Iam::V3::UpdatePolicyBindingRequest.new(policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask), call_options) do |_result, response|
+        c.update_policy_binding(::Google::Iam::V3::UpdatePolicyBindingRequest.new(policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Iam::V3::PolicyBindings::Rest::ClientTest < Minitest::Test
     ::Google::Iam::V3::PolicyBindings::Rest::ServiceStub.stub :transcode_delete_policy_binding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_policy_binding_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_policy_binding({ name: name, etag: etag, validate_only: validate_only }) do |_result, response|
+        c.delete_policy_binding({ name: name, etag: etag, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_policy_binding name: name, etag: etag, validate_only: validate_only do |_result, response|
+        c.delete_policy_binding name: name, etag: etag, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_policy_binding ::Google::Iam::V3::DeletePolicyBindingRequest.new(name: name, etag: etag, validate_only: validate_only) do |_result, response|
+        c.delete_policy_binding ::Google::Iam::V3::DeletePolicyBindingRequest.new(name: name, etag: etag, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_policy_binding({ name: name, etag: etag, validate_only: validate_only }, call_options) do |_result, response|
+        c.delete_policy_binding({ name: name, etag: etag, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_policy_binding(::Google::Iam::V3::DeletePolicyBindingRequest.new(name: name, etag: etag, validate_only: validate_only), call_options) do |_result, response|
+        c.delete_policy_binding(::Google::Iam::V3::DeletePolicyBindingRequest.new(name: name, etag: etag, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Iam::V3::PolicyBindings::Rest::ClientTest < Minitest::Test
     ::Google::Iam::V3::PolicyBindings::Rest::ServiceStub.stub :transcode_list_policy_bindings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_policy_bindings_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_policy_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_policy_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_policy_bindings parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_policy_bindings parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_policy_bindings ::Google::Iam::V3::ListPolicyBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_policy_bindings ::Google::Iam::V3::ListPolicyBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_policy_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_policy_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_policy_bindings(::Google::Iam::V3::ListPolicyBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_policy_bindings(::Google::Iam::V3::ListPolicyBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -380,32 +380,32 @@ class ::Google::Iam::V3::PolicyBindings::Rest::ClientTest < Minitest::Test
     ::Google::Iam::V3::PolicyBindings::Rest::ServiceStub.stub :transcode_search_target_policy_bindings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_target_policy_bindings_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PolicyBindings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent }) do |_result, response|
+        c.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_target_policy_bindings target: target, page_size: page_size, page_token: page_token, parent: parent do |_result, response|
+        c.search_target_policy_bindings target: target, page_size: page_size, page_token: page_token, parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_target_policy_bindings ::Google::Iam::V3::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent) do |_result, response|
+        c.search_target_policy_bindings ::Google::Iam::V3::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent }, call_options) do |_result, response|
+        c.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_target_policy_bindings(::Google::Iam::V3::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent), call_options) do |_result, response|
+        c.search_target_policy_bindings(::Google::Iam::V3::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

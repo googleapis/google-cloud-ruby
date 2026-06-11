@@ -90,40 +90,40 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AccountIssueService::Clien
 
     Gapic::ServiceStub.stub :new, list_account_issues_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1beta::AccountIssueService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1beta::AccountIssueService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_account_issues({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code, time_zone: time_zone }) do |response, operation|
+      c.list_account_issues({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code, time_zone: time_zone }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_account_issues parent: parent, page_size: page_size, page_token: page_token, language_code: language_code, time_zone: time_zone do |response, operation|
+      c.list_account_issues parent: parent, page_size: page_size, page_token: page_token, language_code: language_code, time_zone: time_zone do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_account_issues ::Google::Shopping::Merchant::Accounts::V1beta::ListAccountIssuesRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code, time_zone: time_zone) do |response, operation|
+      c.list_account_issues ::Google::Shopping::Merchant::Accounts::V1beta::ListAccountIssuesRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code, time_zone: time_zone) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_account_issues({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code, time_zone: time_zone }, grpc_options) do |response, operation|
+      c.list_account_issues({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code, time_zone: time_zone }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_account_issues(::Google::Shopping::Merchant::Accounts::V1beta::ListAccountIssuesRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code, time_zone: time_zone), grpc_options) do |response, operation|
+      c.list_account_issues(::Google::Shopping::Merchant::Accounts::V1beta::ListAccountIssuesRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code, time_zone: time_zone), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

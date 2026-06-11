@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceAgreementSta
     ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceAgreementStateService::Rest::ServiceStub.stub :transcode_get_terms_of_service_agreement_state_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_terms_of_service_agreement_state_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceAgreementStateService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceAgreementStateService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_terms_of_service_agreement_state({ name: name }) do |_result, response|
+        c.get_terms_of_service_agreement_state({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_terms_of_service_agreement_state name: name do |_result, response|
+        c.get_terms_of_service_agreement_state name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_terms_of_service_agreement_state ::Google::Shopping::Merchant::Accounts::V1beta::GetTermsOfServiceAgreementStateRequest.new(name: name) do |_result, response|
+        c.get_terms_of_service_agreement_state ::Google::Shopping::Merchant::Accounts::V1beta::GetTermsOfServiceAgreementStateRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_terms_of_service_agreement_state({ name: name }, call_options) do |_result, response|
+        c.get_terms_of_service_agreement_state({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_terms_of_service_agreement_state(::Google::Shopping::Merchant::Accounts::V1beta::GetTermsOfServiceAgreementStateRequest.new(name: name), call_options) do |_result, response|
+        c.get_terms_of_service_agreement_state(::Google::Shopping::Merchant::Accounts::V1beta::GetTermsOfServiceAgreementStateRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -151,32 +151,32 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceAgreementSta
     ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceAgreementStateService::Rest::ServiceStub.stub :transcode_retrieve_for_application_terms_of_service_agreement_state_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, retrieve_for_application_terms_of_service_agreement_state_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceAgreementStateService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceAgreementStateService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.retrieve_for_application_terms_of_service_agreement_state({ parent: parent }) do |_result, response|
+        c.retrieve_for_application_terms_of_service_agreement_state({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.retrieve_for_application_terms_of_service_agreement_state parent: parent do |_result, response|
+        c.retrieve_for_application_terms_of_service_agreement_state parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.retrieve_for_application_terms_of_service_agreement_state ::Google::Shopping::Merchant::Accounts::V1beta::RetrieveForApplicationTermsOfServiceAgreementStateRequest.new(parent: parent) do |_result, response|
+        c.retrieve_for_application_terms_of_service_agreement_state ::Google::Shopping::Merchant::Accounts::V1beta::RetrieveForApplicationTermsOfServiceAgreementStateRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.retrieve_for_application_terms_of_service_agreement_state({ parent: parent }, call_options) do |_result, response|
+        c.retrieve_for_application_terms_of_service_agreement_state({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.retrieve_for_application_terms_of_service_agreement_state(::Google::Shopping::Merchant::Accounts::V1beta::RetrieveForApplicationTermsOfServiceAgreementStateRequest.new(parent: parent), call_options) do |_result, response|
+        c.retrieve_for_application_terms_of_service_agreement_state(::Google::Shopping::Merchant::Accounts::V1beta::RetrieveForApplicationTermsOfServiceAgreementStateRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

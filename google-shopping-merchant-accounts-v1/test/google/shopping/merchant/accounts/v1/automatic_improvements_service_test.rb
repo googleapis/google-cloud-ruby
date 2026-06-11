@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::
 
     Gapic::ServiceStub.stub :new, get_automatic_improvements_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_automatic_improvements({ name: name }) do |response, operation|
+      c.get_automatic_improvements({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_automatic_improvements name: name do |response, operation|
+      c.get_automatic_improvements name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_automatic_improvements ::Google::Shopping::Merchant::Accounts::V1::GetAutomaticImprovementsRequest.new(name: name) do |response, operation|
+      c.get_automatic_improvements ::Google::Shopping::Merchant::Accounts::V1::GetAutomaticImprovementsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_automatic_improvements({ name: name }, grpc_options) do |response, operation|
+      c.get_automatic_improvements({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_automatic_improvements(::Google::Shopping::Merchant::Accounts::V1::GetAutomaticImprovementsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_automatic_improvements(::Google::Shopping::Merchant::Accounts::V1::GetAutomaticImprovementsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::
 
     Gapic::ServiceStub.stub :new, update_automatic_improvements_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_automatic_improvements({ automatic_improvements: automatic_improvements, update_mask: update_mask }) do |response, operation|
+      c.update_automatic_improvements({ automatic_improvements: automatic_improvements, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_automatic_improvements automatic_improvements: automatic_improvements, update_mask: update_mask do |response, operation|
+      c.update_automatic_improvements automatic_improvements: automatic_improvements, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_automatic_improvements ::Google::Shopping::Merchant::Accounts::V1::UpdateAutomaticImprovementsRequest.new(automatic_improvements: automatic_improvements, update_mask: update_mask) do |response, operation|
+      c.update_automatic_improvements ::Google::Shopping::Merchant::Accounts::V1::UpdateAutomaticImprovementsRequest.new(automatic_improvements: automatic_improvements, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_automatic_improvements({ automatic_improvements: automatic_improvements, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_automatic_improvements({ automatic_improvements: automatic_improvements, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_automatic_improvements(::Google::Shopping::Merchant::Accounts::V1::UpdateAutomaticImprovementsRequest.new(automatic_improvements: automatic_improvements, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_automatic_improvements(::Google::Shopping::Merchant::Accounts::V1::UpdateAutomaticImprovementsRequest.new(automatic_improvements: automatic_improvements, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateSe
 
     Gapic::ServiceStub.stub :new, get_terms_of_service_agreement_state_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_terms_of_service_agreement_state({ name: name }) do |response, operation|
+      c.get_terms_of_service_agreement_state({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_terms_of_service_agreement_state name: name do |response, operation|
+      c.get_terms_of_service_agreement_state name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_terms_of_service_agreement_state ::Google::Shopping::Merchant::Accounts::V1::GetTermsOfServiceAgreementStateRequest.new(name: name) do |response, operation|
+      c.get_terms_of_service_agreement_state ::Google::Shopping::Merchant::Accounts::V1::GetTermsOfServiceAgreementStateRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_terms_of_service_agreement_state({ name: name }, grpc_options) do |response, operation|
+      c.get_terms_of_service_agreement_state({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_terms_of_service_agreement_state(::Google::Shopping::Merchant::Accounts::V1::GetTermsOfServiceAgreementStateRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_terms_of_service_agreement_state(::Google::Shopping::Merchant::Accounts::V1::GetTermsOfServiceAgreementStateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -140,36 +140,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateSe
 
     Gapic::ServiceStub.stub :new, retrieve_for_application_terms_of_service_agreement_state_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.retrieve_for_application_terms_of_service_agreement_state({ parent: parent }) do |response, operation|
+      c.retrieve_for_application_terms_of_service_agreement_state({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.retrieve_for_application_terms_of_service_agreement_state parent: parent do |response, operation|
+      c.retrieve_for_application_terms_of_service_agreement_state parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.retrieve_for_application_terms_of_service_agreement_state ::Google::Shopping::Merchant::Accounts::V1::RetrieveForApplicationTermsOfServiceAgreementStateRequest.new(parent: parent) do |response, operation|
+      c.retrieve_for_application_terms_of_service_agreement_state ::Google::Shopping::Merchant::Accounts::V1::RetrieveForApplicationTermsOfServiceAgreementStateRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.retrieve_for_application_terms_of_service_agreement_state({ parent: parent }, grpc_options) do |response, operation|
+      c.retrieve_for_application_terms_of_service_agreement_state({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.retrieve_for_application_terms_of_service_agreement_state(::Google::Shopping::Merchant::Accounts::V1::RetrieveForApplicationTermsOfServiceAgreementStateRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.retrieve_for_application_terms_of_service_agreement_state(::Google::Shopping::Merchant::Accounts::V1::RetrieveForApplicationTermsOfServiceAgreementStateRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

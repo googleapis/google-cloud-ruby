@@ -97,32 +97,32 @@ class ::Google::Shopping::Css::V1::CssProductsService::Rest::ClientTest < Minite
     ::Google::Shopping::Css::V1::CssProductsService::Rest::ServiceStub.stub :transcode_get_css_product_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_css_product_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::CssProductsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::CssProductsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_css_product({ name: name }) do |_result, response|
+        c.get_css_product({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_css_product name: name do |_result, response|
+        c.get_css_product name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_css_product ::Google::Shopping::Css::V1::GetCssProductRequest.new(name: name) do |_result, response|
+        c.get_css_product ::Google::Shopping::Css::V1::GetCssProductRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_css_product({ name: name }, call_options) do |_result, response|
+        c.get_css_product({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_css_product(::Google::Shopping::Css::V1::GetCssProductRequest.new(name: name), call_options) do |_result, response|
+        c.get_css_product(::Google::Shopping::Css::V1::GetCssProductRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Shopping::Css::V1::CssProductsService::Rest::ClientTest < Minite
     ::Google::Shopping::Css::V1::CssProductsService::Rest::ServiceStub.stub :transcode_list_css_products_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_css_products_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::CssProductsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::CssProductsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_css_products({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_css_products({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_css_products parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_css_products parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_css_products ::Google::Shopping::Css::V1::ListCssProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_css_products ::Google::Shopping::Css::V1::ListCssProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_css_products({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_css_products({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_css_products(::Google::Shopping::Css::V1::ListCssProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_css_products(::Google::Shopping::Css::V1::ListCssProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

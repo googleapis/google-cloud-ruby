@@ -88,36 +88,36 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_vehicle_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_vehicle({ header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle }) do |response, operation|
+      c.create_vehicle({ header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_vehicle header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle do |response, operation|
+      c.create_vehicle header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_vehicle ::Google::Maps::FleetEngine::V1::CreateVehicleRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle) do |response, operation|
+      c.create_vehicle ::Google::Maps::FleetEngine::V1::CreateVehicleRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_vehicle({ header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle }, grpc_options) do |response, operation|
+      c.create_vehicle({ header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_vehicle(::Google::Maps::FleetEngine::V1::CreateVehicleRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle), grpc_options) do |response, operation|
+      c.create_vehicle(::Google::Maps::FleetEngine::V1::CreateVehicleRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, vehicle: vehicle), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -152,36 +152,36 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_vehicle_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_vehicle({ header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version }) do |response, operation|
+      c.get_vehicle({ header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_vehicle header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version do |response, operation|
+      c.get_vehicle header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_vehicle ::Google::Maps::FleetEngine::V1::GetVehicleRequest.new(header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version) do |response, operation|
+      c.get_vehicle ::Google::Maps::FleetEngine::V1::GetVehicleRequest.new(header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_vehicle({ header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version }, grpc_options) do |response, operation|
+      c.get_vehicle({ header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_vehicle(::Google::Maps::FleetEngine::V1::GetVehicleRequest.new(header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version), grpc_options) do |response, operation|
+      c.get_vehicle(::Google::Maps::FleetEngine::V1::GetVehicleRequest.new(header: header, name: name, current_route_segment_version: current_route_segment_version, waypoints_version: waypoints_version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -212,36 +212,36 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_vehicle_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_vehicle({ header: header, name: name }) do |response, operation|
+      c.delete_vehicle({ header: header, name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_vehicle header: header, name: name do |response, operation|
+      c.delete_vehicle header: header, name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_vehicle ::Google::Maps::FleetEngine::V1::DeleteVehicleRequest.new(header: header, name: name) do |response, operation|
+      c.delete_vehicle ::Google::Maps::FleetEngine::V1::DeleteVehicleRequest.new(header: header, name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_vehicle({ header: header, name: name }, grpc_options) do |response, operation|
+      c.delete_vehicle({ header: header, name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_vehicle(::Google::Maps::FleetEngine::V1::DeleteVehicleRequest.new(header: header, name: name), grpc_options) do |response, operation|
+      c.delete_vehicle(::Google::Maps::FleetEngine::V1::DeleteVehicleRequest.new(header: header, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -276,36 +276,36 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_vehicle_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_vehicle({ header: header, name: name, vehicle: vehicle, update_mask: update_mask }) do |response, operation|
+      c.update_vehicle({ header: header, name: name, vehicle: vehicle, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_vehicle header: header, name: name, vehicle: vehicle, update_mask: update_mask do |response, operation|
+      c.update_vehicle header: header, name: name, vehicle: vehicle, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_vehicle ::Google::Maps::FleetEngine::V1::UpdateVehicleRequest.new(header: header, name: name, vehicle: vehicle, update_mask: update_mask) do |response, operation|
+      c.update_vehicle ::Google::Maps::FleetEngine::V1::UpdateVehicleRequest.new(header: header, name: name, vehicle: vehicle, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_vehicle({ header: header, name: name, vehicle: vehicle, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_vehicle({ header: header, name: name, vehicle: vehicle, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_vehicle(::Google::Maps::FleetEngine::V1::UpdateVehicleRequest.new(header: header, name: name, vehicle: vehicle, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_vehicle(::Google::Maps::FleetEngine::V1::UpdateVehicleRequest.new(header: header, name: name, vehicle: vehicle, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -338,36 +338,36 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_vehicle_attributes_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_vehicle_attributes({ header: header, name: name, attributes: attributes }) do |response, operation|
+      c.update_vehicle_attributes({ header: header, name: name, attributes: attributes }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_vehicle_attributes header: header, name: name, attributes: attributes do |response, operation|
+      c.update_vehicle_attributes header: header, name: name, attributes: attributes do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_vehicle_attributes ::Google::Maps::FleetEngine::V1::UpdateVehicleAttributesRequest.new(header: header, name: name, attributes: attributes) do |response, operation|
+      c.update_vehicle_attributes ::Google::Maps::FleetEngine::V1::UpdateVehicleAttributesRequest.new(header: header, name: name, attributes: attributes) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_vehicle_attributes({ header: header, name: name, attributes: attributes }, grpc_options) do |response, operation|
+      c.update_vehicle_attributes({ header: header, name: name, attributes: attributes }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_vehicle_attributes(::Google::Maps::FleetEngine::V1::UpdateVehicleAttributesRequest.new(header: header, name: name, attributes: attributes), grpc_options) do |response, operation|
+      c.update_vehicle_attributes(::Google::Maps::FleetEngine::V1::UpdateVehicleAttributesRequest.new(header: header, name: name, attributes: attributes), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -424,40 +424,40 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_vehicles_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport }) do |response, operation|
+      c.list_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_vehicles header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport do |response, operation|
+      c.list_vehicles header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_vehicles ::Google::Maps::FleetEngine::V1::ListVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport) do |response, operation|
+      c.list_vehicles ::Google::Maps::FleetEngine::V1::ListVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport }, grpc_options) do |response, operation|
+      c.list_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_vehicles(::Google::Maps::FleetEngine::V1::ListVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport), grpc_options) do |response, operation|
+      c.list_vehicles(::Google::Maps::FleetEngine::V1::ListVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_type_categories: vehicle_type_categories, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, vehicle_state: vehicle_state, on_trip_only: on_trip_only, filter: filter, viewport: viewport), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -521,36 +521,36 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, search_vehicles_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::V1::VehicleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_vehicles({ header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter }) do |response, operation|
+      c.search_vehicles({ header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_vehicles header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter do |response, operation|
+      c.search_vehicles header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_vehicles ::Google::Maps::FleetEngine::V1::SearchVehiclesRequest.new(header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter) do |response, operation|
+      c.search_vehicles ::Google::Maps::FleetEngine::V1::SearchVehiclesRequest.new(header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_vehicles({ header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter }, grpc_options) do |response, operation|
+      c.search_vehicles({ header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_vehicles(::Google::Maps::FleetEngine::V1::SearchVehiclesRequest.new(header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter), grpc_options) do |response, operation|
+      c.search_vehicles(::Google::Maps::FleetEngine::V1::SearchVehiclesRequest.new(header: header, parent: parent, pickup_point: pickup_point, dropoff_point: dropoff_point, pickup_radius_meters: pickup_radius_meters, count: count, minimum_capacity: minimum_capacity, trip_types: trip_types, maximum_staleness: maximum_staleness, vehicle_types: vehicle_types, required_attributes: required_attributes, required_one_of_attributes: required_one_of_attributes, required_one_of_attribute_sets: required_one_of_attribute_sets, order_by: order_by, include_back_to_back: include_back_to_back, trip_id: trip_id, current_trips_present: current_trips_present, filter: filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
