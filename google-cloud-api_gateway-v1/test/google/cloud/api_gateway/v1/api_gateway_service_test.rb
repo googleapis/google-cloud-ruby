@@ -90,40 +90,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_gateways_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_gateways parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_gateways parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_gateways ::Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_gateways ::Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_gateways(::Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_gateways(::Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_gateway_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_gateway({ name: name }) do |response, operation|
+      c.get_gateway({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_gateway name: name do |response, operation|
+      c.get_gateway name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_gateway ::Google::Cloud::ApiGateway::V1::GetGatewayRequest.new(name: name) do |response, operation|
+      c.get_gateway ::Google::Cloud::ApiGateway::V1::GetGatewayRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_gateway({ name: name }, grpc_options) do |response, operation|
+      c.get_gateway({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_gateway(::Google::Cloud::ApiGateway::V1::GetGatewayRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_gateway(::Google::Cloud::ApiGateway::V1::GetGatewayRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_gateway_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }) do |response, operation|
+      c.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_gateway parent: parent, gateway_id: gateway_id, gateway: gateway do |response, operation|
+      c.create_gateway parent: parent, gateway_id: gateway_id, gateway: gateway do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_gateway ::Google::Cloud::ApiGateway::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway) do |response, operation|
+      c.create_gateway ::Google::Cloud::ApiGateway::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }, grpc_options) do |response, operation|
+      c.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_gateway(::Google::Cloud::ApiGateway::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway), grpc_options) do |response, operation|
+      c.create_gateway(::Google::Cloud::ApiGateway::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_gateway_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_gateway({ update_mask: update_mask, gateway: gateway }) do |response, operation|
+      c.update_gateway({ update_mask: update_mask, gateway: gateway }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_gateway update_mask: update_mask, gateway: gateway do |response, operation|
+      c.update_gateway update_mask: update_mask, gateway: gateway do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_gateway ::Google::Cloud::ApiGateway::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway) do |response, operation|
+      c.update_gateway ::Google::Cloud::ApiGateway::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_gateway({ update_mask: update_mask, gateway: gateway }, grpc_options) do |response, operation|
+      c.update_gateway({ update_mask: update_mask, gateway: gateway }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_gateway(::Google::Cloud::ApiGateway::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway), grpc_options) do |response, operation|
+      c.update_gateway(::Google::Cloud::ApiGateway::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -343,40 +343,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_gateway_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_gateway({ name: name }) do |response, operation|
+      c.delete_gateway({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_gateway name: name do |response, operation|
+      c.delete_gateway name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_gateway ::Google::Cloud::ApiGateway::V1::DeleteGatewayRequest.new(name: name) do |response, operation|
+      c.delete_gateway ::Google::Cloud::ApiGateway::V1::DeleteGatewayRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_gateway({ name: name }, grpc_options) do |response, operation|
+      c.delete_gateway({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_gateway(::Google::Cloud::ApiGateway::V1::DeleteGatewayRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_gateway(::Google::Cloud::ApiGateway::V1::DeleteGatewayRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -414,40 +414,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_apis_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_apis parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_apis parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_apis ::Google::Cloud::ApiGateway::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_apis ::Google::Cloud::ApiGateway::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_apis(::Google::Cloud::ApiGateway::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_apis(::Google::Cloud::ApiGateway::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -477,36 +477,36 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_api_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_api({ name: name }) do |response, operation|
+      c.get_api({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_api name: name do |response, operation|
+      c.get_api name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_api ::Google::Cloud::ApiGateway::V1::GetApiRequest.new(name: name) do |response, operation|
+      c.get_api ::Google::Cloud::ApiGateway::V1::GetApiRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_api({ name: name }, grpc_options) do |response, operation|
+      c.get_api({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_api(::Google::Cloud::ApiGateway::V1::GetApiRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_api(::Google::Cloud::ApiGateway::V1::GetApiRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -539,40 +539,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_api_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_api({ parent: parent, api_id: api_id, api: api }) do |response, operation|
+      c.create_api({ parent: parent, api_id: api_id, api: api }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_api parent: parent, api_id: api_id, api: api do |response, operation|
+      c.create_api parent: parent, api_id: api_id, api: api do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_api ::Google::Cloud::ApiGateway::V1::CreateApiRequest.new(parent: parent, api_id: api_id, api: api) do |response, operation|
+      c.create_api ::Google::Cloud::ApiGateway::V1::CreateApiRequest.new(parent: parent, api_id: api_id, api: api) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_api({ parent: parent, api_id: api_id, api: api }, grpc_options) do |response, operation|
+      c.create_api({ parent: parent, api_id: api_id, api: api }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_api(::Google::Cloud::ApiGateway::V1::CreateApiRequest.new(parent: parent, api_id: api_id, api: api), grpc_options) do |response, operation|
+      c.create_api(::Google::Cloud::ApiGateway::V1::CreateApiRequest.new(parent: parent, api_id: api_id, api: api), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -604,40 +604,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_api_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_api({ update_mask: update_mask, api: api }) do |response, operation|
+      c.update_api({ update_mask: update_mask, api: api }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_api update_mask: update_mask, api: api do |response, operation|
+      c.update_api update_mask: update_mask, api: api do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_api ::Google::Cloud::ApiGateway::V1::UpdateApiRequest.new(update_mask: update_mask, api: api) do |response, operation|
+      c.update_api ::Google::Cloud::ApiGateway::V1::UpdateApiRequest.new(update_mask: update_mask, api: api) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_api({ update_mask: update_mask, api: api }, grpc_options) do |response, operation|
+      c.update_api({ update_mask: update_mask, api: api }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_api(::Google::Cloud::ApiGateway::V1::UpdateApiRequest.new(update_mask: update_mask, api: api), grpc_options) do |response, operation|
+      c.update_api(::Google::Cloud::ApiGateway::V1::UpdateApiRequest.new(update_mask: update_mask, api: api), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -667,40 +667,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_api_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_api({ name: name }) do |response, operation|
+      c.delete_api({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_api name: name do |response, operation|
+      c.delete_api name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_api ::Google::Cloud::ApiGateway::V1::DeleteApiRequest.new(name: name) do |response, operation|
+      c.delete_api ::Google::Cloud::ApiGateway::V1::DeleteApiRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_api({ name: name }, grpc_options) do |response, operation|
+      c.delete_api({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_api(::Google::Cloud::ApiGateway::V1::DeleteApiRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_api(::Google::Cloud::ApiGateway::V1::DeleteApiRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -738,40 +738,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_api_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_api_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_api_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_api_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_api_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_api_configs ::Google::Cloud::ApiGateway::V1::ListApiConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_api_configs ::Google::Cloud::ApiGateway::V1::ListApiConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_api_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_api_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_api_configs(::Google::Cloud::ApiGateway::V1::ListApiConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_api_configs(::Google::Cloud::ApiGateway::V1::ListApiConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -803,36 +803,36 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_api_config_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_api_config({ name: name, view: view }) do |response, operation|
+      c.get_api_config({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_api_config name: name, view: view do |response, operation|
+      c.get_api_config name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_api_config ::Google::Cloud::ApiGateway::V1::GetApiConfigRequest.new(name: name, view: view) do |response, operation|
+      c.get_api_config ::Google::Cloud::ApiGateway::V1::GetApiConfigRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_api_config({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_api_config({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_api_config(::Google::Cloud::ApiGateway::V1::GetApiConfigRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_api_config(::Google::Cloud::ApiGateway::V1::GetApiConfigRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -865,40 +865,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_api_config_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_api_config({ parent: parent, api_config_id: api_config_id, api_config: api_config }) do |response, operation|
+      c.create_api_config({ parent: parent, api_config_id: api_config_id, api_config: api_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_api_config parent: parent, api_config_id: api_config_id, api_config: api_config do |response, operation|
+      c.create_api_config parent: parent, api_config_id: api_config_id, api_config: api_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_api_config ::Google::Cloud::ApiGateway::V1::CreateApiConfigRequest.new(parent: parent, api_config_id: api_config_id, api_config: api_config) do |response, operation|
+      c.create_api_config ::Google::Cloud::ApiGateway::V1::CreateApiConfigRequest.new(parent: parent, api_config_id: api_config_id, api_config: api_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_api_config({ parent: parent, api_config_id: api_config_id, api_config: api_config }, grpc_options) do |response, operation|
+      c.create_api_config({ parent: parent, api_config_id: api_config_id, api_config: api_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_api_config(::Google::Cloud::ApiGateway::V1::CreateApiConfigRequest.new(parent: parent, api_config_id: api_config_id, api_config: api_config), grpc_options) do |response, operation|
+      c.create_api_config(::Google::Cloud::ApiGateway::V1::CreateApiConfigRequest.new(parent: parent, api_config_id: api_config_id, api_config: api_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -930,40 +930,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_api_config_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_api_config({ update_mask: update_mask, api_config: api_config }) do |response, operation|
+      c.update_api_config({ update_mask: update_mask, api_config: api_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_api_config update_mask: update_mask, api_config: api_config do |response, operation|
+      c.update_api_config update_mask: update_mask, api_config: api_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_api_config ::Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest.new(update_mask: update_mask, api_config: api_config) do |response, operation|
+      c.update_api_config ::Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest.new(update_mask: update_mask, api_config: api_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_api_config({ update_mask: update_mask, api_config: api_config }, grpc_options) do |response, operation|
+      c.update_api_config({ update_mask: update_mask, api_config: api_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_api_config(::Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest.new(update_mask: update_mask, api_config: api_config), grpc_options) do |response, operation|
+      c.update_api_config(::Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest.new(update_mask: update_mask, api_config: api_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -993,40 +993,40 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_api_config_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+      c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_api_config({ name: name }) do |response, operation|
+      c.delete_api_config({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_api_config name: name do |response, operation|
+      c.delete_api_config name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_api_config ::Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest.new(name: name) do |response, operation|
+      c.delete_api_config ::Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_api_config({ name: name }, grpc_options) do |response, operation|
+      c.delete_api_config({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_api_config(::Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_api_config(::Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -98,32 +98,32 @@ class ::Google::Cloud::AIPlatform::V1::EvaluationService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::EvaluationService::Rest::ServiceStub.stub :transcode_evaluate_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, evaluate_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.evaluate_instances({ exact_match_input: exact_match_input, location: location }) do |_result, response|
+        c.evaluate_instances({ exact_match_input: exact_match_input, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.evaluate_instances exact_match_input: exact_match_input, location: location do |_result, response|
+        c.evaluate_instances exact_match_input: exact_match_input, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.evaluate_instances ::Google::Cloud::AIPlatform::V1::EvaluateInstancesRequest.new(exact_match_input: exact_match_input, location: location) do |_result, response|
+        c.evaluate_instances ::Google::Cloud::AIPlatform::V1::EvaluateInstancesRequest.new(exact_match_input: exact_match_input, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.evaluate_instances({ exact_match_input: exact_match_input, location: location }, call_options) do |_result, response|
+        c.evaluate_instances({ exact_match_input: exact_match_input, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.evaluate_instances(::Google::Cloud::AIPlatform::V1::EvaluateInstancesRequest.new(exact_match_input: exact_match_input, location: location), call_options) do |_result, response|
+        c.evaluate_instances(::Google::Cloud::AIPlatform::V1::EvaluateInstancesRequest.new(exact_match_input: exact_match_input, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -86,36 +86,36 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, fetch_feature_values_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_feature_values({ feature_view: feature_view, data_key: data_key, data_format: data_format }) do |response, operation|
+      c.fetch_feature_values({ feature_view: feature_view, data_key: data_key, data_format: data_format }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_feature_values feature_view: feature_view, data_key: data_key, data_format: data_format do |response, operation|
+      c.fetch_feature_values feature_view: feature_view, data_key: data_key, data_format: data_format do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_feature_values ::Google::Cloud::AIPlatform::V1::FetchFeatureValuesRequest.new(feature_view: feature_view, data_key: data_key, data_format: data_format) do |response, operation|
+      c.fetch_feature_values ::Google::Cloud::AIPlatform::V1::FetchFeatureValuesRequest.new(feature_view: feature_view, data_key: data_key, data_format: data_format) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_feature_values({ feature_view: feature_view, data_key: data_key, data_format: data_format }, grpc_options) do |response, operation|
+      c.fetch_feature_values({ feature_view: feature_view, data_key: data_key, data_format: data_format }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_feature_values(::Google::Cloud::AIPlatform::V1::FetchFeatureValuesRequest.new(feature_view: feature_view, data_key: data_key, data_format: data_format), grpc_options) do |response, operation|
+      c.fetch_feature_values(::Google::Cloud::AIPlatform::V1::FetchFeatureValuesRequest.new(feature_view: feature_view, data_key: data_key, data_format: data_format), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,36 +148,36 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, search_nearest_entities_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_nearest_entities({ feature_view: feature_view, query: query, return_full_entity: return_full_entity }) do |response, operation|
+      c.search_nearest_entities({ feature_view: feature_view, query: query, return_full_entity: return_full_entity }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_nearest_entities feature_view: feature_view, query: query, return_full_entity: return_full_entity do |response, operation|
+      c.search_nearest_entities feature_view: feature_view, query: query, return_full_entity: return_full_entity do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_nearest_entities ::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest.new(feature_view: feature_view, query: query, return_full_entity: return_full_entity) do |response, operation|
+      c.search_nearest_entities ::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest.new(feature_view: feature_view, query: query, return_full_entity: return_full_entity) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_nearest_entities({ feature_view: feature_view, query: query, return_full_entity: return_full_entity }, grpc_options) do |response, operation|
+      c.search_nearest_entities({ feature_view: feature_view, query: query, return_full_entity: return_full_entity }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_nearest_entities(::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest.new(feature_view: feature_view, query: query, return_full_entity: return_full_entity), grpc_options) do |response, operation|
+      c.search_nearest_entities(::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest.new(feature_view: feature_view, query: query, return_full_entity: return_full_entity), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -207,7 +207,7 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, feature_view_direct_write_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -215,7 +215,7 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < M
       request_hash = { feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values }
       request_proto = ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest.new feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values
       enum_input = [request_hash, request_proto].to_enum
-      client.feature_view_direct_write enum_input do |response, operation|
+      c.feature_view_direct_write enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse, r
@@ -227,7 +227,7 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < M
       request_hash = { feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values }
       request_proto = ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest.new feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values
       stream_input = Gapic::StreamInput.new
-      client.feature_view_direct_write stream_input do |response, operation|
+      c.feature_view_direct_write stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse, r
@@ -242,7 +242,7 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < M
       request_hash = { feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values }
       request_proto = ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest.new feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values
       enum_input = [request_hash, request_proto].to_enum
-      client.feature_view_direct_write enum_input, grpc_options do |response, operation|
+      c.feature_view_direct_write enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse, r
@@ -254,7 +254,7 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < M
       request_hash = { feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values }
       request_proto = ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest.new feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values
       stream_input = Gapic::StreamInput.new
-      client.feature_view_direct_write stream_input, grpc_options do |response, operation|
+      c.feature_view_direct_write stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse, r
@@ -296,36 +296,36 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, generate_fetch_access_token_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_fetch_access_token({ feature_view: feature_view }) do |response, operation|
+      c.generate_fetch_access_token({ feature_view: feature_view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_fetch_access_token feature_view: feature_view do |response, operation|
+      c.generate_fetch_access_token feature_view: feature_view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_fetch_access_token ::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest.new(feature_view: feature_view) do |response, operation|
+      c.generate_fetch_access_token ::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest.new(feature_view: feature_view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_fetch_access_token({ feature_view: feature_view }, grpc_options) do |response, operation|
+      c.generate_fetch_access_token({ feature_view: feature_view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_fetch_access_token(::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest.new(feature_view: feature_view), grpc_options) do |response, operation|
+      c.generate_fetch_access_token(::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest.new(feature_view: feature_view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

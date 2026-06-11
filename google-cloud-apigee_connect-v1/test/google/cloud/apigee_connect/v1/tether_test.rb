@@ -88,7 +88,7 @@ class ::Google::Cloud::ApigeeConnect::V1::Tether::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, egress_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeConnect::V1::Tether::Client.new do |config|
+      c = ::Google::Cloud::ApigeeConnect::V1::Tether::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -96,7 +96,7 @@ class ::Google::Cloud::ApigeeConnect::V1::Tether::ClientTest < Minitest::Test
       request_hash = { id: id, http_response: http_response, status: status, project: project, trace_id: trace_id, endpoint: endpoint, name: name }
       request_proto = ::Google::Cloud::ApigeeConnect::V1::EgressResponse.new id: id, http_response: http_response, status: status, project: project, trace_id: trace_id, endpoint: endpoint, name: name
       enum_input = [request_hash, request_proto].to_enum
-      client.egress enum_input do |response, operation|
+      c.egress enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::ApigeeConnect::V1::EgressRequest, r
@@ -108,7 +108,7 @@ class ::Google::Cloud::ApigeeConnect::V1::Tether::ClientTest < Minitest::Test
       request_hash = { id: id, http_response: http_response, status: status, project: project, trace_id: trace_id, endpoint: endpoint, name: name }
       request_proto = ::Google::Cloud::ApigeeConnect::V1::EgressResponse.new id: id, http_response: http_response, status: status, project: project, trace_id: trace_id, endpoint: endpoint, name: name
       stream_input = Gapic::StreamInput.new
-      client.egress stream_input do |response, operation|
+      c.egress stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::ApigeeConnect::V1::EgressRequest, r
@@ -123,7 +123,7 @@ class ::Google::Cloud::ApigeeConnect::V1::Tether::ClientTest < Minitest::Test
       request_hash = { id: id, http_response: http_response, status: status, project: project, trace_id: trace_id, endpoint: endpoint, name: name }
       request_proto = ::Google::Cloud::ApigeeConnect::V1::EgressResponse.new id: id, http_response: http_response, status: status, project: project, trace_id: trace_id, endpoint: endpoint, name: name
       enum_input = [request_hash, request_proto].to_enum
-      client.egress enum_input, grpc_options do |response, operation|
+      c.egress enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::ApigeeConnect::V1::EgressRequest, r
@@ -135,7 +135,7 @@ class ::Google::Cloud::ApigeeConnect::V1::Tether::ClientTest < Minitest::Test
       request_hash = { id: id, http_response: http_response, status: status, project: project, trace_id: trace_id, endpoint: endpoint, name: name }
       request_proto = ::Google::Cloud::ApigeeConnect::V1::EgressResponse.new id: id, http_response: http_response, status: status, project: project, trace_id: trace_id, endpoint: endpoint, name: name
       stream_input = Gapic::StreamInput.new
-      client.egress stream_input, grpc_options do |response, operation|
+      c.egress stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::ApigeeConnect::V1::EgressRequest, r

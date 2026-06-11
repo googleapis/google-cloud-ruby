@@ -98,32 +98,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_create_rag_corpus_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_rag_corpus_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_rag_corpus({ parent: parent, rag_corpus: rag_corpus }) do |_result, response|
+        c.create_rag_corpus({ parent: parent, rag_corpus: rag_corpus }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_rag_corpus parent: parent, rag_corpus: rag_corpus do |_result, response|
+        c.create_rag_corpus parent: parent, rag_corpus: rag_corpus do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_rag_corpus ::Google::Cloud::AIPlatform::V1::CreateRagCorpusRequest.new(parent: parent, rag_corpus: rag_corpus) do |_result, response|
+        c.create_rag_corpus ::Google::Cloud::AIPlatform::V1::CreateRagCorpusRequest.new(parent: parent, rag_corpus: rag_corpus) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_rag_corpus({ parent: parent, rag_corpus: rag_corpus }, call_options) do |_result, response|
+        c.create_rag_corpus({ parent: parent, rag_corpus: rag_corpus }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_rag_corpus(::Google::Cloud::AIPlatform::V1::CreateRagCorpusRequest.new(parent: parent, rag_corpus: rag_corpus), call_options) do |_result, response|
+        c.create_rag_corpus(::Google::Cloud::AIPlatform::V1::CreateRagCorpusRequest.new(parent: parent, rag_corpus: rag_corpus), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_update_rag_corpus_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_rag_corpus_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_rag_corpus({ rag_corpus: rag_corpus }) do |_result, response|
+        c.update_rag_corpus({ rag_corpus: rag_corpus }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_rag_corpus rag_corpus: rag_corpus do |_result, response|
+        c.update_rag_corpus rag_corpus: rag_corpus do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_rag_corpus ::Google::Cloud::AIPlatform::V1::UpdateRagCorpusRequest.new(rag_corpus: rag_corpus) do |_result, response|
+        c.update_rag_corpus ::Google::Cloud::AIPlatform::V1::UpdateRagCorpusRequest.new(rag_corpus: rag_corpus) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_rag_corpus({ rag_corpus: rag_corpus }, call_options) do |_result, response|
+        c.update_rag_corpus({ rag_corpus: rag_corpus }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_rag_corpus(::Google::Cloud::AIPlatform::V1::UpdateRagCorpusRequest.new(rag_corpus: rag_corpus), call_options) do |_result, response|
+        c.update_rag_corpus(::Google::Cloud::AIPlatform::V1::UpdateRagCorpusRequest.new(rag_corpus: rag_corpus), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,32 +206,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_get_rag_corpus_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_rag_corpus_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_rag_corpus({ name: name }) do |_result, response|
+        c.get_rag_corpus({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_rag_corpus name: name do |_result, response|
+        c.get_rag_corpus name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_rag_corpus ::Google::Cloud::AIPlatform::V1::GetRagCorpusRequest.new(name: name) do |_result, response|
+        c.get_rag_corpus ::Google::Cloud::AIPlatform::V1::GetRagCorpusRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_rag_corpus({ name: name }, call_options) do |_result, response|
+        c.get_rag_corpus({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_rag_corpus(::Google::Cloud::AIPlatform::V1::GetRagCorpusRequest.new(name: name), call_options) do |_result, response|
+        c.get_rag_corpus(::Google::Cloud::AIPlatform::V1::GetRagCorpusRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_list_rag_corpora_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_rag_corpora_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_rag_corpora({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_rag_corpora({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_rag_corpora parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_rag_corpora parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_rag_corpora ::Google::Cloud::AIPlatform::V1::ListRagCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_rag_corpora ::Google::Cloud::AIPlatform::V1::ListRagCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_rag_corpora({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_rag_corpora({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_rag_corpora(::Google::Cloud::AIPlatform::V1::ListRagCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_rag_corpora(::Google::Cloud::AIPlatform::V1::ListRagCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_delete_rag_corpus_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_rag_corpus_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_rag_corpus({ name: name, force: force }) do |_result, response|
+        c.delete_rag_corpus({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_rag_corpus name: name, force: force do |_result, response|
+        c.delete_rag_corpus name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_rag_corpus ::Google::Cloud::AIPlatform::V1::DeleteRagCorpusRequest.new(name: name, force: force) do |_result, response|
+        c.delete_rag_corpus ::Google::Cloud::AIPlatform::V1::DeleteRagCorpusRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_rag_corpus({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_rag_corpus({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_rag_corpus(::Google::Cloud::AIPlatform::V1::DeleteRagCorpusRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_rag_corpus(::Google::Cloud::AIPlatform::V1::DeleteRagCorpusRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -373,32 +373,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_upload_rag_file_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, upload_rag_file_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.upload_rag_file({ parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config }) do |_result, response|
+        c.upload_rag_file({ parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.upload_rag_file parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config do |_result, response|
+        c.upload_rag_file parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.upload_rag_file ::Google::Cloud::AIPlatform::V1::UploadRagFileRequest.new(parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config) do |_result, response|
+        c.upload_rag_file ::Google::Cloud::AIPlatform::V1::UploadRagFileRequest.new(parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.upload_rag_file({ parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config }, call_options) do |_result, response|
+        c.upload_rag_file({ parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.upload_rag_file(::Google::Cloud::AIPlatform::V1::UploadRagFileRequest.new(parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config), call_options) do |_result, response|
+        c.upload_rag_file(::Google::Cloud::AIPlatform::V1::UploadRagFileRequest.new(parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_import_rag_files_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_rag_files_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_rag_files({ parent: parent, import_rag_files_config: import_rag_files_config }) do |_result, response|
+        c.import_rag_files({ parent: parent, import_rag_files_config: import_rag_files_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_rag_files parent: parent, import_rag_files_config: import_rag_files_config do |_result, response|
+        c.import_rag_files parent: parent, import_rag_files_config: import_rag_files_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_rag_files ::Google::Cloud::AIPlatform::V1::ImportRagFilesRequest.new(parent: parent, import_rag_files_config: import_rag_files_config) do |_result, response|
+        c.import_rag_files ::Google::Cloud::AIPlatform::V1::ImportRagFilesRequest.new(parent: parent, import_rag_files_config: import_rag_files_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_rag_files({ parent: parent, import_rag_files_config: import_rag_files_config }, call_options) do |_result, response|
+        c.import_rag_files({ parent: parent, import_rag_files_config: import_rag_files_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_rag_files(::Google::Cloud::AIPlatform::V1::ImportRagFilesRequest.new(parent: parent, import_rag_files_config: import_rag_files_config), call_options) do |_result, response|
+        c.import_rag_files(::Google::Cloud::AIPlatform::V1::ImportRagFilesRequest.new(parent: parent, import_rag_files_config: import_rag_files_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -482,32 +482,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_get_rag_file_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_rag_file_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_rag_file({ name: name }) do |_result, response|
+        c.get_rag_file({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_rag_file name: name do |_result, response|
+        c.get_rag_file name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_rag_file ::Google::Cloud::AIPlatform::V1::GetRagFileRequest.new(name: name) do |_result, response|
+        c.get_rag_file ::Google::Cloud::AIPlatform::V1::GetRagFileRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_rag_file({ name: name }, call_options) do |_result, response|
+        c.get_rag_file({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_rag_file(::Google::Cloud::AIPlatform::V1::GetRagFileRequest.new(name: name), call_options) do |_result, response|
+        c.get_rag_file(::Google::Cloud::AIPlatform::V1::GetRagFileRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -538,32 +538,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_list_rag_files_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_rag_files_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_rag_files({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_rag_files({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_rag_files parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_rag_files parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_rag_files ::Google::Cloud::AIPlatform::V1::ListRagFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_rag_files ::Google::Cloud::AIPlatform::V1::ListRagFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_rag_files({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_rag_files({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_rag_files(::Google::Cloud::AIPlatform::V1::ListRagFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_rag_files(::Google::Cloud::AIPlatform::V1::ListRagFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -592,32 +592,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_delete_rag_file_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_rag_file_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_rag_file({ name: name }) do |_result, response|
+        c.delete_rag_file({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_rag_file name: name do |_result, response|
+        c.delete_rag_file name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_rag_file ::Google::Cloud::AIPlatform::V1::DeleteRagFileRequest.new(name: name) do |_result, response|
+        c.delete_rag_file ::Google::Cloud::AIPlatform::V1::DeleteRagFileRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_rag_file({ name: name }, call_options) do |_result, response|
+        c.delete_rag_file({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_rag_file(::Google::Cloud::AIPlatform::V1::DeleteRagFileRequest.new(name: name), call_options) do |_result, response|
+        c.delete_rag_file(::Google::Cloud::AIPlatform::V1::DeleteRagFileRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -646,32 +646,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_update_rag_engine_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_rag_engine_config_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_rag_engine_config({ rag_engine_config: rag_engine_config }) do |_result, response|
+        c.update_rag_engine_config({ rag_engine_config: rag_engine_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_rag_engine_config rag_engine_config: rag_engine_config do |_result, response|
+        c.update_rag_engine_config rag_engine_config: rag_engine_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_rag_engine_config ::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest.new(rag_engine_config: rag_engine_config) do |_result, response|
+        c.update_rag_engine_config ::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest.new(rag_engine_config: rag_engine_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_rag_engine_config({ rag_engine_config: rag_engine_config }, call_options) do |_result, response|
+        c.update_rag_engine_config({ rag_engine_config: rag_engine_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_rag_engine_config(::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest.new(rag_engine_config: rag_engine_config), call_options) do |_result, response|
+        c.update_rag_engine_config(::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest.new(rag_engine_config: rag_engine_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -700,32 +700,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ClientTest < 
     ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::ServiceStub.stub :transcode_get_rag_engine_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_rag_engine_config_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_rag_engine_config({ name: name }) do |_result, response|
+        c.get_rag_engine_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_rag_engine_config name: name do |_result, response|
+        c.get_rag_engine_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_rag_engine_config ::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest.new(name: name) do |_result, response|
+        c.get_rag_engine_config ::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_rag_engine_config({ name: name }, call_options) do |_result, response|
+        c.get_rag_engine_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_rag_engine_config(::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_rag_engine_config(::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -84,40 +84,40 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_tensorboard_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tensorboard({ parent: parent, tensorboard: tensorboard }) do |response, operation|
+      c.create_tensorboard({ parent: parent, tensorboard: tensorboard }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tensorboard parent: parent, tensorboard: tensorboard do |response, operation|
+      c.create_tensorboard parent: parent, tensorboard: tensorboard do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tensorboard ::Google::Cloud::AIPlatform::V1::CreateTensorboardRequest.new(parent: parent, tensorboard: tensorboard) do |response, operation|
+      c.create_tensorboard ::Google::Cloud::AIPlatform::V1::CreateTensorboardRequest.new(parent: parent, tensorboard: tensorboard) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tensorboard({ parent: parent, tensorboard: tensorboard }, grpc_options) do |response, operation|
+      c.create_tensorboard({ parent: parent, tensorboard: tensorboard }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tensorboard(::Google::Cloud::AIPlatform::V1::CreateTensorboardRequest.new(parent: parent, tensorboard: tensorboard), grpc_options) do |response, operation|
+      c.create_tensorboard(::Google::Cloud::AIPlatform::V1::CreateTensorboardRequest.new(parent: parent, tensorboard: tensorboard), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -147,36 +147,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_tensorboard_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tensorboard({ name: name }) do |response, operation|
+      c.get_tensorboard({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tensorboard name: name do |response, operation|
+      c.get_tensorboard name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tensorboard ::Google::Cloud::AIPlatform::V1::GetTensorboardRequest.new(name: name) do |response, operation|
+      c.get_tensorboard ::Google::Cloud::AIPlatform::V1::GetTensorboardRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tensorboard({ name: name }, grpc_options) do |response, operation|
+      c.get_tensorboard({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tensorboard(::Google::Cloud::AIPlatform::V1::GetTensorboardRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tensorboard(::Google::Cloud::AIPlatform::V1::GetTensorboardRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -207,40 +207,40 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_tensorboard_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tensorboard({ update_mask: update_mask, tensorboard: tensorboard }) do |response, operation|
+      c.update_tensorboard({ update_mask: update_mask, tensorboard: tensorboard }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tensorboard update_mask: update_mask, tensorboard: tensorboard do |response, operation|
+      c.update_tensorboard update_mask: update_mask, tensorboard: tensorboard do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tensorboard ::Google::Cloud::AIPlatform::V1::UpdateTensorboardRequest.new(update_mask: update_mask, tensorboard: tensorboard) do |response, operation|
+      c.update_tensorboard ::Google::Cloud::AIPlatform::V1::UpdateTensorboardRequest.new(update_mask: update_mask, tensorboard: tensorboard) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tensorboard({ update_mask: update_mask, tensorboard: tensorboard }, grpc_options) do |response, operation|
+      c.update_tensorboard({ update_mask: update_mask, tensorboard: tensorboard }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tensorboard(::Google::Cloud::AIPlatform::V1::UpdateTensorboardRequest.new(update_mask: update_mask, tensorboard: tensorboard), grpc_options) do |response, operation|
+      c.update_tensorboard(::Google::Cloud::AIPlatform::V1::UpdateTensorboardRequest.new(update_mask: update_mask, tensorboard: tensorboard), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_tensorboards_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tensorboards({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
+      c.list_tensorboards({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tensorboards parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
+      c.list_tensorboards parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tensorboards ::Google::Cloud::AIPlatform::V1::ListTensorboardsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
+      c.list_tensorboards ::Google::Cloud::AIPlatform::V1::ListTensorboardsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tensorboards({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_tensorboards({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tensorboards(::Google::Cloud::AIPlatform::V1::ListTensorboardsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_tensorboards(::Google::Cloud::AIPlatform::V1::ListTensorboardsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -343,40 +343,40 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_tensorboard_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tensorboard({ name: name }) do |response, operation|
+      c.delete_tensorboard({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tensorboard name: name do |response, operation|
+      c.delete_tensorboard name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tensorboard ::Google::Cloud::AIPlatform::V1::DeleteTensorboardRequest.new(name: name) do |response, operation|
+      c.delete_tensorboard ::Google::Cloud::AIPlatform::V1::DeleteTensorboardRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tensorboard({ name: name }, grpc_options) do |response, operation|
+      c.delete_tensorboard({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tensorboard(::Google::Cloud::AIPlatform::V1::DeleteTensorboardRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_tensorboard(::Google::Cloud::AIPlatform::V1::DeleteTensorboardRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -406,36 +406,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, read_tensorboard_usage_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_tensorboard_usage({ tensorboard: tensorboard }) do |response, operation|
+      c.read_tensorboard_usage({ tensorboard: tensorboard }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.read_tensorboard_usage tensorboard: tensorboard do |response, operation|
+      c.read_tensorboard_usage tensorboard: tensorboard do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.read_tensorboard_usage ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest.new(tensorboard: tensorboard) do |response, operation|
+      c.read_tensorboard_usage ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest.new(tensorboard: tensorboard) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.read_tensorboard_usage({ tensorboard: tensorboard }, grpc_options) do |response, operation|
+      c.read_tensorboard_usage({ tensorboard: tensorboard }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.read_tensorboard_usage(::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest.new(tensorboard: tensorboard), grpc_options) do |response, operation|
+      c.read_tensorboard_usage(::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest.new(tensorboard: tensorboard), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -464,36 +464,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, read_tensorboard_size_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_tensorboard_size({ tensorboard: tensorboard }) do |response, operation|
+      c.read_tensorboard_size({ tensorboard: tensorboard }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.read_tensorboard_size tensorboard: tensorboard do |response, operation|
+      c.read_tensorboard_size tensorboard: tensorboard do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.read_tensorboard_size ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest.new(tensorboard: tensorboard) do |response, operation|
+      c.read_tensorboard_size ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest.new(tensorboard: tensorboard) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.read_tensorboard_size({ tensorboard: tensorboard }, grpc_options) do |response, operation|
+      c.read_tensorboard_size({ tensorboard: tensorboard }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.read_tensorboard_size(::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest.new(tensorboard: tensorboard), grpc_options) do |response, operation|
+      c.read_tensorboard_size(::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeRequest.new(tensorboard: tensorboard), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -526,36 +526,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_tensorboard_experiment_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tensorboard_experiment({ parent: parent, tensorboard_experiment: tensorboard_experiment, tensorboard_experiment_id: tensorboard_experiment_id }) do |response, operation|
+      c.create_tensorboard_experiment({ parent: parent, tensorboard_experiment: tensorboard_experiment, tensorboard_experiment_id: tensorboard_experiment_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tensorboard_experiment parent: parent, tensorboard_experiment: tensorboard_experiment, tensorboard_experiment_id: tensorboard_experiment_id do |response, operation|
+      c.create_tensorboard_experiment parent: parent, tensorboard_experiment: tensorboard_experiment, tensorboard_experiment_id: tensorboard_experiment_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tensorboard_experiment ::Google::Cloud::AIPlatform::V1::CreateTensorboardExperimentRequest.new(parent: parent, tensorboard_experiment: tensorboard_experiment, tensorboard_experiment_id: tensorboard_experiment_id) do |response, operation|
+      c.create_tensorboard_experiment ::Google::Cloud::AIPlatform::V1::CreateTensorboardExperimentRequest.new(parent: parent, tensorboard_experiment: tensorboard_experiment, tensorboard_experiment_id: tensorboard_experiment_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tensorboard_experiment({ parent: parent, tensorboard_experiment: tensorboard_experiment, tensorboard_experiment_id: tensorboard_experiment_id }, grpc_options) do |response, operation|
+      c.create_tensorboard_experiment({ parent: parent, tensorboard_experiment: tensorboard_experiment, tensorboard_experiment_id: tensorboard_experiment_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tensorboard_experiment(::Google::Cloud::AIPlatform::V1::CreateTensorboardExperimentRequest.new(parent: parent, tensorboard_experiment: tensorboard_experiment, tensorboard_experiment_id: tensorboard_experiment_id), grpc_options) do |response, operation|
+      c.create_tensorboard_experiment(::Google::Cloud::AIPlatform::V1::CreateTensorboardExperimentRequest.new(parent: parent, tensorboard_experiment: tensorboard_experiment, tensorboard_experiment_id: tensorboard_experiment_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -584,36 +584,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_tensorboard_experiment_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tensorboard_experiment({ name: name }) do |response, operation|
+      c.get_tensorboard_experiment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tensorboard_experiment name: name do |response, operation|
+      c.get_tensorboard_experiment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tensorboard_experiment ::Google::Cloud::AIPlatform::V1::GetTensorboardExperimentRequest.new(name: name) do |response, operation|
+      c.get_tensorboard_experiment ::Google::Cloud::AIPlatform::V1::GetTensorboardExperimentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tensorboard_experiment({ name: name }, grpc_options) do |response, operation|
+      c.get_tensorboard_experiment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tensorboard_experiment(::Google::Cloud::AIPlatform::V1::GetTensorboardExperimentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tensorboard_experiment(::Google::Cloud::AIPlatform::V1::GetTensorboardExperimentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -644,36 +644,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_tensorboard_experiment_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tensorboard_experiment({ update_mask: update_mask, tensorboard_experiment: tensorboard_experiment }) do |response, operation|
+      c.update_tensorboard_experiment({ update_mask: update_mask, tensorboard_experiment: tensorboard_experiment }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tensorboard_experiment update_mask: update_mask, tensorboard_experiment: tensorboard_experiment do |response, operation|
+      c.update_tensorboard_experiment update_mask: update_mask, tensorboard_experiment: tensorboard_experiment do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tensorboard_experiment ::Google::Cloud::AIPlatform::V1::UpdateTensorboardExperimentRequest.new(update_mask: update_mask, tensorboard_experiment: tensorboard_experiment) do |response, operation|
+      c.update_tensorboard_experiment ::Google::Cloud::AIPlatform::V1::UpdateTensorboardExperimentRequest.new(update_mask: update_mask, tensorboard_experiment: tensorboard_experiment) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tensorboard_experiment({ update_mask: update_mask, tensorboard_experiment: tensorboard_experiment }, grpc_options) do |response, operation|
+      c.update_tensorboard_experiment({ update_mask: update_mask, tensorboard_experiment: tensorboard_experiment }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tensorboard_experiment(::Google::Cloud::AIPlatform::V1::UpdateTensorboardExperimentRequest.new(update_mask: update_mask, tensorboard_experiment: tensorboard_experiment), grpc_options) do |response, operation|
+      c.update_tensorboard_experiment(::Google::Cloud::AIPlatform::V1::UpdateTensorboardExperimentRequest.new(update_mask: update_mask, tensorboard_experiment: tensorboard_experiment), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -712,40 +712,40 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_tensorboard_experiments_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tensorboard_experiments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
+      c.list_tensorboard_experiments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tensorboard_experiments parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
+      c.list_tensorboard_experiments parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tensorboard_experiments ::Google::Cloud::AIPlatform::V1::ListTensorboardExperimentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
+      c.list_tensorboard_experiments ::Google::Cloud::AIPlatform::V1::ListTensorboardExperimentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tensorboard_experiments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_tensorboard_experiments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tensorboard_experiments(::Google::Cloud::AIPlatform::V1::ListTensorboardExperimentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_tensorboard_experiments(::Google::Cloud::AIPlatform::V1::ListTensorboardExperimentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -775,40 +775,40 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_tensorboard_experiment_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tensorboard_experiment({ name: name }) do |response, operation|
+      c.delete_tensorboard_experiment({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tensorboard_experiment name: name do |response, operation|
+      c.delete_tensorboard_experiment name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tensorboard_experiment ::Google::Cloud::AIPlatform::V1::DeleteTensorboardExperimentRequest.new(name: name) do |response, operation|
+      c.delete_tensorboard_experiment ::Google::Cloud::AIPlatform::V1::DeleteTensorboardExperimentRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tensorboard_experiment({ name: name }, grpc_options) do |response, operation|
+      c.delete_tensorboard_experiment({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tensorboard_experiment(::Google::Cloud::AIPlatform::V1::DeleteTensorboardExperimentRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_tensorboard_experiment(::Google::Cloud::AIPlatform::V1::DeleteTensorboardExperimentRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -842,36 +842,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_tensorboard_run_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tensorboard_run({ parent: parent, tensorboard_run: tensorboard_run, tensorboard_run_id: tensorboard_run_id }) do |response, operation|
+      c.create_tensorboard_run({ parent: parent, tensorboard_run: tensorboard_run, tensorboard_run_id: tensorboard_run_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tensorboard_run parent: parent, tensorboard_run: tensorboard_run, tensorboard_run_id: tensorboard_run_id do |response, operation|
+      c.create_tensorboard_run parent: parent, tensorboard_run: tensorboard_run, tensorboard_run_id: tensorboard_run_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tensorboard_run ::Google::Cloud::AIPlatform::V1::CreateTensorboardRunRequest.new(parent: parent, tensorboard_run: tensorboard_run, tensorboard_run_id: tensorboard_run_id) do |response, operation|
+      c.create_tensorboard_run ::Google::Cloud::AIPlatform::V1::CreateTensorboardRunRequest.new(parent: parent, tensorboard_run: tensorboard_run, tensorboard_run_id: tensorboard_run_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tensorboard_run({ parent: parent, tensorboard_run: tensorboard_run, tensorboard_run_id: tensorboard_run_id }, grpc_options) do |response, operation|
+      c.create_tensorboard_run({ parent: parent, tensorboard_run: tensorboard_run, tensorboard_run_id: tensorboard_run_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tensorboard_run(::Google::Cloud::AIPlatform::V1::CreateTensorboardRunRequest.new(parent: parent, tensorboard_run: tensorboard_run, tensorboard_run_id: tensorboard_run_id), grpc_options) do |response, operation|
+      c.create_tensorboard_run(::Google::Cloud::AIPlatform::V1::CreateTensorboardRunRequest.new(parent: parent, tensorboard_run: tensorboard_run, tensorboard_run_id: tensorboard_run_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -902,36 +902,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, batch_create_tensorboard_runs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_tensorboard_runs({ parent: parent, requests: requests }) do |response, operation|
+      c.batch_create_tensorboard_runs({ parent: parent, requests: requests }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_tensorboard_runs parent: parent, requests: requests do |response, operation|
+      c.batch_create_tensorboard_runs parent: parent, requests: requests do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_tensorboard_runs ::Google::Cloud::AIPlatform::V1::BatchCreateTensorboardRunsRequest.new(parent: parent, requests: requests) do |response, operation|
+      c.batch_create_tensorboard_runs ::Google::Cloud::AIPlatform::V1::BatchCreateTensorboardRunsRequest.new(parent: parent, requests: requests) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_tensorboard_runs({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+      c.batch_create_tensorboard_runs({ parent: parent, requests: requests }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_tensorboard_runs(::Google::Cloud::AIPlatform::V1::BatchCreateTensorboardRunsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+      c.batch_create_tensorboard_runs(::Google::Cloud::AIPlatform::V1::BatchCreateTensorboardRunsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -960,36 +960,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_tensorboard_run_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tensorboard_run({ name: name }) do |response, operation|
+      c.get_tensorboard_run({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tensorboard_run name: name do |response, operation|
+      c.get_tensorboard_run name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tensorboard_run ::Google::Cloud::AIPlatform::V1::GetTensorboardRunRequest.new(name: name) do |response, operation|
+      c.get_tensorboard_run ::Google::Cloud::AIPlatform::V1::GetTensorboardRunRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tensorboard_run({ name: name }, grpc_options) do |response, operation|
+      c.get_tensorboard_run({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tensorboard_run(::Google::Cloud::AIPlatform::V1::GetTensorboardRunRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tensorboard_run(::Google::Cloud::AIPlatform::V1::GetTensorboardRunRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1020,36 +1020,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_tensorboard_run_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tensorboard_run({ update_mask: update_mask, tensorboard_run: tensorboard_run }) do |response, operation|
+      c.update_tensorboard_run({ update_mask: update_mask, tensorboard_run: tensorboard_run }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tensorboard_run update_mask: update_mask, tensorboard_run: tensorboard_run do |response, operation|
+      c.update_tensorboard_run update_mask: update_mask, tensorboard_run: tensorboard_run do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tensorboard_run ::Google::Cloud::AIPlatform::V1::UpdateTensorboardRunRequest.new(update_mask: update_mask, tensorboard_run: tensorboard_run) do |response, operation|
+      c.update_tensorboard_run ::Google::Cloud::AIPlatform::V1::UpdateTensorboardRunRequest.new(update_mask: update_mask, tensorboard_run: tensorboard_run) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tensorboard_run({ update_mask: update_mask, tensorboard_run: tensorboard_run }, grpc_options) do |response, operation|
+      c.update_tensorboard_run({ update_mask: update_mask, tensorboard_run: tensorboard_run }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tensorboard_run(::Google::Cloud::AIPlatform::V1::UpdateTensorboardRunRequest.new(update_mask: update_mask, tensorboard_run: tensorboard_run), grpc_options) do |response, operation|
+      c.update_tensorboard_run(::Google::Cloud::AIPlatform::V1::UpdateTensorboardRunRequest.new(update_mask: update_mask, tensorboard_run: tensorboard_run), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1088,40 +1088,40 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_tensorboard_runs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tensorboard_runs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
+      c.list_tensorboard_runs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tensorboard_runs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
+      c.list_tensorboard_runs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tensorboard_runs ::Google::Cloud::AIPlatform::V1::ListTensorboardRunsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
+      c.list_tensorboard_runs ::Google::Cloud::AIPlatform::V1::ListTensorboardRunsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tensorboard_runs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_tensorboard_runs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tensorboard_runs(::Google::Cloud::AIPlatform::V1::ListTensorboardRunsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_tensorboard_runs(::Google::Cloud::AIPlatform::V1::ListTensorboardRunsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1151,40 +1151,40 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_tensorboard_run_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tensorboard_run({ name: name }) do |response, operation|
+      c.delete_tensorboard_run({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tensorboard_run name: name do |response, operation|
+      c.delete_tensorboard_run name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tensorboard_run ::Google::Cloud::AIPlatform::V1::DeleteTensorboardRunRequest.new(name: name) do |response, operation|
+      c.delete_tensorboard_run ::Google::Cloud::AIPlatform::V1::DeleteTensorboardRunRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tensorboard_run({ name: name }, grpc_options) do |response, operation|
+      c.delete_tensorboard_run({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tensorboard_run(::Google::Cloud::AIPlatform::V1::DeleteTensorboardRunRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_tensorboard_run(::Google::Cloud::AIPlatform::V1::DeleteTensorboardRunRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1216,36 +1216,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, batch_create_tensorboard_time_series_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_tensorboard_time_series({ parent: parent, requests: requests }) do |response, operation|
+      c.batch_create_tensorboard_time_series({ parent: parent, requests: requests }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_tensorboard_time_series parent: parent, requests: requests do |response, operation|
+      c.batch_create_tensorboard_time_series parent: parent, requests: requests do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::BatchCreateTensorboardTimeSeriesRequest.new(parent: parent, requests: requests) do |response, operation|
+      c.batch_create_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::BatchCreateTensorboardTimeSeriesRequest.new(parent: parent, requests: requests) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_tensorboard_time_series({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+      c.batch_create_tensorboard_time_series({ parent: parent, requests: requests }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::BatchCreateTensorboardTimeSeriesRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+      c.batch_create_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::BatchCreateTensorboardTimeSeriesRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1278,36 +1278,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_tensorboard_time_series_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tensorboard_time_series({ parent: parent, tensorboard_time_series_id: tensorboard_time_series_id, tensorboard_time_series: tensorboard_time_series }) do |response, operation|
+      c.create_tensorboard_time_series({ parent: parent, tensorboard_time_series_id: tensorboard_time_series_id, tensorboard_time_series: tensorboard_time_series }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tensorboard_time_series parent: parent, tensorboard_time_series_id: tensorboard_time_series_id, tensorboard_time_series: tensorboard_time_series do |response, operation|
+      c.create_tensorboard_time_series parent: parent, tensorboard_time_series_id: tensorboard_time_series_id, tensorboard_time_series: tensorboard_time_series do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::CreateTensorboardTimeSeriesRequest.new(parent: parent, tensorboard_time_series_id: tensorboard_time_series_id, tensorboard_time_series: tensorboard_time_series) do |response, operation|
+      c.create_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::CreateTensorboardTimeSeriesRequest.new(parent: parent, tensorboard_time_series_id: tensorboard_time_series_id, tensorboard_time_series: tensorboard_time_series) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tensorboard_time_series({ parent: parent, tensorboard_time_series_id: tensorboard_time_series_id, tensorboard_time_series: tensorboard_time_series }, grpc_options) do |response, operation|
+      c.create_tensorboard_time_series({ parent: parent, tensorboard_time_series_id: tensorboard_time_series_id, tensorboard_time_series: tensorboard_time_series }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::CreateTensorboardTimeSeriesRequest.new(parent: parent, tensorboard_time_series_id: tensorboard_time_series_id, tensorboard_time_series: tensorboard_time_series), grpc_options) do |response, operation|
+      c.create_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::CreateTensorboardTimeSeriesRequest.new(parent: parent, tensorboard_time_series_id: tensorboard_time_series_id, tensorboard_time_series: tensorboard_time_series), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1336,36 +1336,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_tensorboard_time_series_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tensorboard_time_series({ name: name }) do |response, operation|
+      c.get_tensorboard_time_series({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tensorboard_time_series name: name do |response, operation|
+      c.get_tensorboard_time_series name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::GetTensorboardTimeSeriesRequest.new(name: name) do |response, operation|
+      c.get_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::GetTensorboardTimeSeriesRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tensorboard_time_series({ name: name }, grpc_options) do |response, operation|
+      c.get_tensorboard_time_series({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::GetTensorboardTimeSeriesRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::GetTensorboardTimeSeriesRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1396,36 +1396,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_tensorboard_time_series_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tensorboard_time_series({ update_mask: update_mask, tensorboard_time_series: tensorboard_time_series }) do |response, operation|
+      c.update_tensorboard_time_series({ update_mask: update_mask, tensorboard_time_series: tensorboard_time_series }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tensorboard_time_series update_mask: update_mask, tensorboard_time_series: tensorboard_time_series do |response, operation|
+      c.update_tensorboard_time_series update_mask: update_mask, tensorboard_time_series: tensorboard_time_series do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::UpdateTensorboardTimeSeriesRequest.new(update_mask: update_mask, tensorboard_time_series: tensorboard_time_series) do |response, operation|
+      c.update_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::UpdateTensorboardTimeSeriesRequest.new(update_mask: update_mask, tensorboard_time_series: tensorboard_time_series) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tensorboard_time_series({ update_mask: update_mask, tensorboard_time_series: tensorboard_time_series }, grpc_options) do |response, operation|
+      c.update_tensorboard_time_series({ update_mask: update_mask, tensorboard_time_series: tensorboard_time_series }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::UpdateTensorboardTimeSeriesRequest.new(update_mask: update_mask, tensorboard_time_series: tensorboard_time_series), grpc_options) do |response, operation|
+      c.update_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::UpdateTensorboardTimeSeriesRequest.new(update_mask: update_mask, tensorboard_time_series: tensorboard_time_series), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1464,40 +1464,40 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_tensorboard_time_series_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tensorboard_time_series({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
+      c.list_tensorboard_time_series({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tensorboard_time_series parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
+      c.list_tensorboard_time_series parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::ListTensorboardTimeSeriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
+      c.list_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::ListTensorboardTimeSeriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tensorboard_time_series({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_tensorboard_time_series({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::ListTensorboardTimeSeriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::ListTensorboardTimeSeriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1527,40 +1527,40 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_tensorboard_time_series_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tensorboard_time_series({ name: name }) do |response, operation|
+      c.delete_tensorboard_time_series({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tensorboard_time_series name: name do |response, operation|
+      c.delete_tensorboard_time_series name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::DeleteTensorboardTimeSeriesRequest.new(name: name) do |response, operation|
+      c.delete_tensorboard_time_series ::Google::Cloud::AIPlatform::V1::DeleteTensorboardTimeSeriesRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tensorboard_time_series({ name: name }, grpc_options) do |response, operation|
+      c.delete_tensorboard_time_series({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::DeleteTensorboardTimeSeriesRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_tensorboard_time_series(::Google::Cloud::AIPlatform::V1::DeleteTensorboardTimeSeriesRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1592,36 +1592,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, batch_read_tensorboard_time_series_data_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_read_tensorboard_time_series_data({ tensorboard: tensorboard, time_series: time_series }) do |response, operation|
+      c.batch_read_tensorboard_time_series_data({ tensorboard: tensorboard, time_series: time_series }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_read_tensorboard_time_series_data tensorboard: tensorboard, time_series: time_series do |response, operation|
+      c.batch_read_tensorboard_time_series_data tensorboard: tensorboard, time_series: time_series do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_read_tensorboard_time_series_data ::Google::Cloud::AIPlatform::V1::BatchReadTensorboardTimeSeriesDataRequest.new(tensorboard: tensorboard, time_series: time_series) do |response, operation|
+      c.batch_read_tensorboard_time_series_data ::Google::Cloud::AIPlatform::V1::BatchReadTensorboardTimeSeriesDataRequest.new(tensorboard: tensorboard, time_series: time_series) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_read_tensorboard_time_series_data({ tensorboard: tensorboard, time_series: time_series }, grpc_options) do |response, operation|
+      c.batch_read_tensorboard_time_series_data({ tensorboard: tensorboard, time_series: time_series }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_read_tensorboard_time_series_data(::Google::Cloud::AIPlatform::V1::BatchReadTensorboardTimeSeriesDataRequest.new(tensorboard: tensorboard, time_series: time_series), grpc_options) do |response, operation|
+      c.batch_read_tensorboard_time_series_data(::Google::Cloud::AIPlatform::V1::BatchReadTensorboardTimeSeriesDataRequest.new(tensorboard: tensorboard, time_series: time_series), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1654,36 +1654,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, read_tensorboard_time_series_data_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_tensorboard_time_series_data({ tensorboard_time_series: tensorboard_time_series, max_data_points: max_data_points, filter: filter }) do |response, operation|
+      c.read_tensorboard_time_series_data({ tensorboard_time_series: tensorboard_time_series, max_data_points: max_data_points, filter: filter }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.read_tensorboard_time_series_data tensorboard_time_series: tensorboard_time_series, max_data_points: max_data_points, filter: filter do |response, operation|
+      c.read_tensorboard_time_series_data tensorboard_time_series: tensorboard_time_series, max_data_points: max_data_points, filter: filter do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.read_tensorboard_time_series_data ::Google::Cloud::AIPlatform::V1::ReadTensorboardTimeSeriesDataRequest.new(tensorboard_time_series: tensorboard_time_series, max_data_points: max_data_points, filter: filter) do |response, operation|
+      c.read_tensorboard_time_series_data ::Google::Cloud::AIPlatform::V1::ReadTensorboardTimeSeriesDataRequest.new(tensorboard_time_series: tensorboard_time_series, max_data_points: max_data_points, filter: filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.read_tensorboard_time_series_data({ tensorboard_time_series: tensorboard_time_series, max_data_points: max_data_points, filter: filter }, grpc_options) do |response, operation|
+      c.read_tensorboard_time_series_data({ tensorboard_time_series: tensorboard_time_series, max_data_points: max_data_points, filter: filter }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.read_tensorboard_time_series_data(::Google::Cloud::AIPlatform::V1::ReadTensorboardTimeSeriesDataRequest.new(tensorboard_time_series: tensorboard_time_series, max_data_points: max_data_points, filter: filter), grpc_options) do |response, operation|
+      c.read_tensorboard_time_series_data(::Google::Cloud::AIPlatform::V1::ReadTensorboardTimeSeriesDataRequest.new(tensorboard_time_series: tensorboard_time_series, max_data_points: max_data_points, filter: filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1714,12 +1714,12 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, read_tensorboard_blob_data_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_tensorboard_blob_data({ time_series: time_series, blob_ids: blob_ids }) do |response, operation|
+      c.read_tensorboard_blob_data({ time_series: time_series, blob_ids: blob_ids }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataResponse, r
@@ -1728,7 +1728,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
       end
 
       # Use named arguments
-      client.read_tensorboard_blob_data time_series: time_series, blob_ids: blob_ids do |response, operation|
+      c.read_tensorboard_blob_data time_series: time_series, blob_ids: blob_ids do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataResponse, r
@@ -1737,7 +1737,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
       end
 
       # Use protobuf object
-      client.read_tensorboard_blob_data ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataRequest.new(time_series: time_series, blob_ids: blob_ids) do |response, operation|
+      c.read_tensorboard_blob_data ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataRequest.new(time_series: time_series, blob_ids: blob_ids) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataResponse, r
@@ -1746,7 +1746,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
       end
 
       # Use hash object with options
-      client.read_tensorboard_blob_data({ time_series: time_series, blob_ids: blob_ids }, grpc_options) do |response, operation|
+      c.read_tensorboard_blob_data({ time_series: time_series, blob_ids: blob_ids }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataResponse, r
@@ -1755,7 +1755,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.read_tensorboard_blob_data(::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataRequest.new(time_series: time_series, blob_ids: blob_ids), grpc_options) do |response, operation|
+      c.read_tensorboard_blob_data(::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataRequest.new(time_series: time_series, blob_ids: blob_ids), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataResponse, r
@@ -1789,36 +1789,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, write_tensorboard_experiment_data_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.write_tensorboard_experiment_data({ tensorboard_experiment: tensorboard_experiment, write_run_data_requests: write_run_data_requests }) do |response, operation|
+      c.write_tensorboard_experiment_data({ tensorboard_experiment: tensorboard_experiment, write_run_data_requests: write_run_data_requests }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.write_tensorboard_experiment_data tensorboard_experiment: tensorboard_experiment, write_run_data_requests: write_run_data_requests do |response, operation|
+      c.write_tensorboard_experiment_data tensorboard_experiment: tensorboard_experiment, write_run_data_requests: write_run_data_requests do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.write_tensorboard_experiment_data ::Google::Cloud::AIPlatform::V1::WriteTensorboardExperimentDataRequest.new(tensorboard_experiment: tensorboard_experiment, write_run_data_requests: write_run_data_requests) do |response, operation|
+      c.write_tensorboard_experiment_data ::Google::Cloud::AIPlatform::V1::WriteTensorboardExperimentDataRequest.new(tensorboard_experiment: tensorboard_experiment, write_run_data_requests: write_run_data_requests) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.write_tensorboard_experiment_data({ tensorboard_experiment: tensorboard_experiment, write_run_data_requests: write_run_data_requests }, grpc_options) do |response, operation|
+      c.write_tensorboard_experiment_data({ tensorboard_experiment: tensorboard_experiment, write_run_data_requests: write_run_data_requests }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.write_tensorboard_experiment_data(::Google::Cloud::AIPlatform::V1::WriteTensorboardExperimentDataRequest.new(tensorboard_experiment: tensorboard_experiment, write_run_data_requests: write_run_data_requests), grpc_options) do |response, operation|
+      c.write_tensorboard_experiment_data(::Google::Cloud::AIPlatform::V1::WriteTensorboardExperimentDataRequest.new(tensorboard_experiment: tensorboard_experiment, write_run_data_requests: write_run_data_requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1849,36 +1849,36 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, write_tensorboard_run_data_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.write_tensorboard_run_data({ tensorboard_run: tensorboard_run, time_series_data: time_series_data }) do |response, operation|
+      c.write_tensorboard_run_data({ tensorboard_run: tensorboard_run, time_series_data: time_series_data }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.write_tensorboard_run_data tensorboard_run: tensorboard_run, time_series_data: time_series_data do |response, operation|
+      c.write_tensorboard_run_data tensorboard_run: tensorboard_run, time_series_data: time_series_data do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.write_tensorboard_run_data ::Google::Cloud::AIPlatform::V1::WriteTensorboardRunDataRequest.new(tensorboard_run: tensorboard_run, time_series_data: time_series_data) do |response, operation|
+      c.write_tensorboard_run_data ::Google::Cloud::AIPlatform::V1::WriteTensorboardRunDataRequest.new(tensorboard_run: tensorboard_run, time_series_data: time_series_data) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.write_tensorboard_run_data({ tensorboard_run: tensorboard_run, time_series_data: time_series_data }, grpc_options) do |response, operation|
+      c.write_tensorboard_run_data({ tensorboard_run: tensorboard_run, time_series_data: time_series_data }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.write_tensorboard_run_data(::Google::Cloud::AIPlatform::V1::WriteTensorboardRunDataRequest.new(tensorboard_run: tensorboard_run, time_series_data: time_series_data), grpc_options) do |response, operation|
+      c.write_tensorboard_run_data(::Google::Cloud::AIPlatform::V1::WriteTensorboardRunDataRequest.new(tensorboard_run: tensorboard_run, time_series_data: time_series_data), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1915,40 +1915,40 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, export_tensorboard_time_series_data_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::TensorboardService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_tensorboard_time_series_data({ tensorboard_time_series: tensorboard_time_series, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
+      c.export_tensorboard_time_series_data({ tensorboard_time_series: tensorboard_time_series, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_tensorboard_time_series_data tensorboard_time_series: tensorboard_time_series, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
+      c.export_tensorboard_time_series_data tensorboard_time_series: tensorboard_time_series, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_tensorboard_time_series_data ::Google::Cloud::AIPlatform::V1::ExportTensorboardTimeSeriesDataRequest.new(tensorboard_time_series: tensorboard_time_series, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
+      c.export_tensorboard_time_series_data ::Google::Cloud::AIPlatform::V1::ExportTensorboardTimeSeriesDataRequest.new(tensorboard_time_series: tensorboard_time_series, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_tensorboard_time_series_data({ tensorboard_time_series: tensorboard_time_series, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
+      c.export_tensorboard_time_series_data({ tensorboard_time_series: tensorboard_time_series, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_tensorboard_time_series_data(::Google::Cloud::AIPlatform::V1::ExportTensorboardTimeSeriesDataRequest.new(tensorboard_time_series: tensorboard_time_series, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
+      c.export_tensorboard_time_series_data(::Google::Cloud::AIPlatform::V1::ExportTensorboardTimeSeriesDataRequest.new(tensorboard_time_series: tensorboard_time_series, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

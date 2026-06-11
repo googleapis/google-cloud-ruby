@@ -86,40 +86,40 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_key_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
+      c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_key({ parent: parent, key: key, key_id: key_id }) do |response, operation|
+      c.create_key({ parent: parent, key: key, key_id: key_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_key parent: parent, key: key, key_id: key_id do |response, operation|
+      c.create_key parent: parent, key: key, key_id: key_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_key ::Google::Cloud::ApiKeys::V2::CreateKeyRequest.new(parent: parent, key: key, key_id: key_id) do |response, operation|
+      c.create_key ::Google::Cloud::ApiKeys::V2::CreateKeyRequest.new(parent: parent, key: key, key_id: key_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_key({ parent: parent, key: key, key_id: key_id }, grpc_options) do |response, operation|
+      c.create_key({ parent: parent, key: key, key_id: key_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_key(::Google::Cloud::ApiKeys::V2::CreateKeyRequest.new(parent: parent, key: key, key_id: key_id), grpc_options) do |response, operation|
+      c.create_key(::Google::Cloud::ApiKeys::V2::CreateKeyRequest.new(parent: parent, key: key, key_id: key_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -155,40 +155,40 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_keys_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
+      c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_keys({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
+      c.list_keys({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_keys parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
+      c.list_keys parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_keys ::Google::Cloud::ApiKeys::V2::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
+      c.list_keys ::Google::Cloud::ApiKeys::V2::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_keys({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_keys({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_keys(::Google::Cloud::ApiKeys::V2::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_keys(::Google::Cloud::ApiKeys::V2::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -218,36 +218,36 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_key_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
+      c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_key({ name: name }) do |response, operation|
+      c.get_key({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_key name: name do |response, operation|
+      c.get_key name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_key ::Google::Cloud::ApiKeys::V2::GetKeyRequest.new(name: name) do |response, operation|
+      c.get_key ::Google::Cloud::ApiKeys::V2::GetKeyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_key({ name: name }, grpc_options) do |response, operation|
+      c.get_key({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_key(::Google::Cloud::ApiKeys::V2::GetKeyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_key(::Google::Cloud::ApiKeys::V2::GetKeyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -276,36 +276,36 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_key_string_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
+      c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_key_string({ name: name }) do |response, operation|
+      c.get_key_string({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_key_string name: name do |response, operation|
+      c.get_key_string name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_key_string ::Google::Cloud::ApiKeys::V2::GetKeyStringRequest.new(name: name) do |response, operation|
+      c.get_key_string ::Google::Cloud::ApiKeys::V2::GetKeyStringRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_key_string({ name: name }, grpc_options) do |response, operation|
+      c.get_key_string({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_key_string(::Google::Cloud::ApiKeys::V2::GetKeyStringRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_key_string(::Google::Cloud::ApiKeys::V2::GetKeyStringRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -336,40 +336,40 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_key_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
+      c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_key({ key: key, update_mask: update_mask }) do |response, operation|
+      c.update_key({ key: key, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_key key: key, update_mask: update_mask do |response, operation|
+      c.update_key key: key, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_key ::Google::Cloud::ApiKeys::V2::UpdateKeyRequest.new(key: key, update_mask: update_mask) do |response, operation|
+      c.update_key ::Google::Cloud::ApiKeys::V2::UpdateKeyRequest.new(key: key, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_key({ key: key, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_key({ key: key, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_key(::Google::Cloud::ApiKeys::V2::UpdateKeyRequest.new(key: key, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_key(::Google::Cloud::ApiKeys::V2::UpdateKeyRequest.new(key: key, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -401,40 +401,40 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_key_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
+      c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_key({ name: name, etag: etag }) do |response, operation|
+      c.delete_key({ name: name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_key name: name, etag: etag do |response, operation|
+      c.delete_key name: name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_key ::Google::Cloud::ApiKeys::V2::DeleteKeyRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_key ::Google::Cloud::ApiKeys::V2::DeleteKeyRequest.new(name: name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_key({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_key({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_key(::Google::Cloud::ApiKeys::V2::DeleteKeyRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_key(::Google::Cloud::ApiKeys::V2::DeleteKeyRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -464,40 +464,40 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, undelete_key_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
+      c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undelete_key({ name: name }) do |response, operation|
+      c.undelete_key({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undelete_key name: name do |response, operation|
+      c.undelete_key name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undelete_key ::Google::Cloud::ApiKeys::V2::UndeleteKeyRequest.new(name: name) do |response, operation|
+      c.undelete_key ::Google::Cloud::ApiKeys::V2::UndeleteKeyRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undelete_key({ name: name }, grpc_options) do |response, operation|
+      c.undelete_key({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undelete_key(::Google::Cloud::ApiKeys::V2::UndeleteKeyRequest.new(name: name), grpc_options) do |response, operation|
+      c.undelete_key(::Google::Cloud::ApiKeys::V2::UndeleteKeyRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -527,36 +527,36 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, lookup_key_client_stub do
       # Create client
-      client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
+      c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.lookup_key({ key_string: key_string }) do |response, operation|
+      c.lookup_key({ key_string: key_string }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.lookup_key key_string: key_string do |response, operation|
+      c.lookup_key key_string: key_string do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.lookup_key ::Google::Cloud::ApiKeys::V2::LookupKeyRequest.new(key_string: key_string) do |response, operation|
+      c.lookup_key ::Google::Cloud::ApiKeys::V2::LookupKeyRequest.new(key_string: key_string) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.lookup_key({ key_string: key_string }, grpc_options) do |response, operation|
+      c.lookup_key({ key_string: key_string }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.lookup_key(::Google::Cloud::ApiKeys::V2::LookupKeyRequest.new(key_string: key_string), grpc_options) do |response, operation|
+      c.lookup_key(::Google::Cloud::ApiKeys::V2::LookupKeyRequest.new(key_string: key_string), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

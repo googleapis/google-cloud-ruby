@@ -97,32 +97,32 @@ class ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::ClientTest <
     ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::ServiceStub.stub :transcode_get_mcp_server_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_mcp_server_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_mcp_server({ name: name }) do |_result, response|
+        c.get_mcp_server({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_mcp_server name: name do |_result, response|
+        c.get_mcp_server name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_mcp_server ::Google::Cloud::ApiRegistry::V1beta::GetMcpServerRequest.new(name: name) do |_result, response|
+        c.get_mcp_server ::Google::Cloud::ApiRegistry::V1beta::GetMcpServerRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_mcp_server({ name: name }, call_options) do |_result, response|
+        c.get_mcp_server({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_mcp_server(::Google::Cloud::ApiRegistry::V1beta::GetMcpServerRequest.new(name: name), call_options) do |_result, response|
+        c.get_mcp_server(::Google::Cloud::ApiRegistry::V1beta::GetMcpServerRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::ClientTest <
     ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::ServiceStub.stub :transcode_list_mcp_servers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_mcp_servers_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_mcp_servers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_mcp_servers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_mcp_servers parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_mcp_servers parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_mcp_servers ::Google::Cloud::ApiRegistry::V1beta::ListMcpServersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_mcp_servers ::Google::Cloud::ApiRegistry::V1beta::ListMcpServersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_mcp_servers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_mcp_servers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_mcp_servers(::Google::Cloud::ApiRegistry::V1beta::ListMcpServersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_mcp_servers(::Google::Cloud::ApiRegistry::V1beta::ListMcpServersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::ClientTest <
     ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::ServiceStub.stub :transcode_get_mcp_tool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_mcp_tool_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_mcp_tool({ name: name }) do |_result, response|
+        c.get_mcp_tool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_mcp_tool name: name do |_result, response|
+        c.get_mcp_tool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_mcp_tool ::Google::Cloud::ApiRegistry::V1beta::GetMcpToolRequest.new(name: name) do |_result, response|
+        c.get_mcp_tool ::Google::Cloud::ApiRegistry::V1beta::GetMcpToolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_mcp_tool({ name: name }, call_options) do |_result, response|
+        c.get_mcp_tool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_mcp_tool(::Google::Cloud::ApiRegistry::V1beta::GetMcpToolRequest.new(name: name), call_options) do |_result, response|
+        c.get_mcp_tool(::Google::Cloud::ApiRegistry::V1beta::GetMcpToolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::ClientTest <
     ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::ServiceStub.stub :transcode_list_mcp_tools_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_mcp_tools_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_mcp_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_mcp_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_mcp_tools parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_mcp_tools parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_mcp_tools ::Google::Cloud::ApiRegistry::V1beta::ListMcpToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_mcp_tools ::Google::Cloud::ApiRegistry::V1beta::ListMcpToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_mcp_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_mcp_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_mcp_tools(::Google::Cloud::ApiRegistry::V1beta::ListMcpToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_mcp_tools(::Google::Cloud::ApiRegistry::V1beta::ListMcpToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

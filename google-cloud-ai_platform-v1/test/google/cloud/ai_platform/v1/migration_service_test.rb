@@ -88,40 +88,40 @@ class ::Google::Cloud::AIPlatform::V1::MigrationService::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, search_migratable_resources_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MigrationService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_migratable_resources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.search_migratable_resources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_migratable_resources parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.search_migratable_resources parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_migratable_resources ::Google::Cloud::AIPlatform::V1::SearchMigratableResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.search_migratable_resources ::Google::Cloud::AIPlatform::V1::SearchMigratableResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_migratable_resources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.search_migratable_resources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_migratable_resources(::Google::Cloud::AIPlatform::V1::SearchMigratableResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.search_migratable_resources(::Google::Cloud::AIPlatform::V1::SearchMigratableResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,40 +153,40 @@ class ::Google::Cloud::AIPlatform::V1::MigrationService::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, batch_migrate_resources_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::MigrationService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::MigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_migrate_resources({ parent: parent, migrate_resource_requests: migrate_resource_requests }) do |response, operation|
+      c.batch_migrate_resources({ parent: parent, migrate_resource_requests: migrate_resource_requests }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_migrate_resources parent: parent, migrate_resource_requests: migrate_resource_requests do |response, operation|
+      c.batch_migrate_resources parent: parent, migrate_resource_requests: migrate_resource_requests do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_migrate_resources ::Google::Cloud::AIPlatform::V1::BatchMigrateResourcesRequest.new(parent: parent, migrate_resource_requests: migrate_resource_requests) do |response, operation|
+      c.batch_migrate_resources ::Google::Cloud::AIPlatform::V1::BatchMigrateResourcesRequest.new(parent: parent, migrate_resource_requests: migrate_resource_requests) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_migrate_resources({ parent: parent, migrate_resource_requests: migrate_resource_requests }, grpc_options) do |response, operation|
+      c.batch_migrate_resources({ parent: parent, migrate_resource_requests: migrate_resource_requests }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_migrate_resources(::Google::Cloud::AIPlatform::V1::BatchMigrateResourcesRequest.new(parent: parent, migrate_resource_requests: migrate_resource_requests), grpc_options) do |response, operation|
+      c.batch_migrate_resources(::Google::Cloud::AIPlatform::V1::BatchMigrateResourcesRequest.new(parent: parent, migrate_resource_requests: migrate_resource_requests), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

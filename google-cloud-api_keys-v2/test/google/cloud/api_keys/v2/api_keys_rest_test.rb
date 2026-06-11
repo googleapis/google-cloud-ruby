@@ -99,32 +99,32 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ServiceStub.stub :transcode_create_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_key_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_key({ parent: parent, key: key, key_id: key_id }) do |_result, response|
+        c.create_key({ parent: parent, key: key, key_id: key_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_key parent: parent, key: key, key_id: key_id do |_result, response|
+        c.create_key parent: parent, key: key, key_id: key_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_key ::Google::Cloud::ApiKeys::V2::CreateKeyRequest.new(parent: parent, key: key, key_id: key_id) do |_result, response|
+        c.create_key ::Google::Cloud::ApiKeys::V2::CreateKeyRequest.new(parent: parent, key: key, key_id: key_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_key({ parent: parent, key: key, key_id: key_id }, call_options) do |_result, response|
+        c.create_key({ parent: parent, key: key, key_id: key_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_key(::Google::Cloud::ApiKeys::V2::CreateKeyRequest.new(parent: parent, key: key, key_id: key_id), call_options) do |_result, response|
+        c.create_key(::Google::Cloud::ApiKeys::V2::CreateKeyRequest.new(parent: parent, key: key, key_id: key_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ServiceStub.stub :transcode_list_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_keys_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_keys({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
+        c.list_keys({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_keys parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
+        c.list_keys parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_keys ::Google::Cloud::ApiKeys::V2::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
+        c.list_keys ::Google::Cloud::ApiKeys::V2::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_keys({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_keys({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_keys(::Google::Cloud::ApiKeys::V2::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_keys(::Google::Cloud::ApiKeys::V2::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ServiceStub.stub :transcode_get_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_key_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_key({ name: name }) do |_result, response|
+        c.get_key({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_key name: name do |_result, response|
+        c.get_key name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_key ::Google::Cloud::ApiKeys::V2::GetKeyRequest.new(name: name) do |_result, response|
+        c.get_key ::Google::Cloud::ApiKeys::V2::GetKeyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_key({ name: name }, call_options) do |_result, response|
+        c.get_key({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_key(::Google::Cloud::ApiKeys::V2::GetKeyRequest.new(name: name), call_options) do |_result, response|
+        c.get_key(::Google::Cloud::ApiKeys::V2::GetKeyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ServiceStub.stub :transcode_get_key_string_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_key_string_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_key_string({ name: name }) do |_result, response|
+        c.get_key_string({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_key_string name: name do |_result, response|
+        c.get_key_string name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_key_string ::Google::Cloud::ApiKeys::V2::GetKeyStringRequest.new(name: name) do |_result, response|
+        c.get_key_string ::Google::Cloud::ApiKeys::V2::GetKeyStringRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_key_string({ name: name }, call_options) do |_result, response|
+        c.get_key_string({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_key_string(::Google::Cloud::ApiKeys::V2::GetKeyStringRequest.new(name: name), call_options) do |_result, response|
+        c.get_key_string(::Google::Cloud::ApiKeys::V2::GetKeyStringRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ServiceStub.stub :transcode_update_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_key_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_key({ key: key, update_mask: update_mask }) do |_result, response|
+        c.update_key({ key: key, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_key key: key, update_mask: update_mask do |_result, response|
+        c.update_key key: key, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_key ::Google::Cloud::ApiKeys::V2::UpdateKeyRequest.new(key: key, update_mask: update_mask) do |_result, response|
+        c.update_key ::Google::Cloud::ApiKeys::V2::UpdateKeyRequest.new(key: key, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_key({ key: key, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_key({ key: key, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_key(::Google::Cloud::ApiKeys::V2::UpdateKeyRequest.new(key: key, update_mask: update_mask), call_options) do |_result, response|
+        c.update_key(::Google::Cloud::ApiKeys::V2::UpdateKeyRequest.new(key: key, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ServiceStub.stub :transcode_delete_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_key_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_key({ name: name, etag: etag }) do |_result, response|
+        c.delete_key({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_key name: name, etag: etag do |_result, response|
+        c.delete_key name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_key ::Google::Cloud::ApiKeys::V2::DeleteKeyRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_key ::Google::Cloud::ApiKeys::V2::DeleteKeyRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_key({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_key({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_key(::Google::Cloud::ApiKeys::V2::DeleteKeyRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_key(::Google::Cloud::ApiKeys::V2::DeleteKeyRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ServiceStub.stub :transcode_undelete_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undelete_key_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undelete_key({ name: name }) do |_result, response|
+        c.undelete_key({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undelete_key name: name do |_result, response|
+        c.undelete_key name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undelete_key ::Google::Cloud::ApiKeys::V2::UndeleteKeyRequest.new(name: name) do |_result, response|
+        c.undelete_key ::Google::Cloud::ApiKeys::V2::UndeleteKeyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undelete_key({ name: name }, call_options) do |_result, response|
+        c.undelete_key({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undelete_key(::Google::Cloud::ApiKeys::V2::UndeleteKeyRequest.new(name: name), call_options) do |_result, response|
+        c.undelete_key(::Google::Cloud::ApiKeys::V2::UndeleteKeyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -482,32 +482,32 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::ServiceStub.stub :transcode_lookup_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, lookup_key_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.lookup_key({ key_string: key_string }) do |_result, response|
+        c.lookup_key({ key_string: key_string }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lookup_key key_string: key_string do |_result, response|
+        c.lookup_key key_string: key_string do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lookup_key ::Google::Cloud::ApiKeys::V2::LookupKeyRequest.new(key_string: key_string) do |_result, response|
+        c.lookup_key ::Google::Cloud::ApiKeys::V2::LookupKeyRequest.new(key_string: key_string) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lookup_key({ key_string: key_string }, call_options) do |_result, response|
+        c.lookup_key({ key_string: key_string }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lookup_key(::Google::Cloud::ApiKeys::V2::LookupKeyRequest.new(key_string: key_string), call_options) do |_result, response|
+        c.lookup_key(::Google::Cloud::ApiKeys::V2::LookupKeyRequest.new(key_string: key_string), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

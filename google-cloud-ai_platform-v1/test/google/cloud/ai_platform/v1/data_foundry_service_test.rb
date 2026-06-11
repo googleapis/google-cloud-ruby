@@ -91,36 +91,36 @@ class ::Google::Cloud::AIPlatform::V1::DataFoundryService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, generate_synthetic_data_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::DataFoundryService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::DataFoundryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_synthetic_data({ task_description: task_description, location: location, count: count, output_field_specs: output_field_specs, examples: examples }) do |response, operation|
+      c.generate_synthetic_data({ task_description: task_description, location: location, count: count, output_field_specs: output_field_specs, examples: examples }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_synthetic_data task_description: task_description, location: location, count: count, output_field_specs: output_field_specs, examples: examples do |response, operation|
+      c.generate_synthetic_data task_description: task_description, location: location, count: count, output_field_specs: output_field_specs, examples: examples do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_synthetic_data ::Google::Cloud::AIPlatform::V1::GenerateSyntheticDataRequest.new(task_description: task_description, location: location, count: count, output_field_specs: output_field_specs, examples: examples) do |response, operation|
+      c.generate_synthetic_data ::Google::Cloud::AIPlatform::V1::GenerateSyntheticDataRequest.new(task_description: task_description, location: location, count: count, output_field_specs: output_field_specs, examples: examples) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_synthetic_data({ task_description: task_description, location: location, count: count, output_field_specs: output_field_specs, examples: examples }, grpc_options) do |response, operation|
+      c.generate_synthetic_data({ task_description: task_description, location: location, count: count, output_field_specs: output_field_specs, examples: examples }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_synthetic_data(::Google::Cloud::AIPlatform::V1::GenerateSyntheticDataRequest.new(task_description: task_description, location: location, count: count, output_field_specs: output_field_specs, examples: examples), grpc_options) do |response, operation|
+      c.generate_synthetic_data(::Google::Cloud::AIPlatform::V1::GenerateSyntheticDataRequest.new(task_description: task_description, location: location, count: count, output_field_specs: output_field_specs, examples: examples), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
