@@ -1,5 +1,29 @@
 # Changelog
 
+### 0.29.0 (2026-06-11)
+
+#### Features
+
+* add custom prompt config in the request and return prompt in the response 
+* add instances client library 
+* Add irb as explicit dependency for Ruby 4.0 compatibility 
+* add SourceCode proto to Run container config 
+* publish client batch config schema 
+* publish new error reasons 
+* update gapic-common dependency to 1.3 and document retry jitter ([#32252](https://github.com/googleapis/google-cloud-ruby/issues/32252)) 
+* update min_speaker_count and max_speaker_count to be optional 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Documentation
+
+* add instances description 
+* An existing repeated string field custom_audiences is marked deprecated for WorkerPools API 
+* Clarify that min_speaker_count and max_speaker_count in SpeakerDiarizationConfig are not currently used 
+* fix documentation formatting 
+* Update guidance on how to enable speaker diarization; to enable, set the diarization_config field to an empty SpeakerDiarizationConfig message 
+* update license year 
+* update various comments 
+
 ### 0.28.1 (2025-10-27)
 
 #### Documentation
