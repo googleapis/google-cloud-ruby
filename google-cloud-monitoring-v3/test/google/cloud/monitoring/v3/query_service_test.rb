@@ -88,40 +88,40 @@ class ::Google::Cloud::Monitoring::V3::QueryService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, query_time_series_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::QueryService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::QueryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_time_series({ name: name, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.query_time_series({ name: name, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_time_series name: name, query: query, page_size: page_size, page_token: page_token do |response, operation|
+      c.query_time_series name: name, query: query, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_time_series ::Google::Cloud::Monitoring::V3::QueryTimeSeriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token) do |response, operation|
+      c.query_time_series ::Google::Cloud::Monitoring::V3::QueryTimeSeriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_time_series({ name: name, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.query_time_series({ name: name, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_time_series(::Google::Cloud::Monitoring::V3::QueryTimeSeriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.query_time_series(::Google::Cloud::Monitoring::V3::QueryTimeSeriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

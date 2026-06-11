@@ -90,40 +90,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_storage_pools_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_storage_pools({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_storage_pools({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_storage_pools parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_storage_pools parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_storage_pools ::Google::Cloud::NetApp::V1::ListStoragePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_storage_pools ::Google::Cloud::NetApp::V1::ListStoragePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_storage_pools({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_storage_pools({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_storage_pools(::Google::Cloud::NetApp::V1::ListStoragePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_storage_pools(::Google::Cloud::NetApp::V1::ListStoragePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -157,40 +157,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_storage_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_storage_pool({ parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool }) do |response, operation|
+      c.create_storage_pool({ parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_storage_pool parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool do |response, operation|
+      c.create_storage_pool parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_storage_pool ::Google::Cloud::NetApp::V1::CreateStoragePoolRequest.new(parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool) do |response, operation|
+      c.create_storage_pool ::Google::Cloud::NetApp::V1::CreateStoragePoolRequest.new(parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_storage_pool({ parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool }, grpc_options) do |response, operation|
+      c.create_storage_pool({ parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_storage_pool(::Google::Cloud::NetApp::V1::CreateStoragePoolRequest.new(parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool), grpc_options) do |response, operation|
+      c.create_storage_pool(::Google::Cloud::NetApp::V1::CreateStoragePoolRequest.new(parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -220,36 +220,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_storage_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_storage_pool({ name: name }) do |response, operation|
+      c.get_storage_pool({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_storage_pool name: name do |response, operation|
+      c.get_storage_pool name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_storage_pool ::Google::Cloud::NetApp::V1::GetStoragePoolRequest.new(name: name) do |response, operation|
+      c.get_storage_pool ::Google::Cloud::NetApp::V1::GetStoragePoolRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_storage_pool({ name: name }, grpc_options) do |response, operation|
+      c.get_storage_pool({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_storage_pool(::Google::Cloud::NetApp::V1::GetStoragePoolRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_storage_pool(::Google::Cloud::NetApp::V1::GetStoragePoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -280,40 +280,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_storage_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_storage_pool({ update_mask: update_mask, storage_pool: storage_pool }) do |response, operation|
+      c.update_storage_pool({ update_mask: update_mask, storage_pool: storage_pool }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_storage_pool update_mask: update_mask, storage_pool: storage_pool do |response, operation|
+      c.update_storage_pool update_mask: update_mask, storage_pool: storage_pool do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_storage_pool ::Google::Cloud::NetApp::V1::UpdateStoragePoolRequest.new(update_mask: update_mask, storage_pool: storage_pool) do |response, operation|
+      c.update_storage_pool ::Google::Cloud::NetApp::V1::UpdateStoragePoolRequest.new(update_mask: update_mask, storage_pool: storage_pool) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_storage_pool({ update_mask: update_mask, storage_pool: storage_pool }, grpc_options) do |response, operation|
+      c.update_storage_pool({ update_mask: update_mask, storage_pool: storage_pool }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_storage_pool(::Google::Cloud::NetApp::V1::UpdateStoragePoolRequest.new(update_mask: update_mask, storage_pool: storage_pool), grpc_options) do |response, operation|
+      c.update_storage_pool(::Google::Cloud::NetApp::V1::UpdateStoragePoolRequest.new(update_mask: update_mask, storage_pool: storage_pool), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -343,40 +343,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_storage_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_storage_pool({ name: name }) do |response, operation|
+      c.delete_storage_pool({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_storage_pool name: name do |response, operation|
+      c.delete_storage_pool name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_storage_pool ::Google::Cloud::NetApp::V1::DeleteStoragePoolRequest.new(name: name) do |response, operation|
+      c.delete_storage_pool ::Google::Cloud::NetApp::V1::DeleteStoragePoolRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_storage_pool({ name: name }, grpc_options) do |response, operation|
+      c.delete_storage_pool({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_storage_pool(::Google::Cloud::NetApp::V1::DeleteStoragePoolRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_storage_pool(::Google::Cloud::NetApp::V1::DeleteStoragePoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -408,40 +408,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, validate_directory_service_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.validate_directory_service({ name: name, directory_service_type: directory_service_type }) do |response, operation|
+      c.validate_directory_service({ name: name, directory_service_type: directory_service_type }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.validate_directory_service name: name, directory_service_type: directory_service_type do |response, operation|
+      c.validate_directory_service name: name, directory_service_type: directory_service_type do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.validate_directory_service ::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest.new(name: name, directory_service_type: directory_service_type) do |response, operation|
+      c.validate_directory_service ::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest.new(name: name, directory_service_type: directory_service_type) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.validate_directory_service({ name: name, directory_service_type: directory_service_type }, grpc_options) do |response, operation|
+      c.validate_directory_service({ name: name, directory_service_type: directory_service_type }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.validate_directory_service(::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest.new(name: name, directory_service_type: directory_service_type), grpc_options) do |response, operation|
+      c.validate_directory_service(::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest.new(name: name, directory_service_type: directory_service_type), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -471,40 +471,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, switch_active_replica_zone_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.switch_active_replica_zone({ name: name }) do |response, operation|
+      c.switch_active_replica_zone({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.switch_active_replica_zone name: name do |response, operation|
+      c.switch_active_replica_zone name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.switch_active_replica_zone ::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest.new(name: name) do |response, operation|
+      c.switch_active_replica_zone ::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.switch_active_replica_zone({ name: name }, grpc_options) do |response, operation|
+      c.switch_active_replica_zone({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.switch_active_replica_zone(::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest.new(name: name), grpc_options) do |response, operation|
+      c.switch_active_replica_zone(::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -542,40 +542,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_volumes_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_volumes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_volumes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_volumes ::Google::Cloud::NetApp::V1::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_volumes ::Google::Cloud::NetApp::V1::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_volumes(::Google::Cloud::NetApp::V1::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_volumes(::Google::Cloud::NetApp::V1::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -605,36 +605,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_volume_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_volume({ name: name }) do |response, operation|
+      c.get_volume({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_volume name: name do |response, operation|
+      c.get_volume name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_volume ::Google::Cloud::NetApp::V1::GetVolumeRequest.new(name: name) do |response, operation|
+      c.get_volume ::Google::Cloud::NetApp::V1::GetVolumeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_volume({ name: name }, grpc_options) do |response, operation|
+      c.get_volume({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_volume(::Google::Cloud::NetApp::V1::GetVolumeRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_volume(::Google::Cloud::NetApp::V1::GetVolumeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -667,40 +667,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_volume_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_volume({ parent: parent, volume_id: volume_id, volume: volume }) do |response, operation|
+      c.create_volume({ parent: parent, volume_id: volume_id, volume: volume }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_volume parent: parent, volume_id: volume_id, volume: volume do |response, operation|
+      c.create_volume parent: parent, volume_id: volume_id, volume: volume do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_volume ::Google::Cloud::NetApp::V1::CreateVolumeRequest.new(parent: parent, volume_id: volume_id, volume: volume) do |response, operation|
+      c.create_volume ::Google::Cloud::NetApp::V1::CreateVolumeRequest.new(parent: parent, volume_id: volume_id, volume: volume) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_volume({ parent: parent, volume_id: volume_id, volume: volume }, grpc_options) do |response, operation|
+      c.create_volume({ parent: parent, volume_id: volume_id, volume: volume }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_volume(::Google::Cloud::NetApp::V1::CreateVolumeRequest.new(parent: parent, volume_id: volume_id, volume: volume), grpc_options) do |response, operation|
+      c.create_volume(::Google::Cloud::NetApp::V1::CreateVolumeRequest.new(parent: parent, volume_id: volume_id, volume: volume), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -732,40 +732,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_volume_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_volume({ update_mask: update_mask, volume: volume }) do |response, operation|
+      c.update_volume({ update_mask: update_mask, volume: volume }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_volume update_mask: update_mask, volume: volume do |response, operation|
+      c.update_volume update_mask: update_mask, volume: volume do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_volume ::Google::Cloud::NetApp::V1::UpdateVolumeRequest.new(update_mask: update_mask, volume: volume) do |response, operation|
+      c.update_volume ::Google::Cloud::NetApp::V1::UpdateVolumeRequest.new(update_mask: update_mask, volume: volume) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_volume({ update_mask: update_mask, volume: volume }, grpc_options) do |response, operation|
+      c.update_volume({ update_mask: update_mask, volume: volume }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_volume(::Google::Cloud::NetApp::V1::UpdateVolumeRequest.new(update_mask: update_mask, volume: volume), grpc_options) do |response, operation|
+      c.update_volume(::Google::Cloud::NetApp::V1::UpdateVolumeRequest.new(update_mask: update_mask, volume: volume), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -797,40 +797,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_volume_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_volume({ name: name, force: force }) do |response, operation|
+      c.delete_volume({ name: name, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_volume name: name, force: force do |response, operation|
+      c.delete_volume name: name, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_volume ::Google::Cloud::NetApp::V1::DeleteVolumeRequest.new(name: name, force: force) do |response, operation|
+      c.delete_volume ::Google::Cloud::NetApp::V1::DeleteVolumeRequest.new(name: name, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_volume({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_volume({ name: name, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_volume(::Google::Cloud::NetApp::V1::DeleteVolumeRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_volume(::Google::Cloud::NetApp::V1::DeleteVolumeRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -862,40 +862,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, revert_volume_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.revert_volume({ name: name, snapshot_id: snapshot_id }) do |response, operation|
+      c.revert_volume({ name: name, snapshot_id: snapshot_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.revert_volume name: name, snapshot_id: snapshot_id do |response, operation|
+      c.revert_volume name: name, snapshot_id: snapshot_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.revert_volume ::Google::Cloud::NetApp::V1::RevertVolumeRequest.new(name: name, snapshot_id: snapshot_id) do |response, operation|
+      c.revert_volume ::Google::Cloud::NetApp::V1::RevertVolumeRequest.new(name: name, snapshot_id: snapshot_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.revert_volume({ name: name, snapshot_id: snapshot_id }, grpc_options) do |response, operation|
+      c.revert_volume({ name: name, snapshot_id: snapshot_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.revert_volume(::Google::Cloud::NetApp::V1::RevertVolumeRequest.new(name: name, snapshot_id: snapshot_id), grpc_options) do |response, operation|
+      c.revert_volume(::Google::Cloud::NetApp::V1::RevertVolumeRequest.new(name: name, snapshot_id: snapshot_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -933,40 +933,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, establish_volume_peering_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.establish_volume_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }) do |response, operation|
+      c.establish_volume_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.establish_volume_peering name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name do |response, operation|
+      c.establish_volume_peering name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.establish_volume_peering ::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name) do |response, operation|
+      c.establish_volume_peering ::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.establish_volume_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }, grpc_options) do |response, operation|
+      c.establish_volume_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.establish_volume_peering(::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name), grpc_options) do |response, operation|
+      c.establish_volume_peering(::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1004,40 +1004,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_snapshots_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_snapshots parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_snapshots parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_snapshots ::Google::Cloud::NetApp::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_snapshots ::Google::Cloud::NetApp::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_snapshots(::Google::Cloud::NetApp::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_snapshots(::Google::Cloud::NetApp::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1067,36 +1067,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_snapshot({ name: name }) do |response, operation|
+      c.get_snapshot({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_snapshot name: name do |response, operation|
+      c.get_snapshot name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_snapshot ::Google::Cloud::NetApp::V1::GetSnapshotRequest.new(name: name) do |response, operation|
+      c.get_snapshot ::Google::Cloud::NetApp::V1::GetSnapshotRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_snapshot({ name: name }, grpc_options) do |response, operation|
+      c.get_snapshot({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_snapshot(::Google::Cloud::NetApp::V1::GetSnapshotRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_snapshot(::Google::Cloud::NetApp::V1::GetSnapshotRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1129,40 +1129,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_snapshot({ parent: parent, snapshot: snapshot, snapshot_id: snapshot_id }) do |response, operation|
+      c.create_snapshot({ parent: parent, snapshot: snapshot, snapshot_id: snapshot_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_snapshot parent: parent, snapshot: snapshot, snapshot_id: snapshot_id do |response, operation|
+      c.create_snapshot parent: parent, snapshot: snapshot, snapshot_id: snapshot_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_snapshot ::Google::Cloud::NetApp::V1::CreateSnapshotRequest.new(parent: parent, snapshot: snapshot, snapshot_id: snapshot_id) do |response, operation|
+      c.create_snapshot ::Google::Cloud::NetApp::V1::CreateSnapshotRequest.new(parent: parent, snapshot: snapshot, snapshot_id: snapshot_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_snapshot({ parent: parent, snapshot: snapshot, snapshot_id: snapshot_id }, grpc_options) do |response, operation|
+      c.create_snapshot({ parent: parent, snapshot: snapshot, snapshot_id: snapshot_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_snapshot(::Google::Cloud::NetApp::V1::CreateSnapshotRequest.new(parent: parent, snapshot: snapshot, snapshot_id: snapshot_id), grpc_options) do |response, operation|
+      c.create_snapshot(::Google::Cloud::NetApp::V1::CreateSnapshotRequest.new(parent: parent, snapshot: snapshot, snapshot_id: snapshot_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1192,40 +1192,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_snapshot({ name: name }) do |response, operation|
+      c.delete_snapshot({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_snapshot name: name do |response, operation|
+      c.delete_snapshot name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_snapshot ::Google::Cloud::NetApp::V1::DeleteSnapshotRequest.new(name: name) do |response, operation|
+      c.delete_snapshot ::Google::Cloud::NetApp::V1::DeleteSnapshotRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_snapshot({ name: name }, grpc_options) do |response, operation|
+      c.delete_snapshot({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_snapshot(::Google::Cloud::NetApp::V1::DeleteSnapshotRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_snapshot(::Google::Cloud::NetApp::V1::DeleteSnapshotRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1257,40 +1257,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_snapshot_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_snapshot({ update_mask: update_mask, snapshot: snapshot }) do |response, operation|
+      c.update_snapshot({ update_mask: update_mask, snapshot: snapshot }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_snapshot update_mask: update_mask, snapshot: snapshot do |response, operation|
+      c.update_snapshot update_mask: update_mask, snapshot: snapshot do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_snapshot ::Google::Cloud::NetApp::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot) do |response, operation|
+      c.update_snapshot ::Google::Cloud::NetApp::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_snapshot({ update_mask: update_mask, snapshot: snapshot }, grpc_options) do |response, operation|
+      c.update_snapshot({ update_mask: update_mask, snapshot: snapshot }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_snapshot(::Google::Cloud::NetApp::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot), grpc_options) do |response, operation|
+      c.update_snapshot(::Google::Cloud::NetApp::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1328,40 +1328,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_active_directories_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_active_directories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_active_directories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_active_directories parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_active_directories parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_active_directories ::Google::Cloud::NetApp::V1::ListActiveDirectoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_active_directories ::Google::Cloud::NetApp::V1::ListActiveDirectoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_active_directories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_active_directories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_active_directories(::Google::Cloud::NetApp::V1::ListActiveDirectoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_active_directories(::Google::Cloud::NetApp::V1::ListActiveDirectoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1391,36 +1391,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_active_directory_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_active_directory({ name: name }) do |response, operation|
+      c.get_active_directory({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_active_directory name: name do |response, operation|
+      c.get_active_directory name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_active_directory ::Google::Cloud::NetApp::V1::GetActiveDirectoryRequest.new(name: name) do |response, operation|
+      c.get_active_directory ::Google::Cloud::NetApp::V1::GetActiveDirectoryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_active_directory({ name: name }, grpc_options) do |response, operation|
+      c.get_active_directory({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_active_directory(::Google::Cloud::NetApp::V1::GetActiveDirectoryRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_active_directory(::Google::Cloud::NetApp::V1::GetActiveDirectoryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1453,40 +1453,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_active_directory_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_active_directory({ parent: parent, active_directory: active_directory, active_directory_id: active_directory_id }) do |response, operation|
+      c.create_active_directory({ parent: parent, active_directory: active_directory, active_directory_id: active_directory_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_active_directory parent: parent, active_directory: active_directory, active_directory_id: active_directory_id do |response, operation|
+      c.create_active_directory parent: parent, active_directory: active_directory, active_directory_id: active_directory_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_active_directory ::Google::Cloud::NetApp::V1::CreateActiveDirectoryRequest.new(parent: parent, active_directory: active_directory, active_directory_id: active_directory_id) do |response, operation|
+      c.create_active_directory ::Google::Cloud::NetApp::V1::CreateActiveDirectoryRequest.new(parent: parent, active_directory: active_directory, active_directory_id: active_directory_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_active_directory({ parent: parent, active_directory: active_directory, active_directory_id: active_directory_id }, grpc_options) do |response, operation|
+      c.create_active_directory({ parent: parent, active_directory: active_directory, active_directory_id: active_directory_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_active_directory(::Google::Cloud::NetApp::V1::CreateActiveDirectoryRequest.new(parent: parent, active_directory: active_directory, active_directory_id: active_directory_id), grpc_options) do |response, operation|
+      c.create_active_directory(::Google::Cloud::NetApp::V1::CreateActiveDirectoryRequest.new(parent: parent, active_directory: active_directory, active_directory_id: active_directory_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1518,40 +1518,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_active_directory_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_active_directory({ update_mask: update_mask, active_directory: active_directory }) do |response, operation|
+      c.update_active_directory({ update_mask: update_mask, active_directory: active_directory }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_active_directory update_mask: update_mask, active_directory: active_directory do |response, operation|
+      c.update_active_directory update_mask: update_mask, active_directory: active_directory do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_active_directory ::Google::Cloud::NetApp::V1::UpdateActiveDirectoryRequest.new(update_mask: update_mask, active_directory: active_directory) do |response, operation|
+      c.update_active_directory ::Google::Cloud::NetApp::V1::UpdateActiveDirectoryRequest.new(update_mask: update_mask, active_directory: active_directory) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_active_directory({ update_mask: update_mask, active_directory: active_directory }, grpc_options) do |response, operation|
+      c.update_active_directory({ update_mask: update_mask, active_directory: active_directory }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_active_directory(::Google::Cloud::NetApp::V1::UpdateActiveDirectoryRequest.new(update_mask: update_mask, active_directory: active_directory), grpc_options) do |response, operation|
+      c.update_active_directory(::Google::Cloud::NetApp::V1::UpdateActiveDirectoryRequest.new(update_mask: update_mask, active_directory: active_directory), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1581,40 +1581,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_active_directory_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_active_directory({ name: name }) do |response, operation|
+      c.delete_active_directory({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_active_directory name: name do |response, operation|
+      c.delete_active_directory name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_active_directory ::Google::Cloud::NetApp::V1::DeleteActiveDirectoryRequest.new(name: name) do |response, operation|
+      c.delete_active_directory ::Google::Cloud::NetApp::V1::DeleteActiveDirectoryRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_active_directory({ name: name }, grpc_options) do |response, operation|
+      c.delete_active_directory({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_active_directory(::Google::Cloud::NetApp::V1::DeleteActiveDirectoryRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_active_directory(::Google::Cloud::NetApp::V1::DeleteActiveDirectoryRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1652,40 +1652,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_kms_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_kms_configs({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_kms_configs({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_kms_configs parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_kms_configs parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_kms_configs ::Google::Cloud::NetApp::V1::ListKmsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_kms_configs ::Google::Cloud::NetApp::V1::ListKmsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_kms_configs({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_kms_configs({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_kms_configs(::Google::Cloud::NetApp::V1::ListKmsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_kms_configs(::Google::Cloud::NetApp::V1::ListKmsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1719,40 +1719,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_kms_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_kms_config({ parent: parent, kms_config_id: kms_config_id, kms_config: kms_config }) do |response, operation|
+      c.create_kms_config({ parent: parent, kms_config_id: kms_config_id, kms_config: kms_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_kms_config parent: parent, kms_config_id: kms_config_id, kms_config: kms_config do |response, operation|
+      c.create_kms_config parent: parent, kms_config_id: kms_config_id, kms_config: kms_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_kms_config ::Google::Cloud::NetApp::V1::CreateKmsConfigRequest.new(parent: parent, kms_config_id: kms_config_id, kms_config: kms_config) do |response, operation|
+      c.create_kms_config ::Google::Cloud::NetApp::V1::CreateKmsConfigRequest.new(parent: parent, kms_config_id: kms_config_id, kms_config: kms_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_kms_config({ parent: parent, kms_config_id: kms_config_id, kms_config: kms_config }, grpc_options) do |response, operation|
+      c.create_kms_config({ parent: parent, kms_config_id: kms_config_id, kms_config: kms_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_kms_config(::Google::Cloud::NetApp::V1::CreateKmsConfigRequest.new(parent: parent, kms_config_id: kms_config_id, kms_config: kms_config), grpc_options) do |response, operation|
+      c.create_kms_config(::Google::Cloud::NetApp::V1::CreateKmsConfigRequest.new(parent: parent, kms_config_id: kms_config_id, kms_config: kms_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1782,36 +1782,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_kms_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_kms_config({ name: name }) do |response, operation|
+      c.get_kms_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_kms_config name: name do |response, operation|
+      c.get_kms_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_kms_config ::Google::Cloud::NetApp::V1::GetKmsConfigRequest.new(name: name) do |response, operation|
+      c.get_kms_config ::Google::Cloud::NetApp::V1::GetKmsConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_kms_config({ name: name }, grpc_options) do |response, operation|
+      c.get_kms_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_kms_config(::Google::Cloud::NetApp::V1::GetKmsConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_kms_config(::Google::Cloud::NetApp::V1::GetKmsConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1842,40 +1842,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_kms_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_kms_config({ update_mask: update_mask, kms_config: kms_config }) do |response, operation|
+      c.update_kms_config({ update_mask: update_mask, kms_config: kms_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_kms_config update_mask: update_mask, kms_config: kms_config do |response, operation|
+      c.update_kms_config update_mask: update_mask, kms_config: kms_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_kms_config ::Google::Cloud::NetApp::V1::UpdateKmsConfigRequest.new(update_mask: update_mask, kms_config: kms_config) do |response, operation|
+      c.update_kms_config ::Google::Cloud::NetApp::V1::UpdateKmsConfigRequest.new(update_mask: update_mask, kms_config: kms_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_kms_config({ update_mask: update_mask, kms_config: kms_config }, grpc_options) do |response, operation|
+      c.update_kms_config({ update_mask: update_mask, kms_config: kms_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_kms_config(::Google::Cloud::NetApp::V1::UpdateKmsConfigRequest.new(update_mask: update_mask, kms_config: kms_config), grpc_options) do |response, operation|
+      c.update_kms_config(::Google::Cloud::NetApp::V1::UpdateKmsConfigRequest.new(update_mask: update_mask, kms_config: kms_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1905,40 +1905,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, encrypt_volumes_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.encrypt_volumes({ name: name }) do |response, operation|
+      c.encrypt_volumes({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.encrypt_volumes name: name do |response, operation|
+      c.encrypt_volumes name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.encrypt_volumes ::Google::Cloud::NetApp::V1::EncryptVolumesRequest.new(name: name) do |response, operation|
+      c.encrypt_volumes ::Google::Cloud::NetApp::V1::EncryptVolumesRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.encrypt_volumes({ name: name }, grpc_options) do |response, operation|
+      c.encrypt_volumes({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.encrypt_volumes(::Google::Cloud::NetApp::V1::EncryptVolumesRequest.new(name: name), grpc_options) do |response, operation|
+      c.encrypt_volumes(::Google::Cloud::NetApp::V1::EncryptVolumesRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1968,36 +1968,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, verify_kms_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.verify_kms_config({ name: name }) do |response, operation|
+      c.verify_kms_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.verify_kms_config name: name do |response, operation|
+      c.verify_kms_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.verify_kms_config ::Google::Cloud::NetApp::V1::VerifyKmsConfigRequest.new(name: name) do |response, operation|
+      c.verify_kms_config ::Google::Cloud::NetApp::V1::VerifyKmsConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.verify_kms_config({ name: name }, grpc_options) do |response, operation|
+      c.verify_kms_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.verify_kms_config(::Google::Cloud::NetApp::V1::VerifyKmsConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.verify_kms_config(::Google::Cloud::NetApp::V1::VerifyKmsConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2026,40 +2026,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_kms_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_kms_config({ name: name }) do |response, operation|
+      c.delete_kms_config({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_kms_config name: name do |response, operation|
+      c.delete_kms_config name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_kms_config ::Google::Cloud::NetApp::V1::DeleteKmsConfigRequest.new(name: name) do |response, operation|
+      c.delete_kms_config ::Google::Cloud::NetApp::V1::DeleteKmsConfigRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_kms_config({ name: name }, grpc_options) do |response, operation|
+      c.delete_kms_config({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_kms_config(::Google::Cloud::NetApp::V1::DeleteKmsConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_kms_config(::Google::Cloud::NetApp::V1::DeleteKmsConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2097,40 +2097,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_replications_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_replications({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_replications({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_replications parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_replications parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_replications ::Google::Cloud::NetApp::V1::ListReplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_replications ::Google::Cloud::NetApp::V1::ListReplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_replications({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_replications({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_replications(::Google::Cloud::NetApp::V1::ListReplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_replications(::Google::Cloud::NetApp::V1::ListReplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2160,36 +2160,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_replication_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_replication({ name: name }) do |response, operation|
+      c.get_replication({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_replication name: name do |response, operation|
+      c.get_replication name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_replication ::Google::Cloud::NetApp::V1::GetReplicationRequest.new(name: name) do |response, operation|
+      c.get_replication ::Google::Cloud::NetApp::V1::GetReplicationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_replication({ name: name }, grpc_options) do |response, operation|
+      c.get_replication({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_replication(::Google::Cloud::NetApp::V1::GetReplicationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_replication(::Google::Cloud::NetApp::V1::GetReplicationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2222,40 +2222,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_replication_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_replication({ parent: parent, replication: replication, replication_id: replication_id }) do |response, operation|
+      c.create_replication({ parent: parent, replication: replication, replication_id: replication_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_replication parent: parent, replication: replication, replication_id: replication_id do |response, operation|
+      c.create_replication parent: parent, replication: replication, replication_id: replication_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_replication ::Google::Cloud::NetApp::V1::CreateReplicationRequest.new(parent: parent, replication: replication, replication_id: replication_id) do |response, operation|
+      c.create_replication ::Google::Cloud::NetApp::V1::CreateReplicationRequest.new(parent: parent, replication: replication, replication_id: replication_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_replication({ parent: parent, replication: replication, replication_id: replication_id }, grpc_options) do |response, operation|
+      c.create_replication({ parent: parent, replication: replication, replication_id: replication_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_replication(::Google::Cloud::NetApp::V1::CreateReplicationRequest.new(parent: parent, replication: replication, replication_id: replication_id), grpc_options) do |response, operation|
+      c.create_replication(::Google::Cloud::NetApp::V1::CreateReplicationRequest.new(parent: parent, replication: replication, replication_id: replication_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2285,40 +2285,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_replication_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_replication({ name: name }) do |response, operation|
+      c.delete_replication({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_replication name: name do |response, operation|
+      c.delete_replication name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_replication ::Google::Cloud::NetApp::V1::DeleteReplicationRequest.new(name: name) do |response, operation|
+      c.delete_replication ::Google::Cloud::NetApp::V1::DeleteReplicationRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_replication({ name: name }, grpc_options) do |response, operation|
+      c.delete_replication({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_replication(::Google::Cloud::NetApp::V1::DeleteReplicationRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_replication(::Google::Cloud::NetApp::V1::DeleteReplicationRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2350,40 +2350,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_replication_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_replication({ update_mask: update_mask, replication: replication }) do |response, operation|
+      c.update_replication({ update_mask: update_mask, replication: replication }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_replication update_mask: update_mask, replication: replication do |response, operation|
+      c.update_replication update_mask: update_mask, replication: replication do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_replication ::Google::Cloud::NetApp::V1::UpdateReplicationRequest.new(update_mask: update_mask, replication: replication) do |response, operation|
+      c.update_replication ::Google::Cloud::NetApp::V1::UpdateReplicationRequest.new(update_mask: update_mask, replication: replication) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_replication({ update_mask: update_mask, replication: replication }, grpc_options) do |response, operation|
+      c.update_replication({ update_mask: update_mask, replication: replication }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_replication(::Google::Cloud::NetApp::V1::UpdateReplicationRequest.new(update_mask: update_mask, replication: replication), grpc_options) do |response, operation|
+      c.update_replication(::Google::Cloud::NetApp::V1::UpdateReplicationRequest.new(update_mask: update_mask, replication: replication), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2415,40 +2415,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, stop_replication_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stop_replication({ name: name, force: force }) do |response, operation|
+      c.stop_replication({ name: name, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.stop_replication name: name, force: force do |response, operation|
+      c.stop_replication name: name, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.stop_replication ::Google::Cloud::NetApp::V1::StopReplicationRequest.new(name: name, force: force) do |response, operation|
+      c.stop_replication ::Google::Cloud::NetApp::V1::StopReplicationRequest.new(name: name, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.stop_replication({ name: name, force: force }, grpc_options) do |response, operation|
+      c.stop_replication({ name: name, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.stop_replication(::Google::Cloud::NetApp::V1::StopReplicationRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.stop_replication(::Google::Cloud::NetApp::V1::StopReplicationRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2478,40 +2478,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, resume_replication_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.resume_replication({ name: name }) do |response, operation|
+      c.resume_replication({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.resume_replication name: name do |response, operation|
+      c.resume_replication name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.resume_replication ::Google::Cloud::NetApp::V1::ResumeReplicationRequest.new(name: name) do |response, operation|
+      c.resume_replication ::Google::Cloud::NetApp::V1::ResumeReplicationRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.resume_replication({ name: name }, grpc_options) do |response, operation|
+      c.resume_replication({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.resume_replication(::Google::Cloud::NetApp::V1::ResumeReplicationRequest.new(name: name), grpc_options) do |response, operation|
+      c.resume_replication(::Google::Cloud::NetApp::V1::ResumeReplicationRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2541,40 +2541,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, reverse_replication_direction_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reverse_replication_direction({ name: name }) do |response, operation|
+      c.reverse_replication_direction({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reverse_replication_direction name: name do |response, operation|
+      c.reverse_replication_direction name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reverse_replication_direction ::Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest.new(name: name) do |response, operation|
+      c.reverse_replication_direction ::Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reverse_replication_direction({ name: name }, grpc_options) do |response, operation|
+      c.reverse_replication_direction({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reverse_replication_direction(::Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.reverse_replication_direction(::Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2612,40 +2612,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, establish_peering_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.establish_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }) do |response, operation|
+      c.establish_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.establish_peering name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name do |response, operation|
+      c.establish_peering name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.establish_peering ::Google::Cloud::NetApp::V1::EstablishPeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name) do |response, operation|
+      c.establish_peering ::Google::Cloud::NetApp::V1::EstablishPeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.establish_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }, grpc_options) do |response, operation|
+      c.establish_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.establish_peering(::Google::Cloud::NetApp::V1::EstablishPeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name), grpc_options) do |response, operation|
+      c.establish_peering(::Google::Cloud::NetApp::V1::EstablishPeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2675,40 +2675,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, sync_replication_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.sync_replication({ name: name }) do |response, operation|
+      c.sync_replication({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.sync_replication name: name do |response, operation|
+      c.sync_replication name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.sync_replication ::Google::Cloud::NetApp::V1::SyncReplicationRequest.new(name: name) do |response, operation|
+      c.sync_replication ::Google::Cloud::NetApp::V1::SyncReplicationRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.sync_replication({ name: name }, grpc_options) do |response, operation|
+      c.sync_replication({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.sync_replication(::Google::Cloud::NetApp::V1::SyncReplicationRequest.new(name: name), grpc_options) do |response, operation|
+      c.sync_replication(::Google::Cloud::NetApp::V1::SyncReplicationRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2742,40 +2742,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_backup_vault_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault }) do |response, operation|
+      c.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_backup_vault parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault do |response, operation|
+      c.create_backup_vault parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_backup_vault ::Google::Cloud::NetApp::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault) do |response, operation|
+      c.create_backup_vault ::Google::Cloud::NetApp::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault }, grpc_options) do |response, operation|
+      c.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_backup_vault(::Google::Cloud::NetApp::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault), grpc_options) do |response, operation|
+      c.create_backup_vault(::Google::Cloud::NetApp::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2805,36 +2805,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_backup_vault_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_backup_vault({ name: name }) do |response, operation|
+      c.get_backup_vault({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_backup_vault name: name do |response, operation|
+      c.get_backup_vault name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_backup_vault ::Google::Cloud::NetApp::V1::GetBackupVaultRequest.new(name: name) do |response, operation|
+      c.get_backup_vault ::Google::Cloud::NetApp::V1::GetBackupVaultRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_backup_vault({ name: name }, grpc_options) do |response, operation|
+      c.get_backup_vault({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_backup_vault(::Google::Cloud::NetApp::V1::GetBackupVaultRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_backup_vault(::Google::Cloud::NetApp::V1::GetBackupVaultRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2871,40 +2871,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_backup_vaults_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_backup_vaults parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_backup_vaults parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_backup_vaults ::Google::Cloud::NetApp::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_backup_vaults ::Google::Cloud::NetApp::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_backup_vaults(::Google::Cloud::NetApp::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_backup_vaults(::Google::Cloud::NetApp::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2936,40 +2936,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_backup_vault_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault }) do |response, operation|
+      c.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_backup_vault update_mask: update_mask, backup_vault: backup_vault do |response, operation|
+      c.update_backup_vault update_mask: update_mask, backup_vault: backup_vault do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_backup_vault ::Google::Cloud::NetApp::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault) do |response, operation|
+      c.update_backup_vault ::Google::Cloud::NetApp::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault }, grpc_options) do |response, operation|
+      c.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_backup_vault(::Google::Cloud::NetApp::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault), grpc_options) do |response, operation|
+      c.update_backup_vault(::Google::Cloud::NetApp::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2999,40 +2999,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_backup_vault_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_backup_vault({ name: name }) do |response, operation|
+      c.delete_backup_vault({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_backup_vault name: name do |response, operation|
+      c.delete_backup_vault name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_backup_vault ::Google::Cloud::NetApp::V1::DeleteBackupVaultRequest.new(name: name) do |response, operation|
+      c.delete_backup_vault ::Google::Cloud::NetApp::V1::DeleteBackupVaultRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_backup_vault({ name: name }, grpc_options) do |response, operation|
+      c.delete_backup_vault({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_backup_vault(::Google::Cloud::NetApp::V1::DeleteBackupVaultRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_backup_vault(::Google::Cloud::NetApp::V1::DeleteBackupVaultRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3066,40 +3066,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_backup({ parent: parent, backup_id: backup_id, backup: backup }) do |response, operation|
+      c.create_backup({ parent: parent, backup_id: backup_id, backup: backup }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_backup parent: parent, backup_id: backup_id, backup: backup do |response, operation|
+      c.create_backup parent: parent, backup_id: backup_id, backup: backup do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_backup ::Google::Cloud::NetApp::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup) do |response, operation|
+      c.create_backup ::Google::Cloud::NetApp::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_backup({ parent: parent, backup_id: backup_id, backup: backup }, grpc_options) do |response, operation|
+      c.create_backup({ parent: parent, backup_id: backup_id, backup: backup }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_backup(::Google::Cloud::NetApp::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup), grpc_options) do |response, operation|
+      c.create_backup(::Google::Cloud::NetApp::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3129,36 +3129,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_backup({ name: name }) do |response, operation|
+      c.get_backup({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_backup name: name do |response, operation|
+      c.get_backup name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_backup ::Google::Cloud::NetApp::V1::GetBackupRequest.new(name: name) do |response, operation|
+      c.get_backup ::Google::Cloud::NetApp::V1::GetBackupRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_backup({ name: name }, grpc_options) do |response, operation|
+      c.get_backup({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_backup(::Google::Cloud::NetApp::V1::GetBackupRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_backup(::Google::Cloud::NetApp::V1::GetBackupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3195,40 +3195,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_backups_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_backups parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_backups parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_backups ::Google::Cloud::NetApp::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_backups ::Google::Cloud::NetApp::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_backups(::Google::Cloud::NetApp::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_backups(::Google::Cloud::NetApp::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3258,40 +3258,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_backup({ name: name }) do |response, operation|
+      c.delete_backup({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_backup name: name do |response, operation|
+      c.delete_backup name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_backup ::Google::Cloud::NetApp::V1::DeleteBackupRequest.new(name: name) do |response, operation|
+      c.delete_backup ::Google::Cloud::NetApp::V1::DeleteBackupRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_backup({ name: name }, grpc_options) do |response, operation|
+      c.delete_backup({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_backup(::Google::Cloud::NetApp::V1::DeleteBackupRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_backup(::Google::Cloud::NetApp::V1::DeleteBackupRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3323,40 +3323,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_backup({ update_mask: update_mask, backup: backup }) do |response, operation|
+      c.update_backup({ update_mask: update_mask, backup: backup }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_backup update_mask: update_mask, backup: backup do |response, operation|
+      c.update_backup update_mask: update_mask, backup: backup do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_backup ::Google::Cloud::NetApp::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup) do |response, operation|
+      c.update_backup ::Google::Cloud::NetApp::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_backup({ update_mask: update_mask, backup: backup }, grpc_options) do |response, operation|
+      c.update_backup({ update_mask: update_mask, backup: backup }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_backup(::Google::Cloud::NetApp::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup), grpc_options) do |response, operation|
+      c.update_backup(::Google::Cloud::NetApp::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3390,40 +3390,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_backup_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_backup_policy({ parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id }) do |response, operation|
+      c.create_backup_policy({ parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_backup_policy parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id do |response, operation|
+      c.create_backup_policy parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_backup_policy ::Google::Cloud::NetApp::V1::CreateBackupPolicyRequest.new(parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id) do |response, operation|
+      c.create_backup_policy ::Google::Cloud::NetApp::V1::CreateBackupPolicyRequest.new(parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_backup_policy({ parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id }, grpc_options) do |response, operation|
+      c.create_backup_policy({ parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_backup_policy(::Google::Cloud::NetApp::V1::CreateBackupPolicyRequest.new(parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id), grpc_options) do |response, operation|
+      c.create_backup_policy(::Google::Cloud::NetApp::V1::CreateBackupPolicyRequest.new(parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3453,36 +3453,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_backup_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_backup_policy({ name: name }) do |response, operation|
+      c.get_backup_policy({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_backup_policy name: name do |response, operation|
+      c.get_backup_policy name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_backup_policy ::Google::Cloud::NetApp::V1::GetBackupPolicyRequest.new(name: name) do |response, operation|
+      c.get_backup_policy ::Google::Cloud::NetApp::V1::GetBackupPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_backup_policy({ name: name }, grpc_options) do |response, operation|
+      c.get_backup_policy({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_backup_policy(::Google::Cloud::NetApp::V1::GetBackupPolicyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_backup_policy(::Google::Cloud::NetApp::V1::GetBackupPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3519,40 +3519,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_backup_policies_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_backup_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_backup_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_backup_policies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_backup_policies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_backup_policies ::Google::Cloud::NetApp::V1::ListBackupPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_backup_policies ::Google::Cloud::NetApp::V1::ListBackupPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_backup_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_backup_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_backup_policies(::Google::Cloud::NetApp::V1::ListBackupPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_backup_policies(::Google::Cloud::NetApp::V1::ListBackupPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3584,40 +3584,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_backup_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_backup_policy({ update_mask: update_mask, backup_policy: backup_policy }) do |response, operation|
+      c.update_backup_policy({ update_mask: update_mask, backup_policy: backup_policy }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_backup_policy update_mask: update_mask, backup_policy: backup_policy do |response, operation|
+      c.update_backup_policy update_mask: update_mask, backup_policy: backup_policy do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_backup_policy ::Google::Cloud::NetApp::V1::UpdateBackupPolicyRequest.new(update_mask: update_mask, backup_policy: backup_policy) do |response, operation|
+      c.update_backup_policy ::Google::Cloud::NetApp::V1::UpdateBackupPolicyRequest.new(update_mask: update_mask, backup_policy: backup_policy) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_backup_policy({ update_mask: update_mask, backup_policy: backup_policy }, grpc_options) do |response, operation|
+      c.update_backup_policy({ update_mask: update_mask, backup_policy: backup_policy }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_backup_policy(::Google::Cloud::NetApp::V1::UpdateBackupPolicyRequest.new(update_mask: update_mask, backup_policy: backup_policy), grpc_options) do |response, operation|
+      c.update_backup_policy(::Google::Cloud::NetApp::V1::UpdateBackupPolicyRequest.new(update_mask: update_mask, backup_policy: backup_policy), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3647,40 +3647,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_backup_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_backup_policy({ name: name }) do |response, operation|
+      c.delete_backup_policy({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_backup_policy name: name do |response, operation|
+      c.delete_backup_policy name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_backup_policy ::Google::Cloud::NetApp::V1::DeleteBackupPolicyRequest.new(name: name) do |response, operation|
+      c.delete_backup_policy ::Google::Cloud::NetApp::V1::DeleteBackupPolicyRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_backup_policy({ name: name }, grpc_options) do |response, operation|
+      c.delete_backup_policy({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_backup_policy(::Google::Cloud::NetApp::V1::DeleteBackupPolicyRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_backup_policy(::Google::Cloud::NetApp::V1::DeleteBackupPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3718,40 +3718,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_quota_rules_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_quota_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_quota_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_quota_rules parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_quota_rules parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_quota_rules ::Google::Cloud::NetApp::V1::ListQuotaRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_quota_rules ::Google::Cloud::NetApp::V1::ListQuotaRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_quota_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_quota_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_quota_rules(::Google::Cloud::NetApp::V1::ListQuotaRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_quota_rules(::Google::Cloud::NetApp::V1::ListQuotaRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3781,36 +3781,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_quota_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_quota_rule({ name: name }) do |response, operation|
+      c.get_quota_rule({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_quota_rule name: name do |response, operation|
+      c.get_quota_rule name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_quota_rule ::Google::Cloud::NetApp::V1::GetQuotaRuleRequest.new(name: name) do |response, operation|
+      c.get_quota_rule ::Google::Cloud::NetApp::V1::GetQuotaRuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_quota_rule({ name: name }, grpc_options) do |response, operation|
+      c.get_quota_rule({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_quota_rule(::Google::Cloud::NetApp::V1::GetQuotaRuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_quota_rule(::Google::Cloud::NetApp::V1::GetQuotaRuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3843,40 +3843,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_quota_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_quota_rule({ parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id }) do |response, operation|
+      c.create_quota_rule({ parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_quota_rule parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id do |response, operation|
+      c.create_quota_rule parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_quota_rule ::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest.new(parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id) do |response, operation|
+      c.create_quota_rule ::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest.new(parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_quota_rule({ parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id }, grpc_options) do |response, operation|
+      c.create_quota_rule({ parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_quota_rule(::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest.new(parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id), grpc_options) do |response, operation|
+      c.create_quota_rule(::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest.new(parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3908,40 +3908,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_quota_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_quota_rule({ update_mask: update_mask, quota_rule: quota_rule }) do |response, operation|
+      c.update_quota_rule({ update_mask: update_mask, quota_rule: quota_rule }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_quota_rule update_mask: update_mask, quota_rule: quota_rule do |response, operation|
+      c.update_quota_rule update_mask: update_mask, quota_rule: quota_rule do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_quota_rule ::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest.new(update_mask: update_mask, quota_rule: quota_rule) do |response, operation|
+      c.update_quota_rule ::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest.new(update_mask: update_mask, quota_rule: quota_rule) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_quota_rule({ update_mask: update_mask, quota_rule: quota_rule }, grpc_options) do |response, operation|
+      c.update_quota_rule({ update_mask: update_mask, quota_rule: quota_rule }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_quota_rule(::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest.new(update_mask: update_mask, quota_rule: quota_rule), grpc_options) do |response, operation|
+      c.update_quota_rule(::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest.new(update_mask: update_mask, quota_rule: quota_rule), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3971,40 +3971,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_quota_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_quota_rule({ name: name }) do |response, operation|
+      c.delete_quota_rule({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_quota_rule name: name do |response, operation|
+      c.delete_quota_rule name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_quota_rule ::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest.new(name: name) do |response, operation|
+      c.delete_quota_rule ::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_quota_rule({ name: name }, grpc_options) do |response, operation|
+      c.delete_quota_rule({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_quota_rule(::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_quota_rule(::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -4040,40 +4040,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, restore_backup_files_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restore_backup_files({ name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path }) do |response, operation|
+      c.restore_backup_files({ name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restore_backup_files name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path do |response, operation|
+      c.restore_backup_files name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restore_backup_files ::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest.new(name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path) do |response, operation|
+      c.restore_backup_files ::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest.new(name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restore_backup_files({ name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path }, grpc_options) do |response, operation|
+      c.restore_backup_files({ name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restore_backup_files(::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest.new(name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path), grpc_options) do |response, operation|
+      c.restore_backup_files(::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest.new(name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -4111,40 +4111,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_host_groups_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_host_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_host_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_host_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_host_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_host_groups ::Google::Cloud::NetApp::V1::ListHostGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_host_groups ::Google::Cloud::NetApp::V1::ListHostGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_host_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_host_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_host_groups(::Google::Cloud::NetApp::V1::ListHostGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_host_groups(::Google::Cloud::NetApp::V1::ListHostGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -4174,36 +4174,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_host_group_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_host_group({ name: name }) do |response, operation|
+      c.get_host_group({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_host_group name: name do |response, operation|
+      c.get_host_group name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_host_group ::Google::Cloud::NetApp::V1::GetHostGroupRequest.new(name: name) do |response, operation|
+      c.get_host_group ::Google::Cloud::NetApp::V1::GetHostGroupRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_host_group({ name: name }, grpc_options) do |response, operation|
+      c.get_host_group({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_host_group(::Google::Cloud::NetApp::V1::GetHostGroupRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_host_group(::Google::Cloud::NetApp::V1::GetHostGroupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4236,40 +4236,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_host_group_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_host_group({ parent: parent, host_group: host_group, host_group_id: host_group_id }) do |response, operation|
+      c.create_host_group({ parent: parent, host_group: host_group, host_group_id: host_group_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_host_group parent: parent, host_group: host_group, host_group_id: host_group_id do |response, operation|
+      c.create_host_group parent: parent, host_group: host_group, host_group_id: host_group_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_host_group ::Google::Cloud::NetApp::V1::CreateHostGroupRequest.new(parent: parent, host_group: host_group, host_group_id: host_group_id) do |response, operation|
+      c.create_host_group ::Google::Cloud::NetApp::V1::CreateHostGroupRequest.new(parent: parent, host_group: host_group, host_group_id: host_group_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_host_group({ parent: parent, host_group: host_group, host_group_id: host_group_id }, grpc_options) do |response, operation|
+      c.create_host_group({ parent: parent, host_group: host_group, host_group_id: host_group_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_host_group(::Google::Cloud::NetApp::V1::CreateHostGroupRequest.new(parent: parent, host_group: host_group, host_group_id: host_group_id), grpc_options) do |response, operation|
+      c.create_host_group(::Google::Cloud::NetApp::V1::CreateHostGroupRequest.new(parent: parent, host_group: host_group, host_group_id: host_group_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -4301,40 +4301,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_host_group_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_host_group({ host_group: host_group, update_mask: update_mask }) do |response, operation|
+      c.update_host_group({ host_group: host_group, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_host_group host_group: host_group, update_mask: update_mask do |response, operation|
+      c.update_host_group host_group: host_group, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_host_group ::Google::Cloud::NetApp::V1::UpdateHostGroupRequest.new(host_group: host_group, update_mask: update_mask) do |response, operation|
+      c.update_host_group ::Google::Cloud::NetApp::V1::UpdateHostGroupRequest.new(host_group: host_group, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_host_group({ host_group: host_group, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_host_group({ host_group: host_group, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_host_group(::Google::Cloud::NetApp::V1::UpdateHostGroupRequest.new(host_group: host_group, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_host_group(::Google::Cloud::NetApp::V1::UpdateHostGroupRequest.new(host_group: host_group, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -4364,40 +4364,40 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_host_group_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_host_group({ name: name }) do |response, operation|
+      c.delete_host_group({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_host_group name: name do |response, operation|
+      c.delete_host_group name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_host_group ::Google::Cloud::NetApp::V1::DeleteHostGroupRequest.new(name: name) do |response, operation|
+      c.delete_host_group ::Google::Cloud::NetApp::V1::DeleteHostGroupRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_host_group({ name: name }, grpc_options) do |response, operation|
+      c.delete_host_group({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_host_group(::Google::Cloud::NetApp::V1::DeleteHostGroupRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_host_group(::Google::Cloud::NetApp::V1::DeleteHostGroupRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -4429,36 +4429,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, execute_ontap_post_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.execute_ontap_post({ body: body, ontap_path: ontap_path }) do |response, operation|
+      c.execute_ontap_post({ body: body, ontap_path: ontap_path }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.execute_ontap_post body: body, ontap_path: ontap_path do |response, operation|
+      c.execute_ontap_post body: body, ontap_path: ontap_path do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.execute_ontap_post ::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest.new(body: body, ontap_path: ontap_path) do |response, operation|
+      c.execute_ontap_post ::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest.new(body: body, ontap_path: ontap_path) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.execute_ontap_post({ body: body, ontap_path: ontap_path }, grpc_options) do |response, operation|
+      c.execute_ontap_post({ body: body, ontap_path: ontap_path }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.execute_ontap_post(::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest.new(body: body, ontap_path: ontap_path), grpc_options) do |response, operation|
+      c.execute_ontap_post(::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest.new(body: body, ontap_path: ontap_path), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4487,36 +4487,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, execute_ontap_get_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.execute_ontap_get({ ontap_path: ontap_path }) do |response, operation|
+      c.execute_ontap_get({ ontap_path: ontap_path }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.execute_ontap_get ontap_path: ontap_path do |response, operation|
+      c.execute_ontap_get ontap_path: ontap_path do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.execute_ontap_get ::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest.new(ontap_path: ontap_path) do |response, operation|
+      c.execute_ontap_get ::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest.new(ontap_path: ontap_path) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.execute_ontap_get({ ontap_path: ontap_path }, grpc_options) do |response, operation|
+      c.execute_ontap_get({ ontap_path: ontap_path }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.execute_ontap_get(::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest.new(ontap_path: ontap_path), grpc_options) do |response, operation|
+      c.execute_ontap_get(::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest.new(ontap_path: ontap_path), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4545,36 +4545,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, execute_ontap_delete_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.execute_ontap_delete({ ontap_path: ontap_path }) do |response, operation|
+      c.execute_ontap_delete({ ontap_path: ontap_path }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.execute_ontap_delete ontap_path: ontap_path do |response, operation|
+      c.execute_ontap_delete ontap_path: ontap_path do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.execute_ontap_delete ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest.new(ontap_path: ontap_path) do |response, operation|
+      c.execute_ontap_delete ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest.new(ontap_path: ontap_path) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.execute_ontap_delete({ ontap_path: ontap_path }, grpc_options) do |response, operation|
+      c.execute_ontap_delete({ ontap_path: ontap_path }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.execute_ontap_delete(::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest.new(ontap_path: ontap_path), grpc_options) do |response, operation|
+      c.execute_ontap_delete(::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest.new(ontap_path: ontap_path), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -4605,36 +4605,36 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, execute_ontap_patch_client_stub do
       # Create client
-      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+      c = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.execute_ontap_patch({ body: body, ontap_path: ontap_path }) do |response, operation|
+      c.execute_ontap_patch({ body: body, ontap_path: ontap_path }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.execute_ontap_patch body: body, ontap_path: ontap_path do |response, operation|
+      c.execute_ontap_patch body: body, ontap_path: ontap_path do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.execute_ontap_patch ::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest.new(body: body, ontap_path: ontap_path) do |response, operation|
+      c.execute_ontap_patch ::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest.new(body: body, ontap_path: ontap_path) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.execute_ontap_patch({ body: body, ontap_path: ontap_path }, grpc_options) do |response, operation|
+      c.execute_ontap_patch({ body: body, ontap_path: ontap_path }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.execute_ontap_patch(::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest.new(body: body, ontap_path: ontap_path), grpc_options) do |response, operation|
+      c.execute_ontap_patch(::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest.new(body: body, ontap_path: ontap_path), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -90,40 +90,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, list_service_connection_maps_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_service_connection_maps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_service_connection_maps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_service_connection_maps parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_service_connection_maps parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_service_connection_maps ::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionMapsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_service_connection_maps ::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionMapsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_service_connection_maps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_service_connection_maps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_service_connection_maps(::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionMapsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_service_connection_maps(::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionMapsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, get_service_connection_map_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_service_connection_map({ name: name }) do |response, operation|
+      c.get_service_connection_map({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_service_connection_map name: name do |response, operation|
+      c.get_service_connection_map name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_service_connection_map ::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionMapRequest.new(name: name) do |response, operation|
+      c.get_service_connection_map ::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionMapRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_service_connection_map({ name: name }, grpc_options) do |response, operation|
+      c.get_service_connection_map({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_service_connection_map(::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionMapRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_service_connection_map(::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionMapRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, create_service_connection_map_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_service_connection_map({ parent: parent, service_connection_map_id: service_connection_map_id, service_connection_map: service_connection_map, request_id: request_id }) do |response, operation|
+      c.create_service_connection_map({ parent: parent, service_connection_map_id: service_connection_map_id, service_connection_map: service_connection_map, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_service_connection_map parent: parent, service_connection_map_id: service_connection_map_id, service_connection_map: service_connection_map, request_id: request_id do |response, operation|
+      c.create_service_connection_map parent: parent, service_connection_map_id: service_connection_map_id, service_connection_map: service_connection_map, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_service_connection_map ::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionMapRequest.new(parent: parent, service_connection_map_id: service_connection_map_id, service_connection_map: service_connection_map, request_id: request_id) do |response, operation|
+      c.create_service_connection_map ::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionMapRequest.new(parent: parent, service_connection_map_id: service_connection_map_id, service_connection_map: service_connection_map, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_service_connection_map({ parent: parent, service_connection_map_id: service_connection_map_id, service_connection_map: service_connection_map, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_service_connection_map({ parent: parent, service_connection_map_id: service_connection_map_id, service_connection_map: service_connection_map, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_service_connection_map(::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionMapRequest.new(parent: parent, service_connection_map_id: service_connection_map_id, service_connection_map: service_connection_map, request_id: request_id), grpc_options) do |response, operation|
+      c.create_service_connection_map(::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionMapRequest.new(parent: parent, service_connection_map_id: service_connection_map_id, service_connection_map: service_connection_map, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, update_service_connection_map_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_service_connection_map({ update_mask: update_mask, service_connection_map: service_connection_map, request_id: request_id }) do |response, operation|
+      c.update_service_connection_map({ update_mask: update_mask, service_connection_map: service_connection_map, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_service_connection_map update_mask: update_mask, service_connection_map: service_connection_map, request_id: request_id do |response, operation|
+      c.update_service_connection_map update_mask: update_mask, service_connection_map: service_connection_map, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_service_connection_map ::Google::Cloud::NetworkConnectivity::V1::UpdateServiceConnectionMapRequest.new(update_mask: update_mask, service_connection_map: service_connection_map, request_id: request_id) do |response, operation|
+      c.update_service_connection_map ::Google::Cloud::NetworkConnectivity::V1::UpdateServiceConnectionMapRequest.new(update_mask: update_mask, service_connection_map: service_connection_map, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_service_connection_map({ update_mask: update_mask, service_connection_map: service_connection_map, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_service_connection_map({ update_mask: update_mask, service_connection_map: service_connection_map, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_service_connection_map(::Google::Cloud::NetworkConnectivity::V1::UpdateServiceConnectionMapRequest.new(update_mask: update_mask, service_connection_map: service_connection_map, request_id: request_id), grpc_options) do |response, operation|
+      c.update_service_connection_map(::Google::Cloud::NetworkConnectivity::V1::UpdateServiceConnectionMapRequest.new(update_mask: update_mask, service_connection_map: service_connection_map, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -352,40 +352,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, delete_service_connection_map_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_service_connection_map({ name: name, request_id: request_id, etag: etag }) do |response, operation|
+      c.delete_service_connection_map({ name: name, request_id: request_id, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_service_connection_map name: name, request_id: request_id, etag: etag do |response, operation|
+      c.delete_service_connection_map name: name, request_id: request_id, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_service_connection_map ::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionMapRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
+      c.delete_service_connection_map ::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionMapRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_service_connection_map({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
+      c.delete_service_connection_map({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_service_connection_map(::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionMapRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
+      c.delete_service_connection_map(::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionMapRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -423,40 +423,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, list_service_connection_policies_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_service_connection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_service_connection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_service_connection_policies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_service_connection_policies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_service_connection_policies ::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_service_connection_policies ::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_service_connection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_service_connection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_service_connection_policies(::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_service_connection_policies(::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -486,36 +486,36 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, get_service_connection_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_service_connection_policy({ name: name }) do |response, operation|
+      c.get_service_connection_policy({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_service_connection_policy name: name do |response, operation|
+      c.get_service_connection_policy name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_service_connection_policy ::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionPolicyRequest.new(name: name) do |response, operation|
+      c.get_service_connection_policy ::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_service_connection_policy({ name: name }, grpc_options) do |response, operation|
+      c.get_service_connection_policy({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_service_connection_policy(::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionPolicyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_service_connection_policy(::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -550,40 +550,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, create_service_connection_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_service_connection_policy({ parent: parent, service_connection_policy_id: service_connection_policy_id, service_connection_policy: service_connection_policy, request_id: request_id }) do |response, operation|
+      c.create_service_connection_policy({ parent: parent, service_connection_policy_id: service_connection_policy_id, service_connection_policy: service_connection_policy, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_service_connection_policy parent: parent, service_connection_policy_id: service_connection_policy_id, service_connection_policy: service_connection_policy, request_id: request_id do |response, operation|
+      c.create_service_connection_policy parent: parent, service_connection_policy_id: service_connection_policy_id, service_connection_policy: service_connection_policy, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_service_connection_policy ::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionPolicyRequest.new(parent: parent, service_connection_policy_id: service_connection_policy_id, service_connection_policy: service_connection_policy, request_id: request_id) do |response, operation|
+      c.create_service_connection_policy ::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionPolicyRequest.new(parent: parent, service_connection_policy_id: service_connection_policy_id, service_connection_policy: service_connection_policy, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_service_connection_policy({ parent: parent, service_connection_policy_id: service_connection_policy_id, service_connection_policy: service_connection_policy, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_service_connection_policy({ parent: parent, service_connection_policy_id: service_connection_policy_id, service_connection_policy: service_connection_policy, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_service_connection_policy(::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionPolicyRequest.new(parent: parent, service_connection_policy_id: service_connection_policy_id, service_connection_policy: service_connection_policy, request_id: request_id), grpc_options) do |response, operation|
+      c.create_service_connection_policy(::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionPolicyRequest.new(parent: parent, service_connection_policy_id: service_connection_policy_id, service_connection_policy: service_connection_policy, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -617,40 +617,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, update_service_connection_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_service_connection_policy({ update_mask: update_mask, service_connection_policy: service_connection_policy, request_id: request_id }) do |response, operation|
+      c.update_service_connection_policy({ update_mask: update_mask, service_connection_policy: service_connection_policy, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_service_connection_policy update_mask: update_mask, service_connection_policy: service_connection_policy, request_id: request_id do |response, operation|
+      c.update_service_connection_policy update_mask: update_mask, service_connection_policy: service_connection_policy, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_service_connection_policy ::Google::Cloud::NetworkConnectivity::V1::UpdateServiceConnectionPolicyRequest.new(update_mask: update_mask, service_connection_policy: service_connection_policy, request_id: request_id) do |response, operation|
+      c.update_service_connection_policy ::Google::Cloud::NetworkConnectivity::V1::UpdateServiceConnectionPolicyRequest.new(update_mask: update_mask, service_connection_policy: service_connection_policy, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_service_connection_policy({ update_mask: update_mask, service_connection_policy: service_connection_policy, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_service_connection_policy({ update_mask: update_mask, service_connection_policy: service_connection_policy, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_service_connection_policy(::Google::Cloud::NetworkConnectivity::V1::UpdateServiceConnectionPolicyRequest.new(update_mask: update_mask, service_connection_policy: service_connection_policy, request_id: request_id), grpc_options) do |response, operation|
+      c.update_service_connection_policy(::Google::Cloud::NetworkConnectivity::V1::UpdateServiceConnectionPolicyRequest.new(update_mask: update_mask, service_connection_policy: service_connection_policy, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -685,40 +685,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, delete_service_connection_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_service_connection_policy({ name: name, request_id: request_id, etag: etag }) do |response, operation|
+      c.delete_service_connection_policy({ name: name, request_id: request_id, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_service_connection_policy name: name, request_id: request_id, etag: etag do |response, operation|
+      c.delete_service_connection_policy name: name, request_id: request_id, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_service_connection_policy ::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionPolicyRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
+      c.delete_service_connection_policy ::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionPolicyRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_service_connection_policy({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
+      c.delete_service_connection_policy({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_service_connection_policy(::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionPolicyRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
+      c.delete_service_connection_policy(::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionPolicyRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -756,40 +756,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, list_service_classes_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_service_classes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_service_classes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_service_classes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_service_classes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_service_classes ::Google::Cloud::NetworkConnectivity::V1::ListServiceClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_service_classes ::Google::Cloud::NetworkConnectivity::V1::ListServiceClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_service_classes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_service_classes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_service_classes(::Google::Cloud::NetworkConnectivity::V1::ListServiceClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_service_classes(::Google::Cloud::NetworkConnectivity::V1::ListServiceClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -819,36 +819,36 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, get_service_class_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_service_class({ name: name }) do |response, operation|
+      c.get_service_class({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_service_class name: name do |response, operation|
+      c.get_service_class name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_service_class ::Google::Cloud::NetworkConnectivity::V1::GetServiceClassRequest.new(name: name) do |response, operation|
+      c.get_service_class ::Google::Cloud::NetworkConnectivity::V1::GetServiceClassRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_service_class({ name: name }, grpc_options) do |response, operation|
+      c.get_service_class({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_service_class(::Google::Cloud::NetworkConnectivity::V1::GetServiceClassRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_service_class(::Google::Cloud::NetworkConnectivity::V1::GetServiceClassRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -881,40 +881,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, update_service_class_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_service_class({ update_mask: update_mask, service_class: service_class, request_id: request_id }) do |response, operation|
+      c.update_service_class({ update_mask: update_mask, service_class: service_class, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_service_class update_mask: update_mask, service_class: service_class, request_id: request_id do |response, operation|
+      c.update_service_class update_mask: update_mask, service_class: service_class, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_service_class ::Google::Cloud::NetworkConnectivity::V1::UpdateServiceClassRequest.new(update_mask: update_mask, service_class: service_class, request_id: request_id) do |response, operation|
+      c.update_service_class ::Google::Cloud::NetworkConnectivity::V1::UpdateServiceClassRequest.new(update_mask: update_mask, service_class: service_class, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_service_class({ update_mask: update_mask, service_class: service_class, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_service_class({ update_mask: update_mask, service_class: service_class, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_service_class(::Google::Cloud::NetworkConnectivity::V1::UpdateServiceClassRequest.new(update_mask: update_mask, service_class: service_class, request_id: request_id), grpc_options) do |response, operation|
+      c.update_service_class(::Google::Cloud::NetworkConnectivity::V1::UpdateServiceClassRequest.new(update_mask: update_mask, service_class: service_class, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -949,40 +949,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, delete_service_class_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_service_class({ name: name, request_id: request_id, etag: etag }) do |response, operation|
+      c.delete_service_class({ name: name, request_id: request_id, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_service_class name: name, request_id: request_id, etag: etag do |response, operation|
+      c.delete_service_class name: name, request_id: request_id, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_service_class ::Google::Cloud::NetworkConnectivity::V1::DeleteServiceClassRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
+      c.delete_service_class ::Google::Cloud::NetworkConnectivity::V1::DeleteServiceClassRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_service_class({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
+      c.delete_service_class({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_service_class(::Google::Cloud::NetworkConnectivity::V1::DeleteServiceClassRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
+      c.delete_service_class(::Google::Cloud::NetworkConnectivity::V1::DeleteServiceClassRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1012,36 +1012,36 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, get_service_connection_token_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_service_connection_token({ name: name }) do |response, operation|
+      c.get_service_connection_token({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_service_connection_token name: name do |response, operation|
+      c.get_service_connection_token name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_service_connection_token ::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionTokenRequest.new(name: name) do |response, operation|
+      c.get_service_connection_token ::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionTokenRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_service_connection_token({ name: name }, grpc_options) do |response, operation|
+      c.get_service_connection_token({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_service_connection_token(::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionTokenRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_service_connection_token(::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionTokenRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1078,40 +1078,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, list_service_connection_tokens_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_service_connection_tokens({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_service_connection_tokens({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_service_connection_tokens parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_service_connection_tokens parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_service_connection_tokens ::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionTokensRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_service_connection_tokens ::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionTokensRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_service_connection_tokens({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_service_connection_tokens({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_service_connection_tokens(::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionTokensRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_service_connection_tokens(::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionTokensRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1147,40 +1147,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, create_service_connection_token_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_service_connection_token({ parent: parent, service_connection_token_id: service_connection_token_id, service_connection_token: service_connection_token, request_id: request_id }) do |response, operation|
+      c.create_service_connection_token({ parent: parent, service_connection_token_id: service_connection_token_id, service_connection_token: service_connection_token, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_service_connection_token parent: parent, service_connection_token_id: service_connection_token_id, service_connection_token: service_connection_token, request_id: request_id do |response, operation|
+      c.create_service_connection_token parent: parent, service_connection_token_id: service_connection_token_id, service_connection_token: service_connection_token, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_service_connection_token ::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionTokenRequest.new(parent: parent, service_connection_token_id: service_connection_token_id, service_connection_token: service_connection_token, request_id: request_id) do |response, operation|
+      c.create_service_connection_token ::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionTokenRequest.new(parent: parent, service_connection_token_id: service_connection_token_id, service_connection_token: service_connection_token, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_service_connection_token({ parent: parent, service_connection_token_id: service_connection_token_id, service_connection_token: service_connection_token, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_service_connection_token({ parent: parent, service_connection_token_id: service_connection_token_id, service_connection_token: service_connection_token, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_service_connection_token(::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionTokenRequest.new(parent: parent, service_connection_token_id: service_connection_token_id, service_connection_token: service_connection_token, request_id: request_id), grpc_options) do |response, operation|
+      c.create_service_connection_token(::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionTokenRequest.new(parent: parent, service_connection_token_id: service_connection_token_id, service_connection_token: service_connection_token, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1215,40 +1215,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::C
 
     Gapic::ServiceStub.stub :new, delete_service_connection_token_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_service_connection_token({ name: name, request_id: request_id, etag: etag }) do |response, operation|
+      c.delete_service_connection_token({ name: name, request_id: request_id, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_service_connection_token name: name, request_id: request_id, etag: etag do |response, operation|
+      c.delete_service_connection_token name: name, request_id: request_id, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_service_connection_token ::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionTokenRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
+      c.delete_service_connection_token ::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionTokenRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_service_connection_token({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
+      c.delete_service_connection_token({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_service_connection_token(::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionTokenRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
+      c.delete_service_connection_token(::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionTokenRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -102,32 +102,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_list_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
+        c.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_assets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
+        c.list_assets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_assets ::Google::Cloud::MigrationCenter::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
+        c.list_assets ::Google::Cloud::MigrationCenter::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
+        c.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_assets(::Google::Cloud::MigrationCenter::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
+        c.list_assets(::Google::Cloud::MigrationCenter::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_get_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_asset({ name: name, view: view }) do |_result, response|
+        c.get_asset({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_asset name: name, view: view do |_result, response|
+        c.get_asset name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_asset ::Google::Cloud::MigrationCenter::V1::GetAssetRequest.new(name: name, view: view) do |_result, response|
+        c.get_asset ::Google::Cloud::MigrationCenter::V1::GetAssetRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_asset({ name: name, view: view }, call_options) do |_result, response|
+        c.get_asset({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_asset(::Google::Cloud::MigrationCenter::V1::GetAssetRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_asset(::Google::Cloud::MigrationCenter::V1::GetAssetRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_update_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_asset({ update_mask: update_mask, asset: asset, request_id: request_id }) do |_result, response|
+        c.update_asset({ update_mask: update_mask, asset: asset, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_asset update_mask: update_mask, asset: asset, request_id: request_id do |_result, response|
+        c.update_asset update_mask: update_mask, asset: asset, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_asset ::Google::Cloud::MigrationCenter::V1::UpdateAssetRequest.new(update_mask: update_mask, asset: asset, request_id: request_id) do |_result, response|
+        c.update_asset ::Google::Cloud::MigrationCenter::V1::UpdateAssetRequest.new(update_mask: update_mask, asset: asset, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_asset({ update_mask: update_mask, asset: asset, request_id: request_id }, call_options) do |_result, response|
+        c.update_asset({ update_mask: update_mask, asset: asset, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_asset(::Google::Cloud::MigrationCenter::V1::UpdateAssetRequest.new(update_mask: update_mask, asset: asset, request_id: request_id), call_options) do |_result, response|
+        c.update_asset(::Google::Cloud::MigrationCenter::V1::UpdateAssetRequest.new(update_mask: update_mask, asset: asset, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_batch_update_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_update_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_update_assets({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_update_assets({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_update_assets parent: parent, requests: requests do |_result, response|
+        c.batch_update_assets parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_update_assets ::Google::Cloud::MigrationCenter::V1::BatchUpdateAssetsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_update_assets ::Google::Cloud::MigrationCenter::V1::BatchUpdateAssetsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_update_assets({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_update_assets({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_update_assets(::Google::Cloud::MigrationCenter::V1::BatchUpdateAssetsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_update_assets(::Google::Cloud::MigrationCenter::V1::BatchUpdateAssetsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_delete_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_asset({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_asset({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_asset name: name, request_id: request_id do |_result, response|
+        c.delete_asset name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_asset ::Google::Cloud::MigrationCenter::V1::DeleteAssetRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_asset ::Google::Cloud::MigrationCenter::V1::DeleteAssetRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_asset({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_asset({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_asset(::Google::Cloud::MigrationCenter::V1::DeleteAssetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_asset(::Google::Cloud::MigrationCenter::V1::DeleteAssetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_batch_delete_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_delete_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_delete_assets({ parent: parent, names: names, allow_missing: allow_missing }) do |_result, response|
+        c.batch_delete_assets({ parent: parent, names: names, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_delete_assets parent: parent, names: names, allow_missing: allow_missing do |_result, response|
+        c.batch_delete_assets parent: parent, names: names, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_delete_assets ::Google::Cloud::MigrationCenter::V1::BatchDeleteAssetsRequest.new(parent: parent, names: names, allow_missing: allow_missing) do |_result, response|
+        c.batch_delete_assets ::Google::Cloud::MigrationCenter::V1::BatchDeleteAssetsRequest.new(parent: parent, names: names, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_delete_assets({ parent: parent, names: names, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.batch_delete_assets({ parent: parent, names: names, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_delete_assets(::Google::Cloud::MigrationCenter::V1::BatchDeleteAssetsRequest.new(parent: parent, names: names, allow_missing: allow_missing), call_options) do |_result, response|
+        c.batch_delete_assets(::Google::Cloud::MigrationCenter::V1::BatchDeleteAssetsRequest.new(parent: parent, names: names, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -435,32 +435,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_report_asset_frames_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, report_asset_frames_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.report_asset_frames({ parent: parent, frames: frames, source: source }) do |_result, response|
+        c.report_asset_frames({ parent: parent, frames: frames, source: source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.report_asset_frames parent: parent, frames: frames, source: source do |_result, response|
+        c.report_asset_frames parent: parent, frames: frames, source: source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.report_asset_frames ::Google::Cloud::MigrationCenter::V1::ReportAssetFramesRequest.new(parent: parent, frames: frames, source: source) do |_result, response|
+        c.report_asset_frames ::Google::Cloud::MigrationCenter::V1::ReportAssetFramesRequest.new(parent: parent, frames: frames, source: source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.report_asset_frames({ parent: parent, frames: frames, source: source }, call_options) do |_result, response|
+        c.report_asset_frames({ parent: parent, frames: frames, source: source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.report_asset_frames(::Google::Cloud::MigrationCenter::V1::ReportAssetFramesRequest.new(parent: parent, frames: frames, source: source), call_options) do |_result, response|
+        c.report_asset_frames(::Google::Cloud::MigrationCenter::V1::ReportAssetFramesRequest.new(parent: parent, frames: frames, source: source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -491,32 +491,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_aggregate_assets_values_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, aggregate_assets_values_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.aggregate_assets_values({ parent: parent, aggregations: aggregations, filter: filter }) do |_result, response|
+        c.aggregate_assets_values({ parent: parent, aggregations: aggregations, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregate_assets_values parent: parent, aggregations: aggregations, filter: filter do |_result, response|
+        c.aggregate_assets_values parent: parent, aggregations: aggregations, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregate_assets_values ::Google::Cloud::MigrationCenter::V1::AggregateAssetsValuesRequest.new(parent: parent, aggregations: aggregations, filter: filter) do |_result, response|
+        c.aggregate_assets_values ::Google::Cloud::MigrationCenter::V1::AggregateAssetsValuesRequest.new(parent: parent, aggregations: aggregations, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregate_assets_values({ parent: parent, aggregations: aggregations, filter: filter }, call_options) do |_result, response|
+        c.aggregate_assets_values({ parent: parent, aggregations: aggregations, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregate_assets_values(::Google::Cloud::MigrationCenter::V1::AggregateAssetsValuesRequest.new(parent: parent, aggregations: aggregations, filter: filter), call_options) do |_result, response|
+        c.aggregate_assets_values(::Google::Cloud::MigrationCenter::V1::AggregateAssetsValuesRequest.new(parent: parent, aggregations: aggregations, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -548,32 +548,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_create_import_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_import_job_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job, request_id: request_id }) do |_result, response|
+        c.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_import_job parent: parent, import_job_id: import_job_id, import_job: import_job, request_id: request_id do |_result, response|
+        c.create_import_job parent: parent, import_job_id: import_job_id, import_job: import_job, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_import_job ::Google::Cloud::MigrationCenter::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job, request_id: request_id) do |_result, response|
+        c.create_import_job ::Google::Cloud::MigrationCenter::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job, request_id: request_id }, call_options) do |_result, response|
+        c.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_import_job(::Google::Cloud::MigrationCenter::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job, request_id: request_id), call_options) do |_result, response|
+        c.create_import_job(::Google::Cloud::MigrationCenter::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -607,32 +607,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_list_import_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_import_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
+        c.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_import_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
+        c.list_import_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_import_jobs ::Google::Cloud::MigrationCenter::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
+        c.list_import_jobs ::Google::Cloud::MigrationCenter::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
+        c.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_import_jobs(::Google::Cloud::MigrationCenter::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
+        c.list_import_jobs(::Google::Cloud::MigrationCenter::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -662,32 +662,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_get_import_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_import_job_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_import_job({ name: name, view: view }) do |_result, response|
+        c.get_import_job({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_import_job name: name, view: view do |_result, response|
+        c.get_import_job name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_import_job ::Google::Cloud::MigrationCenter::V1::GetImportJobRequest.new(name: name, view: view) do |_result, response|
+        c.get_import_job ::Google::Cloud::MigrationCenter::V1::GetImportJobRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_import_job({ name: name, view: view }, call_options) do |_result, response|
+        c.get_import_job({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_import_job(::Google::Cloud::MigrationCenter::V1::GetImportJobRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_import_job(::Google::Cloud::MigrationCenter::V1::GetImportJobRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -718,32 +718,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_delete_import_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_import_job_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_import_job({ name: name, request_id: request_id, force: force }) do |_result, response|
+        c.delete_import_job({ name: name, request_id: request_id, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_import_job name: name, request_id: request_id, force: force do |_result, response|
+        c.delete_import_job name: name, request_id: request_id, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_import_job ::Google::Cloud::MigrationCenter::V1::DeleteImportJobRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
+        c.delete_import_job ::Google::Cloud::MigrationCenter::V1::DeleteImportJobRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_import_job({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
+        c.delete_import_job({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_import_job(::Google::Cloud::MigrationCenter::V1::DeleteImportJobRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
+        c.delete_import_job(::Google::Cloud::MigrationCenter::V1::DeleteImportJobRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -774,32 +774,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_update_import_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_import_job_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_import_job({ update_mask: update_mask, import_job: import_job, request_id: request_id }) do |_result, response|
+        c.update_import_job({ update_mask: update_mask, import_job: import_job, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_import_job update_mask: update_mask, import_job: import_job, request_id: request_id do |_result, response|
+        c.update_import_job update_mask: update_mask, import_job: import_job, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_import_job ::Google::Cloud::MigrationCenter::V1::UpdateImportJobRequest.new(update_mask: update_mask, import_job: import_job, request_id: request_id) do |_result, response|
+        c.update_import_job ::Google::Cloud::MigrationCenter::V1::UpdateImportJobRequest.new(update_mask: update_mask, import_job: import_job, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_import_job({ update_mask: update_mask, import_job: import_job, request_id: request_id }, call_options) do |_result, response|
+        c.update_import_job({ update_mask: update_mask, import_job: import_job, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_import_job(::Google::Cloud::MigrationCenter::V1::UpdateImportJobRequest.new(update_mask: update_mask, import_job: import_job, request_id: request_id), call_options) do |_result, response|
+        c.update_import_job(::Google::Cloud::MigrationCenter::V1::UpdateImportJobRequest.new(update_mask: update_mask, import_job: import_job, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -829,32 +829,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_validate_import_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, validate_import_job_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.validate_import_job({ name: name, request_id: request_id }) do |_result, response|
+        c.validate_import_job({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.validate_import_job name: name, request_id: request_id do |_result, response|
+        c.validate_import_job name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.validate_import_job ::Google::Cloud::MigrationCenter::V1::ValidateImportJobRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.validate_import_job ::Google::Cloud::MigrationCenter::V1::ValidateImportJobRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.validate_import_job({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.validate_import_job({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.validate_import_job(::Google::Cloud::MigrationCenter::V1::ValidateImportJobRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.validate_import_job(::Google::Cloud::MigrationCenter::V1::ValidateImportJobRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -884,32 +884,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_run_import_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_import_job_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_import_job({ name: name, request_id: request_id }) do |_result, response|
+        c.run_import_job({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_import_job name: name, request_id: request_id do |_result, response|
+        c.run_import_job name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_import_job ::Google::Cloud::MigrationCenter::V1::RunImportJobRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.run_import_job ::Google::Cloud::MigrationCenter::V1::RunImportJobRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_import_job({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.run_import_job({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_import_job(::Google::Cloud::MigrationCenter::V1::RunImportJobRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.run_import_job(::Google::Cloud::MigrationCenter::V1::RunImportJobRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -938,32 +938,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_get_import_data_file_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_import_data_file_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_import_data_file({ name: name }) do |_result, response|
+        c.get_import_data_file({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_import_data_file name: name do |_result, response|
+        c.get_import_data_file name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_import_data_file ::Google::Cloud::MigrationCenter::V1::GetImportDataFileRequest.new(name: name) do |_result, response|
+        c.get_import_data_file ::Google::Cloud::MigrationCenter::V1::GetImportDataFileRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_import_data_file({ name: name }, call_options) do |_result, response|
+        c.get_import_data_file({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_import_data_file(::Google::Cloud::MigrationCenter::V1::GetImportDataFileRequest.new(name: name), call_options) do |_result, response|
+        c.get_import_data_file(::Google::Cloud::MigrationCenter::V1::GetImportDataFileRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -996,32 +996,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_list_import_data_files_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_import_data_files_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_import_data_files({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_import_data_files({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_import_data_files parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_import_data_files parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_import_data_files ::Google::Cloud::MigrationCenter::V1::ListImportDataFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_import_data_files ::Google::Cloud::MigrationCenter::V1::ListImportDataFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_import_data_files({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_import_data_files({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_import_data_files(::Google::Cloud::MigrationCenter::V1::ListImportDataFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_import_data_files(::Google::Cloud::MigrationCenter::V1::ListImportDataFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1053,32 +1053,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_create_import_data_file_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_import_data_file_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_import_data_file({ parent: parent, import_data_file_id: import_data_file_id, import_data_file: import_data_file, request_id: request_id }) do |_result, response|
+        c.create_import_data_file({ parent: parent, import_data_file_id: import_data_file_id, import_data_file: import_data_file, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_import_data_file parent: parent, import_data_file_id: import_data_file_id, import_data_file: import_data_file, request_id: request_id do |_result, response|
+        c.create_import_data_file parent: parent, import_data_file_id: import_data_file_id, import_data_file: import_data_file, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_import_data_file ::Google::Cloud::MigrationCenter::V1::CreateImportDataFileRequest.new(parent: parent, import_data_file_id: import_data_file_id, import_data_file: import_data_file, request_id: request_id) do |_result, response|
+        c.create_import_data_file ::Google::Cloud::MigrationCenter::V1::CreateImportDataFileRequest.new(parent: parent, import_data_file_id: import_data_file_id, import_data_file: import_data_file, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_import_data_file({ parent: parent, import_data_file_id: import_data_file_id, import_data_file: import_data_file, request_id: request_id }, call_options) do |_result, response|
+        c.create_import_data_file({ parent: parent, import_data_file_id: import_data_file_id, import_data_file: import_data_file, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_import_data_file(::Google::Cloud::MigrationCenter::V1::CreateImportDataFileRequest.new(parent: parent, import_data_file_id: import_data_file_id, import_data_file: import_data_file, request_id: request_id), call_options) do |_result, response|
+        c.create_import_data_file(::Google::Cloud::MigrationCenter::V1::CreateImportDataFileRequest.new(parent: parent, import_data_file_id: import_data_file_id, import_data_file: import_data_file, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1108,32 +1108,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_delete_import_data_file_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_import_data_file_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_import_data_file({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_import_data_file({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_import_data_file name: name, request_id: request_id do |_result, response|
+        c.delete_import_data_file name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_import_data_file ::Google::Cloud::MigrationCenter::V1::DeleteImportDataFileRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_import_data_file ::Google::Cloud::MigrationCenter::V1::DeleteImportDataFileRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_import_data_file({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_import_data_file({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_import_data_file(::Google::Cloud::MigrationCenter::V1::DeleteImportDataFileRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_import_data_file(::Google::Cloud::MigrationCenter::V1::DeleteImportDataFileRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1166,32 +1166,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_list_groups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_groups_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_groups ::Google::Cloud::MigrationCenter::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_groups ::Google::Cloud::MigrationCenter::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_groups(::Google::Cloud::MigrationCenter::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_groups(::Google::Cloud::MigrationCenter::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1220,32 +1220,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_get_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_group_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_group({ name: name }) do |_result, response|
+        c.get_group({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_group name: name do |_result, response|
+        c.get_group name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_group ::Google::Cloud::MigrationCenter::V1::GetGroupRequest.new(name: name) do |_result, response|
+        c.get_group ::Google::Cloud::MigrationCenter::V1::GetGroupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_group({ name: name }, call_options) do |_result, response|
+        c.get_group({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_group(::Google::Cloud::MigrationCenter::V1::GetGroupRequest.new(name: name), call_options) do |_result, response|
+        c.get_group(::Google::Cloud::MigrationCenter::V1::GetGroupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1277,32 +1277,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_create_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_group_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_group({ parent: parent, group_id: group_id, group: group, request_id: request_id }) do |_result, response|
+        c.create_group({ parent: parent, group_id: group_id, group: group, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_group parent: parent, group_id: group_id, group: group, request_id: request_id do |_result, response|
+        c.create_group parent: parent, group_id: group_id, group: group, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_group ::Google::Cloud::MigrationCenter::V1::CreateGroupRequest.new(parent: parent, group_id: group_id, group: group, request_id: request_id) do |_result, response|
+        c.create_group ::Google::Cloud::MigrationCenter::V1::CreateGroupRequest.new(parent: parent, group_id: group_id, group: group, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_group({ parent: parent, group_id: group_id, group: group, request_id: request_id }, call_options) do |_result, response|
+        c.create_group({ parent: parent, group_id: group_id, group: group, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_group(::Google::Cloud::MigrationCenter::V1::CreateGroupRequest.new(parent: parent, group_id: group_id, group: group, request_id: request_id), call_options) do |_result, response|
+        c.create_group(::Google::Cloud::MigrationCenter::V1::CreateGroupRequest.new(parent: parent, group_id: group_id, group: group, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1333,32 +1333,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_update_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_group_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_group({ update_mask: update_mask, group: group, request_id: request_id }) do |_result, response|
+        c.update_group({ update_mask: update_mask, group: group, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_group update_mask: update_mask, group: group, request_id: request_id do |_result, response|
+        c.update_group update_mask: update_mask, group: group, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_group ::Google::Cloud::MigrationCenter::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id) do |_result, response|
+        c.update_group ::Google::Cloud::MigrationCenter::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_group({ update_mask: update_mask, group: group, request_id: request_id }, call_options) do |_result, response|
+        c.update_group({ update_mask: update_mask, group: group, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_group(::Google::Cloud::MigrationCenter::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id), call_options) do |_result, response|
+        c.update_group(::Google::Cloud::MigrationCenter::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1388,32 +1388,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_delete_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_group_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_group({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_group({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_group name: name, request_id: request_id do |_result, response|
+        c.delete_group name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_group ::Google::Cloud::MigrationCenter::V1::DeleteGroupRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_group ::Google::Cloud::MigrationCenter::V1::DeleteGroupRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_group({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_group({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_group(::Google::Cloud::MigrationCenter::V1::DeleteGroupRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_group(::Google::Cloud::MigrationCenter::V1::DeleteGroupRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1445,32 +1445,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_add_assets_to_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, add_assets_to_group_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.add_assets_to_group({ group: group, request_id: request_id, assets: assets, allow_existing: allow_existing }) do |_result, response|
+        c.add_assets_to_group({ group: group, request_id: request_id, assets: assets, allow_existing: allow_existing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.add_assets_to_group group: group, request_id: request_id, assets: assets, allow_existing: allow_existing do |_result, response|
+        c.add_assets_to_group group: group, request_id: request_id, assets: assets, allow_existing: allow_existing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.add_assets_to_group ::Google::Cloud::MigrationCenter::V1::AddAssetsToGroupRequest.new(group: group, request_id: request_id, assets: assets, allow_existing: allow_existing) do |_result, response|
+        c.add_assets_to_group ::Google::Cloud::MigrationCenter::V1::AddAssetsToGroupRequest.new(group: group, request_id: request_id, assets: assets, allow_existing: allow_existing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.add_assets_to_group({ group: group, request_id: request_id, assets: assets, allow_existing: allow_existing }, call_options) do |_result, response|
+        c.add_assets_to_group({ group: group, request_id: request_id, assets: assets, allow_existing: allow_existing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.add_assets_to_group(::Google::Cloud::MigrationCenter::V1::AddAssetsToGroupRequest.new(group: group, request_id: request_id, assets: assets, allow_existing: allow_existing), call_options) do |_result, response|
+        c.add_assets_to_group(::Google::Cloud::MigrationCenter::V1::AddAssetsToGroupRequest.new(group: group, request_id: request_id, assets: assets, allow_existing: allow_existing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1502,32 +1502,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_remove_assets_from_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, remove_assets_from_group_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.remove_assets_from_group({ group: group, request_id: request_id, assets: assets, allow_missing: allow_missing }) do |_result, response|
+        c.remove_assets_from_group({ group: group, request_id: request_id, assets: assets, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.remove_assets_from_group group: group, request_id: request_id, assets: assets, allow_missing: allow_missing do |_result, response|
+        c.remove_assets_from_group group: group, request_id: request_id, assets: assets, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.remove_assets_from_group ::Google::Cloud::MigrationCenter::V1::RemoveAssetsFromGroupRequest.new(group: group, request_id: request_id, assets: assets, allow_missing: allow_missing) do |_result, response|
+        c.remove_assets_from_group ::Google::Cloud::MigrationCenter::V1::RemoveAssetsFromGroupRequest.new(group: group, request_id: request_id, assets: assets, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.remove_assets_from_group({ group: group, request_id: request_id, assets: assets, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.remove_assets_from_group({ group: group, request_id: request_id, assets: assets, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.remove_assets_from_group(::Google::Cloud::MigrationCenter::V1::RemoveAssetsFromGroupRequest.new(group: group, request_id: request_id, assets: assets, allow_missing: allow_missing), call_options) do |_result, response|
+        c.remove_assets_from_group(::Google::Cloud::MigrationCenter::V1::RemoveAssetsFromGroupRequest.new(group: group, request_id: request_id, assets: assets, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1559,32 +1559,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_list_error_frames_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_error_frames_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_error_frames({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |_result, response|
+        c.list_error_frames({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_error_frames parent: parent, page_size: page_size, page_token: page_token, view: view do |_result, response|
+        c.list_error_frames parent: parent, page_size: page_size, page_token: page_token, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_error_frames ::Google::Cloud::MigrationCenter::V1::ListErrorFramesRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |_result, response|
+        c.list_error_frames ::Google::Cloud::MigrationCenter::V1::ListErrorFramesRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_error_frames({ parent: parent, page_size: page_size, page_token: page_token, view: view }, call_options) do |_result, response|
+        c.list_error_frames({ parent: parent, page_size: page_size, page_token: page_token, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_error_frames(::Google::Cloud::MigrationCenter::V1::ListErrorFramesRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), call_options) do |_result, response|
+        c.list_error_frames(::Google::Cloud::MigrationCenter::V1::ListErrorFramesRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1614,32 +1614,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_get_error_frame_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_error_frame_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_error_frame({ name: name, view: view }) do |_result, response|
+        c.get_error_frame({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_error_frame name: name, view: view do |_result, response|
+        c.get_error_frame name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_error_frame ::Google::Cloud::MigrationCenter::V1::GetErrorFrameRequest.new(name: name, view: view) do |_result, response|
+        c.get_error_frame ::Google::Cloud::MigrationCenter::V1::GetErrorFrameRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_error_frame({ name: name, view: view }, call_options) do |_result, response|
+        c.get_error_frame({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_error_frame(::Google::Cloud::MigrationCenter::V1::GetErrorFrameRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_error_frame(::Google::Cloud::MigrationCenter::V1::GetErrorFrameRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1672,32 +1672,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_list_sources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_sources_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_sources parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_sources parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_sources ::Google::Cloud::MigrationCenter::V1::ListSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_sources ::Google::Cloud::MigrationCenter::V1::ListSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_sources(::Google::Cloud::MigrationCenter::V1::ListSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_sources(::Google::Cloud::MigrationCenter::V1::ListSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1726,32 +1726,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_get_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_source_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_source({ name: name }) do |_result, response|
+        c.get_source({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_source name: name do |_result, response|
+        c.get_source name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_source ::Google::Cloud::MigrationCenter::V1::GetSourceRequest.new(name: name) do |_result, response|
+        c.get_source ::Google::Cloud::MigrationCenter::V1::GetSourceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_source({ name: name }, call_options) do |_result, response|
+        c.get_source({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_source(::Google::Cloud::MigrationCenter::V1::GetSourceRequest.new(name: name), call_options) do |_result, response|
+        c.get_source(::Google::Cloud::MigrationCenter::V1::GetSourceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1783,32 +1783,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_create_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_source_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_source({ parent: parent, source_id: source_id, source: source, request_id: request_id }) do |_result, response|
+        c.create_source({ parent: parent, source_id: source_id, source: source, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_source parent: parent, source_id: source_id, source: source, request_id: request_id do |_result, response|
+        c.create_source parent: parent, source_id: source_id, source: source, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_source ::Google::Cloud::MigrationCenter::V1::CreateSourceRequest.new(parent: parent, source_id: source_id, source: source, request_id: request_id) do |_result, response|
+        c.create_source ::Google::Cloud::MigrationCenter::V1::CreateSourceRequest.new(parent: parent, source_id: source_id, source: source, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_source({ parent: parent, source_id: source_id, source: source, request_id: request_id }, call_options) do |_result, response|
+        c.create_source({ parent: parent, source_id: source_id, source: source, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_source(::Google::Cloud::MigrationCenter::V1::CreateSourceRequest.new(parent: parent, source_id: source_id, source: source, request_id: request_id), call_options) do |_result, response|
+        c.create_source(::Google::Cloud::MigrationCenter::V1::CreateSourceRequest.new(parent: parent, source_id: source_id, source: source, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1839,32 +1839,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_update_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_source_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_source({ update_mask: update_mask, source: source, request_id: request_id }) do |_result, response|
+        c.update_source({ update_mask: update_mask, source: source, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_source update_mask: update_mask, source: source, request_id: request_id do |_result, response|
+        c.update_source update_mask: update_mask, source: source, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_source ::Google::Cloud::MigrationCenter::V1::UpdateSourceRequest.new(update_mask: update_mask, source: source, request_id: request_id) do |_result, response|
+        c.update_source ::Google::Cloud::MigrationCenter::V1::UpdateSourceRequest.new(update_mask: update_mask, source: source, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_source({ update_mask: update_mask, source: source, request_id: request_id }, call_options) do |_result, response|
+        c.update_source({ update_mask: update_mask, source: source, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_source(::Google::Cloud::MigrationCenter::V1::UpdateSourceRequest.new(update_mask: update_mask, source: source, request_id: request_id), call_options) do |_result, response|
+        c.update_source(::Google::Cloud::MigrationCenter::V1::UpdateSourceRequest.new(update_mask: update_mask, source: source, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1894,32 +1894,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_delete_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_source_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_source({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_source({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_source name: name, request_id: request_id do |_result, response|
+        c.delete_source name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_source ::Google::Cloud::MigrationCenter::V1::DeleteSourceRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_source ::Google::Cloud::MigrationCenter::V1::DeleteSourceRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_source({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_source({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_source(::Google::Cloud::MigrationCenter::V1::DeleteSourceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_source(::Google::Cloud::MigrationCenter::V1::DeleteSourceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1951,32 +1951,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_list_preference_sets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_preference_sets_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_preference_sets({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
+        c.list_preference_sets({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_preference_sets parent: parent, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
+        c.list_preference_sets parent: parent, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_preference_sets ::Google::Cloud::MigrationCenter::V1::ListPreferenceSetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
+        c.list_preference_sets ::Google::Cloud::MigrationCenter::V1::ListPreferenceSetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_preference_sets({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
+        c.list_preference_sets({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_preference_sets(::Google::Cloud::MigrationCenter::V1::ListPreferenceSetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
+        c.list_preference_sets(::Google::Cloud::MigrationCenter::V1::ListPreferenceSetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2005,32 +2005,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_get_preference_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_preference_set_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_preference_set({ name: name }) do |_result, response|
+        c.get_preference_set({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_preference_set name: name do |_result, response|
+        c.get_preference_set name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_preference_set ::Google::Cloud::MigrationCenter::V1::GetPreferenceSetRequest.new(name: name) do |_result, response|
+        c.get_preference_set ::Google::Cloud::MigrationCenter::V1::GetPreferenceSetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_preference_set({ name: name }, call_options) do |_result, response|
+        c.get_preference_set({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_preference_set(::Google::Cloud::MigrationCenter::V1::GetPreferenceSetRequest.new(name: name), call_options) do |_result, response|
+        c.get_preference_set(::Google::Cloud::MigrationCenter::V1::GetPreferenceSetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2062,32 +2062,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_create_preference_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_preference_set_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_preference_set({ parent: parent, preference_set_id: preference_set_id, preference_set: preference_set, request_id: request_id }) do |_result, response|
+        c.create_preference_set({ parent: parent, preference_set_id: preference_set_id, preference_set: preference_set, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_preference_set parent: parent, preference_set_id: preference_set_id, preference_set: preference_set, request_id: request_id do |_result, response|
+        c.create_preference_set parent: parent, preference_set_id: preference_set_id, preference_set: preference_set, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_preference_set ::Google::Cloud::MigrationCenter::V1::CreatePreferenceSetRequest.new(parent: parent, preference_set_id: preference_set_id, preference_set: preference_set, request_id: request_id) do |_result, response|
+        c.create_preference_set ::Google::Cloud::MigrationCenter::V1::CreatePreferenceSetRequest.new(parent: parent, preference_set_id: preference_set_id, preference_set: preference_set, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_preference_set({ parent: parent, preference_set_id: preference_set_id, preference_set: preference_set, request_id: request_id }, call_options) do |_result, response|
+        c.create_preference_set({ parent: parent, preference_set_id: preference_set_id, preference_set: preference_set, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_preference_set(::Google::Cloud::MigrationCenter::V1::CreatePreferenceSetRequest.new(parent: parent, preference_set_id: preference_set_id, preference_set: preference_set, request_id: request_id), call_options) do |_result, response|
+        c.create_preference_set(::Google::Cloud::MigrationCenter::V1::CreatePreferenceSetRequest.new(parent: parent, preference_set_id: preference_set_id, preference_set: preference_set, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2118,32 +2118,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_update_preference_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_preference_set_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_preference_set({ update_mask: update_mask, preference_set: preference_set, request_id: request_id }) do |_result, response|
+        c.update_preference_set({ update_mask: update_mask, preference_set: preference_set, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_preference_set update_mask: update_mask, preference_set: preference_set, request_id: request_id do |_result, response|
+        c.update_preference_set update_mask: update_mask, preference_set: preference_set, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_preference_set ::Google::Cloud::MigrationCenter::V1::UpdatePreferenceSetRequest.new(update_mask: update_mask, preference_set: preference_set, request_id: request_id) do |_result, response|
+        c.update_preference_set ::Google::Cloud::MigrationCenter::V1::UpdatePreferenceSetRequest.new(update_mask: update_mask, preference_set: preference_set, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_preference_set({ update_mask: update_mask, preference_set: preference_set, request_id: request_id }, call_options) do |_result, response|
+        c.update_preference_set({ update_mask: update_mask, preference_set: preference_set, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_preference_set(::Google::Cloud::MigrationCenter::V1::UpdatePreferenceSetRequest.new(update_mask: update_mask, preference_set: preference_set, request_id: request_id), call_options) do |_result, response|
+        c.update_preference_set(::Google::Cloud::MigrationCenter::V1::UpdatePreferenceSetRequest.new(update_mask: update_mask, preference_set: preference_set, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2173,32 +2173,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_delete_preference_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_preference_set_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_preference_set({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_preference_set({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_preference_set name: name, request_id: request_id do |_result, response|
+        c.delete_preference_set name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_preference_set ::Google::Cloud::MigrationCenter::V1::DeletePreferenceSetRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_preference_set ::Google::Cloud::MigrationCenter::V1::DeletePreferenceSetRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_preference_set({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_preference_set({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_preference_set(::Google::Cloud::MigrationCenter::V1::DeletePreferenceSetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_preference_set(::Google::Cloud::MigrationCenter::V1::DeletePreferenceSetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2227,32 +2227,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_get_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_settings({ name: name }) do |_result, response|
+        c.get_settings({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_settings name: name do |_result, response|
+        c.get_settings name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_settings ::Google::Cloud::MigrationCenter::V1::GetSettingsRequest.new(name: name) do |_result, response|
+        c.get_settings ::Google::Cloud::MigrationCenter::V1::GetSettingsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_settings({ name: name }, call_options) do |_result, response|
+        c.get_settings({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_settings(::Google::Cloud::MigrationCenter::V1::GetSettingsRequest.new(name: name), call_options) do |_result, response|
+        c.get_settings(::Google::Cloud::MigrationCenter::V1::GetSettingsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2283,32 +2283,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_update_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_settings({ update_mask: update_mask, settings: settings, request_id: request_id }) do |_result, response|
+        c.update_settings({ update_mask: update_mask, settings: settings, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_settings update_mask: update_mask, settings: settings, request_id: request_id do |_result, response|
+        c.update_settings update_mask: update_mask, settings: settings, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_settings ::Google::Cloud::MigrationCenter::V1::UpdateSettingsRequest.new(update_mask: update_mask, settings: settings, request_id: request_id) do |_result, response|
+        c.update_settings ::Google::Cloud::MigrationCenter::V1::UpdateSettingsRequest.new(update_mask: update_mask, settings: settings, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_settings({ update_mask: update_mask, settings: settings, request_id: request_id }, call_options) do |_result, response|
+        c.update_settings({ update_mask: update_mask, settings: settings, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_settings(::Google::Cloud::MigrationCenter::V1::UpdateSettingsRequest.new(update_mask: update_mask, settings: settings, request_id: request_id), call_options) do |_result, response|
+        c.update_settings(::Google::Cloud::MigrationCenter::V1::UpdateSettingsRequest.new(update_mask: update_mask, settings: settings, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2340,32 +2340,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_create_report_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_report_config_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_report_config({ parent: parent, report_config_id: report_config_id, report_config: report_config, request_id: request_id }) do |_result, response|
+        c.create_report_config({ parent: parent, report_config_id: report_config_id, report_config: report_config, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_report_config parent: parent, report_config_id: report_config_id, report_config: report_config, request_id: request_id do |_result, response|
+        c.create_report_config parent: parent, report_config_id: report_config_id, report_config: report_config, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_report_config ::Google::Cloud::MigrationCenter::V1::CreateReportConfigRequest.new(parent: parent, report_config_id: report_config_id, report_config: report_config, request_id: request_id) do |_result, response|
+        c.create_report_config ::Google::Cloud::MigrationCenter::V1::CreateReportConfigRequest.new(parent: parent, report_config_id: report_config_id, report_config: report_config, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_report_config({ parent: parent, report_config_id: report_config_id, report_config: report_config, request_id: request_id }, call_options) do |_result, response|
+        c.create_report_config({ parent: parent, report_config_id: report_config_id, report_config: report_config, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_report_config(::Google::Cloud::MigrationCenter::V1::CreateReportConfigRequest.new(parent: parent, report_config_id: report_config_id, report_config: report_config, request_id: request_id), call_options) do |_result, response|
+        c.create_report_config(::Google::Cloud::MigrationCenter::V1::CreateReportConfigRequest.new(parent: parent, report_config_id: report_config_id, report_config: report_config, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2394,32 +2394,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_get_report_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_report_config_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_report_config({ name: name }) do |_result, response|
+        c.get_report_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_report_config name: name do |_result, response|
+        c.get_report_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_report_config ::Google::Cloud::MigrationCenter::V1::GetReportConfigRequest.new(name: name) do |_result, response|
+        c.get_report_config ::Google::Cloud::MigrationCenter::V1::GetReportConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_report_config({ name: name }, call_options) do |_result, response|
+        c.get_report_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_report_config(::Google::Cloud::MigrationCenter::V1::GetReportConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_report_config(::Google::Cloud::MigrationCenter::V1::GetReportConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2452,32 +2452,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_list_report_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_report_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_report_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_report_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_report_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_report_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_report_configs ::Google::Cloud::MigrationCenter::V1::ListReportConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_report_configs ::Google::Cloud::MigrationCenter::V1::ListReportConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_report_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_report_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_report_configs(::Google::Cloud::MigrationCenter::V1::ListReportConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_report_configs(::Google::Cloud::MigrationCenter::V1::ListReportConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2508,32 +2508,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_delete_report_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_report_config_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_report_config({ name: name, request_id: request_id, force: force }) do |_result, response|
+        c.delete_report_config({ name: name, request_id: request_id, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_report_config name: name, request_id: request_id, force: force do |_result, response|
+        c.delete_report_config name: name, request_id: request_id, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_report_config ::Google::Cloud::MigrationCenter::V1::DeleteReportConfigRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
+        c.delete_report_config ::Google::Cloud::MigrationCenter::V1::DeleteReportConfigRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_report_config({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
+        c.delete_report_config({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_report_config(::Google::Cloud::MigrationCenter::V1::DeleteReportConfigRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
+        c.delete_report_config(::Google::Cloud::MigrationCenter::V1::DeleteReportConfigRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2565,32 +2565,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_create_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_report_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_report({ parent: parent, report_id: report_id, report: report, request_id: request_id }) do |_result, response|
+        c.create_report({ parent: parent, report_id: report_id, report: report, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_report parent: parent, report_id: report_id, report: report, request_id: request_id do |_result, response|
+        c.create_report parent: parent, report_id: report_id, report: report, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_report ::Google::Cloud::MigrationCenter::V1::CreateReportRequest.new(parent: parent, report_id: report_id, report: report, request_id: request_id) do |_result, response|
+        c.create_report ::Google::Cloud::MigrationCenter::V1::CreateReportRequest.new(parent: parent, report_id: report_id, report: report, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_report({ parent: parent, report_id: report_id, report: report, request_id: request_id }, call_options) do |_result, response|
+        c.create_report({ parent: parent, report_id: report_id, report: report, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_report(::Google::Cloud::MigrationCenter::V1::CreateReportRequest.new(parent: parent, report_id: report_id, report: report, request_id: request_id), call_options) do |_result, response|
+        c.create_report(::Google::Cloud::MigrationCenter::V1::CreateReportRequest.new(parent: parent, report_id: report_id, report: report, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2620,32 +2620,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_get_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_report_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_report({ name: name, view: view }) do |_result, response|
+        c.get_report({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_report name: name, view: view do |_result, response|
+        c.get_report name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_report ::Google::Cloud::MigrationCenter::V1::GetReportRequest.new(name: name, view: view) do |_result, response|
+        c.get_report ::Google::Cloud::MigrationCenter::V1::GetReportRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_report({ name: name, view: view }, call_options) do |_result, response|
+        c.get_report({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_report(::Google::Cloud::MigrationCenter::V1::GetReportRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_report(::Google::Cloud::MigrationCenter::V1::GetReportRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2679,32 +2679,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_list_reports_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_reports_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
+        c.list_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_reports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
+        c.list_reports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_reports ::Google::Cloud::MigrationCenter::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
+        c.list_reports ::Google::Cloud::MigrationCenter::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
+        c.list_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_reports(::Google::Cloud::MigrationCenter::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
+        c.list_reports(::Google::Cloud::MigrationCenter::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2734,32 +2734,32 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ServiceStub.stub :transcode_delete_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_report_client_stub do
         # Create client
-        client = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_report({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_report({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_report name: name, request_id: request_id do |_result, response|
+        c.delete_report name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_report ::Google::Cloud::MigrationCenter::V1::DeleteReportRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_report ::Google::Cloud::MigrationCenter::V1::DeleteReportRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_report({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_report({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_report(::Google::Cloud::MigrationCenter::V1::DeleteReportRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_report(::Google::Cloud::MigrationCenter::V1::DeleteReportRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

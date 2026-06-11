@@ -101,32 +101,32 @@ class ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ClientTest < Mini
     ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instances ::Google::Cloud::Memorystore::V1beta::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_instances ::Google::Cloud::Memorystore::V1beta::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instances(::Google::Cloud::Memorystore::V1beta::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_instances(::Google::Cloud::Memorystore::V1beta::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ClientTest < Mini
     ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ServiceStub.stub :transcode_get_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance({ name: name }) do |_result, response|
+        c.get_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance name: name do |_result, response|
+        c.get_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance ::Google::Cloud::Memorystore::V1beta::GetInstanceRequest.new(name: name) do |_result, response|
+        c.get_instance ::Google::Cloud::Memorystore::V1beta::GetInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance({ name: name }, call_options) do |_result, response|
+        c.get_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance(::Google::Cloud::Memorystore::V1beta::GetInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance(::Google::Cloud::Memorystore::V1beta::GetInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ClientTest < Mini
     ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ServiceStub.stub :transcode_create_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |_result, response|
+        c.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_instance ::Google::Cloud::Memorystore::V1beta::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |_result, response|
+        c.create_instance ::Google::Cloud::Memorystore::V1beta::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, call_options) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_instance(::Google::Cloud::Memorystore::V1beta::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), call_options) do |_result, response|
+        c.create_instance(::Google::Cloud::Memorystore::V1beta::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ClientTest < Mini
     ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ServiceStub.stub :transcode_update_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }) do |_result, response|
+        c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_instance update_mask: update_mask, instance: instance, request_id: request_id do |_result, response|
+        c.update_instance update_mask: update_mask, instance: instance, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_instance ::Google::Cloud::Memorystore::V1beta::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id) do |_result, response|
+        c.update_instance ::Google::Cloud::Memorystore::V1beta::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }, call_options) do |_result, response|
+        c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_instance(::Google::Cloud::Memorystore::V1beta::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id), call_options) do |_result, response|
+        c.update_instance(::Google::Cloud::Memorystore::V1beta::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ClientTest < Mini
     ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ServiceStub.stub :transcode_delete_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_instance({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_instance({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_instance name: name, request_id: request_id do |_result, response|
+        c.delete_instance name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_instance ::Google::Cloud::Memorystore::V1beta::DeleteInstanceRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_instance ::Google::Cloud::Memorystore::V1beta::DeleteInstanceRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_instance({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_instance({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_instance(::Google::Cloud::Memorystore::V1beta::DeleteInstanceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_instance(::Google::Cloud::Memorystore::V1beta::DeleteInstanceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -377,32 +377,32 @@ class ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ClientTest < Mini
     ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ServiceStub.stub :transcode_get_certificate_authority_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_certificate_authority_client_stub do
         # Create client
-        client = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_certificate_authority({ name: name }) do |_result, response|
+        c.get_certificate_authority({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_certificate_authority name: name do |_result, response|
+        c.get_certificate_authority name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_certificate_authority ::Google::Cloud::Memorystore::V1beta::GetCertificateAuthorityRequest.new(name: name) do |_result, response|
+        c.get_certificate_authority ::Google::Cloud::Memorystore::V1beta::GetCertificateAuthorityRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_certificate_authority({ name: name }, call_options) do |_result, response|
+        c.get_certificate_authority({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_certificate_authority(::Google::Cloud::Memorystore::V1beta::GetCertificateAuthorityRequest.new(name: name), call_options) do |_result, response|
+        c.get_certificate_authority(::Google::Cloud::Memorystore::V1beta::GetCertificateAuthorityRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ClientTest < Mini
     ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::ServiceStub.stub :transcode_get_shared_regional_certificate_authority_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_shared_regional_certificate_authority_client_stub do
         # Create client
-        client = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_shared_regional_certificate_authority({ name: name }) do |_result, response|
+        c.get_shared_regional_certificate_authority({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_shared_regional_certificate_authority name: name do |_result, response|
+        c.get_shared_regional_certificate_authority name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_shared_regional_certificate_authority ::Google::Cloud::Memorystore::V1beta::GetSharedRegionalCertificateAuthorityRequest.new(name: name) do |_result, response|
+        c.get_shared_regional_certificate_authority ::Google::Cloud::Memorystore::V1beta::GetSharedRegionalCertificateAuthorityRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_shared_regional_certificate_authority({ name: name }, call_options) do |_result, response|
+        c.get_shared_regional_certificate_authority({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_shared_regional_certificate_authority(::Google::Cloud::Memorystore::V1beta::GetSharedRegionalCertificateAuthorityRequest.new(name: name), call_options) do |_result, response|
+        c.get_shared_regional_certificate_authority(::Google::Cloud::Memorystore::V1beta::GetSharedRegionalCertificateAuthorityRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -90,40 +90,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, list_hubs_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_hubs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_hubs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_hubs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_hubs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_hubs ::Google::Cloud::NetworkConnectivity::V1::ListHubsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_hubs ::Google::Cloud::NetworkConnectivity::V1::ListHubsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_hubs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_hubs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_hubs(::Google::Cloud::NetworkConnectivity::V1::ListHubsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_hubs(::Google::Cloud::NetworkConnectivity::V1::ListHubsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, get_hub_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_hub({ name: name }) do |response, operation|
+      c.get_hub({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_hub name: name do |response, operation|
+      c.get_hub name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_hub ::Google::Cloud::NetworkConnectivity::V1::GetHubRequest.new(name: name) do |response, operation|
+      c.get_hub ::Google::Cloud::NetworkConnectivity::V1::GetHubRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_hub({ name: name }, grpc_options) do |response, operation|
+      c.get_hub({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_hub(::Google::Cloud::NetworkConnectivity::V1::GetHubRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_hub(::Google::Cloud::NetworkConnectivity::V1::GetHubRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, create_hub_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_hub({ parent: parent, hub_id: hub_id, hub: hub, request_id: request_id }) do |response, operation|
+      c.create_hub({ parent: parent, hub_id: hub_id, hub: hub, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_hub parent: parent, hub_id: hub_id, hub: hub, request_id: request_id do |response, operation|
+      c.create_hub parent: parent, hub_id: hub_id, hub: hub, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_hub ::Google::Cloud::NetworkConnectivity::V1::CreateHubRequest.new(parent: parent, hub_id: hub_id, hub: hub, request_id: request_id) do |response, operation|
+      c.create_hub ::Google::Cloud::NetworkConnectivity::V1::CreateHubRequest.new(parent: parent, hub_id: hub_id, hub: hub, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_hub({ parent: parent, hub_id: hub_id, hub: hub, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_hub({ parent: parent, hub_id: hub_id, hub: hub, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_hub(::Google::Cloud::NetworkConnectivity::V1::CreateHubRequest.new(parent: parent, hub_id: hub_id, hub: hub, request_id: request_id), grpc_options) do |response, operation|
+      c.create_hub(::Google::Cloud::NetworkConnectivity::V1::CreateHubRequest.new(parent: parent, hub_id: hub_id, hub: hub, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, update_hub_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_hub({ update_mask: update_mask, hub: hub, request_id: request_id }) do |response, operation|
+      c.update_hub({ update_mask: update_mask, hub: hub, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_hub update_mask: update_mask, hub: hub, request_id: request_id do |response, operation|
+      c.update_hub update_mask: update_mask, hub: hub, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_hub ::Google::Cloud::NetworkConnectivity::V1::UpdateHubRequest.new(update_mask: update_mask, hub: hub, request_id: request_id) do |response, operation|
+      c.update_hub ::Google::Cloud::NetworkConnectivity::V1::UpdateHubRequest.new(update_mask: update_mask, hub: hub, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_hub({ update_mask: update_mask, hub: hub, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_hub({ update_mask: update_mask, hub: hub, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_hub(::Google::Cloud::NetworkConnectivity::V1::UpdateHubRequest.new(update_mask: update_mask, hub: hub, request_id: request_id), grpc_options) do |response, operation|
+      c.update_hub(::Google::Cloud::NetworkConnectivity::V1::UpdateHubRequest.new(update_mask: update_mask, hub: hub, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, delete_hub_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_hub({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_hub({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_hub name: name, request_id: request_id do |response, operation|
+      c.delete_hub name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_hub ::Google::Cloud::NetworkConnectivity::V1::DeleteHubRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_hub ::Google::Cloud::NetworkConnectivity::V1::DeleteHubRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_hub({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_hub({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_hub(::Google::Cloud::NetworkConnectivity::V1::DeleteHubRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_hub(::Google::Cloud::NetworkConnectivity::V1::DeleteHubRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -424,40 +424,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, list_hub_spokes_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_hub_spokes({ name: name, spoke_locations: spoke_locations, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |response, operation|
+      c.list_hub_spokes({ name: name, spoke_locations: spoke_locations, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_hub_spokes name: name, spoke_locations: spoke_locations, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |response, operation|
+      c.list_hub_spokes name: name, spoke_locations: spoke_locations, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_hub_spokes ::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest.new(name: name, spoke_locations: spoke_locations, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |response, operation|
+      c.list_hub_spokes ::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest.new(name: name, spoke_locations: spoke_locations, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_hub_spokes({ name: name, spoke_locations: spoke_locations, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, grpc_options) do |response, operation|
+      c.list_hub_spokes({ name: name, spoke_locations: spoke_locations, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_hub_spokes(::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest.new(name: name, spoke_locations: spoke_locations, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), grpc_options) do |response, operation|
+      c.list_hub_spokes(::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest.new(name: name, spoke_locations: spoke_locations, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -497,40 +497,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, query_hub_status_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_hub_status({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, group_by: group_by }) do |response, operation|
+      c.query_hub_status({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, group_by: group_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_hub_status name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, group_by: group_by do |response, operation|
+      c.query_hub_status name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, group_by: group_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_hub_status ::Google::Cloud::NetworkConnectivity::V1::QueryHubStatusRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, group_by: group_by) do |response, operation|
+      c.query_hub_status ::Google::Cloud::NetworkConnectivity::V1::QueryHubStatusRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, group_by: group_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_hub_status({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, group_by: group_by }, grpc_options) do |response, operation|
+      c.query_hub_status({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, group_by: group_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_hub_status(::Google::Cloud::NetworkConnectivity::V1::QueryHubStatusRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, group_by: group_by), grpc_options) do |response, operation|
+      c.query_hub_status(::Google::Cloud::NetworkConnectivity::V1::QueryHubStatusRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, group_by: group_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -568,40 +568,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, list_spokes_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_spokes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_spokes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_spokes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_spokes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_spokes ::Google::Cloud::NetworkConnectivity::V1::ListSpokesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_spokes ::Google::Cloud::NetworkConnectivity::V1::ListSpokesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_spokes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_spokes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_spokes(::Google::Cloud::NetworkConnectivity::V1::ListSpokesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_spokes(::Google::Cloud::NetworkConnectivity::V1::ListSpokesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -631,36 +631,36 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, get_spoke_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_spoke({ name: name }) do |response, operation|
+      c.get_spoke({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_spoke name: name do |response, operation|
+      c.get_spoke name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_spoke ::Google::Cloud::NetworkConnectivity::V1::GetSpokeRequest.new(name: name) do |response, operation|
+      c.get_spoke ::Google::Cloud::NetworkConnectivity::V1::GetSpokeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_spoke({ name: name }, grpc_options) do |response, operation|
+      c.get_spoke({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_spoke(::Google::Cloud::NetworkConnectivity::V1::GetSpokeRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_spoke(::Google::Cloud::NetworkConnectivity::V1::GetSpokeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -695,40 +695,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, create_spoke_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_spoke({ parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id }) do |response, operation|
+      c.create_spoke({ parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_spoke parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id do |response, operation|
+      c.create_spoke parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_spoke ::Google::Cloud::NetworkConnectivity::V1::CreateSpokeRequest.new(parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id) do |response, operation|
+      c.create_spoke ::Google::Cloud::NetworkConnectivity::V1::CreateSpokeRequest.new(parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_spoke({ parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_spoke({ parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_spoke(::Google::Cloud::NetworkConnectivity::V1::CreateSpokeRequest.new(parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id), grpc_options) do |response, operation|
+      c.create_spoke(::Google::Cloud::NetworkConnectivity::V1::CreateSpokeRequest.new(parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -762,40 +762,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, update_spoke_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_spoke({ update_mask: update_mask, spoke: spoke, request_id: request_id }) do |response, operation|
+      c.update_spoke({ update_mask: update_mask, spoke: spoke, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_spoke update_mask: update_mask, spoke: spoke, request_id: request_id do |response, operation|
+      c.update_spoke update_mask: update_mask, spoke: spoke, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_spoke ::Google::Cloud::NetworkConnectivity::V1::UpdateSpokeRequest.new(update_mask: update_mask, spoke: spoke, request_id: request_id) do |response, operation|
+      c.update_spoke ::Google::Cloud::NetworkConnectivity::V1::UpdateSpokeRequest.new(update_mask: update_mask, spoke: spoke, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_spoke({ update_mask: update_mask, spoke: spoke, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_spoke({ update_mask: update_mask, spoke: spoke, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_spoke(::Google::Cloud::NetworkConnectivity::V1::UpdateSpokeRequest.new(update_mask: update_mask, spoke: spoke, request_id: request_id), grpc_options) do |response, operation|
+      c.update_spoke(::Google::Cloud::NetworkConnectivity::V1::UpdateSpokeRequest.new(update_mask: update_mask, spoke: spoke, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -831,40 +831,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, reject_hub_spoke_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reject_hub_spoke({ name: name, spoke_uri: spoke_uri, request_id: request_id, details: details }) do |response, operation|
+      c.reject_hub_spoke({ name: name, spoke_uri: spoke_uri, request_id: request_id, details: details }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reject_hub_spoke name: name, spoke_uri: spoke_uri, request_id: request_id, details: details do |response, operation|
+      c.reject_hub_spoke name: name, spoke_uri: spoke_uri, request_id: request_id, details: details do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reject_hub_spoke ::Google::Cloud::NetworkConnectivity::V1::RejectHubSpokeRequest.new(name: name, spoke_uri: spoke_uri, request_id: request_id, details: details) do |response, operation|
+      c.reject_hub_spoke ::Google::Cloud::NetworkConnectivity::V1::RejectHubSpokeRequest.new(name: name, spoke_uri: spoke_uri, request_id: request_id, details: details) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reject_hub_spoke({ name: name, spoke_uri: spoke_uri, request_id: request_id, details: details }, grpc_options) do |response, operation|
+      c.reject_hub_spoke({ name: name, spoke_uri: spoke_uri, request_id: request_id, details: details }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reject_hub_spoke(::Google::Cloud::NetworkConnectivity::V1::RejectHubSpokeRequest.new(name: name, spoke_uri: spoke_uri, request_id: request_id, details: details), grpc_options) do |response, operation|
+      c.reject_hub_spoke(::Google::Cloud::NetworkConnectivity::V1::RejectHubSpokeRequest.new(name: name, spoke_uri: spoke_uri, request_id: request_id, details: details), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -898,40 +898,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, accept_hub_spoke_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.accept_hub_spoke({ name: name, spoke_uri: spoke_uri, request_id: request_id }) do |response, operation|
+      c.accept_hub_spoke({ name: name, spoke_uri: spoke_uri, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.accept_hub_spoke name: name, spoke_uri: spoke_uri, request_id: request_id do |response, operation|
+      c.accept_hub_spoke name: name, spoke_uri: spoke_uri, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.accept_hub_spoke ::Google::Cloud::NetworkConnectivity::V1::AcceptHubSpokeRequest.new(name: name, spoke_uri: spoke_uri, request_id: request_id) do |response, operation|
+      c.accept_hub_spoke ::Google::Cloud::NetworkConnectivity::V1::AcceptHubSpokeRequest.new(name: name, spoke_uri: spoke_uri, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.accept_hub_spoke({ name: name, spoke_uri: spoke_uri, request_id: request_id }, grpc_options) do |response, operation|
+      c.accept_hub_spoke({ name: name, spoke_uri: spoke_uri, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.accept_hub_spoke(::Google::Cloud::NetworkConnectivity::V1::AcceptHubSpokeRequest.new(name: name, spoke_uri: spoke_uri, request_id: request_id), grpc_options) do |response, operation|
+      c.accept_hub_spoke(::Google::Cloud::NetworkConnectivity::V1::AcceptHubSpokeRequest.new(name: name, spoke_uri: spoke_uri, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -967,40 +967,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, accept_spoke_update_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.accept_spoke_update({ name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, request_id: request_id }) do |response, operation|
+      c.accept_spoke_update({ name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.accept_spoke_update name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, request_id: request_id do |response, operation|
+      c.accept_spoke_update name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.accept_spoke_update ::Google::Cloud::NetworkConnectivity::V1::AcceptSpokeUpdateRequest.new(name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, request_id: request_id) do |response, operation|
+      c.accept_spoke_update ::Google::Cloud::NetworkConnectivity::V1::AcceptSpokeUpdateRequest.new(name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.accept_spoke_update({ name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, request_id: request_id }, grpc_options) do |response, operation|
+      c.accept_spoke_update({ name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.accept_spoke_update(::Google::Cloud::NetworkConnectivity::V1::AcceptSpokeUpdateRequest.new(name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, request_id: request_id), grpc_options) do |response, operation|
+      c.accept_spoke_update(::Google::Cloud::NetworkConnectivity::V1::AcceptSpokeUpdateRequest.new(name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1038,40 +1038,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, reject_spoke_update_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reject_spoke_update({ name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, details: details, request_id: request_id }) do |response, operation|
+      c.reject_spoke_update({ name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, details: details, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reject_spoke_update name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, details: details, request_id: request_id do |response, operation|
+      c.reject_spoke_update name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, details: details, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reject_spoke_update ::Google::Cloud::NetworkConnectivity::V1::RejectSpokeUpdateRequest.new(name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, details: details, request_id: request_id) do |response, operation|
+      c.reject_spoke_update ::Google::Cloud::NetworkConnectivity::V1::RejectSpokeUpdateRequest.new(name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, details: details, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reject_spoke_update({ name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, details: details, request_id: request_id }, grpc_options) do |response, operation|
+      c.reject_spoke_update({ name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, details: details, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reject_spoke_update(::Google::Cloud::NetworkConnectivity::V1::RejectSpokeUpdateRequest.new(name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, details: details, request_id: request_id), grpc_options) do |response, operation|
+      c.reject_spoke_update(::Google::Cloud::NetworkConnectivity::V1::RejectSpokeUpdateRequest.new(name: name, spoke_uri: spoke_uri, spoke_etag: spoke_etag, details: details, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1103,40 +1103,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, delete_spoke_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_spoke({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_spoke({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_spoke name: name, request_id: request_id do |response, operation|
+      c.delete_spoke name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_spoke ::Google::Cloud::NetworkConnectivity::V1::DeleteSpokeRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_spoke ::Google::Cloud::NetworkConnectivity::V1::DeleteSpokeRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_spoke({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_spoke({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_spoke(::Google::Cloud::NetworkConnectivity::V1::DeleteSpokeRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_spoke(::Google::Cloud::NetworkConnectivity::V1::DeleteSpokeRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1166,36 +1166,36 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, get_route_table_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_route_table({ name: name }) do |response, operation|
+      c.get_route_table({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_route_table name: name do |response, operation|
+      c.get_route_table name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_route_table ::Google::Cloud::NetworkConnectivity::V1::GetRouteTableRequest.new(name: name) do |response, operation|
+      c.get_route_table ::Google::Cloud::NetworkConnectivity::V1::GetRouteTableRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_route_table({ name: name }, grpc_options) do |response, operation|
+      c.get_route_table({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_route_table(::Google::Cloud::NetworkConnectivity::V1::GetRouteTableRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_route_table(::Google::Cloud::NetworkConnectivity::V1::GetRouteTableRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1224,36 +1224,36 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, get_route_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_route({ name: name }) do |response, operation|
+      c.get_route({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_route name: name do |response, operation|
+      c.get_route name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_route ::Google::Cloud::NetworkConnectivity::V1::GetRouteRequest.new(name: name) do |response, operation|
+      c.get_route ::Google::Cloud::NetworkConnectivity::V1::GetRouteRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_route({ name: name }, grpc_options) do |response, operation|
+      c.get_route({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_route(::Google::Cloud::NetworkConnectivity::V1::GetRouteRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_route(::Google::Cloud::NetworkConnectivity::V1::GetRouteRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1290,40 +1290,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, list_routes_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_routes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_routes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_routes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_routes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_routes ::Google::Cloud::NetworkConnectivity::V1::ListRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_routes ::Google::Cloud::NetworkConnectivity::V1::ListRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_routes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_routes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_routes(::Google::Cloud::NetworkConnectivity::V1::ListRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_routes(::Google::Cloud::NetworkConnectivity::V1::ListRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1361,40 +1361,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, list_route_tables_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_route_tables({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_route_tables({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_route_tables parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_route_tables parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_route_tables ::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_route_tables ::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_route_tables({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_route_tables({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_route_tables(::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_route_tables(::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1424,36 +1424,36 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, get_group_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_group({ name: name }) do |response, operation|
+      c.get_group({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_group name: name do |response, operation|
+      c.get_group name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_group ::Google::Cloud::NetworkConnectivity::V1::GetGroupRequest.new(name: name) do |response, operation|
+      c.get_group ::Google::Cloud::NetworkConnectivity::V1::GetGroupRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_group({ name: name }, grpc_options) do |response, operation|
+      c.get_group({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_group(::Google::Cloud::NetworkConnectivity::V1::GetGroupRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_group(::Google::Cloud::NetworkConnectivity::V1::GetGroupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1490,40 +1490,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, list_groups_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_groups ::Google::Cloud::NetworkConnectivity::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_groups ::Google::Cloud::NetworkConnectivity::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_groups(::Google::Cloud::NetworkConnectivity::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_groups(::Google::Cloud::NetworkConnectivity::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1557,40 +1557,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, update_group_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_group({ update_mask: update_mask, group: group, request_id: request_id }) do |response, operation|
+      c.update_group({ update_mask: update_mask, group: group, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_group update_mask: update_mask, group: group, request_id: request_id do |response, operation|
+      c.update_group update_mask: update_mask, group: group, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_group ::Google::Cloud::NetworkConnectivity::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id) do |response, operation|
+      c.update_group ::Google::Cloud::NetworkConnectivity::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_group({ update_mask: update_mask, group: group, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_group({ update_mask: update_mask, group: group, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_group(::Google::Cloud::NetworkConnectivity::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id), grpc_options) do |response, operation|
+      c.update_group(::Google::Cloud::NetworkConnectivity::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
