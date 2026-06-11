@@ -88,40 +88,40 @@ class ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, search_catalogs_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client.new do |config|
+      c = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_catalogs({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_catalogs({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_catalogs resource: resource, query: query, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_catalogs resource: resource, query: query, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_catalogs ::Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_catalogs ::Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_catalogs({ resource: resource, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_catalogs({ resource: resource, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_catalogs(::Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_catalogs(::Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -157,40 +157,40 @@ class ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, search_products_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client.new do |config|
+      c = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_products({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_products({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_products resource: resource, query: query, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_products resource: resource, query: query, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_products ::Google::Cloud::PrivateCatalog::V1beta1::SearchProductsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_products ::Google::Cloud::PrivateCatalog::V1beta1::SearchProductsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_products({ resource: resource, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_products({ resource: resource, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_products(::Google::Cloud::PrivateCatalog::V1beta1::SearchProductsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_products(::Google::Cloud::PrivateCatalog::V1beta1::SearchProductsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -226,40 +226,40 @@ class ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, search_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client.new do |config|
+      c = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_versions({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_versions({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_versions resource: resource, query: query, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_versions resource: resource, query: query, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_versions ::Google::Cloud::PrivateCatalog::V1beta1::SearchVersionsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_versions ::Google::Cloud::PrivateCatalog::V1beta1::SearchVersionsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_versions({ resource: resource, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_versions({ resource: resource, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_versions(::Google::Cloud::PrivateCatalog::V1beta1::SearchVersionsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_versions(::Google::Cloud::PrivateCatalog::V1beta1::SearchVersionsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

@@ -84,36 +84,36 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_ssh_public_key_client_stub do
       # Create client
-      client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
+      c = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key }) do |response, operation|
+      c.create_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_ssh_public_key parent: parent, ssh_public_key: ssh_public_key do |response, operation|
+      c.create_ssh_public_key parent: parent, ssh_public_key: ssh_public_key do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_ssh_public_key ::Google::Cloud::OsLogin::V1beta::CreateSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key) do |response, operation|
+      c.create_ssh_public_key ::Google::Cloud::OsLogin::V1beta::CreateSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key }, grpc_options) do |response, operation|
+      c.create_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_ssh_public_key(::Google::Cloud::OsLogin::V1beta::CreateSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key), grpc_options) do |response, operation|
+      c.create_ssh_public_key(::Google::Cloud::OsLogin::V1beta::CreateSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_posix_account_client_stub do
       # Create client
-      client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
+      c = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_posix_account({ name: name }) do |response, operation|
+      c.delete_posix_account({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_posix_account name: name do |response, operation|
+      c.delete_posix_account name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_posix_account ::Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest.new(name: name) do |response, operation|
+      c.delete_posix_account ::Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_posix_account({ name: name }, grpc_options) do |response, operation|
+      c.delete_posix_account({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_posix_account(::Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_posix_account(::Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -200,36 +200,36 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_ssh_public_key_client_stub do
       # Create client
-      client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
+      c = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_ssh_public_key({ name: name }) do |response, operation|
+      c.delete_ssh_public_key({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_ssh_public_key name: name do |response, operation|
+      c.delete_ssh_public_key name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_ssh_public_key ::Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest.new(name: name) do |response, operation|
+      c.delete_ssh_public_key ::Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_ssh_public_key({ name: name }, grpc_options) do |response, operation|
+      c.delete_ssh_public_key({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_ssh_public_key(::Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_ssh_public_key(::Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -264,36 +264,36 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_login_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
+      c = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_login_profile({ name: name, project_id: project_id, system_id: system_id, view: view }) do |response, operation|
+      c.get_login_profile({ name: name, project_id: project_id, system_id: system_id, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_login_profile name: name, project_id: project_id, system_id: system_id, view: view do |response, operation|
+      c.get_login_profile name: name, project_id: project_id, system_id: system_id, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_login_profile ::Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest.new(name: name, project_id: project_id, system_id: system_id, view: view) do |response, operation|
+      c.get_login_profile ::Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest.new(name: name, project_id: project_id, system_id: system_id, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_login_profile({ name: name, project_id: project_id, system_id: system_id, view: view }, grpc_options) do |response, operation|
+      c.get_login_profile({ name: name, project_id: project_id, system_id: system_id, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_login_profile(::Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest.new(name: name, project_id: project_id, system_id: system_id, view: view), grpc_options) do |response, operation|
+      c.get_login_profile(::Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest.new(name: name, project_id: project_id, system_id: system_id, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -322,36 +322,36 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_ssh_public_key_client_stub do
       # Create client
-      client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
+      c = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_ssh_public_key({ name: name }) do |response, operation|
+      c.get_ssh_public_key({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_ssh_public_key name: name do |response, operation|
+      c.get_ssh_public_key name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_ssh_public_key ::Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest.new(name: name) do |response, operation|
+      c.get_ssh_public_key ::Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_ssh_public_key({ name: name }, grpc_options) do |response, operation|
+      c.get_ssh_public_key({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_ssh_public_key(::Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_ssh_public_key(::Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -388,36 +388,36 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, import_ssh_public_key_client_stub do
       # Create client
-      client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
+      c = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions }) do |response, operation|
+      c.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_ssh_public_key parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions do |response, operation|
+      c.import_ssh_public_key parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_ssh_public_key ::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions) do |response, operation|
+      c.import_ssh_public_key ::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions }, grpc_options) do |response, operation|
+      c.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_ssh_public_key(::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions), grpc_options) do |response, operation|
+      c.import_ssh_public_key(::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -450,36 +450,36 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_ssh_public_key_client_stub do
       # Create client
-      client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
+      c = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_ssh_public_key({ name: name, ssh_public_key: ssh_public_key, update_mask: update_mask }) do |response, operation|
+      c.update_ssh_public_key({ name: name, ssh_public_key: ssh_public_key, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_ssh_public_key name: name, ssh_public_key: ssh_public_key, update_mask: update_mask do |response, operation|
+      c.update_ssh_public_key name: name, ssh_public_key: ssh_public_key, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_ssh_public_key ::Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest.new(name: name, ssh_public_key: ssh_public_key, update_mask: update_mask) do |response, operation|
+      c.update_ssh_public_key ::Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest.new(name: name, ssh_public_key: ssh_public_key, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_ssh_public_key({ name: name, ssh_public_key: ssh_public_key, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_ssh_public_key({ name: name, ssh_public_key: ssh_public_key, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_ssh_public_key(::Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest.new(name: name, ssh_public_key: ssh_public_key, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_ssh_public_key(::Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest.new(name: name, ssh_public_key: ssh_public_key, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -510,36 +510,36 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, sign_ssh_public_key_client_stub do
       # Create client
-      client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
+      c = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.sign_ssh_public_key({ ssh_public_key: ssh_public_key, parent: parent }) do |response, operation|
+      c.sign_ssh_public_key({ ssh_public_key: ssh_public_key, parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.sign_ssh_public_key ssh_public_key: ssh_public_key, parent: parent do |response, operation|
+      c.sign_ssh_public_key ssh_public_key: ssh_public_key, parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.sign_ssh_public_key ::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest.new(ssh_public_key: ssh_public_key, parent: parent) do |response, operation|
+      c.sign_ssh_public_key ::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest.new(ssh_public_key: ssh_public_key, parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.sign_ssh_public_key({ ssh_public_key: ssh_public_key, parent: parent }, grpc_options) do |response, operation|
+      c.sign_ssh_public_key({ ssh_public_key: ssh_public_key, parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.sign_ssh_public_key(::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest.new(ssh_public_key: ssh_public_key, parent: parent), grpc_options) do |response, operation|
+      c.sign_ssh_public_key(::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyRequest.new(ssh_public_key: ssh_public_key, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

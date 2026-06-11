@@ -100,32 +100,32 @@ class ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::ClientTest
     ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::ServiceStub.stub :transcode_search_catalogs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_catalogs_client_stub do
         # Create client
-        client = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_catalogs({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.search_catalogs({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_catalogs resource: resource, query: query, page_size: page_size, page_token: page_token do |_result, response|
+        c.search_catalogs resource: resource, query: query, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_catalogs ::Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |_result, response|
+        c.search_catalogs ::Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_catalogs({ resource: resource, query: query, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.search_catalogs({ resource: resource, query: query, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_catalogs(::Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.search_catalogs(::Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::ClientTest
     ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::ServiceStub.stub :transcode_search_products_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_products_client_stub do
         # Create client
-        client = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_products({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.search_products({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_products resource: resource, query: query, page_size: page_size, page_token: page_token do |_result, response|
+        c.search_products resource: resource, query: query, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_products ::Google::Cloud::PrivateCatalog::V1beta1::SearchProductsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |_result, response|
+        c.search_products ::Google::Cloud::PrivateCatalog::V1beta1::SearchProductsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_products({ resource: resource, query: query, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.search_products({ resource: resource, query: query, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_products(::Google::Cloud::PrivateCatalog::V1beta1::SearchProductsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.search_products(::Google::Cloud::PrivateCatalog::V1beta1::SearchProductsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -214,32 +214,32 @@ class ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::ClientTest
     ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::ServiceStub.stub :transcode_search_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_versions({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.search_versions({ resource: resource, query: query, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_versions resource: resource, query: query, page_size: page_size, page_token: page_token do |_result, response|
+        c.search_versions resource: resource, query: query, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_versions ::Google::Cloud::PrivateCatalog::V1beta1::SearchVersionsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |_result, response|
+        c.search_versions ::Google::Cloud::PrivateCatalog::V1beta1::SearchVersionsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_versions({ resource: resource, query: query, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.search_versions({ resource: resource, query: query, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_versions(::Google::Cloud::PrivateCatalog::V1beta1::SearchVersionsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.search_versions(::Google::Cloud::PrivateCatalog::V1beta1::SearchVersionsRequest.new(resource: resource, query: query, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

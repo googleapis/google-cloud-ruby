@@ -84,36 +84,36 @@ class ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::C
 
     Gapic::ServiceStub.stub :new, report_phishing_client_stub do
       # Create client
-      client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new do |config|
+      c = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.report_phishing({ parent: parent, uri: uri }) do |response, operation|
+      c.report_phishing({ parent: parent, uri: uri }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.report_phishing parent: parent, uri: uri do |response, operation|
+      c.report_phishing parent: parent, uri: uri do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.report_phishing ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri) do |response, operation|
+      c.report_phishing ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.report_phishing({ parent: parent, uri: uri }, grpc_options) do |response, operation|
+      c.report_phishing({ parent: parent, uri: uri }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.report_phishing(::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri), grpc_options) do |response, operation|
+      c.report_phishing(::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

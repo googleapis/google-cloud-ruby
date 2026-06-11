@@ -98,32 +98,32 @@ class ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::R
     ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Rest::ServiceStub.stub :transcode_report_phishing_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, report_phishing_client_stub do
         # Create client
-        client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.report_phishing({ parent: parent, uri: uri }) do |_result, response|
+        c.report_phishing({ parent: parent, uri: uri }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.report_phishing parent: parent, uri: uri do |_result, response|
+        c.report_phishing parent: parent, uri: uri do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.report_phishing ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri) do |_result, response|
+        c.report_phishing ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.report_phishing({ parent: parent, uri: uri }, call_options) do |_result, response|
+        c.report_phishing({ parent: parent, uri: uri }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.report_phishing(::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri), call_options) do |_result, response|
+        c.report_phishing(::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
