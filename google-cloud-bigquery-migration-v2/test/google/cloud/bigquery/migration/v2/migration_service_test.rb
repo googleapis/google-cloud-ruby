@@ -84,36 +84,36 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, create_migration_workflow_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_migration_workflow({ parent: parent, migration_workflow: migration_workflow }) do |response, operation|
+      c.create_migration_workflow({ parent: parent, migration_workflow: migration_workflow }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_migration_workflow parent: parent, migration_workflow: migration_workflow do |response, operation|
+      c.create_migration_workflow parent: parent, migration_workflow: migration_workflow do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::CreateMigrationWorkflowRequest.new(parent: parent, migration_workflow: migration_workflow) do |response, operation|
+      c.create_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::CreateMigrationWorkflowRequest.new(parent: parent, migration_workflow: migration_workflow) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_migration_workflow({ parent: parent, migration_workflow: migration_workflow }, grpc_options) do |response, operation|
+      c.create_migration_workflow({ parent: parent, migration_workflow: migration_workflow }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::CreateMigrationWorkflowRequest.new(parent: parent, migration_workflow: migration_workflow), grpc_options) do |response, operation|
+      c.create_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::CreateMigrationWorkflowRequest.new(parent: parent, migration_workflow: migration_workflow), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, get_migration_workflow_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_migration_workflow({ name: name, read_mask: read_mask }) do |response, operation|
+      c.get_migration_workflow({ name: name, read_mask: read_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_migration_workflow name: name, read_mask: read_mask do |response, operation|
+      c.get_migration_workflow name: name, read_mask: read_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::GetMigrationWorkflowRequest.new(name: name, read_mask: read_mask) do |response, operation|
+      c.get_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::GetMigrationWorkflowRequest.new(name: name, read_mask: read_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_migration_workflow({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.get_migration_workflow({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::GetMigrationWorkflowRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
+      c.get_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::GetMigrationWorkflowRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -208,40 +208,40 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, list_migration_workflows_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_migration_workflows({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_migration_workflows({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_migration_workflows parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_migration_workflows parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_migration_workflows ::Google::Cloud::Bigquery::Migration::V2::ListMigrationWorkflowsRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_migration_workflows ::Google::Cloud::Bigquery::Migration::V2::ListMigrationWorkflowsRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_migration_workflows({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_migration_workflows({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_migration_workflows(::Google::Cloud::Bigquery::Migration::V2::ListMigrationWorkflowsRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_migration_workflows(::Google::Cloud::Bigquery::Migration::V2::ListMigrationWorkflowsRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -271,36 +271,36 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, delete_migration_workflow_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_migration_workflow({ name: name }) do |response, operation|
+      c.delete_migration_workflow({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_migration_workflow name: name do |response, operation|
+      c.delete_migration_workflow name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::DeleteMigrationWorkflowRequest.new(name: name) do |response, operation|
+      c.delete_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::DeleteMigrationWorkflowRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_migration_workflow({ name: name }, grpc_options) do |response, operation|
+      c.delete_migration_workflow({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::DeleteMigrationWorkflowRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::DeleteMigrationWorkflowRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -329,36 +329,36 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, start_migration_workflow_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.start_migration_workflow({ name: name }) do |response, operation|
+      c.start_migration_workflow({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.start_migration_workflow name: name do |response, operation|
+      c.start_migration_workflow name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.start_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::StartMigrationWorkflowRequest.new(name: name) do |response, operation|
+      c.start_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::StartMigrationWorkflowRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.start_migration_workflow({ name: name }, grpc_options) do |response, operation|
+      c.start_migration_workflow({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.start_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::StartMigrationWorkflowRequest.new(name: name), grpc_options) do |response, operation|
+      c.start_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::StartMigrationWorkflowRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -389,36 +389,36 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, get_migration_subtask_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_migration_subtask({ name: name, read_mask: read_mask }) do |response, operation|
+      c.get_migration_subtask({ name: name, read_mask: read_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_migration_subtask name: name, read_mask: read_mask do |response, operation|
+      c.get_migration_subtask name: name, read_mask: read_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_migration_subtask ::Google::Cloud::Bigquery::Migration::V2::GetMigrationSubtaskRequest.new(name: name, read_mask: read_mask) do |response, operation|
+      c.get_migration_subtask ::Google::Cloud::Bigquery::Migration::V2::GetMigrationSubtaskRequest.new(name: name, read_mask: read_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_migration_subtask({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.get_migration_subtask({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_migration_subtask(::Google::Cloud::Bigquery::Migration::V2::GetMigrationSubtaskRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
+      c.get_migration_subtask(::Google::Cloud::Bigquery::Migration::V2::GetMigrationSubtaskRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -455,40 +455,40 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, list_migration_subtasks_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_migration_subtasks({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_migration_subtasks({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_migration_subtasks parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_migration_subtasks parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_migration_subtasks ::Google::Cloud::Bigquery::Migration::V2::ListMigrationSubtasksRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_migration_subtasks ::Google::Cloud::Bigquery::Migration::V2::ListMigrationSubtasksRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_migration_subtasks({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_migration_subtasks({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_migration_subtasks(::Google::Cloud::Bigquery::Migration::V2::ListMigrationSubtasksRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_migration_subtasks(::Google::Cloud::Bigquery::Migration::V2::ListMigrationSubtasksRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

@@ -84,36 +84,36 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, create_budget_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new do |config|
+      c = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_budget({ parent: parent, budget: budget }) do |response, operation|
+      c.create_budget({ parent: parent, budget: budget }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_budget parent: parent, budget: budget do |response, operation|
+      c.create_budget parent: parent, budget: budget do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_budget ::Google::Cloud::Billing::Budgets::V1::CreateBudgetRequest.new(parent: parent, budget: budget) do |response, operation|
+      c.create_budget ::Google::Cloud::Billing::Budgets::V1::CreateBudgetRequest.new(parent: parent, budget: budget) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_budget({ parent: parent, budget: budget }, grpc_options) do |response, operation|
+      c.create_budget({ parent: parent, budget: budget }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_budget(::Google::Cloud::Billing::Budgets::V1::CreateBudgetRequest.new(parent: parent, budget: budget), grpc_options) do |response, operation|
+      c.create_budget(::Google::Cloud::Billing::Budgets::V1::CreateBudgetRequest.new(parent: parent, budget: budget), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, update_budget_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new do |config|
+      c = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_budget({ budget: budget, update_mask: update_mask }) do |response, operation|
+      c.update_budget({ budget: budget, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_budget budget: budget, update_mask: update_mask do |response, operation|
+      c.update_budget budget: budget, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_budget ::Google::Cloud::Billing::Budgets::V1::UpdateBudgetRequest.new(budget: budget, update_mask: update_mask) do |response, operation|
+      c.update_budget ::Google::Cloud::Billing::Budgets::V1::UpdateBudgetRequest.new(budget: budget, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_budget({ budget: budget, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_budget({ budget: budget, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_budget(::Google::Cloud::Billing::Budgets::V1::UpdateBudgetRequest.new(budget: budget, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_budget(::Google::Cloud::Billing::Budgets::V1::UpdateBudgetRequest.new(budget: budget, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -202,36 +202,36 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, get_budget_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new do |config|
+      c = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_budget({ name: name }) do |response, operation|
+      c.get_budget({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_budget name: name do |response, operation|
+      c.get_budget name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_budget ::Google::Cloud::Billing::Budgets::V1::GetBudgetRequest.new(name: name) do |response, operation|
+      c.get_budget ::Google::Cloud::Billing::Budgets::V1::GetBudgetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_budget({ name: name }, grpc_options) do |response, operation|
+      c.get_budget({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_budget(::Google::Cloud::Billing::Budgets::V1::GetBudgetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_budget(::Google::Cloud::Billing::Budgets::V1::GetBudgetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -266,40 +266,40 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, list_budgets_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new do |config|
+      c = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_budgets parent: parent, scope: scope, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_budgets parent: parent, scope: scope, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_budgets ::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_budgets ::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_budgets(::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_budgets(::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -329,36 +329,36 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, delete_budget_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new do |config|
+      c = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_budget({ name: name }) do |response, operation|
+      c.delete_budget({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_budget name: name do |response, operation|
+      c.delete_budget name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_budget ::Google::Cloud::Billing::Budgets::V1::DeleteBudgetRequest.new(name: name) do |response, operation|
+      c.delete_budget ::Google::Cloud::Billing::Budgets::V1::DeleteBudgetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_budget({ name: name }, grpc_options) do |response, operation|
+      c.delete_budget({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_budget(::Google::Cloud::Billing::Budgets::V1::DeleteBudgetRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_budget(::Google::Cloud::Billing::Budgets::V1::DeleteBudgetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
