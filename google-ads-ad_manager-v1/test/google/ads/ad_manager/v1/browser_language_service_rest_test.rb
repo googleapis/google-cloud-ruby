@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::BrowserLanguageService::Rest::ClientTest < M
     ::Google::Ads::AdManager::V1::BrowserLanguageService::Rest::ServiceStub.stub :transcode_get_browser_language_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_browser_language_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::BrowserLanguageService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::BrowserLanguageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_browser_language({ name: name }) do |_result, response|
+        c.get_browser_language({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_browser_language name: name do |_result, response|
+        c.get_browser_language name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_browser_language ::Google::Ads::AdManager::V1::GetBrowserLanguageRequest.new(name: name) do |_result, response|
+        c.get_browser_language ::Google::Ads::AdManager::V1::GetBrowserLanguageRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_browser_language({ name: name }, call_options) do |_result, response|
+        c.get_browser_language({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_browser_language(::Google::Ads::AdManager::V1::GetBrowserLanguageRequest.new(name: name), call_options) do |_result, response|
+        c.get_browser_language(::Google::Ads::AdManager::V1::GetBrowserLanguageRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::BrowserLanguageService::Rest::ClientTest < M
     ::Google::Ads::AdManager::V1::BrowserLanguageService::Rest::ServiceStub.stub :transcode_list_browser_languages_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_browser_languages_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::BrowserLanguageService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::BrowserLanguageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_browser_languages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_browser_languages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_browser_languages parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_browser_languages parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_browser_languages ::Google::Ads::AdManager::V1::ListBrowserLanguagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_browser_languages ::Google::Ads::AdManager::V1::ListBrowserLanguagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_browser_languages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_browser_languages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_browser_languages(::Google::Ads::AdManager::V1::ListBrowserLanguagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_browser_languages(::Google::Ads::AdManager::V1::ListBrowserLanguagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

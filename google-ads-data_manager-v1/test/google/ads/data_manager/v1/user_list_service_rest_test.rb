@@ -97,32 +97,32 @@ class ::Google::Ads::DataManager::V1::UserListService::Rest::ClientTest < Minite
     ::Google::Ads::DataManager::V1::UserListService::Rest::ServiceStub.stub :transcode_get_user_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_user_list_client_stub do
         # Create client
-        client = ::Google::Ads::DataManager::V1::UserListService::Rest::Client.new do |config|
+        c = ::Google::Ads::DataManager::V1::UserListService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_user_list({ name: name }) do |_result, response|
+        c.get_user_list({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_user_list name: name do |_result, response|
+        c.get_user_list name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_user_list ::Google::Ads::DataManager::V1::GetUserListRequest.new(name: name) do |_result, response|
+        c.get_user_list ::Google::Ads::DataManager::V1::GetUserListRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_user_list({ name: name }, call_options) do |_result, response|
+        c.get_user_list({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_user_list(::Google::Ads::DataManager::V1::GetUserListRequest.new(name: name), call_options) do |_result, response|
+        c.get_user_list(::Google::Ads::DataManager::V1::GetUserListRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Ads::DataManager::V1::UserListService::Rest::ClientTest < Minite
     ::Google::Ads::DataManager::V1::UserListService::Rest::ServiceStub.stub :transcode_list_user_lists_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_user_lists_client_stub do
         # Create client
-        client = ::Google::Ads::DataManager::V1::UserListService::Rest::Client.new do |config|
+        c = ::Google::Ads::DataManager::V1::UserListService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_user_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_user_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_user_lists parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_user_lists parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_user_lists ::Google::Ads::DataManager::V1::ListUserListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_user_lists ::Google::Ads::DataManager::V1::ListUserListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_user_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_user_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_user_lists(::Google::Ads::DataManager::V1::ListUserListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_user_lists(::Google::Ads::DataManager::V1::ListUserListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Ads::DataManager::V1::UserListService::Rest::ClientTest < Minite
     ::Google::Ads::DataManager::V1::UserListService::Rest::ServiceStub.stub :transcode_create_user_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_user_list_client_stub do
         # Create client
-        client = ::Google::Ads::DataManager::V1::UserListService::Rest::Client.new do |config|
+        c = ::Google::Ads::DataManager::V1::UserListService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_user_list({ parent: parent, user_list: user_list, validate_only: validate_only }) do |_result, response|
+        c.create_user_list({ parent: parent, user_list: user_list, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_user_list parent: parent, user_list: user_list, validate_only: validate_only do |_result, response|
+        c.create_user_list parent: parent, user_list: user_list, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_user_list ::Google::Ads::DataManager::V1::CreateUserListRequest.new(parent: parent, user_list: user_list, validate_only: validate_only) do |_result, response|
+        c.create_user_list ::Google::Ads::DataManager::V1::CreateUserListRequest.new(parent: parent, user_list: user_list, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_user_list({ parent: parent, user_list: user_list, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_user_list({ parent: parent, user_list: user_list, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_user_list(::Google::Ads::DataManager::V1::CreateUserListRequest.new(parent: parent, user_list: user_list, validate_only: validate_only), call_options) do |_result, response|
+        c.create_user_list(::Google::Ads::DataManager::V1::CreateUserListRequest.new(parent: parent, user_list: user_list, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Ads::DataManager::V1::UserListService::Rest::ClientTest < Minite
     ::Google::Ads::DataManager::V1::UserListService::Rest::ServiceStub.stub :transcode_update_user_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_user_list_client_stub do
         # Create client
-        client = ::Google::Ads::DataManager::V1::UserListService::Rest::Client.new do |config|
+        c = ::Google::Ads::DataManager::V1::UserListService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_user_list({ user_list: user_list, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_user_list({ user_list: user_list, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_user_list user_list: user_list, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_user_list user_list: user_list, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_user_list ::Google::Ads::DataManager::V1::UpdateUserListRequest.new(user_list: user_list, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_user_list ::Google::Ads::DataManager::V1::UpdateUserListRequest.new(user_list: user_list, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_user_list({ user_list: user_list, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_user_list({ user_list: user_list, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_user_list(::Google::Ads::DataManager::V1::UpdateUserListRequest.new(user_list: user_list, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_user_list(::Google::Ads::DataManager::V1::UpdateUserListRequest.new(user_list: user_list, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Ads::DataManager::V1::UserListService::Rest::ClientTest < Minite
     ::Google::Ads::DataManager::V1::UserListService::Rest::ServiceStub.stub :transcode_delete_user_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_user_list_client_stub do
         # Create client
-        client = ::Google::Ads::DataManager::V1::UserListService::Rest::Client.new do |config|
+        c = ::Google::Ads::DataManager::V1::UserListService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_user_list({ name: name, validate_only: validate_only }) do |_result, response|
+        c.delete_user_list({ name: name, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_user_list name: name, validate_only: validate_only do |_result, response|
+        c.delete_user_list name: name, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_user_list ::Google::Ads::DataManager::V1::DeleteUserListRequest.new(name: name, validate_only: validate_only) do |_result, response|
+        c.delete_user_list ::Google::Ads::DataManager::V1::DeleteUserListRequest.new(name: name, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_user_list({ name: name, validate_only: validate_only }, call_options) do |_result, response|
+        c.delete_user_list({ name: name, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_user_list(::Google::Ads::DataManager::V1::DeleteUserListRequest.new(name: name, validate_only: validate_only), call_options) do |_result, response|
+        c.delete_user_list(::Google::Ads::DataManager::V1::DeleteUserListRequest.new(name: name, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

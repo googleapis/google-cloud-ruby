@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::ContentBundleService::Rest::ClientTest < Min
     ::Google::Ads::AdManager::V1::ContentBundleService::Rest::ServiceStub.stub :transcode_get_content_bundle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_content_bundle_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ContentBundleService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ContentBundleService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_content_bundle({ name: name }) do |_result, response|
+        c.get_content_bundle({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_content_bundle name: name do |_result, response|
+        c.get_content_bundle name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_content_bundle ::Google::Ads::AdManager::V1::GetContentBundleRequest.new(name: name) do |_result, response|
+        c.get_content_bundle ::Google::Ads::AdManager::V1::GetContentBundleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_content_bundle({ name: name }, call_options) do |_result, response|
+        c.get_content_bundle({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_content_bundle(::Google::Ads::AdManager::V1::GetContentBundleRequest.new(name: name), call_options) do |_result, response|
+        c.get_content_bundle(::Google::Ads::AdManager::V1::GetContentBundleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::ContentBundleService::Rest::ClientTest < Min
     ::Google::Ads::AdManager::V1::ContentBundleService::Rest::ServiceStub.stub :transcode_list_content_bundles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_content_bundles_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ContentBundleService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ContentBundleService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_content_bundles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_content_bundles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_content_bundles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_content_bundles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_content_bundles ::Google::Ads::AdManager::V1::ListContentBundlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_content_bundles ::Google::Ads::AdManager::V1::ListContentBundlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_content_bundles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_content_bundles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_content_bundles(::Google::Ads::AdManager::V1::ListContentBundlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_content_bundles(::Google::Ads::AdManager::V1::ListContentBundlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

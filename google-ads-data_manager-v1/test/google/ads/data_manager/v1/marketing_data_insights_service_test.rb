@@ -86,36 +86,36 @@ class ::Google::Ads::DataManager::V1::MarketingDataInsightsService::ClientTest <
 
     Gapic::ServiceStub.stub :new, retrieve_insights_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::MarketingDataInsightsService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::MarketingDataInsightsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.retrieve_insights({ parent: parent, baseline: baseline, user_list_id: user_list_id }) do |response, operation|
+      c.retrieve_insights({ parent: parent, baseline: baseline, user_list_id: user_list_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.retrieve_insights parent: parent, baseline: baseline, user_list_id: user_list_id do |response, operation|
+      c.retrieve_insights parent: parent, baseline: baseline, user_list_id: user_list_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.retrieve_insights ::Google::Ads::DataManager::V1::RetrieveInsightsRequest.new(parent: parent, baseline: baseline, user_list_id: user_list_id) do |response, operation|
+      c.retrieve_insights ::Google::Ads::DataManager::V1::RetrieveInsightsRequest.new(parent: parent, baseline: baseline, user_list_id: user_list_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.retrieve_insights({ parent: parent, baseline: baseline, user_list_id: user_list_id }, grpc_options) do |response, operation|
+      c.retrieve_insights({ parent: parent, baseline: baseline, user_list_id: user_list_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.retrieve_insights(::Google::Ads::DataManager::V1::RetrieveInsightsRequest.new(parent: parent, baseline: baseline, user_list_id: user_list_id), grpc_options) do |response, operation|
+      c.retrieve_insights(::Google::Ads::DataManager::V1::RetrieveInsightsRequest.new(parent: parent, baseline: baseline, user_list_id: user_list_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

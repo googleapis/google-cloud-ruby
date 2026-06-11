@@ -82,36 +82,36 @@ class ::Google::Ads::DataManager::V1::UserListService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_user_list_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::UserListService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::UserListService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_user_list({ name: name }) do |response, operation|
+      c.get_user_list({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_user_list name: name do |response, operation|
+      c.get_user_list name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_user_list ::Google::Ads::DataManager::V1::GetUserListRequest.new(name: name) do |response, operation|
+      c.get_user_list ::Google::Ads::DataManager::V1::GetUserListRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_user_list({ name: name }, grpc_options) do |response, operation|
+      c.get_user_list({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_user_list(::Google::Ads::DataManager::V1::GetUserListRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_user_list(::Google::Ads::DataManager::V1::GetUserListRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Ads::DataManager::V1::UserListService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_user_lists_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::UserListService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::UserListService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_user_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_user_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_user_lists parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_user_lists parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_user_lists ::Google::Ads::DataManager::V1::ListUserListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_user_lists ::Google::Ads::DataManager::V1::ListUserListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_user_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_user_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_user_lists(::Google::Ads::DataManager::V1::ListUserListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_user_lists(::Google::Ads::DataManager::V1::ListUserListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -213,36 +213,36 @@ class ::Google::Ads::DataManager::V1::UserListService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_user_list_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::UserListService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::UserListService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_user_list({ parent: parent, user_list: user_list, validate_only: validate_only }) do |response, operation|
+      c.create_user_list({ parent: parent, user_list: user_list, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_user_list parent: parent, user_list: user_list, validate_only: validate_only do |response, operation|
+      c.create_user_list parent: parent, user_list: user_list, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_user_list ::Google::Ads::DataManager::V1::CreateUserListRequest.new(parent: parent, user_list: user_list, validate_only: validate_only) do |response, operation|
+      c.create_user_list ::Google::Ads::DataManager::V1::CreateUserListRequest.new(parent: parent, user_list: user_list, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_user_list({ parent: parent, user_list: user_list, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_user_list({ parent: parent, user_list: user_list, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_user_list(::Google::Ads::DataManager::V1::CreateUserListRequest.new(parent: parent, user_list: user_list, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_user_list(::Google::Ads::DataManager::V1::CreateUserListRequest.new(parent: parent, user_list: user_list, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -275,36 +275,36 @@ class ::Google::Ads::DataManager::V1::UserListService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_user_list_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::UserListService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::UserListService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_user_list({ user_list: user_list, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
+      c.update_user_list({ user_list: user_list, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_user_list user_list: user_list, update_mask: update_mask, validate_only: validate_only do |response, operation|
+      c.update_user_list user_list: user_list, update_mask: update_mask, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_user_list ::Google::Ads::DataManager::V1::UpdateUserListRequest.new(user_list: user_list, update_mask: update_mask, validate_only: validate_only) do |response, operation|
+      c.update_user_list ::Google::Ads::DataManager::V1::UpdateUserListRequest.new(user_list: user_list, update_mask: update_mask, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_user_list({ user_list: user_list, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_user_list({ user_list: user_list, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_user_list(::Google::Ads::DataManager::V1::UpdateUserListRequest.new(user_list: user_list, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_user_list(::Google::Ads::DataManager::V1::UpdateUserListRequest.new(user_list: user_list, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,36 +335,36 @@ class ::Google::Ads::DataManager::V1::UserListService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_user_list_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::UserListService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::UserListService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_user_list({ name: name, validate_only: validate_only }) do |response, operation|
+      c.delete_user_list({ name: name, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_user_list name: name, validate_only: validate_only do |response, operation|
+      c.delete_user_list name: name, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_user_list ::Google::Ads::DataManager::V1::DeleteUserListRequest.new(name: name, validate_only: validate_only) do |response, operation|
+      c.delete_user_list ::Google::Ads::DataManager::V1::DeleteUserListRequest.new(name: name, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_user_list({ name: name, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.delete_user_list({ name: name, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_user_list(::Google::Ads::DataManager::V1::DeleteUserListRequest.new(name: name, validate_only: validate_only), grpc_options) do |response, operation|
+      c.delete_user_list(::Google::Ads::DataManager::V1::DeleteUserListRequest.new(name: name, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

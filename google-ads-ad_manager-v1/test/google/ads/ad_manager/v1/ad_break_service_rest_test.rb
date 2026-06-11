@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::AdBreakService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::AdBreakService::Rest::ServiceStub.stub :transcode_get_ad_break_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_ad_break_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_ad_break({ name: name }) do |_result, response|
+        c.get_ad_break({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_ad_break name: name do |_result, response|
+        c.get_ad_break name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_ad_break ::Google::Ads::AdManager::V1::GetAdBreakRequest.new(name: name) do |_result, response|
+        c.get_ad_break ::Google::Ads::AdManager::V1::GetAdBreakRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_ad_break({ name: name }, call_options) do |_result, response|
+        c.get_ad_break({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_ad_break(::Google::Ads::AdManager::V1::GetAdBreakRequest.new(name: name), call_options) do |_result, response|
+        c.get_ad_break(::Google::Ads::AdManager::V1::GetAdBreakRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::AdBreakService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::AdBreakService::Rest::ServiceStub.stub :transcode_list_ad_breaks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_ad_breaks_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_ad_breaks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_ad_breaks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_ad_breaks parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_ad_breaks parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_ad_breaks ::Google::Ads::AdManager::V1::ListAdBreaksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_ad_breaks ::Google::Ads::AdManager::V1::ListAdBreaksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_ad_breaks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_ad_breaks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_ad_breaks(::Google::Ads::AdManager::V1::ListAdBreaksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_ad_breaks(::Google::Ads::AdManager::V1::ListAdBreaksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Ads::AdManager::V1::AdBreakService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::AdBreakService::Rest::ServiceStub.stub :transcode_create_ad_break_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_ad_break_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_ad_break({ parent: parent, ad_break: ad_break }) do |_result, response|
+        c.create_ad_break({ parent: parent, ad_break: ad_break }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_ad_break parent: parent, ad_break: ad_break do |_result, response|
+        c.create_ad_break parent: parent, ad_break: ad_break do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_ad_break ::Google::Ads::AdManager::V1::CreateAdBreakRequest.new(parent: parent, ad_break: ad_break) do |_result, response|
+        c.create_ad_break ::Google::Ads::AdManager::V1::CreateAdBreakRequest.new(parent: parent, ad_break: ad_break) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_ad_break({ parent: parent, ad_break: ad_break }, call_options) do |_result, response|
+        c.create_ad_break({ parent: parent, ad_break: ad_break }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_ad_break(::Google::Ads::AdManager::V1::CreateAdBreakRequest.new(parent: parent, ad_break: ad_break), call_options) do |_result, response|
+        c.create_ad_break(::Google::Ads::AdManager::V1::CreateAdBreakRequest.new(parent: parent, ad_break: ad_break), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Ads::AdManager::V1::AdBreakService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::AdBreakService::Rest::ServiceStub.stub :transcode_update_ad_break_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_ad_break_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_ad_break({ ad_break: ad_break, update_mask: update_mask }) do |_result, response|
+        c.update_ad_break({ ad_break: ad_break, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_ad_break ad_break: ad_break, update_mask: update_mask do |_result, response|
+        c.update_ad_break ad_break: ad_break, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_ad_break ::Google::Ads::AdManager::V1::UpdateAdBreakRequest.new(ad_break: ad_break, update_mask: update_mask) do |_result, response|
+        c.update_ad_break ::Google::Ads::AdManager::V1::UpdateAdBreakRequest.new(ad_break: ad_break, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_ad_break({ ad_break: ad_break, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_ad_break({ ad_break: ad_break, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_ad_break(::Google::Ads::AdManager::V1::UpdateAdBreakRequest.new(ad_break: ad_break, update_mask: update_mask), call_options) do |_result, response|
+        c.update_ad_break(::Google::Ads::AdManager::V1::UpdateAdBreakRequest.new(ad_break: ad_break, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Ads::AdManager::V1::AdBreakService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::AdBreakService::Rest::ServiceStub.stub :transcode_delete_ad_break_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_ad_break_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_ad_break({ name: name }) do |_result, response|
+        c.delete_ad_break({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_ad_break name: name do |_result, response|
+        c.delete_ad_break name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_ad_break ::Google::Ads::AdManager::V1::DeleteAdBreakRequest.new(name: name) do |_result, response|
+        c.delete_ad_break ::Google::Ads::AdManager::V1::DeleteAdBreakRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_ad_break({ name: name }, call_options) do |_result, response|
+        c.delete_ad_break({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_ad_break(::Google::Ads::AdManager::V1::DeleteAdBreakRequest.new(name: name), call_options) do |_result, response|
+        c.delete_ad_break(::Google::Ads::AdManager::V1::DeleteAdBreakRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -97,32 +97,32 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
     ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_get_organization_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_organization_client_stub do
         # Create client
-        client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_organization({ name: name }) do |_result, response|
+        c.get_organization({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_organization name: name do |_result, response|
+        c.get_organization name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_organization ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetOrganizationRequest.new(name: name) do |_result, response|
+        c.get_organization ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetOrganizationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_organization({ name: name }, call_options) do |_result, response|
+        c.get_organization({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_organization(::Google::Ads::MarketingPlatform::Admin::V1alpha::GetOrganizationRequest.new(name: name), call_options) do |_result, response|
+        c.get_organization(::Google::Ads::MarketingPlatform::Admin::V1alpha::GetOrganizationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
     ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_list_organizations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_organizations_client_stub do
         # Create client
-        client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_organizations({ page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_organizations({ page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_organizations page_size: page_size, page_token: page_token do |_result, response|
+        c.list_organizations page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_organizations ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest.new(page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_organizations ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest.new(page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_organizations({ page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_organizations({ page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_organizations(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest.new(page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_organizations(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest.new(page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
     ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_find_sales_partner_managed_clients_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, find_sales_partner_managed_clients_client_stub do
         # Create client
-        client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.find_sales_partner_managed_clients({ organization: organization, is_active: is_active }) do |_result, response|
+        c.find_sales_partner_managed_clients({ organization: organization, is_active: is_active }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.find_sales_partner_managed_clients organization: organization, is_active: is_active do |_result, response|
+        c.find_sales_partner_managed_clients organization: organization, is_active: is_active do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.find_sales_partner_managed_clients ::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest.new(organization: organization, is_active: is_active) do |_result, response|
+        c.find_sales_partner_managed_clients ::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest.new(organization: organization, is_active: is_active) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.find_sales_partner_managed_clients({ organization: organization, is_active: is_active }, call_options) do |_result, response|
+        c.find_sales_partner_managed_clients({ organization: organization, is_active: is_active }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.find_sales_partner_managed_clients(::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest.new(organization: organization, is_active: is_active), call_options) do |_result, response|
+        c.find_sales_partner_managed_clients(::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest.new(organization: organization, is_active: is_active), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
     ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_list_analytics_account_links_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_analytics_account_links_client_stub do
         # Create client
-        client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_analytics_account_links({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_analytics_account_links({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_analytics_account_links parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_analytics_account_links parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_analytics_account_links ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_analytics_account_links ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_analytics_account_links({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_analytics_account_links({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_analytics_account_links(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_analytics_account_links(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
     ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_create_analytics_account_link_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_analytics_account_link_client_stub do
         # Create client
-        client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_analytics_account_link({ parent: parent, analytics_account_link: analytics_account_link }) do |_result, response|
+        c.create_analytics_account_link({ parent: parent, analytics_account_link: analytics_account_link }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_analytics_account_link parent: parent, analytics_account_link: analytics_account_link do |_result, response|
+        c.create_analytics_account_link parent: parent, analytics_account_link: analytics_account_link do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_analytics_account_link ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAnalyticsAccountLinkRequest.new(parent: parent, analytics_account_link: analytics_account_link) do |_result, response|
+        c.create_analytics_account_link ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAnalyticsAccountLinkRequest.new(parent: parent, analytics_account_link: analytics_account_link) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_analytics_account_link({ parent: parent, analytics_account_link: analytics_account_link }, call_options) do |_result, response|
+        c.create_analytics_account_link({ parent: parent, analytics_account_link: analytics_account_link }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_analytics_account_link(::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAnalyticsAccountLinkRequest.new(parent: parent, analytics_account_link: analytics_account_link), call_options) do |_result, response|
+        c.create_analytics_account_link(::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAnalyticsAccountLinkRequest.new(parent: parent, analytics_account_link: analytics_account_link), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -372,32 +372,32 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
     ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_delete_analytics_account_link_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_analytics_account_link_client_stub do
         # Create client
-        client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_analytics_account_link({ name: name }) do |_result, response|
+        c.delete_analytics_account_link({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_analytics_account_link name: name do |_result, response|
+        c.delete_analytics_account_link name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_analytics_account_link ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteAnalyticsAccountLinkRequest.new(name: name) do |_result, response|
+        c.delete_analytics_account_link ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteAnalyticsAccountLinkRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_analytics_account_link({ name: name }, call_options) do |_result, response|
+        c.delete_analytics_account_link({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_analytics_account_link(::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteAnalyticsAccountLinkRequest.new(name: name), call_options) do |_result, response|
+        c.delete_analytics_account_link(::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteAnalyticsAccountLinkRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
     ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_set_property_service_level_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_property_service_level_client_stub do
         # Create client
-        client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_property_service_level({ analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level }) do |_result, response|
+        c.set_property_service_level({ analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_property_service_level analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level do |_result, response|
+        c.set_property_service_level analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_property_service_level ::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelRequest.new(analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level) do |_result, response|
+        c.set_property_service_level ::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelRequest.new(analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_property_service_level({ analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level }, call_options) do |_result, response|
+        c.set_property_service_level({ analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_property_service_level(::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelRequest.new(analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level), call_options) do |_result, response|
+        c.set_property_service_level(::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelRequest.new(analytics_account_link: analytics_account_link, analytics_property: analytics_property, service_level: service_level), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -483,32 +483,32 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
     ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_report_property_usage_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, report_property_usage_client_stub do
         # Create client
-        client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.report_property_usage({ organization: organization, month: month }) do |_result, response|
+        c.report_property_usage({ organization: organization, month: month }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.report_property_usage organization: organization, month: month do |_result, response|
+        c.report_property_usage organization: organization, month: month do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.report_property_usage ::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest.new(organization: organization, month: month) do |_result, response|
+        c.report_property_usage ::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest.new(organization: organization, month: month) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.report_property_usage({ organization: organization, month: month }, call_options) do |_result, response|
+        c.report_property_usage({ organization: organization, month: month }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.report_property_usage(::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest.new(organization: organization, month: month), call_options) do |_result, response|
+        c.report_property_usage(::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest.new(organization: organization, month: month), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

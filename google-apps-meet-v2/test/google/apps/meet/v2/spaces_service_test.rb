@@ -82,36 +82,36 @@ class ::Google::Apps::Meet::V2::SpacesService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_space_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::SpacesService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::SpacesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_space({ space: space }) do |response, operation|
+      c.create_space({ space: space }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_space space: space do |response, operation|
+      c.create_space space: space do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_space ::Google::Apps::Meet::V2::CreateSpaceRequest.new(space: space) do |response, operation|
+      c.create_space ::Google::Apps::Meet::V2::CreateSpaceRequest.new(space: space) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_space({ space: space }, grpc_options) do |response, operation|
+      c.create_space({ space: space }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_space(::Google::Apps::Meet::V2::CreateSpaceRequest.new(space: space), grpc_options) do |response, operation|
+      c.create_space(::Google::Apps::Meet::V2::CreateSpaceRequest.new(space: space), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -140,36 +140,36 @@ class ::Google::Apps::Meet::V2::SpacesService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_space_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::SpacesService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::SpacesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_space({ name: name }) do |response, operation|
+      c.get_space({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_space name: name do |response, operation|
+      c.get_space name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_space ::Google::Apps::Meet::V2::GetSpaceRequest.new(name: name) do |response, operation|
+      c.get_space ::Google::Apps::Meet::V2::GetSpaceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_space({ name: name }, grpc_options) do |response, operation|
+      c.get_space({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_space(::Google::Apps::Meet::V2::GetSpaceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_space(::Google::Apps::Meet::V2::GetSpaceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -200,36 +200,36 @@ class ::Google::Apps::Meet::V2::SpacesService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_space_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::SpacesService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::SpacesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_space({ space: space, update_mask: update_mask }) do |response, operation|
+      c.update_space({ space: space, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_space space: space, update_mask: update_mask do |response, operation|
+      c.update_space space: space, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_space ::Google::Apps::Meet::V2::UpdateSpaceRequest.new(space: space, update_mask: update_mask) do |response, operation|
+      c.update_space ::Google::Apps::Meet::V2::UpdateSpaceRequest.new(space: space, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_space({ space: space, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_space({ space: space, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_space(::Google::Apps::Meet::V2::UpdateSpaceRequest.new(space: space, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_space(::Google::Apps::Meet::V2::UpdateSpaceRequest.new(space: space, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -258,36 +258,36 @@ class ::Google::Apps::Meet::V2::SpacesService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, end_active_conference_client_stub do
       # Create client
-      client = ::Google::Apps::Meet::V2::SpacesService::Client.new do |config|
+      c = ::Google::Apps::Meet::V2::SpacesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.end_active_conference({ name: name }) do |response, operation|
+      c.end_active_conference({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.end_active_conference name: name do |response, operation|
+      c.end_active_conference name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.end_active_conference ::Google::Apps::Meet::V2::EndActiveConferenceRequest.new(name: name) do |response, operation|
+      c.end_active_conference ::Google::Apps::Meet::V2::EndActiveConferenceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.end_active_conference({ name: name }, grpc_options) do |response, operation|
+      c.end_active_conference({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.end_active_conference(::Google::Apps::Meet::V2::EndActiveConferenceRequest.new(name: name), grpc_options) do |response, operation|
+      c.end_active_conference(::Google::Apps::Meet::V2::EndActiveConferenceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

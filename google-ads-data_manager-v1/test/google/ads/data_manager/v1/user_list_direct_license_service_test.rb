@@ -84,36 +84,36 @@ class ::Google::Ads::DataManager::V1::UserListDirectLicenseService::ClientTest <
 
     Gapic::ServiceStub.stub :new, create_user_list_direct_license_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_user_list_direct_license({ parent: parent, user_list_direct_license: user_list_direct_license }) do |response, operation|
+      c.create_user_list_direct_license({ parent: parent, user_list_direct_license: user_list_direct_license }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_user_list_direct_license parent: parent, user_list_direct_license: user_list_direct_license do |response, operation|
+      c.create_user_list_direct_license parent: parent, user_list_direct_license: user_list_direct_license do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_user_list_direct_license ::Google::Ads::DataManager::V1::CreateUserListDirectLicenseRequest.new(parent: parent, user_list_direct_license: user_list_direct_license) do |response, operation|
+      c.create_user_list_direct_license ::Google::Ads::DataManager::V1::CreateUserListDirectLicenseRequest.new(parent: parent, user_list_direct_license: user_list_direct_license) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_user_list_direct_license({ parent: parent, user_list_direct_license: user_list_direct_license }, grpc_options) do |response, operation|
+      c.create_user_list_direct_license({ parent: parent, user_list_direct_license: user_list_direct_license }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_user_list_direct_license(::Google::Ads::DataManager::V1::CreateUserListDirectLicenseRequest.new(parent: parent, user_list_direct_license: user_list_direct_license), grpc_options) do |response, operation|
+      c.create_user_list_direct_license(::Google::Ads::DataManager::V1::CreateUserListDirectLicenseRequest.new(parent: parent, user_list_direct_license: user_list_direct_license), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Ads::DataManager::V1::UserListDirectLicenseService::ClientTest <
 
     Gapic::ServiceStub.stub :new, get_user_list_direct_license_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_user_list_direct_license({ name: name }) do |response, operation|
+      c.get_user_list_direct_license({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_user_list_direct_license name: name do |response, operation|
+      c.get_user_list_direct_license name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_user_list_direct_license ::Google::Ads::DataManager::V1::GetUserListDirectLicenseRequest.new(name: name) do |response, operation|
+      c.get_user_list_direct_license ::Google::Ads::DataManager::V1::GetUserListDirectLicenseRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_user_list_direct_license({ name: name }, grpc_options) do |response, operation|
+      c.get_user_list_direct_license({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_user_list_direct_license(::Google::Ads::DataManager::V1::GetUserListDirectLicenseRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_user_list_direct_license(::Google::Ads::DataManager::V1::GetUserListDirectLicenseRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -202,36 +202,36 @@ class ::Google::Ads::DataManager::V1::UserListDirectLicenseService::ClientTest <
 
     Gapic::ServiceStub.stub :new, update_user_list_direct_license_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_user_list_direct_license({ user_list_direct_license: user_list_direct_license, update_mask: update_mask }) do |response, operation|
+      c.update_user_list_direct_license({ user_list_direct_license: user_list_direct_license, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_user_list_direct_license user_list_direct_license: user_list_direct_license, update_mask: update_mask do |response, operation|
+      c.update_user_list_direct_license user_list_direct_license: user_list_direct_license, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_user_list_direct_license ::Google::Ads::DataManager::V1::UpdateUserListDirectLicenseRequest.new(user_list_direct_license: user_list_direct_license, update_mask: update_mask) do |response, operation|
+      c.update_user_list_direct_license ::Google::Ads::DataManager::V1::UpdateUserListDirectLicenseRequest.new(user_list_direct_license: user_list_direct_license, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_user_list_direct_license({ user_list_direct_license: user_list_direct_license, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_user_list_direct_license({ user_list_direct_license: user_list_direct_license, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_user_list_direct_license(::Google::Ads::DataManager::V1::UpdateUserListDirectLicenseRequest.new(user_list_direct_license: user_list_direct_license, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_user_list_direct_license(::Google::Ads::DataManager::V1::UpdateUserListDirectLicenseRequest.new(user_list_direct_license: user_list_direct_license, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -266,40 +266,40 @@ class ::Google::Ads::DataManager::V1::UserListDirectLicenseService::ClientTest <
 
     Gapic::ServiceStub.stub :new, list_user_list_direct_licenses_client_stub do
       # Create client
-      client = ::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client.new do |config|
+      c = ::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_user_list_direct_licenses({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_user_list_direct_licenses({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_user_list_direct_licenses parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_user_list_direct_licenses parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_user_list_direct_licenses ::Google::Ads::DataManager::V1::ListUserListDirectLicensesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_user_list_direct_licenses ::Google::Ads::DataManager::V1::ListUserListDirectLicensesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_user_list_direct_licenses({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_user_list_direct_licenses({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_user_list_direct_licenses(::Google::Ads::DataManager::V1::ListUserListDirectLicensesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_user_list_direct_licenses(::Google::Ads::DataManager::V1::ListUserListDirectLicensesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

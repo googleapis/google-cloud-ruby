@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ServiceStub.stub :transcode_get_custom_targeting_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_custom_targeting_key_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_custom_targeting_key({ name: name }) do |_result, response|
+        c.get_custom_targeting_key({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_custom_targeting_key name: name do |_result, response|
+        c.get_custom_targeting_key name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_custom_targeting_key ::Google::Ads::AdManager::V1::GetCustomTargetingKeyRequest.new(name: name) do |_result, response|
+        c.get_custom_targeting_key ::Google::Ads::AdManager::V1::GetCustomTargetingKeyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_custom_targeting_key({ name: name }, call_options) do |_result, response|
+        c.get_custom_targeting_key({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_custom_targeting_key(::Google::Ads::AdManager::V1::GetCustomTargetingKeyRequest.new(name: name), call_options) do |_result, response|
+        c.get_custom_targeting_key(::Google::Ads::AdManager::V1::GetCustomTargetingKeyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ServiceStub.stub :transcode_list_custom_targeting_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_custom_targeting_keys_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_custom_targeting_keys({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_custom_targeting_keys({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_custom_targeting_keys parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_custom_targeting_keys parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_custom_targeting_keys ::Google::Ads::AdManager::V1::ListCustomTargetingKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_custom_targeting_keys ::Google::Ads::AdManager::V1::ListCustomTargetingKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_custom_targeting_keys({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_custom_targeting_keys({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_custom_targeting_keys(::Google::Ads::AdManager::V1::ListCustomTargetingKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_custom_targeting_keys(::Google::Ads::AdManager::V1::ListCustomTargetingKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ServiceStub.stub :transcode_create_custom_targeting_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_custom_targeting_key_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_custom_targeting_key({ parent: parent, custom_targeting_key: custom_targeting_key }) do |_result, response|
+        c.create_custom_targeting_key({ parent: parent, custom_targeting_key: custom_targeting_key }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_custom_targeting_key parent: parent, custom_targeting_key: custom_targeting_key do |_result, response|
+        c.create_custom_targeting_key parent: parent, custom_targeting_key: custom_targeting_key do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_custom_targeting_key ::Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest.new(parent: parent, custom_targeting_key: custom_targeting_key) do |_result, response|
+        c.create_custom_targeting_key ::Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest.new(parent: parent, custom_targeting_key: custom_targeting_key) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_custom_targeting_key({ parent: parent, custom_targeting_key: custom_targeting_key }, call_options) do |_result, response|
+        c.create_custom_targeting_key({ parent: parent, custom_targeting_key: custom_targeting_key }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_custom_targeting_key(::Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest.new(parent: parent, custom_targeting_key: custom_targeting_key), call_options) do |_result, response|
+        c.create_custom_targeting_key(::Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest.new(parent: parent, custom_targeting_key: custom_targeting_key), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ServiceStub.stub :transcode_batch_create_custom_targeting_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_create_custom_targeting_keys_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_create_custom_targeting_keys({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_create_custom_targeting_keys({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_create_custom_targeting_keys parent: parent, requests: requests do |_result, response|
+        c.batch_create_custom_targeting_keys parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_create_custom_targeting_keys ::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_create_custom_targeting_keys ::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_create_custom_targeting_keys({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_create_custom_targeting_keys({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_create_custom_targeting_keys(::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_create_custom_targeting_keys(::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ServiceStub.stub :transcode_update_custom_targeting_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_custom_targeting_key_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_custom_targeting_key({ custom_targeting_key: custom_targeting_key, update_mask: update_mask }) do |_result, response|
+        c.update_custom_targeting_key({ custom_targeting_key: custom_targeting_key, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_custom_targeting_key custom_targeting_key: custom_targeting_key, update_mask: update_mask do |_result, response|
+        c.update_custom_targeting_key custom_targeting_key: custom_targeting_key, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_custom_targeting_key ::Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest.new(custom_targeting_key: custom_targeting_key, update_mask: update_mask) do |_result, response|
+        c.update_custom_targeting_key ::Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest.new(custom_targeting_key: custom_targeting_key, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_custom_targeting_key({ custom_targeting_key: custom_targeting_key, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_custom_targeting_key({ custom_targeting_key: custom_targeting_key, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_custom_targeting_key(::Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest.new(custom_targeting_key: custom_targeting_key, update_mask: update_mask), call_options) do |_result, response|
+        c.update_custom_targeting_key(::Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest.new(custom_targeting_key: custom_targeting_key, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ServiceStub.stub :transcode_batch_update_custom_targeting_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_update_custom_targeting_keys_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_update_custom_targeting_keys({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_update_custom_targeting_keys({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_update_custom_targeting_keys parent: parent, requests: requests do |_result, response|
+        c.batch_update_custom_targeting_keys parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_update_custom_targeting_keys ::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_update_custom_targeting_keys ::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_update_custom_targeting_keys({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_update_custom_targeting_keys({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_update_custom_targeting_keys(::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_update_custom_targeting_keys(::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ServiceStub.stub :transcode_batch_activate_custom_targeting_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_activate_custom_targeting_keys_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_activate_custom_targeting_keys({ parent: parent, names: names }) do |_result, response|
+        c.batch_activate_custom_targeting_keys({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_activate_custom_targeting_keys parent: parent, names: names do |_result, response|
+        c.batch_activate_custom_targeting_keys parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_activate_custom_targeting_keys ::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_activate_custom_targeting_keys ::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_activate_custom_targeting_keys({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_activate_custom_targeting_keys({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_activate_custom_targeting_keys(::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_activate_custom_targeting_keys(::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::ServiceStub.stub :transcode_batch_deactivate_custom_targeting_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_deactivate_custom_targeting_keys_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_deactivate_custom_targeting_keys({ parent: parent, names: names }) do |_result, response|
+        c.batch_deactivate_custom_targeting_keys({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_deactivate_custom_targeting_keys parent: parent, names: names do |_result, response|
+        c.batch_deactivate_custom_targeting_keys parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_deactivate_custom_targeting_keys ::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_deactivate_custom_targeting_keys ::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_deactivate_custom_targeting_keys({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_deactivate_custom_targeting_keys({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_deactivate_custom_targeting_keys(::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_deactivate_custom_targeting_keys(::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

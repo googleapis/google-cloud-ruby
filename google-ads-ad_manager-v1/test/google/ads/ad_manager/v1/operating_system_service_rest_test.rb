@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::OperatingSystemService::Rest::ClientTest < M
     ::Google::Ads::AdManager::V1::OperatingSystemService::Rest::ServiceStub.stub :transcode_get_operating_system_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_operating_system_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::OperatingSystemService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::OperatingSystemService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_operating_system({ name: name }) do |_result, response|
+        c.get_operating_system({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_operating_system name: name do |_result, response|
+        c.get_operating_system name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_operating_system ::Google::Ads::AdManager::V1::GetOperatingSystemRequest.new(name: name) do |_result, response|
+        c.get_operating_system ::Google::Ads::AdManager::V1::GetOperatingSystemRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_operating_system({ name: name }, call_options) do |_result, response|
+        c.get_operating_system({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_operating_system(::Google::Ads::AdManager::V1::GetOperatingSystemRequest.new(name: name), call_options) do |_result, response|
+        c.get_operating_system(::Google::Ads::AdManager::V1::GetOperatingSystemRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::OperatingSystemService::Rest::ClientTest < M
     ::Google::Ads::AdManager::V1::OperatingSystemService::Rest::ServiceStub.stub :transcode_list_operating_systems_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_operating_systems_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::OperatingSystemService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::OperatingSystemService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_operating_systems({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_operating_systems({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_operating_systems parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_operating_systems parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_operating_systems ::Google::Ads::AdManager::V1::ListOperatingSystemsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_operating_systems ::Google::Ads::AdManager::V1::ListOperatingSystemsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_operating_systems({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_operating_systems({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_operating_systems(::Google::Ads::AdManager::V1::ListOperatingSystemsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_operating_systems(::Google::Ads::AdManager::V1::ListOperatingSystemsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

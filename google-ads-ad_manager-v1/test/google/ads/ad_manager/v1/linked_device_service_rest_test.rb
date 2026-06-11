@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::LinkedDeviceService::Rest::ClientTest < Mini
     ::Google::Ads::AdManager::V1::LinkedDeviceService::Rest::ServiceStub.stub :transcode_get_linked_device_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_linked_device_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::LinkedDeviceService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::LinkedDeviceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_linked_device({ name: name }) do |_result, response|
+        c.get_linked_device({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_linked_device name: name do |_result, response|
+        c.get_linked_device name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_linked_device ::Google::Ads::AdManager::V1::GetLinkedDeviceRequest.new(name: name) do |_result, response|
+        c.get_linked_device ::Google::Ads::AdManager::V1::GetLinkedDeviceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_linked_device({ name: name }, call_options) do |_result, response|
+        c.get_linked_device({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_linked_device(::Google::Ads::AdManager::V1::GetLinkedDeviceRequest.new(name: name), call_options) do |_result, response|
+        c.get_linked_device(::Google::Ads::AdManager::V1::GetLinkedDeviceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::LinkedDeviceService::Rest::ClientTest < Mini
     ::Google::Ads::AdManager::V1::LinkedDeviceService::Rest::ServiceStub.stub :transcode_list_linked_devices_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_linked_devices_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::LinkedDeviceService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::LinkedDeviceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_linked_devices({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_linked_devices({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_linked_devices parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_linked_devices parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_linked_devices ::Google::Ads::AdManager::V1::ListLinkedDevicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_linked_devices ::Google::Ads::AdManager::V1::ListLinkedDevicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_linked_devices({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_linked_devices({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_linked_devices(::Google::Ads::AdManager::V1::ListLinkedDevicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_linked_devices(::Google::Ads::AdManager::V1::ListLinkedDevicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
