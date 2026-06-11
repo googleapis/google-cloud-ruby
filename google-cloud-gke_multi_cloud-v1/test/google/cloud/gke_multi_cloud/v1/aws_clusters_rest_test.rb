@@ -100,32 +100,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_create_aws_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_aws_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_aws_cluster({ parent: parent, aws_cluster: aws_cluster, aws_cluster_id: aws_cluster_id, validate_only: validate_only }) do |_result, response|
+        c.create_aws_cluster({ parent: parent, aws_cluster: aws_cluster, aws_cluster_id: aws_cluster_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_aws_cluster parent: parent, aws_cluster: aws_cluster, aws_cluster_id: aws_cluster_id, validate_only: validate_only do |_result, response|
+        c.create_aws_cluster parent: parent, aws_cluster: aws_cluster, aws_cluster_id: aws_cluster_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_aws_cluster ::Google::Cloud::GkeMultiCloud::V1::CreateAwsClusterRequest.new(parent: parent, aws_cluster: aws_cluster, aws_cluster_id: aws_cluster_id, validate_only: validate_only) do |_result, response|
+        c.create_aws_cluster ::Google::Cloud::GkeMultiCloud::V1::CreateAwsClusterRequest.new(parent: parent, aws_cluster: aws_cluster, aws_cluster_id: aws_cluster_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_aws_cluster({ parent: parent, aws_cluster: aws_cluster, aws_cluster_id: aws_cluster_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_aws_cluster({ parent: parent, aws_cluster: aws_cluster, aws_cluster_id: aws_cluster_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_aws_cluster(::Google::Cloud::GkeMultiCloud::V1::CreateAwsClusterRequest.new(parent: parent, aws_cluster: aws_cluster, aws_cluster_id: aws_cluster_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_aws_cluster(::Google::Cloud::GkeMultiCloud::V1::CreateAwsClusterRequest.new(parent: parent, aws_cluster: aws_cluster, aws_cluster_id: aws_cluster_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_update_aws_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_aws_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_aws_cluster({ aws_cluster: aws_cluster, validate_only: validate_only, update_mask: update_mask }) do |_result, response|
+        c.update_aws_cluster({ aws_cluster: aws_cluster, validate_only: validate_only, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_aws_cluster aws_cluster: aws_cluster, validate_only: validate_only, update_mask: update_mask do |_result, response|
+        c.update_aws_cluster aws_cluster: aws_cluster, validate_only: validate_only, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_aws_cluster ::Google::Cloud::GkeMultiCloud::V1::UpdateAwsClusterRequest.new(aws_cluster: aws_cluster, validate_only: validate_only, update_mask: update_mask) do |_result, response|
+        c.update_aws_cluster ::Google::Cloud::GkeMultiCloud::V1::UpdateAwsClusterRequest.new(aws_cluster: aws_cluster, validate_only: validate_only, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_aws_cluster({ aws_cluster: aws_cluster, validate_only: validate_only, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_aws_cluster({ aws_cluster: aws_cluster, validate_only: validate_only, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_aws_cluster(::Google::Cloud::GkeMultiCloud::V1::UpdateAwsClusterRequest.new(aws_cluster: aws_cluster, validate_only: validate_only, update_mask: update_mask), call_options) do |_result, response|
+        c.update_aws_cluster(::Google::Cloud::GkeMultiCloud::V1::UpdateAwsClusterRequest.new(aws_cluster: aws_cluster, validate_only: validate_only, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_get_aws_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_aws_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_aws_cluster({ name: name }) do |_result, response|
+        c.get_aws_cluster({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_aws_cluster name: name do |_result, response|
+        c.get_aws_cluster name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_aws_cluster ::Google::Cloud::GkeMultiCloud::V1::GetAwsClusterRequest.new(name: name) do |_result, response|
+        c.get_aws_cluster ::Google::Cloud::GkeMultiCloud::V1::GetAwsClusterRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_aws_cluster({ name: name }, call_options) do |_result, response|
+        c.get_aws_cluster({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_aws_cluster(::Google::Cloud::GkeMultiCloud::V1::GetAwsClusterRequest.new(name: name), call_options) do |_result, response|
+        c.get_aws_cluster(::Google::Cloud::GkeMultiCloud::V1::GetAwsClusterRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_list_aws_clusters_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_aws_clusters_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_aws_clusters({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_aws_clusters({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_aws_clusters parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_aws_clusters parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_aws_clusters ::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_aws_clusters ::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_aws_clusters({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_aws_clusters({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_aws_clusters(::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_aws_clusters(::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -324,32 +324,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_delete_aws_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_aws_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_aws_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }) do |_result, response|
+        c.delete_aws_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_aws_cluster name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag do |_result, response|
+        c.delete_aws_cluster name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_aws_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAwsClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag) do |_result, response|
+        c.delete_aws_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAwsClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_aws_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }, call_options) do |_result, response|
+        c.delete_aws_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_aws_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAwsClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag), call_options) do |_result, response|
+        c.delete_aws_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAwsClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -387,32 +387,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_generate_aws_cluster_agent_token_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_aws_cluster_agent_token_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_aws_cluster_agent_token({ aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }) do |_result, response|
+        c.generate_aws_cluster_agent_token({ aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_aws_cluster_agent_token aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options do |_result, response|
+        c.generate_aws_cluster_agent_token aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_aws_cluster_agent_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest.new(aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options) do |_result, response|
+        c.generate_aws_cluster_agent_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest.new(aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_aws_cluster_agent_token({ aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }, call_options) do |_result, response|
+        c.generate_aws_cluster_agent_token({ aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_aws_cluster_agent_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest.new(aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options), call_options) do |_result, response|
+        c.generate_aws_cluster_agent_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest.new(aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -441,32 +441,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_generate_aws_access_token_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_aws_access_token_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_aws_access_token({ aws_cluster: aws_cluster }) do |_result, response|
+        c.generate_aws_access_token({ aws_cluster: aws_cluster }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_aws_access_token aws_cluster: aws_cluster do |_result, response|
+        c.generate_aws_access_token aws_cluster: aws_cluster do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_aws_access_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsAccessTokenRequest.new(aws_cluster: aws_cluster) do |_result, response|
+        c.generate_aws_access_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsAccessTokenRequest.new(aws_cluster: aws_cluster) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_aws_access_token({ aws_cluster: aws_cluster }, call_options) do |_result, response|
+        c.generate_aws_access_token({ aws_cluster: aws_cluster }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_aws_access_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAwsAccessTokenRequest.new(aws_cluster: aws_cluster), call_options) do |_result, response|
+        c.generate_aws_access_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAwsAccessTokenRequest.new(aws_cluster: aws_cluster), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -498,32 +498,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_create_aws_node_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_aws_node_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_aws_node_pool({ parent: parent, aws_node_pool: aws_node_pool, aws_node_pool_id: aws_node_pool_id, validate_only: validate_only }) do |_result, response|
+        c.create_aws_node_pool({ parent: parent, aws_node_pool: aws_node_pool, aws_node_pool_id: aws_node_pool_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_aws_node_pool parent: parent, aws_node_pool: aws_node_pool, aws_node_pool_id: aws_node_pool_id, validate_only: validate_only do |_result, response|
+        c.create_aws_node_pool parent: parent, aws_node_pool: aws_node_pool, aws_node_pool_id: aws_node_pool_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_aws_node_pool ::Google::Cloud::GkeMultiCloud::V1::CreateAwsNodePoolRequest.new(parent: parent, aws_node_pool: aws_node_pool, aws_node_pool_id: aws_node_pool_id, validate_only: validate_only) do |_result, response|
+        c.create_aws_node_pool ::Google::Cloud::GkeMultiCloud::V1::CreateAwsNodePoolRequest.new(parent: parent, aws_node_pool: aws_node_pool, aws_node_pool_id: aws_node_pool_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_aws_node_pool({ parent: parent, aws_node_pool: aws_node_pool, aws_node_pool_id: aws_node_pool_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_aws_node_pool({ parent: parent, aws_node_pool: aws_node_pool, aws_node_pool_id: aws_node_pool_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_aws_node_pool(::Google::Cloud::GkeMultiCloud::V1::CreateAwsNodePoolRequest.new(parent: parent, aws_node_pool: aws_node_pool, aws_node_pool_id: aws_node_pool_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_aws_node_pool(::Google::Cloud::GkeMultiCloud::V1::CreateAwsNodePoolRequest.new(parent: parent, aws_node_pool: aws_node_pool, aws_node_pool_id: aws_node_pool_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -554,32 +554,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_update_aws_node_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_aws_node_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_aws_node_pool({ aws_node_pool: aws_node_pool, validate_only: validate_only, update_mask: update_mask }) do |_result, response|
+        c.update_aws_node_pool({ aws_node_pool: aws_node_pool, validate_only: validate_only, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_aws_node_pool aws_node_pool: aws_node_pool, validate_only: validate_only, update_mask: update_mask do |_result, response|
+        c.update_aws_node_pool aws_node_pool: aws_node_pool, validate_only: validate_only, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_aws_node_pool ::Google::Cloud::GkeMultiCloud::V1::UpdateAwsNodePoolRequest.new(aws_node_pool: aws_node_pool, validate_only: validate_only, update_mask: update_mask) do |_result, response|
+        c.update_aws_node_pool ::Google::Cloud::GkeMultiCloud::V1::UpdateAwsNodePoolRequest.new(aws_node_pool: aws_node_pool, validate_only: validate_only, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_aws_node_pool({ aws_node_pool: aws_node_pool, validate_only: validate_only, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_aws_node_pool({ aws_node_pool: aws_node_pool, validate_only: validate_only, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_aws_node_pool(::Google::Cloud::GkeMultiCloud::V1::UpdateAwsNodePoolRequest.new(aws_node_pool: aws_node_pool, validate_only: validate_only, update_mask: update_mask), call_options) do |_result, response|
+        c.update_aws_node_pool(::Google::Cloud::GkeMultiCloud::V1::UpdateAwsNodePoolRequest.new(aws_node_pool: aws_node_pool, validate_only: validate_only, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -609,32 +609,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_rollback_aws_node_pool_update_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rollback_aws_node_pool_update_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rollback_aws_node_pool_update({ name: name, respect_pdb: respect_pdb }) do |_result, response|
+        c.rollback_aws_node_pool_update({ name: name, respect_pdb: respect_pdb }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rollback_aws_node_pool_update name: name, respect_pdb: respect_pdb do |_result, response|
+        c.rollback_aws_node_pool_update name: name, respect_pdb: respect_pdb do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rollback_aws_node_pool_update ::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest.new(name: name, respect_pdb: respect_pdb) do |_result, response|
+        c.rollback_aws_node_pool_update ::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest.new(name: name, respect_pdb: respect_pdb) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rollback_aws_node_pool_update({ name: name, respect_pdb: respect_pdb }, call_options) do |_result, response|
+        c.rollback_aws_node_pool_update({ name: name, respect_pdb: respect_pdb }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rollback_aws_node_pool_update(::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest.new(name: name, respect_pdb: respect_pdb), call_options) do |_result, response|
+        c.rollback_aws_node_pool_update(::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest.new(name: name, respect_pdb: respect_pdb), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -663,32 +663,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_get_aws_node_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_aws_node_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_aws_node_pool({ name: name }) do |_result, response|
+        c.get_aws_node_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_aws_node_pool name: name do |_result, response|
+        c.get_aws_node_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_aws_node_pool ::Google::Cloud::GkeMultiCloud::V1::GetAwsNodePoolRequest.new(name: name) do |_result, response|
+        c.get_aws_node_pool ::Google::Cloud::GkeMultiCloud::V1::GetAwsNodePoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_aws_node_pool({ name: name }, call_options) do |_result, response|
+        c.get_aws_node_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_aws_node_pool(::Google::Cloud::GkeMultiCloud::V1::GetAwsNodePoolRequest.new(name: name), call_options) do |_result, response|
+        c.get_aws_node_pool(::Google::Cloud::GkeMultiCloud::V1::GetAwsNodePoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -719,32 +719,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_list_aws_node_pools_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_aws_node_pools_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_aws_node_pools({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_aws_node_pools({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_aws_node_pools parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_aws_node_pools parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_aws_node_pools ::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_aws_node_pools ::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_aws_node_pools({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_aws_node_pools({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_aws_node_pools(::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_aws_node_pools(::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -777,32 +777,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_delete_aws_node_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_aws_node_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_aws_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }) do |_result, response|
+        c.delete_aws_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_aws_node_pool name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag do |_result, response|
+        c.delete_aws_node_pool name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_aws_node_pool ::Google::Cloud::GkeMultiCloud::V1::DeleteAwsNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag) do |_result, response|
+        c.delete_aws_node_pool ::Google::Cloud::GkeMultiCloud::V1::DeleteAwsNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_aws_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }, call_options) do |_result, response|
+        c.delete_aws_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_aws_node_pool(::Google::Cloud::GkeMultiCloud::V1::DeleteAwsNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag), call_options) do |_result, response|
+        c.delete_aws_node_pool(::Google::Cloud::GkeMultiCloud::V1::DeleteAwsNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -831,32 +831,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_get_aws_open_id_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_aws_open_id_config_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_aws_open_id_config({ aws_cluster: aws_cluster }) do |_result, response|
+        c.get_aws_open_id_config({ aws_cluster: aws_cluster }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_aws_open_id_config aws_cluster: aws_cluster do |_result, response|
+        c.get_aws_open_id_config aws_cluster: aws_cluster do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_aws_open_id_config ::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest.new(aws_cluster: aws_cluster) do |_result, response|
+        c.get_aws_open_id_config ::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest.new(aws_cluster: aws_cluster) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_aws_open_id_config({ aws_cluster: aws_cluster }, call_options) do |_result, response|
+        c.get_aws_open_id_config({ aws_cluster: aws_cluster }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_aws_open_id_config(::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest.new(aws_cluster: aws_cluster), call_options) do |_result, response|
+        c.get_aws_open_id_config(::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest.new(aws_cluster: aws_cluster), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -885,32 +885,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_get_aws_json_web_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_aws_json_web_keys_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_aws_json_web_keys({ aws_cluster: aws_cluster }) do |_result, response|
+        c.get_aws_json_web_keys({ aws_cluster: aws_cluster }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_aws_json_web_keys aws_cluster: aws_cluster do |_result, response|
+        c.get_aws_json_web_keys aws_cluster: aws_cluster do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_aws_json_web_keys ::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest.new(aws_cluster: aws_cluster) do |_result, response|
+        c.get_aws_json_web_keys ::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest.new(aws_cluster: aws_cluster) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_aws_json_web_keys({ aws_cluster: aws_cluster }, call_options) do |_result, response|
+        c.get_aws_json_web_keys({ aws_cluster: aws_cluster }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_aws_json_web_keys(::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest.new(aws_cluster: aws_cluster), call_options) do |_result, response|
+        c.get_aws_json_web_keys(::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest.new(aws_cluster: aws_cluster), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -939,32 +939,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ClientTest < Minite
     ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::ServiceStub.stub :transcode_get_aws_server_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_aws_server_config_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_aws_server_config({ name: name }) do |_result, response|
+        c.get_aws_server_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_aws_server_config name: name do |_result, response|
+        c.get_aws_server_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_aws_server_config ::Google::Cloud::GkeMultiCloud::V1::GetAwsServerConfigRequest.new(name: name) do |_result, response|
+        c.get_aws_server_config ::Google::Cloud::GkeMultiCloud::V1::GetAwsServerConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_aws_server_config({ name: name }, call_options) do |_result, response|
+        c.get_aws_server_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_aws_server_config(::Google::Cloud::GkeMultiCloud::V1::GetAwsServerConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_aws_server_config(::Google::Cloud::GkeMultiCloud::V1::GetAwsServerConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

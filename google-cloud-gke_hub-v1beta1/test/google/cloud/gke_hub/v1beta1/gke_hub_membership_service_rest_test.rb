@@ -101,32 +101,32 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ClientTes
     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ServiceStub.stub :transcode_list_memberships_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_memberships_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_memberships({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_memberships({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_memberships parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_memberships parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_memberships ::Google::Cloud::GkeHub::V1beta1::ListMembershipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_memberships ::Google::Cloud::GkeHub::V1beta1::ListMembershipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_memberships({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_memberships({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_memberships(::Google::Cloud::GkeHub::V1beta1::ListMembershipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_memberships(::Google::Cloud::GkeHub::V1beta1::ListMembershipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ClientTes
     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ServiceStub.stub :transcode_get_membership_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_membership_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_membership({ name: name }) do |_result, response|
+        c.get_membership({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_membership name: name do |_result, response|
+        c.get_membership name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_membership ::Google::Cloud::GkeHub::V1beta1::GetMembershipRequest.new(name: name) do |_result, response|
+        c.get_membership ::Google::Cloud::GkeHub::V1beta1::GetMembershipRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_membership({ name: name }, call_options) do |_result, response|
+        c.get_membership({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_membership(::Google::Cloud::GkeHub::V1beta1::GetMembershipRequest.new(name: name), call_options) do |_result, response|
+        c.get_membership(::Google::Cloud::GkeHub::V1beta1::GetMembershipRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ClientTes
     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ServiceStub.stub :transcode_create_membership_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_membership_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_membership({ parent: parent, membership_id: membership_id, resource: resource, request_id: request_id }) do |_result, response|
+        c.create_membership({ parent: parent, membership_id: membership_id, resource: resource, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_membership parent: parent, membership_id: membership_id, resource: resource, request_id: request_id do |_result, response|
+        c.create_membership parent: parent, membership_id: membership_id, resource: resource, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_membership ::Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest.new(parent: parent, membership_id: membership_id, resource: resource, request_id: request_id) do |_result, response|
+        c.create_membership ::Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest.new(parent: parent, membership_id: membership_id, resource: resource, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_membership({ parent: parent, membership_id: membership_id, resource: resource, request_id: request_id }, call_options) do |_result, response|
+        c.create_membership({ parent: parent, membership_id: membership_id, resource: resource, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_membership(::Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest.new(parent: parent, membership_id: membership_id, resource: resource, request_id: request_id), call_options) do |_result, response|
+        c.create_membership(::Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest.new(parent: parent, membership_id: membership_id, resource: resource, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ClientTes
     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ServiceStub.stub :transcode_delete_membership_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_membership_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_membership({ name: name, request_id: request_id, force: force }) do |_result, response|
+        c.delete_membership({ name: name, request_id: request_id, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_membership name: name, request_id: request_id, force: force do |_result, response|
+        c.delete_membership name: name, request_id: request_id, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_membership ::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
+        c.delete_membership ::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_membership({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
+        c.delete_membership({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_membership(::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
+        c.delete_membership(::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -325,32 +325,32 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ClientTes
     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ServiceStub.stub :transcode_update_membership_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_membership_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_membership({ name: name, update_mask: update_mask, resource: resource, request_id: request_id }) do |_result, response|
+        c.update_membership({ name: name, update_mask: update_mask, resource: resource, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_membership name: name, update_mask: update_mask, resource: resource, request_id: request_id do |_result, response|
+        c.update_membership name: name, update_mask: update_mask, resource: resource, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_membership ::Google::Cloud::GkeHub::V1beta1::UpdateMembershipRequest.new(name: name, update_mask: update_mask, resource: resource, request_id: request_id) do |_result, response|
+        c.update_membership ::Google::Cloud::GkeHub::V1beta1::UpdateMembershipRequest.new(name: name, update_mask: update_mask, resource: resource, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_membership({ name: name, update_mask: update_mask, resource: resource, request_id: request_id }, call_options) do |_result, response|
+        c.update_membership({ name: name, update_mask: update_mask, resource: resource, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_membership(::Google::Cloud::GkeHub::V1beta1::UpdateMembershipRequest.new(name: name, update_mask: update_mask, resource: resource, request_id: request_id), call_options) do |_result, response|
+        c.update_membership(::Google::Cloud::GkeHub::V1beta1::UpdateMembershipRequest.new(name: name, update_mask: update_mask, resource: resource, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -384,32 +384,32 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ClientTes
     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ServiceStub.stub :transcode_generate_connect_manifest_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_connect_manifest_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_connect_manifest({ name: name, connect_agent: connect_agent, version: version, is_upgrade: is_upgrade, registry: registry, image_pull_secret_content: image_pull_secret_content }) do |_result, response|
+        c.generate_connect_manifest({ name: name, connect_agent: connect_agent, version: version, is_upgrade: is_upgrade, registry: registry, image_pull_secret_content: image_pull_secret_content }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_connect_manifest name: name, connect_agent: connect_agent, version: version, is_upgrade: is_upgrade, registry: registry, image_pull_secret_content: image_pull_secret_content do |_result, response|
+        c.generate_connect_manifest name: name, connect_agent: connect_agent, version: version, is_upgrade: is_upgrade, registry: registry, image_pull_secret_content: image_pull_secret_content do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_connect_manifest ::Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestRequest.new(name: name, connect_agent: connect_agent, version: version, is_upgrade: is_upgrade, registry: registry, image_pull_secret_content: image_pull_secret_content) do |_result, response|
+        c.generate_connect_manifest ::Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestRequest.new(name: name, connect_agent: connect_agent, version: version, is_upgrade: is_upgrade, registry: registry, image_pull_secret_content: image_pull_secret_content) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_connect_manifest({ name: name, connect_agent: connect_agent, version: version, is_upgrade: is_upgrade, registry: registry, image_pull_secret_content: image_pull_secret_content }, call_options) do |_result, response|
+        c.generate_connect_manifest({ name: name, connect_agent: connect_agent, version: version, is_upgrade: is_upgrade, registry: registry, image_pull_secret_content: image_pull_secret_content }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_connect_manifest(::Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestRequest.new(name: name, connect_agent: connect_agent, version: version, is_upgrade: is_upgrade, registry: registry, image_pull_secret_content: image_pull_secret_content), call_options) do |_result, response|
+        c.generate_connect_manifest(::Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestRequest.new(name: name, connect_agent: connect_agent, version: version, is_upgrade: is_upgrade, registry: registry, image_pull_secret_content: image_pull_secret_content), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -440,32 +440,32 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ClientTes
     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ServiceStub.stub :transcode_validate_exclusivity_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, validate_exclusivity_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.validate_exclusivity({ parent: parent, cr_manifest: cr_manifest, intended_membership: intended_membership }) do |_result, response|
+        c.validate_exclusivity({ parent: parent, cr_manifest: cr_manifest, intended_membership: intended_membership }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.validate_exclusivity parent: parent, cr_manifest: cr_manifest, intended_membership: intended_membership do |_result, response|
+        c.validate_exclusivity parent: parent, cr_manifest: cr_manifest, intended_membership: intended_membership do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.validate_exclusivity ::Google::Cloud::GkeHub::V1beta1::ValidateExclusivityRequest.new(parent: parent, cr_manifest: cr_manifest, intended_membership: intended_membership) do |_result, response|
+        c.validate_exclusivity ::Google::Cloud::GkeHub::V1beta1::ValidateExclusivityRequest.new(parent: parent, cr_manifest: cr_manifest, intended_membership: intended_membership) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.validate_exclusivity({ parent: parent, cr_manifest: cr_manifest, intended_membership: intended_membership }, call_options) do |_result, response|
+        c.validate_exclusivity({ parent: parent, cr_manifest: cr_manifest, intended_membership: intended_membership }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.validate_exclusivity(::Google::Cloud::GkeHub::V1beta1::ValidateExclusivityRequest.new(parent: parent, cr_manifest: cr_manifest, intended_membership: intended_membership), call_options) do |_result, response|
+        c.validate_exclusivity(::Google::Cloud::GkeHub::V1beta1::ValidateExclusivityRequest.new(parent: parent, cr_manifest: cr_manifest, intended_membership: intended_membership), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -496,32 +496,32 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ClientTes
     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ServiceStub.stub :transcode_generate_exclusivity_manifest_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_exclusivity_manifest_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_exclusivity_manifest({ name: name, crd_manifest: crd_manifest, cr_manifest: cr_manifest }) do |_result, response|
+        c.generate_exclusivity_manifest({ name: name, crd_manifest: crd_manifest, cr_manifest: cr_manifest }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_exclusivity_manifest name: name, crd_manifest: crd_manifest, cr_manifest: cr_manifest do |_result, response|
+        c.generate_exclusivity_manifest name: name, crd_manifest: crd_manifest, cr_manifest: cr_manifest do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_exclusivity_manifest ::Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestRequest.new(name: name, crd_manifest: crd_manifest, cr_manifest: cr_manifest) do |_result, response|
+        c.generate_exclusivity_manifest ::Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestRequest.new(name: name, crd_manifest: crd_manifest, cr_manifest: cr_manifest) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_exclusivity_manifest({ name: name, crd_manifest: crd_manifest, cr_manifest: cr_manifest }, call_options) do |_result, response|
+        c.generate_exclusivity_manifest({ name: name, crd_manifest: crd_manifest, cr_manifest: cr_manifest }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_exclusivity_manifest(::Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestRequest.new(name: name, crd_manifest: crd_manifest, cr_manifest: cr_manifest), call_options) do |_result, response|
+        c.generate_exclusivity_manifest(::Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestRequest.new(name: name, crd_manifest: crd_manifest, cr_manifest: cr_manifest), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

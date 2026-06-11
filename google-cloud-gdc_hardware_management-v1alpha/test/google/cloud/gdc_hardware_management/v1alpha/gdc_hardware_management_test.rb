@@ -90,40 +90,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, list_orders_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_orders parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_orders parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_orders ::Google::Cloud::GDCHardwareManagement::V1alpha::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_orders ::Google::Cloud::GDCHardwareManagement::V1alpha::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_orders(::Google::Cloud::GDCHardwareManagement::V1alpha::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_orders(::Google::Cloud::GDCHardwareManagement::V1alpha::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, get_order_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_order({ name: name }) do |response, operation|
+      c.get_order({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_order name: name do |response, operation|
+      c.get_order name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_order ::Google::Cloud::GDCHardwareManagement::V1alpha::GetOrderRequest.new(name: name) do |response, operation|
+      c.get_order ::Google::Cloud::GDCHardwareManagement::V1alpha::GetOrderRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_order({ name: name }, grpc_options) do |response, operation|
+      c.get_order({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_order(::Google::Cloud::GDCHardwareManagement::V1alpha::GetOrderRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_order(::Google::Cloud::GDCHardwareManagement::V1alpha::GetOrderRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, create_order_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_order({ parent: parent, order_id: order_id, order: order, request_id: request_id }) do |response, operation|
+      c.create_order({ parent: parent, order_id: order_id, order: order, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_order parent: parent, order_id: order_id, order: order, request_id: request_id do |response, operation|
+      c.create_order parent: parent, order_id: order_id, order: order, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_order ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateOrderRequest.new(parent: parent, order_id: order_id, order: order, request_id: request_id) do |response, operation|
+      c.create_order ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateOrderRequest.new(parent: parent, order_id: order_id, order: order, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_order({ parent: parent, order_id: order_id, order: order, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_order({ parent: parent, order_id: order_id, order: order, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_order(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateOrderRequest.new(parent: parent, order_id: order_id, order: order, request_id: request_id), grpc_options) do |response, operation|
+      c.create_order(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateOrderRequest.new(parent: parent, order_id: order_id, order: order, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, update_order_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_order({ update_mask: update_mask, order: order, request_id: request_id }) do |response, operation|
+      c.update_order({ update_mask: update_mask, order: order, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_order update_mask: update_mask, order: order, request_id: request_id do |response, operation|
+      c.update_order update_mask: update_mask, order: order, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_order ::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateOrderRequest.new(update_mask: update_mask, order: order, request_id: request_id) do |response, operation|
+      c.update_order ::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateOrderRequest.new(update_mask: update_mask, order: order, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_order({ update_mask: update_mask, order: order, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_order({ update_mask: update_mask, order: order, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_order(::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateOrderRequest.new(update_mask: update_mask, order: order, request_id: request_id), grpc_options) do |response, operation|
+      c.update_order(::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateOrderRequest.new(update_mask: update_mask, order: order, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -351,40 +351,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, delete_order_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_order({ name: name, request_id: request_id, force: force }) do |response, operation|
+      c.delete_order({ name: name, request_id: request_id, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_order name: name, request_id: request_id, force: force do |response, operation|
+      c.delete_order name: name, request_id: request_id, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_order ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteOrderRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
+      c.delete_order ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteOrderRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_order({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
+      c.delete_order({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_order(::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteOrderRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
+      c.delete_order(::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteOrderRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -418,40 +418,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, submit_order_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.submit_order({ name: name, request_id: request_id, type: type }) do |response, operation|
+      c.submit_order({ name: name, request_id: request_id, type: type }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.submit_order name: name, request_id: request_id, type: type do |response, operation|
+      c.submit_order name: name, request_id: request_id, type: type do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.submit_order ::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id, type: type) do |response, operation|
+      c.submit_order ::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id, type: type) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.submit_order({ name: name, request_id: request_id, type: type }, grpc_options) do |response, operation|
+      c.submit_order({ name: name, request_id: request_id, type: type }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.submit_order(::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id, type: type), grpc_options) do |response, operation|
+      c.submit_order(::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id, type: type), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -483,40 +483,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, cancel_order_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_order({ name: name, request_id: request_id }) do |response, operation|
+      c.cancel_order({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_order name: name, request_id: request_id do |response, operation|
+      c.cancel_order name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_order ::Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.cancel_order ::Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_order({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.cancel_order({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_order(::Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.cancel_order(::Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -554,40 +554,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, list_sites_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_sites({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_sites({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_sites parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_sites parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_sites ::Google::Cloud::GDCHardwareManagement::V1alpha::ListSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_sites ::Google::Cloud::GDCHardwareManagement::V1alpha::ListSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_sites({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_sites({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_sites(::Google::Cloud::GDCHardwareManagement::V1alpha::ListSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_sites(::Google::Cloud::GDCHardwareManagement::V1alpha::ListSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -617,36 +617,36 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, get_site_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_site({ name: name }) do |response, operation|
+      c.get_site({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_site name: name do |response, operation|
+      c.get_site name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_site ::Google::Cloud::GDCHardwareManagement::V1alpha::GetSiteRequest.new(name: name) do |response, operation|
+      c.get_site ::Google::Cloud::GDCHardwareManagement::V1alpha::GetSiteRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_site({ name: name }, grpc_options) do |response, operation|
+      c.get_site({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_site(::Google::Cloud::GDCHardwareManagement::V1alpha::GetSiteRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_site(::Google::Cloud::GDCHardwareManagement::V1alpha::GetSiteRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -681,40 +681,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, create_site_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_site({ parent: parent, site_id: site_id, site: site, request_id: request_id }) do |response, operation|
+      c.create_site({ parent: parent, site_id: site_id, site: site, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_site parent: parent, site_id: site_id, site: site, request_id: request_id do |response, operation|
+      c.create_site parent: parent, site_id: site_id, site: site, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_site ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateSiteRequest.new(parent: parent, site_id: site_id, site: site, request_id: request_id) do |response, operation|
+      c.create_site ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateSiteRequest.new(parent: parent, site_id: site_id, site: site, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_site({ parent: parent, site_id: site_id, site: site, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_site({ parent: parent, site_id: site_id, site: site, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_site(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateSiteRequest.new(parent: parent, site_id: site_id, site: site, request_id: request_id), grpc_options) do |response, operation|
+      c.create_site(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateSiteRequest.new(parent: parent, site_id: site_id, site: site, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -748,40 +748,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, update_site_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_site({ update_mask: update_mask, site: site, request_id: request_id }) do |response, operation|
+      c.update_site({ update_mask: update_mask, site: site, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_site update_mask: update_mask, site: site, request_id: request_id do |response, operation|
+      c.update_site update_mask: update_mask, site: site, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_site ::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateSiteRequest.new(update_mask: update_mask, site: site, request_id: request_id) do |response, operation|
+      c.update_site ::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateSiteRequest.new(update_mask: update_mask, site: site, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_site({ update_mask: update_mask, site: site, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_site({ update_mask: update_mask, site: site, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_site(::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateSiteRequest.new(update_mask: update_mask, site: site, request_id: request_id), grpc_options) do |response, operation|
+      c.update_site(::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateSiteRequest.new(update_mask: update_mask, site: site, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -813,40 +813,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, delete_site_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_site({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_site({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_site name: name, request_id: request_id do |response, operation|
+      c.delete_site name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_site ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteSiteRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_site ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteSiteRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_site({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_site({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_site(::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteSiteRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_site(::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteSiteRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -884,40 +884,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, list_hardware_groups_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_hardware_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_hardware_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_hardware_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_hardware_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_hardware_groups ::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_hardware_groups ::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_hardware_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_hardware_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_hardware_groups(::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_hardware_groups(::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -947,36 +947,36 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, get_hardware_group_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_hardware_group({ name: name }) do |response, operation|
+      c.get_hardware_group({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_hardware_group name: name do |response, operation|
+      c.get_hardware_group name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_hardware_group ::Google::Cloud::GDCHardwareManagement::V1alpha::GetHardwareGroupRequest.new(name: name) do |response, operation|
+      c.get_hardware_group ::Google::Cloud::GDCHardwareManagement::V1alpha::GetHardwareGroupRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_hardware_group({ name: name }, grpc_options) do |response, operation|
+      c.get_hardware_group({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_hardware_group(::Google::Cloud::GDCHardwareManagement::V1alpha::GetHardwareGroupRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_hardware_group(::Google::Cloud::GDCHardwareManagement::V1alpha::GetHardwareGroupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1011,40 +1011,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, create_hardware_group_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_hardware_group({ parent: parent, hardware_group_id: hardware_group_id, hardware_group: hardware_group, request_id: request_id }) do |response, operation|
+      c.create_hardware_group({ parent: parent, hardware_group_id: hardware_group_id, hardware_group: hardware_group, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_hardware_group parent: parent, hardware_group_id: hardware_group_id, hardware_group: hardware_group, request_id: request_id do |response, operation|
+      c.create_hardware_group parent: parent, hardware_group_id: hardware_group_id, hardware_group: hardware_group, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_hardware_group ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateHardwareGroupRequest.new(parent: parent, hardware_group_id: hardware_group_id, hardware_group: hardware_group, request_id: request_id) do |response, operation|
+      c.create_hardware_group ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateHardwareGroupRequest.new(parent: parent, hardware_group_id: hardware_group_id, hardware_group: hardware_group, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_hardware_group({ parent: parent, hardware_group_id: hardware_group_id, hardware_group: hardware_group, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_hardware_group({ parent: parent, hardware_group_id: hardware_group_id, hardware_group: hardware_group, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_hardware_group(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateHardwareGroupRequest.new(parent: parent, hardware_group_id: hardware_group_id, hardware_group: hardware_group, request_id: request_id), grpc_options) do |response, operation|
+      c.create_hardware_group(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateHardwareGroupRequest.new(parent: parent, hardware_group_id: hardware_group_id, hardware_group: hardware_group, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1078,40 +1078,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, update_hardware_group_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_hardware_group({ update_mask: update_mask, hardware_group: hardware_group, request_id: request_id }) do |response, operation|
+      c.update_hardware_group({ update_mask: update_mask, hardware_group: hardware_group, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_hardware_group update_mask: update_mask, hardware_group: hardware_group, request_id: request_id do |response, operation|
+      c.update_hardware_group update_mask: update_mask, hardware_group: hardware_group, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_hardware_group ::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateHardwareGroupRequest.new(update_mask: update_mask, hardware_group: hardware_group, request_id: request_id) do |response, operation|
+      c.update_hardware_group ::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateHardwareGroupRequest.new(update_mask: update_mask, hardware_group: hardware_group, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_hardware_group({ update_mask: update_mask, hardware_group: hardware_group, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_hardware_group({ update_mask: update_mask, hardware_group: hardware_group, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_hardware_group(::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateHardwareGroupRequest.new(update_mask: update_mask, hardware_group: hardware_group, request_id: request_id), grpc_options) do |response, operation|
+      c.update_hardware_group(::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateHardwareGroupRequest.new(update_mask: update_mask, hardware_group: hardware_group, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1143,40 +1143,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, delete_hardware_group_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_hardware_group({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_hardware_group({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_hardware_group name: name, request_id: request_id do |response, operation|
+      c.delete_hardware_group name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_hardware_group ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteHardwareGroupRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_hardware_group ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteHardwareGroupRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_hardware_group({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_hardware_group({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_hardware_group(::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteHardwareGroupRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_hardware_group(::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteHardwareGroupRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1214,40 +1214,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, list_hardware_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_hardware({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_hardware({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_hardware parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_hardware parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_hardware ::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_hardware ::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_hardware({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_hardware({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_hardware(::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_hardware(::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1277,36 +1277,36 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, get_hardware_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_hardware({ name: name }) do |response, operation|
+      c.get_hardware({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_hardware name: name do |response, operation|
+      c.get_hardware name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_hardware ::Google::Cloud::GDCHardwareManagement::V1alpha::GetHardwareRequest.new(name: name) do |response, operation|
+      c.get_hardware ::Google::Cloud::GDCHardwareManagement::V1alpha::GetHardwareRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_hardware({ name: name }, grpc_options) do |response, operation|
+      c.get_hardware({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_hardware(::Google::Cloud::GDCHardwareManagement::V1alpha::GetHardwareRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_hardware(::Google::Cloud::GDCHardwareManagement::V1alpha::GetHardwareRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1339,40 +1339,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, create_hardware_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_hardware({ parent: parent, hardware_id: hardware_id, hardware: hardware }) do |response, operation|
+      c.create_hardware({ parent: parent, hardware_id: hardware_id, hardware: hardware }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_hardware parent: parent, hardware_id: hardware_id, hardware: hardware do |response, operation|
+      c.create_hardware parent: parent, hardware_id: hardware_id, hardware: hardware do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_hardware ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateHardwareRequest.new(parent: parent, hardware_id: hardware_id, hardware: hardware) do |response, operation|
+      c.create_hardware ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateHardwareRequest.new(parent: parent, hardware_id: hardware_id, hardware: hardware) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_hardware({ parent: parent, hardware_id: hardware_id, hardware: hardware }, grpc_options) do |response, operation|
+      c.create_hardware({ parent: parent, hardware_id: hardware_id, hardware: hardware }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_hardware(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateHardwareRequest.new(parent: parent, hardware_id: hardware_id, hardware: hardware), grpc_options) do |response, operation|
+      c.create_hardware(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateHardwareRequest.new(parent: parent, hardware_id: hardware_id, hardware: hardware), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1406,40 +1406,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, update_hardware_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_hardware({ update_mask: update_mask, hardware: hardware, request_id: request_id }) do |response, operation|
+      c.update_hardware({ update_mask: update_mask, hardware: hardware, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_hardware update_mask: update_mask, hardware: hardware, request_id: request_id do |response, operation|
+      c.update_hardware update_mask: update_mask, hardware: hardware, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_hardware ::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateHardwareRequest.new(update_mask: update_mask, hardware: hardware, request_id: request_id) do |response, operation|
+      c.update_hardware ::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateHardwareRequest.new(update_mask: update_mask, hardware: hardware, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_hardware({ update_mask: update_mask, hardware: hardware, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_hardware({ update_mask: update_mask, hardware: hardware, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_hardware(::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateHardwareRequest.new(update_mask: update_mask, hardware: hardware, request_id: request_id), grpc_options) do |response, operation|
+      c.update_hardware(::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateHardwareRequest.new(update_mask: update_mask, hardware: hardware, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1471,40 +1471,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, delete_hardware_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_hardware({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_hardware({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_hardware name: name, request_id: request_id do |response, operation|
+      c.delete_hardware name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_hardware ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteHardwareRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_hardware ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteHardwareRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_hardware({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_hardware({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_hardware(::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteHardwareRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_hardware(::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteHardwareRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1542,40 +1542,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, list_comments_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_comments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_comments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_comments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_comments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_comments ::Google::Cloud::GDCHardwareManagement::V1alpha::ListCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_comments ::Google::Cloud::GDCHardwareManagement::V1alpha::ListCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_comments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_comments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_comments(::Google::Cloud::GDCHardwareManagement::V1alpha::ListCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_comments(::Google::Cloud::GDCHardwareManagement::V1alpha::ListCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1605,36 +1605,36 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, get_comment_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_comment({ name: name }) do |response, operation|
+      c.get_comment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_comment name: name do |response, operation|
+      c.get_comment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_comment ::Google::Cloud::GDCHardwareManagement::V1alpha::GetCommentRequest.new(name: name) do |response, operation|
+      c.get_comment ::Google::Cloud::GDCHardwareManagement::V1alpha::GetCommentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_comment({ name: name }, grpc_options) do |response, operation|
+      c.get_comment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_comment(::Google::Cloud::GDCHardwareManagement::V1alpha::GetCommentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_comment(::Google::Cloud::GDCHardwareManagement::V1alpha::GetCommentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1669,40 +1669,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, create_comment_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_comment({ parent: parent, comment_id: comment_id, comment: comment, request_id: request_id }) do |response, operation|
+      c.create_comment({ parent: parent, comment_id: comment_id, comment: comment, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_comment parent: parent, comment_id: comment_id, comment: comment, request_id: request_id do |response, operation|
+      c.create_comment parent: parent, comment_id: comment_id, comment: comment, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_comment ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateCommentRequest.new(parent: parent, comment_id: comment_id, comment: comment, request_id: request_id) do |response, operation|
+      c.create_comment ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateCommentRequest.new(parent: parent, comment_id: comment_id, comment: comment, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_comment({ parent: parent, comment_id: comment_id, comment: comment, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_comment({ parent: parent, comment_id: comment_id, comment: comment, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_comment(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateCommentRequest.new(parent: parent, comment_id: comment_id, comment: comment, request_id: request_id), grpc_options) do |response, operation|
+      c.create_comment(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateCommentRequest.new(parent: parent, comment_id: comment_id, comment: comment, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1734,36 +1734,36 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, record_action_on_comment_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.record_action_on_comment({ name: name, action_type: action_type }) do |response, operation|
+      c.record_action_on_comment({ name: name, action_type: action_type }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.record_action_on_comment name: name, action_type: action_type do |response, operation|
+      c.record_action_on_comment name: name, action_type: action_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.record_action_on_comment ::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest.new(name: name, action_type: action_type) do |response, operation|
+      c.record_action_on_comment ::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest.new(name: name, action_type: action_type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.record_action_on_comment({ name: name, action_type: action_type }, grpc_options) do |response, operation|
+      c.record_action_on_comment({ name: name, action_type: action_type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.record_action_on_comment(::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest.new(name: name, action_type: action_type), grpc_options) do |response, operation|
+      c.record_action_on_comment(::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest.new(name: name, action_type: action_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1800,40 +1800,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, list_change_log_entries_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_change_log_entries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_change_log_entries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_change_log_entries parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_change_log_entries parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_change_log_entries ::Google::Cloud::GDCHardwareManagement::V1alpha::ListChangeLogEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_change_log_entries ::Google::Cloud::GDCHardwareManagement::V1alpha::ListChangeLogEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_change_log_entries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_change_log_entries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_change_log_entries(::Google::Cloud::GDCHardwareManagement::V1alpha::ListChangeLogEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_change_log_entries(::Google::Cloud::GDCHardwareManagement::V1alpha::ListChangeLogEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1863,36 +1863,36 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, get_change_log_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_change_log_entry({ name: name }) do |response, operation|
+      c.get_change_log_entry({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_change_log_entry name: name do |response, operation|
+      c.get_change_log_entry name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_change_log_entry ::Google::Cloud::GDCHardwareManagement::V1alpha::GetChangeLogEntryRequest.new(name: name) do |response, operation|
+      c.get_change_log_entry ::Google::Cloud::GDCHardwareManagement::V1alpha::GetChangeLogEntryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_change_log_entry({ name: name }, grpc_options) do |response, operation|
+      c.get_change_log_entry({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_change_log_entry(::Google::Cloud::GDCHardwareManagement::V1alpha::GetChangeLogEntryRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_change_log_entry(::Google::Cloud::GDCHardwareManagement::V1alpha::GetChangeLogEntryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1929,40 +1929,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, list_skus_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_skus({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_skus({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_skus parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_skus parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_skus ::Google::Cloud::GDCHardwareManagement::V1alpha::ListSkusRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_skus ::Google::Cloud::GDCHardwareManagement::V1alpha::ListSkusRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_skus({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_skus({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_skus(::Google::Cloud::GDCHardwareManagement::V1alpha::ListSkusRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_skus(::Google::Cloud::GDCHardwareManagement::V1alpha::ListSkusRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1992,36 +1992,36 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, get_sku_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_sku({ name: name }) do |response, operation|
+      c.get_sku({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_sku name: name do |response, operation|
+      c.get_sku name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_sku ::Google::Cloud::GDCHardwareManagement::V1alpha::GetSkuRequest.new(name: name) do |response, operation|
+      c.get_sku ::Google::Cloud::GDCHardwareManagement::V1alpha::GetSkuRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_sku({ name: name }, grpc_options) do |response, operation|
+      c.get_sku({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_sku(::Google::Cloud::GDCHardwareManagement::V1alpha::GetSkuRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_sku(::Google::Cloud::GDCHardwareManagement::V1alpha::GetSkuRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2058,40 +2058,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, list_zones_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_zones parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_zones parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_zones ::Google::Cloud::GDCHardwareManagement::V1alpha::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_zones ::Google::Cloud::GDCHardwareManagement::V1alpha::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_zones(::Google::Cloud::GDCHardwareManagement::V1alpha::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_zones(::Google::Cloud::GDCHardwareManagement::V1alpha::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2121,36 +2121,36 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, get_zone_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_zone({ name: name }) do |response, operation|
+      c.get_zone({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_zone name: name do |response, operation|
+      c.get_zone name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_zone ::Google::Cloud::GDCHardwareManagement::V1alpha::GetZoneRequest.new(name: name) do |response, operation|
+      c.get_zone ::Google::Cloud::GDCHardwareManagement::V1alpha::GetZoneRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_zone({ name: name }, grpc_options) do |response, operation|
+      c.get_zone({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_zone(::Google::Cloud::GDCHardwareManagement::V1alpha::GetZoneRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_zone(::Google::Cloud::GDCHardwareManagement::V1alpha::GetZoneRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2185,40 +2185,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, create_zone_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_zone({ parent: parent, zone_id: zone_id, zone: zone, request_id: request_id }) do |response, operation|
+      c.create_zone({ parent: parent, zone_id: zone_id, zone: zone, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_zone parent: parent, zone_id: zone_id, zone: zone, request_id: request_id do |response, operation|
+      c.create_zone parent: parent, zone_id: zone_id, zone: zone, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_zone ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateZoneRequest.new(parent: parent, zone_id: zone_id, zone: zone, request_id: request_id) do |response, operation|
+      c.create_zone ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateZoneRequest.new(parent: parent, zone_id: zone_id, zone: zone, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_zone({ parent: parent, zone_id: zone_id, zone: zone, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_zone({ parent: parent, zone_id: zone_id, zone: zone, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_zone(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateZoneRequest.new(parent: parent, zone_id: zone_id, zone: zone, request_id: request_id), grpc_options) do |response, operation|
+      c.create_zone(::Google::Cloud::GDCHardwareManagement::V1alpha::CreateZoneRequest.new(parent: parent, zone_id: zone_id, zone: zone, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2252,40 +2252,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, update_zone_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_zone({ update_mask: update_mask, zone: zone, request_id: request_id }) do |response, operation|
+      c.update_zone({ update_mask: update_mask, zone: zone, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_zone update_mask: update_mask, zone: zone, request_id: request_id do |response, operation|
+      c.update_zone update_mask: update_mask, zone: zone, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_zone ::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateZoneRequest.new(update_mask: update_mask, zone: zone, request_id: request_id) do |response, operation|
+      c.update_zone ::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateZoneRequest.new(update_mask: update_mask, zone: zone, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_zone({ update_mask: update_mask, zone: zone, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_zone({ update_mask: update_mask, zone: zone, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_zone(::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateZoneRequest.new(update_mask: update_mask, zone: zone, request_id: request_id), grpc_options) do |response, operation|
+      c.update_zone(::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateZoneRequest.new(update_mask: update_mask, zone: zone, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2317,40 +2317,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, delete_zone_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_zone({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_zone({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_zone name: name, request_id: request_id do |response, operation|
+      c.delete_zone name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_zone ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteZoneRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_zone ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteZoneRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_zone({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_zone({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_zone(::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteZoneRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_zone(::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteZoneRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2390,40 +2390,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, signal_zone_state_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details }) do |response, operation|
+      c.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.signal_zone_state name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details do |response, operation|
+      c.signal_zone_state name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.signal_zone_state ::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details) do |response, operation|
+      c.signal_zone_state ::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details }, grpc_options) do |response, operation|
+      c.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.signal_zone_state(::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details), grpc_options) do |response, operation|
+      c.signal_zone_state(::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2455,40 +2455,40 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
     Gapic::ServiceStub.stub :new, request_order_date_change_client_stub do
       # Create client
-      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+      c = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.request_order_date_change({ name: name, requested_date: requested_date }) do |response, operation|
+      c.request_order_date_change({ name: name, requested_date: requested_date }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.request_order_date_change name: name, requested_date: requested_date do |response, operation|
+      c.request_order_date_change name: name, requested_date: requested_date do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.request_order_date_change ::Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest.new(name: name, requested_date: requested_date) do |response, operation|
+      c.request_order_date_change ::Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest.new(name: name, requested_date: requested_date) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.request_order_date_change({ name: name, requested_date: requested_date }, grpc_options) do |response, operation|
+      c.request_order_date_change({ name: name, requested_date: requested_date }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.request_order_date_change(::Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest.new(name: name, requested_date: requested_date), grpc_options) do |response, operation|
+      c.request_order_date_change(::Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest.new(name: name, requested_date: requested_date), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -88,40 +88,40 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, create_azure_client_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_azure_client({ parent: parent, azure_client: azure_client, azure_client_id: azure_client_id, validate_only: validate_only }) do |response, operation|
+      c.create_azure_client({ parent: parent, azure_client: azure_client, azure_client_id: azure_client_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_azure_client parent: parent, azure_client: azure_client, azure_client_id: azure_client_id, validate_only: validate_only do |response, operation|
+      c.create_azure_client parent: parent, azure_client: azure_client, azure_client_id: azure_client_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_azure_client ::Google::Cloud::GkeMultiCloud::V1::CreateAzureClientRequest.new(parent: parent, azure_client: azure_client, azure_client_id: azure_client_id, validate_only: validate_only) do |response, operation|
+      c.create_azure_client ::Google::Cloud::GkeMultiCloud::V1::CreateAzureClientRequest.new(parent: parent, azure_client: azure_client, azure_client_id: azure_client_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_azure_client({ parent: parent, azure_client: azure_client, azure_client_id: azure_client_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_azure_client({ parent: parent, azure_client: azure_client, azure_client_id: azure_client_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_azure_client(::Google::Cloud::GkeMultiCloud::V1::CreateAzureClientRequest.new(parent: parent, azure_client: azure_client, azure_client_id: azure_client_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_azure_client(::Google::Cloud::GkeMultiCloud::V1::CreateAzureClientRequest.new(parent: parent, azure_client: azure_client, azure_client_id: azure_client_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_azure_client_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_azure_client({ name: name }) do |response, operation|
+      c.get_azure_client({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_azure_client name: name do |response, operation|
+      c.get_azure_client name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_azure_client ::Google::Cloud::GkeMultiCloud::V1::GetAzureClientRequest.new(name: name) do |response, operation|
+      c.get_azure_client ::Google::Cloud::GkeMultiCloud::V1::GetAzureClientRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_azure_client({ name: name }, grpc_options) do |response, operation|
+      c.get_azure_client({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_azure_client(::Google::Cloud::GkeMultiCloud::V1::GetAzureClientRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_azure_client(::Google::Cloud::GkeMultiCloud::V1::GetAzureClientRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,40 +213,40 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_azure_clients_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_azure_clients({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_azure_clients({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_azure_clients parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_azure_clients parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_azure_clients ::Google::Cloud::GkeMultiCloud::V1::ListAzureClientsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_azure_clients ::Google::Cloud::GkeMultiCloud::V1::ListAzureClientsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_azure_clients({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_azure_clients({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_azure_clients(::Google::Cloud::GkeMultiCloud::V1::ListAzureClientsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_azure_clients(::Google::Cloud::GkeMultiCloud::V1::ListAzureClientsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, delete_azure_client_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_azure_client({ name: name, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+      c.delete_azure_client({ name: name, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_azure_client name: name, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+      c.delete_azure_client name: name, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_azure_client ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClientRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+      c.delete_azure_client ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClientRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_azure_client({ name: name, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.delete_azure_client({ name: name, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_azure_client(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClientRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+      c.delete_azure_client(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClientRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, create_azure_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_azure_cluster({ parent: parent, azure_cluster: azure_cluster, azure_cluster_id: azure_cluster_id, validate_only: validate_only }) do |response, operation|
+      c.create_azure_cluster({ parent: parent, azure_cluster: azure_cluster, azure_cluster_id: azure_cluster_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_azure_cluster parent: parent, azure_cluster: azure_cluster, azure_cluster_id: azure_cluster_id, validate_only: validate_only do |response, operation|
+      c.create_azure_cluster parent: parent, azure_cluster: azure_cluster, azure_cluster_id: azure_cluster_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::CreateAzureClusterRequest.new(parent: parent, azure_cluster: azure_cluster, azure_cluster_id: azure_cluster_id, validate_only: validate_only) do |response, operation|
+      c.create_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::CreateAzureClusterRequest.new(parent: parent, azure_cluster: azure_cluster, azure_cluster_id: azure_cluster_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_azure_cluster({ parent: parent, azure_cluster: azure_cluster, azure_cluster_id: azure_cluster_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_azure_cluster({ parent: parent, azure_cluster: azure_cluster, azure_cluster_id: azure_cluster_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::CreateAzureClusterRequest.new(parent: parent, azure_cluster: azure_cluster, azure_cluster_id: azure_cluster_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::CreateAzureClusterRequest.new(parent: parent, azure_cluster: azure_cluster, azure_cluster_id: azure_cluster_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -416,40 +416,40 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, update_azure_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_azure_cluster({ azure_cluster: azure_cluster, validate_only: validate_only, update_mask: update_mask }) do |response, operation|
+      c.update_azure_cluster({ azure_cluster: azure_cluster, validate_only: validate_only, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_azure_cluster azure_cluster: azure_cluster, validate_only: validate_only, update_mask: update_mask do |response, operation|
+      c.update_azure_cluster azure_cluster: azure_cluster, validate_only: validate_only, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::UpdateAzureClusterRequest.new(azure_cluster: azure_cluster, validate_only: validate_only, update_mask: update_mask) do |response, operation|
+      c.update_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::UpdateAzureClusterRequest.new(azure_cluster: azure_cluster, validate_only: validate_only, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_azure_cluster({ azure_cluster: azure_cluster, validate_only: validate_only, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_azure_cluster({ azure_cluster: azure_cluster, validate_only: validate_only, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::UpdateAzureClusterRequest.new(azure_cluster: azure_cluster, validate_only: validate_only, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::UpdateAzureClusterRequest.new(azure_cluster: azure_cluster, validate_only: validate_only, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -479,36 +479,36 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_azure_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_azure_cluster({ name: name }) do |response, operation|
+      c.get_azure_cluster({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_azure_cluster name: name do |response, operation|
+      c.get_azure_cluster name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::GetAzureClusterRequest.new(name: name) do |response, operation|
+      c.get_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::GetAzureClusterRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_azure_cluster({ name: name }, grpc_options) do |response, operation|
+      c.get_azure_cluster({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::GetAzureClusterRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::GetAzureClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -541,40 +541,40 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_azure_clusters_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_azure_clusters({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_azure_clusters({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_azure_clusters parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_azure_clusters parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_azure_clusters ::Google::Cloud::GkeMultiCloud::V1::ListAzureClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_azure_clusters ::Google::Cloud::GkeMultiCloud::V1::ListAzureClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_azure_clusters({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_azure_clusters({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_azure_clusters(::Google::Cloud::GkeMultiCloud::V1::ListAzureClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_azure_clusters(::Google::Cloud::GkeMultiCloud::V1::ListAzureClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -612,40 +612,40 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, delete_azure_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors }) do |response, operation|
+      c.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_azure_cluster name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors do |response, operation|
+      c.delete_azure_cluster name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors) do |response, operation|
+      c.delete_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors }, grpc_options) do |response, operation|
+      c.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors), grpc_options) do |response, operation|
+      c.delete_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -693,36 +693,36 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, generate_azure_cluster_agent_token_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_azure_cluster_agent_token({ azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }) do |response, operation|
+      c.generate_azure_cluster_agent_token({ azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_azure_cluster_agent_token azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options do |response, operation|
+      c.generate_azure_cluster_agent_token azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_azure_cluster_agent_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest.new(azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options) do |response, operation|
+      c.generate_azure_cluster_agent_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest.new(azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_azure_cluster_agent_token({ azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }, grpc_options) do |response, operation|
+      c.generate_azure_cluster_agent_token({ azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_azure_cluster_agent_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest.new(azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options), grpc_options) do |response, operation|
+      c.generate_azure_cluster_agent_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest.new(azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -751,36 +751,36 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, generate_azure_access_token_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_azure_access_token({ azure_cluster: azure_cluster }) do |response, operation|
+      c.generate_azure_access_token({ azure_cluster: azure_cluster }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_azure_access_token azure_cluster: azure_cluster do |response, operation|
+      c.generate_azure_access_token azure_cluster: azure_cluster do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_azure_access_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenRequest.new(azure_cluster: azure_cluster) do |response, operation|
+      c.generate_azure_access_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenRequest.new(azure_cluster: azure_cluster) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_azure_access_token({ azure_cluster: azure_cluster }, grpc_options) do |response, operation|
+      c.generate_azure_access_token({ azure_cluster: azure_cluster }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_azure_access_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenRequest.new(azure_cluster: azure_cluster), grpc_options) do |response, operation|
+      c.generate_azure_access_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenRequest.new(azure_cluster: azure_cluster), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -815,40 +815,40 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, create_azure_node_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_azure_node_pool({ parent: parent, azure_node_pool: azure_node_pool, azure_node_pool_id: azure_node_pool_id, validate_only: validate_only }) do |response, operation|
+      c.create_azure_node_pool({ parent: parent, azure_node_pool: azure_node_pool, azure_node_pool_id: azure_node_pool_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_azure_node_pool parent: parent, azure_node_pool: azure_node_pool, azure_node_pool_id: azure_node_pool_id, validate_only: validate_only do |response, operation|
+      c.create_azure_node_pool parent: parent, azure_node_pool: azure_node_pool, azure_node_pool_id: azure_node_pool_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::CreateAzureNodePoolRequest.new(parent: parent, azure_node_pool: azure_node_pool, azure_node_pool_id: azure_node_pool_id, validate_only: validate_only) do |response, operation|
+      c.create_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::CreateAzureNodePoolRequest.new(parent: parent, azure_node_pool: azure_node_pool, azure_node_pool_id: azure_node_pool_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_azure_node_pool({ parent: parent, azure_node_pool: azure_node_pool, azure_node_pool_id: azure_node_pool_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_azure_node_pool({ parent: parent, azure_node_pool: azure_node_pool, azure_node_pool_id: azure_node_pool_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::CreateAzureNodePoolRequest.new(parent: parent, azure_node_pool: azure_node_pool, azure_node_pool_id: azure_node_pool_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::CreateAzureNodePoolRequest.new(parent: parent, azure_node_pool: azure_node_pool, azure_node_pool_id: azure_node_pool_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -882,40 +882,40 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, update_azure_node_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_azure_node_pool({ azure_node_pool: azure_node_pool, validate_only: validate_only, update_mask: update_mask }) do |response, operation|
+      c.update_azure_node_pool({ azure_node_pool: azure_node_pool, validate_only: validate_only, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_azure_node_pool azure_node_pool: azure_node_pool, validate_only: validate_only, update_mask: update_mask do |response, operation|
+      c.update_azure_node_pool azure_node_pool: azure_node_pool, validate_only: validate_only, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::UpdateAzureNodePoolRequest.new(azure_node_pool: azure_node_pool, validate_only: validate_only, update_mask: update_mask) do |response, operation|
+      c.update_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::UpdateAzureNodePoolRequest.new(azure_node_pool: azure_node_pool, validate_only: validate_only, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_azure_node_pool({ azure_node_pool: azure_node_pool, validate_only: validate_only, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_azure_node_pool({ azure_node_pool: azure_node_pool, validate_only: validate_only, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::UpdateAzureNodePoolRequest.new(azure_node_pool: azure_node_pool, validate_only: validate_only, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::UpdateAzureNodePoolRequest.new(azure_node_pool: azure_node_pool, validate_only: validate_only, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -945,36 +945,36 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_azure_node_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_azure_node_pool({ name: name }) do |response, operation|
+      c.get_azure_node_pool({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_azure_node_pool name: name do |response, operation|
+      c.get_azure_node_pool name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::GetAzureNodePoolRequest.new(name: name) do |response, operation|
+      c.get_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::GetAzureNodePoolRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_azure_node_pool({ name: name }, grpc_options) do |response, operation|
+      c.get_azure_node_pool({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::GetAzureNodePoolRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::GetAzureNodePoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1007,40 +1007,40 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_azure_node_pools_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_azure_node_pools({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_azure_node_pools({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_azure_node_pools parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_azure_node_pools parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_azure_node_pools ::Google::Cloud::GkeMultiCloud::V1::ListAzureNodePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_azure_node_pools ::Google::Cloud::GkeMultiCloud::V1::ListAzureNodePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_azure_node_pools({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_azure_node_pools({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_azure_node_pools(::Google::Cloud::GkeMultiCloud::V1::ListAzureNodePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_azure_node_pools(::Google::Cloud::GkeMultiCloud::V1::ListAzureNodePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1078,40 +1078,40 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, delete_azure_node_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors }) do |response, operation|
+      c.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_azure_node_pool name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors do |response, operation|
+      c.delete_azure_node_pool name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors) do |response, operation|
+      c.delete_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors }, grpc_options) do |response, operation|
+      c.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors), grpc_options) do |response, operation|
+      c.delete_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1141,36 +1141,36 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_azure_open_id_config_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_azure_open_id_config({ azure_cluster: azure_cluster }) do |response, operation|
+      c.get_azure_open_id_config({ azure_cluster: azure_cluster }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_azure_open_id_config azure_cluster: azure_cluster do |response, operation|
+      c.get_azure_open_id_config azure_cluster: azure_cluster do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_azure_open_id_config ::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest.new(azure_cluster: azure_cluster) do |response, operation|
+      c.get_azure_open_id_config ::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest.new(azure_cluster: azure_cluster) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_azure_open_id_config({ azure_cluster: azure_cluster }, grpc_options) do |response, operation|
+      c.get_azure_open_id_config({ azure_cluster: azure_cluster }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_azure_open_id_config(::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest.new(azure_cluster: azure_cluster), grpc_options) do |response, operation|
+      c.get_azure_open_id_config(::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest.new(azure_cluster: azure_cluster), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1199,36 +1199,36 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_azure_json_web_keys_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_azure_json_web_keys({ azure_cluster: azure_cluster }) do |response, operation|
+      c.get_azure_json_web_keys({ azure_cluster: azure_cluster }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_azure_json_web_keys azure_cluster: azure_cluster do |response, operation|
+      c.get_azure_json_web_keys azure_cluster: azure_cluster do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_azure_json_web_keys ::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest.new(azure_cluster: azure_cluster) do |response, operation|
+      c.get_azure_json_web_keys ::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest.new(azure_cluster: azure_cluster) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_azure_json_web_keys({ azure_cluster: azure_cluster }, grpc_options) do |response, operation|
+      c.get_azure_json_web_keys({ azure_cluster: azure_cluster }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_azure_json_web_keys(::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest.new(azure_cluster: azure_cluster), grpc_options) do |response, operation|
+      c.get_azure_json_web_keys(::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest.new(azure_cluster: azure_cluster), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1257,36 +1257,36 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_azure_server_config_client_stub do
       # Create client
-      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+      c = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_azure_server_config({ name: name }) do |response, operation|
+      c.get_azure_server_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_azure_server_config name: name do |response, operation|
+      c.get_azure_server_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_azure_server_config ::Google::Cloud::GkeMultiCloud::V1::GetAzureServerConfigRequest.new(name: name) do |response, operation|
+      c.get_azure_server_config ::Google::Cloud::GkeMultiCloud::V1::GetAzureServerConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_azure_server_config({ name: name }, grpc_options) do |response, operation|
+      c.get_azure_server_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_azure_server_config(::Google::Cloud::GkeMultiCloud::V1::GetAzureServerConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_azure_server_config(::Google::Cloud::GkeMultiCloud::V1::GetAzureServerConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

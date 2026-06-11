@@ -98,32 +98,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_create_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_index_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_index({ parent: parent, index: index }) do |_result, response|
+        c.create_index({ parent: parent, index: index }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_index parent: parent, index: index do |_result, response|
+        c.create_index parent: parent, index: index do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_index ::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new(parent: parent, index: index) do |_result, response|
+        c.create_index ::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new(parent: parent, index: index) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_index({ parent: parent, index: index }, call_options) do |_result, response|
+        c.create_index({ parent: parent, index: index }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_index(::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new(parent: parent, index: index), call_options) do |_result, response|
+        c.create_index(::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new(parent: parent, index: index), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_list_indexes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_indexes_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_indexes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_indexes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_indexes parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_indexes parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_indexes ::Google::Cloud::Firestore::Admin::V1::ListIndexesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_indexes ::Google::Cloud::Firestore::Admin::V1::ListIndexesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_indexes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_indexes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_indexes(::Google::Cloud::Firestore::Admin::V1::ListIndexesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_indexes(::Google::Cloud::Firestore::Admin::V1::ListIndexesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_get_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_index_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_index({ name: name }) do |_result, response|
+        c.get_index({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_index name: name do |_result, response|
+        c.get_index name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_index ::Google::Cloud::Firestore::Admin::V1::GetIndexRequest.new(name: name) do |_result, response|
+        c.get_index ::Google::Cloud::Firestore::Admin::V1::GetIndexRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_index({ name: name }, call_options) do |_result, response|
+        c.get_index({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_index(::Google::Cloud::Firestore::Admin::V1::GetIndexRequest.new(name: name), call_options) do |_result, response|
+        c.get_index(::Google::Cloud::Firestore::Admin::V1::GetIndexRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_delete_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_index_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_index({ name: name }) do |_result, response|
+        c.delete_index({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_index name: name do |_result, response|
+        c.delete_index name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_index ::Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new(name: name) do |_result, response|
+        c.delete_index ::Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_index({ name: name }, call_options) do |_result, response|
+        c.delete_index({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_index(::Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new(name: name), call_options) do |_result, response|
+        c.delete_index(::Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_get_field_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_field_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_field({ name: name }) do |_result, response|
+        c.get_field({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_field name: name do |_result, response|
+        c.get_field name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_field ::Google::Cloud::Firestore::Admin::V1::GetFieldRequest.new(name: name) do |_result, response|
+        c.get_field ::Google::Cloud::Firestore::Admin::V1::GetFieldRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_field({ name: name }, call_options) do |_result, response|
+        c.get_field({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_field(::Google::Cloud::Firestore::Admin::V1::GetFieldRequest.new(name: name), call_options) do |_result, response|
+        c.get_field(::Google::Cloud::Firestore::Admin::V1::GetFieldRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -372,32 +372,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_update_field_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_field_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_field({ field: field, update_mask: update_mask }) do |_result, response|
+        c.update_field({ field: field, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_field field: field, update_mask: update_mask do |_result, response|
+        c.update_field field: field, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_field ::Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest.new(field: field, update_mask: update_mask) do |_result, response|
+        c.update_field ::Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest.new(field: field, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_field({ field: field, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_field({ field: field, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_field(::Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest.new(field: field, update_mask: update_mask), call_options) do |_result, response|
+        c.update_field(::Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest.new(field: field, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -429,32 +429,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_list_fields_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_fields_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_fields({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_fields({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_fields parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_fields parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_fields ::Google::Cloud::Firestore::Admin::V1::ListFieldsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_fields ::Google::Cloud::Firestore::Admin::V1::ListFieldsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_fields({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_fields({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_fields(::Google::Cloud::Firestore::Admin::V1::ListFieldsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_fields(::Google::Cloud::Firestore::Admin::V1::ListFieldsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -487,32 +487,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_export_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_documents_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_documents({ name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time }) do |_result, response|
+        c.export_documents({ name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_documents name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time do |_result, response|
+        c.export_documents name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_documents ::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new(name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time) do |_result, response|
+        c.export_documents ::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new(name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_documents({ name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time }, call_options) do |_result, response|
+        c.export_documents({ name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_documents(::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new(name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time), call_options) do |_result, response|
+        c.export_documents(::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new(name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -544,32 +544,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_import_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_documents_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_documents({ name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids }) do |_result, response|
+        c.import_documents({ name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_documents name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids do |_result, response|
+        c.import_documents name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_documents ::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new(name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids) do |_result, response|
+        c.import_documents ::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new(name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_documents({ name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids }, call_options) do |_result, response|
+        c.import_documents({ name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_documents(::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new(name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids), call_options) do |_result, response|
+        c.import_documents(::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new(name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -600,32 +600,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_bulk_delete_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, bulk_delete_documents_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.bulk_delete_documents({ name: name, collection_ids: collection_ids, namespace_ids: namespace_ids }) do |_result, response|
+        c.bulk_delete_documents({ name: name, collection_ids: collection_ids, namespace_ids: namespace_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.bulk_delete_documents name: name, collection_ids: collection_ids, namespace_ids: namespace_ids do |_result, response|
+        c.bulk_delete_documents name: name, collection_ids: collection_ids, namespace_ids: namespace_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.bulk_delete_documents ::Google::Cloud::Firestore::Admin::V1::BulkDeleteDocumentsRequest.new(name: name, collection_ids: collection_ids, namespace_ids: namespace_ids) do |_result, response|
+        c.bulk_delete_documents ::Google::Cloud::Firestore::Admin::V1::BulkDeleteDocumentsRequest.new(name: name, collection_ids: collection_ids, namespace_ids: namespace_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.bulk_delete_documents({ name: name, collection_ids: collection_ids, namespace_ids: namespace_ids }, call_options) do |_result, response|
+        c.bulk_delete_documents({ name: name, collection_ids: collection_ids, namespace_ids: namespace_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.bulk_delete_documents(::Google::Cloud::Firestore::Admin::V1::BulkDeleteDocumentsRequest.new(name: name, collection_ids: collection_ids, namespace_ids: namespace_ids), call_options) do |_result, response|
+        c.bulk_delete_documents(::Google::Cloud::Firestore::Admin::V1::BulkDeleteDocumentsRequest.new(name: name, collection_ids: collection_ids, namespace_ids: namespace_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -656,32 +656,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_create_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_database({ parent: parent, database: database, database_id: database_id }) do |_result, response|
+        c.create_database({ parent: parent, database: database, database_id: database_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_database parent: parent, database: database, database_id: database_id do |_result, response|
+        c.create_database parent: parent, database: database, database_id: database_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_database ::Google::Cloud::Firestore::Admin::V1::CreateDatabaseRequest.new(parent: parent, database: database, database_id: database_id) do |_result, response|
+        c.create_database ::Google::Cloud::Firestore::Admin::V1::CreateDatabaseRequest.new(parent: parent, database: database, database_id: database_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_database({ parent: parent, database: database, database_id: database_id }, call_options) do |_result, response|
+        c.create_database({ parent: parent, database: database, database_id: database_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_database(::Google::Cloud::Firestore::Admin::V1::CreateDatabaseRequest.new(parent: parent, database: database, database_id: database_id), call_options) do |_result, response|
+        c.create_database(::Google::Cloud::Firestore::Admin::V1::CreateDatabaseRequest.new(parent: parent, database: database, database_id: database_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -710,32 +710,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_get_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_database({ name: name }) do |_result, response|
+        c.get_database({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_database name: name do |_result, response|
+        c.get_database name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_database ::Google::Cloud::Firestore::Admin::V1::GetDatabaseRequest.new(name: name) do |_result, response|
+        c.get_database ::Google::Cloud::Firestore::Admin::V1::GetDatabaseRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_database({ name: name }, call_options) do |_result, response|
+        c.get_database({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_database(::Google::Cloud::Firestore::Admin::V1::GetDatabaseRequest.new(name: name), call_options) do |_result, response|
+        c.get_database(::Google::Cloud::Firestore::Admin::V1::GetDatabaseRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -765,32 +765,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_list_databases_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_databases_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_databases({ parent: parent, show_deleted: show_deleted }) do |_result, response|
+        c.list_databases({ parent: parent, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_databases parent: parent, show_deleted: show_deleted do |_result, response|
+        c.list_databases parent: parent, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_databases ::Google::Cloud::Firestore::Admin::V1::ListDatabasesRequest.new(parent: parent, show_deleted: show_deleted) do |_result, response|
+        c.list_databases ::Google::Cloud::Firestore::Admin::V1::ListDatabasesRequest.new(parent: parent, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_databases({ parent: parent, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_databases({ parent: parent, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_databases(::Google::Cloud::Firestore::Admin::V1::ListDatabasesRequest.new(parent: parent, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_databases(::Google::Cloud::Firestore::Admin::V1::ListDatabasesRequest.new(parent: parent, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -820,32 +820,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_update_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_database({ database: database, update_mask: update_mask }) do |_result, response|
+        c.update_database({ database: database, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_database database: database, update_mask: update_mask do |_result, response|
+        c.update_database database: database, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_database ::Google::Cloud::Firestore::Admin::V1::UpdateDatabaseRequest.new(database: database, update_mask: update_mask) do |_result, response|
+        c.update_database ::Google::Cloud::Firestore::Admin::V1::UpdateDatabaseRequest.new(database: database, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_database({ database: database, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_database({ database: database, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_database(::Google::Cloud::Firestore::Admin::V1::UpdateDatabaseRequest.new(database: database, update_mask: update_mask), call_options) do |_result, response|
+        c.update_database(::Google::Cloud::Firestore::Admin::V1::UpdateDatabaseRequest.new(database: database, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -875,32 +875,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_delete_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_database({ name: name, etag: etag }) do |_result, response|
+        c.delete_database({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_database name: name, etag: etag do |_result, response|
+        c.delete_database name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_database ::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_database ::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_database({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_database({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_database(::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_database(::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -931,32 +931,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_create_user_creds_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_user_creds_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_user_creds({ parent: parent, user_creds: user_creds, user_creds_id: user_creds_id }) do |_result, response|
+        c.create_user_creds({ parent: parent, user_creds: user_creds, user_creds_id: user_creds_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_user_creds parent: parent, user_creds: user_creds, user_creds_id: user_creds_id do |_result, response|
+        c.create_user_creds parent: parent, user_creds: user_creds, user_creds_id: user_creds_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_user_creds ::Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest.new(parent: parent, user_creds: user_creds, user_creds_id: user_creds_id) do |_result, response|
+        c.create_user_creds ::Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest.new(parent: parent, user_creds: user_creds, user_creds_id: user_creds_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_user_creds({ parent: parent, user_creds: user_creds, user_creds_id: user_creds_id }, call_options) do |_result, response|
+        c.create_user_creds({ parent: parent, user_creds: user_creds, user_creds_id: user_creds_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_user_creds(::Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest.new(parent: parent, user_creds: user_creds, user_creds_id: user_creds_id), call_options) do |_result, response|
+        c.create_user_creds(::Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest.new(parent: parent, user_creds: user_creds, user_creds_id: user_creds_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -985,32 +985,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_get_user_creds_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_user_creds_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_user_creds({ name: name }) do |_result, response|
+        c.get_user_creds({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_user_creds name: name do |_result, response|
+        c.get_user_creds name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_user_creds ::Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest.new(name: name) do |_result, response|
+        c.get_user_creds ::Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_user_creds({ name: name }, call_options) do |_result, response|
+        c.get_user_creds({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_user_creds(::Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest.new(name: name), call_options) do |_result, response|
+        c.get_user_creds(::Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1039,32 +1039,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_list_user_creds_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_user_creds_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_user_creds({ parent: parent }) do |_result, response|
+        c.list_user_creds({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_user_creds parent: parent do |_result, response|
+        c.list_user_creds parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_user_creds ::Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest.new(parent: parent) do |_result, response|
+        c.list_user_creds ::Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_user_creds({ parent: parent }, call_options) do |_result, response|
+        c.list_user_creds({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_user_creds(::Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest.new(parent: parent), call_options) do |_result, response|
+        c.list_user_creds(::Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1093,32 +1093,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_enable_user_creds_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, enable_user_creds_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.enable_user_creds({ name: name }) do |_result, response|
+        c.enable_user_creds({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.enable_user_creds name: name do |_result, response|
+        c.enable_user_creds name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.enable_user_creds ::Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest.new(name: name) do |_result, response|
+        c.enable_user_creds ::Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.enable_user_creds({ name: name }, call_options) do |_result, response|
+        c.enable_user_creds({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.enable_user_creds(::Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest.new(name: name), call_options) do |_result, response|
+        c.enable_user_creds(::Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1147,32 +1147,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_disable_user_creds_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, disable_user_creds_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.disable_user_creds({ name: name }) do |_result, response|
+        c.disable_user_creds({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.disable_user_creds name: name do |_result, response|
+        c.disable_user_creds name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.disable_user_creds ::Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest.new(name: name) do |_result, response|
+        c.disable_user_creds ::Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.disable_user_creds({ name: name }, call_options) do |_result, response|
+        c.disable_user_creds({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.disable_user_creds(::Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest.new(name: name), call_options) do |_result, response|
+        c.disable_user_creds(::Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1201,32 +1201,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_reset_user_password_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reset_user_password_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reset_user_password({ name: name }) do |_result, response|
+        c.reset_user_password({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reset_user_password name: name do |_result, response|
+        c.reset_user_password name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reset_user_password ::Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest.new(name: name) do |_result, response|
+        c.reset_user_password ::Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reset_user_password({ name: name }, call_options) do |_result, response|
+        c.reset_user_password({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reset_user_password(::Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest.new(name: name), call_options) do |_result, response|
+        c.reset_user_password(::Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1255,32 +1255,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_delete_user_creds_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_user_creds_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_user_creds({ name: name }) do |_result, response|
+        c.delete_user_creds({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_user_creds name: name do |_result, response|
+        c.delete_user_creds name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_user_creds ::Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest.new(name: name) do |_result, response|
+        c.delete_user_creds ::Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_user_creds({ name: name }, call_options) do |_result, response|
+        c.delete_user_creds({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_user_creds(::Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest.new(name: name), call_options) do |_result, response|
+        c.delete_user_creds(::Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1309,32 +1309,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_get_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup({ name: name }) do |_result, response|
+        c.get_backup({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup name: name do |_result, response|
+        c.get_backup name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup ::Google::Cloud::Firestore::Admin::V1::GetBackupRequest.new(name: name) do |_result, response|
+        c.get_backup ::Google::Cloud::Firestore::Admin::V1::GetBackupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup({ name: name }, call_options) do |_result, response|
+        c.get_backup({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup(::Google::Cloud::Firestore::Admin::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup(::Google::Cloud::Firestore::Admin::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1364,32 +1364,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_list_backups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backups_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backups({ parent: parent, filter: filter }) do |_result, response|
+        c.list_backups({ parent: parent, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backups parent: parent, filter: filter do |_result, response|
+        c.list_backups parent: parent, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backups ::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent, filter: filter) do |_result, response|
+        c.list_backups ::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backups({ parent: parent, filter: filter }, call_options) do |_result, response|
+        c.list_backups({ parent: parent, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backups(::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent, filter: filter), call_options) do |_result, response|
+        c.list_backups(::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1418,32 +1418,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_delete_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup({ name: name }) do |_result, response|
+        c.delete_backup({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup name: name do |_result, response|
+        c.delete_backup name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup ::Google::Cloud::Firestore::Admin::V1::DeleteBackupRequest.new(name: name) do |_result, response|
+        c.delete_backup ::Google::Cloud::Firestore::Admin::V1::DeleteBackupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup({ name: name }, call_options) do |_result, response|
+        c.delete_backup({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup(::Google::Cloud::Firestore::Admin::V1::DeleteBackupRequest.new(name: name), call_options) do |_result, response|
+        c.delete_backup(::Google::Cloud::Firestore::Admin::V1::DeleteBackupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1476,32 +1476,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_restore_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config, tags: tags }) do |_result, response|
+        c.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config, tags: tags }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_database parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config, tags: tags do |_result, response|
+        c.restore_database parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config, tags: tags do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_database ::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config, tags: tags) do |_result, response|
+        c.restore_database ::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config, tags: tags) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config, tags: tags }, call_options) do |_result, response|
+        c.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config, tags: tags }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_database(::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config, tags: tags), call_options) do |_result, response|
+        c.restore_database(::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config, tags: tags), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1531,32 +1531,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_create_backup_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup_schedule({ parent: parent, backup_schedule: backup_schedule }) do |_result, response|
+        c.create_backup_schedule({ parent: parent, backup_schedule: backup_schedule }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup_schedule parent: parent, backup_schedule: backup_schedule do |_result, response|
+        c.create_backup_schedule parent: parent, backup_schedule: backup_schedule do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup_schedule ::Google::Cloud::Firestore::Admin::V1::CreateBackupScheduleRequest.new(parent: parent, backup_schedule: backup_schedule) do |_result, response|
+        c.create_backup_schedule ::Google::Cloud::Firestore::Admin::V1::CreateBackupScheduleRequest.new(parent: parent, backup_schedule: backup_schedule) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup_schedule({ parent: parent, backup_schedule: backup_schedule }, call_options) do |_result, response|
+        c.create_backup_schedule({ parent: parent, backup_schedule: backup_schedule }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup_schedule(::Google::Cloud::Firestore::Admin::V1::CreateBackupScheduleRequest.new(parent: parent, backup_schedule: backup_schedule), call_options) do |_result, response|
+        c.create_backup_schedule(::Google::Cloud::Firestore::Admin::V1::CreateBackupScheduleRequest.new(parent: parent, backup_schedule: backup_schedule), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1585,32 +1585,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_get_backup_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup_schedule({ name: name }) do |_result, response|
+        c.get_backup_schedule({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup_schedule name: name do |_result, response|
+        c.get_backup_schedule name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup_schedule ::Google::Cloud::Firestore::Admin::V1::GetBackupScheduleRequest.new(name: name) do |_result, response|
+        c.get_backup_schedule ::Google::Cloud::Firestore::Admin::V1::GetBackupScheduleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup_schedule({ name: name }, call_options) do |_result, response|
+        c.get_backup_schedule({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup_schedule(::Google::Cloud::Firestore::Admin::V1::GetBackupScheduleRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup_schedule(::Google::Cloud::Firestore::Admin::V1::GetBackupScheduleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1639,32 +1639,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_list_backup_schedules_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backup_schedules_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backup_schedules({ parent: parent }) do |_result, response|
+        c.list_backup_schedules({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backup_schedules parent: parent do |_result, response|
+        c.list_backup_schedules parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backup_schedules ::Google::Cloud::Firestore::Admin::V1::ListBackupSchedulesRequest.new(parent: parent) do |_result, response|
+        c.list_backup_schedules ::Google::Cloud::Firestore::Admin::V1::ListBackupSchedulesRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backup_schedules({ parent: parent }, call_options) do |_result, response|
+        c.list_backup_schedules({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backup_schedules(::Google::Cloud::Firestore::Admin::V1::ListBackupSchedulesRequest.new(parent: parent), call_options) do |_result, response|
+        c.list_backup_schedules(::Google::Cloud::Firestore::Admin::V1::ListBackupSchedulesRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1694,32 +1694,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_update_backup_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup_schedule({ backup_schedule: backup_schedule, update_mask: update_mask }) do |_result, response|
+        c.update_backup_schedule({ backup_schedule: backup_schedule, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup_schedule backup_schedule: backup_schedule, update_mask: update_mask do |_result, response|
+        c.update_backup_schedule backup_schedule: backup_schedule, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup_schedule ::Google::Cloud::Firestore::Admin::V1::UpdateBackupScheduleRequest.new(backup_schedule: backup_schedule, update_mask: update_mask) do |_result, response|
+        c.update_backup_schedule ::Google::Cloud::Firestore::Admin::V1::UpdateBackupScheduleRequest.new(backup_schedule: backup_schedule, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup_schedule({ backup_schedule: backup_schedule, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_backup_schedule({ backup_schedule: backup_schedule, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup_schedule(::Google::Cloud::Firestore::Admin::V1::UpdateBackupScheduleRequest.new(backup_schedule: backup_schedule, update_mask: update_mask), call_options) do |_result, response|
+        c.update_backup_schedule(::Google::Cloud::Firestore::Admin::V1::UpdateBackupScheduleRequest.new(backup_schedule: backup_schedule, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1748,32 +1748,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_delete_backup_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup_schedule({ name: name }) do |_result, response|
+        c.delete_backup_schedule({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup_schedule name: name do |_result, response|
+        c.delete_backup_schedule name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup_schedule ::Google::Cloud::Firestore::Admin::V1::DeleteBackupScheduleRequest.new(name: name) do |_result, response|
+        c.delete_backup_schedule ::Google::Cloud::Firestore::Admin::V1::DeleteBackupScheduleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup_schedule({ name: name }, call_options) do |_result, response|
+        c.delete_backup_schedule({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup_schedule(::Google::Cloud::Firestore::Admin::V1::DeleteBackupScheduleRequest.new(name: name), call_options) do |_result, response|
+        c.delete_backup_schedule(::Google::Cloud::Firestore::Admin::V1::DeleteBackupScheduleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1806,32 +1806,32 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_clone_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, clone_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.clone_database({ parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags }) do |_result, response|
+        c.clone_database({ parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.clone_database parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags do |_result, response|
+        c.clone_database parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.clone_database ::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest.new(parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags) do |_result, response|
+        c.clone_database ::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest.new(parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.clone_database({ parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags }, call_options) do |_result, response|
+        c.clone_database({ parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.clone_database(::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest.new(parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags), call_options) do |_result, response|
+        c.clone_database(::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest.new(parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
