@@ -99,32 +99,32 @@ class ::Google::Cloud::Kms::V1::Autokey::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::Autokey::Rest::ServiceStub.stub :transcode_create_key_handle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_key_handle_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::Autokey::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::Autokey::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_key_handle({ parent: parent, key_handle_id: key_handle_id, key_handle: key_handle }) do |_result, response|
+        c.create_key_handle({ parent: parent, key_handle_id: key_handle_id, key_handle: key_handle }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_key_handle parent: parent, key_handle_id: key_handle_id, key_handle: key_handle do |_result, response|
+        c.create_key_handle parent: parent, key_handle_id: key_handle_id, key_handle: key_handle do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_key_handle ::Google::Cloud::Kms::V1::CreateKeyHandleRequest.new(parent: parent, key_handle_id: key_handle_id, key_handle: key_handle) do |_result, response|
+        c.create_key_handle ::Google::Cloud::Kms::V1::CreateKeyHandleRequest.new(parent: parent, key_handle_id: key_handle_id, key_handle: key_handle) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_key_handle({ parent: parent, key_handle_id: key_handle_id, key_handle: key_handle }, call_options) do |_result, response|
+        c.create_key_handle({ parent: parent, key_handle_id: key_handle_id, key_handle: key_handle }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_key_handle(::Google::Cloud::Kms::V1::CreateKeyHandleRequest.new(parent: parent, key_handle_id: key_handle_id, key_handle: key_handle), call_options) do |_result, response|
+        c.create_key_handle(::Google::Cloud::Kms::V1::CreateKeyHandleRequest.new(parent: parent, key_handle_id: key_handle_id, key_handle: key_handle), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Kms::V1::Autokey::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::Autokey::Rest::ServiceStub.stub :transcode_get_key_handle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_key_handle_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::Autokey::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::Autokey::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_key_handle({ name: name }) do |_result, response|
+        c.get_key_handle({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_key_handle name: name do |_result, response|
+        c.get_key_handle name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_key_handle ::Google::Cloud::Kms::V1::GetKeyHandleRequest.new(name: name) do |_result, response|
+        c.get_key_handle ::Google::Cloud::Kms::V1::GetKeyHandleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_key_handle({ name: name }, call_options) do |_result, response|
+        c.get_key_handle({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_key_handle(::Google::Cloud::Kms::V1::GetKeyHandleRequest.new(name: name), call_options) do |_result, response|
+        c.get_key_handle(::Google::Cloud::Kms::V1::GetKeyHandleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Kms::V1::Autokey::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::Autokey::Rest::ServiceStub.stub :transcode_list_key_handles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_key_handles_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::Autokey::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::Autokey::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_key_handles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_key_handles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_key_handles parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_key_handles parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_key_handles ::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_key_handles ::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_key_handles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_key_handles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_key_handles(::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_key_handles(::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

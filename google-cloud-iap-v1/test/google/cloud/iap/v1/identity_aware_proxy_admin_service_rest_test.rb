@@ -99,32 +99,32 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ClientTest
     ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+        c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+        c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+        c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ClientTest
     ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_iam_policy resource: resource, options: options do |_result, response|
+        c.get_iam_policy resource: resource, options: options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+        c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+        c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ClientTest
     ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
         # Create client
-        client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
+        c.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
+        c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
+        c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ClientTest
     ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ServiceStub.stub :transcode_get_iap_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_iap_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_iap_settings({ name: name }) do |_result, response|
+        c.get_iap_settings({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_iap_settings name: name do |_result, response|
+        c.get_iap_settings name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_iap_settings ::Google::Cloud::Iap::V1::GetIapSettingsRequest.new(name: name) do |_result, response|
+        c.get_iap_settings ::Google::Cloud::Iap::V1::GetIapSettingsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_iap_settings({ name: name }, call_options) do |_result, response|
+        c.get_iap_settings({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_iap_settings(::Google::Cloud::Iap::V1::GetIapSettingsRequest.new(name: name), call_options) do |_result, response|
+        c.get_iap_settings(::Google::Cloud::Iap::V1::GetIapSettingsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ClientTest
     ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ServiceStub.stub :transcode_update_iap_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_iap_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_iap_settings({ iap_settings: iap_settings, update_mask: update_mask }) do |_result, response|
+        c.update_iap_settings({ iap_settings: iap_settings, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_iap_settings iap_settings: iap_settings, update_mask: update_mask do |_result, response|
+        c.update_iap_settings iap_settings: iap_settings, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_iap_settings ::Google::Cloud::Iap::V1::UpdateIapSettingsRequest.new(iap_settings: iap_settings, update_mask: update_mask) do |_result, response|
+        c.update_iap_settings ::Google::Cloud::Iap::V1::UpdateIapSettingsRequest.new(iap_settings: iap_settings, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_iap_settings({ iap_settings: iap_settings, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_iap_settings({ iap_settings: iap_settings, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_iap_settings(::Google::Cloud::Iap::V1::UpdateIapSettingsRequest.new(iap_settings: iap_settings, update_mask: update_mask), call_options) do |_result, response|
+        c.update_iap_settings(::Google::Cloud::Iap::V1::UpdateIapSettingsRequest.new(iap_settings: iap_settings, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -373,32 +373,32 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ClientTest
     ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ServiceStub.stub :transcode_validate_iap_attribute_expression_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, validate_iap_attribute_expression_client_stub do
         # Create client
-        client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.validate_iap_attribute_expression({ name: name, expression: expression }) do |_result, response|
+        c.validate_iap_attribute_expression({ name: name, expression: expression }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.validate_iap_attribute_expression name: name, expression: expression do |_result, response|
+        c.validate_iap_attribute_expression name: name, expression: expression do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.validate_iap_attribute_expression ::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest.new(name: name, expression: expression) do |_result, response|
+        c.validate_iap_attribute_expression ::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest.new(name: name, expression: expression) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.validate_iap_attribute_expression({ name: name, expression: expression }, call_options) do |_result, response|
+        c.validate_iap_attribute_expression({ name: name, expression: expression }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.validate_iap_attribute_expression(::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest.new(name: name, expression: expression), call_options) do |_result, response|
+        c.validate_iap_attribute_expression(::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest.new(name: name, expression: expression), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -429,32 +429,32 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ClientTest
     ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ServiceStub.stub :transcode_list_tunnel_dest_groups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tunnel_dest_groups_client_stub do
         # Create client
-        client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tunnel_dest_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_tunnel_dest_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tunnel_dest_groups parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_tunnel_dest_groups parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tunnel_dest_groups ::Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_tunnel_dest_groups ::Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tunnel_dest_groups({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_tunnel_dest_groups({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tunnel_dest_groups(::Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_tunnel_dest_groups(::Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -485,32 +485,32 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ClientTest
     ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ServiceStub.stub :transcode_create_tunnel_dest_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tunnel_dest_group_client_stub do
         # Create client
-        client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tunnel_dest_group({ parent: parent, tunnel_dest_group: tunnel_dest_group, tunnel_dest_group_id: tunnel_dest_group_id }) do |_result, response|
+        c.create_tunnel_dest_group({ parent: parent, tunnel_dest_group: tunnel_dest_group, tunnel_dest_group_id: tunnel_dest_group_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tunnel_dest_group parent: parent, tunnel_dest_group: tunnel_dest_group, tunnel_dest_group_id: tunnel_dest_group_id do |_result, response|
+        c.create_tunnel_dest_group parent: parent, tunnel_dest_group: tunnel_dest_group, tunnel_dest_group_id: tunnel_dest_group_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tunnel_dest_group ::Google::Cloud::Iap::V1::CreateTunnelDestGroupRequest.new(parent: parent, tunnel_dest_group: tunnel_dest_group, tunnel_dest_group_id: tunnel_dest_group_id) do |_result, response|
+        c.create_tunnel_dest_group ::Google::Cloud::Iap::V1::CreateTunnelDestGroupRequest.new(parent: parent, tunnel_dest_group: tunnel_dest_group, tunnel_dest_group_id: tunnel_dest_group_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tunnel_dest_group({ parent: parent, tunnel_dest_group: tunnel_dest_group, tunnel_dest_group_id: tunnel_dest_group_id }, call_options) do |_result, response|
+        c.create_tunnel_dest_group({ parent: parent, tunnel_dest_group: tunnel_dest_group, tunnel_dest_group_id: tunnel_dest_group_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tunnel_dest_group(::Google::Cloud::Iap::V1::CreateTunnelDestGroupRequest.new(parent: parent, tunnel_dest_group: tunnel_dest_group, tunnel_dest_group_id: tunnel_dest_group_id), call_options) do |_result, response|
+        c.create_tunnel_dest_group(::Google::Cloud::Iap::V1::CreateTunnelDestGroupRequest.new(parent: parent, tunnel_dest_group: tunnel_dest_group, tunnel_dest_group_id: tunnel_dest_group_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -539,32 +539,32 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ClientTest
     ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ServiceStub.stub :transcode_get_tunnel_dest_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_tunnel_dest_group_client_stub do
         # Create client
-        client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_tunnel_dest_group({ name: name }) do |_result, response|
+        c.get_tunnel_dest_group({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_tunnel_dest_group name: name do |_result, response|
+        c.get_tunnel_dest_group name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_tunnel_dest_group ::Google::Cloud::Iap::V1::GetTunnelDestGroupRequest.new(name: name) do |_result, response|
+        c.get_tunnel_dest_group ::Google::Cloud::Iap::V1::GetTunnelDestGroupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_tunnel_dest_group({ name: name }, call_options) do |_result, response|
+        c.get_tunnel_dest_group({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_tunnel_dest_group(::Google::Cloud::Iap::V1::GetTunnelDestGroupRequest.new(name: name), call_options) do |_result, response|
+        c.get_tunnel_dest_group(::Google::Cloud::Iap::V1::GetTunnelDestGroupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -593,32 +593,32 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ClientTest
     ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ServiceStub.stub :transcode_delete_tunnel_dest_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tunnel_dest_group_client_stub do
         # Create client
-        client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tunnel_dest_group({ name: name }) do |_result, response|
+        c.delete_tunnel_dest_group({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tunnel_dest_group name: name do |_result, response|
+        c.delete_tunnel_dest_group name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tunnel_dest_group ::Google::Cloud::Iap::V1::DeleteTunnelDestGroupRequest.new(name: name) do |_result, response|
+        c.delete_tunnel_dest_group ::Google::Cloud::Iap::V1::DeleteTunnelDestGroupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tunnel_dest_group({ name: name }, call_options) do |_result, response|
+        c.delete_tunnel_dest_group({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tunnel_dest_group(::Google::Cloud::Iap::V1::DeleteTunnelDestGroupRequest.new(name: name), call_options) do |_result, response|
+        c.delete_tunnel_dest_group(::Google::Cloud::Iap::V1::DeleteTunnelDestGroupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -648,32 +648,32 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ClientTest
     ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::ServiceStub.stub :transcode_update_tunnel_dest_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_tunnel_dest_group_client_stub do
         # Create client
-        client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_tunnel_dest_group({ tunnel_dest_group: tunnel_dest_group, update_mask: update_mask }) do |_result, response|
+        c.update_tunnel_dest_group({ tunnel_dest_group: tunnel_dest_group, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_tunnel_dest_group tunnel_dest_group: tunnel_dest_group, update_mask: update_mask do |_result, response|
+        c.update_tunnel_dest_group tunnel_dest_group: tunnel_dest_group, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_tunnel_dest_group ::Google::Cloud::Iap::V1::UpdateTunnelDestGroupRequest.new(tunnel_dest_group: tunnel_dest_group, update_mask: update_mask) do |_result, response|
+        c.update_tunnel_dest_group ::Google::Cloud::Iap::V1::UpdateTunnelDestGroupRequest.new(tunnel_dest_group: tunnel_dest_group, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_tunnel_dest_group({ tunnel_dest_group: tunnel_dest_group, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_tunnel_dest_group({ tunnel_dest_group: tunnel_dest_group, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_tunnel_dest_group(::Google::Cloud::Iap::V1::UpdateTunnelDestGroupRequest.new(tunnel_dest_group: tunnel_dest_group, update_mask: update_mask), call_options) do |_result, response|
+        c.update_tunnel_dest_group(::Google::Cloud::Iap::V1::UpdateTunnelDestGroupRequest.new(tunnel_dest_group: tunnel_dest_group, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

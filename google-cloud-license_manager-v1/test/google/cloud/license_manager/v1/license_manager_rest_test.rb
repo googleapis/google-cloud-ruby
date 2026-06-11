@@ -101,32 +101,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_list_configurations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_configurations_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_configurations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_configurations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_configurations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_configurations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_configurations ::Google::Cloud::LicenseManager::V1::ListConfigurationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_configurations ::Google::Cloud::LicenseManager::V1::ListConfigurationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_configurations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_configurations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_configurations(::Google::Cloud::LicenseManager::V1::ListConfigurationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_configurations(::Google::Cloud::LicenseManager::V1::ListConfigurationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_get_configuration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_configuration_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_configuration({ name: name }) do |_result, response|
+        c.get_configuration({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_configuration name: name do |_result, response|
+        c.get_configuration name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_configuration ::Google::Cloud::LicenseManager::V1::GetConfigurationRequest.new(name: name) do |_result, response|
+        c.get_configuration ::Google::Cloud::LicenseManager::V1::GetConfigurationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_configuration({ name: name }, call_options) do |_result, response|
+        c.get_configuration({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_configuration(::Google::Cloud::LicenseManager::V1::GetConfigurationRequest.new(name: name), call_options) do |_result, response|
+        c.get_configuration(::Google::Cloud::LicenseManager::V1::GetConfigurationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_create_configuration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_configuration_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_configuration({ parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id }) do |_result, response|
+        c.create_configuration({ parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_configuration parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id do |_result, response|
+        c.create_configuration parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_configuration ::Google::Cloud::LicenseManager::V1::CreateConfigurationRequest.new(parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id) do |_result, response|
+        c.create_configuration ::Google::Cloud::LicenseManager::V1::CreateConfigurationRequest.new(parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_configuration({ parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id }, call_options) do |_result, response|
+        c.create_configuration({ parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_configuration(::Google::Cloud::LicenseManager::V1::CreateConfigurationRequest.new(parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id), call_options) do |_result, response|
+        c.create_configuration(::Google::Cloud::LicenseManager::V1::CreateConfigurationRequest.new(parent: parent, configuration_id: configuration_id, configuration: configuration, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_update_configuration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_configuration_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_configuration({ update_mask: update_mask, configuration: configuration, request_id: request_id }) do |_result, response|
+        c.update_configuration({ update_mask: update_mask, configuration: configuration, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_configuration update_mask: update_mask, configuration: configuration, request_id: request_id do |_result, response|
+        c.update_configuration update_mask: update_mask, configuration: configuration, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_configuration ::Google::Cloud::LicenseManager::V1::UpdateConfigurationRequest.new(update_mask: update_mask, configuration: configuration, request_id: request_id) do |_result, response|
+        c.update_configuration ::Google::Cloud::LicenseManager::V1::UpdateConfigurationRequest.new(update_mask: update_mask, configuration: configuration, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_configuration({ update_mask: update_mask, configuration: configuration, request_id: request_id }, call_options) do |_result, response|
+        c.update_configuration({ update_mask: update_mask, configuration: configuration, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_configuration(::Google::Cloud::LicenseManager::V1::UpdateConfigurationRequest.new(update_mask: update_mask, configuration: configuration, request_id: request_id), call_options) do |_result, response|
+        c.update_configuration(::Google::Cloud::LicenseManager::V1::UpdateConfigurationRequest.new(update_mask: update_mask, configuration: configuration, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_delete_configuration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_configuration_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_configuration({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_configuration({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_configuration name: name, request_id: request_id do |_result, response|
+        c.delete_configuration name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_configuration ::Google::Cloud::LicenseManager::V1::DeleteConfigurationRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_configuration ::Google::Cloud::LicenseManager::V1::DeleteConfigurationRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_configuration({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_configuration({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_configuration(::Google::Cloud::LicenseManager::V1::DeleteConfigurationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_configuration(::Google::Cloud::LicenseManager::V1::DeleteConfigurationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -381,32 +381,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instances ::Google::Cloud::LicenseManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_instances ::Google::Cloud::LicenseManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instances(::Google::Cloud::LicenseManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_instances(::Google::Cloud::LicenseManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -435,32 +435,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_get_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance({ name: name }) do |_result, response|
+        c.get_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance name: name do |_result, response|
+        c.get_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance ::Google::Cloud::LicenseManager::V1::GetInstanceRequest.new(name: name) do |_result, response|
+        c.get_instance ::Google::Cloud::LicenseManager::V1::GetInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance({ name: name }, call_options) do |_result, response|
+        c.get_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance(::Google::Cloud::LicenseManager::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance(::Google::Cloud::LicenseManager::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -490,32 +490,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_deactivate_configuration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, deactivate_configuration_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.deactivate_configuration({ name: name, request_id: request_id }) do |_result, response|
+        c.deactivate_configuration({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.deactivate_configuration name: name, request_id: request_id do |_result, response|
+        c.deactivate_configuration name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.deactivate_configuration ::Google::Cloud::LicenseManager::V1::DeactivateConfigurationRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.deactivate_configuration ::Google::Cloud::LicenseManager::V1::DeactivateConfigurationRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.deactivate_configuration({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.deactivate_configuration({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.deactivate_configuration(::Google::Cloud::LicenseManager::V1::DeactivateConfigurationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.deactivate_configuration(::Google::Cloud::LicenseManager::V1::DeactivateConfigurationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -545,32 +545,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_reactivate_configuration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reactivate_configuration_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reactivate_configuration({ name: name, request_id: request_id }) do |_result, response|
+        c.reactivate_configuration({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reactivate_configuration name: name, request_id: request_id do |_result, response|
+        c.reactivate_configuration name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reactivate_configuration ::Google::Cloud::LicenseManager::V1::ReactivateConfigurationRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.reactivate_configuration ::Google::Cloud::LicenseManager::V1::ReactivateConfigurationRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reactivate_configuration({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.reactivate_configuration({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reactivate_configuration(::Google::Cloud::LicenseManager::V1::ReactivateConfigurationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.reactivate_configuration(::Google::Cloud::LicenseManager::V1::ReactivateConfigurationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -601,32 +601,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_query_configuration_license_usage_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_configuration_license_usage_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_configuration_license_usage({ name: name, start_time: start_time, end_time: end_time }) do |_result, response|
+        c.query_configuration_license_usage({ name: name, start_time: start_time, end_time: end_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_configuration_license_usage name: name, start_time: start_time, end_time: end_time do |_result, response|
+        c.query_configuration_license_usage name: name, start_time: start_time, end_time: end_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_configuration_license_usage ::Google::Cloud::LicenseManager::V1::QueryConfigurationLicenseUsageRequest.new(name: name, start_time: start_time, end_time: end_time) do |_result, response|
+        c.query_configuration_license_usage ::Google::Cloud::LicenseManager::V1::QueryConfigurationLicenseUsageRequest.new(name: name, start_time: start_time, end_time: end_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_configuration_license_usage({ name: name, start_time: start_time, end_time: end_time }, call_options) do |_result, response|
+        c.query_configuration_license_usage({ name: name, start_time: start_time, end_time: end_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_configuration_license_usage(::Google::Cloud::LicenseManager::V1::QueryConfigurationLicenseUsageRequest.new(name: name, start_time: start_time, end_time: end_time), call_options) do |_result, response|
+        c.query_configuration_license_usage(::Google::Cloud::LicenseManager::V1::QueryConfigurationLicenseUsageRequest.new(name: name, start_time: start_time, end_time: end_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -661,32 +661,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_aggregate_usage_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, aggregate_usage_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.aggregate_usage({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time }) do |_result, response|
+        c.aggregate_usage({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregate_usage name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time do |_result, response|
+        c.aggregate_usage name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregate_usage ::Google::Cloud::LicenseManager::V1::AggregateUsageRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time) do |_result, response|
+        c.aggregate_usage ::Google::Cloud::LicenseManager::V1::AggregateUsageRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregate_usage({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time }, call_options) do |_result, response|
+        c.aggregate_usage({ name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregate_usage(::Google::Cloud::LicenseManager::V1::AggregateUsageRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time), call_options) do |_result, response|
+        c.aggregate_usage(::Google::Cloud::LicenseManager::V1::AggregateUsageRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, start_time: start_time, end_time: end_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -719,32 +719,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_list_products_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_products_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_products parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_products parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_products ::Google::Cloud::LicenseManager::V1::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_products ::Google::Cloud::LicenseManager::V1::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_products({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_products(::Google::Cloud::LicenseManager::V1::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_products(::Google::Cloud::LicenseManager::V1::ListProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -773,32 +773,32 @@ class ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ClientTest < Mi
     ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::ServiceStub.stub :transcode_get_product_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_product_client_stub do
         # Create client
-        client = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::LicenseManager::V1::LicenseManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_product({ name: name }) do |_result, response|
+        c.get_product({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_product name: name do |_result, response|
+        c.get_product name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_product ::Google::Cloud::LicenseManager::V1::GetProductRequest.new(name: name) do |_result, response|
+        c.get_product ::Google::Cloud::LicenseManager::V1::GetProductRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_product({ name: name }, call_options) do |_result, response|
+        c.get_product({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_product(::Google::Cloud::LicenseManager::V1::GetProductRequest.new(name: name), call_options) do |_result, response|
+        c.get_product(::Google::Cloud::LicenseManager::V1::GetProductRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

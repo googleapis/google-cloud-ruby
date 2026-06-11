@@ -97,32 +97,32 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ClientTest < Minite
     ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ServiceStub.stub :transcode_get_authorization_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_authorization_client_stub do
         # Create client
-        client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
+        c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_authorization({ name: name }) do |_result, response|
+        c.get_authorization({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_authorization name: name do |_result, response|
+        c.get_authorization name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_authorization ::Google::Cloud::GSuiteAddOns::V1::GetAuthorizationRequest.new(name: name) do |_result, response|
+        c.get_authorization ::Google::Cloud::GSuiteAddOns::V1::GetAuthorizationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_authorization({ name: name }, call_options) do |_result, response|
+        c.get_authorization({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_authorization(::Google::Cloud::GSuiteAddOns::V1::GetAuthorizationRequest.new(name: name), call_options) do |_result, response|
+        c.get_authorization(::Google::Cloud::GSuiteAddOns::V1::GetAuthorizationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ClientTest < Minite
     ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ServiceStub.stub :transcode_create_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
+        c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }) do |_result, response|
+        c.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_deployment parent: parent, deployment_id: deployment_id, deployment: deployment do |_result, response|
+        c.create_deployment parent: parent, deployment_id: deployment_id, deployment: deployment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_deployment ::Google::Cloud::GSuiteAddOns::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment) do |_result, response|
+        c.create_deployment ::Google::Cloud::GSuiteAddOns::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }, call_options) do |_result, response|
+        c.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_deployment(::Google::Cloud::GSuiteAddOns::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment), call_options) do |_result, response|
+        c.create_deployment(::Google::Cloud::GSuiteAddOns::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ClientTest < Minite
     ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ServiceStub.stub :transcode_replace_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, replace_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
+        c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.replace_deployment({ deployment: deployment }) do |_result, response|
+        c.replace_deployment({ deployment: deployment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.replace_deployment deployment: deployment do |_result, response|
+        c.replace_deployment deployment: deployment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.replace_deployment ::Google::Cloud::GSuiteAddOns::V1::ReplaceDeploymentRequest.new(deployment: deployment) do |_result, response|
+        c.replace_deployment ::Google::Cloud::GSuiteAddOns::V1::ReplaceDeploymentRequest.new(deployment: deployment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.replace_deployment({ deployment: deployment }, call_options) do |_result, response|
+        c.replace_deployment({ deployment: deployment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.replace_deployment(::Google::Cloud::GSuiteAddOns::V1::ReplaceDeploymentRequest.new(deployment: deployment), call_options) do |_result, response|
+        c.replace_deployment(::Google::Cloud::GSuiteAddOns::V1::ReplaceDeploymentRequest.new(deployment: deployment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ClientTest < Minite
     ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ServiceStub.stub :transcode_get_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
+        c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_deployment({ name: name }) do |_result, response|
+        c.get_deployment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_deployment name: name do |_result, response|
+        c.get_deployment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_deployment ::Google::Cloud::GSuiteAddOns::V1::GetDeploymentRequest.new(name: name) do |_result, response|
+        c.get_deployment ::Google::Cloud::GSuiteAddOns::V1::GetDeploymentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_deployment({ name: name }, call_options) do |_result, response|
+        c.get_deployment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_deployment(::Google::Cloud::GSuiteAddOns::V1::GetDeploymentRequest.new(name: name), call_options) do |_result, response|
+        c.get_deployment(::Google::Cloud::GSuiteAddOns::V1::GetDeploymentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ClientTest < Minite
     ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ServiceStub.stub :transcode_list_deployments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_deployments_client_stub do
         # Create client
-        client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
+        c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_deployments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_deployments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_deployments ::Google::Cloud::GSuiteAddOns::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_deployments ::Google::Cloud::GSuiteAddOns::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_deployments(::Google::Cloud::GSuiteAddOns::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_deployments(::Google::Cloud::GSuiteAddOns::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -372,32 +372,32 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ClientTest < Minite
     ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ServiceStub.stub :transcode_delete_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
+        c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_deployment({ name: name, etag: etag }) do |_result, response|
+        c.delete_deployment({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_deployment name: name, etag: etag do |_result, response|
+        c.delete_deployment name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_deployment ::Google::Cloud::GSuiteAddOns::V1::DeleteDeploymentRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_deployment ::Google::Cloud::GSuiteAddOns::V1::DeleteDeploymentRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_deployment({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_deployment({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_deployment(::Google::Cloud::GSuiteAddOns::V1::DeleteDeploymentRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_deployment(::Google::Cloud::GSuiteAddOns::V1::DeleteDeploymentRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -426,32 +426,32 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ClientTest < Minite
     ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ServiceStub.stub :transcode_install_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, install_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
+        c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.install_deployment({ name: name }) do |_result, response|
+        c.install_deployment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.install_deployment name: name do |_result, response|
+        c.install_deployment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.install_deployment ::Google::Cloud::GSuiteAddOns::V1::InstallDeploymentRequest.new(name: name) do |_result, response|
+        c.install_deployment ::Google::Cloud::GSuiteAddOns::V1::InstallDeploymentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.install_deployment({ name: name }, call_options) do |_result, response|
+        c.install_deployment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.install_deployment(::Google::Cloud::GSuiteAddOns::V1::InstallDeploymentRequest.new(name: name), call_options) do |_result, response|
+        c.install_deployment(::Google::Cloud::GSuiteAddOns::V1::InstallDeploymentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -480,32 +480,32 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ClientTest < Minite
     ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ServiceStub.stub :transcode_uninstall_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, uninstall_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
+        c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.uninstall_deployment({ name: name }) do |_result, response|
+        c.uninstall_deployment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.uninstall_deployment name: name do |_result, response|
+        c.uninstall_deployment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.uninstall_deployment ::Google::Cloud::GSuiteAddOns::V1::UninstallDeploymentRequest.new(name: name) do |_result, response|
+        c.uninstall_deployment ::Google::Cloud::GSuiteAddOns::V1::UninstallDeploymentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.uninstall_deployment({ name: name }, call_options) do |_result, response|
+        c.uninstall_deployment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.uninstall_deployment(::Google::Cloud::GSuiteAddOns::V1::UninstallDeploymentRequest.new(name: name), call_options) do |_result, response|
+        c.uninstall_deployment(::Google::Cloud::GSuiteAddOns::V1::UninstallDeploymentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -534,32 +534,32 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ClientTest < Minite
     ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::ServiceStub.stub :transcode_get_install_status_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_install_status_client_stub do
         # Create client
-        client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
+        c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_install_status({ name: name }) do |_result, response|
+        c.get_install_status({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_install_status name: name do |_result, response|
+        c.get_install_status name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_install_status ::Google::Cloud::GSuiteAddOns::V1::GetInstallStatusRequest.new(name: name) do |_result, response|
+        c.get_install_status ::Google::Cloud::GSuiteAddOns::V1::GetInstallStatusRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_install_status({ name: name }, call_options) do |_result, response|
+        c.get_install_status({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_install_status(::Google::Cloud::GSuiteAddOns::V1::GetInstallStatusRequest.new(name: name), call_options) do |_result, response|
+        c.get_install_status(::Google::Cloud::GSuiteAddOns::V1::GetInstallStatusRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

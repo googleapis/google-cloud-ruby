@@ -84,36 +84,36 @@ class ::Google::Cloud::Kms::V1::AutokeyAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_autokey_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::AutokeyAdmin::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::AutokeyAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_autokey_config({ autokey_config: autokey_config, update_mask: update_mask }) do |response, operation|
+      c.update_autokey_config({ autokey_config: autokey_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_autokey_config autokey_config: autokey_config, update_mask: update_mask do |response, operation|
+      c.update_autokey_config autokey_config: autokey_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_autokey_config ::Google::Cloud::Kms::V1::UpdateAutokeyConfigRequest.new(autokey_config: autokey_config, update_mask: update_mask) do |response, operation|
+      c.update_autokey_config ::Google::Cloud::Kms::V1::UpdateAutokeyConfigRequest.new(autokey_config: autokey_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_autokey_config({ autokey_config: autokey_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_autokey_config({ autokey_config: autokey_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_autokey_config(::Google::Cloud::Kms::V1::UpdateAutokeyConfigRequest.new(autokey_config: autokey_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_autokey_config(::Google::Cloud::Kms::V1::UpdateAutokeyConfigRequest.new(autokey_config: autokey_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::Kms::V1::AutokeyAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_autokey_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::AutokeyAdmin::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::AutokeyAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_autokey_config({ name: name }) do |response, operation|
+      c.get_autokey_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_autokey_config name: name do |response, operation|
+      c.get_autokey_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_autokey_config ::Google::Cloud::Kms::V1::GetAutokeyConfigRequest.new(name: name) do |response, operation|
+      c.get_autokey_config ::Google::Cloud::Kms::V1::GetAutokeyConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_autokey_config({ name: name }, grpc_options) do |response, operation|
+      c.get_autokey_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_autokey_config(::Google::Cloud::Kms::V1::GetAutokeyConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_autokey_config(::Google::Cloud::Kms::V1::GetAutokeyConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -200,36 +200,36 @@ class ::Google::Cloud::Kms::V1::AutokeyAdmin::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, show_effective_autokey_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::AutokeyAdmin::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::AutokeyAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.show_effective_autokey_config({ parent: parent }) do |response, operation|
+      c.show_effective_autokey_config({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.show_effective_autokey_config parent: parent do |response, operation|
+      c.show_effective_autokey_config parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.show_effective_autokey_config ::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigRequest.new(parent: parent) do |response, operation|
+      c.show_effective_autokey_config ::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.show_effective_autokey_config({ parent: parent }, grpc_options) do |response, operation|
+      c.show_effective_autokey_config({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.show_effective_autokey_config(::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.show_effective_autokey_config(::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

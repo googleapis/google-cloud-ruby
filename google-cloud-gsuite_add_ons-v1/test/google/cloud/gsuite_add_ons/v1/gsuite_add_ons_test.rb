@@ -82,36 +82,36 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_authorization_client_stub do
       # Create client
-      client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
+      c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_authorization({ name: name }) do |response, operation|
+      c.get_authorization({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_authorization name: name do |response, operation|
+      c.get_authorization name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_authorization ::Google::Cloud::GSuiteAddOns::V1::GetAuthorizationRequest.new(name: name) do |response, operation|
+      c.get_authorization ::Google::Cloud::GSuiteAddOns::V1::GetAuthorizationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_authorization({ name: name }, grpc_options) do |response, operation|
+      c.get_authorization({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_authorization(::Google::Cloud::GSuiteAddOns::V1::GetAuthorizationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_authorization(::Google::Cloud::GSuiteAddOns::V1::GetAuthorizationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
+      c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }) do |response, operation|
+      c.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_deployment parent: parent, deployment_id: deployment_id, deployment: deployment do |response, operation|
+      c.create_deployment parent: parent, deployment_id: deployment_id, deployment: deployment do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_deployment ::Google::Cloud::GSuiteAddOns::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment) do |response, operation|
+      c.create_deployment ::Google::Cloud::GSuiteAddOns::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }, grpc_options) do |response, operation|
+      c.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_deployment(::Google::Cloud::GSuiteAddOns::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment), grpc_options) do |response, operation|
+      c.create_deployment(::Google::Cloud::GSuiteAddOns::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -202,36 +202,36 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, replace_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
+      c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.replace_deployment({ deployment: deployment }) do |response, operation|
+      c.replace_deployment({ deployment: deployment }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.replace_deployment deployment: deployment do |response, operation|
+      c.replace_deployment deployment: deployment do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.replace_deployment ::Google::Cloud::GSuiteAddOns::V1::ReplaceDeploymentRequest.new(deployment: deployment) do |response, operation|
+      c.replace_deployment ::Google::Cloud::GSuiteAddOns::V1::ReplaceDeploymentRequest.new(deployment: deployment) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.replace_deployment({ deployment: deployment }, grpc_options) do |response, operation|
+      c.replace_deployment({ deployment: deployment }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.replace_deployment(::Google::Cloud::GSuiteAddOns::V1::ReplaceDeploymentRequest.new(deployment: deployment), grpc_options) do |response, operation|
+      c.replace_deployment(::Google::Cloud::GSuiteAddOns::V1::ReplaceDeploymentRequest.new(deployment: deployment), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -260,36 +260,36 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
+      c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_deployment({ name: name }) do |response, operation|
+      c.get_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_deployment name: name do |response, operation|
+      c.get_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_deployment ::Google::Cloud::GSuiteAddOns::V1::GetDeploymentRequest.new(name: name) do |response, operation|
+      c.get_deployment ::Google::Cloud::GSuiteAddOns::V1::GetDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_deployment({ name: name }, grpc_options) do |response, operation|
+      c.get_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_deployment(::Google::Cloud::GSuiteAddOns::V1::GetDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_deployment(::Google::Cloud::GSuiteAddOns::V1::GetDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -322,40 +322,40 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_deployments_client_stub do
       # Create client
-      client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
+      c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_deployments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_deployments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_deployments ::Google::Cloud::GSuiteAddOns::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_deployments ::Google::Cloud::GSuiteAddOns::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_deployments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_deployments(::Google::Cloud::GSuiteAddOns::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_deployments(::Google::Cloud::GSuiteAddOns::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -387,36 +387,36 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
+      c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_deployment({ name: name, etag: etag }) do |response, operation|
+      c.delete_deployment({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_deployment name: name, etag: etag do |response, operation|
+      c.delete_deployment name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_deployment ::Google::Cloud::GSuiteAddOns::V1::DeleteDeploymentRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_deployment ::Google::Cloud::GSuiteAddOns::V1::DeleteDeploymentRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_deployment({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_deployment({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_deployment(::Google::Cloud::GSuiteAddOns::V1::DeleteDeploymentRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_deployment(::Google::Cloud::GSuiteAddOns::V1::DeleteDeploymentRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -445,36 +445,36 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, install_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
+      c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.install_deployment({ name: name }) do |response, operation|
+      c.install_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.install_deployment name: name do |response, operation|
+      c.install_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.install_deployment ::Google::Cloud::GSuiteAddOns::V1::InstallDeploymentRequest.new(name: name) do |response, operation|
+      c.install_deployment ::Google::Cloud::GSuiteAddOns::V1::InstallDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.install_deployment({ name: name }, grpc_options) do |response, operation|
+      c.install_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.install_deployment(::Google::Cloud::GSuiteAddOns::V1::InstallDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.install_deployment(::Google::Cloud::GSuiteAddOns::V1::InstallDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -503,36 +503,36 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, uninstall_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
+      c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.uninstall_deployment({ name: name }) do |response, operation|
+      c.uninstall_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.uninstall_deployment name: name do |response, operation|
+      c.uninstall_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.uninstall_deployment ::Google::Cloud::GSuiteAddOns::V1::UninstallDeploymentRequest.new(name: name) do |response, operation|
+      c.uninstall_deployment ::Google::Cloud::GSuiteAddOns::V1::UninstallDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.uninstall_deployment({ name: name }, grpc_options) do |response, operation|
+      c.uninstall_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.uninstall_deployment(::Google::Cloud::GSuiteAddOns::V1::UninstallDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.uninstall_deployment(::Google::Cloud::GSuiteAddOns::V1::UninstallDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -561,36 +561,36 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_install_status_client_stub do
       # Create client
-      client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
+      c = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_install_status({ name: name }) do |response, operation|
+      c.get_install_status({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_install_status name: name do |response, operation|
+      c.get_install_status name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_install_status ::Google::Cloud::GSuiteAddOns::V1::GetInstallStatusRequest.new(name: name) do |response, operation|
+      c.get_install_status ::Google::Cloud::GSuiteAddOns::V1::GetInstallStatusRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_install_status({ name: name }, grpc_options) do |response, operation|
+      c.get_install_status({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_install_status(::Google::Cloud::GSuiteAddOns::V1::GetInstallStatusRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_install_status(::Google::Cloud::GSuiteAddOns::V1::GetInstallStatusRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

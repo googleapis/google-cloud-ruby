@@ -90,40 +90,40 @@ class ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::ClientT
 
     Gapic::ServiceStub.stub :new, list_clusters_client_stub do
       # Create client
-      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+      c = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_clusters ::Google::Cloud::HypercomputeCluster::V1beta::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_clusters ::Google::Cloud::HypercomputeCluster::V1beta::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_clusters(::Google::Cloud::HypercomputeCluster::V1beta::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_clusters(::Google::Cloud::HypercomputeCluster::V1beta::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::ClientT
 
     Gapic::ServiceStub.stub :new, get_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+      c = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_cluster({ name: name }) do |response, operation|
+      c.get_cluster({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_cluster name: name do |response, operation|
+      c.get_cluster name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_cluster ::Google::Cloud::HypercomputeCluster::V1beta::GetClusterRequest.new(name: name) do |response, operation|
+      c.get_cluster ::Google::Cloud::HypercomputeCluster::V1beta::GetClusterRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_cluster({ name: name }, grpc_options) do |response, operation|
+      c.get_cluster({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_cluster(::Google::Cloud::HypercomputeCluster::V1beta::GetClusterRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_cluster(::Google::Cloud::HypercomputeCluster::V1beta::GetClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::ClientT
 
     Gapic::ServiceStub.stub :new, create_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+      c = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }) do |response, operation|
+      c.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_cluster parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id do |response, operation|
+      c.create_cluster parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_cluster ::Google::Cloud::HypercomputeCluster::V1beta::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id) do |response, operation|
+      c.create_cluster ::Google::Cloud::HypercomputeCluster::V1beta::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_cluster(::Google::Cloud::HypercomputeCluster::V1beta::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
+      c.create_cluster(::Google::Cloud::HypercomputeCluster::V1beta::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::ClientT
 
     Gapic::ServiceStub.stub :new, update_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+      c = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_cluster({ cluster: cluster, update_mask: update_mask, request_id: request_id }) do |response, operation|
+      c.update_cluster({ cluster: cluster, update_mask: update_mask, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_cluster cluster: cluster, update_mask: update_mask, request_id: request_id do |response, operation|
+      c.update_cluster cluster: cluster, update_mask: update_mask, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_cluster ::Google::Cloud::HypercomputeCluster::V1beta::UpdateClusterRequest.new(cluster: cluster, update_mask: update_mask, request_id: request_id) do |response, operation|
+      c.update_cluster ::Google::Cloud::HypercomputeCluster::V1beta::UpdateClusterRequest.new(cluster: cluster, update_mask: update_mask, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_cluster({ cluster: cluster, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_cluster({ cluster: cluster, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_cluster(::Google::Cloud::HypercomputeCluster::V1beta::UpdateClusterRequest.new(cluster: cluster, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+      c.update_cluster(::Google::Cloud::HypercomputeCluster::V1beta::UpdateClusterRequest.new(cluster: cluster, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::ClientT
 
     Gapic::ServiceStub.stub :new, delete_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+      c = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_cluster({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_cluster({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_cluster name: name, request_id: request_id do |response, operation|
+      c.delete_cluster name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_cluster ::Google::Cloud::HypercomputeCluster::V1beta::DeleteClusterRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_cluster ::Google::Cloud::HypercomputeCluster::V1beta::DeleteClusterRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_cluster({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_cluster({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_cluster(::Google::Cloud::HypercomputeCluster::V1beta::DeleteClusterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_cluster(::Google::Cloud::HypercomputeCluster::V1beta::DeleteClusterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
