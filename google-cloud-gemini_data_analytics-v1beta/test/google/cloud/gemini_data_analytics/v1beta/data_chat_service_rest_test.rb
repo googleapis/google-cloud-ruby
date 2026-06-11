@@ -104,32 +104,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Clien
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::ServiceStub.stub :transcode_chat_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, chat_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.chat({ inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model }) do |_result, response|
+        c.chat({ inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.chat inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model do |_result, response|
+        c.chat inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.chat ::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model) do |_result, response|
+        c.chat ::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.chat({ inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model }, call_options) do |_result, response|
+        c.chat({ inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.chat(::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model), call_options) do |_result, response|
+        c.chat(::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
@@ -161,32 +161,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Clien
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::ServiceStub.stub :transcode_create_conversation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_conversation_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_conversation({ parent: parent, conversation_id: conversation_id, conversation: conversation, request_id: request_id }) do |_result, response|
+        c.create_conversation({ parent: parent, conversation_id: conversation_id, conversation: conversation, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_conversation parent: parent, conversation_id: conversation_id, conversation: conversation, request_id: request_id do |_result, response|
+        c.create_conversation parent: parent, conversation_id: conversation_id, conversation: conversation, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_conversation ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateConversationRequest.new(parent: parent, conversation_id: conversation_id, conversation: conversation, request_id: request_id) do |_result, response|
+        c.create_conversation ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateConversationRequest.new(parent: parent, conversation_id: conversation_id, conversation: conversation, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_conversation({ parent: parent, conversation_id: conversation_id, conversation: conversation, request_id: request_id }, call_options) do |_result, response|
+        c.create_conversation({ parent: parent, conversation_id: conversation_id, conversation: conversation, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_conversation(::Google::Cloud::GeminiDataAnalytics::V1beta::CreateConversationRequest.new(parent: parent, conversation_id: conversation_id, conversation: conversation, request_id: request_id), call_options) do |_result, response|
+        c.create_conversation(::Google::Cloud::GeminiDataAnalytics::V1beta::CreateConversationRequest.new(parent: parent, conversation_id: conversation_id, conversation: conversation, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -215,32 +215,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Clien
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::ServiceStub.stub :transcode_delete_conversation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_conversation_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_conversation({ name: name }) do |_result, response|
+        c.delete_conversation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_conversation name: name do |_result, response|
+        c.delete_conversation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_conversation ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest.new(name: name) do |_result, response|
+        c.delete_conversation ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_conversation({ name: name }, call_options) do |_result, response|
+        c.delete_conversation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_conversation(::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest.new(name: name), call_options) do |_result, response|
+        c.delete_conversation(::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -269,32 +269,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Clien
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::ServiceStub.stub :transcode_get_conversation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_conversation_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_conversation({ name: name }) do |_result, response|
+        c.get_conversation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_conversation name: name do |_result, response|
+        c.get_conversation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_conversation ::Google::Cloud::GeminiDataAnalytics::V1beta::GetConversationRequest.new(name: name) do |_result, response|
+        c.get_conversation ::Google::Cloud::GeminiDataAnalytics::V1beta::GetConversationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_conversation({ name: name }, call_options) do |_result, response|
+        c.get_conversation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_conversation(::Google::Cloud::GeminiDataAnalytics::V1beta::GetConversationRequest.new(name: name), call_options) do |_result, response|
+        c.get_conversation(::Google::Cloud::GeminiDataAnalytics::V1beta::GetConversationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -326,32 +326,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Clien
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::ServiceStub.stub :transcode_list_conversations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_conversations_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_conversations ::Google::Cloud::GeminiDataAnalytics::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_conversations ::Google::Cloud::GeminiDataAnalytics::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_conversations(::Google::Cloud::GeminiDataAnalytics::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_conversations(::Google::Cloud::GeminiDataAnalytics::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -383,32 +383,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Clien
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::ServiceStub.stub :transcode_list_messages_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_messages_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_messages parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_messages parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_messages ::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_messages ::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_messages(::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_messages(::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -440,32 +440,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Clien
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::ServiceStub.stub :transcode_query_data_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_data_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_data({ parent: parent, prompt: prompt, context: context, generation_options: generation_options }) do |_result, response|
+        c.query_data({ parent: parent, prompt: prompt, context: context, generation_options: generation_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_data parent: parent, prompt: prompt, context: context, generation_options: generation_options do |_result, response|
+        c.query_data parent: parent, prompt: prompt, context: context, generation_options: generation_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_data ::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest.new(parent: parent, prompt: prompt, context: context, generation_options: generation_options) do |_result, response|
+        c.query_data ::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest.new(parent: parent, prompt: prompt, context: context, generation_options: generation_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_data({ parent: parent, prompt: prompt, context: context, generation_options: generation_options }, call_options) do |_result, response|
+        c.query_data({ parent: parent, prompt: prompt, context: context, generation_options: generation_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_data(::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest.new(parent: parent, prompt: prompt, context: context, generation_options: generation_options), call_options) do |_result, response|
+        c.query_data(::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest.new(parent: parent, prompt: prompt, context: context, generation_options: generation_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

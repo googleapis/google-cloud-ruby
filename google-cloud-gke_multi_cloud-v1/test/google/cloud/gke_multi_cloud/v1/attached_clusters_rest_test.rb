@@ -100,32 +100,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ClientTest < M
     ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ServiceStub.stub :transcode_create_attached_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_attached_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_attached_cluster({ parent: parent, attached_cluster: attached_cluster, attached_cluster_id: attached_cluster_id, validate_only: validate_only }) do |_result, response|
+        c.create_attached_cluster({ parent: parent, attached_cluster: attached_cluster, attached_cluster_id: attached_cluster_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_attached_cluster parent: parent, attached_cluster: attached_cluster, attached_cluster_id: attached_cluster_id, validate_only: validate_only do |_result, response|
+        c.create_attached_cluster parent: parent, attached_cluster: attached_cluster, attached_cluster_id: attached_cluster_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_attached_cluster ::Google::Cloud::GkeMultiCloud::V1::CreateAttachedClusterRequest.new(parent: parent, attached_cluster: attached_cluster, attached_cluster_id: attached_cluster_id, validate_only: validate_only) do |_result, response|
+        c.create_attached_cluster ::Google::Cloud::GkeMultiCloud::V1::CreateAttachedClusterRequest.new(parent: parent, attached_cluster: attached_cluster, attached_cluster_id: attached_cluster_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_attached_cluster({ parent: parent, attached_cluster: attached_cluster, attached_cluster_id: attached_cluster_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_attached_cluster({ parent: parent, attached_cluster: attached_cluster, attached_cluster_id: attached_cluster_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_attached_cluster(::Google::Cloud::GkeMultiCloud::V1::CreateAttachedClusterRequest.new(parent: parent, attached_cluster: attached_cluster, attached_cluster_id: attached_cluster_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_attached_cluster(::Google::Cloud::GkeMultiCloud::V1::CreateAttachedClusterRequest.new(parent: parent, attached_cluster: attached_cluster, attached_cluster_id: attached_cluster_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ClientTest < M
     ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ServiceStub.stub :transcode_update_attached_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_attached_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_attached_cluster({ attached_cluster: attached_cluster, validate_only: validate_only, update_mask: update_mask }) do |_result, response|
+        c.update_attached_cluster({ attached_cluster: attached_cluster, validate_only: validate_only, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_attached_cluster attached_cluster: attached_cluster, validate_only: validate_only, update_mask: update_mask do |_result, response|
+        c.update_attached_cluster attached_cluster: attached_cluster, validate_only: validate_only, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_attached_cluster ::Google::Cloud::GkeMultiCloud::V1::UpdateAttachedClusterRequest.new(attached_cluster: attached_cluster, validate_only: validate_only, update_mask: update_mask) do |_result, response|
+        c.update_attached_cluster ::Google::Cloud::GkeMultiCloud::V1::UpdateAttachedClusterRequest.new(attached_cluster: attached_cluster, validate_only: validate_only, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_attached_cluster({ attached_cluster: attached_cluster, validate_only: validate_only, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_attached_cluster({ attached_cluster: attached_cluster, validate_only: validate_only, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_attached_cluster(::Google::Cloud::GkeMultiCloud::V1::UpdateAttachedClusterRequest.new(attached_cluster: attached_cluster, validate_only: validate_only, update_mask: update_mask), call_options) do |_result, response|
+        c.update_attached_cluster(::Google::Cloud::GkeMultiCloud::V1::UpdateAttachedClusterRequest.new(attached_cluster: attached_cluster, validate_only: validate_only, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -215,32 +215,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ClientTest < M
     ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ServiceStub.stub :transcode_import_attached_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_attached_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_attached_cluster({ parent: parent, validate_only: validate_only, fleet_membership: fleet_membership, platform_version: platform_version, distribution: distribution, proxy_config: proxy_config }) do |_result, response|
+        c.import_attached_cluster({ parent: parent, validate_only: validate_only, fleet_membership: fleet_membership, platform_version: platform_version, distribution: distribution, proxy_config: proxy_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_attached_cluster parent: parent, validate_only: validate_only, fleet_membership: fleet_membership, platform_version: platform_version, distribution: distribution, proxy_config: proxy_config do |_result, response|
+        c.import_attached_cluster parent: parent, validate_only: validate_only, fleet_membership: fleet_membership, platform_version: platform_version, distribution: distribution, proxy_config: proxy_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_attached_cluster ::Google::Cloud::GkeMultiCloud::V1::ImportAttachedClusterRequest.new(parent: parent, validate_only: validate_only, fleet_membership: fleet_membership, platform_version: platform_version, distribution: distribution, proxy_config: proxy_config) do |_result, response|
+        c.import_attached_cluster ::Google::Cloud::GkeMultiCloud::V1::ImportAttachedClusterRequest.new(parent: parent, validate_only: validate_only, fleet_membership: fleet_membership, platform_version: platform_version, distribution: distribution, proxy_config: proxy_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_attached_cluster({ parent: parent, validate_only: validate_only, fleet_membership: fleet_membership, platform_version: platform_version, distribution: distribution, proxy_config: proxy_config }, call_options) do |_result, response|
+        c.import_attached_cluster({ parent: parent, validate_only: validate_only, fleet_membership: fleet_membership, platform_version: platform_version, distribution: distribution, proxy_config: proxy_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_attached_cluster(::Google::Cloud::GkeMultiCloud::V1::ImportAttachedClusterRequest.new(parent: parent, validate_only: validate_only, fleet_membership: fleet_membership, platform_version: platform_version, distribution: distribution, proxy_config: proxy_config), call_options) do |_result, response|
+        c.import_attached_cluster(::Google::Cloud::GkeMultiCloud::V1::ImportAttachedClusterRequest.new(parent: parent, validate_only: validate_only, fleet_membership: fleet_membership, platform_version: platform_version, distribution: distribution, proxy_config: proxy_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -269,32 +269,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ClientTest < M
     ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ServiceStub.stub :transcode_get_attached_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_attached_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_attached_cluster({ name: name }) do |_result, response|
+        c.get_attached_cluster({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_attached_cluster name: name do |_result, response|
+        c.get_attached_cluster name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_attached_cluster ::Google::Cloud::GkeMultiCloud::V1::GetAttachedClusterRequest.new(name: name) do |_result, response|
+        c.get_attached_cluster ::Google::Cloud::GkeMultiCloud::V1::GetAttachedClusterRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_attached_cluster({ name: name }, call_options) do |_result, response|
+        c.get_attached_cluster({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_attached_cluster(::Google::Cloud::GkeMultiCloud::V1::GetAttachedClusterRequest.new(name: name), call_options) do |_result, response|
+        c.get_attached_cluster(::Google::Cloud::GkeMultiCloud::V1::GetAttachedClusterRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -325,32 +325,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ClientTest < M
     ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ServiceStub.stub :transcode_list_attached_clusters_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_attached_clusters_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_attached_clusters({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_attached_clusters({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_attached_clusters parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_attached_clusters parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_attached_clusters ::Google::Cloud::GkeMultiCloud::V1::ListAttachedClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_attached_clusters ::Google::Cloud::GkeMultiCloud::V1::ListAttachedClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_attached_clusters({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_attached_clusters({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_attached_clusters(::Google::Cloud::GkeMultiCloud::V1::ListAttachedClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_attached_clusters(::Google::Cloud::GkeMultiCloud::V1::ListAttachedClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -383,32 +383,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ClientTest < M
     ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ServiceStub.stub :transcode_delete_attached_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_attached_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_attached_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }) do |_result, response|
+        c.delete_attached_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_attached_cluster name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag do |_result, response|
+        c.delete_attached_cluster name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_attached_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAttachedClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag) do |_result, response|
+        c.delete_attached_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAttachedClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_attached_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }, call_options) do |_result, response|
+        c.delete_attached_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_attached_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAttachedClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag), call_options) do |_result, response|
+        c.delete_attached_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAttachedClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -437,32 +437,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ClientTest < M
     ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ServiceStub.stub :transcode_get_attached_server_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_attached_server_config_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_attached_server_config({ name: name }) do |_result, response|
+        c.get_attached_server_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_attached_server_config name: name do |_result, response|
+        c.get_attached_server_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_attached_server_config ::Google::Cloud::GkeMultiCloud::V1::GetAttachedServerConfigRequest.new(name: name) do |_result, response|
+        c.get_attached_server_config ::Google::Cloud::GkeMultiCloud::V1::GetAttachedServerConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_attached_server_config({ name: name }, call_options) do |_result, response|
+        c.get_attached_server_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_attached_server_config(::Google::Cloud::GkeMultiCloud::V1::GetAttachedServerConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_attached_server_config(::Google::Cloud::GkeMultiCloud::V1::GetAttachedServerConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -494,32 +494,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ClientTest < M
     ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ServiceStub.stub :transcode_generate_attached_cluster_install_manifest_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_attached_cluster_install_manifest_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_attached_cluster_install_manifest({ parent: parent, attached_cluster_id: attached_cluster_id, platform_version: platform_version, proxy_config: proxy_config }) do |_result, response|
+        c.generate_attached_cluster_install_manifest({ parent: parent, attached_cluster_id: attached_cluster_id, platform_version: platform_version, proxy_config: proxy_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_attached_cluster_install_manifest parent: parent, attached_cluster_id: attached_cluster_id, platform_version: platform_version, proxy_config: proxy_config do |_result, response|
+        c.generate_attached_cluster_install_manifest parent: parent, attached_cluster_id: attached_cluster_id, platform_version: platform_version, proxy_config: proxy_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_attached_cluster_install_manifest ::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterInstallManifestRequest.new(parent: parent, attached_cluster_id: attached_cluster_id, platform_version: platform_version, proxy_config: proxy_config) do |_result, response|
+        c.generate_attached_cluster_install_manifest ::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterInstallManifestRequest.new(parent: parent, attached_cluster_id: attached_cluster_id, platform_version: platform_version, proxy_config: proxy_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_attached_cluster_install_manifest({ parent: parent, attached_cluster_id: attached_cluster_id, platform_version: platform_version, proxy_config: proxy_config }, call_options) do |_result, response|
+        c.generate_attached_cluster_install_manifest({ parent: parent, attached_cluster_id: attached_cluster_id, platform_version: platform_version, proxy_config: proxy_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_attached_cluster_install_manifest(::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterInstallManifestRequest.new(parent: parent, attached_cluster_id: attached_cluster_id, platform_version: platform_version, proxy_config: proxy_config), call_options) do |_result, response|
+        c.generate_attached_cluster_install_manifest(::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterInstallManifestRequest.new(parent: parent, attached_cluster_id: attached_cluster_id, platform_version: platform_version, proxy_config: proxy_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -556,32 +556,32 @@ class ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ClientTest < M
     ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ServiceStub.stub :transcode_generate_attached_cluster_agent_token_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_attached_cluster_agent_token_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_attached_cluster_agent_token({ attached_cluster: attached_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }) do |_result, response|
+        c.generate_attached_cluster_agent_token({ attached_cluster: attached_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_attached_cluster_agent_token attached_cluster: attached_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options do |_result, response|
+        c.generate_attached_cluster_agent_token attached_cluster: attached_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_attached_cluster_agent_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenRequest.new(attached_cluster: attached_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options) do |_result, response|
+        c.generate_attached_cluster_agent_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenRequest.new(attached_cluster: attached_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_attached_cluster_agent_token({ attached_cluster: attached_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }, call_options) do |_result, response|
+        c.generate_attached_cluster_agent_token({ attached_cluster: attached_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_attached_cluster_agent_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenRequest.new(attached_cluster: attached_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options), call_options) do |_result, response|
+        c.generate_attached_cluster_agent_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenRequest.new(attached_cluster: attached_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
