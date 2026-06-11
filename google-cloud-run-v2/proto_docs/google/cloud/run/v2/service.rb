@@ -95,6 +95,10 @@ module Google
         #   @return [::String]
         #     A token indicating there are more items than page_size. Use it in the next
         #     ListServices request to continue.
+        # @!attribute [r] unreachable
+        #   @return [::Array<::String>]
+        #     Output only. For global requests, returns the list of regions that could
+        #     not be reached within the deadline.
         class ListServicesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -137,9 +141,9 @@ module Google
         # decisions such as rollout policy and team resource ownership.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The fully qualified name of this Service. In CreateServiceRequest, this
-        #     field is ignored, and instead composed from CreateServiceRequest.parent and
-        #     CreateServiceRequest.service_id.
+        #     Identifier. The fully qualified name of this Service. In
+        #     CreateServiceRequest, this field is ignored, and instead composed from
+        #     CreateServiceRequest.parent and CreateServiceRequest.service_id.
         #
         #     Format:
         #     projects/\\{project}/locations/\\{location}/services/\\{service_id}
@@ -244,8 +248,7 @@ module Google
         # @!attribute [rw] invoker_iam_disabled
         #   @return [::Boolean]
         #     Optional. Disables IAM permission check for run.routes.invoke for callers
-        #     of this service. This feature is available by invitation only. For more
-        #     information, visit
+        #     of this service. For more information, visit
         #     https://cloud.google.com/run/docs/securing/managing-access#invoker_check.
         # @!attribute [rw] default_uri_disabled
         #   @return [::Boolean]
@@ -253,6 +256,12 @@ module Google
         # @!attribute [r] urls
         #   @return [::Array<::String>]
         #     Output only. All URLs serving traffic for this Service.
+        # @!attribute [rw] iap_enabled
+        #   @return [::Boolean]
+        #     Optional. IAP settings on the Service.
+        # @!attribute [rw] multi_region_settings
+        #   @return [::Google::Cloud::Run::V2::Service::MultiRegionSettings]
+        #     Optional. Settings for multi-region deployment.
         # @!attribute [rw] custom_audiences
         #   @return [::Array<::String>]
         #     One or more custom audiences that you want this service to support. Specify
@@ -300,6 +309,10 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [r] threat_detection_enabled
+        #   @return [::Boolean]
+        #     Output only. True if Cloud Run Threat Detection monitoring is enabled for
+        #     the parent project of this Service.
         # @!attribute [rw] build_config
         #   @return [::Google::Cloud::Run::V2::BuildConfig]
         #     Optional. Configuration for building a Cloud Run function.
@@ -327,13 +340,25 @@ module Google
         #     `latest_ready_revision` will have the state of the last serving revision,
         #     or empty for newly created Services. Additional information on the failure
         #     can be found in `terminal_condition` and `conditions`.
-        # @!attribute [r] etag
+        # @!attribute [rw] etag
         #   @return [::String]
-        #     Output only. A system-generated fingerprint for this version of the
+        #     Optional. A system-generated fingerprint for this version of the
         #     resource. May be used to detect modification conflict during updates.
         class Service
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Settings for multi-region deployment.
+          # @!attribute [rw] regions
+          #   @return [::Array<::String>]
+          #     Required. List of regions to deploy to, including primary region.
+          # @!attribute [rw] multi_region_id
+          #   @return [::String]
+          #     Optional. System-generated unique id for the multi-region Service.
+          class MultiRegionSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]

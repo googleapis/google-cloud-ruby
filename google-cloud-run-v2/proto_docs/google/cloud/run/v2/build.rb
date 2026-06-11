@@ -59,6 +59,17 @@ module Google
         # @!attribute [rw] tags
         #   @return [::Array<::String>]
         #     Optional. Additional tags to annotate the build.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     Optional. The machine type from default pool to use for the build. If left
+        #     blank, cloudbuild will use a sensible default. Currently only E2_HIGHCPU_8
+        #     is supported. If worker_pool is set, this field will be ignored.
+        # @!attribute [rw] release_track
+        #   @return [::Google::Api::LaunchStage]
+        #     Optional. The release track of the client that initiated the build request.
+        # @!attribute [rw] client
+        #   @return [::String]
+        #     Optional. The client that initiated the build request.
         class SubmitBuildRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

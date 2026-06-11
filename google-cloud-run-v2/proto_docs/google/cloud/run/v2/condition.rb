@@ -213,6 +213,9 @@ module Google
 
             # The execution was deleted.
             DELETED = 5
+
+            # A delayed execution is waiting for a start time.
+            DELAYED_START_PENDING = 6
           end
         end
       end

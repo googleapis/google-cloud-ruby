@@ -82,36 +82,36 @@ class ::Google::Cloud::Run::V2::Tasks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_task_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::Tasks::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::Tasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_task({ name: name }) do |response, operation|
+      c.get_task({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_task name: name do |response, operation|
+      c.get_task name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_task ::Google::Cloud::Run::V2::GetTaskRequest.new(name: name) do |response, operation|
+      c.get_task ::Google::Cloud::Run::V2::GetTaskRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_task({ name: name }, grpc_options) do |response, operation|
+      c.get_task({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_task(::Google::Cloud::Run::V2::GetTaskRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_task(::Google::Cloud::Run::V2::GetTaskRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Cloud::Run::V2::Tasks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_tasks_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::Tasks::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::Tasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
+      c.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tasks parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
+      c.list_tasks parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tasks ::Google::Cloud::Run::V2::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
+      c.list_tasks ::Google::Cloud::Run::V2::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tasks(::Google::Cloud::Run::V2::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_tasks(::Google::Cloud::Run::V2::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
