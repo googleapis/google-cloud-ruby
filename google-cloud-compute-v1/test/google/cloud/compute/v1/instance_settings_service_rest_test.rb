@@ -98,32 +98,32 @@ class ::Google::Cloud::Compute::V1::InstanceSettingsService::Rest::ClientTest < 
     ::Google::Cloud::Compute::V1::InstanceSettingsService::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::InstanceSettingsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::InstanceSettingsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ project: project, zone: zone }) do |_result, response|
+        c.get({ project: project, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get project: project, zone: zone do |_result, response|
+        c.get project: project, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetInstanceSettingRequest.new(project: project, zone: zone) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetInstanceSettingRequest.new(project: project, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ project: project, zone: zone }, call_options) do |_result, response|
+        c.get({ project: project, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetInstanceSettingRequest.new(project: project, zone: zone), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetInstanceSettingRequest.new(project: project, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Compute::V1::InstanceSettingsService::Rest::ClientTest < 
     ::Google::Cloud::Compute::V1::InstanceSettingsService::Rest::ServiceStub.stub :transcode_patch_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, patch_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::InstanceSettingsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::InstanceSettingsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.patch({ instance_settings_resource: instance_settings_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone }) do |_result, response|
+        c.patch({ instance_settings_resource: instance_settings_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.patch instance_settings_resource: instance_settings_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone do |_result, response|
+        c.patch instance_settings_resource: instance_settings_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.patch ::Google::Cloud::Compute::V1::PatchInstanceSettingRequest.new(instance_settings_resource: instance_settings_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone) do |_result, response|
+        c.patch ::Google::Cloud::Compute::V1::PatchInstanceSettingRequest.new(instance_settings_resource: instance_settings_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.patch({ instance_settings_resource: instance_settings_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone }, call_options) do |_result, response|
+        c.patch({ instance_settings_resource: instance_settings_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.patch(::Google::Cloud::Compute::V1::PatchInstanceSettingRequest.new(instance_settings_resource: instance_settings_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone), call_options) do |_result, response|
+        c.patch(::Google::Cloud::Compute::V1::PatchInstanceSettingRequest.new(instance_settings_resource: instance_settings_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

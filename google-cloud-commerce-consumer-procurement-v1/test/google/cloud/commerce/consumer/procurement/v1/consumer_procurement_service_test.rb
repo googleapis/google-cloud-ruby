@@ -88,40 +88,40 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
 
     Gapic::ServiceStub.stub :new, place_order_client_stub do
       # Create client
-      client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new do |config|
+      c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.place_order({ parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id }) do |response, operation|
+      c.place_order({ parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.place_order parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id do |response, operation|
+      c.place_order parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.place_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::PlaceOrderRequest.new(parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id) do |response, operation|
+      c.place_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::PlaceOrderRequest.new(parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.place_order({ parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id }, grpc_options) do |response, operation|
+      c.place_order({ parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.place_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::PlaceOrderRequest.new(parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id), grpc_options) do |response, operation|
+      c.place_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::PlaceOrderRequest.new(parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
 
     Gapic::ServiceStub.stub :new, get_order_client_stub do
       # Create client
-      client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new do |config|
+      c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_order({ name: name }) do |response, operation|
+      c.get_order({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_order name: name do |response, operation|
+      c.get_order name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::GetOrderRequest.new(name: name) do |response, operation|
+      c.get_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::GetOrderRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_order({ name: name }, grpc_options) do |response, operation|
+      c.get_order({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::GetOrderRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::GetOrderRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
 
     Gapic::ServiceStub.stub :new, list_orders_client_stub do
       # Create client
-      client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new do |config|
+      c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_orders parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_orders parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_orders ::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_orders ::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_orders(::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_orders(::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
 
     Gapic::ServiceStub.stub :new, modify_order_client_stub do
       # Create client
-      client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new do |config|
+      c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.modify_order({ name: name, modifications: modifications, display_name: display_name, etag: etag }) do |response, operation|
+      c.modify_order({ name: name, modifications: modifications, display_name: display_name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.modify_order name: name, modifications: modifications, display_name: display_name, etag: etag do |response, operation|
+      c.modify_order name: name, modifications: modifications, display_name: display_name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.modify_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest.new(name: name, modifications: modifications, display_name: display_name, etag: etag) do |response, operation|
+      c.modify_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest.new(name: name, modifications: modifications, display_name: display_name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.modify_order({ name: name, modifications: modifications, display_name: display_name, etag: etag }, grpc_options) do |response, operation|
+      c.modify_order({ name: name, modifications: modifications, display_name: display_name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.modify_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest.new(name: name, modifications: modifications, display_name: display_name, etag: etag), grpc_options) do |response, operation|
+      c.modify_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest.new(name: name, modifications: modifications, display_name: display_name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -351,40 +351,40 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
 
     Gapic::ServiceStub.stub :new, cancel_order_client_stub do
       # Create client
-      client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new do |config|
+      c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_order({ name: name, etag: etag, cancellation_policy: cancellation_policy }) do |response, operation|
+      c.cancel_order({ name: name, etag: etag, cancellation_policy: cancellation_policy }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_order name: name, etag: etag, cancellation_policy: cancellation_policy do |response, operation|
+      c.cancel_order name: name, etag: etag, cancellation_policy: cancellation_policy do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest.new(name: name, etag: etag, cancellation_policy: cancellation_policy) do |response, operation|
+      c.cancel_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest.new(name: name, etag: etag, cancellation_policy: cancellation_policy) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_order({ name: name, etag: etag, cancellation_policy: cancellation_policy }, grpc_options) do |response, operation|
+      c.cancel_order({ name: name, etag: etag, cancellation_policy: cancellation_policy }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest.new(name: name, etag: etag, cancellation_policy: cancellation_policy), grpc_options) do |response, operation|
+      c.cancel_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest.new(name: name, etag: etag, cancellation_policy: cancellation_policy), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
