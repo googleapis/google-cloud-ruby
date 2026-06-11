@@ -86,40 +86,40 @@ class ::Google::Shopping::Merchant::Quota::V1::QuotaService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_quota_groups_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Quota::V1::QuotaService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Quota::V1::QuotaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_quota_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_quota_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_quota_groups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_quota_groups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_quota_groups ::Google::Shopping::Merchant::Quota::V1::ListQuotaGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_quota_groups ::Google::Shopping::Merchant::Quota::V1::ListQuotaGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_quota_groups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_quota_groups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_quota_groups(::Google::Shopping::Merchant::Quota::V1::ListQuotaGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_quota_groups(::Google::Shopping::Merchant::Quota::V1::ListQuotaGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

@@ -100,32 +100,32 @@ class ::Google::Shopping::Merchant::Reports::V1::ReportService::Rest::ClientTest
     ::Google::Shopping::Merchant::Reports::V1::ReportService::Rest::ServiceStub.stub :transcode_search_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Reports::V1::ReportService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Reports::V1::ReportService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.search({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search parent: parent, query: query, page_size: page_size, page_token: page_token do |_result, response|
+        c.search parent: parent, query: query, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search ::Google::Shopping::Merchant::Reports::V1::SearchRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |_result, response|
+        c.search ::Google::Shopping::Merchant::Reports::V1::SearchRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search({ parent: parent, query: query, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.search({ parent: parent, query: query, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search(::Google::Shopping::Merchant::Reports::V1::SearchRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.search(::Google::Shopping::Merchant::Reports::V1::SearchRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
