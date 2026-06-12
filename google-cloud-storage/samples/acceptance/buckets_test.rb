@@ -237,6 +237,8 @@ describe "Buckets Snippets" do
         end
       end
     end
+
+  end
   describe "storage_bucket_encryption_enforcement_config" do
     bucket_name = random_bucket_name
 

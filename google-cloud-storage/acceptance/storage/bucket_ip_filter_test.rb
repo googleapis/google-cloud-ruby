@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "storage_helper"
-
+require_relative "../storage_helper"
+require 'pry'
 describe Google::Cloud::Storage::Bucket, :storage do
   let(:ip_filter_disabled) do
     {
@@ -33,10 +33,14 @@ describe Google::Cloud::Storage::Bucket, :storage do
     }
   end
 
-  let(:bucket_name) { "#{$bucket_names[2]}-ip-filter" }
+  let(:bucket_name) { "#{$bucket_names.first}-ip-filter" }
 
   it "creates, gets, updates, and deletes a bucket with ip_filter" do
     # Create a bucket with ip_filter
+    puts "*************************Bucket Name**************************"
+    puts bucket_name
+    puts "*************************Bucket Name**************************"
+
     bucket = storage.bucket(bucket_name) ||
       safe_gcs_execute {storage.create_bucket bucket_name, ip_filter: ip_filter_disabled}
 
