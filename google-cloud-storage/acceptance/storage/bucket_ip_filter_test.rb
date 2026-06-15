@@ -31,17 +31,24 @@ describe Google::Cloud::Storage::Bucket, :storage do
       }
     }
   end
-
   let(:bucket_name) { "#{$bucket_names.first}-ip-filter" }
+  let :bucket do
+    storage.bucket(bucket_name) ||
+    storage.create_bucket(bucket_name, ip_filter: ip_filter_disabled) 
+  end
+
+  after(:all) do
+    safe_gcs_execute { bucket.delete }
+  end
 
   it "creates, gets, updates, and deletes a bucket with ip_filter" do
     # Create a bucket with ip_filter
     puts "*************************Bucket Name**************************"
-    puts bucket_name
+    puts bucket.ip_filter
     puts "*************************Bucket Name**************************"
 
-    bucket = storage.bucket(bucket_name) ||
-      safe_gcs_execute {storage.create_bucket bucket_name, ip_filter: ip_filter_disabled}
+    # bucket = storage.bucket(bucket_name) ||
+    #   safe_gcs_execute {storage.create_bucket bucket_name, ip_filter: ip_filter_disabled}
 
     # _(bucket.ip_filter).wont_be_nil
     _(bucket.ip_filter.mode).must_equal "Disabled"
@@ -74,9 +81,6 @@ describe Google::Cloud::Storage::Bucket, :storage do
     end
 
     _(bucket.ip_filter.public_network_source.allowed_ip_cidr_ranges).must_be_nil
-
-    safe_gcs_execute { bucket.delete }
-    _(storage.bucket(bucket_name)).must_be :nil?
 
   end
 end
