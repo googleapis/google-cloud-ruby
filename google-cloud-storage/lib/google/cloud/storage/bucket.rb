@@ -2154,6 +2154,8 @@ module Google
         # @param [Integer] if_metageneration_match Makes the operation conditional
         #   on whether the destination file's current metageneration matches the
         #   given value.
+        # @param [Boolean] delete_source_objects If true, the source objects
+        #   will be deleted after the composition operation is successful.
         #
         # @yield [file] A block yielding a delegate file object for setting the
         #   properties of the destination file.

@@ -803,18 +803,18 @@ describe Google::Cloud::Storage::File, :storage do
     composed.delete
   end
 
-  it "should compose existing files into a new file and delete source files" do
-    uploaded_a = bucket.create_file StringIO.new("a"), "a-delete.txt"
-    uploaded_b = bucket.create_file StringIO.new("b"), "b-delete.txt"
+   it "should compose existing files into a new file and delete source files" do
+    uploaded_a = bucket.create_file StringIO.new("a"), "first_file.txt"
+    uploaded_b = bucket.create_file StringIO.new("b"), "second_file.txt"
 
     composed = try_with_backoff "copying existing file" do
-      bucket.compose [uploaded_a, uploaded_b], "ab-delete.txt", delete_source_objects: true
+      bucket.compose [uploaded_a, uploaded_b], "new_file.txt", delete_source_objects: true
     end
 
-    _(composed.name).must_equal "ab-delete.txt"
+    _(composed.name).must_equal "new_file.txt"
     _(composed.size).must_equal uploaded_a.size + uploaded_b.size
 
-    Tempfile.open ["ab-delete", ".txt"] do |tmpfile|
+    Tempfile.open ["new", ".txt"] do |tmpfile|
       downloaded = composed.download tmpfile
 
       _(File.read(downloaded.path)).must_equal "ab"
@@ -825,7 +825,6 @@ describe Google::Cloud::Storage::File, :storage do
 
     composed.delete
   end
-
   it "should raise when attempting to compose existing files with failing precondition" do
     uploaded_a = bucket.create_file StringIO.new("a"), "a.txt"
     uploaded_b = bucket.create_file StringIO.new("b"), "b.txt"
