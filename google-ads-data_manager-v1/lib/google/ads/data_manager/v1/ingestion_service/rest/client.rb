@@ -480,6 +480,93 @@ module Google
               end
 
               ##
+              # Uploads a list of
+              # {::Google::Ads::DataManager::V1::AdEvent AdEvent} resources to Google
+              # Analytics.
+              #
+              # This feature is only available to accounts on an allowlist.
+              #
+              # @overload ingest_ad_events(request, options = nil)
+              #   Pass arguments to `ingest_ad_events` via a request object, either of type
+              #   {::Google::Ads::DataManager::V1::IngestAdEventsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::DataManager::V1::IngestAdEventsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload ingest_ad_events(ad_events: nil, encryption_info: nil, validate_only: nil)
+              #   Pass arguments to `ingest_ad_events` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param ad_events [::Array<::Google::Ads::DataManager::V1::AdEvent, ::Hash>]
+              #     Required. Required (at least 1). A list of ad events.
+              #   @param encryption_info [::Google::Ads::DataManager::V1::EncryptionInfo, ::Hash]
+              #     Optional. Information about encryption keys which are used to encrypt the
+              #     data.
+              #   @param validate_only [::Boolean]
+              #     Optional. If true, the request is validated, but not executed.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::DataManager::V1::IngestAdEventsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::DataManager::V1::IngestAdEventsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/data_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::DataManager::V1::IngestionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::DataManager::V1::IngestAdEventsRequest.new
+              #
+              #   # Call the ingest_ad_events method.
+              #   result = client.ingest_ad_events request
+              #
+              #   # The returned object is of type Google::Ads::DataManager::V1::IngestAdEventsResponse.
+              #   p result
+              #
+              def ingest_ad_events request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::DataManager::V1::IngestAdEventsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.ingest_ad_events.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::DataManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.ingest_ad_events.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.ingest_ad_events.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ingestion_service_stub.ingest_ad_events request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Gets the status of a request given request id.
               #
               # @overload retrieve_request_status(request, options = nil)
@@ -721,6 +808,11 @@ module Google
                   #
                   attr_reader :ingest_events
                   ##
+                  # RPC-specific configuration for `ingest_ad_events`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :ingest_ad_events
+                  ##
                   # RPC-specific configuration for `retrieve_request_status`
                   # @return [::Gapic::Config::Method]
                   #
@@ -734,6 +826,8 @@ module Google
                     @remove_audience_members = ::Gapic::Config::Method.new remove_audience_members_config
                     ingest_events_config = parent_rpcs.ingest_events if parent_rpcs.respond_to? :ingest_events
                     @ingest_events = ::Gapic::Config::Method.new ingest_events_config
+                    ingest_ad_events_config = parent_rpcs.ingest_ad_events if parent_rpcs.respond_to? :ingest_ad_events
+                    @ingest_ad_events = ::Gapic::Config::Method.new ingest_ad_events_config
                     retrieve_request_status_config = parent_rpcs.retrieve_request_status if parent_rpcs.respond_to? :retrieve_request_status
                     @retrieve_request_status = ::Gapic::Config::Method.new retrieve_request_status_config
 

@@ -162,6 +162,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request to upload ad events.
+        # @!attribute [rw] ad_events
+        #   @return [::Array<::Google::Ads::DataManager::V1::AdEvent>]
+        #     Required. Required (at least 1). A list of ad events.
+        # @!attribute [rw] encryption_info
+        #   @return [::Google::Ads::DataManager::V1::EncryptionInfo]
+        #     Optional. Information about encryption keys which are used to encrypt the
+        #     data.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If true, the request is validated, but not executed.
+        class IngestAdEventsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response from an ad event ingestion operation.
+        class IngestAdEventsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request to get the status of request made to the DM API for a given request
         # ID. Returns a
         # {::Google::Ads::DataManager::V1::RetrieveRequestStatusResponse RetrieveRequestStatusResponse}.

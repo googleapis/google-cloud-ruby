@@ -255,6 +255,62 @@ class ::Google::Ads::DataManager::V1::IngestionService::Rest::ClientTest < Minit
     end
   end
 
+  def test_ingest_ad_events
+    # Create test objects.
+    client_result = ::Google::Ads::DataManager::V1::IngestAdEventsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    ad_events = [{}]
+    encryption_info = {}
+    validate_only = true
+
+    ingest_ad_events_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::DataManager::V1::IngestionService::Rest::ServiceStub.stub :transcode_ingest_ad_events_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, ingest_ad_events_client_stub do
+        # Create client
+        c = ::Google::Ads::DataManager::V1::IngestionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.ingest_ad_events({ ad_events: ad_events, encryption_info: encryption_info, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.ingest_ad_events ad_events: ad_events, encryption_info: encryption_info, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.ingest_ad_events ::Google::Ads::DataManager::V1::IngestAdEventsRequest.new(ad_events: ad_events, encryption_info: encryption_info, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.ingest_ad_events({ ad_events: ad_events, encryption_info: encryption_info, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.ingest_ad_events(::Google::Ads::DataManager::V1::IngestAdEventsRequest.new(ad_events: ad_events, encryption_info: encryption_info, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, ingest_ad_events_client_stub.call_count
+      end
+    end
+  end
+
   def test_retrieve_request_status
     # Create test objects.
     client_result = ::Google::Ads::DataManager::V1::RetrieveRequestStatusResponse.new

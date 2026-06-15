@@ -45,6 +45,12 @@ module Google
             # [Event][google.ads.datamanager.v1.Event] resources from
             # the provided [Destination][google.ads.datamanager.v1.Destination].
             rpc :IngestEvents, ::Google::Ads::DataManager::V1::IngestEventsRequest, ::Google::Ads::DataManager::V1::IngestEventsResponse
+            # Uploads a list of
+            # [AdEvent][google.ads.datamanager.v1.AdEvent] resources to Google
+            # Analytics.
+            #
+            # This feature is only available to accounts on an allowlist.
+            rpc :IngestAdEvents, ::Google::Ads::DataManager::V1::IngestAdEventsRequest, ::Google::Ads::DataManager::V1::IngestAdEventsResponse
             # Gets the status of a request given request id.
             rpc :RetrieveRequestStatus, ::Google::Ads::DataManager::V1::RetrieveRequestStatusRequest, ::Google::Ads::DataManager::V1::RetrieveRequestStatusResponse
           end

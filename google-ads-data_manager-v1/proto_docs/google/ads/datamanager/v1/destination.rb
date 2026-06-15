@@ -71,7 +71,7 @@ module Google
         #     Required. The ID of the account. For example, your Google Ads account ID.
         # @!attribute [rw] account_type
         #   @return [::Google::Ads::DataManager::V1::ProductAccount::AccountType]
-        #     Optional. The type of the account. For example, `GOOGLE_ADS`.
+        #     Required. The type of the account. For example, `GOOGLE_ADS`.
         #     Either `account_type` or the deprecated `product` is required.
         #     If both are set, the values must match.
         class ProductAccount
