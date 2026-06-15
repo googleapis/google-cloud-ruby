@@ -58,6 +58,9 @@ module Google
     # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes.
     #                  The default value is 100 MB, i.e. 104_857_600 bytes. To disable chunking and upload
     #                  the complete file regardless of size, pass 0 as the chunk size.
+    # @param [String] emulator_host Host of a Storage emulator, such as `localhost:9000`. Optional.
+    #   If nil, uses the `emulator_host` config, which defaults to the `STORAGE_EMULATOR_HOST`
+    #   environment variable. See {Google::Cloud::Storage.new}.
     #
     # @return [Google::Cloud::Storage::Project]
     #
@@ -77,7 +80,8 @@ module Google
     #   readonly_storage = gcloud.storage scope: readonly_scope
     #
     def storage scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil,
-                max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil
+                max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil,
+                emulator_host: nil
       Google::Cloud.storage @project, @keyfile, scope: scope,
                                                 retries: retries || @retries,
                                                 timeout: timeout || @timeout,
@@ -88,7 +92,8 @@ module Google
                                                 base_interval: base_interval,
                                                 max_interval: max_interval,
                                                 multiplier: multiplier,
-                                                upload_chunk_size: upload_chunk_size
+                                                upload_chunk_size: upload_chunk_size,
+                                                emulator_host: emulator_host
     end
 
     ##
@@ -127,6 +132,9 @@ module Google
     # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes.
     #                  The default value is 100 MB, i.e. 104_857_600 bytes. To disable chunking and upload
     #                  the complete file regardless of size, pass 0 as the chunk size.
+    # @param [String] emulator_host Host of a Storage emulator, such as `localhost:9000`. Optional.
+    #   If nil, uses the `emulator_host` config, which defaults to the `STORAGE_EMULATOR_HOST`
+    #   environment variable. See {Google::Cloud::Storage.new}.
     #
     # @return [Google::Cloud::Storage::Project]
     #
@@ -142,7 +150,7 @@ module Google
     def self.storage project_id = nil, credentials = nil, scope: nil,
                      retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil,
                      max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil,
-                     upload_chunk_size: nil
+                     upload_chunk_size: nil, emulator_host: nil
       require "google/cloud/storage"
       Google::Cloud::Storage.new project_id: project_id,
                                  credentials: credentials,
@@ -156,7 +164,8 @@ module Google
                                  base_interval: base_interval,
                                  max_interval: max_interval,
                                  multiplier: multiplier,
-                                 upload_chunk_size: upload_chunk_size
+                                 upload_chunk_size: upload_chunk_size,
+                                 emulator_host: emulator_host
     end
   end
 end
@@ -171,6 +180,10 @@ Google::Cloud.configure.add_config! :storage do |config|
       "STORAGE_CREDENTIALS", "STORAGE_CREDENTIALS_JSON",
       "STORAGE_KEYFILE", "STORAGE_KEYFILE_JSON"
     )
+  end
+  default_emulator = Google::Cloud::Config.deferred do
+    emulator_host = ENV["STORAGE_EMULATOR_HOST"]
+    emulator_host unless emulator_host.to_s.strip.empty?
   end
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
@@ -192,5 +205,6 @@ Google::Cloud.configure.add_config! :storage do |config|
   config.add_field! :send_timeout, nil, match: Integer
   config.add_field! :upload_chunk_size, nil, match: Integer
   config.add_field! :endpoint, nil, match: String, allow_nil: true
+  config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :universe_domain, nil, match: String, allow_nil: true
 end
