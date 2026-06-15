@@ -13,7 +13,6 @@
 # limitations under the License.
 
 require_relative "../storage_helper"
-require 'pry'
 describe Google::Cloud::Storage::Bucket, :storage do
   let(:ip_filter_disabled) do
     {
