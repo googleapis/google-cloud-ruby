@@ -122,8 +122,8 @@ module Google
         #   error_event = error_reporting.error_event "Error with Backtrace"
         #   error_reporting.report error_event
         #
-        def report *args, &block
-          service.report(*args, &block)
+        def report(*args, &)
+          service.report(*args, &)
         end
 
         ##
