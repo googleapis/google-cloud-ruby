@@ -138,6 +138,59 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Document resource string.
+            #
+            # @overload document_path(project:, location:, data_store:, branch:, document:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param data_store [String]
+            #   @param branch [String]
+            #   @param document [String]
+            #
+            # @overload document_path(project:, location:, collection:, data_store:, branch:, document:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param data_store [String]
+            #   @param branch [String]
+            #   @param document [String]
+            #
+            # @return [::String]
+            def document_path **args
+              resources = {
+                "branch:data_store:document:location:project" => (proc do |project:, location:, data_store:, branch:, document:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+                  raise ::ArgumentError, "branch cannot contain /" if branch.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/dataStores/#{data_store}/branches/#{branch}/documents/#{document}"
+                end),
+                "branch:collection:data_store:document:location:project" => (proc do |project:, location:, collection:, data_store:, branch:, document:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+                  raise ::ArgumentError, "branch cannot contain /" if branch.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/dataStores/#{data_store}/branches/#{branch}/documents/#{document}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Engine resource string.
             #
             # The resource will be in the following format:

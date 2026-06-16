@@ -34,6 +34,20 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.discoveryengine.v1beta.ServingConfigService'
 
+            # Creates a ServingConfig.
+            #
+            # Note: The Google Cloud console works only with the default serving config.
+            # Additional ServingConfigs can be created and managed only via the API.
+            #
+            # A maximum of 100
+            # [ServingConfig][google.cloud.discoveryengine.v1beta.ServingConfig]s are
+            # allowed in an [Engine][google.cloud.discoveryengine.v1beta.Engine],
+            # otherwise a RESOURCE_EXHAUSTED error is returned.
+            rpc :CreateServingConfig, ::Google::Cloud::DiscoveryEngine::V1beta::CreateServingConfigRequest, ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig
+            # Deletes a ServingConfig.
+            #
+            # Returns a NOT_FOUND error if the ServingConfig does not exist.
+            rpc :DeleteServingConfig, ::Google::Cloud::DiscoveryEngine::V1beta::DeleteServingConfigRequest, ::Google::Protobuf::Empty
             # Updates a ServingConfig.
             #
             # Returns a NOT_FOUND error if the ServingConfig does not exist.

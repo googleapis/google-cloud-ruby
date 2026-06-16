@@ -951,6 +951,13 @@ module Google
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/dataStores/[^/]+/siteSearchEngine/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{parent}/sitemaps:fetch",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/siteSearchEngine/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 

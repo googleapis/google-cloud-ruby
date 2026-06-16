@@ -40,6 +40,12 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1beta::Project::ServiceTerms}]
         #     Output only. A map of terms of services. The key is the `id` of
         #     {::Google::Cloud::DiscoveryEngine::V1beta::Project::ServiceTerms ServiceTerms}.
+        # @!attribute [rw] customer_provided_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Project::CustomerProvidedConfig]
+        #     Optional. Customer provided configurations.
+        # @!attribute [r] configurable_billing_status
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Project::ConfigurableBillingStatus]
+        #     Output only. The current status of the project's configurable billing.
         class Project
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -88,6 +94,214 @@ module Google
 
               # The project has declined or revoked the agreement to terms of service.
               TERMS_DECLINED = 3
+            end
+          end
+
+          # Customer provided configurations.
+          # @!attribute [rw] notebooklm_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Project::CustomerProvidedConfig::NotebooklmConfig]
+          #     Optional. Configuration for NotebookLM settings.
+          class CustomerProvidedConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration for NotebookLM.
+            # @!attribute [rw] model_armor_config
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Project::CustomerProvidedConfig::NotebooklmConfig::ModelArmorConfig]
+            #     Model Armor configuration to be used for sanitizing user prompts and
+            #     LLM responses.
+            # @!attribute [rw] opt_out_notebook_sharing
+            #   @return [::Boolean]
+            #     Optional. Whether to disable the notebook sharing feature for the
+            #     project. Default to false if not specified.
+            # @!attribute [rw] data_protection_policy
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Project::CustomerProvidedConfig::NotebooklmConfig::DataProtectionPolicy]
+            #     Optional. Specifies the data protection policy for NotebookLM.
+            # @!attribute [rw] observability_config
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ObservabilityConfig]
+            #     Optional. Observability config for NotebookLM.
+            class NotebooklmConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Configuration for customer defined Model Armor templates to be used for
+              # sanitizing user prompts and LLM responses.
+              # @!attribute [rw] user_prompt_template
+              #   @return [::String]
+              #     Optional. The resource name of the Model Armor Template for
+              #     sanitizing user prompts. Format:
+              #     projects/\\{project}/locations/\\{location}/templates/\\{template_id}
+              #     If not specified, no sanitization will be applied to the user prompt.
+              # @!attribute [rw] response_template
+              #   @return [::String]
+              #     Optional. The resource name of the Model Armor Template for
+              #     sanitizing LLM responses. Format:
+              #     projects/\\{project}/locations/\\{location}/templates/\\{template_id}
+              #     If not specified, no sanitization will be applied to the LLM
+              #     response.
+              class ModelArmorConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Data protection policy config for NotebookLM.
+              # @!attribute [rw] sensitive_data_protection_policy
+              #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Project::CustomerProvidedConfig::NotebooklmConfig::DataProtectionPolicy::SensitiveDataProtectionPolicy]
+              #     Optional. The sensitive data protection policy.
+              class DataProtectionPolicy
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Specifies a Sensitive Data Protection
+                # (https://cloud.google.com/sensitive-data-protection/docs/sensitive-data-protection-overview)
+                # policy.
+                # @!attribute [rw] policy
+                #   @return [::String]
+                #     Optional. The Sensitive Data Protection policy resource name.
+                class SensitiveDataProtectionPolicy
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+              end
+            end
+          end
+
+          # Represents the currently effective configurable billing parameters.
+          # These values are derived from the customer's subscription history stored
+          # internally and reflect the thresholds actively being used for billing
+          # purposes at the time of the GetProject call. This includes the start_time
+          # of the subscription and may differ from the values in
+          # `customer_provided_config` due to billing rules
+          # (e.g., scale-downs taking effect only at the start of a new month).
+          # We also include the update type to indicate the type of update performed on
+          # the configurable billing configuration in the UpdateProject operation.
+          # @!attribute [rw] effective_search_qpm_threshold
+          #   @return [::Integer]
+          #     Optional. The currently effective Search QPM threshold in queries per
+          #     minute. This is the threshold against which QPM usage is compared for
+          #     overage calculations.
+          # @!attribute [rw] effective_indexing_core_threshold
+          #   @return [::Integer]
+          #     Optional. The currently effective Indexing Core threshold.
+          #     This is the threshold against which Indexing Core usage is compared
+          #     for overage calculations.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Optional. The start time of the currently active billing subscription.
+          # @!attribute [r] terminate_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The latest terminate effective time of search qpm and
+          #     indexing core subscriptions.
+          # @!attribute [r] search_qpm_threshold_next_update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The earliest next update time for the search QPM
+          #     subscription threshold. This is based on the next_update_time returned by
+          #     the underlying Cloud Billing Subscription V3 API. This field is populated
+          #     only if an update QPM subscription threshold request is succeeded.
+          # @!attribute [r] indexing_core_threshold_next_update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The earliest next update time for the indexing core
+          #     subscription threshold. This is based on the next_update_time returned by
+          #     the underlying Cloud Billing Subscription V3 API. This field is populated
+          #     only if an update indexing core subscription threshold
+          #     request is succeeded.
+          # @!attribute [r] update_type
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Project::ConfigurableBillingStatus::UpdateType]
+          #     Output only. The type of update performed in this operation.
+          #     This field is populated in the response of UpdateProject.
+          # @!attribute [r] agent_search_token_subscription_statuses
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Project::ConfigurableBillingStatus::AgentSearchTokenSubscriptionStatus>]
+          #     Output only. Per-model Agent Search TPM subscription status.
+          class ConfigurableBillingStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Per-model Agent Search TPM subscription status. One entry per active
+            # `core_subscription.agent_search_token_subscriptions[*]` entry in the
+            # customer-provided config; populated by UpdateProject and GetProject.
+            #
+            # The lifecycle scalars on this message (`start_time`, `terminate_time`,
+            # `update_type`, `tpm_threshold_next_update_time`) are per (project,
+            # model_version) — siblings of the whole-relationship `start_time` /
+            # `terminate_time` / `update_type` on the enclosing
+            # ConfigurableBillingStatus, but scoped to this specific Agent Search
+            # TPM subscription instead of to the overall customer-configurable-
+            # pricing relationship. This per-instance granularity is intentional:
+            # the underlying SubV3 storage is per-(project, model_version), so
+            # each model has its own activation, termination, and deferred-update
+            # clock; surfacing that on the response gives customers the granularity
+            # they need to manage per-model commitments independently. QPM /
+            # IndexingCore differ — their storage is one row per (project,
+            # location), so their lifecycle is represented only by the whole-
+            # relationship scalars on ConfigurableBillingStatus.
+            # @!attribute [r] model_version
+            #   @return [::String]
+            #     Output only. The Gemini model version this status corresponds to.
+            #     Matches CoreSubscription.AgentSearchTokenSubscription.model_version (a
+            #     stable Gemini model version from the Gemini Enterprise Agent Platform
+            #     model-versions registry; see
+            #     https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions#gemini-models).
+            # @!attribute [r] effective_tpm_threshold
+            #   @return [::Integer]
+            #     Output only. The currently effective TPM threshold. Reflects scale-up
+            #     immediately and scale-down at the next billing cycle, matching
+            #     `effective_search_qpm_threshold` semantics.
+            # @!attribute [r] tpm_threshold_next_update_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. The earliest next update time for the TPM subscription
+            #     threshold for this (project, model_version). Populated only after a
+            #     successful update.
+            # @!attribute [r] start_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. When this (project, model_version) Agent Search TPM
+            #     subscription was first activated. Set once on first activation of this
+            #     model version and never moved by subsequent threshold updates; on
+            #     termination + re-activation a new value is recorded. Does NOT move
+            #     the whole-relationship `start_time` on the enclosing
+            #     ConfigurableBillingStatus, which continues to represent the first
+            #     activation of the overall customer-configurable-pricing
+            #     relationship.
+            # @!attribute [r] terminate_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. If set, the scheduled effective time at which this
+            #     (project, model_version) Agent Search TPM subscription will terminate.
+            #     Populated when the customer removes this entry from
+            #     `core_subscription.agent_search_token_subscriptions[*]`. Does NOT move
+            #     the whole-relationship `terminate_time` on the enclosing
+            #     ConfigurableBillingStatus, which is populated only when the entire
+            #     customer-configurable-pricing relationship is being torn down.
+            # @!attribute [r] update_type
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Project::ConfigurableBillingStatus::UpdateType]
+            #     Output only. The type of the most recent update to this (project,
+            #     model_version) subscription, as performed by the most recent
+            #     UpdateProject call. `UPDATE_TYPE_UNSPECIFIED` indicates this
+            #     model_version was not touched by the most recent UpdateProject (its
+            #     `effective_tpm_threshold` reflects an earlier update). The
+            #     whole-relationship `update_type` on the enclosing
+            #     ConfigurableBillingStatus continues to summarize the direction of
+            #     the most recent update across all surfaces in the project (QPM,
+            #     IndexingCore, and Agent Search TPM together).
+            class AgentSearchTokenSubscriptionStatus
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The type of update performed on the configurable billing configuration.
+            module UpdateType
+              # Unspecified update type.
+              UPDATE_TYPE_UNSPECIFIED = 0
+
+              # Configurable billing was created/enabled.
+              CREATE = 1
+
+              # Configurable billing was deleted/disabled.
+              DELETE = 2
+
+              # Subscription was scaled up (thresholds increased).
+              SCALE_UP = 3
+
+              # Subscription was scaled down (thresholds decreased).
+              SCALE_DOWN = 4
             end
           end
 

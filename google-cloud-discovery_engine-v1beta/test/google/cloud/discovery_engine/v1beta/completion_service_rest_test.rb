@@ -152,6 +152,8 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::ClientT
     include_tail_suggestions = true
     boost_spec = {}
     suggestion_types = [:SUGGESTION_TYPE_UNSPECIFIED]
+    suggestion_type_specs = [{}]
+    experiment_ids = ["hello world"]
 
     advanced_complete_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -167,27 +169,27 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::ClientT
         end
 
         # Use hash object
-        c.advanced_complete_query({ completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types }) do |_result, response|
+        c.advanced_complete_query({ completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.advanced_complete_query completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types do |_result, response|
+        c.advanced_complete_query completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.advanced_complete_query ::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest.new(completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types) do |_result, response|
+        c.advanced_complete_query ::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest.new(completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.advanced_complete_query({ completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types }, call_options) do |_result, response|
+        c.advanced_complete_query({ completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.advanced_complete_query(::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest.new(completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types), call_options) do |_result, response|
+        c.advanced_complete_query(::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest.new(completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -412,6 +414,64 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::ClientT
 
         # Verify method calls
         assert_equal 5, purge_completion_suggestions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_remove_suggestion
+    # Create test objects.
+    client_result = ::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    search_history_suggestion = "hello world"
+    completion_config = "hello world"
+    user_pseudo_id = "hello world"
+    user_info = {}
+    remove_time = {}
+
+    remove_suggestion_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::ServiceStub.stub :transcode_remove_suggestion_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, remove_suggestion_client_stub do
+        # Create client
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.remove_suggestion({ search_history_suggestion: search_history_suggestion, completion_config: completion_config, user_pseudo_id: user_pseudo_id, user_info: user_info, remove_time: remove_time }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.remove_suggestion search_history_suggestion: search_history_suggestion, completion_config: completion_config, user_pseudo_id: user_pseudo_id, user_info: user_info, remove_time: remove_time do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.remove_suggestion ::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionRequest.new(search_history_suggestion: search_history_suggestion, completion_config: completion_config, user_pseudo_id: user_pseudo_id, user_info: user_info, remove_time: remove_time) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.remove_suggestion({ search_history_suggestion: search_history_suggestion, completion_config: completion_config, user_pseudo_id: user_pseudo_id, user_info: user_info, remove_time: remove_time }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.remove_suggestion(::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionRequest.new(search_history_suggestion: search_history_suggestion, completion_config: completion_config, user_pseudo_id: user_pseudo_id, user_info: user_info, remove_time: remove_time), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, remove_suggestion_client_stub.call_count
       end
     end
   end

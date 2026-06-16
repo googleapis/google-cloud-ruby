@@ -73,12 +73,14 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::ClientTest < Min
     # Create request parameters for a unary method.
     parent = "hello world"
     session = {}
+    session_id = "hello world"
 
     create_session_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_session, name
       assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::Session), request["session"]
+      assert_equal "hello world", request["session_id"]
       refute_nil options
     end
 
@@ -89,31 +91,31 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::ClientTest < Min
       end
 
       # Use hash object
-      c.create_session({ parent: parent, session: session }) do |response, operation|
+      c.create_session({ parent: parent, session: session, session_id: session_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.create_session parent: parent, session: session do |response, operation|
+      c.create_session parent: parent, session: session, session_id: session_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.create_session ::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session) do |response, operation|
+      c.create_session ::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.create_session({ parent: parent, session: session }, grpc_options) do |response, operation|
+      c.create_session({ parent: parent, session: session, session_id: session_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.create_session(::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session), grpc_options) do |response, operation|
+      c.create_session(::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

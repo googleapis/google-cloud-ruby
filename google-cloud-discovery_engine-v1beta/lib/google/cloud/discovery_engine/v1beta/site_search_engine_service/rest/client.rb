@@ -1344,9 +1344,7 @@ module Google
               #     {::Google::Cloud::DiscoveryEngine::V1beta::TargetSite TargetSite} in
               #     `site_search_engine`.
               #   @param site_credential [::String]
-              #     Optional. Full resource name of the [SiteCredential][], such as
-              #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/siteCredentials/*`.
-              #     Only set to crawl private URIs.
+              #     Optional. Credential id to use for crawling.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

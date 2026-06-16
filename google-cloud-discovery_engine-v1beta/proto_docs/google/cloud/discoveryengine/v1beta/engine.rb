@@ -30,7 +30,7 @@ module Google
         #     is
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_CHAT SOLUTION_TYPE_CHAT}.
         #
-        #     Note: The following fields are mutually exclusive: `chat_engine_config`, `search_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `chat_engine_config`, `search_engine_config`, `media_recommendation_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] search_engine_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::SearchEngineConfig]
         #     Configurations for the Search Engine. Only applicable if
@@ -38,7 +38,18 @@ module Google
         #     is
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         #
-        #     Note: The following fields are mutually exclusive: `search_engine_config`, `chat_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `search_engine_config`, `chat_engine_config`, `media_recommendation_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] media_recommendation_engine_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::MediaRecommendationEngineConfig]
+        #     Configurations for the Media Engine. Only applicable on the data
+        #     stores with
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Engine#solution_type solution_type}
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}
+        #     and
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::IndustryVertical::MEDIA IndustryVertical.MEDIA}
+        #     vertical.
+        #
+        #     Note: The following fields are mutually exclusive: `media_recommendation_engine_config`, `chat_engine_config`, `search_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] chat_engine_metadata
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::ChatEngineMetadata]
         #     Output only. Additional information of the Chat Engine. Only applicable
@@ -48,7 +59,7 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_CHAT SOLUTION_TYPE_CHAT}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Immutable. The fully qualified resource name of the engine.
+        #     Immutable. Identifier. The fully qualified resource name of the engine.
         #
         #     This field must be a UTF-8 encoded string with a length limit of 1024
         #     characters.
@@ -69,7 +80,7 @@ module Google
         #     Output only. Timestamp the Recommendation Engine was last updated.
         # @!attribute [rw] data_store_ids
         #   @return [::Array<::String>]
-        #     The data stores associated with this engine.
+        #     Optional. The data stores associated with this engine.
         #
         #     For
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}
@@ -94,18 +105,95 @@ module Google
         #     Required. The solutions of the engine.
         # @!attribute [rw] industry_vertical
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::IndustryVertical]
-        #     The industry vertical that the engine registers.
+        #     Optional. The industry vertical that the engine registers.
         #     The restriction of the Engine industry vertical is based on
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}: If unspecified,
-        #     default to `GENERIC`. Vertical on Engine has to match vertical of the
-        #     DataStore linked to the engine.
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}: Vertical on
+        #     Engine has to match vertical of the DataStore linked to the engine.
         # @!attribute [rw] common_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::CommonConfig]
         #     Common config spec that specifies the metadata of the engine.
+        # @!attribute [rw] knowledge_graph_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::KnowledgeGraphConfig]
+        #     Optional. Configurations for the Knowledge Graph. Only applicable if
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Engine#solution_type solution_type}
+        #     is
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
+        # @!attribute [rw] app_type
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::AppType]
+        #     Optional. Immutable. This the application type which this engine resource
+        #     represents. NOTE: this is a new concept independ of existing industry
+        #     vertical or solution type.
         # @!attribute [rw] disable_analytics
         #   @return [::Boolean]
         #     Optional. Whether to disable analytics for searches performed on this
         #     engine.
+        # @!attribute [rw] features
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1beta::Engine::FeatureState}]
+        #     Optional. Feature config for the engine to opt in or opt out of features.
+        #     Supported keys:
+        #
+        #     * `*`: all features, if it's present, all other feature state settings are
+        #            ignored.
+        #     * `agent-gallery`
+        #     * `no-code-agent-builder`
+        #     * `prompt-gallery`
+        #     * `model-selector`
+        #     * `notebook-lm`
+        #     * `people-search`
+        #     * `people-search-org-chart`
+        #     * `bi-directional-audio`
+        #     * `feedback`
+        #     * `session-sharing`
+        #     * `personalization-memory`
+        #     * `personalization-suggested-highlights`
+        #     * `mobile-app-access`
+        #     * `disable-agent-sharing`
+        #     * `disable-image-generation`
+        #     * `disable-video-generation`
+        #     * `disable-onedrive-upload`
+        #     * `disable-talk-to-content`
+        #     * `disable-google-drive-upload`
+        #     * `disable-welcome-emails`
+        #     * `disable-canvas`
+        #     * `disable-canvas-workspace`
+        #     * `disable-skills`
+        #     * `enable-end-user-sharing-with-groups`
+        #     * `single-agent-orchestration`
+        #     * `multi-agent-orchestration`
+        #     * `cross-product-intelligence`
+        # @!attribute [r] cmek_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::CmekConfig]
+        #     Output only. CMEK-related information for the Engine.
+        # @!attribute [rw] configurable_billing_approach
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::ConfigurableBillingApproach]
+        #     Optional. Configuration for configurable billing approach.
+        # @!attribute [rw] model_configs
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1beta::Engine::ModelState}]
+        #     Optional. Maps a model name to its specific configuration for this engine.
+        #     This allows admin users to turn on/off individual models. This only stores
+        #     models whose states are overridden by the admin.
+        #
+        #     When the state is unspecified, or model_configs is empty for this
+        #     model, the system will decide if this model should be available or not
+        #     based on the default configuration. For example, a preview model
+        #     should be disabled by default if the admin has not chosen to enable it.
+        # @!attribute [rw] observability_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ObservabilityConfig]
+        #     Optional. Observability config for the engine.
+        # @!attribute [rw] connector_tenant_info
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Maps a connector ID (e.g., "hybrid-github", "shopify") to
+        #     tenant-specific information required for that connector. The structure of
+        #     the tenant information string is connector-dependent.
+        # @!attribute [rw] agent_gateway_setting
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::AgentGatewaySetting]
+        #     Optional. The agent gateway setting for the engine.
+        # @!attribute [rw] marketplace_agent_visibility
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::MarketplaceAgentVisibility]
+        #     Optional. The visibility of marketplace agents in the agent gallery.
+        # @!attribute [rw] procurement_contact_emails
+        #   @return [::Array<::String>]
+        #     Optional. The emails of the procurement contacts.
         class Engine
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -121,12 +209,144 @@ module Google
           #     Defaults to
           #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchTier::SEARCH_TIER_STANDARD SearchTier.SEARCH_TIER_STANDARD}
           #     if not specified.
+          # @!attribute [rw] required_subscription_tier
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SubscriptionTier]
+          #     Optional. The required subscription tier of this engine.
+          #
+          #     They cannot be modified after engine creation. If the required
+          #     subscription tier is search, user with higher license tier like assist
+          #     can still access the standalone app associated with this engine.
           # @!attribute [rw] search_add_ons
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchAddOn>]
           #     The add-on that this search engine enables.
           class SearchEngineConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Additional config specs for a Media Recommendation engine.
+          # @!attribute [rw] type
+          #   @return [::String]
+          #     Required. The type of engine. e.g., `recommended-for-you`.
+          #
+          #     This field together with
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::Engine::MediaRecommendationEngineConfig#optimization_objective optimization_objective}
+          #     describe engine metadata to use to control engine training and serving.
+          #
+          #     Currently supported values: `recommended-for-you`, `others-you-may-like`,
+          #     `more-like-this`, `most-popular-items`.
+          # @!attribute [rw] optimization_objective
+          #   @return [::String]
+          #     The optimization objective. e.g., `cvr`.
+          #
+          #     This field together with
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::Engine::MediaRecommendationEngineConfig#type optimization_objective}
+          #     describe engine metadata to use to control engine training and serving.
+          #
+          #     Currently supported
+          #     values: `ctr`, `cvr`.
+          #
+          #      If not specified, we choose default based on engine type.
+          #     Default depends on type of recommendation:
+          #
+          #     `recommended-for-you` => `ctr`
+          #
+          #     `others-you-may-like` => `ctr`
+          # @!attribute [rw] optimization_objective_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::MediaRecommendationEngineConfig::OptimizationObjectiveConfig]
+          #     Name and value of the custom threshold for cvr optimization_objective.
+          #     For target_field `watch-time`, target_field_value must be an integer
+          #     value indicating the media progress time in seconds between (0, 86400]
+          #     (excludes 0, includes 86400) (e.g., 90).
+          #     For target_field `watch-percentage`, the target_field_value must be a
+          #     valid float value between (0, 1.0] (excludes 0, includes 1.0) (e.g.,
+          #     0.5).
+          # @!attribute [rw] training_state
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::MediaRecommendationEngineConfig::TrainingState]
+          #     The training state that the engine is in (e.g.
+          #     `TRAINING` or `PAUSED`).
+          #
+          #     Since part of the cost of running the service
+          #     is frequency of training - this can be used to determine when to train
+          #     engine in order to control cost. If not specified: the default value for
+          #     `CreateEngine` method is `TRAINING`. The default value for
+          #     `UpdateEngine` method is to keep the state the same as before.
+          # @!attribute [rw] engine_features_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::MediaRecommendationEngineConfig::EngineFeaturesConfig]
+          #     Optional. Additional engine features config.
+          class MediaRecommendationEngineConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Custom threshold for `cvr` optimization_objective.
+            # @!attribute [rw] target_field
+            #   @return [::String]
+            #     Required. The name of the field to target. Currently supported
+            #     values: `watch-percentage`, `watch-time`.
+            # @!attribute [rw] target_field_value_float
+            #   @return [::Float]
+            #     Required. The threshold to be applied to the target (e.g., 0.5).
+            class OptimizationObjectiveConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # More feature configs of the selected engine type.
+            # @!attribute [rw] recommended_for_you_config
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::MediaRecommendationEngineConfig::RecommendedForYouFeatureConfig]
+            #     Recommended for you engine feature config.
+            #
+            #     Note: The following fields are mutually exclusive: `recommended_for_you_config`, `most_popular_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] most_popular_config
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::MediaRecommendationEngineConfig::MostPopularFeatureConfig]
+            #     Most popular engine feature config.
+            #
+            #     Note: The following fields are mutually exclusive: `most_popular_config`, `recommended_for_you_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            class EngineFeaturesConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Additional feature configurations for creating a `recommended-for-you`
+            # engine.
+            # @!attribute [rw] context_event_type
+            #   @return [::String]
+            #     The type of event with which the engine is queried at prediction time.
+            #     If set to `generic`, only `view-item`, `media-play`,and
+            #     `media-complete` will be used as `context-event` in engine training. If
+            #     set to `view-home-page`, `view-home-page` will also be used as
+            #     `context-events` in addition to `view-item`, `media-play`, and
+            #     `media-complete`. Currently supported for the `recommended-for-you`
+            #     engine. Currently supported values: `view-home-page`, `generic`.
+            class RecommendedForYouFeatureConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Feature configurations that are required for creating a Most Popular
+            # engine.
+            # @!attribute [rw] time_window_days
+            #   @return [::Integer]
+            #     The time window of which the engine is queried at training and
+            #     prediction time. Positive integers only. The value translates to the
+            #     last X days of events. Currently required for the `most-popular-items`
+            #     engine.
+            class MostPopularFeatureConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The training state of the engine.
+            module TrainingState
+              # Unspecified training state.
+              TRAINING_STATE_UNSPECIFIED = 0
+
+              # The engine training is paused.
+              PAUSED = 1
+
+              # The engine is training.
+              TRAINING = 2
+            end
           end
 
           # Configurations for a Chat Engine.
@@ -158,6 +378,20 @@ module Google
           #     API after engine creation. Use
           #     {::Google::Cloud::DiscoveryEngine::V1beta::Engine::ChatEngineMetadata#dialogflow_agent ChatEngineMetadata.dialogflow_agent}
           #     for actual agent association after Engine is created.
+          # @!attribute [rw] allow_cross_region
+          #   @return [::Boolean]
+          #     Optional. If the flag set to true, we allow the agent and engine are in
+          #     different locations, otherwise the agent and engine are required to be in
+          #     the same location. The flag is set to false by default.
+          #
+          #     Note that the `allow_cross_region` are one-time consumed by and
+          #     passed to
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#create_engine EngineService.CreateEngine}.
+          #     It means they cannot be retrieved using
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#get_engine EngineService.GetEngine}
+          #     or
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#list_engines EngineService.ListEngines}
+          #     API after engine creation.
           class ChatEngineConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -207,6 +441,57 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Configuration message for the Knowledge Graph.
+          # @!attribute [rw] enable_cloud_knowledge_graph
+          #   @return [::Boolean]
+          #     Whether to enable the Cloud Knowledge Graph for the engine.
+          #
+          #     Defaults to false if not specified.
+          # @!attribute [rw] cloud_knowledge_graph_types
+          #   @return [::Array<::String>]
+          #     Specify entity types to support.
+          # @!attribute [rw] enable_private_knowledge_graph
+          #   @return [::Boolean]
+          #     Whether to enable the Private Knowledge Graph for the engine.
+          #
+          #     Defaults to false if not specified.
+          # @!attribute [rw] private_knowledge_graph_types
+          #   @return [::Array<::String>]
+          #     Specify entity types to support.
+          # @!attribute [rw] feature_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::KnowledgeGraphConfig::FeatureConfig]
+          #     Optional. Feature config for the Knowledge Graph.
+          class KnowledgeGraphConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Feature config for the Knowledge Graph.
+            # @!attribute [rw] disable_private_kg_query_understanding
+            #   @return [::Boolean]
+            #     Whether to disable the private KG query understanding for the engine.
+            #
+            #     Defaults to false if not specified.
+            # @!attribute [rw] disable_private_kg_enrichment
+            #   @return [::Boolean]
+            #     Whether to disable the private KG enrichment for the engine.
+            #
+            #     Defaults to false if not specified.
+            # @!attribute [rw] disable_private_kg_auto_complete
+            #   @return [::Boolean]
+            #     Whether to disable the private KG auto complete for the engine.
+            #
+            #     Defaults to false if not specified.
+            # @!attribute [rw] disable_private_kg_query_ui_chips
+            #   @return [::Boolean]
+            #     Whether to disable the private KG for query UI chips.
+            #
+            #     Defaults to false if not specified.
+            class FeatureConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
           # Additional information of a Chat Engine.
           # Fields in this message are output only.
           # @!attribute [rw] dialogflow_agent
@@ -219,6 +504,101 @@ module Google
           class ChatEngineMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::FeatureState]
+          class FeaturesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::ModelState]
+          class ModelConfigsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ConnectorTenantInfoEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The app of the engine.
+          module AppType
+            # All non specified apps.
+            APP_TYPE_UNSPECIFIED = 0
+
+            # App type for intranet search and Agentspace.
+            APP_TYPE_INTRANET = 1
+          end
+
+          # The state of the feature for the engine.
+          module FeatureState
+            # The feature state is unspecified.
+            FEATURE_STATE_UNSPECIFIED = 0
+
+            # The feature is turned on to be accessible.
+            FEATURE_STATE_ON = 1
+
+            # The feature is turned off to be inaccessible.
+            FEATURE_STATE_OFF = 2
+          end
+
+          # Configuration for configurable billing approach.
+          module ConfigurableBillingApproach
+            # Default value. For Spark and non-Spark non-configurable billing approach.
+            # General pricing model.
+            CONFIGURABLE_BILLING_APPROACH_UNSPECIFIED = 0
+
+            # The billing approach follows configurations specified by customer.
+            CONFIGURABLE_BILLING_APPROACH_ENABLED = 1
+          end
+
+          # The status of the model for the engine.
+          module ModelState
+            # The model state is unspecified.
+            MODEL_STATE_UNSPECIFIED = 0
+
+            # The model is enabled by admin.
+            MODEL_ENABLED = 1
+
+            # The model is disabled by admin.
+            MODEL_DISABLED = 2
+          end
+
+          # Represents which marketplace agents are visible to any users in agent
+          # gallery.
+          module MarketplaceAgentVisibility
+            # Defaults to `MARKETPLACE_AGENT_VISIBILITY_UNSPECIFIED`.
+            MARKETPLACE_AGENT_VISIBILITY_UNSPECIFIED = 0
+
+            # Only agents that are currently available for use by the user are visible.
+            SHOW_AVAILABLE_AGENTS_ONLY = 1
+
+            # Show marketplace agents that the user does not yet have access to but
+            # are integrated into the engine. This level also includes all agents
+            # visible with `SHOW_AVAILABLE_AGENTS_ONLY`.
+            SHOW_AGENTS_ALREADY_INTEGRATED = 2
+
+            # Show all agents visible with `SHOW_AGENTS_ALREADY_INTEGRATED`, plus
+            # agents that have already been purchased by the project/organization, even
+            # if they are not currently integrated into the engine.
+            SHOW_AGENTS_ALREADY_PURCHASED = 3
+
+            # All agents in the marketplace are visible, regardless of access or
+            # purchase status. This level encompasses all agents shown in the previous
+            # levels.
+            SHOW_ALL_AGENTS = 4
           end
         end
       end
