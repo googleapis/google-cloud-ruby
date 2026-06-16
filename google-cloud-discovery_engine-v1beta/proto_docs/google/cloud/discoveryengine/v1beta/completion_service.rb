@@ -54,10 +54,10 @@ module Google
         #     * `search-history` is the default model for site search dataStores.
         # @!attribute [rw] user_pseudo_id
         #   @return [::String]
-        #     A unique identifier for tracking visitors. For example, this could be
-        #     implemented with an HTTP cookie, which should be able to uniquely identify
-        #     a visitor on a single device. This unique identifier should not change if
-        #     the visitor logs in or out of the website.
+        #     Optional. A unique identifier for tracking visitors. For example, this
+        #     could be implemented with an HTTP cookie, which should be able to uniquely
+        #     identify a visitor on a single device. This unique identifier should not
+        #     change if the visitor logs in or out of the website.
         #
         #     This field should NOT have a fixed value such as `unknown_visitor`.
         #
@@ -134,9 +134,9 @@ module Google
         #     user's recently searched queries given the empty query.
         # @!attribute [rw] query_model
         #   @return [::String]
-        #     Specifies the autocomplete data model. This overrides any model specified
-        #     in the Configuration > Autocomplete section of the Cloud console. Currently
-        #     supported values:
+        #     Specifies the autocomplete query model, which only applies to the QUERY
+        #     SuggestionType. This overrides any model specified in the Configuration >
+        #     Autocomplete section of the Cloud console. Currently supported values:
         #
         #     * `document` - Using suggestions generated from user-imported documents.
         #     * `search-history` - Using suggestions generated from the past history of
@@ -153,10 +153,10 @@ module Google
         #     * `search-history` is the default model for site search dataStores.
         # @!attribute [rw] user_pseudo_id
         #   @return [::String]
-        #     A unique identifier for tracking visitors. For example, this could be
-        #     implemented with an HTTP cookie, which should be able to uniquely identify
-        #     a visitor on a single device. This unique identifier should not change if
-        #     the visitor logs in or out of the website.
+        #     Optional. A unique identifier for tracking visitors. For example, this
+        #     could be implemented with an HTTP cookie, which should be able to uniquely
+        #     identify a visitor on a single device. This unique identifier should not
+        #     change if the visitor logs in or out of the website.
         #
         #     This field should NOT have a fixed value such as `unknown_visitor`.
         #
@@ -188,15 +188,22 @@ module Google
         #     Optional. Suggestion types to return. If empty or unspecified, query
         #     suggestions are returned. Only one suggestion type is supported at the
         #     moment.
+        # @!attribute [rw] suggestion_type_specs
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest::SuggestionTypeSpec>]
+        #     Optional. Specification of each suggestion type.
+        # @!attribute [rw] experiment_ids
+        #   @return [::Array<::String>]
+        #     Optional. Experiment ids for this request.
         class AdvancedCompleteQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specification to boost suggestions based on the condtion of the suggestion.
+          # Specification to boost suggestions based on the condition of the
+          # suggestion.
           # @!attribute [rw] condition_boost_specs
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest::BoostSpec::ConditionBoostSpec>]
           #     Condition boost specifications. If a suggestion matches multiple
-          #     conditions in the specifictions, boost values from these specifications
+          #     conditions in the specifications, boost values from these specifications
           #     are all applied and combined in a non-linear way. Maximum number of
           #     specifications is 20.
           #
@@ -234,6 +241,19 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Specification of each suggestion type.
+          # @!attribute [rw] suggestion_type
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest::SuggestionType]
+          #     Optional. Suggestion type.
+          # @!attribute [rw] max_suggestions
+          #   @return [::Integer]
+          #     Optional. Maximum number of suggestions to return for each suggestion
+          #     type.
+          class SuggestionTypeSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Suggestion type to return.
@@ -300,6 +320,9 @@ module Google
           # @!attribute [rw] data_store
           #   @return [::Array<::String>]
           #     The name of the dataStore that this suggestion belongs to.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     The score of each suggestion. The score is in the range of [0, 1].
           class QuerySuggestion
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -319,6 +342,15 @@ module Google
           # @!attribute [rw] data_store
           #   @return [::String]
           #     The name of the dataStore that this suggestion belongs to.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     The score of each suggestion. The score is in the range of [0, 1].
+          # @!attribute [rw] display_photo_uri
+          #   @return [::String]
+          #     The photo uri of the person suggestion.
+          # @!attribute [rw] destination_uri
+          #   @return [::String]
+          #     The destination uri of the person suggestion.
           class PersonSuggestion
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -350,6 +382,15 @@ module Google
           # @!attribute [rw] data_store
           #   @return [::String]
           #     The name of the dataStore that this suggestion belongs to.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     The score of each suggestion. The score is in the range of [0, 1].
+          # @!attribute [rw] icon_uri
+          #   @return [::String]
+          #     The icon uri of the content suggestion.
+          # @!attribute [rw] destination_uri
+          #   @return [::String]
+          #     The destination uri of the content suggestion.
           class ContentSuggestion
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -374,10 +415,71 @@ module Google
           # @!attribute [rw] recent_search_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The time when this recent rearch happened.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     The score of each suggestion. The score is in the range of [0, 1].
           class RecentSearchSuggestion
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#remove_suggestion CompletionService.RemoveSuggestion}
+        # method.
+        # @!attribute [rw] search_history_suggestion
+        #   @return [::String]
+        #     The search history suggestion to be removed.
+        #
+        #     Note: The following fields are mutually exclusive: `search_history_suggestion`, `remove_all_search_history_suggestions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] remove_all_search_history_suggestions
+        #   @return [::Boolean]
+        #     Remove all search history suggestions for the user.
+        #
+        #     Note: The following fields are mutually exclusive: `remove_all_search_history_suggestions`, `search_history_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] completion_config
+        #   @return [::String]
+        #     Required. The completion_config of the parent engine resource name for
+        #     which the search history suggestion is to be removed, such as
+        #     `projects/*/locations/global/collections/default_collection/engines/*/completionConfig`.
+        # @!attribute [rw] user_pseudo_id
+        #   @return [::String]
+        #     Required. A unique identifier for tracking visitors. For example, this
+        #     could be implemented with an HTTP cookie, which should be able to uniquely
+        #     identify a visitor on a single device. This unique identifier should not
+        #     change if the visitor logs in or out of the website.
+        #
+        #     This field should NOT have a fixed value such as `unknown_visitor`.
+        #
+        #     This should be the same identifier as
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent#user_pseudo_id UserEvent.user_pseudo_id}
+        #     and
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#user_pseudo_id SearchRequest.user_pseudo_id}.
+        #
+        #     The field must be a UTF-8 encoded string with a length limit of 128.
+        # @!attribute [rw] user_info
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::UserInfo]
+        #     Optional. Information about the end user.
+        #
+        #     This should be the same identifier information as
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent#user_info UserEvent.user_info}
+        #     and
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#user_info SearchRequest.user_info}.
+        # @!attribute [rw] remove_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Required. Time at which the suggestion was removed. If not set, the current
+        #     time will be used.
+        class RemoveSuggestionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#remove_suggestion CompletionService.RemoveSuggestion}
+        # method.
+        class RemoveSuggestionResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

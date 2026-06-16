@@ -262,10 +262,10 @@ module Google
             #     * `document` is the default model for regular dataStores.
             #     * `search-history` is the default model for site search dataStores.
             #   @param user_pseudo_id [::String]
-            #     A unique identifier for tracking visitors. For example, this could be
-            #     implemented with an HTTP cookie, which should be able to uniquely identify
-            #     a visitor on a single device. This unique identifier should not change if
-            #     the visitor logs in or out of the website.
+            #     Optional. A unique identifier for tracking visitors. For example, this
+            #     could be implemented with an HTTP cookie, which should be able to uniquely
+            #     identify a visitor on a single device. This unique identifier should not
+            #     change if the visitor logs in or out of the website.
             #
             #     This field should NOT have a fixed value such as `unknown_visitor`.
             #
@@ -359,7 +359,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload advanced_complete_query(completion_config: nil, query: nil, query_model: nil, user_pseudo_id: nil, user_info: nil, include_tail_suggestions: nil, boost_spec: nil, suggestion_types: nil)
+            # @overload advanced_complete_query(completion_config: nil, query: nil, query_model: nil, user_pseudo_id: nil, user_info: nil, include_tail_suggestions: nil, boost_spec: nil, suggestion_types: nil, suggestion_type_specs: nil, experiment_ids: nil)
             #   Pass arguments to `advanced_complete_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -379,9 +379,9 @@ module Google
             #     be an empty string. The is called "zero prefix" feature, which returns
             #     user's recently searched queries given the empty query.
             #   @param query_model [::String]
-            #     Specifies the autocomplete data model. This overrides any model specified
-            #     in the Configuration > Autocomplete section of the Cloud console. Currently
-            #     supported values:
+            #     Specifies the autocomplete query model, which only applies to the QUERY
+            #     SuggestionType. This overrides any model specified in the Configuration >
+            #     Autocomplete section of the Cloud console. Currently supported values:
             #
             #     * `document` - Using suggestions generated from user-imported documents.
             #     * `search-history` - Using suggestions generated from the past history of
@@ -397,10 +397,10 @@ module Google
             #     * `document` is the default model for regular dataStores.
             #     * `search-history` is the default model for site search dataStores.
             #   @param user_pseudo_id [::String]
-            #     A unique identifier for tracking visitors. For example, this could be
-            #     implemented with an HTTP cookie, which should be able to uniquely identify
-            #     a visitor on a single device. This unique identifier should not change if
-            #     the visitor logs in or out of the website.
+            #     Optional. A unique identifier for tracking visitors. For example, this
+            #     could be implemented with an HTTP cookie, which should be able to uniquely
+            #     identify a visitor on a single device. This unique identifier should not
+            #     change if the visitor logs in or out of the website.
             #
             #     This field should NOT have a fixed value such as `unknown_visitor`.
             #
@@ -428,6 +428,10 @@ module Google
             #     Optional. Suggestion types to return. If empty or unspecified, query
             #     suggestions are returned. Only one suggestion type is supported at the
             #     moment.
+            #   @param suggestion_type_specs [::Array<::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest::SuggestionTypeSpec, ::Hash>]
+            #     Optional. Specification of each suggestion type.
+            #   @param experiment_ids [::Array<::String>]
+            #     Optional. Experiment ids for this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryResponse]
@@ -914,6 +918,129 @@ module Google
             end
 
             ##
+            # Removes the search history suggestion in an engine for a user. This will
+            # remove the suggestion from being returned in the
+            # {::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryResponse#recent_search_suggestions AdvancedCompleteQueryResponse.recent_search_suggestions}
+            # for this user. If the user searches the same suggestion again, the new
+            # history will override and suggest this suggestion again.
+            #
+            # @overload remove_suggestion(request, options = nil)
+            #   Pass arguments to `remove_suggestion` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload remove_suggestion(search_history_suggestion: nil, remove_all_search_history_suggestions: nil, completion_config: nil, user_pseudo_id: nil, user_info: nil, remove_time: nil)
+            #   Pass arguments to `remove_suggestion` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param search_history_suggestion [::String]
+            #     The search history suggestion to be removed.
+            #
+            #     Note: The following parameters are mutually exclusive: `search_history_suggestion`, `remove_all_search_history_suggestions`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param remove_all_search_history_suggestions [::Boolean]
+            #     Remove all search history suggestions for the user.
+            #
+            #     Note: The following parameters are mutually exclusive: `remove_all_search_history_suggestions`, `search_history_suggestion`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param completion_config [::String]
+            #     Required. The completion_config of the parent engine resource name for
+            #     which the search history suggestion is to be removed, such as
+            #     `projects/*/locations/global/collections/default_collection/engines/*/completionConfig`.
+            #   @param user_pseudo_id [::String]
+            #     Required. A unique identifier for tracking visitors. For example, this
+            #     could be implemented with an HTTP cookie, which should be able to uniquely
+            #     identify a visitor on a single device. This unique identifier should not
+            #     change if the visitor logs in or out of the website.
+            #
+            #     This field should NOT have a fixed value such as `unknown_visitor`.
+            #
+            #     This should be the same identifier as
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent#user_pseudo_id UserEvent.user_pseudo_id}
+            #     and
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#user_pseudo_id SearchRequest.user_pseudo_id}.
+            #
+            #     The field must be a UTF-8 encoded string with a length limit of 128.
+            #   @param user_info [::Google::Cloud::DiscoveryEngine::V1beta::UserInfo, ::Hash]
+            #     Optional. Information about the end user.
+            #
+            #     This should be the same identifier information as
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent#user_info UserEvent.user_info}
+            #     and
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#user_info SearchRequest.user_info}.
+            #   @param remove_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Required. Time at which the suggestion was removed. If not set, the current
+            #     time will be used.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionRequest.new
+            #
+            #   # Call the remove_suggestion method.
+            #   result = client.remove_suggestion request
+            #
+            #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionResponse.
+            #   p result
+            #
+            def remove_suggestion request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.remove_suggestion.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.completion_config
+                header_params["completion_config"] = request.completion_config
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.remove_suggestion.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.remove_suggestion.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @completion_service_stub.call_rpc :remove_suggestion, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the CompletionService API.
             #
             # This class represents the configuration for CompletionService,
@@ -1128,6 +1255,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :purge_completion_suggestions
+                ##
+                # RPC-specific configuration for `remove_suggestion`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :remove_suggestion
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1143,6 +1275,8 @@ module Google
                   @import_completion_suggestions = ::Gapic::Config::Method.new import_completion_suggestions_config
                   purge_completion_suggestions_config = parent_rpcs.purge_completion_suggestions if parent_rpcs.respond_to? :purge_completion_suggestions
                   @purge_completion_suggestions = ::Gapic::Config::Method.new purge_completion_suggestions_config
+                  remove_suggestion_config = parent_rpcs.remove_suggestion if parent_rpcs.respond_to? :remove_suggestion
+                  @remove_suggestion = ::Gapic::Config::Method.new remove_suggestion_config
 
                   yield self if block_given?
                 end

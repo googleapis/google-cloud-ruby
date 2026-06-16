@@ -32,12 +32,22 @@ module Google
         # @!attribute [rw] answer_text
         #   @return [::String]
         #     The textual answer.
+        # @!attribute [rw] grounding_score
+        #   @return [::Float]
+        #     A score in the range of [0, 1] describing how grounded the answer is by the
+        #     reference chunks.
         # @!attribute [rw] citations
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Answer::Citation>]
         #     Citations.
+        # @!attribute [rw] grounding_supports
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Answer::GroundingSupport>]
+        #     Optional. Grounding supports.
         # @!attribute [rw] references
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Answer::Reference>]
         #     References.
+        # @!attribute [r] blob_attachments
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Answer::BlobAttachment>]
+        #     Output only. List of blob attachments in the answer.
         # @!attribute [rw] related_questions
         #   @return [::Array<::String>]
         #     Suggested related questions.
@@ -57,6 +67,9 @@ module Google
         # @!attribute [r] complete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Answer completed timestamp.
+        # @!attribute [rw] safety_ratings
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SafetyRating>]
+        #     Optional. Safety ratings.
         class Answer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -65,10 +78,13 @@ module Google
           # @!attribute [rw] start_index
           #   @return [::Integer]
           #     Index indicates the start of the segment, measured in bytes (UTF-8
-          #     unicode).
+          #     unicode). If there are multi-byte characters,such as non-ASCII
+          #     characters, the index measurement is longer than the string length.
           # @!attribute [rw] end_index
           #   @return [::Integer]
-          #     End of the attributed segment, exclusive.
+          #     End of the attributed segment, exclusive. Measured in bytes (UTF-8
+          #     unicode). If there are multi-byte characters,such as non-ASCII
+          #     characters, the index measurement is longer than the string length.
           # @!attribute [rw] sources
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Answer::CitationSource>]
           #     Citation sources for the attributed segment.
@@ -82,6 +98,35 @@ module Google
           #   @return [::String]
           #     ID of the citation source.
           class CitationSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Grounding support for a claim in `answer_text`.
+          # @!attribute [rw] start_index
+          #   @return [::Integer]
+          #     Required. Index indicates the start of the claim, measured in bytes
+          #     (UTF-8 unicode).
+          # @!attribute [rw] end_index
+          #   @return [::Integer]
+          #     Required. End of the claim, exclusive.
+          # @!attribute [rw] grounding_score
+          #   @return [::Float]
+          #     A score in the range of [0, 1] describing how grounded is a specific
+          #     claim by the references.
+          #     Higher value means that the claim is better supported by the reference
+          #     chunks.
+          # @!attribute [rw] grounding_check_required
+          #   @return [::Boolean]
+          #     Indicates that this claim required grounding check. When the
+          #     system decided this claim didn't require attribution/grounding check,
+          #     this field is set to false. In that case, no grounding check was
+          #     done for the claim and therefore `grounding_score`, `sources` is not
+          #     returned.
+          # @!attribute [rw] sources
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Answer::CitationSource>]
+          #     Optional. Citation sources for the claim.
+          class GroundingSupport
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -141,6 +186,9 @@ module Google
               #     This value is for informational purpose only. It may change for
               #     the same query and chunk at any time due to a model retraining or
               #     change in implementation.
+              # @!attribute [r] blob_attachment_indexes
+              #   @return [::Array<::Integer>]
+              #     Output only. Stores indexes of blobattachments linked to this chunk.
               class ChunkContent
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -164,6 +212,9 @@ module Google
             # @!attribute [rw] document_metadata
             #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Answer::Reference::ChunkInfo::DocumentMetadata]
             #     Document metadata.
+            # @!attribute [r] blob_attachment_indexes
+            #   @return [::Array<::Integer>]
+            #     Output only. Stores indexes of blobattachments linked to this chunk.
             class ChunkInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -198,9 +249,53 @@ module Google
             # @!attribute [rw] struct_data
             #   @return [::Google::Protobuf::Struct]
             #     Structured search data.
+            # @!attribute [r] title
+            #   @return [::String]
+            #     Output only. The title of the document.
+            # @!attribute [r] uri
+            #   @return [::String]
+            #     Output only. The URI of the document.
             class StructuredDocumentInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Stores binarydata attached to text answer, e.g. image, video, audio, etc.
+          # @!attribute [r] data
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Answer::BlobAttachment::Blob]
+          #     Output only. The mime type and data of the blob.
+          # @!attribute [r] attribution_type
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Answer::BlobAttachment::AttributionType]
+          #     Output only. The attribution type of the blob.
+          class BlobAttachment
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The media type and data of the blob.
+            # @!attribute [r] mime_type
+            #   @return [::String]
+            #     Output only. The media type (MIME type) of the generated or retrieved
+            #     data.
+            # @!attribute [r] data
+            #   @return [::String]
+            #     Output only. Raw bytes.
+            class Blob
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The source of the blob.
+            module AttributionType
+              # Unspecified attribution type.
+              ATTRIBUTION_TYPE_UNSPECIFIED = 0
+
+              # The attachment data is from the corpus.
+              CORPUS = 1
+
+              # The attachment data is generated by the model through code
+              # generation.
+              GENERATED = 2
             end
           end
 
@@ -362,6 +457,9 @@ module Google
 
                 # Non-answer-seeking query classification type, for no clear intent.
                 NON_ANSWER_SEEKING_QUERY_V2 = 4
+
+                # User defined query classification type.
+                USER_DEFINED_CLASSIFICATION_QUERY = 5
               end
             end
           end
@@ -379,6 +477,9 @@ module Google
 
             # Answer generation has succeeded.
             SUCCEEDED = 3
+
+            # Answer generation is currently in progress.
+            STREAMING = 4
           end
 
           # An enum for answer skipped reasons.
@@ -434,6 +535,20 @@ module Google
             # Google skips the answer if a well grounded answer was unable to be
             # generated.
             LOW_GROUNDED_ANSWER = 9
+
+            # The user defined query classification ignored case.
+            #
+            # Google skips the answer if the query is classified as a user defined
+            # query classification.
+            USER_DEFINED_CLASSIFICATION_QUERY_IGNORED = 10
+
+            # The unhelpful answer case.
+            #
+            # Google skips the answer if the answer is not helpful. This can be due to
+            # a variety of factors, including but not limited to: the query is not
+            # answerable, the answer is not relevant to the query, or the answer is
+            # not well-formatted.
+            UNHELPFUL_ANSWER = 11
           end
         end
       end

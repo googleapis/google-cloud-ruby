@@ -21,6 +21,26 @@ module Google
   module Cloud
     module DiscoveryEngine
       module V1beta
+        # Request for CreateServingConfig method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Full resource name of parent. Format:
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+        # @!attribute [rw] serving_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig]
+        #     Required. The ServingConfig to create.
+        # @!attribute [rw] serving_config_id
+        #   @return [::String]
+        #     Required. The ID to use for the ServingConfig, which will become the final
+        #     component of the ServingConfig's resource name.
+        #
+        #     This value should be 4-63 characters, and valid characters
+        #     are /[a-zA-Z0-9][a-zA-Z0-9_-]+/.
+        class CreateServingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request for UpdateServingConfig method.
         # @!attribute [rw] serving_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig]
@@ -35,6 +55,16 @@ module Google
         #
         #     If not set, all supported fields are updated.
         class UpdateServingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for DeleteServingConfig method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the ServingConfig to delete. Format:
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
+        class DeleteServingConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

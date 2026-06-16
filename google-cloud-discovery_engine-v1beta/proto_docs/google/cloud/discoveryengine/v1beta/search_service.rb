@@ -42,6 +42,25 @@ module Google
         # @!attribute [rw] query
         #   @return [::String]
         #     Raw search query.
+        # @!attribute [rw] page_categories
+        #   @return [::Array<::String>]
+        #     Optional. The categories associated with a category page. Must be set for
+        #     category navigation queries to achieve good search quality. The format
+        #     should be the same as
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::PageInfo#page_category PageInfo.page_category}.
+        #     This field is the equivalent of the query for browse (navigation) queries.
+        #     It's used by the browse model when the query is empty.
+        #
+        #     If the field is empty, it will not be used by the browse model.
+        #     If the field contains more than one element, only the first element will
+        #     be used.
+        #
+        #     To represent full path of a category, use '>' character to separate
+        #     different hierarchies. If '>' is part of the category name, replace it with
+        #     other character(s).
+        #     For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+        #     4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+        #     > Founders Edition`
         # @!attribute [rw] image_query
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ImageQuery]
         #     Raw image query.
@@ -76,6 +95,8 @@ module Google
         #     is unset.
         #
         #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+        #
+        #     A large offset may be capped to a reasonable threshold.
         # @!attribute [rw] one_box_page_size
         #   @return [::Integer]
         #     The maximum number of results to return for OneBox.
@@ -83,10 +104,19 @@ module Google
         #     Default number is 10.
         # @!attribute [rw] data_store_specs
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DataStoreSpec>]
-        #     Specs defining dataStores to filter on in a search call and configurations
-        #     for those dataStores. This is only considered for engines with multiple
-        #     dataStores use case. For single dataStore within an engine, they should
-        #     use the specs at the top level.
+        #     Specifications that define the specific
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}s to be searched,
+        #     along with configurations for those data stores. This is only considered
+        #     for {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}s with multiple
+        #     data stores. For engines with a single data store, the specs directly under
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest SearchRequest} should
+        #     be used.
+        # @!attribute [rw] num_results_per_data_store
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to retrieve from each data store.
+        #     If not specified, it will use the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DataStoreSpec#num_results SearchRequest.DataStoreSpec.num_results}
+        #     if provided, otherwise there is no limit.
         # @!attribute [rw] filter
         #   @return [::String]
         #     The filter syntax consists of an expression language for constructing a
@@ -135,7 +165,7 @@ module Google
         # @!attribute [rw] user_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::UserInfo]
         #     Information about the end user.
-        #     Highly recommended for analytics.
+        #     Highly recommended for analytics and personalization.
         #     {::Google::Cloud::DiscoveryEngine::V1beta::UserInfo#user_agent UserInfo.user_agent}
         #     is used to deduce `device_type` for analytics.
         # @!attribute [rw] language_code
@@ -189,10 +219,10 @@ module Google
         #     which spell correction takes effect.
         # @!attribute [rw] user_pseudo_id
         #   @return [::String]
-        #     A unique identifier for tracking visitors. For example, this could be
-        #     implemented with an HTTP cookie, which should be able to uniquely identify
-        #     a visitor on a single device. This unique identifier should not change if
-        #     the visitor logs in or out of the website.
+        #     Optional. A unique identifier for tracking visitors. For example, this
+        #     could be implemented with an HTTP cookie, which should be able to uniquely
+        #     identify a visitor on a single device. This unique identifier should not
+        #     change if the visitor logs in or out of the website.
         #
         #     This field should NOT have a fixed value such as `unknown_visitor`.
         #
@@ -220,8 +250,8 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#embedding_config ServingConfig.EmbeddingConfig.field_path}.
         # @!attribute [rw] ranking_expression
         #   @return [::String]
-        #     The ranking expression controls the customized ranking on retrieval
-        #     documents. This overrides
+        #     Optional. The ranking expression controls the customized ranking on
+        #     retrieval documents. This overrides
         #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#ranking_expression ServingConfig.ranking_expression}.
         #     The syntax and supported features depend on the
         #     `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -310,9 +340,18 @@ module Google
         #       Google model to determine the keyword-based overlap between the query and
         #       the document.
         #       * `base_rank`: the default rank of the result
+        #       * `media_actor_match`: whether the media actor matches the query
+        #       * `media_director_match`: whether the media director matches the query
+        #       * `media_genre_match`: whether the media genre matches the query
+        #       * `media_language_match`: whether the media language matches the query
+        #       * `media_title_match`: whether the media title matches the query
+        #       * `media_prefix_similarity_rank`: prefix similarity rank for media
+        #       results
+        #       * `media_semantic_similarity_rank`: semantic similarity rank for media
+        #       results
         # @!attribute [rw] ranking_expression_backend
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RankingExpressionBackend]
-        #     The backend to use for the ranking expression evaluation.
+        #     Optional. The backend to use for the ranking expression evaluation.
         # @!attribute [rw] safe_search
         #   @return [::Boolean]
         #     Whether to turn on safe search. This is only supported for
@@ -338,6 +377,10 @@ module Google
         #     for more details.
         # @!attribute [rw] natural_language_query_understanding_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::NaturalLanguageQueryUnderstandingSpec]
+        #     Optional. Config for natural language query understanding capabilities,
+        #     such as extracting structured field filters from the query. Refer to [this
+        #     documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+        #     for more information.
         #     If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
         #     natural language query understanding will be done.
         # @!attribute [rw] search_as_you_type_spec
@@ -345,6 +388,21 @@ module Google
         #     Search as you type configuration. Only supported for the
         #     {::Google::Cloud::DiscoveryEngine::V1beta::IndustryVertical::MEDIA IndustryVertical.MEDIA}
         #     vertical.
+        # @!attribute [rw] display_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DisplaySpec]
+        #     Optional. Config for display feature, like match highlighting on search
+        #     results.
+        # @!attribute [rw] crowding_specs
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::CrowdingSpec>]
+        #     Optional. Crowding specifications for improving result diversity.
+        #     If multiple CrowdingSpecs are specified, crowding will be evaluated on
+        #     each unique combination of the `field` values, and max_count will be the
+        #     maximum value of `max_count` across all CrowdingSpecs.
+        #     For example, if the first CrowdingSpec has `field` = "color" and
+        #     `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+        #     `max_count` = 2, then after 3 documents that share the same color AND size
+        #     have been returned, subsequent ones should be
+        #     removed or demoted.
         # @!attribute [rw] session
         #   @return [::String]
         #     The session resource name. Optional.
@@ -363,10 +421,6 @@ module Google
         #       Call /answer API with the session ID generated in the first call.
         #       Here, the answer generation happens in the context of the search
         #       results from the first search call.
-        #
-        #     Multi-turn Search feature is currently at private GA stage. Please use
-        #     v1alpha or v1beta version instead before we launch this feature to public
-        #     GA. Or ask for allowlisting through Google Support team.
         # @!attribute [rw] session_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SessionSpec]
         #     Session specification.
@@ -374,11 +428,25 @@ module Google
         #     Can be used only when `session` is set.
         # @!attribute [rw] relevance_threshold
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RelevanceThreshold]
-        #     The relevance threshold of the search results.
+        #     The global relevance threshold of the search results.
         #
-        #     Default to Google defined threshold, leveraging a balance of
+        #     Defaults to Google defined threshold, leveraging a balance of
         #     precision and recall to deliver both highly accurate results and
         #     comprehensive coverage of relevant information.
+        #
+        #     If more granular relevance filtering is required, use the
+        #     `relevance_filter_spec` instead.
+        #
+        #     This feature is not supported for healthcare search.
+        # @!attribute [rw] relevance_filter_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RelevanceFilterSpec]
+        #     Optional. The granular relevance filtering specification.
+        #
+        #     If not specified, the global `relevance_threshold` will be used for all
+        #     sub-searches. If specified, this overrides the global
+        #     `relevance_threshold` to use thresholds on a per sub-search basis.
+        #
+        #     This feature is currently supported only for custom and site search.
         # @!attribute [rw] personalization_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::PersonalizationSpec]
         #     The specification for personalization.
@@ -391,6 +459,25 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#personalization_spec SearchRequest.personalization_spec}
         #     overrides
         #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#personalization_spec ServingConfig.personalization_spec}.
+        # @!attribute [rw] relevance_score_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RelevanceScoreSpec]
+        #     Optional. The specification for returning the relevance score.
+        # @!attribute [rw] search_addon_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SearchAddonSpec]
+        #     Optional. SearchAddonSpec is used to disable add-ons for search as per new
+        #     repricing model.
+        #     This field is only supported for search requests.
+        # @!attribute [rw] custom_ranking_params
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::CustomRankingParams]
+        #     Optional. Optional configuration for the Custom Ranking feature.
+        # @!attribute [rw] entity
+        #   @return [::String]
+        #     Optional. The entity for customers that may run multiple different
+        #     entities, domains, sites or regions, for example, "Google US", "Google
+        #     Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+        #     be exactly matched with
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent#entity UserEvent.entity} to
+        #     get search results boosted by entity.
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -425,6 +512,20 @@ module Google
           #     Optional. Boost specification to boost certain documents.
           #     For more information on boosting, see
           #     [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
+          # @!attribute [rw] custom_search_operators
+          #   @return [::String]
+          #     Optional. Custom search operators which if specified will be used to
+          #     filter results from workspace data stores. For more information on custom
+          #     search operators, see
+          #     [SearchOperators](https://support.google.com/cloudsearch/answer/6172299).
+          # @!attribute [rw] num_results
+          #   @return [::Integer]
+          #     Optional. The maximum number of results to retrieve from this data store.
+          #     If not specified, it will use the
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#num_results_per_data_store SearchRequest.num_results_per_data_store}
+          #     if provided, otherwise there is no limit. If both this field and
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#num_results_per_data_store SearchRequest.num_results_per_data_store}
+          #     are specified, this field will be used.
           class DataStoreSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -447,7 +548,6 @@ module Google
           # @!attribute [rw] excluded_filter_keys
           #   @return [::Array<::String>]
           #     List of keys to exclude when faceting.
-          #
           #
           #     By default,
           #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::FacetSpec::FacetKey#key FacetKey.key}
@@ -574,7 +674,7 @@ module Google
           # @!attribute [rw] condition_boost_specs
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::BoostSpec::ConditionBoostSpec>]
           #     Condition boost specifications. If a document matches multiple conditions
-          #     in the specifictions, boost scores from these specifications are all
+          #     in the specifications, boost scores from these specifications are all
           #     applied and combined in a non-linear way. Maximum number of
           #     specifications is 20.
           class BoostSpec
@@ -894,6 +994,9 @@ module Google
             #     competing company's CEO". If this field is set to `true`, we skip
             #     generating summaries for jail-breaking queries and return fallback
             #     messages instead.
+            # @!attribute [rw] multimodal_spec
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec::MultiModalSpec]
+            #     Optional. Multimodal specification.
             # @!attribute [rw] model_prompt_spec
             #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec::ModelPromptSpec]
             #     If specified, the spec will be used to modify the prompt provided to
@@ -918,6 +1021,34 @@ module Google
             class SummarySpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Multimodal specification: Will return an image from specified source.
+              # If multiple sources are specified, the pick is a quality based
+              # decision.
+              # @!attribute [rw] image_source
+              #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec::MultiModalSpec::ImageSource]
+              #     Optional. Source of image returned in the answer.
+              class MultiModalSpec
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Specifies the image source.
+                module ImageSource
+                  # Unspecified image source (multimodal feature is disabled by
+                  # default).
+                  IMAGE_SOURCE_UNSPECIFIED = 0
+
+                  # Behavior when service determines the pick from all available
+                  # sources.
+                  ALL_AVAILABLE_SOURCES = 1
+
+                  # Includes image from corpus in the answer.
+                  CORPUS_IMAGE_ONLY = 2
+
+                  # Triggers figure generation in the answer.
+                  FIGURE_GENERATION_ONLY = 3
+                end
+              end
 
               # Specification of the prompt to use with the model.
               # @!attribute [rw] preamble
@@ -1037,7 +1168,8 @@ module Google
               DOCUMENTS = 1
 
               # Returns chunks in the search result. Only available if the
-              # [DataStore.DocumentProcessingConfig.chunking_config][] is specified.
+              # {::Google::Cloud::DiscoveryEngine::V1beta::DocumentProcessingConfig#chunking_config DocumentProcessingConfig.chunking_config}
+              # is specified.
               CHUNKS = 2
             end
           end
@@ -1069,22 +1201,41 @@ module Google
           # @!attribute [rw] filter_extraction_condition
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::NaturalLanguageQueryUnderstandingSpec::FilterExtractionCondition]
           #     The condition under which filter extraction should occur.
-          #     Default to [Condition.DISABLED][].
+          #     Server behavior defaults to `DISABLED`.
           # @!attribute [rw] geo_search_query_detection_field_names
           #   @return [::Array<::String>]
           #     Field names used for location-based filtering, where geolocation filters
           #     are detected in natural language search queries.
           #     Only valid when the FilterExtractionCondition is set to `ENABLED`.
-          #
-          #     If this field is set, it overrides the field names set in
-          #     [ServingConfig.geo_search_query_detection_field_names][google.cloud.discoveryengine.v1beta.ServingConfig.geo_search_query_detection_field_names].
+          # @!attribute [rw] extracted_filter_behavior
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::NaturalLanguageQueryUnderstandingSpec::ExtractedFilterBehavior]
+          #     Optional. Controls behavior of how extracted filters are applied to the
+          #     search. The default behavior depends on the request. For single datastore
+          #     structured search, the default is `HARD_FILTER`. For multi-datastore
+          #     search, the default behavior is `SOFT_BOOST`.
+          #     Location-based filters are always applied as hard filters, and the
+          #     `SOFT_BOOST` setting will not affect them.
+          #     This field is only used if
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::NaturalLanguageQueryUnderstandingSpec::FilterExtractionCondition SearchRequest.NaturalLanguageQueryUnderstandingSpec.FilterExtractionCondition}
+          #     is set to
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::NaturalLanguageQueryUnderstandingSpec::FilterExtractionCondition::ENABLED FilterExtractionCondition.ENABLED}.
+          # @!attribute [rw] allowed_field_names
+          #   @return [::Array<::String>]
+          #     Optional. Allowlist of fields that can be used for natural language
+          #     filter extraction. By default, if this is unspecified, all indexable
+          #     fields are eligible for natural language filter extraction (but are not
+          #     guaranteed to be used). If any fields are specified in
+          #     allowed_field_names, only the fields that are both marked as indexable in
+          #     the schema and specified in the allowlist will be eligible for natural
+          #     language filter extraction. Note: for multi-datastore search, this is not
+          #     yet supported, and will be ignored.
           class NaturalLanguageQueryUnderstandingSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Enum describing under which condition filter extraction should occur.
             module FilterExtractionCondition
-              # Server behavior defaults to [Condition.DISABLED][].
+              # Server behavior defaults to `DISABLED`.
               CONDITION_UNSPECIFIED = 0
 
               # Disables NL filter extraction.
@@ -1092,6 +1243,24 @@ module Google
 
               # Enables NL filter extraction.
               ENABLED = 2
+            end
+
+            # Enum describing how extracted filters are applied to the search.
+            module ExtractedFilterBehavior
+              # `EXTRACTED_FILTER_BEHAVIOR_UNSPECIFIED` will use the default behavior
+              # for extracted filters. For single datastore search, the default is to
+              # apply as hard filters. For multi-datastore search, the default is to
+              # apply as soft boosts.
+              EXTRACTED_FILTER_BEHAVIOR_UNSPECIFIED = 0
+
+              # Applies all extracted filters as hard filters on the results. Results
+              # that do not pass the extracted filters will not be returned in the
+              # result set.
+              HARD_FILTER = 1
+
+              # Applies all extracted filters as soft boosts. Results that pass the
+              # filters will be boosted up to higher ranks in the result set.
+              SOFT_BOOST = 2
             end
           end
 
@@ -1123,11 +1292,67 @@ module Google
             end
           end
 
+          # Specifies features for display, like match highlighting.
+          # @!attribute [rw] match_highlighting_condition
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DisplaySpec::MatchHighlightingCondition]
+          #     The condition under which match highlighting should occur.
+          class DisplaySpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum describing under which condition match highlighting should occur.
+            module MatchHighlightingCondition
+              # Server behavior is the same as `MATCH_HIGHLIGHTING_DISABLED`.
+              MATCH_HIGHLIGHTING_CONDITION_UNSPECIFIED = 0
+
+              # Disables match highlighting on all documents.
+              MATCH_HIGHLIGHTING_DISABLED = 1
+
+              # Enables match highlighting on all documents.
+              MATCH_HIGHLIGHTING_ENABLED = 2
+            end
+          end
+
+          # Specification for crowding. Crowding improves the diversity of search
+          # results by limiting the number of results that share the same field value.
+          # For example, crowding on the color field with a max_count of 3 and mode
+          # DROP_CROWDED_RESULTS will return at most 3 results with the same color
+          # across all pages.
+          # @!attribute [rw] field
+          #   @return [::String]
+          #     The field to use for crowding. Documents can be crowded by a field in the
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} object. Crowding
+          #     field is case sensitive.
+          # @!attribute [rw] max_count
+          #   @return [::Integer]
+          #     The maximum number of documents to keep per value of the field. Once
+          #     there are at least max_count previous results which contain the same
+          #     value for the given field (according to the order specified in
+          #     `order_by`), later results with the same value are "crowded away".
+          #     If not specified, the default value is 1.
+          # @!attribute [rw] mode
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::CrowdingSpec::Mode]
+          #     Mode to use for documents that are crowded away.
+          class CrowdingSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum describing the mode to use for documents that are crowded away.
+            # They can be dropped or demoted to the later pages.
+            module Mode
+              # Unspecified crowding mode. In this case, server behavior defaults to
+              # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::CrowdingSpec::Mode::DROP_CROWDED_RESULTS Mode.DROP_CROWDED_RESULTS}.
+              MODE_UNSPECIFIED = 0
+
+              # Drop crowded results.
+              DROP_CROWDED_RESULTS = 1
+
+              # Demote crowded results to the later pages.
+              DEMOTE_CROWDED_RESULTS_TO_END = 2
+            end
+          end
+
           # Session specification.
-          #
-          # Multi-turn Search feature is currently at private GA stage. Please use
-          # v1alpha or v1beta version instead before we launch this feature to public
-          # GA. Or ask for allowlisting through Google Support team.
           # @!attribute [rw] query_id
           #   @return [::String]
           #     If set, the search result gets stored to the "turn" specified by this
@@ -1160,13 +1385,43 @@ module Google
           #     The number of top search results to persist. The persisted search results
           #     can be used for the subsequent /answer api call.
           #
-          #     This field is simliar to the `summary_result_count` field in
+          #     This field is similar to the `summary_result_count` field in
           #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec#summary_result_count SearchRequest.ContentSearchSpec.SummarySpec.summary_result_count}.
           #
           #     At most 10 results for documents mode, or 50 for chunks mode.
           class SessionSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Relevance filtering specification.
+          # @!attribute [rw] keyword_search_threshold
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RelevanceFilterSpec::RelevanceThresholdSpec]
+          #     Optional. Relevance filtering threshold specification for keyword search.
+          # @!attribute [rw] semantic_search_threshold
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RelevanceFilterSpec::RelevanceThresholdSpec]
+          #     Optional. Relevance filtering threshold specification for semantic
+          #     search.
+          class RelevanceFilterSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Specification for relevance filtering on a specific sub-search.
+            # @!attribute [rw] relevance_threshold
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RelevanceThreshold]
+            #     Pre-defined relevance threshold for the sub-search.
+            #
+            #     Note: The following fields are mutually exclusive: `relevance_threshold`, `semantic_relevance_threshold`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] semantic_relevance_threshold
+            #   @return [::Float]
+            #     Custom relevance threshold for the sub-search.
+            #     The value must be in [0.0, 1.0].
+            #
+            #     Note: The following fields are mutually exclusive: `semantic_relevance_threshold`, `relevance_threshold`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            class RelevanceThresholdSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # The specification for personalization.
@@ -1193,6 +1448,49 @@ module Google
             end
           end
 
+          # The specification for returning the document relevance score.
+          # @!attribute [rw] return_relevance_score
+          #   @return [::Boolean]
+          #     Optional. Whether to return the relevance score for search results.
+          #     The higher the score, the more relevant the document is to the query.
+          class RelevanceScoreSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # SearchAddonSpec is used to disable add-ons for search as per new
+          # repricing model. By default if the SearchAddonSpec is not specified, we
+          # consider that the customer wants to enable them wherever applicable.
+          # @!attribute [rw] disable_semantic_add_on
+          #   @return [::Boolean]
+          #     Optional. If true, semantic add-on is disabled. Semantic add-on includes
+          #     embeddings and jetstream.
+          # @!attribute [rw] disable_kpi_personalization_add_on
+          #   @return [::Boolean]
+          #     Optional. If true, disables event re-ranking and personalization to
+          #     optimize KPIs & personalize results.
+          # @!attribute [rw] disable_generative_answer_add_on
+          #   @return [::Boolean]
+          #     Optional. If true, generative answer add-on is disabled. Generative
+          #     answer add-on includes natural language to filters and simple answers.
+          class SearchAddonSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration parameters for the Custom Ranking feature.
+          # @!attribute [rw] expressions_to_precompute
+          #   @return [::Array<::String>]
+          #     Optional. A list of ranking expressions (see `ranking_expression` for the
+          #     syntax documentation) to evaluate. The evaluation results will be
+          #     returned in
+          #     `SearchResponse.SearchResult.rank_signals.precomputed_expression_values`
+          #     field.
+          class CustomRankingParams
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -1209,6 +1507,30 @@ module Google
           class UserLabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The backend to use for the ranking expression evaluation.
+          module RankingExpressionBackend
+            # Default option for unspecified/unknown values.
+            RANKING_EXPRESSION_BACKEND_UNSPECIFIED = 0
+
+            # Deprecated: Use `RANK_BY_EMBEDDING` instead.
+            # Ranking by custom embedding model, the default way to evaluate the
+            # ranking expression. Legacy enum option, `RANK_BY_EMBEDDING` should be
+            # used instead.
+            BYOE = 1
+
+            # Deprecated: Use `RANK_BY_FORMULA` instead.
+            # Ranking by custom formula. Legacy enum option, `RANK_BY_FORMULA` should
+            # be used instead.
+            CLEARBOX = 2
+
+            # Ranking by custom embedding model, the default way to evaluate the
+            # ranking expression.
+            RANK_BY_EMBEDDING = 3
+
+            # Ranking by custom formula.
+            RANK_BY_FORMULA = 4
           end
 
           # The relevance threshold of the search results. The higher relevance
@@ -1230,19 +1552,6 @@ module Google
 
             # High relevance threshold.
             HIGH = 4
-          end
-
-          # The backend to use for the ranking expression evaluation.
-          module RankingExpressionBackend
-            # Default option for unspecified/unknown values.
-            RANKING_EXPRESSION_BACKEND_UNSPECIFIED = 0
-
-            # Ranking by custom embedding model, the default way to evaluate the
-            # ranking expression.
-            RANK_BY_EMBEDDING = 3
-
-            # Ranking by custom formula.
-            RANK_BY_FORMULA = 4
           end
         end
 
@@ -1292,6 +1601,13 @@ module Google
         #     Contains the spell corrected query, if found. If the spell correction type
         #     is AUTOMATIC, then the search results are based on corrected_query.
         #     Otherwise the original query is used for search.
+        # @!attribute [rw] suggested_query
+        #   @return [::String]
+        #     Corrected query with low confidence, AKA did you mean query.
+        #     Compared with corrected_query, this field is set when SpellCorrector
+        #     returned a response, but FPR(full page replacement) is not triggered
+        #     because the corrction is of low confidence(eg, reversed because there are
+        #     matches of the original query in document corpus).
         # @!attribute [rw] summary
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::Summary]
         #     A summary as part of the search results.
@@ -1306,9 +1622,10 @@ module Google
         # @!attribute [rw] query_expansion_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::QueryExpansionInfo]
         #     Query expansion information for the returned results.
-        # @!attribute [rw] natural_language_query_understanding_info
+        # @!attribute [r] natural_language_query_understanding_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo]
-        #     Natural language query understanding information for the returned results.
+        #     Output only. Natural language query understanding information for the
+        #     returned results.
         # @!attribute [rw] session_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SessionInfo]
         #     Session information.
@@ -1320,6 +1637,12 @@ module Google
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::OneBoxResult>]
         #     A list of One Box results. There can be multiple One Box results of
         #     different types.
+        # @!attribute [rw] search_link_promotions
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchLinkPromotion>]
+        #     Promotions for site search.
+        # @!attribute [r] semantic_state
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SemanticState]
+        #     Output only. Indicates the semantic state of the search response.
         class SearchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1339,15 +1662,66 @@ module Google
           #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec#search_result_mode SearchRequest.ContentSearchSpec.search_result_mode}
           #     is set to
           #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SearchResultMode::CHUNKS CHUNKS}.
-          # @!attribute [rw] model_scores
+          # @!attribute [r] model_scores
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1beta::DoubleList}]
-          #     Google provided available scores.
+          #     Output only. Google provided available scores.
           # @!attribute [rw] rank_signals
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SearchResult::RankSignals]
-          #     A set of ranking signals associated with the result.
+          #     Optional. A set of ranking signals associated with the result.
           class SearchResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # A set of ranking signals.
+            # @!attribute [rw] keyword_similarity_score
+            #   @return [::Float]
+            #     Optional. Keyword matching adjustment.
+            # @!attribute [rw] relevance_score
+            #   @return [::Float]
+            #     Optional. Semantic relevance adjustment.
+            # @!attribute [rw] semantic_similarity_score
+            #   @return [::Float]
+            #     Optional. Semantic similarity adjustment.
+            # @!attribute [rw] pctr_rank
+            #   @return [::Float]
+            #     Optional. Predicted conversion rate adjustment as a rank.
+            # @!attribute [rw] topicality_rank
+            #   @return [::Float]
+            #     Optional. Topicality adjustment as a rank.
+            # @!attribute [rw] document_age
+            #   @return [::Float]
+            #     Optional. Age of the document in hours.
+            # @!attribute [rw] boosting_factor
+            #   @return [::Float]
+            #     Optional. Combined custom boosts for a doc.
+            # @!attribute [rw] default_rank
+            #   @return [::Float]
+            #     Optional. The default rank of the result.
+            # @!attribute [rw] custom_signals
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SearchResult::RankSignals::CustomSignal>]
+            #     Optional. A list of custom clearbox signals.
+            # @!attribute [rw] precomputed_expression_values
+            #   @return [::Array<::Float>]
+            #     Optional. A list of precomputed expression results for a given
+            #     document, in the same order as requested in
+            #     `SearchRequest.custom_ranking_params.expressions_to_precompute`.
+            class RankSignals
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Custom clearbox signal represented by name and value pair.
+              # @!attribute [rw] name
+              #   @return [::String]
+              #     Optional. Name of the signal.
+              # @!attribute [rw] value
+              #   @return [::Float]
+              #     Optional. Float value representing the ranking signal (e.g. 1.25 for
+              #     BM25).
+              class CustomSignal
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
 
             # @!attribute [rw] key
             #   @return [::String]
@@ -1356,51 +1730,6 @@ module Google
             class ModelScoresEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
-            end
-
-            # A set of ranking signals.
-            # @!attribute [rw] keyword_similarity_score
-            #   @return [::Float]
-            #     Keyword matching adjustment.
-            # @!attribute [rw] relevance_score
-            #   @return [::Float]
-            #     Semantic relevance adjustment.
-            # @!attribute [rw] semantic_similarity_score
-            #   @return [::Float]
-            #     Semantic similarity adjustment.
-            # @!attribute [rw] pctr_rank
-            #   @return [::Float]
-            #     Predicted conversion rate adjustment as a rank.
-            # @!attribute [rw] topicality_rank
-            #   @return [::Float]
-            #     Topicality adjustment as a rank.
-            # @!attribute [rw] document_age
-            #   @return [::Float]
-            #     Age of the document in hours.
-            # @!attribute [rw] boosting_factor
-            #   @return [::Float]
-            #     Combined custom boosts for a doc.
-            # @!attribute [rw] default_rank
-            #   @return [::Float]
-            #     The default rank of the result.
-            # @!attribute [rw] custom_signals
-            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SearchResult::RankSignals::CustomSignal>]
-            #     A list of custom clearbox signals.
-            class RankSignals
-              include ::Google::Protobuf::MessageExts
-              extend ::Google::Protobuf::MessageExts::ClassMethods
-
-              # Custom clearbox signal represented by name and value pair.
-              # @!attribute [rw] name
-              #   @return [::String]
-              #     Name of the signal.
-              # @!attribute [rw] value
-              #   @return [::Float]
-              #     Float value representing the ranking signal (e.g. 1.25 for BM25).
-              class CustomSignal
-                include ::Google::Protobuf::MessageExts
-                extend ::Google::Protobuf::MessageExts::ClassMethods
-              end
             end
           end
 
@@ -1562,9 +1891,49 @@ module Google
               # @!attribute [rw] page_identifier
               #   @return [::String]
               #     Page identifier.
+              # @!attribute [r] blob_attachment_indexes
+              #   @return [::Array<::Integer>]
+              #     Output only. Stores indexes of blobattachments linked to this chunk.
               class ChunkContent
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # Stores binarydata attached to text answer, e.g. image, video, audio, etc.
+            # @!attribute [r] data
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::Summary::BlobAttachment::Blob]
+            #     Output only. The blob data.
+            # @!attribute [r] attribution_type
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::Summary::BlobAttachment::AttributionType]
+            #     Output only. The attribution type of the blob.
+            class BlobAttachment
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Stores type and data of the blob.
+              # @!attribute [r] mime_type
+              #   @return [::String]
+              #     Output only. The media type (MIME type) of the generated data.
+              # @!attribute [r] data
+              #   @return [::String]
+              #     Output only. Raw bytes.
+              class Blob
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Defines the attribution type of the blob.
+              module AttributionType
+                # Unspecified attribution type.
+                ATTRIBUTION_TYPE_UNSPECIFIED = 0
+
+                # The attachment data is from the corpus.
+                CORPUS = 1
+
+                # The attachment data is generated by the model through code
+                # generation.
+                GENERATED = 2
               end
             end
 
@@ -1578,6 +1947,9 @@ module Google
             # @!attribute [rw] references
             #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::Summary::Reference>]
             #     Document References.
+            # @!attribute [r] blob_attachments
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::Summary::BlobAttachment>]
+            #     Output only. Store multimodal data for answer enhancement.
             class SummaryWithMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1648,6 +2020,11 @@ module Google
               # [SearchRequest.ContentSearchSpec.SummarySpec.ignore_non_answer_seeking_query]
               # is set to `true`.
               NON_SUMMARY_SEEKING_QUERY_IGNORED_V2 = 9
+
+              # The time out case.
+              #
+              # Google skips the summary if the time out.
+              TIME_OUT = 10
             end
           end
 
@@ -1688,6 +2065,9 @@ module Google
           # @!attribute [rw] rewritten_query
           #   @return [::String]
           #     Rewritten input query minus the extracted filters.
+          # @!attribute [rw] classified_intents
+          #   @return [::Array<::String>]
+          #     The classified intents from the input query.
           # @!attribute [rw] structured_extracted_filter
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter]
           #     The filters that were extracted from the input query represented in a
@@ -1891,6 +2271,18 @@ module Google
               # One Box result contains Knowledge Graph search responses.
               KNOWLEDGE_GRAPH = 4
             end
+          end
+
+          # Semantic state of the search response.
+          module SemanticState
+            # Default value. Should not be used.
+            SEMANTIC_STATE_UNSPECIFIED = 0
+
+            # Semantic search was disabled for this search response.
+            DISABLED = 1
+
+            # Semantic search was enabled for this search response.
+            ENABLED = 2
           end
         end
       end

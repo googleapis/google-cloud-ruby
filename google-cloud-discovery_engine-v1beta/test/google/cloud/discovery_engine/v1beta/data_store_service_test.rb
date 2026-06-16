@@ -71,6 +71,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::ClientTest < M
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    cmek_config_name = "hello world"
     parent = "hello world"
     data_store = {}
     data_store_id = "hello world"
@@ -80,6 +81,8 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::ClientTest < M
     create_data_store_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_data_store, name
       assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::CreateDataStoreRequest, request
+      assert_equal "hello world", request["cmek_config_name"]
+      assert_equal :cmek_config_name, request.cmek_options
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::DataStore), request["data_store"]
       assert_equal "hello world", request["data_store_id"]
@@ -95,35 +98,35 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::ClientTest < M
       end
 
       # Use hash object
-      c.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }) do |response, operation|
+      c.create_data_store({ cmek_config_name: cmek_config_name, parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.create_data_store parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation do |response, operation|
+      c.create_data_store cmek_config_name: cmek_config_name, parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.create_data_store ::Google::Cloud::DiscoveryEngine::V1beta::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation) do |response, operation|
+      c.create_data_store ::Google::Cloud::DiscoveryEngine::V1beta::CreateDataStoreRequest.new(cmek_config_name: cmek_config_name, parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }, grpc_options) do |response, operation|
+      c.create_data_store({ cmek_config_name: cmek_config_name, parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.create_data_store(::Google::Cloud::DiscoveryEngine::V1beta::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation), grpc_options) do |response, operation|
+      c.create_data_store(::Google::Cloud::DiscoveryEngine::V1beta::CreateDataStoreRequest.new(cmek_config_name: cmek_config_name, parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

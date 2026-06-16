@@ -86,6 +86,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Rest::ClientTe
     call_options = {}
 
     # Create request parameters for a unary method.
+    cmek_config_name = "hello world"
     parent = "hello world"
     data_store = {}
     data_store_id = "hello world"
@@ -106,27 +107,27 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Rest::ClientTe
         end
 
         # Use hash object
-        c.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }) do |_result, response|
+        c.create_data_store({ cmek_config_name: cmek_config_name, parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.create_data_store parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation do |_result, response|
+        c.create_data_store cmek_config_name: cmek_config_name, parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.create_data_store ::Google::Cloud::DiscoveryEngine::V1beta::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation) do |_result, response|
+        c.create_data_store ::Google::Cloud::DiscoveryEngine::V1beta::CreateDataStoreRequest.new(cmek_config_name: cmek_config_name, parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }, call_options) do |_result, response|
+        c.create_data_store({ cmek_config_name: cmek_config_name, parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.create_data_store(::Google::Cloud::DiscoveryEngine::V1beta::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation), call_options) do |_result, response|
+        c.create_data_store(::Google::Cloud::DiscoveryEngine::V1beta::CreateDataStoreRequest.new(cmek_config_name: cmek_config_name, parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -29,11 +29,11 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore} level, the
         #     format is:
         #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-        #     If the write user event action is applied in [Location][] level, for
-        #     example, the event with
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} across multiple
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}, the format is:
-        #     `projects/{project}/locations/{location}`.
+        #     If the write user event action is applied in
+        #     [Location][google.cloud.location.Location] level, for example, the event
+        #     with {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} across
+        #     multiple {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}, the
+        #     format is: `projects/{project}/locations/{location}`.
         # @!attribute [rw] user_event
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::UserEvent]
         #     Required. User event to write.
@@ -49,8 +49,16 @@ module Google
         # Request message for CollectUserEvent method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent DataStore resource name, such as
+        #     Required. The parent resource name.
+        #     If the collect user event action is applied in
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore} level, the
+        #     format is:
         #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+        #     If the collect user event action is applied in
+        #     [Location][google.cloud.location.Location] level, for example, the event
+        #     with {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} across
+        #     multiple {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}, the
+        #     format is: `projects/{project}/locations/{location}`.
         # @!attribute [rw] user_event
         #   @return [::String]
         #     Required. URL encoded UserEvent proto with a length limit of 2,000,000
