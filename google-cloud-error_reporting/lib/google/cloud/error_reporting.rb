@@ -93,7 +93,10 @@ module Google
         credentials = resolve_credentials credentials, scope
         project_id = resolve_project_id project_id, credentials
 
-        service = ErrorReporting::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        quota_project = configure.quota_project
+        service = ErrorReporting::Service.new project_id, credentials,
+                                              host: endpoint, timeout: timeout,
+                                              quota_project: quota_project
         ErrorReporting::Project.new service
       end
 
