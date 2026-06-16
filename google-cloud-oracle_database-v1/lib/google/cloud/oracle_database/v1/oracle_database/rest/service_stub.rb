@@ -2714,46 +2714,6 @@ module Google
               end
 
               ##
-              # Baseline implementation for the get_goldengate_deployment_version REST call
-              #
-              # @param request_pb [::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentVersion]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentVersion]
-              #   A result object deserialized from the server's reply
-              def get_goldengate_deployment_version request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_get_goldengate_deployment_version_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "get_goldengate_deployment_version",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentVersion.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
               # Baseline implementation for the list_goldengate_deployment_versions REST call
               #
               # @param request_pb [::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentVersionsRequest]
@@ -2787,46 +2747,6 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentVersionsResponse.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
-              # Baseline implementation for the get_goldengate_deployment_type REST call
-              #
-              # @param request_pb [::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentType]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentType]
-              #   A result object deserialized from the server's reply
-              def get_goldengate_deployment_type request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_get_goldengate_deployment_type_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "get_goldengate_deployment_type",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentType.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -2874,46 +2794,6 @@ module Google
               end
 
               ##
-              # Baseline implementation for the get_goldengate_deployment_environment REST call
-              #
-              # @param request_pb [::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentEnvironment]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentEnvironment]
-              #   A result object deserialized from the server's reply
-              def get_goldengate_deployment_environment request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_get_goldengate_deployment_environment_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "get_goldengate_deployment_environment",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentEnvironment.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
               # Baseline implementation for the list_goldengate_deployment_environments REST call
               #
               # @param request_pb [::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentEnvironmentsRequest]
@@ -2947,46 +2827,6 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentEnvironmentsResponse.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
-              # Baseline implementation for the get_goldengate_connection_type REST call
-              #
-              # @param request_pb [::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::OracleDatabase::V1::GoldengateConnectionType]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::OracleDatabase::V1::GoldengateConnectionType]
-              #   A result object deserialized from the server's reply
-              def get_goldengate_connection_type request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_get_goldengate_connection_type_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "get_goldengate_connection_type",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::OracleDatabase::V1::GoldengateConnectionType.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -4731,27 +4571,6 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the get_goldengate_deployment_version REST call
-              #
-              # @param request_pb [::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_get_goldengate_deployment_version_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1/{name}",
-                                                          matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/goldengateDeploymentVersions/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
               # GRPC transcoding helper method for the list_goldengate_deployment_versions REST call
               #
               # @param request_pb [::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentVersionsRequest]
@@ -4765,27 +4584,6 @@ module Google
                                                           uri_template: "/v1/{parent}/goldengateDeploymentVersions",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the get_goldengate_deployment_type REST call
-              #
-              # @param request_pb [::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_get_goldengate_deployment_type_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1/{name}",
-                                                          matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/goldengateDeploymentTypes/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -4815,27 +4613,6 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the get_goldengate_deployment_environment REST call
-              #
-              # @param request_pb [::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_get_goldengate_deployment_environment_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1/{name}",
-                                                          matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/goldengateDeploymentEnvironments/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
               # GRPC transcoding helper method for the list_goldengate_deployment_environments REST call
               #
               # @param request_pb [::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentEnvironmentsRequest]
@@ -4849,27 +4626,6 @@ module Google
                                                           uri_template: "/v1/{parent}/goldengateDeploymentEnvironments",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the get_goldengate_connection_type REST call
-              #
-              # @param request_pb [::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_get_goldengate_connection_type_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1/{name}",
-                                                          matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/goldengateConnectionTypes/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

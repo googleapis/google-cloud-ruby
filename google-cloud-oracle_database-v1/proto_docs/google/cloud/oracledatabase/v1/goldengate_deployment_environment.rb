@@ -95,16 +95,6 @@ module Google
           end
         end
 
-        # Message for getting a GoldengateDeploymentEnvironment.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. Name of the resource with the format:
-        #     projects/\\{project}/locations/\\{location}/goldengateDeploymentEnvironments/\\{goldengate_deployment_environment}
-        class GetGoldengateDeploymentEnvironmentRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Message for listing GoldengateDeploymentEnvironments.
         # @!attribute [rw] parent
         #   @return [::String]

@@ -236,25 +236,6 @@ module Google
             end
 
             ##
-            # Create a fully-qualified GoldengateConnectionType resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/goldengateConnectionTypes/{goldengate_connection_type}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param goldengate_connection_type [String]
-            #
-            # @return [::String]
-            def goldengate_connection_type_path project:, location:, goldengate_connection_type:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/goldengateConnectionTypes/#{goldengate_connection_type}"
-            end
-
-            ##
             # Create a fully-qualified GoldengateDeployment resource string.
             #
             # The resource will be in the following format:
@@ -271,63 +252,6 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/goldengateDeployments/#{goldengate_deployment}"
-            end
-
-            ##
-            # Create a fully-qualified GoldengateDeploymentEnvironment resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/goldengateDeploymentEnvironments/{goldengate_deployment_environment}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param goldengate_deployment_environment [String]
-            #
-            # @return [::String]
-            def goldengate_deployment_environment_path project:, location:, goldengate_deployment_environment:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/goldengateDeploymentEnvironments/#{goldengate_deployment_environment}"
-            end
-
-            ##
-            # Create a fully-qualified GoldengateDeploymentType resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/goldengateDeploymentTypes/{goldengate_deployment_type}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param goldengate_deployment_type [String]
-            #
-            # @return [::String]
-            def goldengate_deployment_type_path project:, location:, goldengate_deployment_type:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/goldengateDeploymentTypes/#{goldengate_deployment_type}"
-            end
-
-            ##
-            # Create a fully-qualified GoldengateDeploymentVersion resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/goldengateDeploymentVersions/{goldengate_deployment_version}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param goldengate_deployment_version [String]
-            #
-            # @return [::String]
-            def goldengate_deployment_version_path project:, location:, goldengate_deployment_version:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/goldengateDeploymentVersions/#{goldengate_deployment_version}"
             end
 
             ##

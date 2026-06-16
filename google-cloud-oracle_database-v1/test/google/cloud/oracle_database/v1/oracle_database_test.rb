@@ -4404,64 +4404,6 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
     end
   end
 
-  def test_get_goldengate_deployment_version
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentVersion.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_goldengate_deployment_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_goldengate_deployment_version, name
-      assert_kind_of ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, get_goldengate_deployment_version_client_stub do
-      # Create client
-      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      c.get_goldengate_deployment_version({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      c.get_goldengate_deployment_version name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      c.get_goldengate_deployment_version ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      c.get_goldengate_deployment_version({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      c.get_goldengate_deployment_version(::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, get_goldengate_deployment_version_client_stub.call_rpc_count
-    end
-  end
-
   def test_list_goldengate_deployment_versions
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentVersionsResponse.new
@@ -4528,64 +4470,6 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, list_goldengate_deployment_versions_client_stub.call_rpc_count
-    end
-  end
-
-  def test_get_goldengate_deployment_type
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentType.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_goldengate_deployment_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_goldengate_deployment_type, name
-      assert_kind_of ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, get_goldengate_deployment_type_client_stub do
-      # Create client
-      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      c.get_goldengate_deployment_type({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      c.get_goldengate_deployment_type name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      c.get_goldengate_deployment_type ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      c.get_goldengate_deployment_type({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      c.get_goldengate_deployment_type(::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, get_goldengate_deployment_type_client_stub.call_rpc_count
     end
   end
 
@@ -4660,64 +4544,6 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
     end
   end
 
-  def test_get_goldengate_deployment_environment
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentEnvironment.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_goldengate_deployment_environment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_goldengate_deployment_environment, name
-      assert_kind_of ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, get_goldengate_deployment_environment_client_stub do
-      # Create client
-      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      c.get_goldengate_deployment_environment({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      c.get_goldengate_deployment_environment name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      c.get_goldengate_deployment_environment ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      c.get_goldengate_deployment_environment({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      c.get_goldengate_deployment_environment(::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, get_goldengate_deployment_environment_client_stub.call_rpc_count
-    end
-  end
-
   def test_list_goldengate_deployment_environments
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentEnvironmentsResponse.new
@@ -4782,64 +4608,6 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, list_goldengate_deployment_environments_client_stub.call_rpc_count
-    end
-  end
-
-  def test_get_goldengate_connection_type
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::OracleDatabase::V1::GoldengateConnectionType.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_goldengate_connection_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_goldengate_connection_type, name
-      assert_kind_of ::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, get_goldengate_connection_type_client_stub do
-      # Create client
-      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      c.get_goldengate_connection_type({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      c.get_goldengate_connection_type name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      c.get_goldengate_connection_type ::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      c.get_goldengate_connection_type({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      c.get_goldengate_connection_type(::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, get_goldengate_connection_type_client_stub.call_rpc_count
     end
   end
 
