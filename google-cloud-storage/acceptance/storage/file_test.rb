@@ -819,7 +819,6 @@ describe Google::Cloud::Storage::File, :storage do
 
       _(File.read(downloaded.path)).must_equal "ab"
     end
-
     _(bucket.file(uploaded_a.name)).must_be :nil?
     _(bucket.file(uploaded_b.name)).must_be :nil?
 
