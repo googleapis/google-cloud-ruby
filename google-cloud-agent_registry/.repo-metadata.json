@@ -1,0 +1,17 @@
+{
+    "api_id": "agentregistry.googleapis.com",
+    "api_shortname": "agentregistry",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-agent_registry/latest",
+    "distribution_name": "google-cloud-agent_registry",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "agentregistry",
+    "name_pretty": "Agent Registry API",
+    "product_documentation": "https://docs.cloud.google.com/agent-registry/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Agent Registry provides the core infrastructure for your environment, bringing together autonomous agents with the consistent data contexts and tools that MCP servers offer. By consolidating these services, Agent Registry resolves common challenges in complex AI deployments, such as fragmented tool access, isolated data, and redundant services.",
+    "ruby-cloud-product-url": "https://docs.cloud.google.com/agent-registry/overview",
+    "library_type": "GAPIC_MANUAL"
+}
