@@ -1,0 +1,775 @@
+{
+  "client_library": {
+    "name": "google-cloud-agent_registry-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.agentregistry.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_ListAgents_sync",
+      "title": "Snippet for the list_agents call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#list_agents.",
+      "file": "agent_registry/list_agents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_agents",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#list_agents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::ListAgentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::ListAgentsResponse",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListAgents",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.ListAgents",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_SearchAgents_sync",
+      "title": "Snippet for the search_agents call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#search_agents.",
+      "file": "agent_registry/search_agents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_agents",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#search_agents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::SearchAgentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::SearchAgentsResponse",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "SearchAgents",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.SearchAgents",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_GetAgent_sync",
+      "title": "Snippet for the get_agent call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#get_agent.",
+      "file": "agent_registry/get_agent.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_agent",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#get_agent",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::GetAgentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::Agent",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetAgent",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.GetAgent",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_ListEndpoints_sync",
+      "title": "Snippet for the list_endpoints call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#list_endpoints.",
+      "file": "agent_registry/list_endpoints.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_endpoints",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#list_endpoints",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::ListEndpointsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::ListEndpointsResponse",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListEndpoints",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.ListEndpoints",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_GetEndpoint_sync",
+      "title": "Snippet for the get_endpoint call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#get_endpoint.",
+      "file": "agent_registry/get_endpoint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_endpoint",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#get_endpoint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::GetEndpointRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::Endpoint",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetEndpoint",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.GetEndpoint",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_ListMcpServers_sync",
+      "title": "Snippet for the list_mcp_servers call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#list_mcp_servers.",
+      "file": "agent_registry/list_mcp_servers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_mcp_servers",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#list_mcp_servers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::ListMcpServersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::ListMcpServersResponse",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListMcpServers",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.ListMcpServers",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_SearchMcpServers_sync",
+      "title": "Snippet for the search_mcp_servers call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#search_mcp_servers.",
+      "file": "agent_registry/search_mcp_servers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_mcp_servers",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#search_mcp_servers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::SearchMcpServersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::SearchMcpServersResponse",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "SearchMcpServers",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.SearchMcpServers",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_GetMcpServer_sync",
+      "title": "Snippet for the get_mcp_server call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#get_mcp_server.",
+      "file": "agent_registry/get_mcp_server.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_mcp_server",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#get_mcp_server",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::GetMcpServerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::McpServer",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetMcpServer",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.GetMcpServer",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_ListServices_sync",
+      "title": "Snippet for the list_services call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#list_services.",
+      "file": "agent_registry/list_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_services",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#list_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::ListServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::ListServicesResponse",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListServices",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.ListServices",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_GetService_sync",
+      "title": "Snippet for the get_service call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#get_service.",
+      "file": "agent_registry/get_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#get_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::GetServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::Service",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetService",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.GetService",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_CreateService_sync",
+      "title": "Snippet for the create_service call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#create_service.",
+      "file": "agent_registry/create_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_service",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#create_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::CreateServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "CreateService",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.CreateService",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_UpdateService_sync",
+      "title": "Snippet for the update_service call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#update_service.",
+      "file": "agent_registry/update_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_service",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#update_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::UpdateServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "UpdateService",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.UpdateService",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_DeleteService_sync",
+      "title": "Snippet for the delete_service call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#delete_service.",
+      "file": "agent_registry/delete_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_service",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#delete_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::DeleteServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "DeleteService",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.DeleteService",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_ListBindings_sync",
+      "title": "Snippet for the list_bindings call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#list_bindings.",
+      "file": "agent_registry/list_bindings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_bindings",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#list_bindings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::ListBindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::ListBindingsResponse",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListBindings",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.ListBindings",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_GetBinding_sync",
+      "title": "Snippet for the get_binding call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#get_binding.",
+      "file": "agent_registry/get_binding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_binding",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#get_binding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::GetBindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::Binding",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetBinding",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.GetBinding",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_CreateBinding_sync",
+      "title": "Snippet for the create_binding call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#create_binding.",
+      "file": "agent_registry/create_binding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_binding",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#create_binding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::CreateBindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "CreateBinding",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.CreateBinding",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_UpdateBinding_sync",
+      "title": "Snippet for the update_binding call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#update_binding.",
+      "file": "agent_registry/update_binding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_binding",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#update_binding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::UpdateBindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "UpdateBinding",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.UpdateBinding",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_DeleteBinding_sync",
+      "title": "Snippet for the delete_binding call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#delete_binding.",
+      "file": "agent_registry/delete_binding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_binding",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#delete_binding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::DeleteBindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "DeleteBinding",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.DeleteBinding",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "agentregistry_v1_generated_AgentRegistry_FetchAvailableBindings_sync",
+      "title": "Snippet for the fetch_available_bindings call in the AgentRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#fetch_available_bindings.",
+      "file": "agent_registry/fetch_available_bindings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_available_bindings",
+        "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client#fetch_available_bindings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AgentRegistry::V1::FetchAvailableBindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AgentRegistry::V1::FetchAvailableBindingsResponse",
+        "client": {
+          "short_name": "AgentRegistry::Client",
+          "full_name": "::Google::Cloud::AgentRegistry::V1::AgentRegistry::Client"
+        },
+        "method": {
+          "short_name": "FetchAvailableBindings",
+          "full_name": "google.cloud.agentregistry.v1.AgentRegistry.FetchAvailableBindings",
+          "service": {
+            "short_name": "AgentRegistry",
+            "full_name": "google.cloud.agentregistry.v1.AgentRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
