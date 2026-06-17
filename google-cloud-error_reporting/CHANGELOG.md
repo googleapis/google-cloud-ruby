@@ -1,5 +1,11 @@
 # Release History
 
+### 0.45.1 (2026-06-17)
+
+#### Bug Fixes
+
+* respect quota_project configuration ([#34610](https://github.com/googleapis/google-cloud-ruby/issues/34610)) 
+
 ### 0.45.0 (2026-06-11)
 
 #### Features
