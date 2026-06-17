@@ -2292,6 +2292,46 @@
       ]
     },
     {
+      "region_tag": "chronicle_v1_generated_ReferenceListService_VerifyReferenceList_sync",
+      "title": "Snippet for the verify_reference_list call in the ReferenceListService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::ReferenceListService::Client#verify_reference_list.",
+      "file": "reference_list_service/verify_reference_list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "verify_reference_list",
+        "full_name": "::Google::Cloud::Chronicle::V1::ReferenceListService::Client#verify_reference_list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::VerifyReferenceListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::VerifyReferenceListResponse",
+        "client": {
+          "short_name": "ReferenceListService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::ReferenceListService::Client"
+        },
+        "method": {
+          "short_name": "VerifyReferenceList",
+          "full_name": "google.cloud.chronicle.v1.ReferenceListService.VerifyReferenceList",
+          "service": {
+            "short_name": "ReferenceListService",
+            "full_name": "google.cloud.chronicle.v1.ReferenceListService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "chronicle_v1_generated_RuleService_CreateRule_sync",
       "title": "Snippet for the create_rule call in the RuleService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::RuleService::Client#create_rule.",
@@ -2475,6 +2515,46 @@
         "method": {
           "short_name": "DeleteRule",
           "full_name": "google.cloud.chronicle.v1.RuleService.DeleteRule",
+          "service": {
+            "short_name": "RuleService",
+            "full_name": "google.cloud.chronicle.v1.RuleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_RuleService_VerifyRuleText_sync",
+      "title": "Snippet for the verify_rule_text call in the RuleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::RuleService::Client#verify_rule_text.",
+      "file": "rule_service/verify_rule_text.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "verify_rule_text",
+        "full_name": "::Google::Cloud::Chronicle::V1::RuleService::Client#verify_rule_text",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::VerifyRuleTextRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::VerifyRuleTextResponse",
+        "client": {
+          "short_name": "RuleService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::RuleService::Client"
+        },
+        "method": {
+          "short_name": "VerifyRuleText",
+          "full_name": "google.cloud.chronicle.v1.RuleService.VerifyRuleText",
           "service": {
             "short_name": "RuleService",
             "full_name": "google.cloud.chronicle.v1.RuleService"

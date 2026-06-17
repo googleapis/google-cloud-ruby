@@ -41,6 +41,8 @@ module Google
             rpc :CreateReferenceList, ::Google::Cloud::Chronicle::V1::CreateReferenceListRequest, ::Google::Cloud::Chronicle::V1::ReferenceList
             # Updates an existing reference list.
             rpc :UpdateReferenceList, ::Google::Cloud::Chronicle::V1::UpdateReferenceListRequest, ::Google::Cloud::Chronicle::V1::ReferenceList
+            # VerifyReferenceList validates list content and returns line errors, if any.
+            rpc :VerifyReferenceList, ::Google::Cloud::Chronicle::V1::VerifyReferenceListRequest, ::Google::Cloud::Chronicle::V1::VerifyReferenceListResponse
           end
 
           Stub = Service.rpc_stub_class

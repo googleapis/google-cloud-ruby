@@ -301,6 +301,62 @@ class ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::ClientTest < M
     end
   end
 
+  def test_verify_reference_list
+    # Create test objects.
+    client_result = ::Google::Cloud::Chronicle::V1::VerifyReferenceListResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    syntax_type = :REFERENCE_LIST_SYNTAX_TYPE_UNSPECIFIED
+    entries = [{}]
+
+    verify_reference_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::ServiceStub.stub :transcode_verify_reference_list_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, verify_reference_list_client_stub do
+        # Create client
+        c = ::Google::Cloud::Chronicle::V1::ReferenceListService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.verify_reference_list({ instance: instance, syntax_type: syntax_type, entries: entries }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.verify_reference_list instance: instance, syntax_type: syntax_type, entries: entries do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.verify_reference_list ::Google::Cloud::Chronicle::V1::VerifyReferenceListRequest.new(instance: instance, syntax_type: syntax_type, entries: entries) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.verify_reference_list({ instance: instance, syntax_type: syntax_type, entries: entries }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.verify_reference_list(::Google::Cloud::Chronicle::V1::VerifyReferenceListRequest.new(instance: instance, syntax_type: syntax_type, entries: entries), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, verify_reference_list_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

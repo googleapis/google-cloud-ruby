@@ -375,6 +375,11 @@
               "methods": [
                 "update_reference_list"
               ]
+            },
+            "VerifyReferenceList": {
+              "methods": [
+                "verify_reference_list"
+              ]
             }
           }
         }
@@ -408,6 +413,11 @@
             "DeleteRule": {
               "methods": [
                 "delete_rule"
+              ]
+            },
+            "VerifyRuleText": {
+              "methods": [
+                "verify_rule_text"
               ]
             },
             "ListRuleRevisions": {
