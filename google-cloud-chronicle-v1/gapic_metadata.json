@@ -458,6 +458,20 @@
           }
         }
       }
+    },
+    "RuleExecutionErrorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::RuleExecutionErrorService::Client",
+          "rpcs": {
+            "ListRuleExecutionErrors": {
+              "methods": [
+                "list_rule_execution_errors"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

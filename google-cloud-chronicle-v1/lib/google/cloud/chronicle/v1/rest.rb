@@ -27,6 +27,7 @@ require "google/cloud/chronicle/v1/featured_content_native_dashboard_service/res
 require "google/cloud/chronicle/v1/instance_service/rest"
 require "google/cloud/chronicle/v1/reference_list_service/rest"
 require "google/cloud/chronicle/v1/rule_service/rest"
+require "google/cloud/chronicle/v1/rule_execution_error_service/rest"
 require "google/cloud/chronicle/v1/version"
 
 module Google
