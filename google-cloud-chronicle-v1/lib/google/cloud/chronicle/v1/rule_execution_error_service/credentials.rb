@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,8 +22,8 @@ module Google
   module Cloud
     module Chronicle
       module V1
-        module ReferenceListService
-          # Credentials for the ReferenceListService API.
+        module RuleExecutionErrorService
+          # Credentials for the RuleExecutionErrorService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/chronicle",

@@ -375,6 +375,11 @@
               "methods": [
                 "update_reference_list"
               ]
+            },
+            "VerifyReferenceList": {
+              "methods": [
+                "verify_reference_list"
+              ]
             }
           }
         }
@@ -410,6 +415,11 @@
                 "delete_rule"
               ]
             },
+            "VerifyRuleText": {
+              "methods": [
+                "verify_rule_text"
+              ]
+            },
             "ListRuleRevisions": {
               "methods": [
                 "list_rule_revisions"
@@ -443,6 +453,20 @@
             "UpdateRuleDeployment": {
               "methods": [
                 "update_rule_deployment"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RuleExecutionErrorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::RuleExecutionErrorService::Client",
+          "rpcs": {
+            "ListRuleExecutionErrors": {
+              "methods": [
+                "list_rule_execution_errors"
               ]
             }
           }
