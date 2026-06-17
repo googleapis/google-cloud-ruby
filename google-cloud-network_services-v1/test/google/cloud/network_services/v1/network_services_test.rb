@@ -1616,6 +1616,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
     return_partial_success = true
+    filter = "hello world"
 
     list_http_routes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_http_routes, name
@@ -1624,6 +1625,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal true, request["return_partial_success"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -1634,35 +1636,35 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       end
 
       # Use hash object
-      c.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
+      c.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.list_http_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
+      c.list_http_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.list_http_routes ::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
+      c.list_http_routes ::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
+      c.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.list_http_routes(::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
+      c.list_http_routes(::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1742,6 +1744,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
     parent = "hello world"
     http_route_id = "hello world"
     http_route = {}
+    request_id = "hello world"
 
     create_http_route_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_http_route, name
@@ -1749,6 +1752,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["http_route_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::NetworkServices::V1::HttpRoute), request["http_route"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -1759,35 +1763,35 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       end
 
       # Use hash object
-      c.create_http_route({ parent: parent, http_route_id: http_route_id, http_route: http_route }) do |response, operation|
+      c.create_http_route({ parent: parent, http_route_id: http_route_id, http_route: http_route, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.create_http_route parent: parent, http_route_id: http_route_id, http_route: http_route do |response, operation|
+      c.create_http_route parent: parent, http_route_id: http_route_id, http_route: http_route, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.create_http_route ::Google::Cloud::NetworkServices::V1::CreateHttpRouteRequest.new(parent: parent, http_route_id: http_route_id, http_route: http_route) do |response, operation|
+      c.create_http_route ::Google::Cloud::NetworkServices::V1::CreateHttpRouteRequest.new(parent: parent, http_route_id: http_route_id, http_route: http_route, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.create_http_route({ parent: parent, http_route_id: http_route_id, http_route: http_route }, grpc_options) do |response, operation|
+      c.create_http_route({ parent: parent, http_route_id: http_route_id, http_route: http_route, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.create_http_route(::Google::Cloud::NetworkServices::V1::CreateHttpRouteRequest.new(parent: parent, http_route_id: http_route_id, http_route: http_route), grpc_options) do |response, operation|
+      c.create_http_route(::Google::Cloud::NetworkServices::V1::CreateHttpRouteRequest.new(parent: parent, http_route_id: http_route_id, http_route: http_route, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3779,6 +3783,330 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
 
       # Verify method calls
       assert_equal 5, list_mesh_route_views_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_agent_gateways
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::ListAgentGatewaysResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    return_partial_success = true
+
+    list_agent_gateways_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_agent_gateways, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::ListAgentGatewaysRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_agent_gateways_client_stub do
+      # Create client
+      c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_agent_gateways({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_agent_gateways parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_agent_gateways ::Google::Cloud::NetworkServices::V1::ListAgentGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_agent_gateways({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_agent_gateways(::Google::Cloud::NetworkServices::V1::ListAgentGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_agent_gateways_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_agent_gateway
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::AgentGateway.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_agent_gateway_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_agent_gateway, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::GetAgentGatewayRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_agent_gateway_client_stub do
+      # Create client
+      c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_agent_gateway({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_agent_gateway name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_agent_gateway ::Google::Cloud::NetworkServices::V1::GetAgentGatewayRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_agent_gateway({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_agent_gateway(::Google::Cloud::NetworkServices::V1::GetAgentGatewayRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_agent_gateway_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_agent_gateway
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    agent_gateway_id = "hello world"
+    agent_gateway = {}
+
+    create_agent_gateway_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_agent_gateway, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::CreateAgentGatewayRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["agent_gateway_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::NetworkServices::V1::AgentGateway), request["agent_gateway"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_agent_gateway_client_stub do
+      # Create client
+      c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_agent_gateway({ parent: parent, agent_gateway_id: agent_gateway_id, agent_gateway: agent_gateway }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_agent_gateway parent: parent, agent_gateway_id: agent_gateway_id, agent_gateway: agent_gateway do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_agent_gateway ::Google::Cloud::NetworkServices::V1::CreateAgentGatewayRequest.new(parent: parent, agent_gateway_id: agent_gateway_id, agent_gateway: agent_gateway) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_agent_gateway({ parent: parent, agent_gateway_id: agent_gateway_id, agent_gateway: agent_gateway }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_agent_gateway(::Google::Cloud::NetworkServices::V1::CreateAgentGatewayRequest.new(parent: parent, agent_gateway_id: agent_gateway_id, agent_gateway: agent_gateway), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_agent_gateway_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_agent_gateway
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    agent_gateway = {}
+
+    update_agent_gateway_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_agent_gateway, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::UpdateAgentGatewayRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::NetworkServices::V1::AgentGateway), request["agent_gateway"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_agent_gateway_client_stub do
+      # Create client
+      c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_agent_gateway({ update_mask: update_mask, agent_gateway: agent_gateway }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_agent_gateway update_mask: update_mask, agent_gateway: agent_gateway do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_agent_gateway ::Google::Cloud::NetworkServices::V1::UpdateAgentGatewayRequest.new(update_mask: update_mask, agent_gateway: agent_gateway) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_agent_gateway({ update_mask: update_mask, agent_gateway: agent_gateway }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_agent_gateway(::Google::Cloud::NetworkServices::V1::UpdateAgentGatewayRequest.new(update_mask: update_mask, agent_gateway: agent_gateway), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_agent_gateway_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_agent_gateway
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+
+    delete_agent_gateway_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_agent_gateway, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::DeleteAgentGatewayRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_agent_gateway_client_stub do
+      # Create client
+      c = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_agent_gateway({ name: name, etag: etag }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_agent_gateway name: name, etag: etag do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_agent_gateway ::Google::Cloud::NetworkServices::V1::DeleteAgentGatewayRequest.new(name: name, etag: etag) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_agent_gateway({ name: name, etag: etag }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_agent_gateway(::Google::Cloud::NetworkServices::V1::DeleteAgentGatewayRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_agent_gateway_client_stub.call_rpc_count
     end
   end
 

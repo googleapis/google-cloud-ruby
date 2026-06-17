@@ -408,6 +408,31 @@
               "methods": [
                 "list_mesh_route_views"
               ]
+            },
+            "ListAgentGateways": {
+              "methods": [
+                "list_agent_gateways"
+              ]
+            },
+            "GetAgentGateway": {
+              "methods": [
+                "get_agent_gateway"
+              ]
+            },
+            "CreateAgentGateway": {
+              "methods": [
+                "create_agent_gateway"
+              ]
+            },
+            "UpdateAgentGateway": {
+              "methods": [
+                "update_agent_gateway"
+              ]
+            },
+            "DeleteAgentGateway": {
+              "methods": [
+                "delete_agent_gateway"
+              ]
             }
           }
         }
