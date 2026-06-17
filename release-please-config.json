@@ -107,6 +107,10 @@
       "component": "google-cloud-advisory_notifications-v1",
       "version_file": "lib/google/cloud/advisory_notifications/v1/version.rb"
     },
+    "google-cloud-agent_registry-v1": {
+      "component": "google-cloud-agent_registry-v1",
+      "version_file": "lib/google/cloud/agent_registry/v1/version.rb"
+    },
     "google-cloud-ai_platform": {
       "component": "google-cloud-ai_platform",
       "version_file": "lib/google/cloud/ai_platform/version.rb"
