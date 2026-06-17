@@ -340,19 +340,9 @@
                 "delete_goldengate_connection"
               ]
             },
-            "GetGoldengateDeploymentVersion": {
-              "methods": [
-                "get_goldengate_deployment_version"
-              ]
-            },
             "ListGoldengateDeploymentVersions": {
               "methods": [
                 "list_goldengate_deployment_versions"
-              ]
-            },
-            "GetGoldengateDeploymentType": {
-              "methods": [
-                "get_goldengate_deployment_type"
               ]
             },
             "ListGoldengateDeploymentTypes": {
@@ -360,19 +350,9 @@
                 "list_goldengate_deployment_types"
               ]
             },
-            "GetGoldengateDeploymentEnvironment": {
-              "methods": [
-                "get_goldengate_deployment_environment"
-              ]
-            },
             "ListGoldengateDeploymentEnvironments": {
               "methods": [
                 "list_goldengate_deployment_environments"
-              ]
-            },
-            "GetGoldengateConnectionType": {
-              "methods": [
-                "get_goldengate_connection_type"
               ]
             },
             "ListGoldengateConnectionTypes": {

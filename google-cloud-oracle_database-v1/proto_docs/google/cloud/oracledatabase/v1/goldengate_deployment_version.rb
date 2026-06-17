@@ -120,17 +120,6 @@ module Google
           end
         end
 
-        # Message for getting a GoldengateDeploymentVersion.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the GoldengateDeploymentVersion to retrieve.
-        #     Format:
-        #     projects/\\{project}/locations/\\{location}/goldengateDeploymentVersions/\\{goldengate_deployment_version}
-        class GetGoldengateDeploymentVersionRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Message for listing GoldengateDeploymentVersions.
         # @!attribute [rw] parent
         #   @return [::String]

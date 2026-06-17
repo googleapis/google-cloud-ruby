@@ -175,20 +175,12 @@ module Google
             rpc :CreateGoldengateConnection, ::Google::Cloud::OracleDatabase::V1::CreateGoldengateConnectionRequest, ::Google::Longrunning::Operation
             # Deletes a single GoldengateConnection.
             rpc :DeleteGoldengateConnection, ::Google::Cloud::OracleDatabase::V1::DeleteGoldengateConnectionRequest, ::Google::Longrunning::Operation
-            # Gets details of a single GoldengateDeploymentVersion.
-            rpc :GetGoldengateDeploymentVersion, ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentVersion
             # Lists GoldengateDeploymentVersions in a given project and location.
             rpc :ListGoldengateDeploymentVersions, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentVersionsRequest, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentVersionsResponse
-            # Gets details of a single GoldenGateDeploymentType.
-            rpc :GetGoldengateDeploymentType, ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentType
             # Lists GoldenGateDeploymentTypes in a given project and location.
             rpc :ListGoldengateDeploymentTypes, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentTypesRequest, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentTypesResponse
-            # Gets details of a single GoldengateDeploymentEnvironment.
-            rpc :GetGoldengateDeploymentEnvironment, ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentEnvironment
             # Lists GoldengateDeploymentEnvironments in a given project and location.
             rpc :ListGoldengateDeploymentEnvironments, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentEnvironmentsRequest, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentEnvironmentsResponse
-            # Gets details of a single GoldengateConnectionType.
-            rpc :GetGoldengateConnectionType, ::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateConnectionType
             # Lists GoldengateConnectionTypes in a given project and location.
             rpc :ListGoldengateConnectionTypes, ::Google::Cloud::OracleDatabase::V1::ListGoldengateConnectionTypesRequest, ::Google::Cloud::OracleDatabase::V1::ListGoldengateConnectionTypesResponse
             # List DbVersions for the given project and location.

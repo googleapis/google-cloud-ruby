@@ -133,16 +133,6 @@ module Google
           end
         end
 
-        # Message for getting a GoldengateConnectionType.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. Name of the resource in the format:
-        #     projects/\\{project}/locations/\\{location}/goldengateConnectionTypes/\\{goldengate_connection_type}
-        class GetGoldengateConnectionTypeRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Message for listing GoldengateConnectionTypes.
         # @!attribute [rw] parent
         #   @return [::String]

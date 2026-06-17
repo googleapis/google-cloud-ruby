@@ -117,17 +117,6 @@ module Google
           end
         end
 
-        # Message for getting a GoldengateDeploymentType.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the GoldengateDeploymentType to retrieve.
-        #     Format:
-        #     projects/\\{project}/locations/\\{location}/goldengateDeploymentTypes/\\{goldengate_deployment_type}
-        class GetGoldengateDeploymentTypeRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Message for listing GoldengateDeploymentTypes.
         # @!attribute [rw] parent
         #   @return [::String]

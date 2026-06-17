@@ -2652,46 +2652,6 @@
       ]
     },
     {
-      "region_tag": "oracledatabase_v1_generated_OracleDatabase_GetGoldengateDeploymentVersion_sync",
-      "title": "Snippet for the get_goldengate_deployment_version call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_goldengate_deployment_version.",
-      "file": "oracle_database/get_goldengate_deployment_version.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_goldengate_deployment_version",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_goldengate_deployment_version",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentVersion",
-        "client": {
-          "short_name": "OracleDatabase::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
-        },
-        "method": {
-          "short_name": "GetGoldengateDeploymentVersion",
-          "full_name": "google.cloud.oracledatabase.v1.OracleDatabase.GetGoldengateDeploymentVersion",
-          "service": {
-            "short_name": "OracleDatabase",
-            "full_name": "google.cloud.oracledatabase.v1.OracleDatabase"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListGoldengateDeploymentVersions_sync",
       "title": "Snippet for the list_goldengate_deployment_versions call in the OracleDatabase service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_goldengate_deployment_versions.",
@@ -2727,46 +2687,6 @@
         {
           "start": 20,
           "end": 50,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "oracledatabase_v1_generated_OracleDatabase_GetGoldengateDeploymentType_sync",
-      "title": "Snippet for the get_goldengate_deployment_type call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_goldengate_deployment_type.",
-      "file": "oracle_database/get_goldengate_deployment_type.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_goldengate_deployment_type",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_goldengate_deployment_type",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentType",
-        "client": {
-          "short_name": "OracleDatabase::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
-        },
-        "method": {
-          "short_name": "GetGoldengateDeploymentType",
-          "full_name": "google.cloud.oracledatabase.v1.OracleDatabase.GetGoldengateDeploymentType",
-          "service": {
-            "short_name": "OracleDatabase",
-            "full_name": "google.cloud.oracledatabase.v1.OracleDatabase"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2812,46 +2732,6 @@
       ]
     },
     {
-      "region_tag": "oracledatabase_v1_generated_OracleDatabase_GetGoldengateDeploymentEnvironment_sync",
-      "title": "Snippet for the get_goldengate_deployment_environment call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_goldengate_deployment_environment.",
-      "file": "oracle_database/get_goldengate_deployment_environment.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_goldengate_deployment_environment",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_goldengate_deployment_environment",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentEnvironment",
-        "client": {
-          "short_name": "OracleDatabase::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
-        },
-        "method": {
-          "short_name": "GetGoldengateDeploymentEnvironment",
-          "full_name": "google.cloud.oracledatabase.v1.OracleDatabase.GetGoldengateDeploymentEnvironment",
-          "service": {
-            "short_name": "OracleDatabase",
-            "full_name": "google.cloud.oracledatabase.v1.OracleDatabase"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListGoldengateDeploymentEnvironments_sync",
       "title": "Snippet for the list_goldengate_deployment_environments call in the OracleDatabase service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_goldengate_deployment_environments.",
@@ -2887,46 +2767,6 @@
         {
           "start": 20,
           "end": 50,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "oracledatabase_v1_generated_OracleDatabase_GetGoldengateConnectionType_sync",
-      "title": "Snippet for the get_goldengate_connection_type call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_goldengate_connection_type.",
-      "file": "oracle_database/get_goldengate_connection_type.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_goldengate_connection_type",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_goldengate_connection_type",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::OracleDatabase::V1::GoldengateConnectionType",
-        "client": {
-          "short_name": "OracleDatabase::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
-        },
-        "method": {
-          "short_name": "GetGoldengateConnectionType",
-          "full_name": "google.cloud.oracledatabase.v1.OracleDatabase.GetGoldengateConnectionType",
-          "service": {
-            "short_name": "OracleDatabase",
-            "full_name": "google.cloud.oracledatabase.v1.OracleDatabase"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
           "type": "FULL"
         }
       ]
