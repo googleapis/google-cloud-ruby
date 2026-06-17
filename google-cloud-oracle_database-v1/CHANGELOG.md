@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.15.0 (2026-06-17)
+
+### ⚠ BREAKING CHANGES
+
+* Remove unsupported Get APIs support ([#34618](https://github.com/googleapis/google-cloud-ruby/issues/34618))
+
+#### Bug Fixes
+
+* Remove unsupported Get APIs support ([#34618](https://github.com/googleapis/google-cloud-ruby/issues/34618)) 
+
 ### 0.14.0 (2026-06-11)
 
 #### Features
