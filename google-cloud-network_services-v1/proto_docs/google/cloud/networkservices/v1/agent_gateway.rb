@@ -66,7 +66,7 @@ module Google
         #     Optional. A list of Agent registries containing the agents, MCP servers and
         #     tools governed by the Agent Gateway. Note: Currently limited to
         #     project-scoped registries Must be of format
-        #     `//agentregistry.googleapis.com/projects/{project}/locations/{location}/
+        #     `//agentregistry.googleapis.com/projects/{project}/locations/{location}/`
         # @!attribute [rw] network_config
         #   @return [::Google::Cloud::NetworkServices::V1::AgentGateway::NetworkConfig]
         #     Optional. Network configuration for the AgentGateway.
