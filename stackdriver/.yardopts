@@ -1,15 +1,9 @@
 --no-private
---title=Stackdriver
+--title="Obsolete Gem stackdriver"
 --markup markdown
 --markup-provider redcarpet
---exclude ./lib/legacy_stackdriver.rb
---main OVERVIEW.md
 
 ./lib/**/*.rb
 -
-OVERVIEW.md
-INSTRUMENTATION_CONFIGURATION.md
-CONTRIBUTING.md
-CHANGELOG.md
-CODE_OF_CONDUCT.md
-LICENSE
+README.md
+LICENSE.md
