@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/agentregistry/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-agent_registry-v1/$1
