@@ -1,5 +1,6 @@
 require "minitest/autorun"
 
+# Trigger PR build to check quota failures
 require "google/cloud/errors"
 require "google/cloud/compute/v1/accelerator_types"
 
@@ -56,7 +57,7 @@ class PaginationSmokeTest < Minitest::Test
 
   def test_aggregated_list_each
     zone_at_pairs = []
-    @client.aggregated_list(project: @default_project, max_results:10).each do |zone, at_grouped_list|
+    @client.aggregated_list(project: @default_project, max_results: 100).each do |zone, at_grouped_list|
       at_grouped_list.accelerator_types.each { |at|  zone_at_pairs << [zone, at.name] }
     end
 
@@ -65,7 +66,7 @@ class PaginationSmokeTest < Minitest::Test
 
   def test_aggregated_list_each_page
     zone_at_pairs = []
-    @client.aggregated_list(project: @default_project, max_results:10).each_page do |page|
+    @client.aggregated_list(project: @default_project, max_results: 100).each_page do |page|
       page.each do |zone_grouped_list|
         zone = zone_grouped_list[0]
         at_grouped_list = zone_grouped_list[1]

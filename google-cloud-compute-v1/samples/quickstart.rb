@@ -188,7 +188,7 @@ require "time"
 # @param [Numeric] timeout seconds until timeout (default is 3 minutes)
 # @return [::Gapic::GenericLRO::Operation] Finished Operation object.
 def wait_until_done operation:, timeout: 3 * 60
-  retry_policy = ::Gapic::Operation::RetryPolicy.new initial_delay: 0.2, multiplier: 2, max_delay: 1, timeout: timeout
+  retry_policy = ::Gapic::Operation::RetryPolicy.new initial_delay: 5.0, multiplier: 2.0, max_delay: 15.0, timeout: timeout
   operation.wait_until_done! retry_policy: retry_policy
 end
 # [END compute_instances_operation_check]
