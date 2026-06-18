@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.24.0 (2026-06-18)
+
+#### Features
+
+* add new FORWARD QuoteType enum in the QuotedMessageMetadata proto ([#34630](https://github.com/googleapis/google-cloud-ruby/issues/34630)) 
+
 ### 0.23.0 (2026-06-11)
 
 #### Features
