@@ -1635,6 +1635,10 @@
       "component": "google-cloud-speech-v2",
       "version_file": "lib/google/cloud/speech/v2/version.rb"
     },
+    "google-cloud-sql-v1": {
+      "component": "google-cloud-sql-v1",
+      "version_file": "lib/google/cloud/sql/v1/version.rb"
+    },
     "google-cloud-storage": {
       "component": "google-cloud-storage",
       "version_file": "lib/google/cloud/storage/version.rb"
