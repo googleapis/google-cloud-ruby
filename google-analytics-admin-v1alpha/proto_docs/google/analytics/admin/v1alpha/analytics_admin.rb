@@ -2956,6 +2956,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for UpdateReportingIdentitySettings RPC.
+        # @!attribute [rw] reporting_identity_settings
+        #   @return [::Google::Analytics::Admin::V1alpha::ReportingIdentitySettings]
+        #     Required. The reporting identity settings to update.
+        #     The settings' `name` field is used to identify the settings.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to be updated. Field names must be in snake
+        #     case (for example, "field_to_update"). Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match all
+        #     fields. If omitted, the service will treat it as an implied field mask
+        #     equivalent to all fields that are populated.
+        class UpdateReportingIdentitySettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for GetUserProvidedDataSettings RPC
         # @!attribute [rw] name
         #   @return [::String]
