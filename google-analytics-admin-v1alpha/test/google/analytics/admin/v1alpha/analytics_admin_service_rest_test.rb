@@ -8534,6 +8534,61 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
     end
   end
 
+  def test_update_reporting_identity_settings
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::ReportingIdentitySettings.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    reporting_identity_settings = {}
+    update_mask = {}
+
+    update_reporting_identity_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_update_reporting_identity_settings_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_reporting_identity_settings_client_stub do
+        # Create client
+        c = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_reporting_identity_settings({ reporting_identity_settings: reporting_identity_settings, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_reporting_identity_settings reporting_identity_settings: reporting_identity_settings, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_reporting_identity_settings ::Google::Analytics::Admin::V1alpha::UpdateReportingIdentitySettingsRequest.new(reporting_identity_settings: reporting_identity_settings, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_reporting_identity_settings({ reporting_identity_settings: reporting_identity_settings, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_reporting_identity_settings(::Google::Analytics::Admin::V1alpha::UpdateReportingIdentitySettingsRequest.new(reporting_identity_settings: reporting_identity_settings, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_reporting_identity_settings_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_user_provided_data_settings
     # Create test objects.
     client_result = ::Google::Analytics::Admin::V1alpha::UserProvidedDataSettings.new
