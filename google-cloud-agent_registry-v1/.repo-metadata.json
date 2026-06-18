@@ -8,7 +8,7 @@
     "name": "agentregistry",
     "name_pretty": "Agent Registry V1 API",
     "product_documentation": "https://docs.cloud.google.com/agent-registry/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Agent Registry provides the core infrastructure for your environment, bringing together autonomous agents with the consistent data contexts and tools that MCP servers offer. By consolidating these services, Agent Registry resolves common challenges in complex AI deployments, such as fragmented tool access, isolated data, and redundant services. Note that google-cloud-agent_registry-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-agent_registry instead. See the readme for more details.",
