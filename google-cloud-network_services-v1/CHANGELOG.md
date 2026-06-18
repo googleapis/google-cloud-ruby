@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.10.1 (2026-06-18)
+
+#### Documentation
+
+* fix unclosed backtick in AgentGateway registries comment ([#34606](https://github.com/googleapis/google-cloud-ruby/issues/34606)) 
+
 ### 2.10.0 (2026-06-11)
 
 #### Features
