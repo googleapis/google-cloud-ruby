@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2026-06-18)
+
+#### Features
+
+* GA RuleExecutionErrorService Client libraries ([#34625](https://github.com/googleapis/google-cloud-ruby/issues/34625)) 
+
 ### 0.5.0 (2026-06-11)
 
 #### Features
