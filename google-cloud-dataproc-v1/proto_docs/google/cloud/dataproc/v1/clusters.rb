@@ -460,7 +460,13 @@ module Google
         # @!attribute [rw] confidential_instance_config
         #   @return [::Google::Cloud::Dataproc::V1::ConfidentialInstanceConfig]
         #     Optional. Confidential Instance Config for clusters using [Confidential
-        #     VMs](https://cloud.google.com/compute/confidential-vm/docs).
+        #     VMs](https://cloud.google.com/confidential-computing/confidential-vm/docs).
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. [Resource manager tags]
+        #     (https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing)
+        #     to add to all instances (see [Use secure tags]
+        #     (https://cloud.google.com/dataproc/docs/guides/use-secure-tags)).
         class GceClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -470,6 +476,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class MetadataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -537,14 +552,38 @@ module Google
         end
 
         # Confidential Instance Config for clusters using [Confidential
-        # VMs](https://cloud.google.com/compute/confidential-vm/docs)
+        # VMs](https://cloud.google.com/confidential-computing/confidential-vm/docs)
         # @!attribute [rw] enable_confidential_compute
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Optional. Defines whether the instance should have confidential compute
-        #     enabled.
+        #     Optional. Deprecated: Use 'confidential_instance_type' instead.
+        #     Defines whether the instance should have confidential compute enabled.
+        # @!attribute [rw] confidential_instance_type
+        #   @return [::Google::Cloud::Dataproc::V1::ConfidentialInstanceConfig::ConfidentialInstanceType]
+        #     Optional. Defines the type of Confidential Compute technology to use.
         class ConfidentialInstanceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of Confidential Compute technology as per [Confidential Computing
+          # types](https://cloud.google.com/confidential-computing/confidential-vm/docs/create-a-confidential-vm-instance#create-instance).
+          # New values may be added in the future.
+          module ConfidentialInstanceType
+            # Confidential Instance Type is not specified.
+            CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED = 0
+
+            # [AMD Secure Encrypted
+            # Virtualization](https://cloud.google.com/confidential-computing/confidential-vm/docs/confidential-vm-overview#amd_sev)
+            SEV = 1
+
+            # [AMD Secure Encrypted Virtualization-Secure Nested
+            # Paging](https://cloud.google.com/confidential-computing/confidential-vm/docs/confidential-vm-overview#amd_sev-snp)
+            SEV_SNP = 2
+
+            # [Intel Trust Domain
+            # Extensions](https://cloud.google.com/confidential-computing/confidential-vm/docs/confidential-vm-overview#intel_tdx)
+            TDX = 3
+          end
         end
 
         # The config settings for Compute Engine resources in
