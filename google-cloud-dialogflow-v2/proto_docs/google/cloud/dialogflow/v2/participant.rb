@@ -50,9 +50,9 @@ module Google
         #        Dialogflow adds the obfuscated user id with the participant.
         #
         #     2. If you set this field in
-        #        {::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest#participant AnalyzeContent}
-        #        or
-        #        {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#participant StreamingAnalyzeContent},
+        #        [AnalyzeContent][google.cloud.dialogflow.v2.AnalyzeContentRequest.obfuscated_external_user_id]
+        #        or [StreamingAnalyzeContent]
+        #        [google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.obfuscated_external_user_id],
         #        Dialogflow will update
         #        {::Google::Cloud::Dialogflow::V2::Participant#obfuscated_external_user_id Participant.obfuscated_external_user_id}.
         #
@@ -63,6 +63,11 @@ module Google
         #     Dialogflow uses this user id for billing and measurement purposes. For
         #     example, Dialogflow determines whether a user in one conversation returned
         #     in a later conversation.
+        #
+        #     Additionally, to link an escalated Virtual Agent conversation
+        #     with its corresponding Agent Assist conversation for analytics, this field
+        #     in Agent Assist conversations should be populated to indicate the user id
+        #     of the `END_USER` participant in the escalated conversation.
         #
         #     Note:
         #
@@ -542,8 +547,11 @@ module Google
         #
         # 1.  If the input was set to streaming audio, the first one or more messages
         #     contain `recognition_result`. Each `recognition_result` represents a more
-        #     complete transcript of what the user said. The last `recognition_result`
-        #     has `is_final` set to `true`.
+        #     complete transcript of what the user said. When a user speaks multiple
+        #     sentences, the API will emit multiple messages where `is_final = true`.
+        #     Each time the system detects a distinct pause or completed thought, it
+        #     locks in that segment, marks it `is_final = true`, and then immediately
+        #     starts a new recognition cycle for the next sentence on the same stream.
         #
         # 2.  In virtual agent stage: if `enable_partial_automated_agent_reply` is
         #     true, the following N (currently 1 <= N <= 4) messages
@@ -1237,6 +1245,11 @@ module Google
         #     to compile the suggestion. It may be smaller than the
         #     {::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest#context_size SuggestKnowledgeAssistRequest.context_size}
         #     field in the request if there are fewer messages in the conversation.
+        # @!attribute [rw] additional_suggested_query_results
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::AdditionalSuggestedQueryResult>]
+        #     Optional. The list of additional suggested queries based on the context.
+        #     This is used for the cases when we want to generate multiple queries
+        #     for a single request.
         class SuggestKnowledgeAssistResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1344,6 +1357,12 @@ module Google
         # @!attribute [rw] service_latency
         #   @return [::Google::Cloud::Dialogflow::V2::ServiceLatency]
         #     The latency of the service.
+        # @!attribute [rw] query_generation_debug_info
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistDebugInfo::QueryGenerationDebugInfo]
+        #     Token usage metadata for query generation.
+        # @!attribute [rw] ces_debug_info
+        #   @return [::Google::Protobuf::Struct]
+        #     Debug information from CES runtime API.
         class KnowledgeAssistDebugInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1408,6 +1427,21 @@ module Google
           #   @return [::Integer]
           #     The number of search contexts appended to the query.
           class KnowledgeAssistBehavior
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Token usage metadata for query generation.
+          # @!attribute [rw] prompt_token_count
+          #   @return [::Integer]
+          #     The total number of tokens in the prompt.
+          # @!attribute [rw] candidates_token_count
+          #   @return [::Integer]
+          #     The total number of tokens in the generated candidates.
+          # @!attribute [rw] total_token_count
+          #   @return [::Integer]
+          #     The total number of tokens for the entire request.
+          class QueryGenerationDebugInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1496,7 +1530,42 @@ module Google
           # @!attribute [rw] query_text
           #   @return [::String]
           #     Suggested query text.
+          # @!attribute [rw] search_contexts
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::SuggestedQuery::SearchContext>]
+          #     Optional. The search contexts for the query.
           class SuggestedQuery
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Search context is information useful for knowledge search that helps
+            # enrich the query.
+            # Example:
+            # search_context {
+            #   key: "application name"
+            #   value: "DesignApp"
+            # }
+            # @!attribute [rw] key
+            #   @return [::String]
+            #     Optional. The key of the search context, e.g. "application name".
+            # @!attribute [rw] value
+            #   @return [::String]
+            #     Optional. The value of the search context, e.g. "DesignApp".
+            class SearchContext
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Represents a single suggested query result.
+          # @!attribute [r] suggested_query
+          #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::SuggestedQuery]
+          #     Output only. The suggested query based on the context.
+          # @!attribute [r] answer_record
+          #   @return [::String]
+          #     Output only. The name of the answer record.
+          #     Format: `projects/<Project ID>/locations/<Location
+          #     ID>/answerRecords/<Answer Record ID>`
+          class AdditionalSuggestedQueryResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1510,12 +1579,22 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::FaqSource]
           #     Populated if the prediction came from FAQ.
           #
-          #     Note: The following fields are mutually exclusive: `faq_source`, `generative_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `faq_source`, `generative_source`, `playbook_source`, `event_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] generative_source
           #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::GenerativeSource]
           #     Populated if the prediction was Generative.
           #
-          #     Note: The following fields are mutually exclusive: `generative_source`, `faq_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `generative_source`, `faq_source`, `playbook_source`, `event_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] playbook_source
+          #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::GenerativeSource]
+          #     Populated if the prediction was from Playbook.
+          #
+          #     Note: The following fields are mutually exclusive: `playbook_source`, `faq_source`, `generative_source`, `event_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] event_source
+          #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::EventSource]
+          #     Populated if the prediction was from an event.
+          #
+          #     Note: The following fields are mutually exclusive: `event_source`, `faq_source`, `generative_source`, `playbook_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class KnowledgeAnswer
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1555,6 +1634,18 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+            end
+
+            # Details about source of Event answer.
+            # @!attribute [rw] event
+            #   @return [::String]
+            #     Name of the triggered event.
+            # @!attribute [rw] snippets
+            #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::GenerativeSource]
+            #     Sources used in event fulfillment.
+            class EventSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
         end

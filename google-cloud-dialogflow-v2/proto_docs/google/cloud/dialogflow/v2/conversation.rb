@@ -1112,6 +1112,12 @@ module Google
 
             # The answer is from intent matching.
             INTENT = 3
+
+            # The answer is from Playbook.
+            PLAYBOOK = 4
+
+            # The answer is from event.
+            EVENT = 5
           end
         end
 

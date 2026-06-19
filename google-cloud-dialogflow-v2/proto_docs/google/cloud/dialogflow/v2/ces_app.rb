@@ -29,6 +29,18 @@ module Google
         # @!attribute [rw] confirmation_requirement
         #   @return [::Google::Cloud::Dialogflow::V2::Tool::ConfirmationRequirement]
         #     Optional. Indicates whether the app requires human confirmation.
+        # @!attribute [rw] proactive_enabled
+        #   @return [::Boolean]
+        #     Optional. Only applicable for CompanionAgent.
+        #     Indicates whether the ces app is enabled in proactive mode.
+        #     At least one of `proactive_enabled` or `reactive_enabled` should be
+        #     true; otherwise, the ces app will be ignored.
+        # @!attribute [rw] reactive_enabled
+        #   @return [::Boolean]
+        #     Optional. Only applicable for CompanionAgent.
+        #     Indicates whether the ces app is enabled in reactive mode.
+        #     At least one of `proactive_enabled` or `reactive_enabled` should be
+        #     true; otherwise, the ces app will be ignored.
         class CesAppSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
