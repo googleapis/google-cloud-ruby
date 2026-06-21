@@ -110,6 +110,7 @@
     "proto_docs/google/type/month.rb",
     "proto_docs/google/type/timeofday.rb",
     "snippets/Gemfile",
+    "snippets/oracle_database/configure_exascale_cloud_exadata_infrastructure.rb",
     "snippets/oracle_database/create_autonomous_database.rb",
     "snippets/oracle_database/create_cloud_exadata_infrastructure.rb",
     "snippets/oracle_database/create_cloud_vm_cluster.rb",

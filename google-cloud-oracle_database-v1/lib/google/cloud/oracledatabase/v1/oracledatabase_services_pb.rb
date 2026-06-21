@@ -41,6 +41,8 @@ module Google
             rpc :CreateCloudExadataInfrastructure, ::Google::Cloud::OracleDatabase::V1::CreateCloudExadataInfrastructureRequest, ::Google::Longrunning::Operation
             # Deletes a single Exadata Infrastructure.
             rpc :DeleteCloudExadataInfrastructure, ::Google::Cloud::OracleDatabase::V1::DeleteCloudExadataInfrastructureRequest, ::Google::Longrunning::Operation
+            # Configures Exascale for a single Exadata Infrastructure.
+            rpc :ConfigureExascaleCloudExadataInfrastructure, ::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest, ::Google::Longrunning::Operation
             # Lists the VM Clusters in a given project and location.
             rpc :ListCloudVmClusters, ::Google::Cloud::OracleDatabase::V1::ListCloudVmClustersRequest, ::Google::Cloud::OracleDatabase::V1::ListCloudVmClustersResponse
             # Gets details of a single VM Cluster.

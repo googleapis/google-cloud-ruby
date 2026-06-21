@@ -835,6 +835,106 @@ module Google
             end
 
             ##
+            # Configures Exascale for a single Exadata Infrastructure.
+            #
+            # @overload configure_exascale_cloud_exadata_infrastructure(request, options = nil)
+            #   Pass arguments to `configure_exascale_cloud_exadata_infrastructure` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload configure_exascale_cloud_exadata_infrastructure(name: nil, total_storage_size_gb: nil, request_id: nil)
+            #   Pass arguments to `configure_exascale_cloud_exadata_infrastructure` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the Cloud Exadata Infrastructure in the following
+            #     format:
+            #     projects/\\{project}/locations/\\{location}/cloudExadataInfrastructures/\\{cloud_exadata_infrastructure}.
+            #   @param total_storage_size_gb [::Integer]
+            #     Required. The total storage to be allocated to Exascale in GBs.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new
+            #
+            #   # Call the configure_exascale_cloud_exadata_infrastructure method.
+            #   result = client.configure_exascale_cloud_exadata_infrastructure request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def configure_exascale_cloud_exadata_infrastructure request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.configure_exascale_cloud_exadata_infrastructure.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.configure_exascale_cloud_exadata_infrastructure.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.configure_exascale_cloud_exadata_infrastructure.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :configure_exascale_cloud_exadata_infrastructure, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists the VM Clusters in a given project and location.
             #
             # @overload list_cloud_vm_clusters(request, options = nil)
@@ -8425,6 +8525,11 @@ module Google
                 #
                 attr_reader :delete_cloud_exadata_infrastructure
                 ##
+                # RPC-specific configuration for `configure_exascale_cloud_exadata_infrastructure`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :configure_exascale_cloud_exadata_infrastructure
+                ##
                 # RPC-specific configuration for `list_cloud_vm_clusters`
                 # @return [::Gapic::Config::Method]
                 #
@@ -8800,6 +8905,8 @@ module Google
                   @create_cloud_exadata_infrastructure = ::Gapic::Config::Method.new create_cloud_exadata_infrastructure_config
                   delete_cloud_exadata_infrastructure_config = parent_rpcs.delete_cloud_exadata_infrastructure if parent_rpcs.respond_to? :delete_cloud_exadata_infrastructure
                   @delete_cloud_exadata_infrastructure = ::Gapic::Config::Method.new delete_cloud_exadata_infrastructure_config
+                  configure_exascale_cloud_exadata_infrastructure_config = parent_rpcs.configure_exascale_cloud_exadata_infrastructure if parent_rpcs.respond_to? :configure_exascale_cloud_exadata_infrastructure
+                  @configure_exascale_cloud_exadata_infrastructure = ::Gapic::Config::Method.new configure_exascale_cloud_exadata_infrastructure_config
                   list_cloud_vm_clusters_config = parent_rpcs.list_cloud_vm_clusters if parent_rpcs.respond_to? :list_cloud_vm_clusters
                   @list_cloud_vm_clusters = ::Gapic::Config::Method.new list_cloud_vm_clusters_config
                   get_cloud_vm_cluster_config = parent_rpcs.get_cloud_vm_cluster if parent_rpcs.respond_to? :get_cloud_vm_cluster

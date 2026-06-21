@@ -30,6 +30,11 @@
                 "delete_cloud_exadata_infrastructure"
               ]
             },
+            "ConfigureExascaleCloudExadataInfrastructure": {
+              "methods": [
+                "configure_exascale_cloud_exadata_infrastructure"
+              ]
+            },
             "ListCloudVmClusters": {
               "methods": [
                 "list_cloud_vm_clusters"

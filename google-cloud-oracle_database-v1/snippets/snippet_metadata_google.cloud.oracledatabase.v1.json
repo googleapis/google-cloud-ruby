@@ -172,6 +172,46 @@
       ]
     },
     {
+      "region_tag": "oracledatabase_v1_generated_OracleDatabase_ConfigureExascaleCloudExadataInfrastructure_sync",
+      "title": "Snippet for the configure_exascale_cloud_exadata_infrastructure call in the OracleDatabase service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#configure_exascale_cloud_exadata_infrastructure.",
+      "file": "oracle_database/configure_exascale_cloud_exadata_infrastructure.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "configure_exascale_cloud_exadata_infrastructure",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#configure_exascale_cloud_exadata_infrastructure",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
+        },
+        "method": {
+          "short_name": "ConfigureExascaleCloudExadataInfrastructure",
+          "full_name": "google.cloud.oracledatabase.v1.OracleDatabase.ConfigureExascaleCloudExadataInfrastructure",
+          "service": {
+            "short_name": "OracleDatabase",
+            "full_name": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListCloudVmClusters_sync",
       "title": "Snippet for the list_cloud_vm_clusters call in the OracleDatabase service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_cloud_vm_clusters.",

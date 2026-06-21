@@ -328,6 +328,73 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
     end
   end
 
+  def test_configure_exascale_cloud_exadata_infrastructure
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    total_storage_size_gb = 42
+    request_id = "hello world"
+
+    configure_exascale_cloud_exadata_infrastructure_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :configure_exascale_cloud_exadata_infrastructure, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["total_storage_size_gb"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, configure_exascale_cloud_exadata_infrastructure_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.configure_exascale_cloud_exadata_infrastructure name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.configure_exascale_cloud_exadata_infrastructure ::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.configure_exascale_cloud_exadata_infrastructure(::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, configure_exascale_cloud_exadata_infrastructure_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_cloud_vm_clusters
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::OracleDatabase::V1::ListCloudVmClustersResponse.new
