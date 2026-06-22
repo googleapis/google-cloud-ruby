@@ -21,7 +21,6 @@ def get_bucket_ip_filter bucket_name:
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
-
   ip_filter = bucket.ip_filter
 
   if ip_filter
