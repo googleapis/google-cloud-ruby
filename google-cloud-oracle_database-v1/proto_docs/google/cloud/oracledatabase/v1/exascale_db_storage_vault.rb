@@ -51,6 +51,12 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels or tags associated with the ExascaleDbStorageVault.
+        # @!attribute [rw] exadata_infrastructure
+        #   @return [::String]
+        #     Optional. The Exadata Infrastructure resource on which
+        #     ExascaleDbStorageVault
+        #     resource is created, in the following format:
+        #     projects/\\{project}/locations/\\{region}/cloudExadataInfrastuctures/\\{cloud_extradata_infrastructure}
         class ExascaleDbStorageVault
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
