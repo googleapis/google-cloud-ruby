@@ -48,6 +48,7 @@ module Google
           ##
           # @private exactly_once_delivery_enabled.
           attr_reader :exactly_once_delivery_enabled
+          attr_accessor :keepalive_interval, :pong_deadline
 
           ##
           # @private Create an empty Subscriber::Stream object.
@@ -68,17 +69,49 @@ module Google
 
             @callback_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.callback_threads
 
+            @keepalive_interval = Float(ENV["PUBSUB_TEST_KEEPALIVE_INTERVAL"] || 30)
+            @pong_deadline = Float(ENV["PUBSUB_TEST_PONG_DEADLINE"] || 15)
+            @last_ping_at = nil
+            @last_pong_at = nil
+            @stream_opened = false
+            @reconnect_delay = nil
+
             @stream_keepalive_task = Concurrent::TimerTask.new(
-              execution_interval: 30
+              execution_interval: @keepalive_interval
             ) do
-              # push empty request every 30 seconds to keep stream alive
-              unless inventory.empty?
-                subscriber.service.logger.log :info, "subscriber-streams" do
-                  "sending keepAlive to stream for subscription #{@subscriber.subscription_name}"
+              synchronize do
+                # @request_queue feeds client requests (initial pull request and keep-alive pings) into gRPC.
+                # Note: ACKs are sent via unary RPCs (TimedUnaryBuffer), not over this stream.
+                # Check that @request_queue is initialized (not nil) before pushing unconditional keep-alive pings.
+                if @stream_opened && !@stopped && @request_queue
+                  subscriber.service.logger.log :info, "subscriber-streams" do
+                    "sending keepAlive to stream for subscription #{@subscriber.subscription_name}"
+                  end
+                  @last_ping_at = Process.clock_gettime(Process::CLOCK_MONOTONIC) if @last_pong_at >= @last_ping_at
+                  push Google::Cloud::PubSub::V1::StreamingPullRequest.new
                 end
-                push Google::Cloud::PubSub::V1::StreamingPullRequest.new
               end
-            end.execute
+            end
+
+            @pong_monitor_task = Concurrent::TimerTask.new(
+              execution_interval: [@keepalive_interval / 5.0, 0.01].max
+            ) do
+              synchronize do
+                # Do not check pong deadline if @paused (client flow control inventory full).
+                # When @paused, background_run waits on condition variable and stops calling enum.next,
+                # so incoming server pongs sit buffered in gRPC and @last_pong_at stays un-updated.
+                if @stream_opened && @last_ping_at && @last_pong_at && !@stopped && !@paused
+                  now = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+                  if now - @last_ping_at >= @pong_deadline && @last_pong_at < @last_ping_at
+                    subscriber.service.logger.log :error, "subscriber-streams" do
+                      "Keep-alive pong not received within #{@pong_deadline}s; restarting stream."
+                    end
+                    @stream_opened = false
+                    @background_thread&.raise RestartStream
+                  end
+                end
+              end
+            end
           end
 
           def start
@@ -86,6 +119,8 @@ module Google
               break if @background_thread
 
               @inventory.start
+              @stream_keepalive_task.execute
+              @pong_monitor_task.execute
 
               start_streaming!
             end
@@ -107,6 +142,9 @@ module Google
               # Signal to the background thread that we are stopped.
               @stopped = true
               @pause_cond.broadcast
+
+              @stream_keepalive_task.shutdown
+              @pong_monitor_task.shutdown
 
               # Now that the reception thread is stopped, immediately stop the
               # callback thread pool. All queued callbacks will see the stream
@@ -219,6 +257,13 @@ module Google
 
           # rubocop:disable all
 
+          def backoff_and_wait!
+            @reconnect_delay = @reconnect_delay ? [@reconnect_delay * 1.5, 60.0].min : 1.0
+            synchronize do
+              @pause_cond.wait(@reconnect_delay + rand(0.0..0.5)) unless @stopped
+            end
+          end
+
           def background_run
             synchronize do
               # Don't allow a stream to restart if already stopped
@@ -245,9 +290,19 @@ module Google
 
             # Call the StreamingPull API to get the response enumerator
             options = { :"metadata" => { :"x-goog-request-params" =>  @subscriber.subscription_name } }
+            synchronize do
+              @stream_opened = false
+            end
             enum = @subscriber.service.streaming_pull @request_queue.each, options
             subscriber.service.logger.log :info, "subscriber-streams" do
               "rpc: streamingPull, subscription: #{@subscriber.subscription_name}, stream opened"
+            end
+
+            synchronize do
+              now = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+              @last_ping_at = now
+              @last_pong_at = now
+              @stream_opened = true
             end
 
             loop do
@@ -264,8 +319,17 @@ module Google
               begin
                 # Cannot synchronize the enumerator, causes deadlock
                 response = enum.next
-                new_exactly_once_delivery_enabled = response&.subscription_properties&.exactly_once_delivery_enabled
+                synchronize do
+                  @last_pong_at = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+                  # Reset backoff delay only after successfully reading a frame from enum.next.
+                  # If the connection drops immediately upon reading, @reconnect_delay is preserved.
+                  @reconnect_delay = nil
+                end
                 received_messages = response.received_messages
+                # Skip processing properties and inventory on Pong frames (empty received_messages).
+                # Subscription properties on keep-alive Pongs are not valid.
+                next if received_messages.empty?
+                new_exactly_once_delivery_enabled = response&.subscription_properties&.exactly_once_delivery_enabled
 
                 # Use synchronize so changes happen atomically
                 synchronize do
@@ -310,11 +374,13 @@ module Google
               "#{status_code}; will be retried."
             end
             # Restart the stream with an incremental back for a retriable error.
+            backoff_and_wait!
             retry
           rescue RestartStream
             subscriber.service.logger.log :info, "subscriber-streams" do
               "Subscriber stream for subscription #{@subscriber.subscription_name} has ended; will be retried."
             end
+            backoff_and_wait!
             retry
           rescue StandardError => e
             subscriber.service.logger.log :error, "subscriber-streams" do
@@ -322,6 +388,7 @@ module Google
             end
             @subscriber.error! e
 
+            backoff_and_wait!
             retry
           end
 
@@ -443,6 +510,7 @@ module Google
               req.client_id = @subscriber.service.client_id
               req.max_outstanding_messages = @inventory.limit
               req.max_outstanding_bytes = @inventory.bytesize
+              req.protocol_version = 1
             end
           end
 
