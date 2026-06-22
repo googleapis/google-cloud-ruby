@@ -1,5 +1,11 @@
 # Release History
 
+### 1.16.1 (2026-06-22)
+
+#### Documentation
+
+* clarified OUTPUT_AUDIO_ENCODING_MP3 ([#34638](https://github.com/googleapis/google-cloud-ruby/issues/34638)) 
+
 ### 1.16.0 (2026-06-11)
 
 #### Features
