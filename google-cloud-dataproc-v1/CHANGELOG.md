@@ -1,5 +1,11 @@
 # Release History
 
+### 1.16.0 (2026-06-22)
+
+#### Features
+
+* Add `ConfidentialInstanceType` field to support selection of confidential compute technology ([#34642](https://github.com/googleapis/google-cloud-ruby/issues/34642)) 
+
 ### 1.15.0 (2026-06-11)
 
 #### Features
