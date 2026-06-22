@@ -1115,11 +1115,7 @@ module Google
         end
 
         ##
-        # Sets whether uniform bucket-level access is enabled for this bucket. When this is enabled, access to the
-        # bucket will be configured through IAM, and legacy ACL policies will not work. When it is first enabled,
-        # {#uniform_bucket_level_access_locked_at} will be set by the API automatically. The uniform bucket-level access
-        # can then be disabled until the time specified, after which it will become immutable and calls to change it
-        # will fail. If uniform bucket-level access is enabled, calls to access legacy ACL information will fail.
+        # Sets whether uniform bucket-level access is enabled for this bucket.
         #
         # Before enabling uniform bucket-level access please review [uniform bucket-level
         # access](https://cloud.google.com/storage/docs/uniform-bucket-level-access).
