@@ -30,6 +30,11 @@
                 "delete_team_folder"
               ]
             },
+            "DeleteTeamFolderTree": {
+              "methods": [
+                "delete_team_folder_tree"
+              ]
+            },
             "QueryTeamFolderContents": {
               "methods": [
                 "query_team_folder_contents"
@@ -58,6 +63,11 @@
             "DeleteFolder": {
               "methods": [
                 "delete_folder"
+              ]
+            },
+            "DeleteFolderTree": {
+              "methods": [
+                "delete_folder_tree"
               ]
             },
             "QueryFolderContents": {
@@ -98,6 +108,11 @@
             "DeleteRepository": {
               "methods": [
                 "delete_repository"
+              ]
+            },
+            "DeleteRepositoryLongRunning": {
+              "methods": [
+                "delete_repository_long_running"
               ]
             },
             "MoveRepository": {

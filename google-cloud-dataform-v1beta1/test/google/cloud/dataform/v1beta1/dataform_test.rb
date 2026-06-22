@@ -301,6 +301,71 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
     end
   end
 
+  def test_delete_team_folder_tree
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    force = true
+
+    delete_team_folder_tree_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_team_folder_tree, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderTreeRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_team_folder_tree_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_team_folder_tree({ name: name, force: force }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_team_folder_tree name: name, force: force do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_team_folder_tree ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderTreeRequest.new(name: name, force: force) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_team_folder_tree({ name: name, force: force }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_team_folder_tree(::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderTreeRequest.new(name: name, force: force), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_team_folder_tree_client_stub.call_rpc_count
+    end
+  end
+
   def test_query_team_folder_contents
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse.new
@@ -678,6 +743,71 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, delete_folder_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_folder_tree
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    force = true
+
+    delete_folder_tree_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_folder_tree, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::DeleteFolderTreeRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_folder_tree_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_folder_tree({ name: name, force: force }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_folder_tree name: name, force: force do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_folder_tree ::Google::Cloud::Dataform::V1beta1::DeleteFolderTreeRequest.new(name: name, force: force) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_folder_tree({ name: name, force: force }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_folder_tree(::Google::Cloud::Dataform::V1beta1::DeleteFolderTreeRequest.new(name: name, force: force), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_folder_tree_client_stub.call_rpc_count
     end
   end
 
@@ -1197,6 +1327,71 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, delete_repository_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_repository_long_running
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    force = true
+
+    delete_repository_long_running_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_repository_long_running, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryLongRunningRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_repository_long_running_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_repository_long_running({ name: name, force: force }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_repository_long_running name: name, force: force do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_repository_long_running ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryLongRunningRequest.new(name: name, force: force) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_repository_long_running({ name: name, force: force }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_repository_long_running(::Google::Cloud::Dataform::V1beta1::DeleteRepositoryLongRunningRequest.new(name: name, force: force), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_repository_long_running_client_stub.call_rpc_count
     end
   end
 
@@ -2391,6 +2586,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
     path = "hello world"
     page_size = 42
     page_token = "hello world"
+    view = :DIRECTORY_CONTENTS_VIEW_UNSPECIFIED
 
     query_directory_contents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :query_directory_contents, name
@@ -2399,6 +2595,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
       assert_equal "hello world", request["path"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal :DIRECTORY_CONTENTS_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -2409,35 +2606,35 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.query_directory_contents workspace: workspace, path: path, page_size: page_size, page_token: page_token do |response, operation|
+      c.query_directory_contents workspace: workspace, path: path, page_size: page_size, page_token: page_token, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.query_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token) do |response, operation|
+      c.query_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.query_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.query_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
