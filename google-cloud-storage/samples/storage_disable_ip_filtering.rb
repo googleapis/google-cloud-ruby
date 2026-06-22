@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_update_bucket_with_ip_filter]
-def update_bucket_with_ip_filter bucket_name:
+# [START storage_disable_ip_filtering]
+def disable_ip_filtering bucket_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -35,10 +35,10 @@ def update_bucket_with_ip_filter bucket_name:
     b.ip_filter = ip_filter
   end
 
-  puts "Updated bucket #{bucket_name} with IP filter."
+  puts "Disabled IP filtering for bucket #{bucket_name}."
 end
-# [END storage_update_bucket_with_ip_filter]
+# [END storage_disable_ip_filtering]
 
 if $PROGRAM_NAME == __FILE__
-  update_bucket_with_ip_filter bucket_name: ARGV.shift
+  disable_ip_filtering bucket_name: ARGV.shift
 end

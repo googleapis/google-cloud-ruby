@@ -23,7 +23,7 @@ require_relative "../storage_create_bucket_dual_region"
 require_relative "../storage_create_bucket_hierarchical_namespace"
 require_relative "../storage_create_bucket_with_ip_filter"
 require_relative "../storage_get_bucket_ip_filter"
-require_relative "../storage_update_bucket_with_ip_filter"
+require_relative "../storage_disable_ip_filtering"
 require_relative "../storage_delete_bucket_ip_filter"
 require_relative "../storage_enable_bucket_ip_filter"
 require_relative "../storage_list_bucket_ip_filters"
@@ -194,11 +194,11 @@ describe "Buckets Snippets" do
         end
       end
 
-      # Updates IP filter of an existing bucket
-      expected = "Updated bucket #{bucket_name} with IP filter.\n"
+      # Disables IP filter of an existing bucket
+      expected = "Disabled IP filtering for bucket #{bucket_name}.\n"
       retry_resource_exhaustion do
         assert_output expected do
-          update_bucket_with_ip_filter bucket_name: bucket_name
+          disable_ip_filtering bucket_name: bucket_name
         end
       end
 
@@ -239,6 +239,7 @@ describe "Buckets Snippets" do
     end
 
   end
+
   describe "storage_bucket_encryption_enforcement_config" do
     bucket_name = random_bucket_name
 
