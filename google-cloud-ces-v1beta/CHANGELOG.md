@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.3.0 (2026-06-24)
+
+### ⚠ BREAKING CHANGES
+
+* An existing field `root_agent` is removed from message `.google.cloud.ces.v1.AgentTool` ([#34650](https://github.com/googleapis/google-cloud-ruby/issues/34650))
+
+#### Bug Fixes
+
+* An existing field `root_agent` is removed from message `.google.cloud.ces.v1.AgentTool` ([#34650](https://github.com/googleapis/google-cloud-ruby/issues/34650)) 
+
 ### 0.2.0 (2026-06-11)
 
 #### Features

@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Ces
       module V1beta
-        VERSION = "0.2.0"
+        VERSION = "0.3.0"
       end
     end
   end
