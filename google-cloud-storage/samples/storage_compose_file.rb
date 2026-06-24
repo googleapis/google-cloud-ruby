@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_compose_file]
-def compose_file bucket_name:, first_file_name:, second_file_name:, destination_file_name:
+def compose_file bucket_name:, first_file_name:, second_file_name:, destination_file_name:, delete_source_objects: false
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -26,17 +26,21 @@ def compose_file bucket_name:, first_file_name:, second_file_name:, destination_
   # The ID to give the new composite object
   # destination_file_name = "new-composite-file-name"
 
+  # Whether to delete the source objects after composing
+  # delete_source_objects = false
+
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name, skip_lookup: true
 
-  destination = bucket.compose [first_file_name, second_file_name], destination_file_name do |f|
+  destination = bucket.compose [first_file_name, second_file_name], destination_file_name, delete_source_objects: delete_source_objects do |f|
     f.content_type = "text/plain"
   end
 
+  deletion_message = delete_source_objects ? " and the source objects were deleted." : "."
   puts "Composed new file #{destination.name} in the bucket #{bucket_name} " \
-       "by combining #{first_file_name} and #{second_file_name}"
+       "by combining #{first_file_name} and #{second_file_name}#{deletion_message}"
 end
 # [END storage_compose_file]
 
@@ -44,5 +48,6 @@ if $PROGRAM_NAME == __FILE__
   compose_file bucket_name:           ARGV.shift,
                first_file_name:       ARGV.shift,
                second_file_name:      ARGV.shift,
-               destination_file_name: ARGV.shift
+               destination_file_name: ARGV.shift,
+               delete_source_objects:  ARGV.shift == "true"
 end
