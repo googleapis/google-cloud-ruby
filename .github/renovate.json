@@ -1,6 +1,39 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base"
   ],
-  "rangeStrategy": "widen"
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  "rangeStrategy": "widen",
+  "bundler": {
+    "enabled": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": false,
+    "schedule": [
+      "before 5am on monday"
+    ],
+    "commitMessageAction": "maintain Gemfile.lock files"
+  },
+  "packageRules": [
+    {
+      "description": "Phase 1: Core & Handwritten Gems Lockfile Rollout",
+      "matchFileNames": [
+        "google-cloud-core/**",
+        "google-cloud-storage/**",
+        "google-cloud-pubsub/**",
+        "google-cloud-spanner/**",
+        "google-cloud-bigquery/**",
+        "google-cloud-errors/**"
+      ],
+      "groupName": "core handwritten gems lockfiles",
+      "rangeStrategy": "update-lockfile",
+      "lockFileMaintenance": {
+        "enabled": true
+      }
+    }
+  ]
 }

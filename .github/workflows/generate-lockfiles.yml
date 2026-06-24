@@ -1,0 +1,37 @@
+name: Generate Gemfile.lock Batches
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch_pattern:
+        description: "Gem directory glob pattern (e.g., google-cloud-core or google-cloud-a*)"
+        required: true
+        default: "google-cloud-core google-cloud-storage google-cloud-pubsub google-cloud-spanner google-cloud-bigquery google-cloud-errors"
+
+jobs:
+  generate-locks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: false
+      - name: Generate Lockfiles for Batch
+        run: |
+          for gemdir in ${{ inputs.batch_pattern }}; do
+            if [ -f "$gemdir/Gemfile" ]; then
+              echo "Locking $gemdir..."
+              (cd "$gemdir" && bundle lock)
+            fi
+          done
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore(deps): generate Gemfile.lock files for ${{ inputs.batch_pattern }}"
+          title: "chore(deps): generate Gemfile.lock files (${{ inputs.batch_pattern }})"
+          body: |
+            Automated initial `Gemfile.lock` generation for compliance mandate https://b.corp.google.com/issues/509981628.
+            
+            Reviewed and coordinated with André as part of the multi-phase rollout.
+          branch: "chore/generate-locks-batch"
