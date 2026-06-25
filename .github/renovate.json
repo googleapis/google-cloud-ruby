@@ -25,7 +25,6 @@
         "google-cloud-core/**",
         "google-cloud-storage/**",
         "google-cloud-pubsub/**",
-        "google-cloud-spanner/**",
         "google-cloud-bigquery/**",
         "google-cloud-errors/**"
       ],

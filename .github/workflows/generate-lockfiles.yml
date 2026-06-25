@@ -28,9 +28,11 @@ jobs:
             if [ -f "$gemdir/Gemfile" ]; then
               echo "Locking $gemdir..."
               (cd "$gemdir" && bundle lock)
+              if [ -f "$gemdir/Gemfile.lock" ]; then
+                git add -f "$gemdir/Gemfile.lock"
+              fi
             fi
           done
-          git add -f */Gemfile.lock
         env:
           INPUTS_BATCH_PATTERN: ${{ inputs.batch_pattern }}
       - name: Create Pull Request
