@@ -1,5 +1,11 @@
 # Release History
 
+### 1.13.0 (2026-06-25)
+
+#### Features
+
+* Add E2_STANDARD_2 machine type to Cloud Build API ([#34651](https://github.com/googleapis/google-cloud-ruby/issues/34651)) 
+
 ### 1.12.0 (2026-06-11)
 
 #### Features
