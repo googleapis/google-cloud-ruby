@@ -11,23 +11,30 @@ on:
 jobs:
   generate-locks:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@9eb537ca036ebaed86729dcb9309076e4c5c3b74 # v1
         with:
           ruby-version: "3.3"
           bundler-cache: false
       - name: Generate Lockfiles for Batch
         run: |
-          for gemdir in ${{ inputs.batch_pattern }}; do
+          for gemdir in ${INPUTS_BATCH_PATTERN}; do
             if [ -f "$gemdir/Gemfile" ]; then
               echo "Locking $gemdir..."
               (cd "$gemdir" && bundle lock)
             fi
           done
           git add -f */Gemfile.lock
+        env:
+          INPUTS_BATCH_PATTERN: ${{ inputs.batch_pattern }}
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6
         with:
           commit-message: "chore(deps): generate Gemfile.lock files for ${{ inputs.batch_pattern }}"
           title: "chore(deps): generate Gemfile.lock files (${{ inputs.batch_pattern }})"
