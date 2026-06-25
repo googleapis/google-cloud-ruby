@@ -6,7 +6,7 @@ on:
       batch_pattern:
         description: "Gem directory glob pattern (e.g., google-cloud-core or google-cloud-a*)"
         required: true
-        default: "google-cloud-core google-cloud-storage google-cloud-pubsub google-cloud-spanner google-cloud-bigquery google-cloud-errors"
+        default: "google-cloud-core google-cloud-storage google-cloud-pubsub google-cloud-bigquery google-cloud-errors"
 
 jobs:
   generate-locks:
@@ -25,6 +25,7 @@ jobs:
               (cd "$gemdir" && bundle lock)
             fi
           done
+          git add -f */Gemfile.lock
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
