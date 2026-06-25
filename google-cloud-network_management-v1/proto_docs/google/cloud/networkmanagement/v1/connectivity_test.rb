@@ -162,6 +162,12 @@ module Google
         #   @return [::String]
         #     A [GKE Pod](https://cloud.google.com/kubernetes-engine/docs/concepts/pod)
         #     URI.
+        # @!attribute [rw] dms_private_connection
+        #   @return [::String]
+        #     A [DMS Private
+        #     Connection](https://docs.cloud.google.com/database-migration/docs/reference/rest/v1/projects.locations.privateConnections)
+        #     name format:
+        #     projects/\\{project}/locations/\\{location}/privateConnections/\\{privateConnection}.
         # @!attribute [rw] cloud_function
         #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::CloudFunctionEndpoint]
         #     A [Cloud Function](https://cloud.google.com/functions). Applicable only to
