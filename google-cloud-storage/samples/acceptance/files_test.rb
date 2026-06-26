@@ -429,6 +429,8 @@ describe "Files Snippets" do
     end
 
     refute_nil bucket.file remote_file_name
+    refute_nil bucket.file file_1_name
+    refute_nil bucket.file file_2_name
   end
 
   it "compose_file with delete_source_objects" do
@@ -449,6 +451,30 @@ describe "Files Snippets" do
     refute_nil bucket.file remote_file_name
     assert_nil bucket.file file_1_name
     assert_nil bucket.file file_2_name
+  end
+
+  it "compose_file with delete_source_objects failing does not delete source objects" do
+    file_1 = bucket.create_file local_file, file_1_name
+    file_2 = bucket.create_file local_file, file_2_name
+
+    real_storage = Google::Cloud::Storage.new
+    bucket.stub :compose, ->(*) { raise Google::Cloud::Error, "Mock API error" } do
+      real_storage.stub :bucket, bucket do
+        Google::Cloud::Storage.stub :new, real_storage do
+          assert_raises Google::Cloud::Error do
+            compose_file bucket_name:           bucket.name,
+                         first_file_name:       file_1.name,
+                         second_file_name:      file_2.name,
+                         destination_file_name: remote_file_name,
+                         delete_source_objects: true
+          end
+        end
+      end
+    end
+
+    refute_nil bucket.file file_1_name
+    refute_nil bucket.file file_2_name
+    assert_nil bucket.file remote_file_name
   end
 
   it "copy_file" do
