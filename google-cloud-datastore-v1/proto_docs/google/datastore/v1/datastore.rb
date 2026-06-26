@@ -45,6 +45,9 @@ module Google
         #     mask, it will be absent from [LookupResponse.found.entity.properties][].
         #
         #     The entity's key is always returned.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Datastore::V1::RequestOptions]
+        #     Optional. The options for this request.
         class LookupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -123,6 +126,9 @@ module Google
         #   @return [::Google::Cloud::Datastore::V1::ExplainOptions]
         #     Optional. Explain options for the query. If set, additional query
         #     statistics will be returned. If not, only query results will be returned.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Datastore::V1::RequestOptions]
+        #     Optional. The options for this request.
         class RunQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -132,7 +138,13 @@ module Google
         # {::Google::Cloud::Datastore::V1::Datastore::Client#run_query Datastore.RunQuery}.
         # @!attribute [rw] batch
         #   @return [::Google::Cloud::Datastore::V1::QueryResultBatch]
-        #     A batch of query results (always present).
+        #     A batch of query results. This is always present unless running a
+        #     query under explain-only
+        #     mode:
+        #     {::Google::Cloud::Datastore::V1::RunQueryRequest#explain_options RunQueryRequest.explain_options}
+        #     was provided and
+        #     {::Google::Cloud::Datastore::V1::ExplainOptions#analyze ExplainOptions.analyze} was
+        #     set to false.
         # @!attribute [rw] query
         #   @return [::Google::Cloud::Datastore::V1::Query]
         #     The parsed form of the `GqlQuery` from the request, if it was set.
@@ -189,6 +201,9 @@ module Google
         #   @return [::Google::Cloud::Datastore::V1::ExplainOptions]
         #     Optional. Explain options for the query. If set, additional query
         #     statistics will be returned. If not, only query results will be returned.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Datastore::V1::RequestOptions]
+        #     Optional. The options for this request.
         class RunAggregationQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -235,6 +250,9 @@ module Google
         # @!attribute [rw] transaction_options
         #   @return [::Google::Cloud::Datastore::V1::TransactionOptions]
         #     Options for a new transaction.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Datastore::V1::RequestOptions]
+        #     Optional. The options for this request.
         class BeginTransactionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -264,6 +282,9 @@ module Google
         #   @return [::String]
         #     Required. The transaction identifier, returned by a call to
         #     {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Datastore::V1::RequestOptions]
+        #     Optional. The options for this request.
         class RollbackRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -320,6 +341,9 @@ module Google
         #
         #     When mode is `NON_TRANSACTIONAL`, no two mutations may affect a single
         #     entity.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Datastore::V1::RequestOptions]
+        #     Optional. The options for this request.
         class CommitRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -371,6 +395,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Datastore::V1::Key>]
         #     Required. A list of keys with incomplete key paths for which to allocate
         #     IDs. No key may be reserved/read-only.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Datastore::V1::RequestOptions]
+        #     Optional. The options for this request.
         class AllocateIdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -402,6 +429,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Datastore::V1::Key>]
         #     Required. A list of keys with complete key paths whose numeric IDs should
         #     not be auto-allocated.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Datastore::V1::RequestOptions]
+        #     Optional. The options for this request.
         class ReserveIdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -750,6 +780,20 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Options for a request.
+        # @!attribute [rw] request_tags
+        #   @return [::Array<::String>]
+        #     Optional. The request tags for the request.
+        #     The tags are processed as follows:
+        #     - Truncated to 510 characters.
+        #     - Filtered out if empty.
+        #     - Deduplicated.
+        #     - Limited to 50 tags.
+        class RequestOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
