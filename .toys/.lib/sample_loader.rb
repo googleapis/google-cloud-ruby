@@ -214,7 +214,7 @@ module SampleLoader
     private
 
     def camelize name
-      ::File.basename(name, ".rb").split("_").map(&:capitalize).join
+      ::File.basename(name, ".rb").split(/[_-]/).map(&:capitalize).join
     end
 
     def traverse_name mod, name, type
