@@ -52,6 +52,9 @@ require_relative "../storage_upload_encrypted_file"
 require_relative "../storage_upload_file"
 require_relative "../storage_upload_from_memory"
 require_relative "../storage_upload_with_kms_key"
+require_relative "../storage_list_soft_deleted_objects"
+require_relative "../storage_list_soft_deleted_object_versions"
+require_relative "../storage_restore_object"
 
 describe "Files Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -717,6 +720,27 @@ describe "Files Snippets" do
       StorageStreamFileDownload.new.storage_stream_file_download bucket_name: bucket.name,
                                                                  file_name: remote_file_name,
                                                                  local_file_obj: StringIO.new
+    end
+  end
+
+  describe "soft_deleted objects" do
+    it "list_soft_deleted_objects, list_soft_deleted_object_versions, restore_object" do
+      file = bucket.create_file StringIO.new(file_content), remote_file_name
+      generation = file.generation
+      file.delete
+
+      out, _err = capture_io do
+        list_soft_deleted_objects bucket_name: bucket.name
+      end
+      assert_match remote_file_name, out
+      out, _err = capture_io do
+        list_soft_deleted_object_versions bucket_name: bucket.name
+      end
+      assert_match remote_file_name, out
+
+      assert_output(/Restored file #{Regexp.escape remote_file_name} with generation \d+ in bucket #{Regexp.escape bucket.name}\./) do
+        restore_object bucket_name: bucket.name, file_name: remote_file_name, generation: generation
+      end
     end
   end
 end
