@@ -122,18 +122,18 @@ module Google
         #     Optional. The name of the tool's action associated with this call.
         # @!attribute [rw] error
         #   @return [::Google::Cloud::Dialogflow::V2::ToolCallResult::Error]
-        #     The tool call's error.
+        #     Optional. The tool call's error.
         #
         #     Note: The following fields are mutually exclusive: `error`, `raw_content`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] raw_content
         #   @return [::String]
-        #     Only populated if the response content is not utf-8 encoded.
+        #     Optional. Only populated if the response content is not utf-8 encoded.
         #     (by definition byte fields are base64 encoded).
         #
         #     Note: The following fields are mutually exclusive: `raw_content`, `error`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] content
         #   @return [::String]
-        #     Only populated if the response content is utf-8 encoded.
+        #     Optional. Only populated if the response content is utf-8 encoded.
         #
         #     Note: The following fields are mutually exclusive: `content`, `error`, `raw_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
