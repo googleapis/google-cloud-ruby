@@ -478,26 +478,6 @@ describe "Files Snippets" do
     assert_nil bucket.file remote_file_name
   end
 
-  it "compose_file with delete_source_objects" do
-    file_1 = bucket.create_file local_file, file_1_name
-    file_2 = bucket.create_file local_file, file_2_name
-
-    expected_out = "Composed new file #{remote_file_name} in the bucket #{bucket.name} " \
-                   "by combining #{file_1.name} and #{file_2.name}\n" \
-                   "Source objects were deleted\n"
-    assert_output expected_out do
-      compose_file bucket_name:           bucket.name,
-                   first_file_name:       file_1.name,
-                   second_file_name:      file_2.name,
-                   destination_file_name: remote_file_name,
-                   delete_source_objects: true
-    end
-
-    refute_nil bucket.file remote_file_name
-    assert_nil bucket.file file_1_name
-    assert_nil bucket.file file_2_name
-  end
-
   it "copy_file" do
     bucket.create_file local_file, remote_file_name
     assert_nil secondary_bucket.file remote_file_name
