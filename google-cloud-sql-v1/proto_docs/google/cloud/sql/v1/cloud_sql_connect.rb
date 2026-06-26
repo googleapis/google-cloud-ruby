@@ -37,6 +37,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Connect settings retrieval request.
+        # @!attribute [rw] dns_name
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID. This does not include the project ID.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Required. The region of the instance.
+        class ResolveConnectSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Connect settings retrieval response.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -99,6 +111,10 @@ module Google
         #     representing parts of the MDX protocol that are supported by this instance.
         #     When the list is empty, the instance does not support MDX, so the client
         #     must not send an MDX request. The default is empty.
+        # @!attribute [r] connection_name
+        #   @return [::String]
+        #     Optional. Output only. Connection name of the Cloud SQL instance used in
+        #     connection strings, in the format project:region:instance.
         class ConnectSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

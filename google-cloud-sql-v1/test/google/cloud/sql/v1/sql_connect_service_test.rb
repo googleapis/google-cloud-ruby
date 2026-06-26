@@ -125,6 +125,66 @@ class ::Google::Cloud::Sql::V1::SqlConnectService::ClientTest < Minitest::Test
     end
   end
 
+  def test_resolve_connect_settings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Sql::V1::ConnectSettings.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    dns_name = "hello world"
+    location = "hello world"
+
+    resolve_connect_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :resolve_connect_settings, name
+      assert_kind_of ::Google::Cloud::Sql::V1::ResolveConnectSettingsRequest, request
+      assert_equal "hello world", request["dns_name"]
+      assert_equal "hello world", request["location"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, resolve_connect_settings_client_stub do
+      # Create client
+      c = ::Google::Cloud::Sql::V1::SqlConnectService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.resolve_connect_settings({ dns_name: dns_name, location: location }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.resolve_connect_settings dns_name: dns_name, location: location do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.resolve_connect_settings ::Google::Cloud::Sql::V1::ResolveConnectSettingsRequest.new(dns_name: dns_name, location: location) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.resolve_connect_settings({ dns_name: dns_name, location: location }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.resolve_connect_settings(::Google::Cloud::Sql::V1::ResolveConnectSettingsRequest.new(dns_name: dns_name, location: location), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, resolve_connect_settings_client_stub.call_rpc_count
+    end
+  end
+
   def test_generate_ephemeral_cert
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Sql::V1::GenerateEphemeralCertResponse.new

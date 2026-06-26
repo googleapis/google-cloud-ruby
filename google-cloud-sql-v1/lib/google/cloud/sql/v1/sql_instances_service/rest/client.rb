@@ -1643,7 +1643,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload patch(instance: nil, project: nil, body: nil)
+              # @overload patch(instance: nil, project: nil, reconcile_psc_networking: nil, reconcile_psc_networking_force: nil, body: nil)
               #   Pass arguments to `patch` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1652,6 +1652,12 @@ module Google
               #     Cloud SQL instance ID. This does not include the project ID.
               #   @param project [::String]
               #     Project ID of the project that contains the instance.
+              #   @param reconcile_psc_networking [::Boolean]
+              #     Optional. Set PSC config to the same value as the existing config to
+              #     reconcile the PSC networking.
+              #   @param reconcile_psc_networking_force [::Boolean]
+              #     Optional. Set PSC config to the same value as the existing config and force
+              #     reconcile the PSC networking.
               #   @param body [::Google::Cloud::Sql::V1::DatabaseInstance, ::Hash]
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Sql::V1::Operation]

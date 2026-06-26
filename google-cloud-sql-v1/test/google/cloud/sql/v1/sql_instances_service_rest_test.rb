@@ -1035,6 +1035,8 @@ class ::Google::Cloud::Sql::V1::SqlInstancesService::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     instance = "hello world"
     project = "hello world"
+    reconcile_psc_networking = true
+    reconcile_psc_networking_force = true
     body = {}
 
     patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -1051,27 +1053,27 @@ class ::Google::Cloud::Sql::V1::SqlInstancesService::Rest::ClientTest < Minitest
         end
 
         # Use hash object
-        c.patch({ instance: instance, project: project, body: body }) do |_result, response|
+        c.patch({ instance: instance, project: project, reconcile_psc_networking: reconcile_psc_networking, reconcile_psc_networking_force: reconcile_psc_networking_force, body: body }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.patch instance: instance, project: project, body: body do |_result, response|
+        c.patch instance: instance, project: project, reconcile_psc_networking: reconcile_psc_networking, reconcile_psc_networking_force: reconcile_psc_networking_force, body: body do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.patch ::Google::Cloud::Sql::V1::SqlInstancesPatchRequest.new(instance: instance, project: project, body: body) do |_result, response|
+        c.patch ::Google::Cloud::Sql::V1::SqlInstancesPatchRequest.new(instance: instance, project: project, reconcile_psc_networking: reconcile_psc_networking, reconcile_psc_networking_force: reconcile_psc_networking_force, body: body) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.patch({ instance: instance, project: project, body: body }, call_options) do |_result, response|
+        c.patch({ instance: instance, project: project, reconcile_psc_networking: reconcile_psc_networking, reconcile_psc_networking_force: reconcile_psc_networking_force, body: body }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.patch(::Google::Cloud::Sql::V1::SqlInstancesPatchRequest.new(instance: instance, project: project, body: body), call_options) do |_result, response|
+        c.patch(::Google::Cloud::Sql::V1::SqlInstancesPatchRequest.new(instance: instance, project: project, reconcile_psc_networking: reconcile_psc_networking, reconcile_psc_networking_force: reconcile_psc_networking_force, body: body), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

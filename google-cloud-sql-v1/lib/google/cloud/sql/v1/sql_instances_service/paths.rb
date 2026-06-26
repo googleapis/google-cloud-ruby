@@ -86,6 +86,25 @@ module Google
               "projects/#{project}/global/networks/#{network}"
             end
 
+            ##
+            # Create a fully-qualified ServiceConnectionPolicy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/serviceConnectionPolicies/{service_connection_policy}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param service_connection_policy [String]
+            #
+            # @return [::String]
+            def service_connection_policy_path project:, region:, service_connection_policy:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/serviceConnectionPolicies/#{service_connection_policy}"
+            end
+
             extend self
           end
         end

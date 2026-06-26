@@ -67,4 +67,16 @@ class ::Google::Cloud::Sql::V1::SqlInstancesService::ClientPathsTest < Minitest:
       assert_equal "projects/value0/global/networks/value1", path
     end
   end
+
+  def test_service_connection_policy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Sql::V1::SqlInstancesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.service_connection_policy_path project: "value0", region: "value1", service_connection_policy: "value2"
+      assert_equal "projects/value0/regions/value1/serviceConnectionPolicies/value2", path
+    end
+  end
 end
