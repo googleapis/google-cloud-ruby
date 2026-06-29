@@ -8,8 +8,6 @@
     // Group well-known non-monorepo packages together - https://docs.renovatebot.com/presets-group/#grouprecommended
     "group:recommended",
   ],
-  // Increase compatibility with other projects - https://docs.renovatebot.com/modules/manager/gleam/#recommended-rangestrategy-for-apps-and-libraries
-  "rangeStrategy": "widen",
   // packageRules take precedence (override 'extends' configs)
   "packageRules": [
     // Group all patch updates together - there doesn't seem to be an existing preset for this.
@@ -17,5 +15,7 @@
       "matchUpdateTypes": ["patch"],
       "groupName": "all patch updates"
     }
-  ]
+  ],
+  // Increase compatibility with other projects - https://docs.renovatebot.com/modules/manager/gleam/#recommended-rangestrategy-for-apps-and-libraries
+  "rangeStrategy": "widen",
 }
