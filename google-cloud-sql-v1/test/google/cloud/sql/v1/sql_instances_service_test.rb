@@ -1119,6 +1119,8 @@ class ::Google::Cloud::Sql::V1::SqlInstancesService::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     instance = "hello world"
     project = "hello world"
+    reconcile_psc_networking = true
+    reconcile_psc_networking_force = true
     body = {}
 
     patch_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -1126,6 +1128,10 @@ class ::Google::Cloud::Sql::V1::SqlInstancesService::ClientTest < Minitest::Test
       assert_kind_of ::Google::Cloud::Sql::V1::SqlInstancesPatchRequest, request
       assert_equal "hello world", request["instance"]
       assert_equal "hello world", request["project"]
+      assert_equal true, request["reconcile_psc_networking"]
+      assert request.has_reconcile_psc_networking?
+      assert_equal true, request["reconcile_psc_networking_force"]
+      assert request.has_reconcile_psc_networking_force?
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Sql::V1::DatabaseInstance), request["body"]
       refute_nil options
     end
@@ -1137,31 +1143,31 @@ class ::Google::Cloud::Sql::V1::SqlInstancesService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.patch({ instance: instance, project: project, body: body }) do |response, operation|
+      c.patch({ instance: instance, project: project, reconcile_psc_networking: reconcile_psc_networking, reconcile_psc_networking_force: reconcile_psc_networking_force, body: body }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.patch instance: instance, project: project, body: body do |response, operation|
+      c.patch instance: instance, project: project, reconcile_psc_networking: reconcile_psc_networking, reconcile_psc_networking_force: reconcile_psc_networking_force, body: body do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.patch ::Google::Cloud::Sql::V1::SqlInstancesPatchRequest.new(instance: instance, project: project, body: body) do |response, operation|
+      c.patch ::Google::Cloud::Sql::V1::SqlInstancesPatchRequest.new(instance: instance, project: project, reconcile_psc_networking: reconcile_psc_networking, reconcile_psc_networking_force: reconcile_psc_networking_force, body: body) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.patch({ instance: instance, project: project, body: body }, grpc_options) do |response, operation|
+      c.patch({ instance: instance, project: project, reconcile_psc_networking: reconcile_psc_networking, reconcile_psc_networking_force: reconcile_psc_networking_force, body: body }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.patch(::Google::Cloud::Sql::V1::SqlInstancesPatchRequest.new(instance: instance, project: project, body: body), grpc_options) do |response, operation|
+      c.patch(::Google::Cloud::Sql::V1::SqlInstancesPatchRequest.new(instance: instance, project: project, reconcile_psc_networking: reconcile_psc_networking, reconcile_psc_networking_force: reconcile_psc_networking_force, body: body), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

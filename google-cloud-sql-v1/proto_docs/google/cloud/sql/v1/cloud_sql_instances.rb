@@ -269,6 +269,14 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID of the project that contains the instance.
+        # @!attribute [rw] reconcile_psc_networking
+        #   @return [::Boolean]
+        #     Optional. Set PSC config to the same value as the existing config to
+        #     reconcile the PSC networking.
+        # @!attribute [rw] reconcile_psc_networking_force
+        #   @return [::Boolean]
+        #     Optional. Set PSC config to the same value as the existing config and force
+        #     reconcile the PSC networking.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::DatabaseInstance]
         class SqlInstancesPatchRequest
@@ -1042,7 +1050,7 @@ module Google
         # @!attribute [rw] destination_network
         #   @return [::String]
         #     Optional. The fully qualified URI of the VPC network to which the cloned
-        #     instance will be connected via Private Services Access for private IP. For
+        #     instance will be connected via private services access for private IP. For
         #     example:`projects/my-network-project/global/networks/my-network`. This
         #     field is only required for cross-project cloning.
         class CloneContext

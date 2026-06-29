@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud SQL Admin V1 API
 
-API for Cloud SQL database instance management.
+Cloud SQL Admin API.
 
 
 https://github.com/googleapis/google-cloud-ruby

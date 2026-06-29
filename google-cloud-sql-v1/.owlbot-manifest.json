@@ -150,6 +150,7 @@
     "snippets/sql_backups_service/update_backup.rb",
     "snippets/sql_connect_service/generate_ephemeral_cert.rb",
     "snippets/sql_connect_service/get_connect_settings.rb",
+    "snippets/sql_connect_service/resolve_connect_settings.rb",
     "snippets/sql_databases_service/delete.rb",
     "snippets/sql_databases_service/get.rb",
     "snippets/sql_databases_service/insert.rb",

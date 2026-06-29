@@ -35,6 +35,9 @@ module Google
 
             # Retrieves connect settings about a Cloud SQL instance.
             rpc :GetConnectSettings, ::Google::Cloud::Sql::V1::GetConnectSettingsRequest, ::Google::Cloud::Sql::V1::ConnectSettings
+            # Retrieves connect settings about a Cloud SQL instance using the instance
+            # DNS name.
+            rpc :ResolveConnectSettings, ::Google::Cloud::Sql::V1::ResolveConnectSettingsRequest, ::Google::Cloud::Sql::V1::ConnectSettings
             # Generates a short-lived X509 certificate containing the provided public key
             # and signed by a private key specific to the target instance. Users may use
             # the certificate to authenticate as themselves when connecting to the
