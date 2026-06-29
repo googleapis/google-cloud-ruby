@@ -150,6 +150,11 @@ module Google
         #     Note: This setting is relevant only for streaming methods.
         #     Note: When specified, InputAudioConfig.single_utterance takes precedence
         #     over StreamingDetectIntentRequest.single_utterance.
+        # @!attribute [rw] enable_voice_activity_events
+        #   @return [::Boolean]
+        #     Optional. If `true`, responses with voice activity speech events will be
+        #     returned as they are detected.
+        #     Note: This setting is relevant only for streaming methods.
         # @!attribute [rw] disable_no_speech_recognized_event
         #   @return [::Boolean]
         #     Only used in
