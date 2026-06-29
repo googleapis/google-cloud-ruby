@@ -594,6 +594,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
 
     # Create request parameters for a unary method.
     name = "hello world"
+    public_key_format = :PUBLIC_KEY_FORMAT_UNSPECIFIED
 
     get_import_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -609,27 +610,27 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        c.get_import_job({ name: name }) do |_result, response|
+        c.get_import_job({ name: name, public_key_format: public_key_format }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.get_import_job name: name do |_result, response|
+        c.get_import_job name: name, public_key_format: public_key_format do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.get_import_job ::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name) do |_result, response|
+        c.get_import_job ::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name, public_key_format: public_key_format) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.get_import_job({ name: name }, call_options) do |_result, response|
+        c.get_import_job({ name: name, public_key_format: public_key_format }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.get_import_job(::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_import_job(::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name, public_key_format: public_key_format), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
