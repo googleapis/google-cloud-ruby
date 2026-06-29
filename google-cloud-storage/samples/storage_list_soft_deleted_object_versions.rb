@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ def list_soft_deleted_object_versions bucket_name:
 
   storage = Google::Cloud::Storage.new
   bucket  = storage.bucket bucket_name
-  binding.pry
   bucket.files(soft_deleted: true).each do |file|
     puts "#{file.name}, generation: #{file.generation}, soft_delete_time: #{file.soft_delete_time}"
   end
