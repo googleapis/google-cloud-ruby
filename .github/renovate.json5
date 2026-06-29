@@ -7,7 +7,7 @@
   ],
   // packageRules take precedence (override 'extends' configs)
   "packageRules": [
-    // Group all patch updates together - there doesn't seem to be an existing preset for this.
+    // Group all patch updates together - there doesn't seem to be an existing preset for this
     {
       "matchUpdateTypes": ["patch"],
       "groupName": "all patch updates"
