@@ -105,7 +105,13 @@ module Google
           #     Required. The Git remote's URL.
           # @!attribute [rw] default_branch
           #   @return [::String]
-          #     Required. The Git remote's default branch name.
+          #     Optional. The Git remote's default branch name.
+          #     If not set, `main` will be used.
+          # @!attribute [r] effective_default_branch
+          #   @return [::String]
+          #     Output only. The Git remote's effective default branch name.
+          #     This is the default branch name of the Git remote if it is set,
+          #     otherwise it is `main`.
           # @!attribute [rw] authentication_token_secret_version
           #   @return [::String]
           #     Optional. The name of the Secret Manager secret version to use as an
@@ -114,6 +120,11 @@ module Google
           # @!attribute [rw] ssh_authentication_config
           #   @return [::Google::Cloud::Dataform::V1::Repository::GitRemoteSettings::SshAuthenticationConfig]
           #     Optional. Authentication fields for remote uris using SSH protocol.
+          # @!attribute [rw] git_repository_link
+          #   @return [::String]
+          #     Optional. Resource name for the `GitRepositoryLink` used for machine
+          #     credentials. Must be in the format
+          #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`
           # @!attribute [r] token_status
           #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Dataform::V1::Repository::GitRemoteSettings::TokenStatus]
@@ -927,12 +938,14 @@ module Google
         # Represents a single entry in a directory.
         # @!attribute [rw] file
         #   @return [::String]
-        #     A file in the directory.
+        #     A file in the directory. The path is returned including the full
+        #     folder structure from the root.
         #
         #     Note: The following fields are mutually exclusive: `file`, `directory`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] directory
         #   @return [::String]
-        #     A child directory in the directory.
+        #     A child directory in the directory. The path is returned including
+        #     the full folder structure from the root.
         #
         #     Note: The following fields are mutually exclusive: `directory`, `file`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metadata
@@ -2485,9 +2498,10 @@ module Google
           #     Output only. The code contents of a Notebook to be run.
           # @!attribute [r] job_id
           #   @return [::String]
-          #     Output only. The ID of the Vertex job that executed the notebook in
-          #     contents and also the ID used for the outputs created in Google Cloud
-          #     Storage buckets. Only set once the job has started to run.
+          #     Output only. The ID of the Gemini Enterprise Agent Platform job that
+          #     executed the notebook in contents and also the ID used for the outputs
+          #     created in Google Cloud Storage buckets. Only set once the job has
+          #     started to run.
           class NotebookAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2707,8 +2721,8 @@ module Google
         #     Optional. The containing Folder resource name. This should take
         #     the format: projects/\\{project}/locations/\\{location}/folders/\\{folder},
         #     projects/\\{project}/locations/\\{location}/teamFolders/\\{teamFolder}, or just
-        #     projects/\\{project}/locations/\\{location} if this is a root Folder. This
-        #     field can only be updated through MoveFolder.
+        #     "" if this is a root Folder. This field can only be updated through
+        #     MoveFolder.
         # @!attribute [r] team_folder_name
         #   @return [::String]
         #     Output only. The resource name of the TeamFolder that this Folder is
@@ -2879,7 +2893,7 @@ module Google
         # `QueryFolderContents` request message.
         # @!attribute [rw] folder
         #   @return [::String]
-        #     Required. Name of the folder whose contents to list.
+        #     Required. Resource name of the Folder to list contents for.
         #     Format: projects/*/locations/*/folders/*
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -2901,15 +2915,17 @@ module Google
         #     order. Supported keywords: display_name (default), create_time,
         #     last_modified_time.
         #     Examples:
-        #       - `orderBy="display_name"`
-        #       - `orderBy="display_name desc"`
+        #
+        #     * `orderBy="display_name"`
+        #     * `orderBy="display_name desc"`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Optional filtering for the returned list. Filtering is currently
         #     only supported on the `display_name` field.
         #
         #     Example:
-        #      - `filter="display_name="MyFolder""`
+        #
+        #     * `filter="display_name="MyFolder""`
         class QueryFolderContentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2947,7 +2963,7 @@ module Google
         # `QueryUserRootContents` request message.
         # @!attribute [rw] location
         #   @return [::String]
-        #     Required. Location of the user root folder whose contents to list.
+        #     Required. Location of the user root folder to list contents for.
         #     Format: projects/*/locations/*
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -2968,15 +2984,17 @@ module Google
         #     Will order Folders before Repositories, and then by `order_by` in ascending
         #     order. Supported keywords: display_name (default), created_at,
         #     last_modified_at. Examples:
-        #       - `orderBy="display_name"`
-        #       - `orderBy="display_name desc"`
+        #
+        #     * `orderBy="display_name"`
+        #     * `orderBy="display_name desc"`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Optional filtering for the returned list. Filtering is currently
         #     only supported on the `display_name` field.
         #
         #     Example:
-        #      - `filter="display_name="MyFolder""`
+        #
+        #     * `filter="display_name="MyFolder""`
         class QueryUserRootContentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3086,7 +3104,7 @@ module Google
         # `QueryTeamFolderContents` request message.
         # @!attribute [rw] team_folder
         #   @return [::String]
-        #     Required. Name of the team_folder whose contents to list.
+        #     Required. Resource name of the TeamFolder to list contents for.
         #     Format: `projects/*/locations/*/teamFolders/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -3108,15 +3126,17 @@ module Google
         #     order. Supported keywords: `display_name` (default), `create_time`,
         #     last_modified_time.
         #     Examples:
-        #       - `orderBy="display_name"`
-        #       - `orderBy="display_name desc"`
+        #
+        #     * `orderBy="display_name"`
+        #     * `orderBy="display_name desc"`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Optional filtering for the returned list. Filtering is currently
         #     only supported on the `display_name` field.
         #
         #     Example:
-        #      - `filter="display_name="MyFolder""`
+        #
+        #     * `filter="display_name="MyFolder""`
         class QueryTeamFolderContentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3158,9 +3178,9 @@ module Google
         #     Format: `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of TeamFolders to return. The server may return
-        #     fewer items than requested. If unspecified, the server will pick an
-        #     appropriate default.
+        #     Optional. Maximum number of `TeamFolders` to return. The server may return
+        #     fewer items than requested. If unspecified, the server will pick a default
+        #     of `page_size` = 50.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. Page token received from a previous `SearchTeamFolders` call.
@@ -3174,15 +3194,17 @@ module Google
         #     Optional. Field to additionally sort results by.
         #     Supported keywords: `display_name` (default), `create_time`,
         #     `last_modified_time`. Examples:
-        #       - `orderBy="display_name"`
-        #       - `orderBy="display_name desc"`
+        #
+        #     * `orderBy="display_name"`
+        #     * `orderBy="display_name desc"`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Optional filtering for the returned list. Filtering is currently
         #     only supported on the `display_name` field.
         #
         #     Example:
-        #      - `filter="display_name="MyFolder""`
+        #
+        #     * `filter="display_name="MyFolder""`
         class SearchTeamFoldersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3292,7 +3314,7 @@ module Google
 
         # Represents the level of detail to return for directory contents.
         module DirectoryContentsView
-          # The default / unset value. Defaults to DIRECTORY_CONTENTS_VIEW_BASIC.
+          # The default unset value. Defaults to DIRECTORY_CONTENTS_VIEW_BASIC.
           DIRECTORY_CONTENTS_VIEW_UNSPECIFIED = 0
 
           # Includes only the file or directory name. This is the default behavior.
