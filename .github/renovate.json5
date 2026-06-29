@@ -1,12 +1,9 @@
 {
   "extends": [
-    "config:base",
+    // Use pre-determined best practices, including some groupings and github action digest pinning - https://docs.renovatebot.com/presets-config/#configbest-practices
+    "config:best-practices",
     // Create version bump PRs on a monthly basis - https://docs.renovatebot.com/presets-schedule/#schedulemonthly
     "schedule:monthly",
-    // Group well-known monorepo packages together - https://docs.renovatebot.com/presets-group/#groupmonorepos
-    "group:monorepos",
-    // Group well-known non-monorepo packages together - https://docs.renovatebot.com/presets-group/#grouprecommended
-    "group:recommended",
   ],
   // packageRules take precedence (override 'extends' configs)
   "packageRules": [
