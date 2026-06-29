@@ -1,7 +1,0 @@
-{
-  "extends": [
-    "config:base",
-    "schedule:monthly",
-  ],
-  "rangeStrategy": "widen"
-}
