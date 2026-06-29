@@ -393,6 +393,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
       file = StringIO.new "test"
       bucket.create_file file, source_file
     end
+    
     it "moves a file for bucket" do
       create_source_file
       bucket.move_file source_file, destination_file
