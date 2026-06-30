@@ -429,6 +429,7 @@ describe "Files Snippets" do
     end
 
     refute_nil bucket.file remote_file_name
+    # Assert that source files remain intact (delete_source_objects defaults to false)
     refute_nil bucket.file file_1_name
     refute_nil bucket.file file_2_name
   end
@@ -453,7 +454,7 @@ describe "Files Snippets" do
     assert_nil bucket.file file_2_name
   end
 
-  it "compose_file with delete_source_objects failing does not delete source objects" do
+  it "compose_file failing does not delete source objects" do
     file_1 = bucket.create_file local_file, file_1_name
     file_2 = bucket.create_file local_file, file_2_name
 
