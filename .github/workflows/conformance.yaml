@@ -2,6 +2,9 @@
 # client library.
 # See https://github.com/googleapis/cloud-bigtable-clients-test
 on:
+
+permissions:
+  contents: read
   push:
     branches:
     - main
