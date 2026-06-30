@@ -895,6 +895,13 @@ module Google
         #     Output only. The public key with which to wrap key material prior to
         #     import. Only returned if {::Google::Cloud::Kms::V1::ImportJob#state state} is
         #     {::Google::Cloud::Kms::V1::ImportJob::ImportJobState::ACTIVE ACTIVE}.
+        # @!attribute [r] public_key_format
+        #   @return [::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat]
+        #     Output only. Specifies the
+        #     {::Google::Cloud::Kms::V1::ImportJob::WrappingPublicKey WrappingPublicKey} format
+        #     provided by the customer in the
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_import_job KeyManagementService.GetImportJob}
+        #     request.
         # @!attribute [r] attestation
         #   @return [::Google::Cloud::Kms::V1::KeyOperationAttestation]
         #     Output only. Statement that was generated and signed by the key creator
@@ -926,6 +933,19 @@ module Google
           #     Considerations](https://tools.ietf.org/html/rfc7468#section-2) and
           #     [Textual Encoding of Subject Public Key Info]
           #     (https://tools.ietf.org/html/rfc7468#section-13).
+          #     This field gets populated by default for RSA-based import methods, if no
+          #     public_key_format is specified in the request.
+          #     If you want to retrieve the wrapping key of an
+          #     {::Google::Cloud::Kms::V1::ImportJob ImportJob} in some other format, use
+          #     {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_import_job KeyManagementService.GetImportJob}
+          #     and set the public_key_format to the desired public key format.
+          # @!attribute [r] data
+          #   @return [::String]
+          #     Output only. Contains the public key, formatted according to the
+          #     {::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat PublicKey.PublicKeyFormat}
+          #     specified in the
+          #     {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_import_job KeyManagementService.GetImportJob}
+          #     request.
           class WrappingPublicKey
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -981,6 +1001,33 @@ module Google
             # to technical limitations of RSA wrapping, this method cannot be used to
             # wrap RSA keys for import.
             RSA_OAEP_4096_SHA256 = 6
+
+            # Represents the Hybrid Public Key Encryption (HPKE) Scheme originally
+            # defined in [RFC 9180](https://www.rfc-editor.org/rfc/rfc9180). It
+            # involves wrapping the raw key with an ephemeral AES key, derived with
+            # HKDF-SHA256 from an encryption context, that is, in turn obtained from
+            # the receiver’s public key with the help of the ML-KEM-768 KEM. For more
+            # details, see the [ML-KEM HPKE
+            # standard](http://datatracker.ietf.org/doc/draft-ietf-hpke-pq/01/).
+            HPKE_KEM_ML_KEM_768_HKDF_SHA256_AES_256_GCM = 8
+
+            # Represents the Hybrid Public Key Encryption (HPKE) Scheme originally
+            # defined in [RFC 9180](https://www.rfc-editor.org/rfc/rfc9180). It
+            # involves wrapping the raw key with an ephemeral AES key, derived with
+            # HKDF-SHA256 from an encryption context, that is, in turn obtained from
+            # the receiver’s public key with the help of the ML-KEM-1024 KEM. For more
+            # details, see the [ML-KEM HPKE
+            # standard](http://datatracker.ietf.org/doc/draft-ietf-hpke-pq/01/).
+            HPKE_KEM_ML_KEM_1024_HKDF_SHA256_AES_256_GCM = 9
+
+            # Represents the Hybrid Public Key Encryption (HPKE) Scheme originally
+            # defined in [RFC 9180](https://www.rfc-editor.org/rfc/rfc9180). It
+            # involves wrapping the raw key with an ephemeral AES key, derived with
+            # HKDF-SHA256 from an encryption context, that is, in turn obtained from
+            # the receiver’s public key with the help of the X-Wing hybrid KEM. For
+            # more details, see the [X-Wing
+            # standard](http://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem/09/).
+            HPKE_KEM_XWING_HKDF_SHA256_AES_256_GCM = 10
           end
 
           # The state of the {::Google::Cloud::Kms::V1::ImportJob ImportJob}, indicating if

@@ -661,11 +661,13 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     # Create request parameters for a unary method.
     name = "hello world"
+    public_key_format = :PUBLIC_KEY_FORMAT_UNSPECIFIED
 
     get_import_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_import_job, name
       assert_kind_of ::Google::Cloud::Kms::V1::GetImportJobRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal :PUBLIC_KEY_FORMAT_UNSPECIFIED, request["public_key_format"]
       refute_nil options
     end
 
@@ -676,31 +678,31 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      c.get_import_job({ name: name }) do |response, operation|
+      c.get_import_job({ name: name, public_key_format: public_key_format }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.get_import_job name: name do |response, operation|
+      c.get_import_job name: name, public_key_format: public_key_format do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.get_import_job ::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name) do |response, operation|
+      c.get_import_job ::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name, public_key_format: public_key_format) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.get_import_job({ name: name }, grpc_options) do |response, operation|
+      c.get_import_job({ name: name, public_key_format: public_key_format }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.get_import_job(::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_import_job(::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name, public_key_format: public_key_format), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
