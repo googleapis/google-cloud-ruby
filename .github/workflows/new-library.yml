@@ -1,5 +1,8 @@
 name: Create New Library
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
     inputs:
@@ -15,10 +18,11 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v6
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       with:
           # IMPORTANT: This ensures the checkout uses the correct identity for git operations
           token: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
+          persist-credentials: false
     # - name: Debug Token Permissions
     #   # Uncomment to debug access token issues
     #   env:
@@ -33,11 +37,11 @@ jobs:
     #     echo "=== 3. Can I see the target fork? ==="
     #     gh repo view yoshi-code-bot/google-cloud-ruby --json viewerPermission
     - name: Install Ruby 3.3
-      uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@9eb537ca036ebaed86729dcb9309076e4c5c3b74 # v1
       with:
         ruby-version: "3.3"
     - name: Install Bazel
-      uses: bazel-contrib/setup-bazel@0.18.0
+      uses: bazel-contrib/setup-bazel@083175551ceeceebc757ebee2127fde78840ca77 # 0.18.0
     - name: Install tools
       run: |
         gem install --no-document toys
