@@ -76,42 +76,8 @@ module Google
             @stream_opened = false
             @reconnect_delay = nil
 
-            @stream_keepalive_task = Concurrent::TimerTask.new(
-              execution_interval: @keepalive_interval
-            ) do
-              synchronize do
-                # @request_queue feeds client requests (initial pull request and keep-alive pings) into gRPC.
-                # Note: ACKs are sent via unary RPCs (TimedUnaryBuffer), not over this stream.
-                # Check that @request_queue is initialized (not nil) before pushing unconditional keep-alive pings.
-                if @stream_opened && !@stopped && @request_queue
-                  subscriber.service.logger.log :info, "subscriber-streams" do
-                    "sending keepAlive to stream for subscription #{@subscriber.subscription_name}"
-                  end
-                  @last_ping_at = Process.clock_gettime(Process::CLOCK_MONOTONIC) if @last_pong_at >= @last_ping_at
-                  push Google::Cloud::PubSub::V1::StreamingPullRequest.new
-                end
-              end
-            end
-
-            @pong_monitor_task = Concurrent::TimerTask.new(
-              execution_interval: [@keepalive_interval / 5.0, 0.01].max
-            ) do
-              synchronize do
-                # Do not check pong deadline if @paused (client flow control inventory full).
-                # When @paused, background_run waits on condition variable and stops calling enum.next,
-                # so incoming server pongs sit buffered in gRPC and @last_pong_at stays un-updated.
-                if @stream_opened && @last_ping_at && @last_pong_at && !@stopped && !@paused
-                  now = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-                  if now - @last_ping_at >= @pong_deadline && @last_pong_at < @last_ping_at
-                    subscriber.service.logger.log :error, "subscriber-streams" do
-                      "Keep-alive pong not received within #{@pong_deadline}s; restarting stream."
-                    end
-                    @stream_opened = false
-                    @background_thread&.raise RestartStream
-                  end
-                end
-              end
-            end
+            @stream_keepalive_task = nil
+            @pong_monitor_task = nil
           end
 
           def start
@@ -119,7 +85,14 @@ module Google
               break if @background_thread
 
               @inventory.start
+              @stream_keepalive_task = Concurrent::TimerTask.new(
+                execution_interval: @keepalive_interval
+              ) { send_keepalive_ping! }
               @stream_keepalive_task.execute
+
+              @pong_monitor_task = Concurrent::TimerTask.new(
+                execution_interval: [@keepalive_interval / 5.0, 0.01].max
+              ) { check_liveness! }
               @pong_monitor_task.execute
 
               start_streaming!
@@ -143,8 +116,10 @@ module Google
               @stopped = true
               @pause_cond.broadcast
 
-              @stream_keepalive_task.shutdown
-              @pong_monitor_task.shutdown
+              @stream_keepalive_task&.shutdown
+              @stream_keepalive_task = nil
+              @pong_monitor_task&.shutdown
+              @pong_monitor_task = nil
 
               # Now that the reception thread is stopped, immediately stop the
               # callback thread pool. All queued callbacks will see the stream
@@ -483,15 +458,45 @@ module Google
             @inventory.full?
           end
 
-          def unpause_streaming!
-            return unless unpause_streaming?
-
-            @paused = nil
-            subscriber.service.logger.log :info, "subscriber-flow-control" do
-              "subscriber for #{@subscriber.subscription_name} is unblocking client-side flow control"
+          def send_keepalive_ping!
+            synchronize do
+              if @stream_opened && !@stopped && @request_queue
+                subscriber.service.logger.log :info, "subscriber-streams" do
+                  "sending keepAlive to stream for subscription #{@subscriber.subscription_name}"
+                end
+                @last_ping_at = Process.clock_gettime(Process::CLOCK_MONOTONIC) if @last_pong_at >= @last_ping_at
+                push Google::Cloud::PubSub::V1::StreamingPullRequest.new
+              end
             end
-            # signal to the background thread that we are unpaused
-            @pause_cond.broadcast
+          end
+
+          def check_liveness!
+            synchronize do
+              if @stream_opened && @last_ping_at && @last_pong_at && !@stopped && !@paused
+                now = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+                if now - @last_ping_at >= @pong_deadline && @last_pong_at < @last_ping_at
+                  subscriber.service.logger.log :error, "subscriber-streams" do
+                    "Keep-alive pong not received within #{@pong_deadline}s; restarting stream."
+                  end
+                  @stream_opened = false
+                  @background_thread&.raise RestartStream
+                end
+              end
+            end
+          end
+
+          def unpause_streaming!
+            synchronize do
+              return unless unpause_streaming?
+
+              @paused = nil
+              @last_pong_at = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+              subscriber.service.logger.log :info, "subscriber-flow-control" do
+                "subscriber for #{@subscriber.subscription_name} is unblocking client-side flow control"
+              end
+              # signal to the background thread that we are unpaused
+              @pause_cond.broadcast
+            end
           end
 
           def unpause_streaming?

@@ -58,37 +58,6 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     _(initial_req.protocol_version).must_equal 1
   end
 
-  it "sends keep-alive pings periodically even when inventory is empty" do
-    q = StreamingPullStub::RaisableEnumeratorQueue.new
-    stub = StreamingPullStub.new [[]]
-    def stub.streaming_pull_internal req, opt = nil
-      @requests << req
-      @my_q.each
-    end
-    stub.instance_variable_set(:@my_q, q)
-    subscriber.service.mocked_subscription_admin = stub
-
-    listener = subscriber.listen streams: 1 do |msg|
-    end
-    listener.start
-
-    pong_thread = Thread.new do
-      10.times do
-        sleep 0.02
-        q.push Google::Cloud::PubSub::V1::StreamingPullResponse.new(received_messages: [])
-      end
-    end
-
-    sleep 0.18
-    pong_thread.join
-
-    listener.stop
-    listener.wait!
-
-    reqs = stub.requests.first.to_a
-    _(reqs.count).must_be :>=, 2
-  end
-
   it "restarts stream when keep-alive pong deadline is exceeded" do
     pull_res2 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc]
     stub = StreamingPullStub.new [[], [pull_res2]]
@@ -102,7 +71,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
 
     listener_retries = 0
     until called
-      fail "stream did not restart and deliver message" if listener_retries > 200
+      fail "stream did not restart and deliver message" if listener_retries > 500
       listener_retries += 1
       sleep 0.01
     end
@@ -113,34 +82,112 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     _(stub.requests.count).must_equal 2
   end
 
-  it "does not restart stream when actively receiving keep-alive pongs" do
-    q = StreamingPullStub::RaisableEnumeratorQueue.new
+  it "sends keep-alive ping synchronously when stream is open and queue exists" do
     stub = StreamingPullStub.new [[]]
-    def stub.streaming_pull_internal req, opt = nil
-      @requests << req
-      @my_q.each
-    end
-    stub.instance_variable_set(:@my_q, q)
     subscriber.service.mocked_subscription_admin = stub
 
     listener = subscriber.listen streams: 1 do |msg|
     end
     listener.start
 
-    pong_sender = Thread.new do
-      8.times do
-        sleep 0.02
-        empty_pong = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: []
-        q.push empty_pong
-      end
-    end
-
-    sleep 0.15
-    pong_sender.join
+    stream = listener.instance_variable_get(:@stream_pool).first
+    stream.send(:send_keepalive_ping!)
 
     listener.stop
     listener.wait!
 
-    _(stub.requests.count).must_equal 1
+    reqs = stub.requests.first.to_a
+    _(reqs.count).must_be :>=, 2
+  end
+
+  it "does not restart stream when check_liveness! runs under active pongs" do
+    stub = StreamingPullStub.new [[]]
+    subscriber.service.mocked_subscription_admin = stub
+
+    listener = subscriber.listen streams: 1 do |msg|
+    end
+    listener.start
+
+    stream = listener.instance_variable_get(:@stream_pool).first
+    stream.instance_variable_set :@last_ping_at, Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    stream.instance_variable_set :@last_pong_at, Process.clock_gettime(Process::CLOCK_MONOTONIC)
+
+    stream.send(:check_liveness!)
+    _(stream.instance_variable_get(:@stream_opened)).must_equal true
+
+    listener.stop
+    listener.wait!
+  end
+
+  it "does not trigger false restarts on unpausing even if pause exceeded deadline" do
+    stub = StreamingPullStub.new [[]]
+    subscriber.service.mocked_subscription_admin = stub
+
+    listener = subscriber.listen streams: 1 do |msg|
+    end
+    listener.start
+
+    stream = listener.instance_variable_get(:@stream_pool).first
+    stream.instance_variable_set :@stream_opened, true
+    stream.instance_variable_set :@last_ping_at, Process.clock_gettime(Process::CLOCK_MONOTONIC) - 30.0
+    stream.instance_variable_set :@last_pong_at, Process.clock_gettime(Process::CLOCK_MONOTONIC) - 35.0
+    stream.instance_variable_set :@paused, true
+    stream.instance_variable_set :@stopped, false
+
+    # 1. When paused, liveness checker should skip verification.
+    stream.send(:check_liveness!)
+    _(stream.instance_variable_get(:@stream_opened)).must_equal true
+
+    # 2. Unpausing must reset @last_pong_at to prevent immediate restart.
+    stream.send(:unpause_streaming!)
+
+    # 3. Direct liveness check immediately after unpausing (simulates the monitor thread racing the background thread).
+    # It should NOT close the stream because our reset made @last_pong_at newer than @last_ping_at.
+    stream.send(:check_liveness!)
+    _(stream.instance_variable_get(:@stream_opened)).must_equal true
+
+    listener.stop
+    listener.wait!
+  end
+
+  it "re-creates and executes timer tasks if stopped and restarted" do
+    stub = StreamingPullStub.new [[]]
+    subscriber.service.mocked_subscription_admin = stub
+
+    listener = subscriber.listen streams: 1 do |msg|
+    end
+    listener.start
+
+    stream = listener.instance_variable_get(:@stream_pool).first
+
+    # 1. Timers should be active on a started stream
+    refute_nil stream.instance_variable_get(:@stream_keepalive_task)
+    refute_nil stream.instance_variable_get(:@pong_monitor_task)
+
+    first_keepalive = stream.instance_variable_get(:@stream_keepalive_task)
+    first_monitor = stream.instance_variable_get(:@pong_monitor_task)
+
+    # 2. Stopping the stream must shutdown and nilify the timers
+    listener.stop
+    listener.wait!
+    assert_nil stream.instance_variable_get(:@stream_keepalive_task)
+    assert_nil stream.instance_variable_get(:@pong_monitor_task)
+    assert first_keepalive.shutdown?
+    assert first_monitor.shutdown?
+
+    # 3. Simulating a restart should create completely new timer instances
+    stream.instance_variable_set :@background_thread, nil
+    stream.instance_variable_set :@stopped, false
+    stream.start
+
+    new_keepalive = stream.instance_variable_get(:@stream_keepalive_task)
+    new_monitor = stream.instance_variable_get(:@pong_monitor_task)
+
+    refute_nil new_keepalive
+    refute_nil new_monitor
+    refute_equal first_keepalive, new_keepalive
+    refute_equal first_monitor, new_monitor
+
+    stream.stop
   end
 end

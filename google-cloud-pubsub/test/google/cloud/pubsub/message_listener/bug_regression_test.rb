@@ -67,7 +67,7 @@ describe Google::Cloud::PubSub::MessageListener, :bug_regression, :mock_pubsub d
 
     stream = listener.instance_variable_get(:@stream_pool).first
     keepalive_task = stream.instance_variable_get(:@stream_keepalive_task)
-    puts "\n[b/528404815 Test] Keepalive task running state after stop: #{keepalive_task.running?}"
-    _(keepalive_task.running?).must_equal false
+    puts "\n[b/528404815 Test] Keepalive task running state after stop: #{keepalive_task&.running? || false}"
+    _(keepalive_task.nil? || !keepalive_task.running?).must_equal true
   end
 end
