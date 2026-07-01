@@ -1991,6 +1991,10 @@
       "component": "google-maps-fleet_engine-v1",
       "version_file": "lib/google/maps/fleet_engine/v1/version.rb"
     },
+    "google-maps-isochrones-v1": {
+      "component": "google-maps-isochrones-v1",
+      "version_file": "lib/google/maps/isochrones/v1/version.rb"
+    },
     "google-shopping-css": {
       "component": "google-shopping-css",
       "version_file": "lib/google/shopping/css/version.rb"
