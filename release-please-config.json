@@ -1995,6 +1995,10 @@
       "component": "google-maps-fleet_engine-v1",
       "version_file": "lib/google/maps/fleet_engine/v1/version.rb"
     },
+    "google-maps-isochrones": {
+      "component": "google-maps-isochrones",
+      "version_file": "lib/google/maps/isochrones/version.rb"
+    },
     "google-maps-isochrones-v1": {
       "component": "google-maps-isochrones-v1",
       "version_file": "lib/google/maps/isochrones/v1/version.rb"
