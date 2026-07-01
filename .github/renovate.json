@@ -7,25 +7,21 @@
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps",
   "rangeStrategy": "widen",
-  "bundler": {
-    "enabled": true,
-    "managerFilePatterns": [
-      "/^google-cloud-core/Gemfile$/",
-      "/^google-cloud-storage/Gemfile$/",
-      "/^google-cloud-pubsub/Gemfile$/",
-      "/^google-cloud-bigquery/Gemfile$/",
-      "/^google-cloud-errors/Gemfile$/"
-    ]
-  },
   "lockFileMaintenance": {
-    "enabled": true,
-    "automerge": false,
-    "schedule": [
-      "before 5am on monday"
-    ],
-    "commitMessageAction": "maintain Gemfile.lock files"
+    "enabled": false
   },
   "packageRules": [
+    {
+      "description": "Disable Renovate processing for non-Phase 1 gems during phased rollout",
+      "matchFileNames": [
+        "!google-cloud-core/**",
+        "!google-cloud-storage/**",
+        "!google-cloud-pubsub/**",
+        "!google-cloud-bigquery/**",
+        "!google-cloud-errors/**"
+      ],
+      "enabled": false
+    },
     {
       "description": "Phase 1: Core & Handwritten Gems Lockfile Rollout",
       "matchFileNames": [
@@ -38,7 +34,12 @@
       "groupName": "core handwritten gems lockfiles",
       "rangeStrategy": "update-lockfile",
       "lockFileMaintenance": {
-        "enabled": true
+        "enabled": true,
+        "automerge": false,
+        "schedule": [
+          "before 5am on monday"
+        ],
+        "commitMessageAction": "maintain Gemfile.lock files"
       }
     }
   ]
