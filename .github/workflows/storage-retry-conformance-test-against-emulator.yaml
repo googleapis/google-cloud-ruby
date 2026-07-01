@@ -21,7 +21,7 @@ jobs:
 
     services:
       emulator:
-        image: gcr.io/cloud-devrel-public-resources/storage-testbench:latest
+        image: gcr.io/cloud-devrel-public-resources/storage-testbench@sha256:600fa5c3cfc8be26435c38591cc094fb4ef648f760ffabf77f93237b1ebee027 # v0.63.0
         ports:
           - 9000:9000
 
