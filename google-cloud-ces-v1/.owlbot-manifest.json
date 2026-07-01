@@ -97,6 +97,7 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/api/routing.rb",
     "proto_docs/google/cloud/ces/v1/agent.rb",
     "proto_docs/google/cloud/ces/v1/agent_service.rb",
     "proto_docs/google/cloud/ces/v1/agent_tool.rb",
