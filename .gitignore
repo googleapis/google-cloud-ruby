@@ -1,4 +1,5 @@
 # Dependency installations and lockfiles
+Gemfile.lock
 .bundle/
 /*/vendor/bundle/
 /*/lib/bundler/man/

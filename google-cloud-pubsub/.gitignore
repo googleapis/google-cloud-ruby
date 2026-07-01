@@ -1,3 +1,4 @@
+Gemfile.lock
 coverage/*
 doc/*
 pkg/*
@@ -6,3 +7,6 @@ jsondoc/*
 
 # Ignore YARD stuffs
 .yardoc
+
+# Allow tracking Gemfile.lock for Phase 1 rollout
+!Gemfile.lock
