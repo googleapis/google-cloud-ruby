@@ -989,6 +989,8 @@
   "google-maps-fleet_engine-delivery-v1+FILLER": "0.0.0",
   "google-maps-fleet_engine-v1": "0.10.0",
   "google-maps-fleet_engine-v1+FILLER": "0.0.0",
+  "google-maps-isochrones": "0.0.1",
+  "google-maps-isochrones+FILLER": "0.0.0",
   "google-maps-isochrones-v1": "0.0.1",
   "google-maps-isochrones-v1+FILLER": "0.0.0",
   "google-shopping-css": "1.4.0",
