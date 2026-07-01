@@ -6,8 +6,8 @@ permissions:
 on:
   workflow_dispatch:
     inputs:
-      protoPath:
-        description: "The path to the protos and build file"
+      protoPaths:
+        description: "The path to the protos and build file. Can specify multiple space-separated paths."
         required: true
 
 jobs:
@@ -47,6 +47,6 @@ jobs:
         gem install --no-document toys
     - name: Create library
       run: |
-        toys new-library -v --bazelisk --pull --pull-googleapis --test --fork --bootstrap-releases ${GITHUB_EVENT_INPUTS_PROTOPATH}
+        toys new-library -v --bazelisk --pull --pull-googleapis --test --fork --bootstrap-releases "${GITHUB_EVENT_INPUTS_PROTOPATH}"
       env:
-        GITHUB_EVENT_INPUTS_PROTOPATH: ${{ github.event.inputs.protoPath }}
+        GITHUB_EVENT_INPUTS_PROTOPATH: ${{ github.event.inputs.protoPaths }}
