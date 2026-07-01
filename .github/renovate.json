@@ -1,14 +1,21 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps",
   "rangeStrategy": "widen",
   "bundler": {
-    "enabled": true
+    "enabled": true,
+    "managerFilePatterns": [
+      "/^google-cloud-core/Gemfile$/",
+      "/^google-cloud-storage/Gemfile$/",
+      "/^google-cloud-pubsub/Gemfile$/",
+      "/^google-cloud-bigquery/Gemfile$/",
+      "/^google-cloud-errors/Gemfile$/"
+    ]
   },
   "lockFileMaintenance": {
     "enabled": true,
