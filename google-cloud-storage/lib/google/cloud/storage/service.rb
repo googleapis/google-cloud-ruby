@@ -1044,3 +1044,71 @@ module Google
     end
   end
 end
+
+# rubocop:disable all
+
+# @private
+module Google
+  module Apis
+    module Core
+      class StorageDownloadCommand < DownloadCommand
+        # Monkey patch to skip writing chunk and updating offset on error status codes (status >= 300)
+        def execute_once(client, &block)
+          request_header = header.dup
+          apply_request_options(request_header)
+          download_offset = nil
+
+          if @offset > 0
+            logger.debug { sprintf('Resuming download from offset %d', @offset) }
+            request_header[RANGE_HEADER] = sprintf('bytes=%d-', @offset)
+          end
+
+          http_res = client.get(url.to_s, query, request_header) do |request|
+            request.options.on_data = proc do |chunk, _size, res|
+              status = res ? res.status.to_i : 200
+              next if chunk.nil? || status >= 300
+
+              download_offset ||= (status == 206 ? @offset : 0)
+              download_offset  += chunk.bytesize
+
+              if download_offset - chunk.bytesize == @offset
+                next_chunk = chunk
+              else
+                # Oh no! Requested a chunk, but received the entire content
+                chunk_index = @offset - (download_offset - chunk.bytesize)
+                next_chunk = chunk.byteslice(chunk_index..-1)
+                next if next_chunk.nil?
+              end
+
+              # logger.debug { sprintf('Writing chunk (%d bytes, %d total)', chunk.length, bytes_read) }
+              @download_io.write(next_chunk)
+
+              @offset += next_chunk.bytesize
+            end
+          end
+
+          @download_io.flush if @download_io.respond_to?(:flush)
+
+          if @close_io_on_finish
+            result = nil
+          else
+            result = @download_io
+          end
+          check_status(http_res.status.to_i, http_res.headers, http_res.body)
+          # In case of file download in storage, we need to respond back with
+          # the http response object along with the result IO object, because
+          # google-cloud-storage uses the HTTP info.
+          # Also, older versions of google-cloud-storage assume this object
+          # conforms to the old httpclient response API instead of the Faraday
+          # response API. Return a subclass that provides the needed methods.
+          http_res = Core::Response.new http_res.env
+          success([result, http_res], &block)
+        rescue => e
+          @download_io.flush if @download_io.respond_to?(:flush)
+          error(e, rethrow: true, &block)
+        end
+      end
+    end
+  end
+end
+# rubocop:enable all
