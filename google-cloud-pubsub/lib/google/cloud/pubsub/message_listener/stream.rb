@@ -57,7 +57,8 @@ module Google
             @subscriber = subscriber
 
             @request_queue = nil
-            @stopped = nil
+            @streaming_stopped = nil
+            @fully_stopped = nil
             @paused  = nil
             @pause_cond = new_cond
             @exactly_once_delivery_enabled = false
@@ -93,9 +94,9 @@ module Google
             self
           end
 
-          def stop
+          def stop shutdown_behavior: :wait_for_processing, shutdown_timeout: nil
             synchronize do
-              break if @stopped
+              break if @streaming_stopped
 
               subscriber.service.logger.log :info, "subscriber-streams" do
                 "stopping stream for subscription #{@subscriber.subscription_name}"
@@ -105,23 +106,60 @@ module Google
               @request_queue&.push self
 
               # Signal to the background thread that we are stopped.
-              @stopped = true
+              @streaming_stopped = true
               @pause_cond.broadcast
 
-              # Now that the reception thread is stopped, immediately stop the
-              # callback thread pool. All queued callbacks will see the stream
-              # is stopped and perform a noop.
-              @callback_thread_pool.shutdown
-
-              # Once all the callbacks are stopped, we can stop the inventory.
-              @inventory.stop
+              if shutdown_behavior == :nack_immediately
+                nack_unprocessed_messages!
+                @fully_stopped = true
+                @callback_thread_pool.shutdown
+                @inventory.stop
+              else
+                # :wait_for_processing
+                @shutdown_thread = Thread.new do
+                  if shutdown_timeout
+                    wait_time = [shutdown_timeout - 30, 0].max
+                    @inventory.wait_until_empty wait_time
+                    if !@inventory.empty?
+                      nack_unprocessed_messages!
+                    end
+                  else
+                    @inventory.wait_until_empty nil
+                  end
+                  synchronize do
+                    @fully_stopped = true
+                    @callback_thread_pool.shutdown
+                    @inventory.stop
+                  end
+                end
+              end
             end
 
             self
           end
 
+          def nack_unprocessed_messages!
+            synchronize do
+              ack_ids = @inventory.ack_ids
+              unless ack_ids.empty?
+                begin
+                  subscriber.service.modify_ack_deadline subscriber.subscription_name, ack_ids, 0
+                rescue StandardError => e
+                  subscriber.service.logger.log :error, "subscriber-streams" do
+                    "Failed to nack unprocessed messages: #{e.message}"
+                  end
+                end
+                @inventory.remove(*ack_ids)
+              end
+            end
+          end
+
           def stopped?
-            synchronize { @stopped }
+            synchronize { @streaming_stopped }
+          end
+
+          def fully_stopped?
+            synchronize { @fully_stopped }
           end
 
           def paused?
@@ -133,6 +171,7 @@ module Google
           end
 
           def wait! timeout = nil
+            @shutdown_thread&.join timeout
             # Wait for all queued callbacks to be processed.
             @callback_thread_pool.wait_for_termination timeout
 
@@ -222,7 +261,7 @@ module Google
           def background_run
             synchronize do
               # Don't allow a stream to restart if already stopped
-              if @stopped
+              if @streaming_stopped
                 subscriber.service.logger.log :debug, "subscriber-streams" do
                   "not filling stream for subscription #{@subscriber.subscription_name} because stream is already" \
                   " stopped"
@@ -230,7 +269,7 @@ module Google
                 return
               end
 
-              @stopped = false
+              @streaming_stopped = false
               @paused  = false
 
               # signal to the previous queue to shut down
@@ -252,14 +291,14 @@ module Google
 
             loop do
               synchronize do
-                if @paused && !@stopped
+                if @paused && !@streaming_stopped
                   @pause_cond.wait
                   next
                 end
               end
 
               # Break loop, close thread if stopped
-              break if synchronize { @stopped }
+              break if synchronize { @streaming_stopped }
 
               begin
                 # Cannot synchronize the enumerator, causes deadlock
@@ -297,7 +336,7 @@ module Google
 
             # Has the loop broken but we aren't stopped?
             # Could be GRPC has thrown an internal error, so restart.
-            raise RestartStream unless synchronize { @stopped }
+            raise RestartStream unless synchronize { @streaming_stopped }
 
             # We must be stopped, tell the stream to quit.
             stop
@@ -372,7 +411,7 @@ module Google
             subscriber.service.logger.log :info, "callback-delivery" do
               "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) delivery to user callbacks"
             end
-            @subscriber.callback.call rec_msg unless stopped?
+            @subscriber.callback.call rec_msg unless fully_stopped?
           rescue StandardError => e
             subscriber.service.logger.log :info, "callback-exceptions" do
               "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) caused a user callback exception: " \
