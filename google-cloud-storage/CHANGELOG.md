@@ -1,5 +1,13 @@
 # Release History
 
+### 1.62.0 (2026-07-02)
+
+#### Features
+
+* Making crc32c default for download ([#34002](https://github.com/googleapis/google-cloud-ruby/issues/34002)) 
+* Support delete source object ([#34619](https://github.com/googleapis/google-cloud-ruby/issues/34619)) 
+* support delete source objects on compose ([#34665](https://github.com/googleapis/google-cloud-ruby/issues/34665)) 
+
 ### 1.61.0 (2026-06-11)
 
 #### Features
