@@ -18,6 +18,7 @@ require_relative "../storage_control_get_folder"
 require_relative "../storage_control_list_folders"
 require_relative "../storage_control_rename_folder"
 require_relative "../storage_control_delete_folder"
+require_relative "../storage_control_delete_folder_recursive"
 
 describe "Storage Control Folders" do
   let(:bucket_name) { random_bucket_name }
@@ -63,6 +64,34 @@ describe "Storage Control Folders" do
     # delete_folder
     assert_output "Deleted folder: #{new_folder_name}\n" do
       delete_folder bucket_name: bucket_name, folder_name: new_folder_name
+    end
+
+    # create parent folder for recursive delete
+    capture_io do
+      create_folder bucket_name: bucket_name, folder_name: folder_name
+    end
+
+    # create a child folder inside parent folder
+    child_folder_name = "#{folder_name}/child-folder"
+    capture_io do
+      create_folder bucket_name: bucket_name, folder_name: child_folder_name
+    end
+
+    # delete parent folder recursively
+    begin
+      assert_output "Deleted folder recursively: #{folder_name}\n" do
+        delete_folder_recursive bucket_name: bucket_name, folder_name: folder_name
+      end
+    rescue Minitest::UnexpectedError => e
+      is_invalid_arg = e.error.is_a? Google::Cloud::InvalidArgumentError
+      is_not_enabled = e.error.message.include? "Recursive folder delete is not enabled for this bucket"
+      raise e unless is_invalid_arg && is_not_enabled
+
+      skip "Skipping recursive delete test because the feature is not enabled for this bucket."
+    rescue Google::Cloud::InvalidArgumentError => e
+      raise e unless e.message.include? "Recursive folder delete is not enabled for this bucket"
+
+      skip "Skipping recursive delete test because the feature is not enabled for this bucket."
     end
   end
 end
