@@ -71,7 +71,6 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     service = Google::Cloud::Storage::Service.new "my-project", default_credentials
     _(service.service.request_options.header["Accept-Encoding"]).must_be :nil?
   end
-
   
   it "supports setting a universe domain argument" do
     service = Google::Cloud::Storage::Service.new "my-project", default_credentials, universe_domain: "mydomain1.com"
