@@ -21,6 +21,12 @@ require_relative "../storage_create_bucket"
 require_relative "../storage_create_bucket_class_location"
 require_relative "../storage_create_bucket_dual_region"
 require_relative "../storage_create_bucket_hierarchical_namespace"
+require_relative "../storage_create_bucket_with_ip_filter"
+require_relative "../storage_get_bucket_ip_filter"
+require_relative "../storage_disable_ip_filtering"
+require_relative "../storage_delete_bucket_ip_filter"
+require_relative "../storage_enable_bucket_ip_filter"
+require_relative "../storage_list_bucket_ip_filters"
 require_relative "../storage_create_bucket_with_object_retention"
 require_relative "../storage_define_bucket_website_configuration"
 require_relative "../storage_delete_bucket"
@@ -170,6 +176,68 @@ describe "Buckets Snippets" do
 
       delete_bucket_helper bucket_name
     end
+  end
+
+  describe "storage_bucket_ip_filter" do
+    let(:bucket_name) { random_bucket_name }
+
+    after :all do
+      delete_bucket_helper bucket_name
+    end
+
+    it "creates, updates, gets, lists, and removes IP filter config" do
+      # Creates IP filter enabled bucket
+      expected = "Created bucket #{bucket_name} with IP filter.\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          create_bucket_with_ip_filter bucket_name: bucket_name
+        end
+      end
+
+      # Disables IP filter of an existing bucket
+      expected = "Disabled IP filtering for bucket #{bucket_name}.\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          disable_ip_filtering bucket_name: bucket_name
+        end
+      end
+
+      # Gets IP filter of an existing bucket
+      expected = "Bucket #{bucket_name} has IP filter mode: Disabled.\n" \
+                 "Allowed public network CIDR ranges: 8.8.8.8/32.\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          get_bucket_ip_filter bucket_name: bucket_name
+        end
+      end
+
+      # Lists IP filter allowed ranges
+      expected = "IP filter mode: Disabled\n" \
+                 "Allowed range: 8.8.8.8/32\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          list_bucket_ip_filters bucket_name: bucket_name
+        end
+      end
+
+      # Deletes IP filter of an existing bucket
+      expected = "Deleted IP filter for bucket #{bucket_name}.\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          delete_bucket_ip_filter bucket_name: bucket_name
+        end
+      end
+
+      # Enables IP filter of an existing bucket (SKIPPED)
+      skip "SKIPPED : If Ip filter is enabled, we cannot access the bucket"
+      expected = "Enabled IP filter for bucket #{bucket_name}.\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          enable_bucket_ip_filter bucket_name: bucket_name
+        end
+      end
+    end
+
   end
 
   describe "storage_bucket_encryption_enforcement_config" do

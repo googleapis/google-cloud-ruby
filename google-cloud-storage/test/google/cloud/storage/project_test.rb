@@ -597,6 +597,38 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(bucket.hierarchical_namespace[:enabled]).must_equal false
   end
 
+  it "creates a bucket with block ip_filter" do
+    mock = Minitest::Mock.new
+    created_bucket = create_bucket_gapi bucket_name
+    ip_filter_hash = {
+      "mode" => "Disabled",
+      "publicNetworkSource" => {
+        "allowedIpCidrRanges" => ["0.0.0.0/0", "::/0"]
+      }
+    }
+    ip_filter_gapi = Google::Apis::StorageV1::Bucket::IpFilter.from_json ip_filter_hash.to_json
+    created_bucket.ip_filter = ip_filter_gapi
+    resp_bucket = bucket_with_location created_bucket
+
+    mock.expect :insert_bucket, resp_bucket, [project, created_bucket], predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil, enable_object_retention: nil, options: {}
+    storage.service.mocked_service = mock
+
+    bucket = storage.create_bucket bucket_name do |b|
+      b.ip_filter = {
+        mode: "Disabled",
+        public_network_source: {
+          allowed_ip_cidr_ranges: ["0.0.0.0/0", "::/0"]
+        }
+      }
+    end
+    mock.verify
+
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.ip_filter).wont_be_nil
+    _(bucket.ip_filter.mode).must_equal "Disabled"
+    _(bucket.ip_filter.public_network_source.allowed_ip_cidr_ranges).must_equal ["0.0.0.0/0", "::/0"]
+  end
+
   it "raises when creating a bucket with a blank name" do
     bucket_name = ""
 

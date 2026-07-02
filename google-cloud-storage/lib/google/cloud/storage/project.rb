@@ -424,6 +424,18 @@ module Google
         # @param [Boolean] enable_object_retention
         #   When set to true, object retention is enabled for this bucket.
         #
+        # @param [Hash] ip_filter The bucket's IP filter configuration.
+        #   Acceptable values are:
+        #   - {Google::Apis::StorageV1::Bucket::IpFilter} object
+        #   - Hash that can be converted to a {Google::Apis::StorageV1::Bucket::IpFilter} object
+        #     - :mode - [String] The mode of the IP filter. Acceptable values are: "Disabled", "Enabled"
+        #     - :public_network_source - [Hash] The public network source configuration:
+        #       - :allowed_ip_cidr_ranges - [Array<String>] Array of IP CIDR ranges allowed for public access.
+        #     - :vpc_network_sources - [Array<Hash>] The VPC network sources configuration:
+        #       - :network - [String] The VPC network resource path, e.g. "projects/PROJECT_ID/global/networks/NETWORK_NAME".
+        #       - :allowed_ip_cidr_ranges - [Array<String>] Array of IP CIDR ranges allowed for VPC access.
+        #     - :allow_cross_org_vpcs - [Boolean] Whether to allow cross-org VPC access.
+        #     - :allow_all_service_agent_access - [Boolean] Whether to allow all service agent access.
         # @yield [bucket] a block for configuring the bucket before it is
         #   created
         # @yieldparam [Bucket] bucket the bucket object to be configured
@@ -477,12 +489,15 @@ module Google
                           user_project: nil,
                           autoclass_enabled: false,
                           enable_object_retention: nil,
-                          hierarchical_namespace: nil
+                          hierarchical_namespace: nil,
+                          ip_filter: nil
+
           params = {
             name: bucket_name,
             location: location,
             custom_placement_config: custom_placement_config,
-            hierarchical_namespace: hierarchical_namespace
+            hierarchical_namespace: hierarchical_namespace,
+            ip_filter: ip_filter
           }.delete_if { |_, v| v.nil? }
           new_bucket = Google::Apis::StorageV1::Bucket.new(**params)
           storage_class = storage_class_for storage_class
@@ -496,6 +511,7 @@ module Google
             b.versioning = versioning unless versioning.nil?
             b.requester_pays = requester_pays unless requester_pays.nil?
             b.hierarchical_namespace = hierarchical_namespace unless hierarchical_namespace.nil?
+            b.ip_filter = ip_filter unless ip_filter.nil?
           end
           yield updater if block_given?
           updater.check_for_changed_labels!
