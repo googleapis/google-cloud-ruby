@@ -21,15 +21,15 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
   let(:bucket_name) { $bucket_names.first }
   let :bucket do
     storage.bucket(bucket_name) ||
-      safe_gcs_execute { storage.create_bucket bucket_name }
+    safe_gcs_execute { storage.create_bucket bucket_name }
   end
-  let(:uri) { URI.parse bucket.url }
+  let(:uri) { URI.parse Google::Cloud::Storage::GOOGLEAPIS_URL }
   let(:data_file) { "logo.jpg" }
-  let(:data) { File.expand_path "../data/#{data_file}", __dir__ }
+  let(:data) { File.expand_path("../data/#{data_file}", __dir__) }
   let(:data_csv_file) { "example.csv" } # < 1 KB
-  let(:data_csv) { File.expand_path "../data/#{data_csv_file}", __dir__ }
+  let(:data_csv) { File.expand_path("../data/#{data_csv_file}", __dir__) }
 
-  it "generates a signed post object v4" do
+  it "generates a signed post object v4 simple" do
     post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10
 
     _(post_object.fields.keys.sort).must_equal [
@@ -45,7 +45,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     # makes the http request fail intermittently with a 400 error.
     # Moving file as the last entry in the form_data array works fine.
     # Updating this in multiple places in this file.
-    form_data = []
+    form_data= []
     post_object.fields.each do |key, value|
       form_data.push [key, value]
     end
@@ -59,7 +59,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     response = http.request request
 
     _(response.code).must_equal "204"
-    file = bucket.file post_object.fields["key"]
+    file = bucket.file(post_object.fields["key"])
     _(file).wont_be :nil?
     Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
       tmpfile.binmode
@@ -146,7 +146,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
 
     response = http.request request
     _(response.code).must_equal "204"
-    file = bucket.file post_object.fields["key"]
+    file = bucket.file(post_object.fields["key"])
     _(file).wont_be :nil?
     Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
       tmpfile.binmode
@@ -156,7 +156,6 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
   end
 
   it "generates a signed post object v4 with acl and cache-control file headers" do
-    skip if bucket.uniform_bucket_level_access?
     fields = {
       "acl" => "public-read",
       "cache-control" => "public,max-age=86400"
@@ -188,7 +187,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     response = http.request request
 
     _(response.code).must_equal "204"
-    file = bucket.file post_object.fields["key"]
+    file = bucket.file(post_object.fields["key"])
     _(file).wont_be :nil?
     Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
       tmpfile.binmode
@@ -227,7 +226,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     response = http.request request
 
     _(response.code).must_equal "200"
-    file = bucket.file post_object.fields["key"]
+    file = bucket.file(post_object.fields["key"])
     _(file).wont_be :nil?
     Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
       tmpfile.binmode
@@ -260,7 +259,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       ["x-goog-credential", post_object.fields["x-goog-credential"]],
       ["x-goog-date", post_object.fields["x-goog-date"]],
       ["x-goog-signature", post_object.fields["x-goog-signature"]],
-      ["file", File.open(data_csv)]
+      ["file", File.open(data_csv)],
     ]
 
     request.set_form form_data, "multipart/form-data"
@@ -268,7 +267,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     response = http.request request
     puts response.body
     _(response.code).must_equal "204"
-    file = bucket.file "example.csv"
+    file = bucket.file("example.csv")
     _(file).wont_be :nil?
     Tempfile.open ["example", ".csv"] do |tmpfile|
       tmpfile.binmode

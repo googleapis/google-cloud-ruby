@@ -14,29 +14,30 @@
 
 require "google/cloud/storage"
 
-def storage_get_object_contexts bucket_name:, file_name:
-  # [START storage_get_object_contexts]
-  # bucket_name = "my-bucket"
-  # file_name   = "my-file.txt"
+# [START storage_get_object_contexts]
+def get_object_contexts bucket_name:, file_name:
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
 
   storage = Google::Cloud::Storage.new
   bucket  = storage.bucket bucket_name
   file    = bucket.file file_name
 
-  puts "File name: #{file.name}"
-  puts "Bucket name: #{file.bucket}"
-  puts "Generation: #{file.generation}"
-  puts "Metageneration: #{file.metageneration}"
-  puts "Content Type: #{file.content_type}"
-  puts "Size: #{file.size}"
-  puts "Created at: #{file.created_at}"
-  puts "Updated at: #{file.updated_at}"
-  puts "MD5: #{file.md5}"
-  puts "CRC32c: #{file.crc32c}"
-  puts "Metadata: #{file.metadata}"
-  # [END storage_get_object_contexts]
+  contexts = file.contexts
+  if contexts&.custom&.any?
+    puts "Custom Contexts for #{file_name} are:"
+    contexts.custom.each do |key, context_obj|
+      puts "Key: #{key}, Value: #{context_obj.value}"
+    end
+  else
+    puts "No custom contexts found for #{file_name}."
+  end
 end
+# [END storage_get_object_contexts]
 
 if $PROGRAM_NAME == __FILE__
-  storage_get_object_contexts bucket_name: ARGV[0], file_name: ARGV[1]
+  get_object_contexts bucket_name: ARGV.shift, file_name: ARGV.shift
 end
