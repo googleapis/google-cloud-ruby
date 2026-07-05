@@ -15,16 +15,19 @@
 require "storage_helper"
 
 describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage do
-  let(:bucket_name) { $bucket.name }
-  let(:bucket) { storage.bucket bucket_name }
+  let(:bucket_name) { $bucket_names.first }
+  let :bucket do
+    storage.bucket(bucket_name) ||
+      safe_gcs_execute { storage.create_bucket bucket_name }
+  end
 
   it "has uniform_bucket_level_access attributes" do
     _(bucket.uniform_bucket_level_access?).must_be_kind_of(TrueClass).or(must_be_kind_of(FalseClass))
-    _(bucket.uniform_bucket_level_access_locked_at).must_be_kind_of(Time).or(must_be :nil?)
+    _(bucket.uniform_bucket_level_access_locked_at).must_be_kind_of(Time).or(must_be(:nil?))
   end
 
   describe "uniform_bucket_level_access is enabled" do
-    let(:ubla_bucket_name) { "#{prefix}_ubla_bucket" }
+    let(:ubla_bucket_name) { "#{$bucket_names[2]}-ubla" }
     let(:ubla_bucket) { storage.bucket ubla_bucket_name }
 
     before do
@@ -34,7 +37,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     end
 
     after do
-      delete_bucket ubla_bucket
+      clean_up_storage_bucket ubla_bucket
     end
 
     it "has uniform_bucket_level_access attributes" do
