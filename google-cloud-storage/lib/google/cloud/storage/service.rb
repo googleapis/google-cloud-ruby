@@ -1,24 +1,24 @@
 # Copyright 2014 Google LLC
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the \"License\");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an \"AS IS\" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
 
-require "google/cloud/storage/version"
-require "google/apis/storage_v1"
-require "google/cloud/config"
-require "digest"
-require "mini_mime"
-require "pathname"
+require \"google/cloud/storage/version\"
+require \"google/apis/storage_v1\"
+require \"google/cloud/config\"
+require \"digest\"
+require \"mini_mime\"
+require \"pathname\"
 
 module Google
   module Cloud
@@ -54,7 +54,7 @@ module Google
           @project = project
           @credentials = credentials
           @service = API::StorageService.new
-          @service.client_options.application_name    = "gcloud-ruby"
+          @service.client_options.application_name    = \"gcloud-ruby\"
           @service.client_options.application_version = Google::Cloud::Storage::VERSION
           @service.client_options.open_timeout_sec = (open_timeout || timeout)
           @service.client_options.read_timeout_sec = (read_timeout || timeout)
@@ -62,9 +62,9 @@ module Google
           @service.client_options.transparent_gzip_decompression = false
           @service.request_options.retries = retries || 3
           @service.request_options.header ||= {}
-          @service.request_options.header["x-goog-api-client"] =
-            "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Storage::VERSION}"
-          @service.request_options.header["Accept-Encoding"] = "gzip"
+          @service.request_options.header[\"x-goog-api-client\"] =
+            \"gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Storage::VERSION}\"
+          @service.request_options.header[\"Accept-Encoding\"] = \"gzip\"
           @service.request_options.quota_project = quota_project if quota_project
           @service.request_options.max_elapsed_time = max_elapsed_time if max_elapsed_time
           @service.request_options.base_interval = base_interval if base_interval
@@ -284,7 +284,7 @@ module Google
         ##
         # Returns Google::Apis::StorageV1::Policy
         def get_bucket_policy bucket_name, requested_policy_version: nil, user_project: nil,
-                               options: {}
+                              options: {}
           # get_bucket_iam_policy(bucket, fields: nil, quota_user: nil,
           #                               user_ip: nil, options: nil)
           execute do
@@ -898,13 +898,13 @@ module Google
         # An empty string is returned if no mime-type can be found.
         def mime_type_for path
           mime_type = MiniMime.lookup_by_filename path
-          return "" if mime_type.nil?
+          return \"\" if mime_type.nil?
           mime_type.content_type
         end
 
         # @private
         def inspect
-          "#{self.class}(#{@project})"
+          \"#{self.class}(#{@project})\"
         end
 
         ##
@@ -948,12 +948,12 @@ module Google
         #   method supporting customer-supplied encryption keys.
         #   See https://cloud.google.com/storage/docs/encryption#request
         def encryption_key_headers options, key, copy_source: false
-          source = copy_source ? "copy-source-" : ""
+          source = copy_source ? \"copy-source-\" : \"\"
           key_sha256 = Digest::SHA256.digest key
           headers = (options[:header] ||= {})
-          headers["x-goog-#{source}encryption-algorithm"] = "AES256"
-          headers["x-goog-#{source}encryption-key"] = Base64.strict_encode64 key
-          headers["x-goog-#{source}encryption-key-sha256"] = Base64.strict_encode64 key_sha256
+          headers[\"x-goog-#{source}encryption-algorithm\"] = \"AES256\"
+          headers[\"x-goog-#{source}encryption-key\"] = Base64.strict_encode64 key
+          headers[\"x-goog-#{source}encryption-key-sha256\"] = Base64.strict_encode64 key_sha256
           options
         end
 
@@ -961,18 +961,18 @@ module Google
           case range
           when Range
             options[:header] ||= {}
-            options[:header]["Range"] = "bytes=#{range.min}-#{range.max}"
+            options[:header][\"Range\"] = \"bytes=#{range.min}-#{range.max}\"
           when String
             options[:header] ||= {}
-            options[:header]["Range"] = range
+            options[:header][\"Range\"] = range
           end
 
           options
         end
 
         def topic_path topic_name
-          return topic_name if topic_name.to_s.include? "/"
-          "//pubsub.googleapis.com/projects/#{project}/topics/#{topic_name}"
+          return topic_name if topic_name.to_s.include? \"/\"
+          \"//pubsub.googleapis.com/projects/#{project}/topics/#{topic_name}\"
         end
 
         # Pub/Sub notification subscription event_types
@@ -982,28 +982,28 @@ module Google
 
         # Pub/Sub notification subscription event_types
         def event_type str
-          { "object_finalize" => "OBJECT_FINALIZE",
-            "finalize" => "OBJECT_FINALIZE",
-            "create" => "OBJECT_FINALIZE",
-            "object_metadata_update" => "OBJECT_METADATA_UPDATE",
-            "object_update" => "OBJECT_METADATA_UPDATE",
-            "metadata_update" => "OBJECT_METADATA_UPDATE",
-            "update" => "OBJECT_METADATA_UPDATE",
-            "object_delete" => "OBJECT_DELETE",
-            "delete" => "OBJECT_DELETE",
-            "object_archive" => "OBJECT_ARCHIVE",
-            "archive" => "OBJECT_ARCHIVE" }[str.to_s.downcase]
+          { \"object_finalize\" => \"OBJECT_FINALIZE\",
+            \"finalize\" => \"OBJECT_FINALIZE\",
+            \"create\" => \"OBJECT_FINALIZE\",
+            \"object_metadata_update\" => \"OBJECT_METADATA_UPDATE\",
+            \"object_update\" => \"OBJECT_METADATA_UPDATE\",
+            \"metadata_update\" => \"OBJECT_METADATA_UPDATE\",
+            \"update\" => \"OBJECT_METADATA_UPDATE\",
+            \"object_delete\" => \"OBJECT_DELETE\",
+            \"delete\" => \"OBJECT_DELETE\",
+            \"object_archive\" => \"OBJECT_ARCHIVE\",
+            \"archive\" => \"OBJECT_ARCHIVE\" }[str.to_s.downcase]
         end
 
         # Pub/Sub notification subscription payload_format
-        # Defaults to "JSON_API_V1"
+        # Defaults to \"JSON_API_V1\"
         def payload_format str_or_bool
-          return "JSON_API_V1" if str_or_bool.nil?
-          { "json_api_v1" => "JSON_API_V1",
-            "json" => "JSON_API_V1",
-            "true" => "JSON_API_V1",
-            "none" => "NONE",
-            "false" => "NONE" }[str_or_bool.to_s.downcase]
+          return \"JSON_API_V1\" if str_or_bool.nil?
+          { \"json_api_v1\" => \"JSON_API_V1\",
+            \"json\" => \"JSON_API_V1\",
+            \"true\" => \"JSON_API_V1\",
+            \"none\" => \"NONE\",
+            \"false\" => \"NONE\" }[str_or_bool.to_s.downcase]
         end
 
         def compose_file_source_objects source_files, if_source_generation_match
@@ -1019,7 +1019,7 @@ module Google
           end
           return source_objects unless if_source_generation_match
           if source_files.count != if_source_generation_match.count
-            raise ArgumentError, "if provided, if_source_generation_match length must match sources length"
+            raise ArgumentError, \"if provided, if_source_generation_match length must match sources length\"
           end
           if_source_generation_match.each_with_index do |generation, i|
             next unless generation
