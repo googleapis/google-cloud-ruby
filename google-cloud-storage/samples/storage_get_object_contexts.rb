@@ -29,7 +29,7 @@ def get_object_contexts bucket_name:, file_name:
   contexts = file.contexts
   if contexts&.custom&.any?
     puts "Custom Contexts for #{file_name} are:"
-    contexts.custom.each do |key, context_obj|
+    contexts.custom.sort.each do |key, context_obj|
       puts "Key: #{key}, Value: #{context_obj.value}"
     end
   else

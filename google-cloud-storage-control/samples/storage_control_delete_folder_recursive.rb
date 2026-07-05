@@ -37,4 +37,4 @@ def delete_folder_recursive bucket_name:, folder_name:
 end
 # [END storage_control_delete_folder_recursive]
 
-delete_folder_recursive bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+delete_folder_recursive bucket_name: ARGV.shift, folder_name: ARGV.shift if $PROGRAM_NAME == __FILE__
