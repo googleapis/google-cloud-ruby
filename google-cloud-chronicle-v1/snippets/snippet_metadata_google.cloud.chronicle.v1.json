@@ -2092,6 +2092,366 @@
       ]
     },
     {
+      "region_tag": "chronicle_v1_generated_FindingsRefinementService_GetFindingsRefinement_sync",
+      "title": "Snippet for the get_findings_refinement call in the FindingsRefinementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#get_findings_refinement.",
+      "file": "findings_refinement_service/get_findings_refinement.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_findings_refinement",
+        "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#get_findings_refinement",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::GetFindingsRefinementRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::FindingsRefinement",
+        "client": {
+          "short_name": "FindingsRefinementService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client"
+        },
+        "method": {
+          "short_name": "GetFindingsRefinement",
+          "full_name": "google.cloud.chronicle.v1.FindingsRefinementService.GetFindingsRefinement",
+          "service": {
+            "short_name": "FindingsRefinementService",
+            "full_name": "google.cloud.chronicle.v1.FindingsRefinementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_FindingsRefinementService_ListFindingsRefinements_sync",
+      "title": "Snippet for the list_findings_refinements call in the FindingsRefinementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#list_findings_refinements.",
+      "file": "findings_refinement_service/list_findings_refinements.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_findings_refinements",
+        "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#list_findings_refinements",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ListFindingsRefinementsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::ListFindingsRefinementsResponse",
+        "client": {
+          "short_name": "FindingsRefinementService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client"
+        },
+        "method": {
+          "short_name": "ListFindingsRefinements",
+          "full_name": "google.cloud.chronicle.v1.FindingsRefinementService.ListFindingsRefinements",
+          "service": {
+            "short_name": "FindingsRefinementService",
+            "full_name": "google.cloud.chronicle.v1.FindingsRefinementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_FindingsRefinementService_CreateFindingsRefinement_sync",
+      "title": "Snippet for the create_findings_refinement call in the FindingsRefinementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#create_findings_refinement.",
+      "file": "findings_refinement_service/create_findings_refinement.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_findings_refinement",
+        "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#create_findings_refinement",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::CreateFindingsRefinementRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::FindingsRefinement",
+        "client": {
+          "short_name": "FindingsRefinementService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client"
+        },
+        "method": {
+          "short_name": "CreateFindingsRefinement",
+          "full_name": "google.cloud.chronicle.v1.FindingsRefinementService.CreateFindingsRefinement",
+          "service": {
+            "short_name": "FindingsRefinementService",
+            "full_name": "google.cloud.chronicle.v1.FindingsRefinementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_FindingsRefinementService_UpdateFindingsRefinement_sync",
+      "title": "Snippet for the update_findings_refinement call in the FindingsRefinementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#update_findings_refinement.",
+      "file": "findings_refinement_service/update_findings_refinement.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_findings_refinement",
+        "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#update_findings_refinement",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::UpdateFindingsRefinementRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::FindingsRefinement",
+        "client": {
+          "short_name": "FindingsRefinementService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client"
+        },
+        "method": {
+          "short_name": "UpdateFindingsRefinement",
+          "full_name": "google.cloud.chronicle.v1.FindingsRefinementService.UpdateFindingsRefinement",
+          "service": {
+            "short_name": "FindingsRefinementService",
+            "full_name": "google.cloud.chronicle.v1.FindingsRefinementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_FindingsRefinementService_GetFindingsRefinementDeployment_sync",
+      "title": "Snippet for the get_findings_refinement_deployment call in the FindingsRefinementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#get_findings_refinement_deployment.",
+      "file": "findings_refinement_service/get_findings_refinement_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_findings_refinement_deployment",
+        "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#get_findings_refinement_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::GetFindingsRefinementDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::FindingsRefinementDeployment",
+        "client": {
+          "short_name": "FindingsRefinementService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client"
+        },
+        "method": {
+          "short_name": "GetFindingsRefinementDeployment",
+          "full_name": "google.cloud.chronicle.v1.FindingsRefinementService.GetFindingsRefinementDeployment",
+          "service": {
+            "short_name": "FindingsRefinementService",
+            "full_name": "google.cloud.chronicle.v1.FindingsRefinementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_FindingsRefinementService_UpdateFindingsRefinementDeployment_sync",
+      "title": "Snippet for the update_findings_refinement_deployment call in the FindingsRefinementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#update_findings_refinement_deployment.",
+      "file": "findings_refinement_service/update_findings_refinement_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_findings_refinement_deployment",
+        "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#update_findings_refinement_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::UpdateFindingsRefinementDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::FindingsRefinementDeployment",
+        "client": {
+          "short_name": "FindingsRefinementService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client"
+        },
+        "method": {
+          "short_name": "UpdateFindingsRefinementDeployment",
+          "full_name": "google.cloud.chronicle.v1.FindingsRefinementService.UpdateFindingsRefinementDeployment",
+          "service": {
+            "short_name": "FindingsRefinementService",
+            "full_name": "google.cloud.chronicle.v1.FindingsRefinementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_FindingsRefinementService_ListAllFindingsRefinementDeployments_sync",
+      "title": "Snippet for the list_all_findings_refinement_deployments call in the FindingsRefinementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#list_all_findings_refinement_deployments.",
+      "file": "findings_refinement_service/list_all_findings_refinement_deployments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_all_findings_refinement_deployments",
+        "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#list_all_findings_refinement_deployments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ListAllFindingsRefinementDeploymentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::ListAllFindingsRefinementDeploymentsResponse",
+        "client": {
+          "short_name": "FindingsRefinementService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client"
+        },
+        "method": {
+          "short_name": "ListAllFindingsRefinementDeployments",
+          "full_name": "google.cloud.chronicle.v1.FindingsRefinementService.ListAllFindingsRefinementDeployments",
+          "service": {
+            "short_name": "FindingsRefinementService",
+            "full_name": "google.cloud.chronicle.v1.FindingsRefinementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_FindingsRefinementService_ComputeFindingsRefinementActivity_sync",
+      "title": "Snippet for the compute_findings_refinement_activity call in the FindingsRefinementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#compute_findings_refinement_activity.",
+      "file": "findings_refinement_service/compute_findings_refinement_activity.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "compute_findings_refinement_activity",
+        "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#compute_findings_refinement_activity",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ComputeFindingsRefinementActivityRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::ComputeFindingsRefinementActivityResponse",
+        "client": {
+          "short_name": "FindingsRefinementService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client"
+        },
+        "method": {
+          "short_name": "ComputeFindingsRefinementActivity",
+          "full_name": "google.cloud.chronicle.v1.FindingsRefinementService.ComputeFindingsRefinementActivity",
+          "service": {
+            "short_name": "FindingsRefinementService",
+            "full_name": "google.cloud.chronicle.v1.FindingsRefinementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_FindingsRefinementService_ComputeAllFindingsRefinementActivities_sync",
+      "title": "Snippet for the compute_all_findings_refinement_activities call in the FindingsRefinementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#compute_all_findings_refinement_activities.",
+      "file": "findings_refinement_service/compute_all_findings_refinement_activities.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "compute_all_findings_refinement_activities",
+        "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client#compute_all_findings_refinement_activities",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ComputeAllFindingsRefinementActivitiesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::ComputeAllFindingsRefinementActivitiesResponse",
+        "client": {
+          "short_name": "FindingsRefinementService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client"
+        },
+        "method": {
+          "short_name": "ComputeAllFindingsRefinementActivities",
+          "full_name": "google.cloud.chronicle.v1.FindingsRefinementService.ComputeAllFindingsRefinementActivities",
+          "service": {
+            "short_name": "FindingsRefinementService",
+            "full_name": "google.cloud.chronicle.v1.FindingsRefinementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "chronicle_v1_generated_InstanceService_GetInstance_sync",
       "title": "Snippet for the get_instance call in the InstanceService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::InstanceService::Client#get_instance.",
