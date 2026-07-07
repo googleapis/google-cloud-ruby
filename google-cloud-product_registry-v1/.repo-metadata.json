@@ -1,0 +1,17 @@
+{
+    "api_id": "cloudproductregistry.googleapis.com",
+    "api_shortname": "cloudproductregistry",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-product_registry-v1/latest",
+    "distribution_name": "google-cloud-product_registry-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudproductregistry",
+    "name_pretty": "Cloud Product Registry V1 API",
+    "product_documentation": "https://docs.cloud.google.com/product-registry",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "cloudproductregistry.googleapis.com API. Note that google-cloud-product_registry-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-product_registry instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://docs.cloud.google.com/product-registry",
+    "library_type": "GAPIC_AUTO"
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.productregistry.v1",
+  "libraryPackage": "::Google::Cloud::ProductRegistry::V1",
+  "services": {
+    "CloudProductRegistryReadService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ProductRegistry::V1::CloudProductRegistryReadService::Client",
+          "rpcs": {
+            "GetProductSuite": {
+              "methods": [
+                "get_product_suite"
+              ]
+            },
+            "ListProductSuites": {
+              "methods": [
+                "list_product_suites"
+              ]
+            },
+            "GetLogicalProduct": {
+              "methods": [
+                "get_logical_product"
+              ]
+            },
+            "ListLogicalProducts": {
+              "methods": [
+                "list_logical_products"
+              ]
+            },
+            "GetLogicalProductVariant": {
+              "methods": [
+                "get_logical_product_variant"
+              ]
+            },
+            "ListLogicalProductVariants": {
+              "methods": [
+                "list_logical_product_variants"
+              ]
+            },
+            "LookupEntity": {
+              "methods": [
+                "lookup_entity"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

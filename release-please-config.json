@@ -1367,6 +1367,14 @@
       "component": "google-cloud-privileged_access_manager-v1",
       "version_file": "lib/google/cloud/privileged_access_manager/v1/version.rb"
     },
+    "google-cloud-product_registry": {
+      "component": "google-cloud-product_registry",
+      "version_file": "lib/google/cloud/product_registry/version.rb"
+    },
+    "google-cloud-product_registry-v1": {
+      "component": "google-cloud-product_registry-v1",
+      "version_file": "lib/google/cloud/product_registry/v1/version.rb"
+    },
     "google-cloud-profiler": {
       "component": "google-cloud-profiler",
       "version_file": "lib/google/cloud/profiler/version.rb"
