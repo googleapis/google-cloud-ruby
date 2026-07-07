@@ -84,6 +84,16 @@
               "methods": [
                 "backup_instance"
               ]
+            },
+            "StartMigration": {
+              "methods": [
+                "start_migration"
+              ]
+            },
+            "FinishMigration": {
+              "methods": [
+                "finish_migration"
+              ]
             }
           }
         }

@@ -149,6 +149,18 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientPathsTest < Minitest:
     end
   end
 
+  def test_network_attachment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.network_attachment_path project: "value0", region: "value1", network_attachment: "value2"
+      assert_equal "projects/value0/regions/value1/networkAttachments/value2", path
+    end
+  end
+
   def test_service_attachment_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
