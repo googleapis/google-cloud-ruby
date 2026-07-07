@@ -56,6 +56,11 @@ module Google
         #   @return [::Google::Protobuf::Struct]
         #     Optional. The input parameters and values for the tool in JSON object
         #     format.
+        # @!attribute [rw] mock_config
+        #   @return [::Google::Cloud::Ces::V1::MockConfig]
+        #     Optional. Mock configuration for the tool execution.
+        #     If this field is set, tools that call other tools will be
+        #     mocked based on the provided patterns and responses.
         class ExecuteToolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -83,6 +88,13 @@ module Google
         # @!attribute [rw] variables
         #   @return [::Google::Protobuf::Struct]
         #     The variable values at the end of the tool execution.
+        # @!attribute [rw] citations
+        #   @return [::Google::Cloud::Ces::V1::Citations]
+        #     Citations that provide the source information for the tool's execution.
+        # @!attribute [rw] google_search_suggestions
+        #   @return [::Google::Cloud::Ces::V1::GoogleSearchSuggestions]
+        #     The suggestions returned from Google Search as a result of invoking the
+        #     Google Search Tool during the tool execution.
         class ExecuteToolResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -148,6 +160,11 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. The identifiers of the tools to retrieve from the toolset.
         #     If empty, all tools in the toolset will be returned.
+        # @!attribute [rw] bypass_persistence_config
+        #   @return [::Boolean]
+        #     Optional. If true, the returned tools will contain raw descriptions and
+        #     schemas directly from the server, bypassing any stored persistence
+        #     configurations (overrides/snapshots).
         class RetrieveToolsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

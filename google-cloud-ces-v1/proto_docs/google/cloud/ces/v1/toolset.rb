@@ -53,6 +53,11 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. The description of the toolset.
+        # @!attribute [rw] timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The timeout for the toolset execution. If not set, the default
+        #     timeout is 30 seconds for `SYNCHRONOUS` toolsets and 60 seconds for
+        #     `ASYNCHRONOUS` toolsets.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when the toolset was created.
