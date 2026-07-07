@@ -2054,6 +2054,304 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_availability
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::Availability.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_availability_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_availability, name
+      assert_kind_of ::Google::Apps::Chat::V1::GetAvailabilityRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_availability_client_stub do
+      # Create client
+      c = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_availability({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_availability name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_availability ::Google::Apps::Chat::V1::GetAvailabilityRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_availability({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_availability(::Google::Apps::Chat::V1::GetAvailabilityRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_availability_client_stub.call_rpc_count
+    end
+  end
+
+  def test_mark_as_active
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::Availability.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    expire_time = {}
+
+    mark_as_active_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :mark_as_active, name
+      assert_kind_of ::Google::Apps::Chat::V1::MarkAsActiveRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["expire_time"]
+      assert_equal :expire_time, request.expiration
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, mark_as_active_client_stub do
+      # Create client
+      c = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.mark_as_active({ name: name, expire_time: expire_time }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.mark_as_active name: name, expire_time: expire_time do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.mark_as_active ::Google::Apps::Chat::V1::MarkAsActiveRequest.new(name: name, expire_time: expire_time) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.mark_as_active({ name: name, expire_time: expire_time }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.mark_as_active(::Google::Apps::Chat::V1::MarkAsActiveRequest.new(name: name, expire_time: expire_time), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, mark_as_active_client_stub.call_rpc_count
+    end
+  end
+
+  def test_mark_as_away
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::Availability.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    mark_as_away_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :mark_as_away, name
+      assert_kind_of ::Google::Apps::Chat::V1::MarkAsAwayRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, mark_as_away_client_stub do
+      # Create client
+      c = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.mark_as_away({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.mark_as_away name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.mark_as_away ::Google::Apps::Chat::V1::MarkAsAwayRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.mark_as_away({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.mark_as_away(::Google::Apps::Chat::V1::MarkAsAwayRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, mark_as_away_client_stub.call_rpc_count
+    end
+  end
+
+  def test_mark_as_do_not_disturb
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::Availability.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    expire_time = {}
+
+    mark_as_do_not_disturb_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :mark_as_do_not_disturb, name
+      assert_kind_of ::Google::Apps::Chat::V1::MarkAsDoNotDisturbRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["expire_time"]
+      assert_equal :expire_time, request.expiration
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, mark_as_do_not_disturb_client_stub do
+      # Create client
+      c = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.mark_as_do_not_disturb({ name: name, expire_time: expire_time }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.mark_as_do_not_disturb name: name, expire_time: expire_time do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.mark_as_do_not_disturb ::Google::Apps::Chat::V1::MarkAsDoNotDisturbRequest.new(name: name, expire_time: expire_time) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.mark_as_do_not_disturb({ name: name, expire_time: expire_time }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.mark_as_do_not_disturb(::Google::Apps::Chat::V1::MarkAsDoNotDisturbRequest.new(name: name, expire_time: expire_time), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, mark_as_do_not_disturb_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_availability
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::Availability.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    availability = {}
+    update_mask = {}
+
+    update_availability_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_availability, name
+      assert_kind_of ::Google::Apps::Chat::V1::UpdateAvailabilityRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Apps::Chat::V1::Availability), request["availability"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_availability_client_stub do
+      # Create client
+      c = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_availability({ availability: availability, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_availability availability: availability, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_availability ::Google::Apps::Chat::V1::UpdateAvailabilityRequest.new(availability: availability, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_availability({ availability: availability, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_availability(::Google::Apps::Chat::V1::UpdateAvailabilityRequest.new(availability: availability, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_availability_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_space_event
     # Create GRPC objects.
     grpc_response = ::Google::Apps::Chat::V1::SpaceEvent.new
