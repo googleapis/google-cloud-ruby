@@ -1374,9 +1374,24 @@ module Google
           # @!attribute [rw] evaluation_run
           #   @return [::String]
           #     Required. The evaluation run used to inform quality report analysis.
+          # @!attribute [rw] algorithm
+          #   @return [::Google::Cloud::Ces::V1beta::GenerateAppResourceRequest::QualityReportGenerationConfig::LossAttributionAlgorithm]
+          #     Optional. The loss attribution algorithm to use.
           class QualityReportGenerationConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The algorithm to use for loss attribution.
+            module LossAttributionAlgorithm
+              # Unspecified.
+              LOSS_ATTRIBUTION_ALGORITHM_UNSPECIFIED = 0
+
+              # App-centric loss attribution. Treats the app as a single unit.
+              APP_CENTRIC = 1
+
+              # Agent-centric loss attribution. Attributes loss to individual agents.
+              AGENT_CENTRIC = 2
+            end
           end
 
           # The configuration to be used for hill climbing fixes.
