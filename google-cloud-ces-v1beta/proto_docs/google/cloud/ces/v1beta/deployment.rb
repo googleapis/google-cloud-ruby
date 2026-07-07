@@ -65,16 +65,16 @@ module Google
             # Unspecified state.
             STATE_UNSPECIFIED = 0
 
-            # Pending state. Experiment is pending and not valid.
+            # Deprecated: This state is no longer used.
             PENDING = 1
 
             # Running state. Experiment is running and valid.
             RUNNING = 2
 
-            # Done state. Experiment is done and no longer valid.
+            # Deprecated: This state is no longer used.
             DONE = 3
 
-            # Expired state. Experiment is expired and no longer valid.
+            # Deprecated: This state is no longer used.
             EXPIRED = 4
           end
         end
@@ -113,7 +113,51 @@ module Google
         # @!attribute [rw] experiment_config
         #   @return [::Google::Cloud::Ces::V1beta::ExperimentConfig]
         #     Optional. Experiment configuration for the deployment.
+        # @!attribute [rw] whatsapp_credentials
+        #   @return [::Google::Cloud::Ces::V1beta::WhatsAppCredentials]
+        #     Optional. Input only. Ephemeral WhatsApp credentials required when
+        #     configuring a WhatsApp channel profile.
+        # @!attribute [rw] instagram_credentials
+        #   @return [::Google::Cloud::Ces::V1beta::InstagramCredentials]
+        #     Optional. Input only. Ephemeral Instagram credentials required when
+        #     configuring a Instagram channel profile.
         class Deployment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Ephemeral Meta credentials for WhatsApp native integration.
+        # @!attribute [rw] auth_code
+        #   @return [::String]
+        #     Required. The Meta auth code provided by the embedded signup flow.
+        # @!attribute [rw] pin
+        #   @return [::String]
+        #     Required. The 6-digit PIN created by the user for two-step verification.
+        # @!attribute [rw] phone_number
+        #   @return [::String]
+        #     Required. The phone number to register with WhatsApp.
+        # @!attribute [rw] business_account_id
+        #   @return [::String]
+        #     Required. The Business Account ID to use for the phone number.
+        # @!attribute [rw] waba_id
+        #   @return [::String]
+        #     Required. The WhatsApp Business Account ID.
+        # @!attribute [rw] conversation_profile_id
+        #   @return [::String]
+        #     Required. The Conversation Profile ID to use for the deployment.
+        class WhatsAppCredentials
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Ephemeral Meta credentials for Instagram native integration.
+        # @!attribute [rw] auth_code
+        #   @return [::String]
+        #     Required. The Meta auth code provided by the embedded signup flow.
+        # @!attribute [rw] conversation_profile_id
+        #   @return [::String]
+        #     Required. The Conversation Profile ID to use for the deployment.
+        class InstagramCredentials
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
