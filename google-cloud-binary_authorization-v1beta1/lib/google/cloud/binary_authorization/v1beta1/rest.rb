@@ -18,6 +18,7 @@
 
 require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/rest"
 require "google/cloud/binary_authorization/v1beta1/system_policy/rest"
+require "google/cloud/binary_authorization/v1beta1/bindings_override"
 require "google/cloud/binary_authorization/v1beta1/version"
 
 module Google
