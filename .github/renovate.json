@@ -12,24 +12,44 @@
   },
   "packageRules": [
     {
-      "description": "Disable Renovate processing for non-Phase 1 gems during phased rollout",
+      "description": "Disable Renovate processing for non-enrolled gems during phased rollout",
       "matchFileNames": [
         "!google-cloud-core/**",
         "!google-cloud-storage/**",
         "!google-cloud-pubsub/**",
         "!google-cloud-bigquery/**",
-        "!google-cloud-errors/**"
+        "!google-cloud-errors/**",
+        "!google-cloud-resource_manager/**",
+        "!google-cloud-logging/**",
+        "!google-cloud-monitoring/**",
+        "!google-cloud-trace/**",
+        "!google-cloud-secret_manager/**",
+        "!google-cloud-kms/**",
+        "!google-cloud-compute/**",
+        "!google-cloud-dns/**",
+        "!google-cloud-firestore/**",
+        "!google-cloud-datastore/**"
       ],
       "enabled": false
     },
     {
-      "description": "Phase 1: Core & Handwritten Gems Lockfile Rollout",
+      "description": "Phase 1 & 2: Core & Handwritten Gems Lockfile Rollout",
       "matchFileNames": [
         "google-cloud-core/**",
         "google-cloud-storage/**",
         "google-cloud-pubsub/**",
         "google-cloud-bigquery/**",
-        "google-cloud-errors/**"
+        "google-cloud-errors/**",
+        "google-cloud-resource_manager/**",
+        "google-cloud-logging/**",
+        "google-cloud-monitoring/**",
+        "google-cloud-trace/**",
+        "google-cloud-secret_manager/**",
+        "google-cloud-kms/**",
+        "google-cloud-compute/**",
+        "google-cloud-dns/**",
+        "google-cloud-firestore/**",
+        "google-cloud-datastore/**"
       ],
       "groupName": "core handwritten gems lockfiles",
       "rangeStrategy": "update-lockfile",

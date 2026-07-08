@@ -14,3 +14,6 @@ benchmark/watch_sort_perf.dump
 # IDE settings
 .idea
 *.iml
+
+# Allow tracking Gemfile.lock for Phase 2 rollout
+!Gemfile.lock
