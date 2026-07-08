@@ -28,12 +28,17 @@
         "!google-cloud-compute/**",
         "!google-cloud-dns/**",
         "!google-cloud-firestore/**",
-        "!google-cloud-datastore/**"
+        "!google-cloud-datastore/**",
+        "!google-ads-*/**",
+        "!google-analytics-*/**",
+        "!google-apps-*/**",
+        "!google-area120-*/**",
+        "!google-cloud-[a-d]*/**"
       ],
       "enabled": false
     },
     {
-      "description": "Phase 1 & 2: Core & Handwritten Gems Lockfile Rollout",
+      "description": "Phase 2: Core, Handwritten & Generated Gems (A - D) Lockfile Rollout",
       "matchFileNames": [
         "google-cloud-core/**",
         "google-cloud-storage/**",
@@ -49,9 +54,14 @@
         "google-cloud-compute/**",
         "google-cloud-dns/**",
         "google-cloud-firestore/**",
-        "google-cloud-datastore/**"
+        "google-cloud-datastore/**",
+        "google-ads-*/**",
+        "google-analytics-*/**",
+        "google-apps-*/**",
+        "google-area120-*/**",
+        "google-cloud-[a-d]*/**"
       ],
-      "groupName": "core handwritten gems lockfiles",
+      "groupName": "phase 1 and 2 lockfiles",
       "rangeStrategy": "update-lockfile",
       "lockFileMaintenance": {
         "enabled": true,
