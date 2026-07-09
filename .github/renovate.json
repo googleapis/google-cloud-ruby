@@ -18,7 +18,11 @@
         "!google-cloud-storage/**",
         "!google-cloud-pubsub/**",
         "!google-cloud-bigquery/**",
-        "!google-cloud-errors/**"
+        "!google-cloud-errors/**",
+        "!google-cloud-resource_manager/**",
+        "!google-cloud-bigtable/**",
+        "!google-cloud-logging/**",
+        "!google-cloud-monitoring/**"
       ],
       "enabled": false
     },
@@ -29,7 +33,11 @@
         "google-cloud-storage/**",
         "google-cloud-pubsub/**",
         "google-cloud-bigquery/**",
-        "google-cloud-errors/**"
+        "google-cloud-errors/**",
+        "google-cloud-resource_manager/**",
+        "google-cloud-bigtable/**",
+        "google-cloud-logging/**",
+        "google-cloud-monitoring/**"
       ],
       "groupName": "core handwritten gems lockfiles",
       "rangeStrategy": "update-lockfile",
@@ -37,7 +45,7 @@
         "enabled": true,
         "automerge": false,
         "schedule": [
-          "before 5am on monday"
+          "before 5am every day"
         ],
         "commitMessageAction": "maintain Gemfile.lock files"
       }
