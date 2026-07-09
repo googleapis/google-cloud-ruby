@@ -15,6 +15,12 @@
 require "google/cloud/logging"
 require "google/cloud/errors"
 require "google/cloud/storage"
+
+if ENV["CI"] || ENV["KOKORO_JOB_NAME"]
+  # Load JUnit XML formatter from googleapis/ruby-common-tools to write tmp/reports/sponge_log.xml for Kokoro/TestGrid.
+  require "gapic/minitest_junit_preloader" rescue nil
+end
+
 require "minitest/autorun"
 require "minitest/focus"
 require "securerandom"
