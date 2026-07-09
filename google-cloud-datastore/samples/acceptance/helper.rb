@@ -16,7 +16,10 @@ gem "minitest"
 
 if ENV["CI"] || ENV["KOKORO_JOB_NAME"]
   # Load JUnit XML formatter from googleapis/ruby-common-tools to write tmp/reports/sponge_log.xml for Kokoro/TestGrid.
-  require "gapic/minitest_junit_preloader" rescue nil
+  begin
+    require "gapic/minitest_junit_preloader"
+  rescue LoadError
+  end
 end
 
 require "minitest/autorun"
