@@ -908,6 +908,116 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ClientTest < Minitest
     end
   end
 
+  def test_start_migration
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    self_managed_source = {}
+    name = "hello world"
+
+    start_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ServiceStub.stub :transcode_start_migration_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, start_migration_client_stub do
+        # Create client
+        c = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.start_migration({ self_managed_source: self_managed_source, name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.start_migration self_managed_source: self_managed_source, name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.start_migration ::Google::Cloud::Memorystore::V1::StartMigrationRequest.new(self_managed_source: self_managed_source, name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.start_migration({ self_managed_source: self_managed_source, name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.start_migration(::Google::Cloud::Memorystore::V1::StartMigrationRequest.new(self_managed_source: self_managed_source, name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, start_migration_client_stub.call_count
+      end
+    end
+  end
+
+  def test_finish_migration
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    force = true
+
+    finish_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ServiceStub.stub :transcode_finish_migration_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, finish_migration_client_stub do
+        # Create client
+        c = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.finish_migration({ name: name, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.finish_migration name: name, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.finish_migration ::Google::Cloud::Memorystore::V1::FinishMigrationRequest.new(name: name, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.finish_migration({ name: name, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.finish_migration(::Google::Cloud::Memorystore::V1::FinishMigrationRequest.new(name: name, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, finish_migration_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
