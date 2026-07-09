@@ -21,6 +21,7 @@ if ENV["CI"] || ENV["KOKORO_JOB_NAME"]
   begin
     require "gapic/minitest_junit_preloader"
   rescue LoadError
+    # Do nothing if preloader is not available (e.g. local runs)
   end
 end
 
