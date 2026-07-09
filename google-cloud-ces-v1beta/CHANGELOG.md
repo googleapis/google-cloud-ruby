@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2026-07-09)
+
+#### Features
+
+* update public libraries for CES v1beta ([#34713](https://github.com/googleapis/google-cloud-ruby/issues/34713)) 
+
 ### 0.3.1 (2026-07-01)
 
 #### Bug Fixes
