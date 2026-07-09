@@ -41,35 +41,44 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1'
 
-            # A [policy][google.cloud.binaryauthorization.v1.Policy] specifies the [attestors][google.cloud.binaryauthorization.v1.Attestor] that must attest to
-            # a container image, before the project is allowed to deploy that
-            # image. There is at most one policy per project. All image admission
-            # requests are permitted if a project has no policy.
+            # A [policy][google.cloud.binaryauthorization.v1.Policy] specifies the
+            # [attestors][google.cloud.binaryauthorization.v1.Attestor] that must attest
+            # to a container image, before the project is allowed to deploy that image.
+            # There is at most one policy per project. All image admission requests are
+            # permitted if a project has no policy.
             #
-            # Gets the [policy][google.cloud.binaryauthorization.v1.Policy] for this project. Returns a default
-            # [policy][google.cloud.binaryauthorization.v1.Policy] if the project does not have one.
+            # Gets the [policy][google.cloud.binaryauthorization.v1.Policy] for this
+            # project. Returns a default
+            # [policy][google.cloud.binaryauthorization.v1.Policy] if the project does
+            # not have one.
             rpc :GetPolicy, ::Google::Cloud::BinaryAuthorization::V1::GetPolicyRequest, ::Google::Cloud::BinaryAuthorization::V1::Policy
-            # Creates or updates a project's [policy][google.cloud.binaryauthorization.v1.Policy], and returns a copy of the
-            # new [policy][google.cloud.binaryauthorization.v1.Policy]. A policy is always updated as a whole, to avoid race
-            # conditions with concurrent policy enforcement (or management!)
-            # requests. Returns NOT_FOUND if the project does not exist, INVALID_ARGUMENT
-            # if the request is malformed.
+            # Creates or updates a project's
+            # [policy][google.cloud.binaryauthorization.v1.Policy], and returns a copy of
+            # the new [policy][google.cloud.binaryauthorization.v1.Policy]. A policy is
+            # always updated as a whole, to avoid race conditions with concurrent policy
+            # enforcement (or management!) requests. Returns `NOT_FOUND` if the project
+            # does not exist, `INVALID_ARGUMENT` if the request is malformed.
             rpc :UpdatePolicy, ::Google::Cloud::BinaryAuthorization::V1::UpdatePolicyRequest, ::Google::Cloud::BinaryAuthorization::V1::Policy
-            # Creates an [attestor][google.cloud.binaryauthorization.v1.Attestor], and returns a copy of the new
-            # [attestor][google.cloud.binaryauthorization.v1.Attestor]. Returns NOT_FOUND if the project does not exist,
-            # INVALID_ARGUMENT if the request is malformed, ALREADY_EXISTS if the
+            # Creates an [attestor][google.cloud.binaryauthorization.v1.Attestor], and
+            # returns a copy of the new
+            # [attestor][google.cloud.binaryauthorization.v1.Attestor]. Returns
+            # `NOT_FOUND` if the project does not exist, `INVALID_ARGUMENT` if the
+            # request is malformed, `ALREADY_EXISTS` if the
             # [attestor][google.cloud.binaryauthorization.v1.Attestor] already exists.
             rpc :CreateAttestor, ::Google::Cloud::BinaryAuthorization::V1::CreateAttestorRequest, ::Google::Cloud::BinaryAuthorization::V1::Attestor
             # Gets an [attestor][google.cloud.binaryauthorization.v1.Attestor].
-            # Returns NOT_FOUND if the [attestor][google.cloud.binaryauthorization.v1.Attestor] does not exist.
+            # Returns `NOT_FOUND` if the
+            # [attestor][google.cloud.binaryauthorization.v1.Attestor] does not exist.
             rpc :GetAttestor, ::Google::Cloud::BinaryAuthorization::V1::GetAttestorRequest, ::Google::Cloud::BinaryAuthorization::V1::Attestor
             # Updates an [attestor][google.cloud.binaryauthorization.v1.Attestor].
-            # Returns NOT_FOUND if the [attestor][google.cloud.binaryauthorization.v1.Attestor] does not exist.
+            # Returns `NOT_FOUND` if the
+            # [attestor][google.cloud.binaryauthorization.v1.Attestor] does not exist.
             rpc :UpdateAttestor, ::Google::Cloud::BinaryAuthorization::V1::UpdateAttestorRequest, ::Google::Cloud::BinaryAuthorization::V1::Attestor
             # Lists [attestors][google.cloud.binaryauthorization.v1.Attestor].
-            # Returns INVALID_ARGUMENT if the project does not exist.
+            # Returns `INVALID_ARGUMENT` if the project does not exist.
             rpc :ListAttestors, ::Google::Cloud::BinaryAuthorization::V1::ListAttestorsRequest, ::Google::Cloud::BinaryAuthorization::V1::ListAttestorsResponse
-            # Deletes an [attestor][google.cloud.binaryauthorization.v1.Attestor]. Returns NOT_FOUND if the
+            # Deletes an [attestor][google.cloud.binaryauthorization.v1.Attestor].
+            # Returns `NOT_FOUND` if the
             # [attestor][google.cloud.binaryauthorization.v1.Attestor] does not exist.
             rpc :DeleteAttestor, ::Google::Cloud::BinaryAuthorization::V1::DeleteAttestorRequest, ::Google::Protobuf::Empty
           end
@@ -102,8 +111,8 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.binaryauthorization.v1.ValidationHelperV1'
 
-            # Returns whether the given Attestation for the given image URI
-            # was signed by the given Attestor
+            # Returns whether the given `Attestation` for the given image URI
+            # was signed by the given `Attestor`
             rpc :ValidateAttestationOccurrence, ::Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceRequest, ::Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceResponse
           end
 

@@ -1215,6 +1215,10 @@
       "component": "google-cloud-network_security",
       "version_file": "lib/google/cloud/network_security/version.rb"
     },
+    "google-cloud-network_security-v1": {
+      "component": "google-cloud-network_security-v1",
+      "version_file": "lib/google/cloud/network_security/v1/version.rb"
+    },
     "google-cloud-network_security-v1beta1": {
       "component": "google-cloud-network_security-v1beta1",
       "version_file": "lib/google/cloud/network_security/v1beta1/version.rb"
@@ -1362,6 +1366,14 @@
     "google-cloud-privileged_access_manager-v1": {
       "component": "google-cloud-privileged_access_manager-v1",
       "version_file": "lib/google/cloud/privileged_access_manager/v1/version.rb"
+    },
+    "google-cloud-product_registry": {
+      "component": "google-cloud-product_registry",
+      "version_file": "lib/google/cloud/product_registry/version.rb"
+    },
+    "google-cloud-product_registry-v1": {
+      "component": "google-cloud-product_registry-v1",
+      "version_file": "lib/google/cloud/product_registry/v1/version.rb"
     },
     "google-cloud-profiler": {
       "component": "google-cloud-profiler",
@@ -1990,6 +2002,14 @@
     "google-maps-fleet_engine-v1": {
       "component": "google-maps-fleet_engine-v1",
       "version_file": "lib/google/maps/fleet_engine/v1/version.rb"
+    },
+    "google-maps-isochrones": {
+      "component": "google-maps-isochrones",
+      "version_file": "lib/google/maps/isochrones/version.rb"
+    },
+    "google-maps-isochrones-v1": {
+      "component": "google-maps-isochrones-v1",
+      "version_file": "lib/google/maps/isochrones/v1/version.rb"
     },
     "google-shopping-css": {
       "component": "google-shopping-css",

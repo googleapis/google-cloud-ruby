@@ -21,7 +21,8 @@ module Google
   module Cloud
     module BinaryAuthorization
       module V1beta1
-        # A {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} for Binary Authorization.
+        # A {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} for Binary
+        # Authorization.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name, in the format `projects/*/policy`. There is
@@ -51,7 +52,8 @@ module Google
         #     https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters.
         # @!attribute [rw] kubernetes_namespace_admission_rules
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule}]
-        #     Optional. Per-kubernetes-namespace admission rules. K8s namespace spec format:
+        #     Optional. Per-kubernetes-namespace admission rules. K8s namespace spec
+        #     format:
         #       `[a-z.-]+`, e.g. `some-namespace`
         # @!attribute [rw] kubernetes_service_account_admission_rules
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule}]
@@ -71,6 +73,11 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the policy was last updated.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. A checksum, returned by the server, that can be sent on update
+        #     requests to ensure the policy has an up-to-date value before attempting to
+        #     update it. See https://google.aip.dev/154.
         class Policy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -123,8 +130,10 @@ module Google
           end
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionWhitelistPattern admission allowlist pattern} exempts images
-        # from checks by {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule admission rules}.
+        # An [admission allowlist
+        # pattern][google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern]
+        # exempts images from checks by [admission
+        # rules][google.cloud.binaryauthorization.v1beta1.AdmissionRule].
         # @!attribute [rw] name_pattern
         #   @return [::String]
         #     An image name pattern to allowlist, in the form `registry/path/to/image`.
@@ -139,26 +148,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule admission rule} specifies either that all container images
-        # used in a pod creation request must be attested to by one or more
-        # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors}, that all pod creations will be allowed, or that all
-        # pod creations will be denied.
+        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule admission rule}
+        # specifies either that all container images used in a pod creation request
+        # must be attested to by one or more
+        # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors}, that all pod
+        # creations will be allowed, or that all pod creations will be denied.
         #
-        # Images matching an {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionWhitelistPattern admission allowlist pattern}
+        # Images matching an [admission allowlist
+        # pattern][google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern]
         # are exempted from admission rules and will never block a pod creation.
         # @!attribute [rw] evaluation_mode
         #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule::EvaluationMode]
         #     Required. How this admission rule will be evaluated.
         # @!attribute [rw] require_attestations_by
         #   @return [::Array<::String>]
-        #     Optional. The resource names of the attestors that must attest to
-        #     a container image, in the format `projects/*/attestors/*`. Each
-        #     attestor must exist before a policy can reference it.  To add an attestor
-        #     to a policy the principal issuing the policy change request must be able
-        #     to read the attestor resource.
-        #
-        #     Note: this field must be non-empty when the evaluation_mode field specifies
-        #     REQUIRE_ATTESTATION, otherwise it must be empty.
         # @!attribute [rw] enforcement_mode
         #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule::EnforcementMode]
         #     Required. The action when a pod creation is denied by the admission rule.
@@ -182,6 +185,8 @@ module Google
             ALWAYS_DENY = 3
           end
 
+          # TODO(wietse) re-word this text to 'per-image' instead of 'per-pod' and to
+          # allow for three-way evaluation (allow, deny, delegate).
           # Defines the possible actions when a pod creation is denied by an admission
           # rule.
           module EnforcementMode
@@ -197,9 +202,9 @@ module Google
           end
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} that attests to container image
-        # artifacts. An existing attestor cannot be modified except where
-        # indicated.
+        # An {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} that attests
+        # to container image artifacts. An existing attestor cannot be modified except
+        # where indicated.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name, in the format:
@@ -214,13 +219,19 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the attestor was last updated.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. A checksum, returned by the server, that can be sent on update
+        #     requests to ensure the attestor has an up-to-date value before attempting
+        #     to update it. See https://google.aip.dev/154.
         class Attestor
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::UserOwnedDrydockNote user owned drydock note} references a Drydock
-        # ATTESTATION_AUTHORITY Note created by the user.
+        # An [user owned drydock
+        # note][google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote]
+        # references a Drydock ATTESTATION_AUTHORITY Note created by the user.
         # @!attribute [rw] note_reference
         #   @return [::String]
         #     Required. The Drydock resource name of a ATTESTATION_AUTHORITY Note,
@@ -289,14 +300,26 @@ module Google
             # RSASSA-PSS 2048 bit key with a SHA256 digest.
             RSA_PSS_2048_SHA256 = 1
 
+            # RSASSA-PSS 2048 bit key with a SHA256 digest.
+            RSA_SIGN_PSS_2048_SHA256 = 1
+
             # RSASSA-PSS 3072 bit key with a SHA256 digest.
             RSA_PSS_3072_SHA256 = 2
+
+            # RSASSA-PSS 3072 bit key with a SHA256 digest.
+            RSA_SIGN_PSS_3072_SHA256 = 2
 
             # RSASSA-PSS 4096 bit key with a SHA256 digest.
             RSA_PSS_4096_SHA256 = 3
 
+            # RSASSA-PSS 4096 bit key with a SHA256 digest.
+            RSA_SIGN_PSS_4096_SHA256 = 3
+
             # RSASSA-PSS 4096 bit key with a SHA512 digest.
             RSA_PSS_4096_SHA512 = 4
+
+            # RSASSA-PSS 4096 bit key with a SHA512 digest.
+            RSA_SIGN_PSS_4096_SHA512 = 4
 
             # RSASSA-PKCS1-v1_5 with a 2048 bit key and a SHA256 digest.
             RSA_SIGN_PKCS1_2048_SHA256 = 5
@@ -327,11 +350,15 @@ module Google
 
             # ECDSA on the NIST P-521 curve with a SHA512 digest.
             EC_SIGN_P521_SHA512 = 11
+
+            # ML-DSA-65 Post-Quantum Cryptography signature algorithm.
+            ML_DSA_65 = 13
           end
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AttestorPublicKey attestor public key} that will be used to verify
-        # attestations signed by this attestor.
+        # An [attestor public
+        # key][google.cloud.binaryauthorization.v1beta1.AttestorPublicKey] that will be
+        # used to verify attestations signed by this attestor.
         # @!attribute [rw] comment
         #   @return [::String]
         #     Optional. A descriptive comment. This field may be updated.

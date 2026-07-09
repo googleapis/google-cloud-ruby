@@ -202,6 +202,12 @@ module Google
         #   @return [::String]
         #     Optional. The noise suppression level of the channel profile.
         #     Available values are "low", "moderate", "high", "very_high".
+        # @!attribute [rw] whatsapp_config
+        #   @return [::Google::Cloud::Ces::V1beta::ChannelProfile::WhatsAppConfig]
+        #     Optional. Configuration specific to WhatsApp deployments.
+        # @!attribute [rw] instagram_config
+        #   @return [::Google::Cloud::Ces::V1beta::ChannelProfile::InstagramConfig]
+        #     Optional. Configuration specific to Instagram deployments.
         class ChannelProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -303,6 +309,48 @@ module Google
             end
           end
 
+          # Configuration specific to WhatsApp deployments.
+          # @!attribute [rw] waba_id
+          #   @return [::String]
+          #     Required. The WhatsApp Business Account ID.
+          # @!attribute [rw] phone_number_id
+          #   @return [::String]
+          #     Required. The Meta phone number ID.
+          # @!attribute [rw] phone_number
+          #   @return [::String]
+          #     Optional. The phone number in E.164 format.
+          # @!attribute [r] display_name
+          #   @return [::String]
+          #     Output only. The fetched Meta business page name.
+          # @!attribute [r] thumbnail_url
+          #   @return [::String]
+          #     Output only. The fetched Meta business profile thumbnail URL.
+          # @!attribute [r] description
+          #   @return [::String]
+          #     Output only. The description of the Meta business page or profile.
+          class WhatsAppConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration specific to Instagram deployments.
+          # @!attribute [rw] instagram_account_id
+          #   @return [::String]
+          #     Required. The Instagram Account ID.
+          # @!attribute [r] display_name
+          #   @return [::String]
+          #     Output only. The fetched Meta business page name.
+          # @!attribute [r] thumbnail_url
+          #   @return [::String]
+          #     Output only. The fetched Meta business profile thumbnail URL.
+          # @!attribute [r] description
+          #   @return [::String]
+          #     Output only. The description of the Meta business page or profile.
+          class InstagramConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The type of the channel profile.
           module ChannelType
             # Unknown channel type.
@@ -323,11 +371,20 @@ module Google
             # Contact Center as a Service (CCaaS) channel.
             CONTACT_CENTER_AS_A_SERVICE = 6
 
+            # Contact Center as a Service (CCaaS Chat) channel.
+            CONTACT_CENTER_AS_A_SERVICE_CHAT = 11
+
             # Five9 channel.
             FIVE9 = 7
 
             # Third party contact center integration channel.
             CONTACT_CENTER_INTEGRATION = 8
+
+            # WhatsApp channel.
+            WHATSAPP = 9
+
+            # Instagram channel.
+            INSTAGRAM = 10
           end
         end
 
@@ -353,6 +410,31 @@ module Google
         class Span
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Settings for evaluation run caching.
+        # @!attribute [rw] run_caching_mode
+        #   @return [::Google::Cloud::Ces::V1beta::EvaluationRunCachingSettings::EvaluationRunCachingMode]
+        #     Optional. The caching mode to use for the evaluation run. If not set,
+        #     default to FORCE_RUN.
+        class EvaluationRunCachingSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The evaluation result caching behavior. Controls whether to return the last
+          # completed evaluation result (if existing) or to execute a new evaluation.
+          module EvaluationRunCachingMode
+            # The run caching mode is unspecified.
+            EVALUATION_RUN_CACHING_MODE_UNSPECIFIED = 0
+
+            # Always execute a full live simulation regardless of whether changelogs
+            # exist.
+            FORCE_RUN = 1
+
+            # Skip execution and copy previous verified results if no dependencies have
+            # mutated, the evaluation channel/run method are the same.
+            SKIP_IF_UNCHANGED = 2
+          end
         end
 
         # The execution type of the tool or toolset.

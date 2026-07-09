@@ -370,6 +370,17 @@ module Google
         #   @return [::String]
         #     Required. The {::Google::Cloud::Kms::V1::ImportJob#name name} of the
         #     {::Google::Cloud::Kms::V1::ImportJob ImportJob} to get.
+        # @!attribute [rw] public_key_format
+        #   @return [::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat]
+        #     Optional. Specifies the [WrappingPublicKey][] format.
+        #     If not specified:
+        #       * For RSA-based import methods, the wrapping key will be returned in PEM
+        #       format
+        #       * For pure ML-KEM-based import methods, the wrapping key will be returned
+        #       in the raw bytes format specified in FIPS-203
+        #       * For X-Wing-based import methods, the wrapping key will be returned in
+        #       the raw bytes format specified in
+        #       https://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem.
         class GetImportJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

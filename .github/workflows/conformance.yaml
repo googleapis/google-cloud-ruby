@@ -1,6 +1,9 @@
 # This workflow runs the Bigtable Conformance Test suite against the Bigtable
 # client library.
 # See https://github.com/googleapis/cloud-bigtable-clients-test
+permissions:
+  contents: read
+
 on:
   push:
     branches:

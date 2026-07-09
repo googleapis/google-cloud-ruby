@@ -1856,6 +1856,279 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_availability
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::Availability.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_availability_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_get_availability_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_availability_client_stub do
+        # Create client
+        c = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_availability({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_availability name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_availability ::Google::Apps::Chat::V1::GetAvailabilityRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_availability({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_availability(::Google::Apps::Chat::V1::GetAvailabilityRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_availability_client_stub.call_count
+      end
+    end
+  end
+
+  def test_mark_as_active
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::Availability.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    expire_time = {}
+
+    mark_as_active_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_mark_as_active_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, mark_as_active_client_stub do
+        # Create client
+        c = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.mark_as_active({ name: name, expire_time: expire_time }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.mark_as_active name: name, expire_time: expire_time do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.mark_as_active ::Google::Apps::Chat::V1::MarkAsActiveRequest.new(name: name, expire_time: expire_time) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.mark_as_active({ name: name, expire_time: expire_time }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.mark_as_active(::Google::Apps::Chat::V1::MarkAsActiveRequest.new(name: name, expire_time: expire_time), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, mark_as_active_client_stub.call_count
+      end
+    end
+  end
+
+  def test_mark_as_away
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::Availability.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    mark_as_away_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_mark_as_away_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, mark_as_away_client_stub do
+        # Create client
+        c = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.mark_as_away({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.mark_as_away name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.mark_as_away ::Google::Apps::Chat::V1::MarkAsAwayRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.mark_as_away({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.mark_as_away(::Google::Apps::Chat::V1::MarkAsAwayRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, mark_as_away_client_stub.call_count
+      end
+    end
+  end
+
+  def test_mark_as_do_not_disturb
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::Availability.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    expire_time = {}
+
+    mark_as_do_not_disturb_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_mark_as_do_not_disturb_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, mark_as_do_not_disturb_client_stub do
+        # Create client
+        c = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.mark_as_do_not_disturb({ name: name, expire_time: expire_time }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.mark_as_do_not_disturb name: name, expire_time: expire_time do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.mark_as_do_not_disturb ::Google::Apps::Chat::V1::MarkAsDoNotDisturbRequest.new(name: name, expire_time: expire_time) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.mark_as_do_not_disturb({ name: name, expire_time: expire_time }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.mark_as_do_not_disturb(::Google::Apps::Chat::V1::MarkAsDoNotDisturbRequest.new(name: name, expire_time: expire_time), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, mark_as_do_not_disturb_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_availability
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::Availability.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    availability = {}
+    update_mask = {}
+
+    update_availability_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_update_availability_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_availability_client_stub do
+        # Create client
+        c = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_availability({ availability: availability, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_availability availability: availability, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_availability ::Google::Apps::Chat::V1::UpdateAvailabilityRequest.new(availability: availability, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_availability({ availability: availability, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_availability(::Google::Apps::Chat::V1::UpdateAvailabilityRequest.new(availability: availability, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_availability_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_space_event
     # Create test objects.
     client_result = ::Google::Apps::Chat::V1::SpaceEvent.new

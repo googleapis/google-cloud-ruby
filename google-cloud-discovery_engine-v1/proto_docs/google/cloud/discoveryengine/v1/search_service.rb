@@ -409,6 +409,15 @@ module Google
         #     `relevance_filter_spec` instead.
         #
         #     This feature is not supported for healthcare search.
+        # @!attribute [rw] relevance_filter_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceFilterSpec]
+        #     Optional. The granular relevance filtering specification.
+        #
+        #     If not specified, the global `relevance_threshold` will be used for all
+        #     sub-searches. If specified, this overrides the global
+        #     `relevance_threshold` to use thresholds on a per sub-search basis.
+        #
+        #     This feature is currently supported only for custom and site search.
         # @!attribute [rw] relevance_score_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceScoreSpec]
         #     Optional. The specification for returning the relevance score.
@@ -1282,6 +1291,36 @@ module Google
           class RelevanceScoreSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Relevance filtering specification.
+          # @!attribute [rw] keyword_search_threshold
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceFilterSpec::RelevanceThresholdSpec]
+          #     Optional. Relevance filtering threshold specification for keyword search.
+          # @!attribute [rw] semantic_search_threshold
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceFilterSpec::RelevanceThresholdSpec]
+          #     Optional. Relevance filtering threshold specification for semantic
+          #     search.
+          class RelevanceFilterSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Specification for relevance filtering on a specific sub-search.
+            # @!attribute [rw] relevance_threshold
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceThreshold]
+            #     Pre-defined relevance threshold for the sub-search.
+            #
+            #     Note: The following fields are mutually exclusive: `relevance_threshold`, `semantic_relevance_threshold`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] semantic_relevance_threshold
+            #   @return [::Float]
+            #     Custom relevance threshold for the sub-search.
+            #     The value must be in [0.0, 1.0].
+            #
+            #     Note: The following fields are mutually exclusive: `semantic_relevance_threshold`, `relevance_threshold`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            class RelevanceThresholdSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # @!attribute [rw] key

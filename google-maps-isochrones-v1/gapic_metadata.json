@@ -1,0 +1,23 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.maps.isochrones.v1",
+  "libraryPackage": "::Google::Maps::Isochrones::V1",
+  "services": {
+    "IsochroneService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Maps::Isochrones::V1::IsochroneService::Client",
+          "rpcs": {
+            "GenerateIsochrone": {
+              "methods": [
+                "generate_isochrone"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

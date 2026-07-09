@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.1 (2026-07-01)
+
+#### Bug Fixes
+
+* add routing annotations to BidiRunSession in v1 and v1beta ([#34694](https://github.com/googleapis/google-cloud-ruby/issues/34694)) 
+
 ### 0.3.0 (2026-06-24)
 
 ### ⚠ BREAKING CHANGES

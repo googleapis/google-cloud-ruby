@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2026-06-30)
+
+#### Features
+
+* A new service `SupportEventSubscription` is added ([#34681](https://github.com/googleapis/google-cloud-ruby/issues/34681)) 
+
 ### 0.6.0 (2026-06-11)
 
 #### Features
