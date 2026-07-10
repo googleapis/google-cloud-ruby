@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.10.0 (2026-07-10)
+
+#### Features
+
+* Add RelevanceFilterSpec to SearchRequest in v1 ([#34739](https://github.com/googleapis/google-cloud-ruby/issues/34739)) 
+
 ### 2.9.0 (2026-06-11)
 
 #### Features
