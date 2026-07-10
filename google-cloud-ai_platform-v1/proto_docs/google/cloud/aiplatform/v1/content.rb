@@ -1009,6 +1009,11 @@ module Google
         # @!attribute [rw] search_entry_point
         #   @return [::Google::Cloud::AIPlatform::V1::SearchEntryPoint]
         #     Optional. Google search entry for the following-up web searches.
+        # @!attribute [rw] retrieval_queries
+        #   @return [::Array<::String>]
+        #     Optional. The queries that were executed by the retrieval tools.
+        #     This field is populated only when the grounding source is a retrieval tool,
+        #     such as Vertex AI Search.
         # @!attribute [rw] grounding_chunks
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::GroundingChunk>]
         #     List of supporting references retrieved from specified grounding source.
