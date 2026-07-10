@@ -45,7 +45,7 @@
         "enabled": true,
         "automerge": false,
         "schedule": [
-          "before 5am every day"
+          "before 5am"
         ],
         "commitMessageAction": "maintain Gemfile.lock files"
       }
