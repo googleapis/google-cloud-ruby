@@ -72,6 +72,7 @@ module Google
           @service.request_options.multiplier = multiplier if multiplier
           @service.request_options.add_invocation_id_header = true
           @service.request_options.upload_chunk_size = upload_chunk_size if upload_chunk_size
+          @service.request_options.add_idempotency_token_header = true
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
           @service.universe_domain = universe_domain || Google::Cloud::Storage.configure.universe_domain
