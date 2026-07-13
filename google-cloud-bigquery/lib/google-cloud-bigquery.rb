@@ -70,6 +70,8 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   bigquery = gcloud.bigquery scope: platform_scope
     #
+    # Test comment to verify CI failures
+    #
     def bigquery scope: nil, retries: nil, timeout: nil
       retries ||= @retries
       timeout ||= @timeout
