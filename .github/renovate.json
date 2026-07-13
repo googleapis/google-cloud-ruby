@@ -27,7 +27,7 @@
       "enabled": false
     },
     {
-      "description": "Phase 1: Core & Handwritten Gems Lockfile Rollout",
+      "description": "Phase 1: Strictly disable direct Gemfile dependency upgrades (do not modify Gemfile version constraints)",
       "matchFileNames": [
         "google-cloud-core/**",
         "google-cloud-storage/**",
@@ -39,13 +39,29 @@
         "google-cloud-logging/**",
         "google-cloud-monitoring/**"
       ],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "enabled": false
+    },
+    {
+      "description": "Phase 1: Strictly Gemfile.lock maintenance (bundle lock --update) across Core & Handwritten gems",
+      "matchFileNames": [
+        "google-cloud-core/**",
+        "google-cloud-storage/**",
+        "google-cloud-pubsub/**",
+        "google-cloud-bigquery/**",
+        "google-cloud-errors/**",
+        "google-cloud-resource_manager/**",
+        "google-cloud-bigtable/**",
+        "google-cloud-logging/**",
+        "google-cloud-monitoring/**"
+      ],
+      "matchUpdateTypes": ["lockFileMaintenance"],
       "groupName": "core handwritten gems lockfiles",
-      "rangeStrategy": "update-lockfile",
       "lockFileMaintenance": {
         "enabled": true,
         "automerge": false,
         "schedule": [
-          "before 5am"
+          "before 5am every day"
         ],
         "commitMessageAction": "maintain Gemfile.lock files"
       }
