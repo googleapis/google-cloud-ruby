@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.46.0 (2026-07-13)
+
+#### Features
+
+* expose retrieval_queries in GroundingMetadata for the v1 API ([#34743](https://github.com/googleapis/google-cloud-ruby/issues/34743)) 
+
 ### 1.45.0 (2026-07-09)
 
 #### Features
