@@ -108,6 +108,16 @@ module Google
             # UIs and command-line tools, not for authorization checking. This operation
             # may "fail open" without warning.
             rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+            # Enables the managed rotation feature for a
+            # [Secret][google.cloud.secretmanager.v1.Secret]. This method can only be
+            # triggered once for a secret. In order to do further rotations, RotateSecret
+            # should be used. This method will add a secret version and update the
+            # password in Cloud SQL.
+            rpc :EnableManagedRotation, ::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest, ::Google::Cloud::SecretManager::V1::SecretVersion
+            # Do a managed rotation for a [Secret][google.cloud.secretmanager.v1.Secret].
+            # This can only be triggered after Managed rotation has been enabled.
+            # This method will add a secret version and update the password in Cloud SQL.
+            rpc :RotateSecret, ::Google::Cloud::SecretManager::V1::RotateSecretRequest, ::Google::Cloud::SecretManager::V1::SecretVersion
           end
 
           Stub = Service.rpc_stub_class

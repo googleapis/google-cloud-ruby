@@ -112,6 +112,52 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#enable_managed_rotation SecretManagerService.EnableManagedRotation}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the
+        #     {::Google::Cloud::SecretManager::V1::Secret Secret} to associate with the
+        #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
+        #     `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
+        # @!attribute [rw] cloud_sql_single_user_credentials
+        #   @return [::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest::CloudSQLSingleUserCredentials]
+        #     Credentials required for Cloud SQL DB for Single user Managed Rotation.
+        class EnableManagedRotationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # These are the credentials required for Cloud SQL DB for Single user
+          # Managed Rotation.
+          # @!attribute [rw] instance_id
+          #   @return [::String]
+          #     Required. Instance ID of the Cloud SQL instance.
+          # @!attribute [rw] username
+          #   @return [::String]
+          #     Required. Username of the Cloud SQL instance.
+          # @!attribute [rw] password
+          #   @return [::String]
+          #     Optional. Password of the Cloud SQL instance. If this is not provided,
+          #     a random password will be generated.
+          class CloudSQLSingleUserCredentials
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Request message for
+        # {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#rotate_secret SecretManagerService.RotateSecret}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the
+        #     {::Google::Cloud::SecretManager::V1::Secret Secret} to associate with the
+        #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
+        #     `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
+        class RotateSecretRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#get_secret SecretManagerService.GetSecret}.
         # @!attribute [rw] name
         #   @return [::String]
